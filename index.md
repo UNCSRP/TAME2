@@ -13,9 +13,7 @@ link-citations: yes
 github-repo: rstudio/bookdown-demo
 ---
 
-# Preface {-}
-
-# TAME 2.0: Expanding the Toolkit for Data Science in Environmental Health Research
+# TAME 2.0: Preface {-}
 
 <br>
 Published online Summer of 2024
