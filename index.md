@@ -1,7 +1,6 @@
 --- 
-title: "TAME 2.0"
-author: "Rager Lab"
-date: "2024-06-24"
+title: "TAME 2.0: Expanding and Improving Online Data Science Training for Environmental Health Research"
+date: "Published online Summer of 2024"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
@@ -13,10 +12,8 @@ link-citations: yes
 github-repo: rstudio/bookdown-demo
 ---
 
-# TAME 2.0: Preface {-}
+# Preface {-}
 
-<br>
-Published online Summer of 2024
 
 
 ## Background
