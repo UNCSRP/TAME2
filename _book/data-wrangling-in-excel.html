@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Data Wrangling in Excel | TAME 2.0</title>
+  <meta name="description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Data Wrangling in Excel | TAME 2.0" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Data Wrangling in Excel | TAME 2.0" />
+  
+  <meta name="twitter:description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
+  
+
+<meta name="author" content="Rager Lab" />
+
+
+<meta name="date" content="2024-06-24" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="file-management-using-github.html"/>
+<link rel="next" href="downloading-and-programming-in-r.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.32/datatables.js"></script>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="images/Data Training Icon for Top Left Bookdown_v2.png"><br></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="part"><span><b>Chapter 1 Introductory <br>Data Science</b></span></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html"><i class="fa fa-check"></i>FAIR Data Management Practices</a>
+<ul>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#introduction-to-training-module"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#introduction-to-fair"><i class="fa fa-check"></i>Introduction to FAIR</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#breaking-down-fair-letter-by-letter"><i class="fa fa-check"></i>Breaking Down FAIR, Letter-by-Letter</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#what-does-this-mean-for-you"><i class="fa fa-check"></i>What Does This Mean for You?</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#data-repositories-for-sharing-of-data"><i class="fa fa-check"></i>Data Repositories for Sharing of Data</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#recent-shifts-in-regulatory-policies-for-data-sharing"><i class="fa fa-check"></i>Recent Shifts in Regulatory Policies for Data Sharing</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#additional-training-resources-on-fair"><i class="fa fa-check"></i>Additional Training Resources on FAIR</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html"><i class="fa fa-check"></i>Data Sharing through Online Repositories</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#an-overview-and-example-with-the-dataverse-repository"><i class="fa fa-check"></i>An Overview and Example with the Dataverse Repository</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#introduction-to-training-module-1"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#data-repositories"><i class="fa fa-check"></i>Data Repositories</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#the-dataverse-project"><i class="fa fa-check"></i>The Dataverse Project</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#what-is-a-dataverse"><i class="fa fa-check"></i>What is a Dataverse?</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#metadata"><i class="fa fa-check"></i>Metadata</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#creating-a-dataverse"><i class="fa fa-check"></i>Creating a Dataverse</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#creating-a-dataset"><i class="fa fa-check"></i>Creating a Dataset</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#concluding-remarks-1"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html"><i class="fa fa-check"></i>File Management using Github</a>
+<ul>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#introduction-to-training-module-2"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#creating-an-account"><i class="fa fa-check"></i>Creating an Account</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#creating-a-repository"><i class="fa fa-check"></i>Creating a Repository</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#uploading-code"><i class="fa fa-check"></i>Uploading Code</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#adding-subfolders-in-a-repository"><i class="fa fa-check"></i>Adding Subfolders in a Repository</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#updating-code"><i class="fa fa-check"></i>Updating Code</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#updating-repository-titles-and-structure-to-support-a-manuscript"><i class="fa fa-check"></i>Updating Repository Titles and Structure to Support a Manuscript</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#tracking-code-changes-using-github-branches"><i class="fa fa-check"></i>Tracking Code Changes using Github Branches</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#concluding-remarks-2"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html"><i class="fa fa-check"></i>Data Wrangling in Excel</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#introduction-to-training-module-3"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#save-a-copy-of-the-soon-to-be-organized-and-cleaned-dataset-as-a-new-file"><i class="fa fa-check"></i>Save a Copy of the Soon-To-Be Organized and Cleaned Dataset as a New File</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#remove-extraneous-white-space"><i class="fa fa-check"></i>Remove Extraneous White Space</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#replace-missing-data-with-na"><i class="fa fa-check"></i>Replace Missing Data with “NA”</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#create-a-metadata-tab"><i class="fa fa-check"></i>Create a Metadata Tab</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#abbreviate-and-capitalize-categorical-data"><i class="fa fa-check"></i>Abbreviate and Capitalize Categorical Data</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#alphabetize-sort-the-data-by-the-categorical-variable-of-interest"><i class="fa fa-check"></i>Alphabetize (Sort) the Data by the Categorical Variable of Interest</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#create-a-new-subject-number-column"><i class="fa fa-check"></i>Create a New Subject Number Column</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#remove-special-symbols-and-dashes"><i class="fa fa-check"></i>Remove Special Symbols and Dashes</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#bold-all-column-names-and-center-all-data"><i class="fa fa-check"></i>Bold all Column Names and Center all Data</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#create-a-subject-identifier-column"><i class="fa fa-check"></i>Create a Subject Identifier Column</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#separate-subject-demographic-data-from-experimental-measurements"><i class="fa fa-check"></i>Separate Subject Demographic Data from Experimental Measurements</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#convert-data-from-wide-to-long-format"><i class="fa fa-check"></i>Convert Data from Wide to Long Format</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#pivoting-data-from-a-wide-to-long-format"><i class="fa fa-check"></i>Pivoting Data from a Wide to Long Format</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#generating-summary-level-statistics-with-pivot-tables"><i class="fa fa-check"></i>Generating Summary-Level Statistics with Pivot Tables</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#excel-vs.-r-which-should-you-use"><i class="fa fa-check"></i>Excel vs. R: Which Should You Use?</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#concluding-remarks-3"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 2 Coding in R</b></span></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html"><i class="fa fa-check"></i>Downloading and Programming in R</a>
+<ul>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#introduction-to-training-module-4"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#general-introduction-and-installation-of-r-and-rstudio"><i class="fa fa-check"></i>General Introduction and Installation of R and RStudio</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#introduction-to-r-packages"><i class="fa fa-check"></i>Introduction to R Packages</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#scripting-basics"><i class="fa fa-check"></i>Scripting Basics</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#code-troubleshooting"><i class="fa fa-check"></i>Code Troubleshooting</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#concluding-remarks-4"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html"><i class="fa fa-check"></i>Coding “Best” Practices</a>
+<ul>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#introduction-to-training-module-5"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#scripting-file-types"><i class="fa fa-check"></i>Scripting File Types</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#script-headers-and-annotation"><i class="fa fa-check"></i>Script Headers and Annotation</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#coding-style"><i class="fa fa-check"></i>Coding Style</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#script-organization"><i class="fa fa-check"></i>Script Organization</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#concluding-remarks-5"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html"><i class="fa fa-check"></i>Data Manipulation and Reshaping</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#introduction-to-training-module-6"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#data-manipulation-using-base-r"><i class="fa fa-check"></i>Data Manipulation Using Base R</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#introduction-to-tidyverse"><i class="fa fa-check"></i>Introduction to Tidyverse</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#concluding-remarks-6"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html"><i class="fa fa-check"></i>Improving Coding Efficiencies</a>
+<ul>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#introduction-to-training-module-7"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#loops"><i class="fa fa-check"></i>Loops</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#functions"><i class="fa fa-check"></i>Functions</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#list-operations"><i class="fa fa-check"></i>List operations</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#concluding-remarks-7"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#additional-resources-2"><i class="fa fa-check"></i>Additional Resources</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 3 Basics of <br>Data Analysis and Visualizations</b></span></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html"><i class="fa fa-check"></i>Data Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#introduction-to-data-visualizations"><i class="fa fa-check"></i>Introduction to Data Visualizations</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#introduction-to-training-module-8"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#density-plot-visualization"><i class="fa fa-check"></i>Density Plot Visualization</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#boxplot-visualization"><i class="fa fa-check"></i>Boxplot Visualization</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#correlation-visualizations"><i class="fa fa-check"></i>Correlation Visualizations</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#heatmap-visualization"><i class="fa fa-check"></i>Heatmap Visualization</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#concluding-remarks-8"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html"><i class="fa fa-check"></i>Improving Data Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#introduction-to-data-visulization-conventions"><i class="fa fa-check"></i>Introduction to Data Visulization Conventions</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#introduction-to-training-module-9"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#creating-an-improved-boxplot-visualization"><i class="fa fa-check"></i>Creating an Improved Boxplot Visualization</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#creating-an-improved-heatmap-visualization"><i class="fa fa-check"></i>Creating an Improved Heatmap Visualization</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#creating-multi-plot-figures"><i class="fa fa-check"></i>Creating Multi-Plot Figures</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#concluding-remarks-9"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html"><i class="fa fa-check"></i>Normality Tests and Data Transformations</a>
+<ul>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#introduction-to-training-module-10"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#what-is-a-normal-distribution"><i class="fa fa-check"></i>What is a Normal Distribution?</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#qualitative-assessment-of-normality"><i class="fa fa-check"></i>Qualitative Assessment of Normality</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#quantitative-normality-assessment"><i class="fa fa-check"></i>Quantitative Normality Assessment</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#data-transformation"><i class="fa fa-check"></i>Data Transformation</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#additional-considerations-regarding-normality"><i class="fa fa-check"></i>Additional Considerations Regarding Normality</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#concluding-remarks-10"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html"><i class="fa fa-check"></i>Intoduction to Statistical Tests</a>
+<ul>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#introduction-to-training-module-11"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#assessing-normality-homogeneity-of-variance"><i class="fa fa-check"></i>Assessing Normality &amp; Homogeneity of Variance</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#two-group-visualizations-and-statistical-comparisons-using-the-t-test"><i class="fa fa-check"></i>Two-Group Visualizations and Statistical Comparisons using the T-Test</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#three-group-visualizations-and-statistical-comparisons-using-an-anova"><i class="fa fa-check"></i>Three-Group Visualizations and Statistical Comparisons using an ANOVA</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#regression-modeling-and-visualization-linear-and-logistic-regressions"><i class="fa fa-check"></i>Regression Modeling and Visualization: Linear and Logistic Regressions</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#statistical-evaluations-of-categorical-data-using-the-chi-squared-test-and-fishers-exact-test"><i class="fa fa-check"></i>Statistical Evaluations of Categorical Data using the Chi-Squared Test and Fisher’s Exact Test</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#concluding-remarks-11"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 4 Converting Wet Lab Data into Dry Lab Analyses</b></span></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html"><i class="fa fa-check"></i>Overview of Experimental Design and Example Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#introduction-to-training-module-12"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#replicates"><i class="fa fa-check"></i>Replicates</a></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#orientation-to-example-data-for-chapter-4"><i class="fa fa-check"></i>Orientation to Example Data for Chapter 4</a></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#concluding-remarks-12"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html"><i class="fa fa-check"></i>Data Import, Processing, and Summary Statistics</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#introduction-to-training-module-13"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#data-import"><i class="fa fa-check"></i>Data Import</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#handling-missing-values"><i class="fa fa-check"></i>Handling Missing Values</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#averaging-replicates"><i class="fa fa-check"></i>Averaging Replicates</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#descriptive-statistics"><i class="fa fa-check"></i>Descriptive Statistics</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#normality-assessment-and-data-transformation"><i class="fa fa-check"></i>Normality Assessment and Data Transformation</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#concluding-remarks-13"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html"><i class="fa fa-check"></i>Data Import from PDF Sources</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#introduction-to-training-module-14"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#importing-data-from-many-single-pdfs-with-the-same-formatting"><i class="fa fa-check"></i>Importing Data from Many Single PDFs with the Same Formatting</a></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#importing-data-stored-in-pdf-tables"><i class="fa fa-check"></i>Importing Data Stored in PDF Tables</a></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#concluding-remarks-14"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html"><i class="fa fa-check"></i>Two-Group Comparisons and Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#introduction-to-training-module-15"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#overview-of-two-group-statistical-tests"><i class="fa fa-check"></i>Overview of Two Group Statistical Tests</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#statistical-vs-biological-significance"><i class="fa fa-check"></i>Statistical vs Biological Significance</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#unpaired-test-example"><i class="fa fa-check"></i>Unpaired Test Example</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#paired-test-example"><i class="fa fa-check"></i>Paired Test Example</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#visualizing-results"><i class="fa fa-check"></i>Visualizing Results</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#concluding-remarks-15"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html"><i class="fa fa-check"></i>Multi-Group and Multi-Variable Comparisons and Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#introduction-to-training-module-16"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#overview-of-multi-group-statistical-tests"><i class="fa fa-check"></i>Overview of Multi-Group Statistical Tests</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#multi-group-analysis-example"><i class="fa fa-check"></i>Multi-Group Analysis Example</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#visualization-of-multi-group-statistical-results"><i class="fa fa-check"></i>Visualization of Multi-Group Statistical Results</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#concluding-remarks-16"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 5 Machine Learning &amp; Artificial Intelligence</b></span></li>
+<li class="part"><span><b>Chapter 6 Applications in Toxicology &amp; Exposure Science</b></span></li>
+<li class="part"><span><b>Chapter 7 Environmental Health Database Mining</b></span></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">TAME 2.0</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-wrangling-in-excel" class="section level1 hasAnchor">
+<h1>Data Wrangling in Excel<a href="data-wrangling-in-excel.html#data-wrangling-in-excel" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This training module was developed by Alexis Payton, Elise Hickman, and Julia E. Rager.</p>
+<p>All input files (script, data, and figures) can be downloaded from the <a href="https://github.com/UNCSRP/TAME2">UNC-SRP TAME2 GitHub website</a>.</p>
+<div id="introduction-to-training-module-3" class="section level2 hasAnchor">
+<h2>Introduction to Training Module<a href="data-wrangling-in-excel.html#introduction-to-training-module-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This module is intended to be a starting guide to cleaning and organizing an example toxicology dataset in Excel. <strong>Data wrangling</strong> involves cleaning, removing of erroneous data, and restructuring necessary for to preparing wet lab generated data for downstream analyses. These steps will ensure that:</p>
+<ul>
+<li>Data are amenable to downstream analyses in R, or your preferred programming language</li>
+<li>Data are clear and easily interpretable by collaborators, reviewers, and readers</li>
+</ul>
+<p>Click <a href="https://www.alteryx.com/glossary/data-wrangling#:~:text=Data%20wrangling%20is%20the%20process,also%20sometimes%20called%20data%20munging.">here</a> for more information on data wrangling.</p>
+<p>In this training tutorial, we’ll make use of an example dataset that needs to be wrangled. The dataset contains concentration values for molecules that were measured using protein-based ELISA technologies. These molecules specifically span 17 sterols and cytokines, selected based upon their important roles in mediating biological responses. These measures were derived from human serum samples. Demographic information also exists for each subject.</p>
+<p>The following steps detailed in this training module are by no means exhaustive! Further resources are provided at the end. This module provides example steps that are helpful when wrangling your data in Excel. Datasets often come in many different formats from our wet bench colleagues, therefore some steps will likely need to be added, removed, or amended depending on your specific data.</p>
+<p><br></p>
+</div>
+<div id="save-a-copy-of-the-soon-to-be-organized-and-cleaned-dataset-as-a-new-file" class="section level2 hasAnchor">
+<h2>Save a Copy of the Soon-To-Be Organized and Cleaned Dataset as a New File<a href="data-wrangling-in-excel.html#save-a-copy-of-the-soon-to-be-organized-and-cleaned-dataset-as-a-new-file" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Open Microsoft Excel and prior to <strong>ANY</strong> edits, click “File” –&gt; “Save As” to save a new version of the file that can serve as the cleaned version of the data. This is very important for file tracking purposes, and can help in the instance that the original version needs to be referred back to (e.g., if data are accidentally deleted or modified during downstream steps).</p>
+<ul>
+<li>The file needs to be named something indicative of the data it contains followed by the current date (e.g., “Allostatic Mediator Data_061622”).</li>
+<li>The title should be succinct and descriptive.</li>
+<li>It is okay to use dashes or underscores in the name of the title.</li>
+<li>Do not include special characters, such as $, #, @, !, %, &amp;, *, (, ), and +. Special characters tend to generate errors on local hard drives when syncing to cloud-based servers, and they are difficult to upload into programming software.</li>
+</ul>
+<p>Let’s first view what the dataset currently looks like:</p>
+<p><img src="Module1_4_Images/Module1_4_Image1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p><br></p>
+<div id="helpful-excel-keyboard-shortcuts" class="section level3 hasAnchor">
+<h3>Helpful Excel Keyboard Shortcuts<a href="data-wrangling-in-excel.html#helpful-excel-keyboard-shortcuts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The following keyboard shortcuts can help you work more efficiently in Excel:</p>
+<ul>
+<li>Move to the last cell in use on the sheet
+<ul>
+<li>Control + Fn + Right arrow key (Mac users)</li>
+<li>Control + End (PC users)</li>
+</ul></li>
+<li>Move to the beginning of the sheet
+<ul>
+<li>Control + Fn + Left arrow key, then same Control + Fn + Up arrow key (Mac users)</li>
+<li>Control + Home (PC users)</li>
+</ul></li>
+<li>Highlight and grab all data
+<ul>
+<li>Click on the first cell in the upper left hand corner then click and hold Shift + Command + Down arrow key + Right arrow key (Mac users)</li>
+<li>Shift + Command + Down arrow key + Right arrow key (PC users)</li>
+</ul></li>
+</ul>
+<p><strong>Note:</strong> This only works if there are no cells with missing information or gaps in the columns/rows used to define the peripheral area.</p>
+<p>For more available shortcuts on various operating systems click <a href="https://support.microsoft.com/en-us/office/keyboard-shortcuts-in-excel-1798d9d5-842a-42b8-9c99-9b7213f0040f">here</a>.</p>
+<p><br></p>
+</div>
+</div>
+<div id="remove-extraneous-white-space" class="section level2 hasAnchor">
+<h2>Remove Extraneous White Space<a href="data-wrangling-in-excel.html#remove-extraneous-white-space" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Before we can begin organizing the data, we need to remove the entirely blank rows of cells. This reduces the file size and allows for the use of the filter function in Excel, as well as other organizing functions, which will be used in the next few steps. This step also makes the data look more tidy and amenable to import for coding purposes.</p>
+<ul>
+<li><strong>Excel Trick #1:</strong> Select all lines that need to be removed and press Control + minus key for Mac and PC users. (Note that there are other ways to do this for larger datasets, but this works fine for this small example.)</li>
+<li><strong>Excel Trick #2:</strong> An easier way to remove blank rows and cells for larger datasets, includes clicking “Find &amp; Select”–&gt; “Special” –&gt; “Blanks” –&gt; click “OK” to select all blank rows and cells. Click “Delete” within the home tab –&gt; “Delete sheet rows”.</li>
+</ul>
+<p>After removing the blank rows, the file should look like the screenshot below.
+<img src="Module1_4_Images/Module1_4_Image2.png" width="1440" style="display: block; margin: auto;" /></p>
+<p><br></p>
+</div>
+<div id="replace-missing-data-with-na" class="section level2 hasAnchor">
+<h2>Replace Missing Data with “NA”<a href="data-wrangling-in-excel.html#replace-missing-data-with-na" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There are many ways missing data can be encoded in datasets. This includes values like “blank”, “N/A”, “NA”, or leaving a cell blank. Replacing all missing values with “NA” values is done for 2 reasons:</p>
+<ul>
+<li>To confirm that the data is indeed missing</li>
+<li>R reads in “NA” values as missing values</li>
+</ul>
+<p>To check for missing values, the filter function can be used on each column and only select cells with missing values. You may need to scroll to the bottom of the filter pop up window for numerical data. Enter “NA” into the cell of the filtered column. Double click the bottom right corner of the cell to copy the “NA” down the rest of the column.</p>
+<p>There was no missing data in this dataset, so this step can be skipped.</p>
+<p><br></p>
+</div>
+<div id="create-a-metadata-tab" class="section level2 hasAnchor">
+<h2>Create a Metadata Tab<a href="data-wrangling-in-excel.html#create-a-metadata-tab" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Metadata explains what each column represents in the dataset. Metadata is now a required component of data sharing, so it is best to initiate this process prior to data analysis. Ideally, this information is filled in by the scientist(s) who generated the data.</p>
+<ul>
+<li>Create a new tab (preferably as the first tab) and label it “XXXXX_METADATA” (ie., “Allostatic_METADATA”)</li>
+<li>Then relabel the original data tab as “XXXX_DATA” (ie., “Allostatic_DATA).</li>
+<li>Within the metadata tab, create three columns: the first, “Column Identifier”, contains each of the column names found in the data tab; the second, “Code”, contains the individual variable/ abbreviation for each column identifier; the third, “Description” contains additional information and definitions for abbreviations.</li>
+</ul>
+<p><img src="Module1_4_Images/Module1_4_Image3.png" width="893" style="display: block; margin: auto;" /></p>
+<p><br></p>
+</div>
+<div id="abbreviate-and-capitalize-categorical-data" class="section level2 hasAnchor">
+<h2>Abbreviate and Capitalize Categorical Data<a href="data-wrangling-in-excel.html#abbreviate-and-capitalize-categorical-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Categorical data are easier to handle in programming languages when they are capitalized and abbreviated. It also helps reduce typos and potential typing mistakes within your script.</p>
+<p>For this dataset, the following variables were edited:</p>
+<ul>
+<li>Group
+<ul>
+<li>“control” became “NS” for non-smoker</li>
+<li>“smoker” became “CS” for cigarette smoker</li>
+</ul></li>
+<li>Sex
+<ul>
+<li>“f” became “F” for female</li>
+<li>“m” became “M” for male</li>
+</ul></li>
+<li>Race
+<ul>
+<li>“AA” became “B” for Black</li>
+<li>“White” became “W” for White</li>
+</ul></li>
+</ul>
+<p><strong>Excel Trick:</strong> To change cells that contain the same data simultaneously, navigate to “Edit”, click “Find”, and then “Replace”.</p>
+<p>Once the categorical data have been abbreviated, add those abbreviations to the metadata and describe what they symbolize.
+<img src="Module1_4_Images/Module1_4_Image4.png" width="1440" style="display: block; margin: auto;" /></p>
+<p><br></p>
+</div>
+<div id="alphabetize-sort-the-data-by-the-categorical-variable-of-interest" class="section level2 hasAnchor">
+<h2>Alphabetize (Sort) the Data by the Categorical Variable of Interest<a href="data-wrangling-in-excel.html#alphabetize-sort-the-data-by-the-categorical-variable-of-interest" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For this dataset, we will sort by the column “Group”. This organizes the data and sets it up for the next step.</p>
+<ul>
+<li>Highlight all the column headers.</li>
+<li>Click on the “Sort &amp; Filter” button and click “Filter”.</li>
+<li>Click on the arrow on cell that contains the column name “Group” and click “Ascending”.</li>
+</ul>
+</div>
+<div id="create-a-new-subject-number-column" class="section level2 hasAnchor">
+<h2>Create a New Subject Number Column<a href="data-wrangling-in-excel.html#create-a-new-subject-number-column" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Analysis-specific subjects are created to give an ordinal subject number to each subject, which allows the scientist to easily identify the number of subjects. In addition, these new ordinal subject numbers will be used to create a subject identifier that combines both a subject’s group and subject number that is helpful for downstream visualization analyses.</p>
+<ul>
+<li>Relabel the subject number/identifier column as “Original_Subject_Number” and create an ordinal subject number column labeled “Subject_Number”.</li>
+</ul>
+<p>R reads in spaces between words as periods, therefore it’s common practice to replace spaces with underscores when doing data analysis in R. Avoid using dashes in column names or anywhere else in the dataset.
+<img src="Module1_4_Images/Module1_4_Image5.png" width="1440" style="display: block; margin: auto;" /></p>
+<p><br></p>
+</div>
+<div id="remove-special-symbols-and-dashes" class="section level2 hasAnchor">
+<h2>Remove Special Symbols and Dashes<a href="data-wrangling-in-excel.html#remove-special-symbols-and-dashes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Programming languages, in general, do not operate well with special symbols and dashes, particularly when included in column identifiers. For this reason, it is best to remove these while cleaning up your data, prior to importing it into R or your preferred programming software.</p>
+<p>In this case, this dataset contains dashes and Greek letters within some of the column header identifiers. Here, it is beneficial to remove these dashes (e.g., change IL-10 to IL10) and replace the Greek letters with first letter of the word in English (e.g., change TNF-<span class="math inline">\(\alpha\)</span> to TNFa).</p>
+<p><br></p>
+</div>
+<div id="bold-all-column-names-and-center-all-data" class="section level2 hasAnchor">
+<h2>Bold all Column Names and Center all Data<a href="data-wrangling-in-excel.html#bold-all-column-names-and-center-all-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>These data will likely be shared with collaborators, uploaded onto data deposition websites, and used as supporting information in published manuscripts. For these purposes, it is nice to format data in Excel such that it is visually appealing and easy to digest.</p>
+<p>For example, here, it is nice to bold column identifiers and center the data, as shown below:
+<img src="Module1_4_Images/Module1_4_Image6.png" width="1440" style="display: block; margin: auto;" /></p>
+<p><br></p>
+</div>
+<div id="create-a-subject-identifier-column" class="section level2 hasAnchor">
+<h2>Create a Subject Identifier Column<a href="data-wrangling-in-excel.html#create-a-subject-identifier-column" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The subject identifier column labeled, “Group_Subject_No”, combines the subject number with the variable of interest (ie. Group for this dataset). This is useful for analyses to identify outliers by the subject number and the group.</p>
+<ul>
+<li>Insert 2 additional columns where the current “Sex” column is.</li>
+<li>To combine values from two different columns, type “=CONCAT(D1,” _ “,C1)” in the first cell in the first column inserted.</li>
+<li>Double click the right corner of the cell for the formula to be copied to last row in the dataset.</li>
+<li>Copy the entire column and paste only the values in the second column by navigating to the drop down arrow next to “Paste” and click “Paste Values”.</li>
+<li>Label the second column “Group_Subject_No” and delete the first column.</li>
+</ul>
+<p><img src="Module1_4_Images/Module1_4_Image7.png" width="1410" style="display: block; margin: auto;" /></p>
+</div>
+<div id="separate-subject-demographic-data-from-experimental-measurements" class="section level2 hasAnchor">
+<h2>Separate Subject Demographic Data from Experimental Measurements<a href="data-wrangling-in-excel.html#separate-subject-demographic-data-from-experimental-measurements" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This example dataset is very small, so the demographic data (e.g., sex, race, age) was kept within the same file as the experimentally measured molecules. Though in larger datasets (e.g., genome-wide data, exposomic data, etc), it is often beneficial to separate the demographic data into one file that can be labeled according to the following format: “XXX_Subject_Info_061622” (ie. “Allostatic_Subject_Info_061622”).</p>
+<p>This step was not completed for this current data, since it had a smaller size and the downstream analyses were simple.</p>
+<p><br></p>
+</div>
+<div id="convert-data-from-wide-to-long-format" class="section level2 hasAnchor">
+<h2>Convert Data from Wide to Long Format<a href="data-wrangling-in-excel.html#convert-data-from-wide-to-long-format" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A wide format contains values that <strong>DO NOT</strong> repeat the subject identifier column. For this dataset, each subject has one row containing all of its data, therefore the subject identifier occurs once in the dataset.</p>
+<p><strong>Wide Format</strong>
+<img src="Module1_4_Images/Module1_4_Image8.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>A long format contains values that <strong>DO</strong> repeat the subject identifier column. For this dataset, that means a new column was created entitled “Variable” containing all the mediator names and a column entitled “Value” containing all their corresponding values. In the screenshot, an additional column, “Category”, was added to help with the categorization of mediators in R analyses.</p>
+<p><strong>Long Format</strong>
+<img src="Module1_4_Images/Module1_4_Image9.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>The reason a long format is preferred is because it makes visualizations and statistical analyses more efficient in R. In the long format, we were able to add a column entitled “Category” to categorize the mediators into “AL Biomarker” or “Cytokine” allowing us to more easily subset the mediators in R. Read more about wide and long formats <a href="https://towardsdatascience.com/long-and-wide-formats-in-data-explained-e48d7c9a06cb">here</a>.</p>
+<p>To convert the data from a wide to long format, follow the steps below:</p>
+</div>
+<div id="pivoting-data-from-a-wide-to-long-format" class="section level2 hasAnchor">
+<h2>Pivoting Data from a Wide to Long Format<a href="data-wrangling-in-excel.html#pivoting-data-from-a-wide-to-long-format" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To do this, a power query in Excel will be used. Note: If you are working on a Mac, you will need to have at least Excel 2016 installed to follow this tutorial, as Power Query is not avaialble for earlier versions. Add-ins are available for Windows users. See <a href="https://blog.enterprisedna.co/how-to-add-power-query-to-excel/">this link</a> for more details.</p>
+<ol style="list-style-type: decimal">
+<li><p>Start by copying all of the data, including the column titles. (Hint: Try using the keyboard shortcut mentioned above.)</p></li>
+<li><p>Click the tab at the top that says “Data”. Then click “Get Data (Power Query)” at the far left.</p></li>
+<li><p>It will ask you to choose a data source. Click “Blank table” in the bottom row.</p></li>
+<li><p>Paste the data into the table. (Hint: Use the shortcut Ctrl + “v”). At this point, your screen should look like the screenshot below.
+<img src="Module1_4_Images/Module1_4_Image10.png" width="1279" style="display: block; margin: auto;" /></p></li>
+<li><p>Click “Use first row as headers” and then click “Next” in the bottom right hand corner.</p></li>
+<li><p>Select all the columns with biomarker names. That should be the column “Cortisol” through the end.
+<img src="Module1_4_Images/Module1_4_Image11.png" width="1291" style="display: block; margin: auto;" /></p></li>
+<li><p>Click the “Transform” button in the upper left hand corner. Then click “Unpivot columns” in the middle of the pane. The final result should look like the sceenshot below with all the biomarkers now in one column entitled “Attribute” and their corresponding values in another column entitled “Value”.
+<img src="Module1_4_Images/Module1_4_Image12.png" width="1300" style="display: block; margin: auto;" /></p></li>
+<li><p>To save this, go back to the “Home” tab and click “Close &amp; load”. You should see something similar to the screenshot below.
+<img src="Module1_4_Images/Module1_4_Image13.png" width="1303" style="display: block; margin: auto;" /></p></li>
+<li><p>In the upper right with all the shaded tables (within the “Table” tab), click the arrow to the left of the green table until you see one with no shading. Then click the table with no colors.</p></li>
+<li><p>Click “Convert to Range” within the “Table” tab. This removes the power query capabilities, so that the data is a regular excel sheet.</p></li>
+<li><p>Now the “Category” column can be created to identify the types of biomarkers in the dataset. The allostatic load (AL) biomarkers denoted in the “Category” column include the variables Cortisol, CRP, Fibrinogen, Hba1c, HDL, and Noradrenaline. The rest of the variables were labeled as cytokines. Additionally, we can make this data more closely resemble the final long format screenshot by bolding the headers, centering all the data, etc.</p></li>
+</ol>
+<p>We have successfully wrangled our data and the final dataset now looks like this:
+<img src="Module1_4_Images/Module1_4_Image14.png" width="975" style="display: block; margin: auto;" /></p>
+<p><br></p>
+</div>
+<div id="generating-summary-level-statistics-with-pivot-tables" class="section level2 hasAnchor">
+<h2>Generating Summary-Level Statistics with Pivot Tables<a href="data-wrangling-in-excel.html#generating-summary-level-statistics-with-pivot-tables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A PivotTable is a tool in Excel used to summarize numerical data. It’s called a pivot table, because it pivots or changes how the data is displayed to make statistical inferences. This can be useful for generating initial summary-level statistics to guage the distribution of data.</p>
+<p>To create a PivotTable, start by selecting all of the data. (Hint: Try using the keyboard shortcut mentioned above.) Click “Insert” tab on the upper left-hand side, click “PivotTable”, and click “OK”. The new PivotTable should be available in a new sheet as seen in the screenshot below.
+<img src="Module1_4_Images/Module1_4_Image15.png" width="717" style="display: block; margin: auto;" /></p>
+<p>A PivotTable will be constructed based on the column headers that can be dragged into the PivotTable fields located on the right-hand side. For example, what if we were interested in determining if there were differences in average expression between non-smokers and cigarette smokers in each category of biomarkers? As seen below, drag the “Group” variable under the “Rows” field and drag the “Value” variable under the “Values” field.
+<img src="Module1_4_Images/Module1_4_Image16.png" width="719" style="display: block; margin: auto;" /></p>
+<p>Notice that it automatically calculates the sum of the expression values for each group. To change the function to average, click the “i” icon and select “Average”. The output should mirror what’s below with non-smokers having an average expression that’s more than double that of cigarette smokers.
+<img src="Module1_4_Images/Module1_4_Image17.png" width="718" style="display: block; margin: auto;" /></p>
+<p><br></p>
+</div>
+<div id="excel-vs.-r-which-should-you-use" class="section level2 hasAnchor">
+<h2>Excel vs. R: Which Should You Use?<a href="data-wrangling-in-excel.html#excel-vs.-r-which-should-you-use" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For the most part, it’s better to perform final analyses in R (or another programming language) rather than Excel for the following reasons…</p>
+<ul>
+<li>R clearly shows the code (instructions), which makes editing, interpretability, and sharing easier. This makes analyses more reproducible and can save time.</li>
+<li>R has packages that makes more complex analyses possible (i.e., machine learning and heatmaps) that aren’t available in Excel.</li>
+<li>R can handle larger data sets.</li>
+<li>R can compute and process data faster.</li>
+</ul>
+<p>However, Excel is still a software that has many benefits for running analyses including…</p>
+<ul>
+<li>Excel is user-friendly and most people have experience in navigating the software at a basic level.</li>
+<li>Excel can be faster for rudimentary statistical analyses and visualizations.</li>
+</ul>
+<p>Depending on each scientist’s skill-level and the complexity of the analysis, Excel or R could be beneficial.</p>
+<p><br></p>
+</div>
+<div id="concluding-remarks-3" class="section level2 hasAnchor">
+<h2>Concluding Remarks<a href="data-wrangling-in-excel.html#concluding-remarks-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In summary, this training module highlights the importance of data wrangling and how to do so in Microsoft Excel for downstream analyses. Concepts discussed include helpful Excel features like power queries and pivot tables and when to use Microsoft Excel vs. R.</p>
+<div id="additional-resources" class="section level3 hasAnchor">
+<h3>Additional Resources<a href="data-wrangling-in-excel.html#additional-resources" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Data wrangling in Excel can be expedited with knowledge of useful features and functions to format data. Check out the resources below for additional information on Excel tricks.</p>
+<ul>
+<li><a href="https://careerfoundry.com/en/blog/data-analytics/data-analysis-in-excel/">Data Analysis in Excel</a></li>
+<li><a href="https://www.lifehack.org/articles/technology/20-excel-spreadsheet-secrets-youll-never-know-you-dont-read-this.html">Excel Spreesheet Hacks</a></li>
+<li><a href="https://www.udemy.com/course/useful-excel-for-beginners/">Excel for Beginners</a></li>
+</ul>
+<p><br></p>
+<p><label class="tykfont">
+Test Your Knowledge
+</label></p>
+<div class="tyk">
+<ol style="list-style-type: decimal">
+<li>Try wrangling the “Module1_4_TYKInput.xlsx” to mimic the cleaned versions of the data found in “Module1_4_TYKSolution.xlsx”. This dataset includes sterol and cytokine concentration levels extracted from induced sputum samples collected after ozone exposure. After wrangling, you should end up with a sheet for subject information and a sheet for experimental data.</li>
+<li>Using the a PivotTable on the cleaned dataset, find the standard deviation of each cytokine variable stratified by the disease status.</li>
+</ol>
+</div>
+
+</div>
+</div>
+</div>
+
+
+
+<!-- ################################################## -->
+<!-- ################################################## -->
+<!-- START SECTION ONE  -->
+<!-- ################################################## -->
+<!-- ################################################## -->
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="file-management-using-github.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="downloading-and-programming-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Normality Tests and Data Transformations | TAME 2.0</title>
+  <meta name="description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Normality Tests and Data Transformations | TAME 2.0" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Normality Tests and Data Transformations | TAME 2.0" />
+  
+  <meta name="twitter:description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
+  
+
+<meta name="author" content="Rager Lab" />
+
+
+<meta name="date" content="2024-06-24" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="improving-data-visualizations.html"/>
+<link rel="next" href="intoduction-to-statistical-tests.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.32/datatables.js"></script>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="images/Data Training Icon for Top Left Bookdown_v2.png"><br></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="part"><span><b>Chapter 1 Introductory <br>Data Science</b></span></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html"><i class="fa fa-check"></i>FAIR Data Management Practices</a>
+<ul>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#introduction-to-training-module"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#introduction-to-fair"><i class="fa fa-check"></i>Introduction to FAIR</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#breaking-down-fair-letter-by-letter"><i class="fa fa-check"></i>Breaking Down FAIR, Letter-by-Letter</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#what-does-this-mean-for-you"><i class="fa fa-check"></i>What Does This Mean for You?</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#data-repositories-for-sharing-of-data"><i class="fa fa-check"></i>Data Repositories for Sharing of Data</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#recent-shifts-in-regulatory-policies-for-data-sharing"><i class="fa fa-check"></i>Recent Shifts in Regulatory Policies for Data Sharing</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#additional-training-resources-on-fair"><i class="fa fa-check"></i>Additional Training Resources on FAIR</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html"><i class="fa fa-check"></i>Data Sharing through Online Repositories</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#an-overview-and-example-with-the-dataverse-repository"><i class="fa fa-check"></i>An Overview and Example with the Dataverse Repository</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#introduction-to-training-module-1"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#data-repositories"><i class="fa fa-check"></i>Data Repositories</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#the-dataverse-project"><i class="fa fa-check"></i>The Dataverse Project</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#what-is-a-dataverse"><i class="fa fa-check"></i>What is a Dataverse?</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#metadata"><i class="fa fa-check"></i>Metadata</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#creating-a-dataverse"><i class="fa fa-check"></i>Creating a Dataverse</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#creating-a-dataset"><i class="fa fa-check"></i>Creating a Dataset</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#concluding-remarks-1"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html"><i class="fa fa-check"></i>File Management using Github</a>
+<ul>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#introduction-to-training-module-2"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#creating-an-account"><i class="fa fa-check"></i>Creating an Account</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#creating-a-repository"><i class="fa fa-check"></i>Creating a Repository</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#uploading-code"><i class="fa fa-check"></i>Uploading Code</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#adding-subfolders-in-a-repository"><i class="fa fa-check"></i>Adding Subfolders in a Repository</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#updating-code"><i class="fa fa-check"></i>Updating Code</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#updating-repository-titles-and-structure-to-support-a-manuscript"><i class="fa fa-check"></i>Updating Repository Titles and Structure to Support a Manuscript</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#tracking-code-changes-using-github-branches"><i class="fa fa-check"></i>Tracking Code Changes using Github Branches</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#concluding-remarks-2"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html"><i class="fa fa-check"></i>Data Wrangling in Excel</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#introduction-to-training-module-3"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#save-a-copy-of-the-soon-to-be-organized-and-cleaned-dataset-as-a-new-file"><i class="fa fa-check"></i>Save a Copy of the Soon-To-Be Organized and Cleaned Dataset as a New File</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#remove-extraneous-white-space"><i class="fa fa-check"></i>Remove Extraneous White Space</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#replace-missing-data-with-na"><i class="fa fa-check"></i>Replace Missing Data with “NA”</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#create-a-metadata-tab"><i class="fa fa-check"></i>Create a Metadata Tab</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#abbreviate-and-capitalize-categorical-data"><i class="fa fa-check"></i>Abbreviate and Capitalize Categorical Data</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#alphabetize-sort-the-data-by-the-categorical-variable-of-interest"><i class="fa fa-check"></i>Alphabetize (Sort) the Data by the Categorical Variable of Interest</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#create-a-new-subject-number-column"><i class="fa fa-check"></i>Create a New Subject Number Column</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#remove-special-symbols-and-dashes"><i class="fa fa-check"></i>Remove Special Symbols and Dashes</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#bold-all-column-names-and-center-all-data"><i class="fa fa-check"></i>Bold all Column Names and Center all Data</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#create-a-subject-identifier-column"><i class="fa fa-check"></i>Create a Subject Identifier Column</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#separate-subject-demographic-data-from-experimental-measurements"><i class="fa fa-check"></i>Separate Subject Demographic Data from Experimental Measurements</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#convert-data-from-wide-to-long-format"><i class="fa fa-check"></i>Convert Data from Wide to Long Format</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#pivoting-data-from-a-wide-to-long-format"><i class="fa fa-check"></i>Pivoting Data from a Wide to Long Format</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#generating-summary-level-statistics-with-pivot-tables"><i class="fa fa-check"></i>Generating Summary-Level Statistics with Pivot Tables</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#excel-vs.-r-which-should-you-use"><i class="fa fa-check"></i>Excel vs. R: Which Should You Use?</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#concluding-remarks-3"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 2 Coding in R</b></span></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html"><i class="fa fa-check"></i>Downloading and Programming in R</a>
+<ul>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#introduction-to-training-module-4"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#general-introduction-and-installation-of-r-and-rstudio"><i class="fa fa-check"></i>General Introduction and Installation of R and RStudio</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#introduction-to-r-packages"><i class="fa fa-check"></i>Introduction to R Packages</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#scripting-basics"><i class="fa fa-check"></i>Scripting Basics</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#code-troubleshooting"><i class="fa fa-check"></i>Code Troubleshooting</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#concluding-remarks-4"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html"><i class="fa fa-check"></i>Coding “Best” Practices</a>
+<ul>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#introduction-to-training-module-5"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#scripting-file-types"><i class="fa fa-check"></i>Scripting File Types</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#script-headers-and-annotation"><i class="fa fa-check"></i>Script Headers and Annotation</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#coding-style"><i class="fa fa-check"></i>Coding Style</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#script-organization"><i class="fa fa-check"></i>Script Organization</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#concluding-remarks-5"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html"><i class="fa fa-check"></i>Data Manipulation and Reshaping</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#introduction-to-training-module-6"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#data-manipulation-using-base-r"><i class="fa fa-check"></i>Data Manipulation Using Base R</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#introduction-to-tidyverse"><i class="fa fa-check"></i>Introduction to Tidyverse</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#concluding-remarks-6"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html"><i class="fa fa-check"></i>Improving Coding Efficiencies</a>
+<ul>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#introduction-to-training-module-7"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#loops"><i class="fa fa-check"></i>Loops</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#functions"><i class="fa fa-check"></i>Functions</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#list-operations"><i class="fa fa-check"></i>List operations</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#concluding-remarks-7"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#additional-resources-2"><i class="fa fa-check"></i>Additional Resources</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 3 Basics of <br>Data Analysis and Visualizations</b></span></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html"><i class="fa fa-check"></i>Data Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#introduction-to-data-visualizations"><i class="fa fa-check"></i>Introduction to Data Visualizations</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#introduction-to-training-module-8"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#density-plot-visualization"><i class="fa fa-check"></i>Density Plot Visualization</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#boxplot-visualization"><i class="fa fa-check"></i>Boxplot Visualization</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#correlation-visualizations"><i class="fa fa-check"></i>Correlation Visualizations</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#heatmap-visualization"><i class="fa fa-check"></i>Heatmap Visualization</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#concluding-remarks-8"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html"><i class="fa fa-check"></i>Improving Data Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#introduction-to-data-visulization-conventions"><i class="fa fa-check"></i>Introduction to Data Visulization Conventions</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#introduction-to-training-module-9"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#creating-an-improved-boxplot-visualization"><i class="fa fa-check"></i>Creating an Improved Boxplot Visualization</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#creating-an-improved-heatmap-visualization"><i class="fa fa-check"></i>Creating an Improved Heatmap Visualization</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#creating-multi-plot-figures"><i class="fa fa-check"></i>Creating Multi-Plot Figures</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#concluding-remarks-9"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html"><i class="fa fa-check"></i>Normality Tests and Data Transformations</a>
+<ul>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#introduction-to-training-module-10"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#what-is-a-normal-distribution"><i class="fa fa-check"></i>What is a Normal Distribution?</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#qualitative-assessment-of-normality"><i class="fa fa-check"></i>Qualitative Assessment of Normality</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#quantitative-normality-assessment"><i class="fa fa-check"></i>Quantitative Normality Assessment</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#data-transformation"><i class="fa fa-check"></i>Data Transformation</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#additional-considerations-regarding-normality"><i class="fa fa-check"></i>Additional Considerations Regarding Normality</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#concluding-remarks-10"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html"><i class="fa fa-check"></i>Intoduction to Statistical Tests</a>
+<ul>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#introduction-to-training-module-11"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#assessing-normality-homogeneity-of-variance"><i class="fa fa-check"></i>Assessing Normality &amp; Homogeneity of Variance</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#two-group-visualizations-and-statistical-comparisons-using-the-t-test"><i class="fa fa-check"></i>Two-Group Visualizations and Statistical Comparisons using the T-Test</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#three-group-visualizations-and-statistical-comparisons-using-an-anova"><i class="fa fa-check"></i>Three-Group Visualizations and Statistical Comparisons using an ANOVA</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#regression-modeling-and-visualization-linear-and-logistic-regressions"><i class="fa fa-check"></i>Regression Modeling and Visualization: Linear and Logistic Regressions</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#statistical-evaluations-of-categorical-data-using-the-chi-squared-test-and-fishers-exact-test"><i class="fa fa-check"></i>Statistical Evaluations of Categorical Data using the Chi-Squared Test and Fisher’s Exact Test</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#concluding-remarks-11"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 4 Converting Wet Lab Data into Dry Lab Analyses</b></span></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html"><i class="fa fa-check"></i>Overview of Experimental Design and Example Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#introduction-to-training-module-12"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#replicates"><i class="fa fa-check"></i>Replicates</a></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#orientation-to-example-data-for-chapter-4"><i class="fa fa-check"></i>Orientation to Example Data for Chapter 4</a></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#concluding-remarks-12"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html"><i class="fa fa-check"></i>Data Import, Processing, and Summary Statistics</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#introduction-to-training-module-13"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#data-import"><i class="fa fa-check"></i>Data Import</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#handling-missing-values"><i class="fa fa-check"></i>Handling Missing Values</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#averaging-replicates"><i class="fa fa-check"></i>Averaging Replicates</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#descriptive-statistics"><i class="fa fa-check"></i>Descriptive Statistics</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#normality-assessment-and-data-transformation"><i class="fa fa-check"></i>Normality Assessment and Data Transformation</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#concluding-remarks-13"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html"><i class="fa fa-check"></i>Data Import from PDF Sources</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#introduction-to-training-module-14"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#importing-data-from-many-single-pdfs-with-the-same-formatting"><i class="fa fa-check"></i>Importing Data from Many Single PDFs with the Same Formatting</a></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#importing-data-stored-in-pdf-tables"><i class="fa fa-check"></i>Importing Data Stored in PDF Tables</a></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#concluding-remarks-14"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html"><i class="fa fa-check"></i>Two-Group Comparisons and Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#introduction-to-training-module-15"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#overview-of-two-group-statistical-tests"><i class="fa fa-check"></i>Overview of Two Group Statistical Tests</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#statistical-vs-biological-significance"><i class="fa fa-check"></i>Statistical vs Biological Significance</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#unpaired-test-example"><i class="fa fa-check"></i>Unpaired Test Example</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#paired-test-example"><i class="fa fa-check"></i>Paired Test Example</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#visualizing-results"><i class="fa fa-check"></i>Visualizing Results</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#concluding-remarks-15"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html"><i class="fa fa-check"></i>Multi-Group and Multi-Variable Comparisons and Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#introduction-to-training-module-16"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#overview-of-multi-group-statistical-tests"><i class="fa fa-check"></i>Overview of Multi-Group Statistical Tests</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#multi-group-analysis-example"><i class="fa fa-check"></i>Multi-Group Analysis Example</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#visualization-of-multi-group-statistical-results"><i class="fa fa-check"></i>Visualization of Multi-Group Statistical Results</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#concluding-remarks-16"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 5 Machine Learning &amp; Artificial Intelligence</b></span></li>
+<li class="part"><span><b>Chapter 6 Applications in Toxicology &amp; Exposure Science</b></span></li>
+<li class="part"><span><b>Chapter 7 Environmental Health Database Mining</b></span></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">TAME 2.0</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="normality-tests-and-data-transformations" class="section level1 hasAnchor">
+<h1>Normality Tests and Data Transformations<a href="normality-tests-and-data-transformations.html#normality-tests-and-data-transformations" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This training module was developed by Elise Hickman, Alexis Payton, and Julia E. Rager.</p>
+<p>All input files (script, data, and figures) can be downloaded from the <a href="https://github.com/UNCSRP/TAME2">UNC-SRP TAME2 GitHub website</a>.</p>
+<div id="introduction-to-training-module-10" class="section level2 hasAnchor">
+<h2>Introduction to Training Module<a href="normality-tests-and-data-transformations.html#introduction-to-training-module-10" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>When selecting the appropriate statistical tests to evaluate potential trends in your data, selection often relies upon whether or not underlying data are normally distributed. Many statistical tests and methods that are commonly implemented in exposure science, toxicology, and environmental health research rely on assumptions of normality. Applying a statistical test intended for data with a specific distribution when your data do not fit within that distribution can generate unreliable results, with the potential for false positive and false negative findings. Thus, one of the most common statistical tests to perform at the beginning of an analysis is a test for normality.</p>
+<p>In this training module, we will:</p>
+<ul>
+<li>Review the normal distribution and why it is important</li>
+<li>Demonstrate how to test whether your variable distributions are normal…
+<ul>
+<li>Qualitatively, with histograms and Q-Q plots</li>
+<li>Quantitatively, with the Shapiro-Wilk test</li>
+</ul></li>
+<li>Discuss data transformation approaches</li>
+<li>Demonstrate log<sub>2</sub> data transformation for non-normal data</li>
+<li>Discuss additional considerations related to normality</li>
+</ul>
+<p>We will demonstrate normality assessment using example data derived from a study in which chemical exposure profiles were collected across study participants through silicone wristbands. This exposure monitoring technique has been described through previous publications, including the following examples:</p>
+<ul>
+<li><p>O’Connell SG, Kincl LD, Anderson KA. <a href="https://pubs.acs.org/doi/full/10.1021/es405022f">Silicone wristbands as personal passive samplers</a>. Environ Sci Technol. 2014 Mar 18;48(6):3327-35. doi: 10.1021/es405022f. Epub 2014 Feb 26. PMID: 24548134; PMCID: PMC3962070.</p></li>
+<li><p>Kile ML, Scott RP, O’Connell SG, Lipscomb S, MacDonald M, McClelland M, Anderson KA. <a href="https://www.sciencedirect.com/science/article/pii/S0013935116300743">Using silicone wristbands to evaluate preschool children’s exposure to flame retardants</a>. Environ Res. 2016 May;147:365-72. doi: 10.1016/j.envres.2016.02.034. Epub 2016 Mar 3. PMID: 26945619; PMCID: PMC4821754.</p></li>
+<li><p>Hammel SC, Hoffman K, Phillips AL, Levasseur JL, Lorenzo AM, Webster TF, Stapleton HM. <a href="https://pubs.acs.org/doi/full/10.1021/acs.est.9b07909">Comparing the Use of Silicone Wristbands, Hand Wipes, And Dust to Evaluate Children’s Exposure to Flame Retardants and Plasticizers</a>. Environ Sci Technol. 2020 Apr 7;54(7):4484-4494. doi: 10.1021/acs.est.9b07909. Epub 2020 Mar 11. PMID: 32122123; PMCID: PMC7430043.</p></li>
+<li><p>Levasseur JL, Hammel SC, Hoffman K, Phillips AL, Zhang S, Ye X, Calafat AM, Webster TF, Stapleton HM. <a href="https://www.sciencedirect.com/science/article/pii/S0160412020322728">Young children’s exposure to phenols in the home: Associations between house dust, hand wipes, silicone wristbands, and urinary biomarkers</a>. Environ Int. 2021 Feb;147:106317. doi: 10.1016/j.envint.2020.106317. Epub 2020 Dec 17. PMID: 33341585; PMCID: PMC7856225.</p></li>
+</ul>
+<p>In the current example dataset, chemical exposure profiles were obtained from the analysis of silicone wristbands worn by 97 participants for one week. Chemical concentrations on the wristbands were measured with gas chromatography mass spectrometry. The subset of chemical data used in this training module are all phthalates, a group of chemicals used primarily in plastic products to increase flexibility and durability.</p>
+<div id="script-preparations-2" class="section level3 hasAnchor">
+<h3>Script Preparations<a href="normality-tests-and-data-transformations.html#script-preparations-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="cleaning-the-global-environment-2" class="section level4 hasAnchor">
+<h4>Cleaning the global environment<a href="normality-tests-and-data-transformations.html#cleaning-the-global-environment-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="normality-tests-and-data-transformations.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span></code></pre></div>
+</div>
+<div id="installing-required-r-packages-2" class="section level4 hasAnchor">
+<h4>Installing required R packages<a href="normality-tests-and-data-transformations.html#installing-required-r-packages-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you</p>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="normality-tests-and-data-transformations.html#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;openxlsx&quot;</span>))</span>
+<span id="cb235-2"><a href="normality-tests-and-data-transformations.html#cb235-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;openxlsx&quot;</span>);</span>
+<span id="cb235-3"><a href="normality-tests-and-data-transformations.html#cb235-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;tidyverse&quot;</span>))</span>
+<span id="cb235-4"><a href="normality-tests-and-data-transformations.html#cb235-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>);</span>
+<span id="cb235-5"><a href="normality-tests-and-data-transformations.html#cb235-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;ggpubr&quot;</span>))</span>
+<span id="cb235-6"><a href="normality-tests-and-data-transformations.html#cb235-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;ggpubr&quot;</span>);</span></code></pre></div>
+</div>
+<div id="loading-r-packages-required-for-this-session-1" class="section level4 hasAnchor">
+<h4>Loading R packages required for this session<a href="normality-tests-and-data-transformations.html#loading-r-packages-required-for-this-session-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="normality-tests-and-data-transformations.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx) <span class="co"># for importing data</span></span>
+<span id="cb236-2"><a href="normality-tests-and-data-transformations.html#cb236-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># for manipulating and plotting data</span></span>
+<span id="cb236-3"><a href="normality-tests-and-data-transformations.html#cb236-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr) <span class="co"># for making Q-Q plots with ggplot </span></span></code></pre></div>
+</div>
+<div id="set-your-working-directory-3" class="section level4 hasAnchor">
+<h4>Set your working directory<a href="normality-tests-and-data-transformations.html#set-your-working-directory-3" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="normality-tests-and-data-transformations.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;/filepath to where your input files are&quot;</span>)</span></code></pre></div>
+</div>
+<div id="importing-example-dataset-3" class="section level4 hasAnchor">
+<h4>Importing example dataset<a href="normality-tests-and-data-transformations.html#importing-example-dataset-3" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="normality-tests-and-data-transformations.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import data</span></span>
+<span id="cb238-2"><a href="normality-tests-and-data-transformations.html#cb238-2" aria-hidden="true" tabindex="-1"></a>wrist_data <span class="ot">&lt;-</span> <span class="fu">read.xlsx</span>(<span class="st">&quot;Module3_3_Input/Module3_3_InputData.xlsx&quot;</span>)</span>
+<span id="cb238-3"><a href="normality-tests-and-data-transformations.html#cb238-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb238-4"><a href="normality-tests-and-data-transformations.html#cb238-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Viewing the data</span></span>
+<span id="cb238-5"><a href="normality-tests-and-data-transformations.html#cb238-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(wrist_data)</span></code></pre></div>
+<pre><code>##   S_ID      Age        DEP       DBP       BBP      DEHA       DEHP     DEHT
+## 1    1 24.76986  335.58857  574.5443  40.67286  755.8157 10621.7029 30420.68
+## 2    2 25.39452   56.38286 1075.7114 243.48857 2716.7314  3036.5757 23991.82
+## 3    3 34.55068  515.65429  121.1657 205.86857 3286.5886  3056.2743 46188.06
+## 4    4 23.83562 1009.00714  373.4957  66.97571 3966.5371   729.7971 17900.74
+## 5    5 39.29315   33.74143  104.0629  77.17286 1654.3317  2599.7129 13597.44
+## 6    6 36.15616  168.79714  503.8300  61.98429  398.6314  1492.6143 29875.76
+##        DINP       TOTM
+## 1 26534.290 1447.86000
+## 2 10073.704   39.46143
+## 3  1842.949  112.67714
+## 4 78779.567   92.31000
+## 5  3682.956  161.84571
+## 6 23845.493  182.56429</code></pre>
+<p>Our example dataset contains subject IDs (<code>S_ID</code>), subject ages, and measurements of 8 different phthalates from silicone wristbands:</p>
+<ul>
+<li><code>DEP</code>: Diethyl phthalate</li>
+<li><code>DBP</code> : Dibutyl phthalate</li>
+<li><code>BBP</code> : Butyl benzyl phthalate</li>
+<li><code>DEHA</code> : Di(2-ethylhexyl) adipate</li>
+<li><code>DEHP</code> : Di(2-ethylhexyl) phthalate</li>
+<li><code>DEHT</code>: Di(2-ethylhexyl) terephthalate</li>
+<li><code>DINP</code> : Diisononyl phthalate</li>
+<li><code>TOTM</code> : Trioctyltrimellitate</li>
+</ul>
+<p>The units for the chemical data are nanogram of chemical per gram of silicone wristband (ng/g) per day the participant wore the wristband. One of the primary questions in this study was whether there were significant differences in chemical exposure between subjects with different levels of social stress or between subjects with differing demographic characteristics. However, before we can analyze the data for significant differences between groups, we first need to assess whether our numeric variables are normally distributed.</p>
+<p><br></p>
+</div>
+</div>
+<div id="training-modules-environmental-health-questions-4" class="section level3 hasAnchor">
+<h3>Training Module’s Environmental Health Questions<a href="normality-tests-and-data-transformations.html#training-modules-environmental-health-questions-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This training module was specifically developed to answer the following environmental health questions:</p>
+<ol style="list-style-type: decimal">
+<li>Are these data normally distributed?</li>
+<li>How does the distribution of data influence the statistical tests performed on the data?</li>
+</ol>
+<p>Before answering these questions, let’s define normality and how to test for it in R.</p>
+<p><br></p>
+</div>
+</div>
+<div id="what-is-a-normal-distribution" class="section level2 hasAnchor">
+<h2>What is a Normal Distribution?<a href="normality-tests-and-data-transformations.html#what-is-a-normal-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+A normal distribution is a distribution of data in which values are distributed roughly symmetrically out from the mean such that 68.3% of values fall within one standard deviation of the mean, 95.4% of values fall within 2 standard deviations of the mean, and 99.7% of values fall within three standard deviations of the mean.
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-45"></span>
+<img src="Module3_3_Input/Module3_3_Image1.png" alt="Figure Credit: D Wells, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons" width="800px" />
+<p class="caption">
+Figure 5: Figure Credit: D Wells, CC BY-SA 4.0 <a href="https://creativecommons.org/licenses/by-sa/4.0" class="uri">https://creativecommons.org/licenses/by-sa/4.0</a>, via Wikimedia Commons
+</p>
+</div>
+<p>Common parametric statistical tests, such as t-tests, one-way ANOVAs, and Pearson correlations, rely on the assumption that data fall within the normal distribution for calculation of z-scores and p-values. Non-parametric tests, such as the Wilcoxon Rank Sum test, Kruskal-Wallis test, and Spearman Rank correlation, do not rely on assumptions about data distribution. Some of the aforementioned between-group comparisons were introduced in <strong>TAME 2.0 Module 3.4 Introduction to Statistical Tests</strong>. They, along with non-parametric tests, are explored further in later modules including <strong>TAME 2.0 Module 4.4 Two-Group Comparisons &amp; Visualizations</strong> and <strong>TAME 2.0 Module 4.5 Multi-group Comparisons &amp; Visualizations</strong>.</p>
+<p><br></p>
+</div>
+<div id="qualitative-assessment-of-normality" class="section level2 hasAnchor">
+<h2>Qualitative Assessment of Normality<a href="normality-tests-and-data-transformations.html#qualitative-assessment-of-normality" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We can begin by assessing the normality of our data through plots. For example, plotting data using <a href="https://en.wikipedia.org/wiki/Histogram">histograms</a>, <a href="https://www.data-to-viz.com/graph/density.html#:~:text=Definition,used%20in%20the%20same%20concept.">densities</a>, or <a href="https://en.wikipedia.org/wiki/Q%E2%80%93Q_plot">Q-Q plots</a> can graphically help inform if a variable’s values appear to be normally distributed or not. We will start with visualizing our data distributions with histograms.</p>
+<div id="histograms" class="section level3 hasAnchor">
+<h3>Histograms<a href="normality-tests-and-data-transformations.html#histograms" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let’s start with visualizing the distribution of the participant’s ages using the <code>hist()</code> function that is part of base R.</p>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="normality-tests-and-data-transformations.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(wrist_data<span class="sc">$</span>Age)</span></code></pre></div>
+<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-46-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>We can edit some of the parameters to improve this basic histogram visualization. For example, we can decrease the size of each bin using the breaks parameter:</p>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="normality-tests-and-data-transformations.html#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(wrist_data<span class="sc">$</span>Age, <span class="at">breaks =</span> <span class="dv">10</span>)</span></code></pre></div>
+<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-47-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>The <code>hist()</code> function is useful for plotting single distributions, but what if we have many variables that need normality assessment? We can leverage <em>ggplot2</em>’s powerful and flexible graphics functions such as <code>geom_histogram()</code> and <code>facet_wrap()</code> to inspect histograms of all of our variables in one figure panel. For more information on data manipulation in general, see <strong>TAME 2.0 Module 2.3 Data Manipulation &amp; Reshaping</strong> and for more on <em>ggplot2</em> including the use of <code>facet_wrap()</code>, see <strong>TAME 2.0 Module 3.2 Improving Data Visualizations</strong>.</p>
+<p>First, we’ll pivot our data to longer to prepare for plotting. Then, we’ll make our plot. We can use the <code>theme_set()</code> function to set a default graphing theme for the rest of the script. A graphing theme represents a set of default formatting parameters (mostly colors) that ggplot will use to make your graphs. <code>theme_bw()</code> is a basic theme that includes a white background for the plot and dark grey axis text and minor axis lines. The theme that you use is a matter of personal preference. For more on the different themes available through <em>ggplot2</em>, see <a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">here</a>.</p>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="normality-tests-and-data-transformations.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot data longer to prepare for plotting</span></span>
+<span id="cb242-2"><a href="normality-tests-and-data-transformations.html#cb242-2" aria-hidden="true" tabindex="-1"></a>wrist_data_long <span class="ot">&lt;-</span> wrist_data <span class="sc">%&gt;%</span></span>
+<span id="cb242-3"><a href="normality-tests-and-data-transformations.html#cb242-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span>S_ID, <span class="at">names_to =</span> <span class="st">&quot;variable&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>)</span>
+<span id="cb242-4"><a href="normality-tests-and-data-transformations.html#cb242-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb242-5"><a href="normality-tests-and-data-transformations.html#cb242-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Set theme for graphing</span></span>
+<span id="cb242-6"><a href="normality-tests-and-data-transformations.html#cb242-6" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>())</span>
+<span id="cb242-7"><a href="normality-tests-and-data-transformations.html#cb242-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb242-8"><a href="normality-tests-and-data-transformations.html#cb242-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Make figure panel of histograms</span></span>
+<span id="cb242-9"><a href="normality-tests-and-data-transformations.html#cb242-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(wrist_data_long, <span class="fu">aes</span>(value)) <span class="sc">+</span></span>
+<span id="cb242-10"><a href="normality-tests-and-data-transformations.html#cb242-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">&quot;gray40&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">binwidth =</span> <span class="cf">function</span>(x) {(<span class="fu">max</span>(x) <span class="sc">-</span> <span class="fu">min</span>(x))<span class="sc">/</span><span class="dv">25</span>}) <span class="sc">+</span></span>
+<span id="cb242-11"><a href="normality-tests-and-data-transformations.html#cb242-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> variable, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="sc">+</span></span>
+<span id="cb242-12"><a href="normality-tests-and-data-transformations.html#cb242-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;# of Observations&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Value&quot;</span>)</span></code></pre></div>
+<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-48-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>From these histograms, we can see that our chemical variables do not appear to be normally distributed.</p>
+</div>
+<div id="q-q-plots" class="section level3 hasAnchor">
+<h3>Q-Q Plots<a href="normality-tests-and-data-transformations.html#q-q-plots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Q-Q (quantile-quantile) plots are another way to visually assess normality. Similar to the histogram above, we can create a single Q-Q plot for the age variable using base R functions. Normal Q-Q plots (Q-Q plots where the theoretical quantiles are based on a normal distribution) have theoretical quantiles on the x-axis and sample quantiles, representing the distribution of the variable of interest from the dataset, on the y-axis. If the variable of interest is normally distributed, the points on the graph will fall along the reference line.</p>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="normality-tests-and-data-transformations.html#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot points</span></span>
+<span id="cb243-2"><a href="normality-tests-and-data-transformations.html#cb243-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(wrist_data<span class="sc">$</span>Age)</span>
+<span id="cb243-3"><a href="normality-tests-and-data-transformations.html#cb243-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb243-4"><a href="normality-tests-and-data-transformations.html#cb243-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a reference line for theoretically normally distributed data</span></span>
+<span id="cb243-5"><a href="normality-tests-and-data-transformations.html#cb243-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(wrist_data<span class="sc">$</span>Age)</span></code></pre></div>
+<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-49-1.png" width="672" style="display: block; margin: auto;" />
+Small variations from the reference line, as seen above, are to be expected for the most extreme values. Overall, we can see that the age data are relatively normally distributed, as the points fall along the reference line.</p>
+<p>To make a figure panel with Q-Q plots for all of our variables of interest, we can use the <code>ggqqplot()</code> function within the <em><a href="https://rpkgs.datanovia.com/ggpubr/">ggpubr</a></em> package. This function generates Q-Q plots and has arguments that are similar to <em>ggplot2</em>.</p>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="normality-tests-and-data-transformations.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggqqplot</span>(wrist_data_long, <span class="at">x =</span> <span class="st">&quot;value&quot;</span>, <span class="at">facet.by =</span> <span class="st">&quot;variable&quot;</span>, <span class="at">ggtheme =</span> <span class="fu">theme_bw</span>(), <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
+<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-50-1.png" width="672" style="display: block; margin: auto;" />
+With this figure panel, we can see that the chemical data have very noticeable deviations from the reference, suggesting non-normal distributions.</p>
+<p>To answer our first environmental health question, age is the only variable that appears to be normally distributed in our dataset. This is based on our histograms and Q-Q plots with data centered in the middle and spreading with a distribution on both the lower and upper sides that follow typical normal data distributions. However, chemical concentrations appear to be non-normally distributed.</p>
+<p>Next, we will implement a quantitative approach to assessing normality, based on a statistical test for normality.</p>
+<p><br></p>
+</div>
+</div>
+<div id="quantitative-normality-assessment" class="section level2 hasAnchor">
+<h2>Quantitative Normality Assessment<a href="normality-tests-and-data-transformations.html#quantitative-normality-assessment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="single-variable-normality-assessment" class="section level3 hasAnchor">
+<h3>Single Variable Normality Assessment<a href="normality-tests-and-data-transformations.html#single-variable-normality-assessment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We will use the Shapiro-Wilk test to quantitatively assess whether our data distribution is normal, again looking at the age data. This test can be carried out simply using the <code>shapiro.test()</code> function from the base R stats package. When using this test and interpreting its results, it is important to remember that the null hypothesis is that the sample distribution is normal, and a significant p-value means the distribution is non-normal.</p>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="normality-tests-and-data-transformations.html#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(wrist_data<span class="sc">$</span>Age)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  wrist_data$Age
+## W = 0.9917, p-value = 0.8143</code></pre>
+<p>This test resulted in a p-value of 0.8143, so we cannot reject the null hypothesis (that data are normally distributed). This means that we can assume that age is normally distributed, which is consistent with our visualizations above.</p>
+</div>
+<div id="multiple-variable-normality-assessment" class="section level3 hasAnchor">
+<h3>Multiple Variable Normality Assessment<a href="normality-tests-and-data-transformations.html#multiple-variable-normality-assessment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>With a large dataset containing many variables of interest (e.g., our example data with multiple chemicals), it is more efficient to test each column for normality and then store those results in a dataframe. We can use the base R function <code>apply()</code> to apply the Shapiro Wilk test over all of the numeric columns of our dataframe. This function generates a list of results, with a list element for each variable tested. There are also other ways that you could iterate through each of your columns, such as a <code>for</code> loop or a function as discussed in <strong>TAME 2.0 Module 2.4 Improving Coding Efficiencies</strong>.</p>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="normality-tests-and-data-transformations.html#cb247-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply Shapiro Wilk test</span></span>
+<span id="cb247-2"><a href="normality-tests-and-data-transformations.html#cb247-2" aria-hidden="true" tabindex="-1"></a>shapiro_res <span class="ot">&lt;-</span>  <span class="fu">apply</span>(wrist_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>S_ID), <span class="dv">2</span>, shapiro.test)</span>
+<span id="cb247-3"><a href="normality-tests-and-data-transformations.html#cb247-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb247-4"><a href="normality-tests-and-data-transformations.html#cb247-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View first three list elements</span></span>
+<span id="cb247-5"><a href="normality-tests-and-data-transformations.html#cb247-5" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(shapiro_res[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span></code></pre></div>
+<pre><code>## List of 3
+##  $ Age:List of 4
+##   ..$ statistic: Named num 0.992
+##   .. ..- attr(*, &quot;names&quot;)= chr &quot;W&quot;
+##   ..$ p.value  : num 0.814
+##   ..$ method   : chr &quot;Shapiro-Wilk normality test&quot;
+##   ..$ data.name: chr &quot;newX[, i]&quot;
+##   ..- attr(*, &quot;class&quot;)= chr &quot;htest&quot;
+##  $ DEP:List of 4
+##   ..$ statistic: Named num 0.225
+##   .. ..- attr(*, &quot;names&quot;)= chr &quot;W&quot;
+##   ..$ p.value  : num 2.74e-20
+##   ..$ method   : chr &quot;Shapiro-Wilk normality test&quot;
+##   ..$ data.name: chr &quot;newX[, i]&quot;
+##   ..- attr(*, &quot;class&quot;)= chr &quot;htest&quot;
+##  $ DBP:List of 4
+##   ..$ statistic: Named num 0.658
+##   .. ..- attr(*, &quot;names&quot;)= chr &quot;W&quot;
+##   ..$ p.value  : num 1.08e-13
+##   ..$ method   : chr &quot;Shapiro-Wilk normality test&quot;
+##   ..$ data.name: chr &quot;newX[, i]&quot;
+##   ..- attr(*, &quot;class&quot;)= chr &quot;htest&quot;</code></pre>
+<p>We can then convert those list results into a dataframe. Each variable is now in a row, with columns describing outputs of the statistical test.</p>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="normality-tests-and-data-transformations.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create results dataframe</span></span>
+<span id="cb249-2"><a href="normality-tests-and-data-transformations.html#cb249-2" aria-hidden="true" tabindex="-1"></a>shapiro_res <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind.data.frame, shapiro_res)</span>
+<span id="cb249-3"><a href="normality-tests-and-data-transformations.html#cb249-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb249-4"><a href="normality-tests-and-data-transformations.html#cb249-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View results dataframe</span></span>
+<span id="cb249-5"><a href="normality-tests-and-data-transformations.html#cb249-5" aria-hidden="true" tabindex="-1"></a>shapiro_res</span></code></pre></div>
+<pre><code>##      statistic      p.value                      method data.name
+## Age  0.9917029 8.143367e-01 Shapiro-Wilk normality test newX[, i]
+## DEP  0.2248611 2.736536e-20 Shapiro-Wilk normality test newX[, i]
+## DBP  0.6584967 1.076529e-13 Shapiro-Wilk normality test newX[, i]
+## BBP  0.2367689 3.757059e-20 Shapiro-Wilk normality test newX[, i]
+## DEHA 0.6646692 1.454576e-13 Shapiro-Wilk normality test newX[, i]
+## DEHP 0.6163531 1.519572e-14 Shapiro-Wilk normality test newX[, i]
+## DEHT 0.8072684 6.315917e-10 Shapiro-Wilk normality test newX[, i]
+## DINP 0.5741864 2.486638e-15 Shapiro-Wilk normality test newX[, i]
+## TOTM 0.3397424 6.901903e-19 Shapiro-Wilk normality test newX[, i]</code></pre>
+<p>Finally, we can clean up our results dataframe and add a column that will quickly tell us whether our variables are normally or non-normally distributed based on the Shapiro-Wilk normality test results.</p>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="normality-tests-and-data-transformations.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean dataframe</span></span>
+<span id="cb251-2"><a href="normality-tests-and-data-transformations.html#cb251-2" aria-hidden="true" tabindex="-1"></a>shapiro_res <span class="ot">&lt;-</span> shapiro_res <span class="sc">%&gt;%</span> </span>
+<span id="cb251-3"><a href="normality-tests-and-data-transformations.html#cb251-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb251-4"><a href="normality-tests-and-data-transformations.html#cb251-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add normality conclusion</span></span>
+<span id="cb251-5"><a href="normality-tests-and-data-transformations.html#cb251-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">normal =</span> <span class="fu">ifelse</span>(p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>, F, T)) <span class="sc">%&gt;%</span></span>
+<span id="cb251-6"><a href="normality-tests-and-data-transformations.html#cb251-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb251-7"><a href="normality-tests-and-data-transformations.html#cb251-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove columns that do not contain informative data</span></span>
+<span id="cb251-8"><a href="normality-tests-and-data-transformations.html#cb251-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(p.value, normal)) </span>
+<span id="cb251-9"><a href="normality-tests-and-data-transformations.html#cb251-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb251-10"><a href="normality-tests-and-data-transformations.html#cb251-10" aria-hidden="true" tabindex="-1"></a><span class="co"># View cleaned up dataframe</span></span>
+<span id="cb251-11"><a href="normality-tests-and-data-transformations.html#cb251-11" aria-hidden="true" tabindex="-1"></a>shapiro_res</span></code></pre></div>
+<pre><code>##           p.value normal
+## Age  8.143367e-01   TRUE
+## DEP  2.736536e-20  FALSE
+## DBP  1.076529e-13  FALSE
+## BBP  3.757059e-20  FALSE
+## DEHA 1.454576e-13  FALSE
+## DEHP 1.519572e-14  FALSE
+## DEHT 6.315917e-10  FALSE
+## DINP 2.486638e-15  FALSE
+## TOTM 6.901903e-19  FALSE</code></pre>
+<p>The results from the Shapiro-Wilk test demonstrate that age data are normally distributed, while the chemical concentration data are non-normally distributed. These results support the conclusions we made based on our qualitative assessment above with histograms and Q-Q plots.</p>
+</div>
+<div id="answer-to-environmental-health-question-1-3" class="section level3 hasAnchor">
+<h3>Answer to Environmental Health Question 1<a href="normality-tests-and-data-transformations.html#answer-to-environmental-health-question-1-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="question">
+<p><em>With this, we can now answer <strong>Environmental Health Question #1</strong></em>: Are these data normally distributed?</p>
+</div>
+<div class="answer">
+<p><strong>Answer:</strong> Age is normally distributed, while chemical concentrates are non-normally distributed.</p>
+</div>
+</div>
+<div id="answer-to-environmental-health-question-2-3" class="section level3 hasAnchor">
+<h3>Answer to Environmental Health Question 2<a href="normality-tests-and-data-transformations.html#answer-to-environmental-health-question-2-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="question">
+<p><em>We can also answer <strong>Environmental Health Question #2</strong></em>: How does the distribution of data influence the statistical tests performed on the data?</p>
+</div>
+<div class="answer">
+<p><strong>Answer:</strong> Parametric statistical tests should be used when analyzing the age data, and non-parametric tests should be used when analyzing the chemical concentration data</p>
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="data-transformation" class="section level2 hasAnchor">
+<h2>Data Transformation<a href="normality-tests-and-data-transformations.html#data-transformation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There are a number of approaches that can be used to change the range and/or distribution of values within each variable. Typically, the purpose for applying these changes is to reduce bias in a dataset, remove known sources of variation, or prepare data for specific downstream analyses. The following are general definitions for common terms used when discussing these changes:</p>
+<ul>
+<li><p><strong>Transformation</strong> refers to any process used to change data into other, related values. Normalization and standardization are types of data transformation. Transformation can also refer to performing the same mathematical operation on every value in your dataframe. For example, taking the log<sub>2</sub> or log<sub>10</sub> of every value is referred to as log transformation.</p>
+<ul>
+<li><p><strong>Normalization</strong> is the process of transforming variables so that they are on a similar scale and therefore are comparable. This can be important when variables in a dataset contain a mixture of data types that are represented by vastly different numeric magnitudes or when there are known sources of variability across samples. Normalization methods are highly dependent on the type of input data. One example of normalization is min-max scaling, which results in a range for each variable of 0 to 1. Although normalization in computational methodologies typically refers to min-max scaling or other similar methods where the variable’s range is bounded by specific values, wet-bench approaches also employ normalization - for example, using a reference gene for RT-qPCR assays or dividing a total protein amount for each sample by the volume of each sample to obtain a concentration.</p></li>
+<li><p><strong>Standardization</strong>, also known as Z-score normalization, is a specific type of normalization that involves subtracting each value from the mean of that variable and dividing by that variable’s standard deviation. The standardized values for each variable will have a mean of 0 and a standard deviation of 1. The <code>scale()</code> function in R performs standardization by default when the data are centered (argument <code>center = TRUE</code> is included within the scale function).</p></li>
+</ul></li>
+</ul>
+<div id="transformation-of-example-data" class="section level3 hasAnchor">
+<h3>Transformation of example data<a href="normality-tests-and-data-transformations.html#transformation-of-example-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When data are non-normally distributed, such as with the chemical concentrations in our example dataset, it may be desirable to transform the data so that the distribution becomes closer to a normal distribution, particularly if there are only parametric tests available to test your hypothesis. A common transformation used in environmental health research is log<sub>2</sub> transformation, in which data are transformed by taking the log<sub>2</sub> of each value in the dataframe.</p>
+<p>Let’s log<sub>2</sub> transform our chemical data and examine the resulting histograms and Q-Q plots to qualitatively assess whether data appear more normal following transformation. We will apply a pseudo-log<sub>2</sub> transformation, where we will add 1 to each value before log<sub>2</sub> transforming so that all resulting values are positive and any zeroes in the dataframe do not return -Inf.</p>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="normality-tests-and-data-transformations.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply psuedo log2 (pslog2) transformation to chemical data</span></span>
+<span id="cb253-2"><a href="normality-tests-and-data-transformations.html#cb253-2" aria-hidden="true" tabindex="-1"></a>wrist_data_pslog2 <span class="ot">&lt;-</span> wrist_data <span class="sc">%&gt;%</span></span>
+<span id="cb253-3"><a href="normality-tests-and-data-transformations.html#cb253-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(DEP<span class="sc">:</span>TOTM, <span class="sc">~</span> <span class="fu">log2</span>(.x <span class="sc">+</span> <span class="dv">1</span>)))</span>
+<span id="cb253-4"><a href="normality-tests-and-data-transformations.html#cb253-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb253-5"><a href="normality-tests-and-data-transformations.html#cb253-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot data longer</span></span>
+<span id="cb253-6"><a href="normality-tests-and-data-transformations.html#cb253-6" aria-hidden="true" tabindex="-1"></a>wrist_data_pslog2_long <span class="ot">&lt;-</span> wrist_data_pslog2 <span class="sc">%&gt;%</span></span>
+<span id="cb253-7"><a href="normality-tests-and-data-transformations.html#cb253-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span>S_ID, <span class="at">names_to =</span> <span class="st">&quot;variable&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>)</span>
+<span id="cb253-8"><a href="normality-tests-and-data-transformations.html#cb253-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb253-9"><a href="normality-tests-and-data-transformations.html#cb253-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Make figure panel of histograms</span></span>
+<span id="cb253-10"><a href="normality-tests-and-data-transformations.html#cb253-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(wrist_data_pslog2_long, <span class="fu">aes</span>(value)) <span class="sc">+</span></span>
+<span id="cb253-11"><a href="normality-tests-and-data-transformations.html#cb253-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">&quot;gray40&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">binwidth =</span> <span class="cf">function</span>(x) {(<span class="fu">max</span>(x) <span class="sc">-</span> <span class="fu">min</span>(x))<span class="sc">/</span><span class="dv">25</span>}) <span class="sc">+</span></span>
+<span id="cb253-12"><a href="normality-tests-and-data-transformations.html#cb253-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> variable, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="sc">+</span></span>
+<span id="cb253-13"><a href="normality-tests-and-data-transformations.html#cb253-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;# of Observations&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Value&quot;</span>)</span></code></pre></div>
+<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-55-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="normality-tests-and-data-transformations.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a figure panel of Q-Q plots</span></span>
+<span id="cb254-2"><a href="normality-tests-and-data-transformations.html#cb254-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggqqplot</span>(wrist_data_pslog2_long, <span class="at">x =</span> <span class="st">&quot;value&quot;</span>, <span class="at">facet.by =</span> <span class="st">&quot;variable&quot;</span>, <span class="at">ggtheme =</span> <span class="fu">theme_bw</span>(), <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
+<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-56-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Both the histograms and the Q-Q plots demonstrate that our log<sub>2</sub> transformed data are more normally distributed than the raw data graphed above. Let’s apply the Shapiro-Wilk test to our log<sub>2</sub> transformed data to determine if the chemical distributions are normally distributed.</p>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="normality-tests-and-data-transformations.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply Shapiro Wilk test</span></span>
+<span id="cb255-2"><a href="normality-tests-and-data-transformations.html#cb255-2" aria-hidden="true" tabindex="-1"></a>shapiro_res_pslog2 <span class="ot">&lt;-</span>  <span class="fu">apply</span>(wrist_data_pslog2 <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>S_ID), <span class="dv">2</span>, shapiro.test)</span>
+<span id="cb255-3"><a href="normality-tests-and-data-transformations.html#cb255-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb255-4"><a href="normality-tests-and-data-transformations.html#cb255-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create results dataframe</span></span>
+<span id="cb255-5"><a href="normality-tests-and-data-transformations.html#cb255-5" aria-hidden="true" tabindex="-1"></a>shapiro_res_pslog2 <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind.data.frame, shapiro_res_pslog2)</span>
+<span id="cb255-6"><a href="normality-tests-and-data-transformations.html#cb255-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb255-7"><a href="normality-tests-and-data-transformations.html#cb255-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean dataframe</span></span>
+<span id="cb255-8"><a href="normality-tests-and-data-transformations.html#cb255-8" aria-hidden="true" tabindex="-1"></a>shapiro_res_pslog2 <span class="ot">&lt;-</span> shapiro_res_pslog2 <span class="sc">%&gt;%</span> </span>
+<span id="cb255-9"><a href="normality-tests-and-data-transformations.html#cb255-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb255-10"><a href="normality-tests-and-data-transformations.html#cb255-10" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Add normality conclusion</span></span>
+<span id="cb255-11"><a href="normality-tests-and-data-transformations.html#cb255-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">normal =</span> <span class="fu">ifelse</span>(p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>, F, T)) <span class="sc">%&gt;%</span></span>
+<span id="cb255-12"><a href="normality-tests-and-data-transformations.html#cb255-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb255-13"><a href="normality-tests-and-data-transformations.html#cb255-13" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Remove columns that do not contain informative data</span></span>
+<span id="cb255-14"><a href="normality-tests-and-data-transformations.html#cb255-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(p.value, normal)) </span>
+<span id="cb255-15"><a href="normality-tests-and-data-transformations.html#cb255-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb255-16"><a href="normality-tests-and-data-transformations.html#cb255-16" aria-hidden="true" tabindex="-1"></a><span class="co"># View cleaned up dataframe</span></span>
+<span id="cb255-17"><a href="normality-tests-and-data-transformations.html#cb255-17" aria-hidden="true" tabindex="-1"></a>shapiro_res_pslog2</span></code></pre></div>
+<pre><code>##          p.value normal
+## Age  0.814336705   TRUE
+## DEP  0.001335217  FALSE
+## DBP  0.368954224   TRUE
+## BBP  0.052805523   TRUE
+## DEHA 0.979072298   TRUE
+## DEHP 0.304963678   TRUE
+## DEHT 0.770066136   TRUE
+## DINP 0.883662530   TRUE
+## TOTM 0.004399442  FALSE</code></pre>
+<p>The results from the Shapiro-Wilk test demonstrate that the the log<sub>2</sub> chemical concentration data are more normally distributed than the raw data. Overall, the p-values, even for the chemicals that are still non-normally distributed, are much higher, and only 2 out of the 8 chemicals are non-normally distributed by the Shapiro-Wilk test. We can also calculate average p-values across all variables for our raw and log<sub>2</sub> transformed data to further demonstrate this point.</p>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="normality-tests-and-data-transformations.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the mean Shapiro-Wilk p-value for the raw chemical data</span></span>
+<span id="cb257-2"><a href="normality-tests-and-data-transformations.html#cb257-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(shapiro_res<span class="sc">$</span>p.value)</span></code></pre></div>
+<pre><code>## [1] 0.09048186</code></pre>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="normality-tests-and-data-transformations.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the mean Shapiro-Wilk p-value for the pslog2 transformed chemical data</span></span>
+<span id="cb259-2"><a href="normality-tests-and-data-transformations.html#cb259-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(shapiro_res_pslog2<span class="sc">$</span>p.value)</span></code></pre></div>
+<pre><code>## [1] 0.4643995</code></pre>
+<p>Therefore, the log<sub>2</sub> chemical data would be most appropriate to use if researchers are wanting to perform parametric statistical testing (and particularly if there is not a non-parametric statistical test for a given experimental design). It is important to note that if you proceed to statistical testing using log<sub>2</sub> or other transformed data, graphs you make of significant results should use the transformed values on the y-axis, and findings should be interpreted in the context of the transformed values.</p>
+<p><br></p>
+</div>
+</div>
+<div id="additional-considerations-regarding-normality" class="section level2 hasAnchor">
+<h2>Additional Considerations Regarding Normality<a href="normality-tests-and-data-transformations.html#additional-considerations-regarding-normality" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The following sections detail additional considerations regarding normality. Similar to other advice in TAME, appropriate methods for handling normality assessment and normal versus non-normal data can be dependent on your field, lab, endpoints of interest, and downstream analyses. We encourage you to take those elements of your study into account, alongside the guidance provided here, when assessing normality. Regardless of the specific steps you take, be sure to report normality assessment steps and the data transformation or statistical test decisions you make based on them in your final report or manuscript.</p>
+<div id="determining-which-data-should-go-through-normality-testing" class="section level4 hasAnchor">
+<h4>Determining which data should go through normality testing:<a href="normality-tests-and-data-transformations.html#determining-which-data-should-go-through-normality-testing" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Values for all samples (rows) that will be going into statistical testing should be tested for normality. If you are only going to be statistically testing a subset of your data, perform the normality test on that subset. Another way to think of this is that data points that are on the same graph together and/or that have been used as input for a statistical test should be tested for normality together.</p>
+</div>
+<div id="analyzing-datasets-with-a-mixture-of-normally-and-non-normally-distributed-variables" class="section level4 hasAnchor">
+<h4>Analyzing datasets with a mixture of normally and non-normally distributed variables:<a href="normality-tests-and-data-transformations.html#analyzing-datasets-with-a-mixture-of-normally-and-non-normally-distributed-variables" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>There are a couple of different routes you can pursue if you have a mixture of normally and non-normally distributed variables in your dataframe:</p>
+<ul>
+<li>Perform parametric statistical tests on the normally distributed variables and non-parametric tests on the non-normally distributed variable.</li>
+<li>Perform the statistical test across all variables that fits with the majority of the variable distributions in your dataset.</li>
+</ul>
+<p>Our preference is to perform one test across all variables of the same data type/endpoint (e.g., all chemical concentrations, all cytokine concentrations). Aim to choose an approach that fits <em>best</em> rather than <em>perfectly</em>.</p>
+</div>
+<div id="improving-efficiency-for-normality-assessment" class="section level4 hasAnchor">
+<h4>Improving efficiency for normality assessment:<a href="normality-tests-and-data-transformations.html#improving-efficiency-for-normality-assessment" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>If you find yourself frequently performing the same normality assessment workflow, consider writing a function that will execute each normality testing step (making a histogram, making a Q-Q plot, determining Shapiro-Wilk normality variable by variable, and determining the average Shapiro-Wilk p-value across all variables) and store the results in a list for easy inspection.</p>
+<p><br></p>
+</div>
+</div>
+<div id="concluding-remarks-10" class="section level2 hasAnchor">
+<h2>Concluding Remarks<a href="normality-tests-and-data-transformations.html#concluding-remarks-10" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In conclusion, this training module serves as an introduction to and step by step tutorial for normality assessment and data transformations. Approaches described in this training module include visualizations to qualitatively assess normality, statistical tests to quantitatively assess normality, data transformation, and other distribution considerations relating to normality. These methods are an important step in data characterization and exploration prior to downstream analyses and statistical testing, and they can be applied to nearly all studies carried out in environmental health research.</p>
+<div id="additional-resources-4" class="section level3 hasAnchor">
+<h3>Additional Resources<a href="normality-tests-and-data-transformations.html#additional-resources-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6350423/">Descriptive Statistics and Normality Tests for Statistical Data</a></li>
+<li><a href="https://www.datanovia.com/en/lessons/normality-test-in-r/">STHDA Normality Test in R</a></li>
+<li><a href="https://www.geeksforgeeks.org/normalization-vs-standardization/">Normalization vs. Standardization</a></li>
+</ul>
+<p><br></p>
+<p><label class="tykfont">
+Test Your Knowledge
+</label></p>
+<div class="tyk">
+<p>Use the input file provided (“Module3_3_TYKInput.xlsx”), which represents a similar dataset to the one used in the module, to answer the following questions:</p>
+<ol style="list-style-type: decimal">
+<li>Are any variables normally distributed in the raw data?</li>
+<li>Does psuedo log<sub>2</sub> transforming the values make the distributions overall more or less normally distributed?</li>
+<li>What are the average Shapiro-Wilk p-values for the raw and psuedo log<sub>2</sub> transformed data?</li>
+</ol>
+</div>
+<!-- ############################################################################################################################# -->
+<!-- ################################################## -->
+<!-- ################################################## -->
+<!-- START SECTION FOUR  -->
+<!-- ################################################## -->
+<!-- ################################################## -->
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="improving-data-visualizations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="intoduction-to-statistical-tests.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

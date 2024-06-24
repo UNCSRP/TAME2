@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Data Visualizations | TAME 2.0</title>
+  <meta name="description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Data Visualizations | TAME 2.0" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Data Visualizations | TAME 2.0" />
+  
+  <meta name="twitter:description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
+  
+
+<meta name="author" content="Rager Lab" />
+
+
+<meta name="date" content="2024-06-24" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="improving-coding-efficiencies.html"/>
+<link rel="next" href="improving-data-visualizations.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.32/datatables.js"></script>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="images/Data Training Icon for Top Left Bookdown_v2.png"><br></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="part"><span><b>Chapter 1 Introductory <br>Data Science</b></span></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html"><i class="fa fa-check"></i>FAIR Data Management Practices</a>
+<ul>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#introduction-to-training-module"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#introduction-to-fair"><i class="fa fa-check"></i>Introduction to FAIR</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#breaking-down-fair-letter-by-letter"><i class="fa fa-check"></i>Breaking Down FAIR, Letter-by-Letter</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#what-does-this-mean-for-you"><i class="fa fa-check"></i>What Does This Mean for You?</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#data-repositories-for-sharing-of-data"><i class="fa fa-check"></i>Data Repositories for Sharing of Data</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#recent-shifts-in-regulatory-policies-for-data-sharing"><i class="fa fa-check"></i>Recent Shifts in Regulatory Policies for Data Sharing</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#additional-training-resources-on-fair"><i class="fa fa-check"></i>Additional Training Resources on FAIR</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html"><i class="fa fa-check"></i>Data Sharing through Online Repositories</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#an-overview-and-example-with-the-dataverse-repository"><i class="fa fa-check"></i>An Overview and Example with the Dataverse Repository</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#introduction-to-training-module-1"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#data-repositories"><i class="fa fa-check"></i>Data Repositories</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#the-dataverse-project"><i class="fa fa-check"></i>The Dataverse Project</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#what-is-a-dataverse"><i class="fa fa-check"></i>What is a Dataverse?</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#metadata"><i class="fa fa-check"></i>Metadata</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#creating-a-dataverse"><i class="fa fa-check"></i>Creating a Dataverse</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#creating-a-dataset"><i class="fa fa-check"></i>Creating a Dataset</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#concluding-remarks-1"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html"><i class="fa fa-check"></i>File Management using Github</a>
+<ul>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#introduction-to-training-module-2"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#creating-an-account"><i class="fa fa-check"></i>Creating an Account</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#creating-a-repository"><i class="fa fa-check"></i>Creating a Repository</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#uploading-code"><i class="fa fa-check"></i>Uploading Code</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#adding-subfolders-in-a-repository"><i class="fa fa-check"></i>Adding Subfolders in a Repository</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#updating-code"><i class="fa fa-check"></i>Updating Code</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#updating-repository-titles-and-structure-to-support-a-manuscript"><i class="fa fa-check"></i>Updating Repository Titles and Structure to Support a Manuscript</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#tracking-code-changes-using-github-branches"><i class="fa fa-check"></i>Tracking Code Changes using Github Branches</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#concluding-remarks-2"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html"><i class="fa fa-check"></i>Data Wrangling in Excel</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#introduction-to-training-module-3"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#save-a-copy-of-the-soon-to-be-organized-and-cleaned-dataset-as-a-new-file"><i class="fa fa-check"></i>Save a Copy of the Soon-To-Be Organized and Cleaned Dataset as a New File</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#remove-extraneous-white-space"><i class="fa fa-check"></i>Remove Extraneous White Space</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#replace-missing-data-with-na"><i class="fa fa-check"></i>Replace Missing Data with “NA”</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#create-a-metadata-tab"><i class="fa fa-check"></i>Create a Metadata Tab</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#abbreviate-and-capitalize-categorical-data"><i class="fa fa-check"></i>Abbreviate and Capitalize Categorical Data</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#alphabetize-sort-the-data-by-the-categorical-variable-of-interest"><i class="fa fa-check"></i>Alphabetize (Sort) the Data by the Categorical Variable of Interest</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#create-a-new-subject-number-column"><i class="fa fa-check"></i>Create a New Subject Number Column</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#remove-special-symbols-and-dashes"><i class="fa fa-check"></i>Remove Special Symbols and Dashes</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#bold-all-column-names-and-center-all-data"><i class="fa fa-check"></i>Bold all Column Names and Center all Data</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#create-a-subject-identifier-column"><i class="fa fa-check"></i>Create a Subject Identifier Column</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#separate-subject-demographic-data-from-experimental-measurements"><i class="fa fa-check"></i>Separate Subject Demographic Data from Experimental Measurements</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#convert-data-from-wide-to-long-format"><i class="fa fa-check"></i>Convert Data from Wide to Long Format</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#pivoting-data-from-a-wide-to-long-format"><i class="fa fa-check"></i>Pivoting Data from a Wide to Long Format</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#generating-summary-level-statistics-with-pivot-tables"><i class="fa fa-check"></i>Generating Summary-Level Statistics with Pivot Tables</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#excel-vs.-r-which-should-you-use"><i class="fa fa-check"></i>Excel vs. R: Which Should You Use?</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#concluding-remarks-3"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 2 Coding in R</b></span></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html"><i class="fa fa-check"></i>Downloading and Programming in R</a>
+<ul>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#introduction-to-training-module-4"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#general-introduction-and-installation-of-r-and-rstudio"><i class="fa fa-check"></i>General Introduction and Installation of R and RStudio</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#introduction-to-r-packages"><i class="fa fa-check"></i>Introduction to R Packages</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#scripting-basics"><i class="fa fa-check"></i>Scripting Basics</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#code-troubleshooting"><i class="fa fa-check"></i>Code Troubleshooting</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#concluding-remarks-4"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html"><i class="fa fa-check"></i>Coding “Best” Practices</a>
+<ul>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#introduction-to-training-module-5"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#scripting-file-types"><i class="fa fa-check"></i>Scripting File Types</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#script-headers-and-annotation"><i class="fa fa-check"></i>Script Headers and Annotation</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#coding-style"><i class="fa fa-check"></i>Coding Style</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#script-organization"><i class="fa fa-check"></i>Script Organization</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#concluding-remarks-5"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html"><i class="fa fa-check"></i>Data Manipulation and Reshaping</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#introduction-to-training-module-6"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#data-manipulation-using-base-r"><i class="fa fa-check"></i>Data Manipulation Using Base R</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#introduction-to-tidyverse"><i class="fa fa-check"></i>Introduction to Tidyverse</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#concluding-remarks-6"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html"><i class="fa fa-check"></i>Improving Coding Efficiencies</a>
+<ul>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#introduction-to-training-module-7"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#loops"><i class="fa fa-check"></i>Loops</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#functions"><i class="fa fa-check"></i>Functions</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#list-operations"><i class="fa fa-check"></i>List operations</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#concluding-remarks-7"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#additional-resources-2"><i class="fa fa-check"></i>Additional Resources</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 3 Basics of <br>Data Analysis and Visualizations</b></span></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html"><i class="fa fa-check"></i>Data Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#introduction-to-data-visualizations"><i class="fa fa-check"></i>Introduction to Data Visualizations</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#introduction-to-training-module-8"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#density-plot-visualization"><i class="fa fa-check"></i>Density Plot Visualization</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#boxplot-visualization"><i class="fa fa-check"></i>Boxplot Visualization</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#correlation-visualizations"><i class="fa fa-check"></i>Correlation Visualizations</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#heatmap-visualization"><i class="fa fa-check"></i>Heatmap Visualization</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#concluding-remarks-8"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html"><i class="fa fa-check"></i>Improving Data Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#introduction-to-data-visulization-conventions"><i class="fa fa-check"></i>Introduction to Data Visulization Conventions</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#introduction-to-training-module-9"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#creating-an-improved-boxplot-visualization"><i class="fa fa-check"></i>Creating an Improved Boxplot Visualization</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#creating-an-improved-heatmap-visualization"><i class="fa fa-check"></i>Creating an Improved Heatmap Visualization</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#creating-multi-plot-figures"><i class="fa fa-check"></i>Creating Multi-Plot Figures</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#concluding-remarks-9"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html"><i class="fa fa-check"></i>Normality Tests and Data Transformations</a>
+<ul>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#introduction-to-training-module-10"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#what-is-a-normal-distribution"><i class="fa fa-check"></i>What is a Normal Distribution?</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#qualitative-assessment-of-normality"><i class="fa fa-check"></i>Qualitative Assessment of Normality</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#quantitative-normality-assessment"><i class="fa fa-check"></i>Quantitative Normality Assessment</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#data-transformation"><i class="fa fa-check"></i>Data Transformation</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#additional-considerations-regarding-normality"><i class="fa fa-check"></i>Additional Considerations Regarding Normality</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#concluding-remarks-10"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html"><i class="fa fa-check"></i>Intoduction to Statistical Tests</a>
+<ul>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#introduction-to-training-module-11"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#assessing-normality-homogeneity-of-variance"><i class="fa fa-check"></i>Assessing Normality &amp; Homogeneity of Variance</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#two-group-visualizations-and-statistical-comparisons-using-the-t-test"><i class="fa fa-check"></i>Two-Group Visualizations and Statistical Comparisons using the T-Test</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#three-group-visualizations-and-statistical-comparisons-using-an-anova"><i class="fa fa-check"></i>Three-Group Visualizations and Statistical Comparisons using an ANOVA</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#regression-modeling-and-visualization-linear-and-logistic-regressions"><i class="fa fa-check"></i>Regression Modeling and Visualization: Linear and Logistic Regressions</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#statistical-evaluations-of-categorical-data-using-the-chi-squared-test-and-fishers-exact-test"><i class="fa fa-check"></i>Statistical Evaluations of Categorical Data using the Chi-Squared Test and Fisher’s Exact Test</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#concluding-remarks-11"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 4 Converting Wet Lab Data into Dry Lab Analyses</b></span></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html"><i class="fa fa-check"></i>Overview of Experimental Design and Example Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#introduction-to-training-module-12"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#replicates"><i class="fa fa-check"></i>Replicates</a></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#orientation-to-example-data-for-chapter-4"><i class="fa fa-check"></i>Orientation to Example Data for Chapter 4</a></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#concluding-remarks-12"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html"><i class="fa fa-check"></i>Data Import, Processing, and Summary Statistics</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#introduction-to-training-module-13"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#data-import"><i class="fa fa-check"></i>Data Import</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#handling-missing-values"><i class="fa fa-check"></i>Handling Missing Values</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#averaging-replicates"><i class="fa fa-check"></i>Averaging Replicates</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#descriptive-statistics"><i class="fa fa-check"></i>Descriptive Statistics</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#normality-assessment-and-data-transformation"><i class="fa fa-check"></i>Normality Assessment and Data Transformation</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#concluding-remarks-13"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html"><i class="fa fa-check"></i>Data Import from PDF Sources</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#introduction-to-training-module-14"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#importing-data-from-many-single-pdfs-with-the-same-formatting"><i class="fa fa-check"></i>Importing Data from Many Single PDFs with the Same Formatting</a></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#importing-data-stored-in-pdf-tables"><i class="fa fa-check"></i>Importing Data Stored in PDF Tables</a></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#concluding-remarks-14"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html"><i class="fa fa-check"></i>Two-Group Comparisons and Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#introduction-to-training-module-15"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#overview-of-two-group-statistical-tests"><i class="fa fa-check"></i>Overview of Two Group Statistical Tests</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#statistical-vs-biological-significance"><i class="fa fa-check"></i>Statistical vs Biological Significance</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#unpaired-test-example"><i class="fa fa-check"></i>Unpaired Test Example</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#paired-test-example"><i class="fa fa-check"></i>Paired Test Example</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#visualizing-results"><i class="fa fa-check"></i>Visualizing Results</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#concluding-remarks-15"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html"><i class="fa fa-check"></i>Multi-Group and Multi-Variable Comparisons and Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#introduction-to-training-module-16"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#overview-of-multi-group-statistical-tests"><i class="fa fa-check"></i>Overview of Multi-Group Statistical Tests</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#multi-group-analysis-example"><i class="fa fa-check"></i>Multi-Group Analysis Example</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#visualization-of-multi-group-statistical-results"><i class="fa fa-check"></i>Visualization of Multi-Group Statistical Results</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#concluding-remarks-16"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 5 Machine Learning &amp; Artificial Intelligence</b></span></li>
+<li class="part"><span><b>Chapter 6 Applications in Toxicology &amp; Exposure Science</b></span></li>
+<li class="part"><span><b>Chapter 7 Environmental Health Database Mining</b></span></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">TAME 2.0</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-visualizations" class="section level1 hasAnchor">
+<h1>Data Visualizations<a href="data-visualizations.html#data-visualizations" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This training module was developed by Alexis Payton, Kyle Roell, Lauren E. Koval, Elise Hickman, and Julia E. Rager.</p>
+<p>All input files (script, data, and figures) can be downloaded from the <a href="https://github.com/UNCSRP/TAME2">UNC-SRP TAME2 GitHub website</a>.</p>
+<div id="introduction-to-data-visualizations" class="section level2 hasAnchor">
+<h2>Introduction to Data Visualizations<a href="data-visualizations.html#introduction-to-data-visualizations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Selecting an approach to visualize data is an important consideration when presenting scientific research, given that figures have the capability to summarize large amounts of data efficiently and effectively. (At least that’s the goal!) This module will focus on basic data visualizations that we view to be most commonly used, both in and outside of the field of environmental health research, many of which you have likely seen before. This module is not meant to be an exhaustive representation of all figure types, rather it serves as an introduction to some types of figures and how to approach choosing the one that most optimally displays your data and primary findings. When selecting a data visualization approach, here are some helpful questions you should first ask yourself:</p>
+<ul>
+<li>What message am I trying to convey with this figure?</li>
+<li>How does this figure highlight major findings from the paper?</li>
+<li>Who is the audience?</li>
+<li>What type of data am I working with?</li>
+</ul>
+<p><a href="https://www.smashingmagazine.com/2023/01/guide-getting-data-visualization-right/">A Guide To Getting Data Visualization Right</a> is a great resource for determining which figure is best suited for various types of data. More complex methodology-specific charts are presented in succeeding TAME modules. These include visualizations for:</p>
+<ul>
+<li>Two Group Comparisons (e.g.,boxplots and logistic regression) in <a href="insert%20link">Module 3.4 Introduction to Statistical Tests</a> and <a href="insert%20link">Module 4.4 Two Group Comparisons and Visualizations</a></li>
+<li>Multi-Group Comparisons (e.g.,boxplots) in <a href="insert%20link">Module 3.4 Introduction to Statistical Tests</a> and <a href="insert%20link">Module 4.5 Mult-Group Comparisons and Visualizations</a></li>
+<li>Supervised Machine Learning (e.g.,decision boundary plots, variable importance plots) in <a href="insert%20link">Module 5.3 Supervised ML Model Interpretation</a></li>
+<li>Unsupervised Machine Learning
+<ul>
+<li>Principal Component Analysis (PCA) plots and heatmaps in <a href="insert%20link">Module 5.4 Unsupervised Machine Learning I: K-Means Clustering &amp; PCA</a></li>
+<li>Dendrograms, clustering visualizations, heatmaps, and variable contribution plots in <a href="insert%20link">Module 5.5 Unsupervised Machine Learning II: Additional Clustering Applications</a></li>
+</ul></li>
+<li>-Omics Expression (e.g.,MA plots and volcano plots) in <a href="insert%20link">Module 6.2 -Omics and Systems Biology: Transcriptomic Applications</a></li>
+<li>Mixtures Methods
+<ul>
+<li>Forest Plots in <a href="insert%20link">Module 6.3 Mixtures I: Overview and Quantile G-Computation Application</a></li>
+<li>Trace Plots in <a href="insert%20link">Module 6.4 Mixtures II: BKMR Application</a></li>
+<li>Sufficient Similarity (e.g.,heatmaps, clustering) in <a href="insert%20link">Module 6.5 Mixtures III: Sufficient Similarity</a></li>
+</ul></li>
+<li>Toxicokinetic Modeling (e.g.,line graph, dose response) in <a href="insert%20link">Module 6.6 Toxicokinetic Modeling</a></li>
+</ul>
+<p><br></p>
+</div>
+<div id="introduction-to-training-module-8" class="section level2 hasAnchor">
+<h2>Introduction to Training Module<a href="data-visualizations.html#introduction-to-training-module-8" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Visualizing data is an important step in any data analysis, including those carried out in environmental health research. Often, visualizations allow scientists to better understand trends and patterns within a particular dataset under evaluation. Even after statistical analysis of a dataset, it is important to then communicate these findings to a wide variety of target audiences. Visualizations are a vital part of communicating complex data and results to target audiences.</p>
+<p>In this module, we highlight some figures that can be used to visualize larger, more high-dimensional datasets using figures that are more simple (but still relevant!) than methods presented later on in TAME. This training module specifically reviews the formatting of data in preparation of generating visualizations, scaling datasets, and then guides users through the generation of the following example data visualizations:</p>
+<ul>
+<li>Density plots</li>
+<li>Boxplots</li>
+<li>Correlation plots</li>
+<li>Heatmaps</li>
+</ul>
+<p>These visualization approaches are demonstrated using a large environmental chemistry dataset. This example dataset was generated through chemical speciation analysis of smoke samples collected during lab-based simulations of wildfire events. Specifically, different biomass materials (eucalyptus, peat, pine, pine needles, and red oak) were burned under two combustion conditions of flaming and smoldering, resulting in the generation of 12 different smoke samples. These data have been previously published in the following environmental health research studies, with data made publicly available:</p>
+<ul>
+<li>Rager JE, Clark J, Eaves LA, Avula V, Niehoff NM, Kim YH, Jaspers I, Gilmour MI. Mixtures modeling identifies chemical inducers versus repressors of toxicity associated with wildfire smoke. Sci Total Environ. 2021 Jun 25;775:145759. doi: 10.1016/j.scitotenv.2021.145759. Epub 2021 Feb 10. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/33611182/">33611182</a>.</li>
+<li>Kim YH, Warren SH, Krantz QT, King C, Jaskot R, Preston WT, George BJ, Hays MD, Landis MS, Higuchi M, DeMarini DM, Gilmour MI. Mutagenicity and Lung Toxicity of Smoldering vs. Flaming Emissions from Various Biomass Fuels: Implications for Health Effects from Wildland Fires. Environ Health Perspect. 2018 Jan 24;126(1):017011. doi: 10.1289/EHP2200. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/29373863/">29373863</a>.</li>
+</ul>
+<div id="ggplot2" class="section level3 hasAnchor">
+<h3>GGplot2<a href="data-visualizations.html#ggplot2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><em>ggplot2</em> is a powerful package used to create graphics in R. It was designed based on the philosophy that every figure can be built using a dataset, a coordinate system, and a geom that specifies the type of plot. As a result, it is fairly straightforward to create highly customizable figures and is typically preferred over using base R to generate graphics. We’ll generate all of the figures in this module using <em>ggplot2</em>.</p>
+<p>For additional resources on <em>ggplot2</em> see <a href="https://ggplot2.tidyverse.org/">ggplot2 Posit Documentation</a> and <a href="https://datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html">Data Visualization with ggplot2</a>.</p>
+</div>
+<div id="script-preparations" class="section level3 hasAnchor">
+<h3>Script Preparations<a href="data-visualizations.html#script-preparations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="cleaning-the-global-environment" class="section level4 hasAnchor">
+<h4>Cleaning the global environment<a href="data-visualizations.html#cleaning-the-global-environment" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="data-visualizations.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span></code></pre></div>
+</div>
+<div id="installing-required-r-packages" class="section level4 hasAnchor">
+<h4>Installing required R packages<a href="data-visualizations.html#installing-required-r-packages" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you</p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="data-visualizations.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;GGally&quot;</span>))</span>
+<span id="cb181-2"><a href="data-visualizations.html#cb181-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;GGally&quot;</span>);</span>
+<span id="cb181-3"><a href="data-visualizations.html#cb181-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;corrplot&quot;</span>))</span>
+<span id="cb181-4"><a href="data-visualizations.html#cb181-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;corrplot&quot;</span>);</span>
+<span id="cb181-5"><a href="data-visualizations.html#cb181-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;pheatmap&quot;</span>))</span>
+<span id="cb181-6"><a href="data-visualizations.html#cb181-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;pheatmap&quot;</span>);</span></code></pre></div>
+</div>
+<div id="loading-r-packages-required-for-this-session" class="section level4 hasAnchor">
+<h4>Loading R packages required for this session<a href="data-visualizations.html#loading-r-packages-required-for-this-session" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="data-visualizations.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb182-2"><a href="data-visualizations.html#cb182-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb182-3"><a href="data-visualizations.html#cb182-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span>
+<span id="cb182-4"><a href="data-visualizations.html#cb182-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb182-5"><a href="data-visualizations.html#cb182-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span></code></pre></div>
+</div>
+<div id="set-your-working-directory-1" class="section level4 hasAnchor">
+<h4>Set your working directory<a href="data-visualizations.html#set-your-working-directory-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="data-visualizations.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;/filepath to where your input files are&quot;</span>)</span></code></pre></div>
+</div>
+<div id="importing-example-dataset-1" class="section level4 hasAnchor">
+<h4>Importing example dataset<a href="data-visualizations.html#importing-example-dataset-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Then let’s read in our example dataset. As mentioned in the introduction, this example dataset represents chemical measurements across 12 different biomass burn scenarios representing potential wildfire events. Let’s upload and view these data:</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="data-visualizations.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
+<span id="cb184-2"><a href="data-visualizations.html#cb184-2" aria-hidden="true" tabindex="-1"></a>smoke_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Module3_1_Input/Module3_1_InputData.csv&quot;</span>)</span>
+<span id="cb184-3"><a href="data-visualizations.html#cb184-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb184-4"><a href="data-visualizations.html#cb184-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View the top of the dataset</span></span>
+<span id="cb184-5"><a href="data-visualizations.html#cb184-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(smoke_data) </span></code></pre></div>
+<pre><code>##   Chemical.Category           Chemical     CASRN Eucalyptus_Smoldering
+## 1         n-Alkanes 2-Methylnonadecane 1560-86-7                  0.06
+## 2         n-Alkanes 3-Methylnonadecane 6418-45-7                  0.04
+## 3         n-Alkanes           Docosane  629-97-0                  0.21
+## 4         n-Alkanes Dodecylcyclohexane 1795-17-1                  0.04
+## 5         n-Alkanes           Eicosane  112-95-8                  0.11
+## 6         n-Alkanes        Heneicosane  629-94-7                  0.13
+##   Eucalyptus_Flaming Peat_Smoldering Peat_Flaming Pine_Smoldering Pine_Flaming
+## 1               0.06            1.36         0.06            0.06         0.06
+## 2               0.04            1.13         0.90            0.47         0.04
+## 3               0.25            9.46         0.57            0.16         0.48
+## 4               0.04            0.25         0.04            0.04         0.04
+## 5               0.25            7.55         0.54            0.17         0.29
+## 6               0.28            6.77         0.34            0.13         0.42
+##   Pine_Needles_Smoldering Pine_Needles_Flaming Red_Oak_Smoldering
+## 1                    0.06                 0.06               0.06
+## 2                    0.04                 0.72               0.04
+## 3                    0.32                 0.18               0.16
+## 4                    0.12                 0.04               0.04
+## 5                    0.28                 0.16               0.15
+## 6                    0.30                 0.13               0.13
+##   Red_Oak_Flaming     Units
+## 1            0.13 ng_per_uL
+## 2            0.77 ng_per_uL
+## 3            0.36 ng_per_uL
+## 4            0.04 ng_per_uL
+## 5            0.38 ng_per_uL
+## 6            0.69 ng_per_uL</code></pre>
+</div>
+</div>
+<div id="training-modules-environmental-health-questions-2" class="section level3 hasAnchor">
+<h3>Training Module’s Environmental Health Questions<a href="data-visualizations.html#training-modules-environmental-health-questions-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This training module was specifically developed to answer the following environmental health questions:</p>
+<ol style="list-style-type: decimal">
+<li>How do the distributions of the chemical concentration data differ based on each biomass burn scenario?</li>
+<li>Are there correlations between biomass burn conditions based on the chemical concentration data?</li>
+<li>Under which biomass burn conditions are concentrations of certain chemical categories the highest?</li>
+</ol>
+<p><br></p>
+<p>We can create a <strong>density plot</strong> to answer the first question. Similar to a histogram, density plots are an effective way to show overall distributions of data and can be useful to compare across various test conditions or other stratifications of the data.</p>
+<p>In this example of a density plot, we’ll visualize the distributions of chemical concentration data on the x axis. A density plot automatically displays where values are concentrated on the y axis. Additionally, we’ll want to have multiple density plots within the same figure for each biomass burn condition.</p>
+<p>Before the data can be visualized, it needs to be converted from a wide to long format. This is because we need to have variable or column names entitled <code>Chemical_Concentration</code> and <code>Biomass_Burn_Condition</code> that can be placed into <code>ggplot()</code>. For review on converting between long and wide formats and using other tidyverse tools, see <strong>TAME 2.0 Module 2.3 Data Manipulation &amp; Reshaping</strong>.</p>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="data-visualizations.html#cb186-1" aria-hidden="true" tabindex="-1"></a>longer_smoke_data <span class="ot">=</span> <span class="fu">pivot_longer</span>(smoke_data, <span class="at">cols =</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">13</span>, <span class="at">names_to =</span> <span class="st">&quot;Biomass_Burn_Condition&quot;</span>, </span>
+<span id="cb186-2"><a href="data-visualizations.html#cb186-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">values_to =</span> <span class="st">&quot;Chemical_Concentration&quot;</span>)</span>
+<span id="cb186-3"><a href="data-visualizations.html#cb186-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb186-4"><a href="data-visualizations.html#cb186-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(longer_smoke_data)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 6
+##   Chemical.Category Chemical           CASRN     Units    Biomass_Burn_Condition
+##   &lt;chr&gt;             &lt;chr&gt;              &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;                 
+## 1 n-Alkanes         2-Methylnonadecane 1560-86-7 ng_per_… Eucalyptus_Smoldering 
+## 2 n-Alkanes         2-Methylnonadecane 1560-86-7 ng_per_… Eucalyptus_Flaming    
+## 3 n-Alkanes         2-Methylnonadecane 1560-86-7 ng_per_… Peat_Smoldering       
+## 4 n-Alkanes         2-Methylnonadecane 1560-86-7 ng_per_… Peat_Flaming          
+## 5 n-Alkanes         2-Methylnonadecane 1560-86-7 ng_per_… Pine_Smoldering       
+## 6 n-Alkanes         2-Methylnonadecane 1560-86-7 ng_per_… Pine_Flaming          
+## # ℹ 1 more variable: Chemical_Concentration &lt;dbl&gt;</code></pre>
+<div id="scaling-dataframes-for-downstream-data-visualizations" class="section level4 hasAnchor">
+<h4>Scaling dataframes for downstream data visualizations<a href="data-visualizations.html#scaling-dataframes-for-downstream-data-visualizations" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>A data preparation method that is commonly used to convert values into those that can be used to better illustrate overall data trends is <strong>data scaling</strong>. Scaling can be achieved through data transformations or normalization procedures, depending on the specific dataset and goal of analysis/visualization. Scaling is often carried out using data vectors or columns of a dataframe.</p>
+<p>For this example, we will normalize the chemical concentration dataset using a basic scaling and centering procedure using the base R function, <code>scale()</code>. This algorithm results in the normalization of a dataset using the mean value and standard deviation. This scaling step will convert chemical concentration values in our dataset into normalized values across samples, such that each chemical’s concentration distributions are more easily comparable between the different biomass burn conditions.</p>
+<p>For more information on the <code>scale()</code> function, see its associated <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/scale">RDocumentation</a> and helpful tutorial on <a href="https://www.journaldev.com/47818/r-scale-function">Implementing the scale() function in R</a>.</p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="data-visualizations.html#cb188-1" aria-hidden="true" tabindex="-1"></a>scaled_longer_smoke_data <span class="ot">=</span> longer_smoke_data <span class="sc">%&gt;%</span></span>
+<span id="cb188-2"><a href="data-visualizations.html#cb188-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># scaling within each chemical</span></span>
+<span id="cb188-3"><a href="data-visualizations.html#cb188-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Chemical) <span class="sc">%&gt;%</span></span>
+<span id="cb188-4"><a href="data-visualizations.html#cb188-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Scaled_Chemical_Concentration =</span> <span class="fu">scale</span>(Chemical_Concentration)) <span class="sc">%&gt;%</span></span>
+<span id="cb188-5"><a href="data-visualizations.html#cb188-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
+<span id="cb188-6"><a href="data-visualizations.html#cb188-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb188-7"><a href="data-visualizations.html#cb188-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(scaled_longer_smoke_data) <span class="co"># see the new scaled values now in the last column (column 7)</span></span></code></pre></div>
+<pre><code>## # A tibble: 6 × 7
+##   Chemical.Category Chemical           CASRN     Units    Biomass_Burn_Condition
+##   &lt;chr&gt;             &lt;chr&gt;              &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;                 
+## 1 n-Alkanes         2-Methylnonadecane 1560-86-7 ng_per_… Eucalyptus_Smoldering 
+## 2 n-Alkanes         2-Methylnonadecane 1560-86-7 ng_per_… Eucalyptus_Flaming    
+## 3 n-Alkanes         2-Methylnonadecane 1560-86-7 ng_per_… Peat_Smoldering       
+## 4 n-Alkanes         2-Methylnonadecane 1560-86-7 ng_per_… Peat_Flaming          
+## 5 n-Alkanes         2-Methylnonadecane 1560-86-7 ng_per_… Pine_Smoldering       
+## 6 n-Alkanes         2-Methylnonadecane 1560-86-7 ng_per_… Pine_Flaming          
+## # ℹ 2 more variables: Chemical_Concentration &lt;dbl&gt;,
+## #   Scaled_Chemical_Concentration &lt;dbl[,1]&gt;</code></pre>
+<p>We can see that in the <code>Scaled_Chemical_Concentration</code> column, each chemical is scaled based on a normal distribution centered around 0, with values now less than or greater than zero.</p>
+<p>Now that we have our dataset formatted, let’s plot it.</p>
+</div>
+</div>
+</div>
+<div id="density-plot-visualization" class="section level2 hasAnchor">
+<h2>Density Plot Visualization<a href="data-visualizations.html#density-plot-visualization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The following code can be used to generate a density plot:</p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="data-visualizations.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(scaled_longer_smoke_data, <span class="fu">aes</span>(<span class="at">x =</span> Scaled_Chemical_Concentration, <span class="at">color =</span> Biomass_Burn_Condition)) <span class="sc">+</span> </span>
+<span id="cb190-2"><a href="data-visualizations.html#cb190-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>()</span></code></pre></div>
+<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div id="answer-to-environmental-health-question-1-method-i" class="section level3 hasAnchor">
+<h3>Answer to Environmental Health Question 1, Method I<a href="data-visualizations.html#answer-to-environmental-health-question-1-method-i" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="question">
+<p><em>With this method, we can answer <strong>Environmental Health Question #1</strong></em>: How do the distributions of the chemical concentration data differ based on each biomass burn scenario?</p>
+</div>
+<div class="answer">
+<p><strong>Answer</strong>: In general, there are a high number of chemicals that were measured at relatively lower abundances across all smoke samples (hence, the peak in occurrence density occurring towards the left, before 0). The three conditions of smoldering peat, flaming peat, and flaming pine contained the most chemicals at the highest relative concentrations (hence, these lines are the top three lines towards the right).</p>
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="boxplot-visualization" class="section level2 hasAnchor">
+<h2>Boxplot Visualization<a href="data-visualizations.html#boxplot-visualization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A <strong>boxplot</strong> can also be used to answer our first environmental health question: <strong>How do the distributions of the chemical concentration data differ based on each biomass burn scenario?</strong>. A boxplot also displays a data’s distribution, but it incorporates a visualization of a five number summary (i.e., minimum, first quartile, median, third quartile, and maximum). Any outliers are displayed as dots.</p>
+<p>For this example, let’s have <code>Scaled_Chemical_Concentration</code> on the x axis and <code>Biomass_Burn_Condition</code> on the y axis. The <code>scaled_longer_smoke_data</code> dataframe is the format we need, so we’ll use that for plotting.</p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="data-visualizations.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(scaled_longer_smoke_data, <span class="fu">aes</span>(<span class="at">x =</span> Scaled_Chemical_Concentration, <span class="at">y =</span> Biomass_Burn_Condition, </span>
+<span id="cb191-2"><a href="data-visualizations.html#cb191-2" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">color =</span> Biomass_Burn_Condition)) <span class="sc">+</span> </span>
+<span id="cb191-3"><a href="data-visualizations.html#cb191-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div id="answer-to-environmental-health-question-1-method-ii" class="section level3 hasAnchor">
+<h3>Answer to Environmental Health Question 1, Method II<a href="data-visualizations.html#answer-to-environmental-health-question-1-method-ii" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="question">
+<p><em>With this alternative method, we can answer, in a different way, <strong>Environmental Health Question #1</strong></em>: How do the distributions of the chemical concentration data differ based on each biomass burn scenario?</p>
+</div>
+<div class="answer">
+<p><strong>Answer, Method II</strong>: The median chemical concentration is fairly low (less than 0) for all biomass burn conditions. Overall, there isn’t much variation in chemical concentrations with the exception of smoldering peat, flaming peat, and flaming eucalyptus.</p>
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="correlation-visualizations" class="section level2 hasAnchor">
+<h2>Correlation Visualizations<a href="data-visualizations.html#correlation-visualizations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s turn our attention to the second environmental health question: <strong>Are there correlations between biomass burn conditions based on the chemical concentration data?</strong> We’ll use two different correlation visualizations to answer this question using the <em>GGally</em> package.</p>
+<p><em>GGally</em> is a package that serves as an extension of <em>ggplot2</em>, the baseline R plotting system based on the grammar of graphics. GGally is very useful for creating plots that compare groups or features within a dataset, among many other utilities. Here we will demonstrate the <code>ggpairs()</code> function within <em>GGally</em> using the scaled chemistry dataset. This function will produce an image that shows correlation values between biomass burn sample pairs and also illustrates the overall distributions of values in the samples. For more information on <em>GGally</em>, see its associated <a href="https://www.rdocumentation.org/packages/GGally/versions/1.5.0">RDocumentation</a> and <a href="http://www.sthda.com/english/wiki/ggally-r-package-extension-to-ggplot2-for-correlation-matrix-and-survival-plots-r-software-and-data-visualization">example helpful tutorial</a>.</p>
+<p><em>GGally</em> requires a wide dataframe with ids (i.e.,<code>Chemical</code>) as the rows and the variables that will be compared to each other (i.e.,<code>Biomass_Burn_Condition</code>) as the columns. Let’s create that dataframe.</p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="data-visualizations.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first selecting the chemical, biomass burn condition, and </span></span>
+<span id="cb192-2"><a href="data-visualizations.html#cb192-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the scaled chemical concentration columns</span></span>
+<span id="cb192-3"><a href="data-visualizations.html#cb192-3" aria-hidden="true" tabindex="-1"></a>wide_scaled_data <span class="ot">=</span> scaled_longer_smoke_data <span class="sc">%&gt;%</span></span>
+<span id="cb192-4"><a href="data-visualizations.html#cb192-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> Chemical, <span class="at">names_from =</span> <span class="st">&quot;Biomass_Burn_Condition&quot;</span>, </span>
+<span id="cb192-5"><a href="data-visualizations.html#cb192-5" aria-hidden="true" tabindex="-1"></a>                               <span class="at">values_from =</span> <span class="st">&quot;Scaled_Chemical_Concentration&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb192-6"><a href="data-visualizations.html#cb192-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># converting the chemical names to row names</span></span>
+<span id="cb192-7"><a href="data-visualizations.html#cb192-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column_to_rownames</span>(<span class="at">var =</span> <span class="st">&quot;Chemical&quot;</span>)</span>
+<span id="cb192-8"><a href="data-visualizations.html#cb192-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb192-9"><a href="data-visualizations.html#cb192-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(wide_scaled_data)</span></code></pre></div>
+<pre><code>##                    Eucalyptus_Smoldering Eucalyptus_Flaming Peat_Smoldering
+## 2-Methylnonadecane            -0.3347765         -0.3347765        2.841935
+## 3-Methylnonadecane            -0.8794448         -0.8794448        1.649829
+## Docosane                      -0.3465132         -0.3327216        2.842787
+## Dodecylcyclohexane            -0.4240624         -0.4240624        2.646734
+## Eicosane                      -0.3802202         -0.3195928        2.841691
+## Heneicosane                   -0.3895328         -0.3166775        2.835527
+##                    Peat_Flaming Pine_Smoldering Pine_Flaming
+## 2-Methylnonadecane   -0.3347765      -0.3347765   -0.3347765
+## 3-Methylnonadecane    1.1161291       0.1183422   -0.8794448
+## Docosane             -0.2223890      -0.3637526   -0.2534201
+## Dodecylcyclohexane   -0.4240624      -0.4240624   -0.4240624
+## Eicosane             -0.1940076      -0.3542370   -0.3022707
+## Heneicosane          -0.2875354      -0.3895328   -0.2486793
+##                    Pine_Needles_Smoldering Pine_Needles_Flaming
+## 2-Methylnonadecane              -0.3347765           -0.3347765
+## 3-Methylnonadecane              -0.8794448            0.6984509
+## Docosane                        -0.3085863           -0.3568568
+## Dodecylcyclohexane               0.7457649           -0.4240624
+## Eicosane                        -0.3066012           -0.3585675
+## Heneicosane                     -0.3069635           -0.3895328
+##                    Red_Oak_Smoldering Red_Oak_Flaming
+## 2-Methylnonadecane         -0.3347765      -0.1637228
+## 3-Methylnonadecane         -0.8794448       0.8144726
+## Docosane                   -0.3637526      -0.2947948
+## Dodecylcyclohexane         -0.4240624      -0.4240624
+## Eicosane                   -0.3628981      -0.2632960
+## Heneicosane                -0.3895328      -0.1175398</code></pre>
+<p>By default, <code>ggpairs()</code> displays Pearson’s correlations. To show Spearman’s correlations takes more nuance, but can be done using the code that has been commented out below.</p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="data-visualizations.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ggpairs with Pearson&#39;s correlations</span></span>
+<span id="cb194-2"><a href="data-visualizations.html#cb194-2" aria-hidden="true" tabindex="-1"></a>wide_scaled_data <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">as.matrix</span>(wide_scaled_data))</span>
+<span id="cb194-3"><a href="data-visualizations.html#cb194-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(wide_scaled_data)</span></code></pre></div>
+<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-10-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="data-visualizations.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ggpairs with Spearman&#39;s correlations</span></span>
+<span id="cb195-2"><a href="data-visualizations.html#cb195-2" aria-hidden="true" tabindex="-1"></a><span class="co"># pearson_correlations = cor(wide_scaled_data, method = &quot;spearman&quot;)</span></span>
+<span id="cb195-3"><a href="data-visualizations.html#cb195-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ggpairs(wide_scaled_data, upper = list(continuous = wrap(ggally_cor, method = &quot;spearman&quot;)))</span></span></code></pre></div>
+<p>Many of these biomass burn conditions have significant correlations denoted by the asterisks.</p>
+<ul>
+<li>’*’: p value &lt; 0.1</li>
+<li>’**’: p value &lt; 0.05</li>
+<li>’***’: p value &lt; 0.01</li>
+</ul>
+<p>The upper right portion displays the correlation values, where a value less than 0 indicates negative correlation and a value greater than 0 signifies positive correlation. The diagonal shows the density plots for each variable. The lower left portion visualizes the values of the two variables compared using a scatterplot.</p>
+<div id="answer-to-environmental-health-question-2-1" class="section level3 hasAnchor">
+<h3>Answer to Environmental Health Question 2<a href="data-visualizations.html#answer-to-environmental-health-question-2-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="question">
+<p><em>With this, we can answer <strong>Environmental Health Question #2</strong></em>: Are there correlations between biomass burn conditions based on the chemical concentration data?</p>
+</div>
+<div class="answer">
+<p><strong>Answer</strong>: There is low correlation between many of the variables (-0.5 &lt; correlation value &lt; 0.5). Eucalyptus flaming and pine flaming are significantly positively correlated along with peat flaming and pine needles flaming (correlation value ~0.7 and p value &lt; 0.001).</p>
+</div>
+<p>We can visualize correlations another way using the other function from <em>GGally</em>, <code>ggcorr()</code>, which visualizes each correlation as a square. Note that this function calculates Pearson’s correlations by default. However, this can be changed using the <code>method</code> parameter shown in the code commented out below.</p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="data-visualizations.html#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pearson&#39;s correlations</span></span>
+<span id="cb196-2"><a href="data-visualizations.html#cb196-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcorr</span>(wide_scaled_data)</span></code></pre></div>
+<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-11-1.png" width="960" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="data-visualizations.html#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Spearman&#39;s correlations</span></span>
+<span id="cb197-2"><a href="data-visualizations.html#cb197-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ggcorr(wide_scaled_data, method = &quot;spearman&quot;)</span></span></code></pre></div>
+<p>We’ll visualize correlations between each of the groups using one more figure using the <code>corrplot()</code> function from the <em>corrplot</em> package.</p>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="data-visualizations.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Need to supply corrplot with a correlation matrix, here, using the &#39;cor&#39; function</span></span>
+<span id="cb198-2"><a href="data-visualizations.html#cb198-2" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="fu">cor</span>(wide_scaled_data))</span></code></pre></div>
+<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Each of these correlation figures displays the same information, but the one you choose to use is a matter of personal preference. Click on the following resources for additional information on <a href="https://r-charts.com/correlation/ggpairs/">ggpairs()</a> and <a href="https://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html">corrplot()</a>.</p>
+<p><br></p>
+</div>
+</div>
+<div id="heatmap-visualization" class="section level2 hasAnchor">
+<h2>Heatmap Visualization<a href="data-visualizations.html#heatmap-visualization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Last, we’ll turn our attention to answering the final environmental health question: <strong>Under which biomass burn conditions are concentrations of certain chemical categories the highest?</strong> This can be addressed with the help of a heatmap.</p>
+<p><strong>Heatmaps</strong> are a highly effective method of viewing an entire dataset at once. Heatmaps can appear similar to correlation plots, but typically illustrate other values (e.g., concentrations, expression levels, presence/absence, etc) besides correlation values. They are used to draw patterns between two variables of highest interest (that comprise the x and y axis, though additional bars can be added to display other layers of information). In this instance, we’ll use a heatmap to determine whether there are patterns apparent between chemical categories and biomass burn condition on chemical concentrations.</p>
+<p>For this example, we can plot <code>Biomass_Burn_Condition</code> and <code>Chemical.Category</code> on the axes and fill in the values with <code>Scaled_Chemical_Concentration</code>. When generating heatmaps, scaled values are often used to better distinguish patterns between groups/samples.</p>
+<p>In this example, we also plan to display the median scaled concentration value within the heatmap as an additional layer of helpful information to aid in interpretation. To do so, we’ll need to take the median chemical concentration for each biomass burn condition within each chemical category. However, since we want <code>ggplot()</code> to visualize the median scaled values with the color of the tiles this step was already necessary.</p>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="data-visualizations.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We&#39;ll find the median value and add that data to the dataframe as an additional column</span></span>
+<span id="cb199-2"><a href="data-visualizations.html#cb199-2" aria-hidden="true" tabindex="-1"></a>heatmap_df <span class="ot">=</span> scaled_longer_smoke_data <span class="sc">%&gt;%</span></span>
+<span id="cb199-3"><a href="data-visualizations.html#cb199-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Biomass_Burn_Condition, Chemical.Category) <span class="sc">%&gt;%</span></span>
+<span id="cb199-4"><a href="data-visualizations.html#cb199-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Median_Scaled_Concentration =</span> <span class="fu">median</span>(Scaled_Chemical_Concentration))</span>
+<span id="cb199-5"><a href="data-visualizations.html#cb199-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb199-6"><a href="data-visualizations.html#cb199-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(heatmap_df)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 8
+## # Groups:   Biomass_Burn_Condition, Chemical.Category [6]
+##   Chemical.Category Chemical           CASRN     Units    Biomass_Burn_Condition
+##   &lt;chr&gt;             &lt;chr&gt;              &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;                 
+## 1 n-Alkanes         2-Methylnonadecane 1560-86-7 ng_per_… Eucalyptus_Smoldering 
+## 2 n-Alkanes         2-Methylnonadecane 1560-86-7 ng_per_… Eucalyptus_Flaming    
+## 3 n-Alkanes         2-Methylnonadecane 1560-86-7 ng_per_… Peat_Smoldering       
+## 4 n-Alkanes         2-Methylnonadecane 1560-86-7 ng_per_… Peat_Flaming          
+## 5 n-Alkanes         2-Methylnonadecane 1560-86-7 ng_per_… Pine_Smoldering       
+## 6 n-Alkanes         2-Methylnonadecane 1560-86-7 ng_per_… Pine_Flaming          
+## # ℹ 3 more variables: Chemical_Concentration &lt;dbl&gt;,
+## #   Scaled_Chemical_Concentration &lt;dbl[,1]&gt;, Median_Scaled_Concentration &lt;dbl&gt;</code></pre>
+<p>Now we can plot the data and add the <code>Median_Scaled_Concentration</code> to the figure using <code>geom_text()</code>. Note that specifying the original <code>Scaled_Chemical_Concentration</code> in the <strong>fill</strong> parameter will NOT give you the same heatmap as specifying the median values in <code>ggplot()</code>.</p>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="data-visualizations.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> heatmap_df, <span class="fu">aes</span>(<span class="at">x =</span> Chemical.Category, <span class="at">y =</span> Biomass_Burn_Condition,</span>
+<span id="cb201-2"><a href="data-visualizations.html#cb201-2" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">fill =</span> Median_Scaled_Concentration)) <span class="sc">+</span> </span>
+<span id="cb201-3"><a href="data-visualizations.html#cb201-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span> <span class="co"># function used to specify a heatmap for ggplot</span></span>
+<span id="cb201-4"><a href="data-visualizations.html#cb201-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(Median_Scaled_Concentration, <span class="dv">2</span>))) <span class="co"># adding concentration values as text, rounding to two values after the decimal</span></span></code></pre></div>
+<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-14-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<div id="answer-to-environmental-health-question-3-1" class="section level3 hasAnchor">
+<h3>Answer to Environmental Health Question 3<a href="data-visualizations.html#answer-to-environmental-health-question-3-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="question">
+<p><em>With this, we can answer <strong>Environmental Health Question #3</strong></em>: Under which biomass burn conditions are concentrations of certain chemical categories the highest?</p>
+</div>
+<div class="answer">
+<p><strong>Answer</strong>: Peat flaming has the highest concentrations of inorganics and ions. Eucalyptus smoldering has the highest concentrations of levoglucosans. Pine smoldering has the highest concentrations of methoxyphenols. Peat smoldering has the highest concentrations of n-alkanes. Pine needles smoldering has highest concentrations of PAHs.</p>
+</div>
+<p>This same heatmap can be achieved another way using the <code>pheatmap()</code> function from the <em>pheatmap</em> package. Using this function requires us to use a wide dataset, which we need to create. It will contain <code>Chemical.Category</code>, <code>Biomass_Burn_Condition</code> and <code>Scaled_Chemical_Concentration</code>.</p>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="data-visualizations.html#cb202-1" aria-hidden="true" tabindex="-1"></a>heatmap_df2 <span class="ot">=</span> scaled_longer_smoke_data <span class="sc">%&gt;%</span></span>
+<span id="cb202-2"><a href="data-visualizations.html#cb202-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Biomass_Burn_Condition, Chemical.Category) <span class="sc">%&gt;%</span></span>
+<span id="cb202-3"><a href="data-visualizations.html#cb202-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># using the summarize function instead of mutate function as was done previously since we only need the median values now</span></span>
+<span id="cb202-4"><a href="data-visualizations.html#cb202-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">Median_Scaled_Concentration =</span> <span class="fu">median</span>(Scaled_Chemical_Concentration)) <span class="sc">%&gt;%</span></span>
+<span id="cb202-5"><a href="data-visualizations.html#cb202-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># transforming the data to a wide format</span></span>
+<span id="cb202-6"><a href="data-visualizations.html#cb202-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> Biomass_Burn_Condition, <span class="at">names_from =</span> <span class="st">&quot;Chemical.Category&quot;</span>, </span>
+<span id="cb202-7"><a href="data-visualizations.html#cb202-7" aria-hidden="true" tabindex="-1"></a>                               <span class="at">values_from =</span> <span class="st">&quot;Median_Scaled_Concentration&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb202-8"><a href="data-visualizations.html#cb202-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># converting the chemical names to row names</span></span>
+<span id="cb202-9"><a href="data-visualizations.html#cb202-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column_to_rownames</span>(<span class="at">var =</span> <span class="st">&quot;Biomass_Burn_Condition&quot;</span>)</span>
+<span id="cb202-10"><a href="data-visualizations.html#cb202-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb202-11"><a href="data-visualizations.html#cb202-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(heatmap_df2)</span></code></pre></div>
+<pre><code>##                        Inorganics        Ions Levoglucosan Methoxyphenols
+## Eucalyptus_Flaming     0.05405359  0.05273246    0.4208870    -0.44781893
+## Eucalyptus_Smoldering -0.68595076 -0.80160192    1.7772753    -0.06449444
+## Peat_Flaming           2.24332901  1.77515899   -0.9383328    -0.51488738
+## Peat_Smoldering       -0.51860591 -0.36146158   -0.8041211     0.05720971
+## Pine_Flaming          -0.02063532 -0.05999543   -0.1992054    -0.50269422
+## Pine_Needles_Flaming   0.36405527  0.82229035   -0.8570130    -0.46331332
+##                             PAHs  n-Alkanes
+## Eucalyptus_Flaming     1.2885776 -0.3790357
+## Eucalyptus_Smoldering -0.4724635 -0.3465132
+## Peat_Flaming          -0.5369746 -0.3093608
+## Peat_Smoldering       -0.3162278  2.8238921
+## Pine_Flaming           1.7825403 -0.3347765
+## Pine_Needles_Flaming  -0.4179505 -0.3850613</code></pre>
+<p>Now let’s generate the same heatmap this time using the <code>pheatmap()</code> function:</p>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="data-visualizations.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pheatmap</span>(heatmap_df2, </span>
+<span id="cb204-2"><a href="data-visualizations.html#cb204-2" aria-hidden="true" tabindex="-1"></a>        <span class="co"># removing the clustering option from both rows and columns</span></span>
+<span id="cb204-3"><a href="data-visualizations.html#cb204-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_rows =</span> <span class="cn">FALSE</span>, <span class="at">cluster_cols =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb204-4"><a href="data-visualizations.html#cb204-4" aria-hidden="true" tabindex="-1"></a>        <span class="co"># adding the values for each cell, making those values black, and changing the font size</span></span>
+<span id="cb204-5"><a href="data-visualizations.html#cb204-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">display_numbers =</span> <span class="cn">TRUE</span>, <span class="at">number_color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">fontsize =</span> <span class="dv">12</span>) </span></code></pre></div>
+<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Notice that the <code>pheatmap()</code> function does not include axes or legend titles as with <code>ggplot()</code>, however those can be added to the figure after exporting from R in MS Powerpoint or Adobe. Additional parameters, including <code>cluster_rows</code>, for the <code>pheatmap()</code> function are discussed further in <strong>TAME 2.0 Module 5.4 Unsupervised Machine Learning</strong>. For basic heatmaps like the ones shown here, <code>ggplot()</code> or <code>pheatmap()</code> can both be used however, both have their pros and cons. For example, <code>ggplot()</code> figures tend to be more customizable and easily combined with other figures, while <code>pheatmap()</code> has additional parameters built into the function that can make plotting certain features advantageous like clustering.</p>
+<p><br></p>
+</div>
+</div>
+<div id="concluding-remarks-8" class="section level2 hasAnchor">
+<h2>Concluding Remarks<a href="data-visualizations.html#concluding-remarks-8" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In conclusion, this training module provided example code to create highly customizable data visualizations using <em>ggplot2</em> pertinent to environmental health research.</p>
+<p><br></p>
+<p><label class="tykfont">
+Test Your Knowledge
+</label></p>
+<div class="tyk">
+<p>Replicate the figure below! The heatmap still visualizes the median chemical concentrations, but this time we’re separating the burn conditions, allowing us to determine if the concentrations of chemicals released are contingent upon the burn condition.</p>
+<p>For additional figures available and to view aspects of figures that can be changed in <em>GGplot2</em>, check out this <a href="https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf">GGPlot2 Cheat Sheet</a>. You might need it to make this figure!</p>
+<p><strong>Hint 1</strong>: Use the <code>separate()</code> function from <em>tidyverse</em> to split <code>Biomass_Burn_Condition</code> into <code>Biomass</code> and <code>Burn_Condition</code>.</p>
+<p><strong>Hint 2</strong>: Use the function <code>facet_wrap()</code> within <code>ggplot()</code> to separate the heatmaps by <code>Burn_Condition</code>.</p>
+</div>
+<p><img src="Module3_1_Input/Module3_1_Image1.png" width="2400" style="display: block; margin: auto;" /></p>
+<!-- ############################################################################################################################# -->
+<!-- ################################################## -->
+<!-- ################################################## -->
+<!-- START SECTION TWO  -->
+<!-- ################################################## -->
+<!-- ################################################## -->
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="improving-coding-efficiencies.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="improving-data-visualizations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
