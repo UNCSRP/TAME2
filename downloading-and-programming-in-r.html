@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Downloading and Programming in R | TAME 2.0</title>
+  <meta name="description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Downloading and Programming in R | TAME 2.0" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Downloading and Programming in R | TAME 2.0" />
+  
+  <meta name="twitter:description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
+  
+
+<meta name="author" content="Rager Lab" />
+
+
+<meta name="date" content="2024-06-24" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data-wrangling-in-excel.html"/>
+<link rel="next" href="coding-best-practices.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.32/datatables.js"></script>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="images/Data Training Icon for Top Left Bookdown_v2.png"><br></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="part"><span><b>Chapter 1 Introductory <br>Data Science</b></span></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html"><i class="fa fa-check"></i>FAIR Data Management Practices</a>
+<ul>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#introduction-to-training-module"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#introduction-to-fair"><i class="fa fa-check"></i>Introduction to FAIR</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#breaking-down-fair-letter-by-letter"><i class="fa fa-check"></i>Breaking Down FAIR, Letter-by-Letter</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#what-does-this-mean-for-you"><i class="fa fa-check"></i>What Does This Mean for You?</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#data-repositories-for-sharing-of-data"><i class="fa fa-check"></i>Data Repositories for Sharing of Data</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#recent-shifts-in-regulatory-policies-for-data-sharing"><i class="fa fa-check"></i>Recent Shifts in Regulatory Policies for Data Sharing</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#additional-training-resources-on-fair"><i class="fa fa-check"></i>Additional Training Resources on FAIR</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html"><i class="fa fa-check"></i>Data Sharing through Online Repositories</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#an-overview-and-example-with-the-dataverse-repository"><i class="fa fa-check"></i>An Overview and Example with the Dataverse Repository</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#introduction-to-training-module-1"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#data-repositories"><i class="fa fa-check"></i>Data Repositories</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#the-dataverse-project"><i class="fa fa-check"></i>The Dataverse Project</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#what-is-a-dataverse"><i class="fa fa-check"></i>What is a Dataverse?</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#metadata"><i class="fa fa-check"></i>Metadata</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#creating-a-dataverse"><i class="fa fa-check"></i>Creating a Dataverse</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#creating-a-dataset"><i class="fa fa-check"></i>Creating a Dataset</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#concluding-remarks-1"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html"><i class="fa fa-check"></i>File Management using Github</a>
+<ul>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#introduction-to-training-module-2"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#creating-an-account"><i class="fa fa-check"></i>Creating an Account</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#creating-a-repository"><i class="fa fa-check"></i>Creating a Repository</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#uploading-code"><i class="fa fa-check"></i>Uploading Code</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#adding-subfolders-in-a-repository"><i class="fa fa-check"></i>Adding Subfolders in a Repository</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#updating-code"><i class="fa fa-check"></i>Updating Code</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#updating-repository-titles-and-structure-to-support-a-manuscript"><i class="fa fa-check"></i>Updating Repository Titles and Structure to Support a Manuscript</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#tracking-code-changes-using-github-branches"><i class="fa fa-check"></i>Tracking Code Changes using Github Branches</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#concluding-remarks-2"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html"><i class="fa fa-check"></i>Data Wrangling in Excel</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#introduction-to-training-module-3"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#save-a-copy-of-the-soon-to-be-organized-and-cleaned-dataset-as-a-new-file"><i class="fa fa-check"></i>Save a Copy of the Soon-To-Be Organized and Cleaned Dataset as a New File</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#remove-extraneous-white-space"><i class="fa fa-check"></i>Remove Extraneous White Space</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#replace-missing-data-with-na"><i class="fa fa-check"></i>Replace Missing Data with “NA”</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#create-a-metadata-tab"><i class="fa fa-check"></i>Create a Metadata Tab</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#abbreviate-and-capitalize-categorical-data"><i class="fa fa-check"></i>Abbreviate and Capitalize Categorical Data</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#alphabetize-sort-the-data-by-the-categorical-variable-of-interest"><i class="fa fa-check"></i>Alphabetize (Sort) the Data by the Categorical Variable of Interest</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#create-a-new-subject-number-column"><i class="fa fa-check"></i>Create a New Subject Number Column</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#remove-special-symbols-and-dashes"><i class="fa fa-check"></i>Remove Special Symbols and Dashes</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#bold-all-column-names-and-center-all-data"><i class="fa fa-check"></i>Bold all Column Names and Center all Data</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#create-a-subject-identifier-column"><i class="fa fa-check"></i>Create a Subject Identifier Column</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#separate-subject-demographic-data-from-experimental-measurements"><i class="fa fa-check"></i>Separate Subject Demographic Data from Experimental Measurements</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#convert-data-from-wide-to-long-format"><i class="fa fa-check"></i>Convert Data from Wide to Long Format</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#pivoting-data-from-a-wide-to-long-format"><i class="fa fa-check"></i>Pivoting Data from a Wide to Long Format</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#generating-summary-level-statistics-with-pivot-tables"><i class="fa fa-check"></i>Generating Summary-Level Statistics with Pivot Tables</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#excel-vs.-r-which-should-you-use"><i class="fa fa-check"></i>Excel vs. R: Which Should You Use?</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#concluding-remarks-3"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 2 Coding in R</b></span></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html"><i class="fa fa-check"></i>Downloading and Programming in R</a>
+<ul>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#introduction-to-training-module-4"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#general-introduction-and-installation-of-r-and-rstudio"><i class="fa fa-check"></i>General Introduction and Installation of R and RStudio</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#introduction-to-r-packages"><i class="fa fa-check"></i>Introduction to R Packages</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#scripting-basics"><i class="fa fa-check"></i>Scripting Basics</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#code-troubleshooting"><i class="fa fa-check"></i>Code Troubleshooting</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#concluding-remarks-4"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html"><i class="fa fa-check"></i>Coding “Best” Practices</a>
+<ul>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#introduction-to-training-module-5"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#scripting-file-types"><i class="fa fa-check"></i>Scripting File Types</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#script-headers-and-annotation"><i class="fa fa-check"></i>Script Headers and Annotation</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#coding-style"><i class="fa fa-check"></i>Coding Style</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#script-organization"><i class="fa fa-check"></i>Script Organization</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#concluding-remarks-5"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html"><i class="fa fa-check"></i>Data Manipulation and Reshaping</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#introduction-to-training-module-6"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#data-manipulation-using-base-r"><i class="fa fa-check"></i>Data Manipulation Using Base R</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#introduction-to-tidyverse"><i class="fa fa-check"></i>Introduction to Tidyverse</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#concluding-remarks-6"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html"><i class="fa fa-check"></i>Improving Coding Efficiencies</a>
+<ul>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#introduction-to-training-module-7"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#loops"><i class="fa fa-check"></i>Loops</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#functions"><i class="fa fa-check"></i>Functions</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#list-operations"><i class="fa fa-check"></i>List operations</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#concluding-remarks-7"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#additional-resources-2"><i class="fa fa-check"></i>Additional Resources</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 3 Basics of <br>Data Analysis and Visualizations</b></span></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html"><i class="fa fa-check"></i>Data Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#introduction-to-data-visualizations"><i class="fa fa-check"></i>Introduction to Data Visualizations</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#introduction-to-training-module-8"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#density-plot-visualization"><i class="fa fa-check"></i>Density Plot Visualization</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#boxplot-visualization"><i class="fa fa-check"></i>Boxplot Visualization</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#correlation-visualizations"><i class="fa fa-check"></i>Correlation Visualizations</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#heatmap-visualization"><i class="fa fa-check"></i>Heatmap Visualization</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#concluding-remarks-8"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html"><i class="fa fa-check"></i>Improving Data Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#introduction-to-data-visulization-conventions"><i class="fa fa-check"></i>Introduction to Data Visulization Conventions</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#introduction-to-training-module-9"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#creating-an-improved-boxplot-visualization"><i class="fa fa-check"></i>Creating an Improved Boxplot Visualization</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#creating-an-improved-heatmap-visualization"><i class="fa fa-check"></i>Creating an Improved Heatmap Visualization</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#creating-multi-plot-figures"><i class="fa fa-check"></i>Creating Multi-Plot Figures</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#concluding-remarks-9"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html"><i class="fa fa-check"></i>Normality Tests and Data Transformations</a>
+<ul>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#introduction-to-training-module-10"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#what-is-a-normal-distribution"><i class="fa fa-check"></i>What is a Normal Distribution?</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#qualitative-assessment-of-normality"><i class="fa fa-check"></i>Qualitative Assessment of Normality</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#quantitative-normality-assessment"><i class="fa fa-check"></i>Quantitative Normality Assessment</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#data-transformation"><i class="fa fa-check"></i>Data Transformation</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#additional-considerations-regarding-normality"><i class="fa fa-check"></i>Additional Considerations Regarding Normality</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#concluding-remarks-10"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html"><i class="fa fa-check"></i>Intoduction to Statistical Tests</a>
+<ul>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#introduction-to-training-module-11"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#assessing-normality-homogeneity-of-variance"><i class="fa fa-check"></i>Assessing Normality &amp; Homogeneity of Variance</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#two-group-visualizations-and-statistical-comparisons-using-the-t-test"><i class="fa fa-check"></i>Two-Group Visualizations and Statistical Comparisons using the T-Test</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#three-group-visualizations-and-statistical-comparisons-using-an-anova"><i class="fa fa-check"></i>Three-Group Visualizations and Statistical Comparisons using an ANOVA</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#regression-modeling-and-visualization-linear-and-logistic-regressions"><i class="fa fa-check"></i>Regression Modeling and Visualization: Linear and Logistic Regressions</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#statistical-evaluations-of-categorical-data-using-the-chi-squared-test-and-fishers-exact-test"><i class="fa fa-check"></i>Statistical Evaluations of Categorical Data using the Chi-Squared Test and Fisher’s Exact Test</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#concluding-remarks-11"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 4 Converting Wet Lab Data into Dry Lab Analyses</b></span></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html"><i class="fa fa-check"></i>Overview of Experimental Design and Example Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#introduction-to-training-module-12"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#replicates"><i class="fa fa-check"></i>Replicates</a></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#orientation-to-example-data-for-chapter-4"><i class="fa fa-check"></i>Orientation to Example Data for Chapter 4</a></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#concluding-remarks-12"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html"><i class="fa fa-check"></i>Data Import, Processing, and Summary Statistics</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#introduction-to-training-module-13"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#data-import"><i class="fa fa-check"></i>Data Import</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#handling-missing-values"><i class="fa fa-check"></i>Handling Missing Values</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#averaging-replicates"><i class="fa fa-check"></i>Averaging Replicates</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#descriptive-statistics"><i class="fa fa-check"></i>Descriptive Statistics</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#normality-assessment-and-data-transformation"><i class="fa fa-check"></i>Normality Assessment and Data Transformation</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#concluding-remarks-13"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html"><i class="fa fa-check"></i>Data Import from PDF Sources</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#introduction-to-training-module-14"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#importing-data-from-many-single-pdfs-with-the-same-formatting"><i class="fa fa-check"></i>Importing Data from Many Single PDFs with the Same Formatting</a></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#importing-data-stored-in-pdf-tables"><i class="fa fa-check"></i>Importing Data Stored in PDF Tables</a></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#concluding-remarks-14"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html"><i class="fa fa-check"></i>Two-Group Comparisons and Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#introduction-to-training-module-15"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#overview-of-two-group-statistical-tests"><i class="fa fa-check"></i>Overview of Two Group Statistical Tests</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#statistical-vs-biological-significance"><i class="fa fa-check"></i>Statistical vs Biological Significance</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#unpaired-test-example"><i class="fa fa-check"></i>Unpaired Test Example</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#paired-test-example"><i class="fa fa-check"></i>Paired Test Example</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#visualizing-results"><i class="fa fa-check"></i>Visualizing Results</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#concluding-remarks-15"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html"><i class="fa fa-check"></i>Multi-Group and Multi-Variable Comparisons and Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#introduction-to-training-module-16"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#overview-of-multi-group-statistical-tests"><i class="fa fa-check"></i>Overview of Multi-Group Statistical Tests</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#multi-group-analysis-example"><i class="fa fa-check"></i>Multi-Group Analysis Example</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#visualization-of-multi-group-statistical-results"><i class="fa fa-check"></i>Visualization of Multi-Group Statistical Results</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#concluding-remarks-16"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 5 Machine Learning &amp; Artificial Intelligence</b></span></li>
+<li class="part"><span><b>Chapter 6 Applications in Toxicology &amp; Exposure Science</b></span></li>
+<li class="part"><span><b>Chapter 7 Environmental Health Database Mining</b></span></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">TAME 2.0</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="downloading-and-programming-in-r" class="section level1 hasAnchor">
+<h1>Downloading and Programming in R<a href="downloading-and-programming-in-r.html#downloading-and-programming-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This training module was developed by Kyle Roell, Elise Hickman, and Julia E. Rager.</p>
+<p>All input files (script, data, and figures) can be downloaded from the <a href="https://github.com/UNCSRP/TAME2">UNC-SRP TAME2 GitHub website</a>.</p>
+<div id="introduction-to-training-module-4" class="section level2 hasAnchor">
+<h2>Introduction to Training Module<a href="downloading-and-programming-in-r.html#introduction-to-training-module-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this training module, we will provide a brief introduction of:</p>
+<ul>
+<li>R</li>
+<li>R Studio</li>
+<li>Packages in R</li>
+<li>Scripting basics</li>
+<li>Code troubleshooting</li>
+</ul>
+</div>
+<div id="general-introduction-and-installation-of-r-and-rstudio" class="section level2 hasAnchor">
+<h2>General Introduction and Installation of R and RStudio<a href="downloading-and-programming-in-r.html#general-introduction-and-installation-of-r-and-rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="what-is-r" class="section level3 hasAnchor">
+<h3>What is R?<a href="downloading-and-programming-in-r.html#what-is-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>R</strong> is a programming language. Computer script (lines of code) can be used to increase data analysis reproducibility, transparency, and methods sharing, and is becoming increasingly incorporated into exposure science, toxicology, and environmental health research. One of the most commonly used coding languages in the field of environmental health science is the <strong>R language</strong>. Some advantages of using R include the following:</p>
+<ul>
+<li>Free, open-source programming language that is licensed under the Free Software Foundation’s GNU General Public License</li>
+<li>Can be run across all major platforms and operating systems, including Unix, Windows, and MacOS</li>
+<li>Publicly available packages help you carry out analyses efficiently (without you having to code for everything yourself)</li>
+<li>Large, diverse collection of packages</li>
+<li>Comprehensive documentation</li>
+<li>When code is efficiently tracked during development/execution, it promotes reproducible analyses</li>
+</ul>
+<p>Because of these advantages, R has emerged as an avenue for world-wide collaboration in data science. Other commonly implemented scripting languages in the field of environmental health research include Python and SAS, among others; and these training tutorials focus on R as an important introductory-level example that also houses many relevant packages and example datasets as further described throughout TAME.</p>
+</div>
+<div id="downloading-and-installing-r" class="section level3 hasAnchor">
+<h3>Downloading and Installing R<a href="downloading-and-programming-in-r.html#downloading-and-installing-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To download R, first navigate to <a href="https://cran.rstudio.com/">https://cran.rstudio.com/</a> and download the .pkg file for your operating system. Install this file according to your computer’s typical program installation steps.</p>
+</div>
+<div id="what-is-rstudio" class="section level3 hasAnchor">
+<h3>What is RStudio?<a href="downloading-and-programming-in-r.html#what-is-rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>RStudio</strong> is an Integrated Development Environment (IDE) for R, which makes it more ‘user friendly’ when developing and using R script. It is a desktop application that can be downloaded for free, online.</p>
+</div>
+<div id="downloading-and-installing-rstudio" class="section level3 hasAnchor">
+<h3>Downloading and Installing RStudio<a href="downloading-and-programming-in-r.html#downloading-and-installing-rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To download RStudio:</p>
+<ul>
+<li>Navigate to: <a href="https://posit.co/download/rstudio-desktop/">https://posit.co/download/rstudio-desktop/</a></li>
+<li>Scroll down and select “Download RStudio”</li>
+<li>Install according to your computer’s typical program installation steps</li>
+</ul>
+</div>
+<div id="rstudio-orientation" class="section level3 hasAnchor">
+<h3>RStudio Orientation<a href="downloading-and-programming-in-r.html#rstudio-orientation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Here is a screenshot demonstrating what the RStudio desktop app looks like:
+<img src="Module2_1_Input/Image1.png" width="1031" style="display: block; margin: auto;" /></p>
+<p>The default RStudio layout has four main panes (numbered above in the blue boxes):</p>
+<ol style="list-style-type: decimal">
+<li><strong>Source Editor:</strong> allows you to open and edit script files and view data.</li>
+<li><strong>Console:</strong> where you can type code that will execute immediately when you press enter/return. This is also where code from script files will appear when you run the code.</li>
+<li><strong>Environment:</strong> shows you the objects in your environment.</li>
+<li><strong>Viewer:</strong> has a number of useful tabs, including:
+<ol style="list-style-type: decimal">
+<li><strong>Files:</strong> a file manager that allows you to navigate similar to Finder or File Explorer</li>
+<li><strong>Plots:</strong> where plots you generate by executing code will appear</li>
+<li><strong>Packages:</strong> shows you packages that are loaded (checked) and those that can be loaded (unchecked)</li>
+<li><strong>Help:</strong> where help pages will appear for packages and functions (see below for further instructions on the help option)</li>
+</ol></li>
+</ol>
+<p>Under “Tools” → “Global Options,” RStudio panes can be customized to appear in different configurations or with different color themes. A number of other options can also be changed. For example, you can choose to have colors highlighted the color they appear or rainbow colored parentheses that can help you visualize nested code.
+<img src="Module2_1_Input/Image2.png" width="786" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="introduction-to-r-packages" class="section level2 hasAnchor">
+<h2>Introduction to R Packages<a href="downloading-and-programming-in-r.html#introduction-to-r-packages" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>One of the major benefits to coding in the R language is access to the continually expanding resource of thousands of user-developed <strong>packages</strong>. Packages represent compilations of code and functions fitted for a specialized focus or purpose. These are
+often written by R users and submitted to the <a href="https://cran.r-project.org/web/packages/">CRAN</a>, or another host such as <a href="https://www.bioconductor.org/">BioConductor</a> or <a href="https://github.com/">Github</a>.</p>
+<p>Packages aid in improved data analyses and methods sharing. Packages have varying utilities, spanning basic organization and manipulation of data, visualizing data, and more advanced approaches to parse and analyze data, with examples included in all of the proceeding training modules.</p>
+<p>Examples of some common packages that we’ll be using throughout these training modules include the following:</p>
+<ul>
+<li><p><strong><em>tidyverse</em></strong>: A collection of open source R packages that share an underlying design philosophy, grammar, and data structures of tidy data. For more information on the <em>tidyverse</em> package, see its associated <a href="https://cran.r-project.org/web/packages/tidyverse/index.html">CRAN webpage</a>, primary <a href="https://www.tidyverse.org/packages/">webpage</a>, and <a href="https://onlinelibrary.wiley.com/doi/10.1002/sdr.1600">peer-reviewed article released in 2018</a>.</p></li>
+<li><p><strong><em>ggplot2</em></strong>: A system for creating graphics. Users provide the data and tell R what type of graph to use, how to map variables to aesthetics (elements of the graph), and additional stylistic elements to include in the graph. For more information on the <em>ggplot2</em> package, see its associated <a href="https://cran.r-project.org/web/packages/ggplot2/index.html">CRAN webpage</a> and <a href="https://www.rdocumentation.org/packages/ggplot2/versions/3.3.5">R Documentation</a>.</p></li>
+</ul>
+<p>More information on these packages, as well as many others, is included throughout TAME training modules.</p>
+<div id="downloadinginstalling-r-packages" class="section level3 hasAnchor">
+<h3>Downloading/Installing R Packages<a href="downloading-and-programming-in-r.html#downloadinginstalling-r-packages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>R packages often do not need to be downloaded from a website. Instead, you can install packages and load them through running script in R. Note that you only need to install packages one time, but packages must be loaded each time you start a new R session.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="downloading-and-programming-in-r.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install the package</span></span>
+<span id="cb1-2"><a href="downloading-and-programming-in-r.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(“tidyverse”)</span>
+<span id="cb1-3"><a href="downloading-and-programming-in-r.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="downloading-and-programming-in-r.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the package for use</span></span>
+<span id="cb1-5"><a href="downloading-and-programming-in-r.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<p>Many packages also exist as part of the baseline configuration of an R working environment, and do not require manual loading each time you launch R. These include the following packages:</p>
+<ul>
+<li>datasets</li>
+<li>graphics</li>
+<li>methods</li>
+<li>stats</li>
+<li>utils</li>
+</ul>
+<p>You can learn more about a function by typing one question mark before the name of the function, which will bring up documentation in the Help tab of the Viewer window. Importantly, this documentation includes a description of the different arguments that can be passed to the function and examples for how to use the function.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="downloading-and-programming-in-r.html#cb2-1" aria-hidden="true" tabindex="-1"></a>?install.packages</span></code></pre></div>
+<p><img src="Module2_1_Input/Image3.png" width="400px" style="display: block; margin: auto;" /></p>
+<p>You can learn more about a package by typing two question marks before the name of the package. This will bring up vingettes and help pages associated with that package.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="downloading-and-programming-in-r.html#cb3-1" aria-hidden="true" tabindex="-1"></a>??tidyverse</span></code></pre></div>
+<p><img src="Module2_1_Input/Image4.png" width="400px" style="display: block; margin: auto;" /></p>
+<p><br></p>
+</div>
+</div>
+<div id="scripting-basics" class="section level2 hasAnchor">
+<h2>Scripting Basics<a href="downloading-and-programming-in-r.html#scripting-basics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="data-types" class="section level3 hasAnchor">
+<h3>Data Types<a href="downloading-and-programming-in-r.html#data-types" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Before writing any script, let’s first review different data types in R. Data types are what they imply – the type of data you are handling. It is important to understand data types because functions often require a specific data type as input.</p>
+<p>R has 5 basic data types:</p>
+<ul>
+<li>Logical (e.g., TRUE or FALSE)</li>
+<li>Integer (e.g., 1, 2, 3)</li>
+<li>Numeric (real or decimal)</li>
+<li>Character (e.g., ”apple”)</li>
+<li>Complex (e.g., 1 + 0i)</li>
+</ul>
+<p>Numeric variables are often stored as “double” values (sometimes shown as &lt; dbl &gt;), or a decimal type with at least two decimal places. Character variables can also be stored as factors, which are data structures that are implemented to store categorical data in a specific order (also known as levels).</p>
+<p>Data are stored in data structures. There are many different data structures in R. Some packages even implement unique data structures. The most common data structures are:</p>
+<ul>
+<li><strong>Vectors:</strong> also known as an atomic vector, can contain characters, logical values, integers, or numeric values (but all elements must be the same data type).</li>
+<li><strong>Matrices:</strong> a vector with multiple dimensions. Elements must still be all the same data type.</li>
+<li><strong>Data frames:</strong> similar to a matrix but can contain different data types and additional attributes such as row names (and is one of the most common data structures in environmental health research). Tibbles are a stricter type of data frame implemented in the <em>tidyverse</em> package.</li>
+<li><strong>Lists:</strong> a special type of vector that acts as a container – other data structures can be stored within the list, and lists can contain other lists. Lists can contain elements that are different data structures.</li>
+</ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-8"></span>
+<img src="Module2_1_Input/Image5.png" alt="Created with *BioRender.com*" width="1152" />
+<p class="caption">
+Figure 1: Created with <em>BioRender.com</em>
+</p>
+</div>
+</div>
+<div id="writing-script" class="section level3 hasAnchor">
+<h3>Writing Script<a href="downloading-and-programming-in-r.html#writing-script" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>R code is written line by line. It may take just one line or many lines of code for one step to be executed, depending on the number of arguments to the function you are using. R code is executed (run) by selecting the line(s) of code to run and pressing return/enter (or a keyboard shortcut), or by clicking “Run” in the upper right corner of the script.</p>
+<p>A very simple example of running code is as follows:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="downloading-and-programming-in-r.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">+</span> <span class="dv">4</span></span></code></pre></div>
+<pre><code>## [1] 7</code></pre>
+<p>We can see that when we ran our code, the answer was returned. But what if we want to store that answer? We can assign that number to a variable named <code>x</code> using the assignment operator <code>&lt;-</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="downloading-and-programming-in-r.html#cb6-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">4</span></span></code></pre></div>
+<p>Then, if we run a line of code with our variable, we will get that value:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="downloading-and-programming-in-r.html#cb7-1" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>## [1] 7</code></pre>
+<p>The assignment operator can also be used to assign values to any of the data structures discussed above, such as vectors and data frames, as shown here:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="downloading-and-programming-in-r.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a vector of values called my_values</span></span>
+<span id="cb9-2"><a href="downloading-and-programming-in-r.html#cb9-2" aria-hidden="true" tabindex="-1"></a>my_values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">3</span>, <span class="dv">8</span>, <span class="dv">9</span>)</span>
+<span id="cb9-3"><a href="downloading-and-programming-in-r.html#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="downloading-and-programming-in-r.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Viewing the vector</span></span>
+<span id="cb9-5"><a href="downloading-and-programming-in-r.html#cb9-5" aria-hidden="true" tabindex="-1"></a>my_values</span></code></pre></div>
+<pre><code>## [1] 7 3 8 9</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="downloading-and-programming-in-r.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a data frame of values corresponding to colors</span></span>
+<span id="cb11-2"><a href="downloading-and-programming-in-r.html#cb11-2" aria-hidden="true" tabindex="-1"></a>my_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">values =</span> my_values, <span class="at">color =</span> <span class="fu">c</span>(<span class="st">&quot;Blue&quot;</span>, <span class="st">&quot;Red&quot;</span>, <span class="st">&quot;Yellow&quot;</span>, <span class="st">&quot;Purple&quot;</span>))</span>
+<span id="cb11-3"><a href="downloading-and-programming-in-r.html#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="downloading-and-programming-in-r.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Viewing the data frame</span></span>
+<span id="cb11-5"><a href="downloading-and-programming-in-r.html#cb11-5" aria-hidden="true" tabindex="-1"></a>my_df</span></code></pre></div>
+<pre><code>##   values  color
+## 1      7   Blue
+## 2      3    Red
+## 3      8 Yellow
+## 4      9 Purple</code></pre>
+</div>
+<div id="comments" class="section level3 hasAnchor">
+<h3>Comments<a href="downloading-and-programming-in-r.html#comments" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>You may have noticed in the code chunks above that there were <code>#</code> followed by phrases describing the code. R allows for scripts to contain non-code elements, called comments, that will not be run or interpreted. Comments are useful to help make code more interpretable for others or to add reminders of what and why parts of code may have been written.</p>
+<p>To make a comment, simply use a <code>#</code> followed by the comment. A <code>#</code> only comments out a single line of code. In other words, only that line will be commented and therefore not be run, but lines directly above/below it will still be run:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="downloading-and-programming-in-r.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is an R comment!</span></span></code></pre></div>
+<p>For more on comments, see <strong>TAME 2.0 Module 2.2 Coding Best Practices</strong>.</p>
+</div>
+<div id="autofilling" class="section level3 hasAnchor">
+<h3>Autofilling<a href="downloading-and-programming-in-r.html#autofilling" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>RStudio will autofill function names and object names as you type, which can save a lot of time. When you are typing a variable or function name, you can press tab while typing. RStudio will look for variables or functions that match the first few letters you’ve typed. If multiple matches are found, RStudio will provide you with a drop down list to select from, which may be useful when searching through newly installed packages or trying to quickly type variable names in an R script.</p>
+<p>For example, let’s say we instead named our example data frame something much longer, and we had two data frames with similar names. If we start typing in <code>my_</code> and pause our typing, all of the objects that start with that name will appear as options in a list. To select which one to autofill, navigate down the list and click return/enter.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="downloading-and-programming-in-r.html#cb14-1" aria-hidden="true" tabindex="-1"></a>my_df_with_really_long_name <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">values =</span> my_values, <span class="at">color =</span> <span class="fu">c</span>(<span class="st">&quot;Blue&quot;</span>, <span class="st">&quot;Red&quot;</span>, <span class="st">&quot;Yellow&quot;</span>, <span class="st">&quot;Purple&quot;</span>))</span>
+<span id="cb14-2"><a href="downloading-and-programming-in-r.html#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="downloading-and-programming-in-r.html#cb14-3" aria-hidden="true" tabindex="-1"></a>my_df_with_really_long_name_2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">values =</span> my_values, <span class="at">color =</span> <span class="fu">c</span>(<span class="st">&quot;Green&quot;</span>, <span class="st">&quot;Teal&quot;</span>, <span class="st">&quot;Magenta&quot;</span>, <span class="st">&quot;Orange&quot;</span>))</span></code></pre></div>
+<p><img src="Module2_1_Input/Image6.png" width="233" style="display: block; margin: auto;" /></p>
+</div>
+<div id="finding-and-setting-your-working-directory" class="section level3 hasAnchor">
+<h3>Finding and Setting Your Working Directory<a href="downloading-and-programming-in-r.html#finding-and-setting-your-working-directory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Another step that is commonly done at the very beginning of your code is setting your working direction. This tells your computer where to look for files that you want to import and where to deposit output files produced during your scripted activities.</p>
+<p>To view your current working directory, run the following:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="downloading-and-programming-in-r.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
+<p>To set or change the location of your working directory, run the following:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="downloading-and-programming-in-r.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;/file path to where your input files are&quot;</span>)</span></code></pre></div>
+<p>Note that macOS file paths use <code>/</code> to separate folders, whereas PC file paths use <code>\</code>.</p>
+<p>You can easily find the file path to your desired working directory by navigating to “Session”, then “Set Working Directory”, and “Choose Directory”:</p>
+<p><img src="Module2_1_Input/Image7.png" width="500px" style="display: block; margin: auto;" /></p>
+<p>In the popup box, navigate to the folder you want to set as your working directory and click “Open.” Look in the R console, which will now contain a line of code with <code>setwd()</code> containing your file path. You can copy this line of code to the top of your script for future use. Alternatively, you can navigate to the folder you want in Finder or File Explorer and right click to see the file path.</p>
+<p>Within your working directory, you can make sub-folders to keep your analyses organized. Here is an example folder hierarchy:</p>
+<p><img src="Module2_1_Input/Image8.png" width="300px" style="display: block; margin: auto;" /></p>
+<p>How you set up your folder hierarchy is highly dependent on your specific analysis and coding style. However, we recommend that you:</p>
+<ul>
+<li>Name your script something concise, but descriptive (no acronyms)</li>
+<li>Consider using dates when appropriate</li>
+<li>Separate your analysis into logical sections so that script doesn’t get too long or hard to follow</li>
+<li>Revisit and adapt your organization as the project evolves!</li>
+<li>Archive old code so you can revisit it</li>
+</ul>
+<div id="a-quick-note-about-projects" class="section level4 hasAnchor">
+<h4>A Quick Note About Projects<a href="downloading-and-programming-in-r.html#a-quick-note-about-projects" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Creating projects allows you to store your progress (open script, global environment) for one project in an R Project File. This facilitates quick transitions between multiple projects. Find detailed information about how to set up projects <a href="https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects">here</a>.</p>
+<p><img src="Module2_1_Input/Image9.png" width="997" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="importing-files" class="section level3 hasAnchor">
+<h3>Importing Files<a href="downloading-and-programming-in-r.html#importing-files" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>After setting the working directory, you can import and export files using various functions based on the type of file being imported or exported. Often, it is easiest to import data into R that are in a comma separated value / comma delimited file (.csv) or tab / text delimited file (.txt).</p>
+<p>Other datatypes such as SAS data files or large .csv files may require different functions to be more efficiently read in, and some of these file formats will be discussed in future modules. Files can also be imported and exported from Excel using the <a href="https://ycphs.github.io/openxlsx/"><em>openxlsx</em></a> package.</p>
+<p>Below, we will demonstrate how to read in .csv and .txt files:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="downloading-and-programming-in-r.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in the .csv data that&#39;s located in our working directory</span></span>
+<span id="cb17-2"><a href="downloading-and-programming-in-r.html#cb17-2" aria-hidden="true" tabindex="-1"></a>csv.dataset <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Module2_1_Input/Module2_1_InputData1.csv&quot;</span>)</span>
+<span id="cb17-3"><a href="downloading-and-programming-in-r.html#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="downloading-and-programming-in-r.html#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in the .txt data</span></span>
+<span id="cb17-5"><a href="downloading-and-programming-in-r.html#cb17-5" aria-hidden="true" tabindex="-1"></a>txt.dataset <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;Module2_1_Input/Module2_1_InputData1.txt&quot;</span>)</span></code></pre></div>
+<p>These datasets now appear as saved dataframes (“csv.dataset” and “txt.dataset”) in our working environment.</p>
+</div>
+<div id="viewing-data" class="section level3 hasAnchor">
+<h3>Viewing Data<a href="downloading-and-programming-in-r.html#viewing-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>After data have been loaded into R, or created within R, you will likely want to view what these datasets look like.
+Datasets can be viewed in their entirety, or datasets can be subsetted to quickly look at part of the data.</p>
+<p>Here’s some example script to view just the beginnings of a dataframe using the <code>head()</code> function:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="downloading-and-programming-in-r.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(csv.dataset)</span></code></pre></div>
+<pre><code>##    Sample Var1 Var2 Var3
+## 1 sample1    1    2    1
+## 2 sample2    2    4    4
+## 3 sample3    3    6    9
+## 4 sample4    4    8   16
+## 5 sample5    5   10   25</code></pre>
+<p>Here, you can see that this automatically brings up a view of the first five rows of the dataframe.</p>
+<p>Another way to view the first five rows of a dataframe is to run the following:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="downloading-and-programming-in-r.html#cb20-1" aria-hidden="true" tabindex="-1"></a>csv.dataset[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,]</span></code></pre></div>
+<pre><code>##    Sample Var1 Var2 Var3
+## 1 sample1    1    2    1
+## 2 sample2    2    4    4
+## 3 sample3    3    6    9
+## 4 sample4    4    8   16
+## 5 sample5    5   10   25</code></pre>
+<p>This brings us to an important concept - indexing! Brackets are used in R to index. Within the bracket, the first argument represents the row numbers, and the second argument represents the column numbers. A colon between two numbers means to select all of the columns in between the left and right numbers. The above line of code told R to select rows 1 to 5, and, by leaving the column argument blank, all of the columns.</p>
+<p>Expanding on this, to view the first 5 rows and 2 columns, we can run the following:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="downloading-and-programming-in-r.html#cb22-1" aria-hidden="true" tabindex="-1"></a>csv.dataset[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span></code></pre></div>
+<pre><code>##    Sample Var1
+## 1 sample1    1
+## 2 sample2    2
+## 3 sample3    3
+## 4 sample4    4
+## 5 sample5    5</code></pre>
+<p>For another example: What if we want to only view the first and third row, and first and fourth column? We can use a vector within the index to do this:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="downloading-and-programming-in-r.html#cb24-1" aria-hidden="true" tabindex="-1"></a>csv.dataset[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>), <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>)]</span></code></pre></div>
+<pre><code>##    Sample Var3
+## 1 sample1    1
+## 3 sample3    9</code></pre>
+<p>To view the entire dataset, use the <code>View()</code> function:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="downloading-and-programming-in-r.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(csv.dataset)</span></code></pre></div>
+<p>Another way to view a dataset is to just click on the name of the data in the environment pane. The view window will pop up in the same way that it did with the <code>View()</code> function.</p>
+</div>
+<div id="determining-data-structures-and-data-types" class="section level3 hasAnchor">
+<h3>Determining Data Structures and Data Types<a href="downloading-and-programming-in-r.html#determining-data-structures-and-data-types" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>As discussed above, there are a number of different data structures and types that can be used in R. Here, we will demonstrate functions that can be used to identify data structures and types within R objects. The <code>glimpse()</code> function, which is part of the <em>tidyverse</em> package, is helpful because it allows us to see an overview of our column names and the types of data contained within those columns.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="downloading-and-programming-in-r.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load tidyverse package</span></span>
+<span id="cb27-2"><a href="downloading-and-programming-in-r.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb27-3"><a href="downloading-and-programming-in-r.html#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="downloading-and-programming-in-r.html#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(csv.dataset)</span></code></pre></div>
+<pre><code>## Rows: 5
+## Columns: 4
+## $ Sample &lt;chr&gt; &quot;sample1&quot;, &quot;sample2&quot;, &quot;sample3&quot;, &quot;sample4&quot;, &quot;sample5&quot;
+## $ Var1   &lt;int&gt; 1, 2, 3, 4, 5
+## $ Var2   &lt;int&gt; 2, 4, 6, 8, 10
+## $ Var3   &lt;int&gt; 1, 4, 9, 16, 25</code></pre>
+<p>Here, we see that our <code>Sample</code> column is a character column, while the rest are integers.</p>
+<p>The <code>class()</code> function is also helpful for understanding objects in our global environment:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="downloading-and-programming-in-r.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># What class (data structure) is our object?</span></span>
+<span id="cb29-2"><a href="downloading-and-programming-in-r.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(csv.dataset)</span></code></pre></div>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="downloading-and-programming-in-r.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># What class (data type) is a specific column in our data?</span></span>
+<span id="cb31-2"><a href="downloading-and-programming-in-r.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(csv.dataset<span class="sc">$</span>Sample)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>These functions are particularly helpful when introducing new functions or troubleshooting code because functions often require input data to be a specific structure or data type.</p>
+</div>
+<div id="exporting-data" class="section level3 hasAnchor">
+<h3>Exporting Data<a href="downloading-and-programming-in-r.html#exporting-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now that we have these datasets saved as dataframes, we can use these as examples to export data files from the R environment back into our local directory.</p>
+<p>There are many ways to export data in R. Data can be written out into a .csv file, tab delimited .txt file, or RData file, for example. There are also many functions within packages that write out specific datasets generated by that package.</p>
+<p>To write out to a .csv file:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="downloading-and-programming-in-r.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(csv.dataset, <span class="st">&quot;Module2_1_SameCSVFileNowOut.csv&quot;</span>)</span></code></pre></div>
+<p>To write out a .txt tab delimited file:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="downloading-and-programming-in-r.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(txt.dataset, <span class="st">&quot;Module2_1_SameTXTFileNowOut.txt&quot;</span>)</span></code></pre></div>
+<p>R also allows objects to be saved in RData files. These files can be read into R, as well, and will load the object into the current workspace. Entire workspaces are also able to be saved in RData files, such that when you open an RData file, your script and Global Environment will be just as you saved them. Below includes example code to carry out these tasks, and though these files are not provided, they are just example code for future reference.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="downloading-and-programming-in-r.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in saved single R data object </span></span>
+<span id="cb35-2"><a href="downloading-and-programming-in-r.html#cb35-2" aria-hidden="true" tabindex="-1"></a>r.obj <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="st">&quot;data.rds&quot;</span>)</span>
+<span id="cb35-3"><a href="downloading-and-programming-in-r.html#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="downloading-and-programming-in-r.html#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Write single R object to file</span></span>
+<span id="cb35-5"><a href="downloading-and-programming-in-r.html#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(object, <span class="st">&quot;single_object.rds&quot;</span>)</span>
+<span id="cb35-6"><a href="downloading-and-programming-in-r.html#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="downloading-and-programming-in-r.html#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in multiple saved R objects</span></span>
+<span id="cb35-8"><a href="downloading-and-programming-in-r.html#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;multiple_data.RData&quot;</span>)</span>
+<span id="cb35-9"><a href="downloading-and-programming-in-r.html#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-10"><a href="downloading-and-programming-in-r.html#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Save multiple R objects </span></span>
+<span id="cb35-11"><a href="downloading-and-programming-in-r.html#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(object1, object2, <span class="st">&quot;multiple_objects.RData&quot;</span>)</span>
+<span id="cb35-12"><a href="downloading-and-programming-in-r.html#cb35-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-13"><a href="downloading-and-programming-in-r.html#cb35-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Save entire workspace</span></span>
+<span id="cb35-14"><a href="downloading-and-programming-in-r.html#cb35-14" aria-hidden="true" tabindex="-1"></a><span class="fu">save.image</span>(<span class="st">&quot;entire_workspace.RData&quot;</span>)</span>
+<span id="cb35-15"><a href="downloading-and-programming-in-r.html#cb35-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-16"><a href="downloading-and-programming-in-r.html#cb35-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Load entire workspace</span></span>
+<span id="cb35-17"><a href="downloading-and-programming-in-r.html#cb35-17" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;entire_workspace.RData&quot;</span>)</span></code></pre></div>
+</div>
+</div>
+<div id="code-troubleshooting" class="section level2 hasAnchor">
+<h2>Code Troubleshooting<a href="downloading-and-programming-in-r.html#code-troubleshooting" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Learning how to code is an iterative, exploratory process. The secret to coding is to…
+<img src="Module2_1_Input/Image10.png" width="496" style="display: block; margin: auto;" /></p>
+<p>Make sure to include “R” and the package and/or function name in your search. Don’t be afraid to try out different solutions until you find one that works for you, but also know when it is time to ask for help. For example, when you have tried solutions available on forums, but they aren’t working for you, or you know a colleague has already spent a significant amount of time developing code for this specific task.</p>
+<p>Note that when reading question/answer forums, make sure to look at how recent a post is, as packages are updated frequently, and old answers may or may not work.</p>
+<p>Some common reasons that code doesn’t work and potential solutions to these problems include:</p>
+<ul>
+<li>Two packages are loaded that have functions with the same name, and the default function is not the one you are intending to run.
+<ul>
+<li>Solutions: specify the package that you want the function to be called from each time you use it (e.g., <code>dplyr::select()</code>) or re-assign that function at the beginning of your script (e.g., <code>select &lt;- dplyr::select</code>)</li>
+</ul></li>
+<li>Your data object is the wrong input type (is a data frame and needs to be a matrix, is character but needs to be numeric)
+<ul>
+<li>Solution: double check the documentation (?functionname) for the input/variable type needed</li>
+</ul></li>
+<li>You accidentally wrote over your data frame or variable with another section of code
+<ul>
+<li>Solution: re-run your code from the beginning, checking that your input is in the correct format</li>
+</ul></li>
+<li>There is a bug in the function/package you are trying to use (this is most common after packages are updated or after you update your version of R)
+<ul>
+<li>Solution: post an issue on GitHub for that package (or StackOverflow if there is not a GitHub) using a reproducible example</li>
+</ul></li>
+</ul>
+<p>There are a number of forums that can be extremely helpful when troubleshooting your code, such as:</p>
+<ul>
+<li><a href="https://stackoverflow.com/">Stack Overflow</a>: one of the most common forums to post questions related to coding and will often be the first few links in a Google search about any code troubleshooting. It is free to make an account, which allows you to post and answer questions.</li>
+<li><a href="https://stats.stackexchange.com/">Cross Validated</a>: a forum focused on statistics, including machine learning, data analysis, data mining, and data visualization, and is best for conceptual questions related to how statistical tests are carried out, when to use specific tests, and how to interpret tests (rather than code execution questions, which are more appropriate to post on Stack Overflow).</li>
+<li><a href="https://support.bioconductor.org/">BioConductor Forum</a>: provides a platform for specific coding and conceptual questions about BioConductor packages.</li>
+<li><a href="https://github.com">GitHub</a>: can also be used to create posts about specific issues/bugs for functions within that package.</li>
+</ul>
+<p><strong>Before you post a question, make sure you have thoroughly explored answers to existing similar questions and are able to explain in your question why those haven’t worked for you.</strong> You will also need to provide a <strong>reproducible example</strong> of your error or question, meaning that you provide all information (input data, packages, code) needed such that others can reproduce your exact issues. While demonstrating a reproducible example is beyond the scope of this module, see the below links and packages for help getting started:</p>
+<ul>
+<li>Detailed step-by-step guides for how to make reproducible examples:
+<ul>
+<li><a href="https://aosmith16.github.io/spring-r-topics/slides/week09_reprex.html#1">How to Reprex</a> by Ariel Muldoon</li>
+<li><a href="https://community.rstudio.com/t/faq-whats-a-reproducible-example-reprex-and-how-do-i-create-one/5219">What’s a reproducible example (reprex) and how do I create one?</a></li>
+</ul></li>
+<li>Helpful packages:
+<ul>
+<li><a href="https://reprex.tidyverse.org/"><em>reprex</em></a>: part of tidyverse, useful for preparing reproducible code for posting to forums.</li>
+<li><a href="https://aosmith16.github.io/spring-r-topics/slides/week09_reprex.html#43"><em>datapasta</em></a>: useful for creating code you can copy and paste that creates a new data frame as a subset of your original data.</li>
+</ul></li>
+</ul>
+</div>
+<div id="concluding-remarks-4" class="section level2 hasAnchor">
+<h2>Concluding Remarks<a href="downloading-and-programming-in-r.html#concluding-remarks-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Together, this training module provides introductory level information on installing and loading packages in R, scripting basics, importing and exporting data, and code troubleshooting.</p>
+<div id="additional-resources-1" class="section level3 hasAnchor">
+<h3>Additional Resources<a href="downloading-and-programming-in-r.html#additional-resources-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><a href="https://www.coursera.org/learn/r-programming%20&amp;%20https://www.coursera.org/courses?query=r">Coursera</a></li>
+<li><a href="https://stackoverflow.com/questions/1744861/how-to-learn-r-as-a-programming-language">Stack Overflow How to Learn R</a></li>
+<li><a href="https://r4ds.had.co.nz/">R for Data Science</a></li>
+</ul>
+<p><label class="tykfont">
+Test Your Knowledge
+</label></p>
+<div class="tyk">
+<ol style="list-style-type: decimal">
+<li>Install R and RStudio on your computer.</li>
+<li>Launch RStudio and explore installing packages (e.g., <em>tidyverse</em>) and understanding data types using the <a href="https://machinelearningmastery.com/built-in-datasets-in-r/#:~:text=The%20ecosystem%20in%20R%20contains,to%20test%20out%20your%20program.">built-in datasets</a> in R.</li>
+<li>Make a vector of the letters A-E.</li>
+<li>Make a data frame of the letters A-E in one column and their corresponding number in the alphabet order in the second column (e.g., A corresponds with 1).</li>
+</ol>
+</div>
+<!-- ############################################################################################################################# -->
+<!-- ################################################## -->
+<!-- ################################################## -->
+<!-- START SECTION TWO  -->
+<!-- ################################################## -->
+<!-- ################################################## -->
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-wrangling-in-excel.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="coding-best-practices.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
