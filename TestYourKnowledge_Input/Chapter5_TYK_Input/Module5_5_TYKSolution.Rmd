@@ -1,0 +1,119 @@
+# TYK Solution for TAME 2.0 Module 5.5, Unsupervised Machine Learning: Additional Clustering Applications
+
+<br.
+
+## TYK Questions
+
+Using the same dataset as in the module (Module5_5_TYKInput.xlsx), answer the questions below. 
+
+1. Determine the optimal number of *k*-means clusters of cytokines derived from the nasal epithelieum lining fluid of **e-cigarette users**. 
+2. How do those clusters compare to the ones that were derived at baseline (in non-smokers)?
+3. Which cytokines have the greatest contributions to the first two eigenvectors?
+
+
+## Solution
+
+```{r message=FALSE}
+library(readxl)
+library(factoextra)
+library(FactoMineR)
+library(tidyverse)
+library(vegan)
+library(reshape2)
+suppressPackageStartupMessages(library(dendextend))
+```
+
+```{r}
+# Reading in file
+cytokines_df = data.frame(read_excel("Module5_5_TYKInput.xlsx", sheet = 2))
+
+# Viewing data 
+head(cytokines_df)
+```
+
+### TYK Question 1
+
+Determine the optimal number of *k*-means clusters of cytokines derived from the nasal epithelieum lining fluid of e-cigarette users.
+
+Starting by performing the necessary data manipulation.
+```{r}
+# selecting NELF samples from ecig users
+ecig_df = cytokines_df %>%
+    filter(Group == "Ecig", Compartment == "NELF") 
+
+head(ecig_df)
+```
+
+```{r}
+wider_ecig_df = reshape2::dcast(ecig_df, Protein ~ SubjectID, value.var = "Conc_pslog2") %>% 
+  column_to_rownames("Protein")
+
+head(wider_ecig_df)
+```
+
+
+Finding the "best" number of clusters to use. 
+```{r fig.align = 'center'}
+# Elbow method
+fviz_nbclust(wider_ecig_df, kmeans, method = "wss") +
+  labs(subtitle = "Elbow method") 
+
+# Silhouette method
+fviz_nbclust(wider_ecig_df, kmeans, method = "silhouette") + 
+  labs(subtitle = "Silhouette method") 
+
+# Gap statistic method
+fviz_nbclust(wider_ecig_df, kmeans, method = "gap_stat") + 
+  labs(subtitle = "Gap Statisitc method") 
+```
+
+The elbow method is suggesting 3 clusters, the silhouette method is suggesting 2, and the gap statistic method suggests 1. Since each of these methods is recommending different *k* values, we can go ahead and run *k*-means to visualize the clusters and test those different *k*'s. 
+```{r fig.align = 'center'}
+# Choosing to iterate through 2 or 3 clusters using i as our iterator
+for (i in 2:3){
+    # nstart = number of random starting partitions, it's recommended for nstart > 1
+    cluster_k <- kmeans(wider_ecig_df, centers = i, nstart = 25)
+    cluster_plot <- fviz_cluster(cluster_k, data = wider_ecig_df) + ggtitle(paste0("k = ", i))
+    print(cluster_plot)
+}
+```
+
+**Answer**: 2 or 3 clusters could be justified here, but we'll move forward with 3 clusters to more easily compare to the non-smoker clusters.
+
+<br>
+
+### TYK Question 2 
+
+How do those clusters compare to the ones that were derived at baseline (in non-smokers)?
+
+This question can be answer by obtaining the cluster assignments.
+```{r}
+# getting cluster assignments
+cluster_kmeans_3 <- kmeans(wider_ecig_df, centers = 3, nstart = 25)
+cluster_kmeans_df <- data.frame(cluster_kmeans_3$cluster) %>%
+    rownames_to_column("Cytokine") %>%
+    rename(`K-Means Cluster` = cluster_kmeans_3.cluster) %>%
+    # Ordering the dataframe for easier comparison
+    arrange(`K-Means Cluster`)
+
+cluster_kmeans_df
+```
+
+**Answer**: All cytokines clustered together as they did in non-smoking subjects with the exception IL-6, which moved from cluster 1 to cluster 2.
+
+<br>
+
+### TYK Question 3
+
+Which cytokines have the greatest contributions to the first two eigenvectors?
+```{r fig.align = 'center'}
+# First running PCA
+pca_cytokine <- prcomp(wider_ecig_df, scale = TRUE, center = TRUE)
+
+# kmeans contributions
+fviz_contrib(pca_cytokine, 
+             choice = "ind", 
+             axes = 1:2) # specifies to show contribution percentages for first 2 PCs
+```
+
+**Answer**: The cytokines that have the greatest contributions to the first two principal components include IL-8, Fractalkine, IP-10, IL-4, MIG, I309, IL-12p70, and IL-10. 

@@ -1,0 +1,156 @@
+# TYK Solution for TAME 2.0 Module 4, Unsupervised Machine Learning
+
+<br>
+
+## TYK Questions
+
+In the training module, we presented an unsupervised machine learning example that was based on defining *k*-means clusters based on chemical class where *k* = 2. Often times, analyses are conducted to explore potential clustering relationships without an preexisting idea of what *k* or the number of clusters should be. In this test your knowledge section, we'll go through an example like that. 
+
+Using the accompanying flame retardant and pesticide physicochemical property variables found in the file ("Module5_4_TYKInput.csv"), answer the following questions:
+
+1. What are some of the physicochemical properties that seem to be driving chemical clustering patterns derived through *k*-means?
+2. Upon reducing the data through PCA, which physicochemical property contributes the most towards informing data variance captured in the primary principal component?
+3. If we did not have information telling us which chemical belonged to which class, could we use PCA and *k*-means to accurately predict whether a chemical is a PFAS or a statin?
+
+## Solution
+
+```{r, results=FALSE, message=FALSE}
+library(pheatmap)
+library(tidyverse)
+library(factoextra)
+```
+
+#### Load and Organize Data for Pesticides and Flame Retardants (FR)
+```{r}
+# Pesticide and Flame Retardant data 
+chems <- read.csv("Module5_4_TYKInput.csv", fileEncoding = "UTF-8-BOM")
+chems <- chems %>% column_to_rownames("CASRN")
+colnames(chems)
+head(chems)
+
+# Isolate just the physchem properties
+props <- chems %>% select(!List)
+colnames(props)
+head(props)
+```
+
+#### Plot original chemical properties as first look at data
+```{r fig.align='center'}
+ggplot(chems, aes(x = ATMOSPHERIC_HYDROXYLATION_RATE_.AOH._CM3.MOLECULE.SEC_OPERA_PRED, y = OCTANOL_WATER_PARTITION_LOGP_OPERA_PRED, color = List)) +
+  geom_point(size = 2) + theme_bw() + 
+  ggtitle('Bivariate Plot of Two Original Physchem Variables') + 
+  xlab("Atmospheric Hydroxylation Rate") + ylab("Octanol Water Partition Coefficient")
+
+```
+
+Look at another set of properties
+```{r fig.align='center'}
+ggplot(chems, aes(x = SOIL_ADSORPTION_COEFFICIENT_KOC_L.KG_OPERA_PRED, y = BOILING_POINT_DEGC_OPERA_PRED, color = List)) + 
+  geom_point(size = 2) + theme_bw() + 
+  ggtitle('Bivariate Plot of Two Original Physchem Variables') + 
+  xlab("Soil Adsorption Coefficient") + ylab("Boiling Point")
+
+```
+
+There are no clear associations when only looking at two variables at a time, so let's proceed with running *k*-means.
+
+### Question #1: What are some of the physicochemical properties that seem to be driving chemical clustering patterns derived through *k*-means?
+
+Specify we are interested in 2 clusters
+```{r}
+num.centers <- 2
+```
+
+Run clustering analysis
+```{r}
+clusters <- kmeans(props,        # input dataframe
+                   centers = num.centers,  # number of cluster centers to calculate
+                   iter.max = 1000,        # the maximum number of iterations allowed
+                   nstart = 50)            # number of rows used as the random set for the initial centers
+```
+
+Extract cluster assignments for the chemicals
+```{r}
+clusters$cluster
+```
+
+Aggregate results and prepare dataset for making a heatmap
+```{r}
+dat_wclusters <- as.data.frame(cbind(props,clusters$cluster))
+colnames(dat_wclusters)[13] <- "kmeans_cluster"  # renaming this new column "kmeans_cluster"
+dat_wclusters <- dat_wclusters[order(dat_wclusters$kmeans_cluster),]  # sorting data by cluster assignments
+colnames(dat_wclusters)
+
+hm_cluster <- data.frame(dat_wclusters$kmeans_cluster, row.names = row.names(dat_wclusters))  # creating the dataframe to show which chemicals are assigned to which cluster for heatmap annotation bar
+colnames(hm_cluster) <- "kmeans_cluster"   # reassigning the column name
+hm_cluster$kmeans_cluster <- as.factor(hm_cluster$kmeans_cluster)   # coercing the cluster numbers into factor variables, to make the heat map prettier
+head(hm_cluster)
+```
+<br>
+
+Make heatmap
+```{r, fig.height=8, fig.width=10, fig.align='center'}
+chem_hm <- pheatmap(dat_wclusters[,1:10], 
+                    main = "Heatmap of Physicochemical Properties with k-means Cluster Assignments",
+                    cluster_rows = FALSE, cluster_cols = FALSE, 
+                    scale = "column",               
+                    annotation_row = hm_cluster,  
+                    angle_col = 45, fontsize_col = 5, fontsize_row = 3,  
+                    cellheight = 3, cellwidth = 25,  
+                    border_color = FALSE  
+)
+```
+**Question #1**: What are some of the physicochemical properties that seem to be driving chemical clustering patterns derived through *k*-means?
+
+**Answer**: Properties with values that show obvious differences between resulting clusters including atmospheric hydroxylation, bioconcentration factor, boiling point, and soil adsorption coefficient.
+
+<br>
+
+### Question 2: Upon reducing the data through PCA, which physicochemical property contributes the most towards informing data variance captured in the primary principal component?
+
+```{r}
+colnames(props) # review dataset of just physicochemical property data
+my.pca <- prcomp(props,   # input dataframe of physchem data
+                   scale = TRUE, center = TRUE) # scaling and centering data
+```
+Looking at how much of the variance was able to be compressed into the eigenvectors
+```{r fig.align='center'}
+fviz_eig(my.pca, addlabels = TRUE)
+```
+
+
+View scores for each chemical's contribution towards each principal component
+```{r}
+head(my.pca$x)
+```
+View loadings
+```{r}
+my.pca$rotation
+```
+**Question 2**: Upon reducing the data through PCA, which physicochemical property contributes the most towards informing data variance captured in the primary principal component?
+
+**Answer**: Boiling point contributes the most towards principal component #1, as it has the largest magnitude (-0.436).
+
+<br>
+
+### Question 3: If we did not have information telling us which chemical belonged to which class, could we use PCA and *k*-means to accurately predict whether a chemical is a PFAS or a statin?
+
+This question can be answered by plotting the first two principal components and coloring the data points based on the chemical class (`List`) and by the *k*-means clusters.
+
+```{r fig.align='center'}
+# Original chemical class coloring
+ggplot(as.data.frame(my.pca$x), aes(x = PC1, y = PC2, color = as.factor(chems$List))) + 
+  geom_point(size = 2) +
+  theme_bw() + 
+  ggtitle('PCA Plot of the First 2 PCs, colored by Chemical Class') + 
+  xlab("Principal Component 1 (33.8%)") + ylab("Principal Component 2 (14.9%)") 
+
+# K means clusters
+ggplot(as.data.frame(my.pca$x), aes(x = PC1, y = PC2, color = as.factor(hm_cluster$kmeans_cluster))) + 
+  geom_point(size = 2) +
+  theme_bw() + 
+  ggtitle('PCA Plot of the First 2 PCs, colored by K-Means Cluster') + 
+  xlab("Principal Component 1 (33.8%)") + ylab("Principal Component 2 (14.9%)") 
+```
+
+**Answer**: Based on the figures, the *k*-means clusters did not align with the chemical classes. This could potentially be attributed to PCA only capturing about 50% of the variance from the original dataset, omitting useful data that could have helped the *k*-means more closely align with the chemical classes. 

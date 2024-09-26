@@ -1,0 +1,249 @@
+# TYK Solution for TAME 2.0 Module 5.3, Supervised Machine Learning Model Interpretation
+
+## TYK Question
+
+1. Using the "Module5_2_TYKInput.xlsx", use RF to determine if well water data can be accurate predictors of Manganese detection as was done in the previous module. However, this time, incorporate SMOTE in the model. Feel free to use either the `trainControl()` or `createFolds()` function for CV. Extract the variable importance for each predictor on a RF model. What two features have the highest variable importance? **Hint**: Regardless of the cross validation function you choose, run SMOTE on the training dataset only to create a more balanced training set while the test set will remain unchanged. 
+
+2. Using casing depth and the feature with the highest variable importance, construct a decision boundary plot. Under what conditions is a well more likely to predict detectable Manganese levels based on a decision boundary plot?
+
+## Solution
+
+```{r message=FALSE}
+library(readxl)
+library(lubridate)
+library(tidyverse)
+library(gtsummary)
+library(flextable)
+library(caret)
+library(randomForest)
+library(themis)
+```
+
+ 
+```{r}
+# Load the data
+manganese_data <- data.frame(read_excel("Module5_3_TYKInput.xlsx"))
+
+# View the top of the dataset
+head(manganese_data) 
+```
+
+## TYK Question 1
+
+Using the "Module5_2TYKInput.xlsx", use RF to determine if well water data can be accurate predictors of Manganese detection as was done in the previous module. However, this time, incorporate SMOTE in the model. Feel free to use either the `trainControl()` or `createFolds()` function for CV. Extract the variable importance for each predictor on a RF model. What two features have the highest variable importance?
+
+Like we did in the module, we'll start by changing some of the data types. 
+```{r}
+manganese_data = manganese_data %>%
+    # Converting `Detect_Concentration` from a character to a factor
+    mutate(Detect_Concentration = relevel(factor(Detect_Concentration), ref = "ND"),
+        # Converting water sample date from a character to a date type 
+        Water_Sample_Date = mdy(Water_Sample_Date)) %>%
+    # Removing tax id and only keeping the predictor and outcome variables in the dataset
+    # This allows us to put the entire dataframe as is into RF
+    select(-Tax_ID)
+
+head(manganese_data)
+```
+
+Next, setting up cross validation and parameters to be tuned.
+```{r}
+set.seed(12)
+
+manganese_index = createFolds(manganese_data$Detect_Concentration, k = 5) 
+
+ntree_values = c(50, 250, 500) # number of decision trees 
+p = dim(manganese_data)[2] - 1 # number of predictor variables in the dataset
+mtry_values = c(sqrt(p), p/2, p) # number of predictors to be used in the model
+```
+
+Predicting with RF
+```{r}
+# Setting the seed again so the predictions are consistent
+set.seed(12)
+
+# Creating an empty dataframe to save the variable importance
+variable_importance_df = data.frame()
+
+# Iterating through the cross validation folds
+for (i in 1:length(manganese_index)){
+    # Training data
+    data_train = manganese_data[-manganese_index[[i]],]
+    # using SMOTE to balance the class distribution
+    balanced_data_train = smotenc(data_train, "Detect_Concentration")
+    
+    # Test data
+    data_test = manganese_data[manganese_index[[i]],]
+    
+    # Creating empty lists and dataframes to store errors 
+    reg_rf_pred_tune = list()
+    rf_OOB_errors = list()
+    rf_error_df = data.frame()
+    
+    # Tuning parameters: using ntree and mtry values to determine which combination yields the smallest OOB error 
+    # from the validation datasets
+    for (j in 1:length(ntree_values)){
+        for (k in 1:length(mtry_values)){
+            
+            # Running RF to tune parameters
+            reg_rf_pred_tune[[k]] = randomForest(Detect_Concentration ~ ., data = balanced_data_train, 
+                                                 ntree = ntree_values[j], mtry = mtry_values[k])
+            # Obtaining the OOB error
+            rf_OOB_errors[[k]] = data.frame("Tree Number" = ntree_values[j], "Variable Number" = mtry_values[k], 
+                                   "OOB_errors" = reg_rf_pred_tune[[k]]$err.rate[ntree_values[j],1])
+            
+            # Storing the values in a dataframe
+            rf_error_df = rbind(rf_error_df, rf_OOB_errors[[k]])
+        }
+    }
+    
+    # Finding the lowest OOB error using best number of predictors at split
+    best_oob_errors <- which(rf_error_df$OOB_errors == min(rf_error_df$OOB_errors))
+
+    # Now running RF on the entire training set with the tuned parameters
+    reg_rf <- randomForest(Detect_Concentration ~ ., data = balanced_data_train,
+                               ntree = rf_error_df$Tree.Number[min(best_oob_errors)],
+                               mtry = rf_error_df$Variable.Number[min(best_oob_errors)])
+
+    # Predicting on test set and adding the predicted values as an additional column to the test data
+    data_test$Pred_Detect_Concentration = predict(reg_rf, newdata = data_test, type = "response")
+
+    # extracting variable importance
+    variable_importance_values = data.frame(importance(reg_rf)) %>%
+        rownames_to_column(var = "Predictor")
+    variable_importance_df = rbind(variable_importance_df, variable_importance_values)
+}
+
+# Taking average
+variable_importance_df = variable_importance_df %>%
+    group_by(Predictor) %>%
+    summarise(MeanDecreaseGini = mean(MeanDecreaseGini)) %>%
+    # Sorting from highest to lowest
+    arrange(-MeanDecreaseGini)
+
+# Viewing the model's variable importance
+variable_importance_df
+```
+
+Reformatting the dataframe for plotting
+```{r}
+# Adding spaces between the variables that need the space
+modified_variable_importance_df = variable_importance_df %>%
+     mutate(Predictor = gsub("_", " ", Predictor))
+
+# Saving the order of the variables from lowest to highest mean decrease gini by putting into a factor
+predictor_order = rev(modified_variable_importance_df$Predictor)
+modified_variable_importance_df$Predictor = factor(modified_variable_importance_df$Predictor, levels = predictor_order)
+
+head(modified_variable_importance_df)
+```
+
+### Variable Importance Plot
+```{r fig.align='center', out.width = "65%"}
+options(repr.plot.width=8, repr.plot.height=5) #changing plot size
+
+ggplot(data = modified_variable_importance_df , 
+             aes(x = MeanDecreaseGini, y = Predictor, size = 3)) + 
+  geom_point() + 
+
+  theme_light() + 
+  theme(axis.line = element_line(color = "black"), #making x and y axes black
+        axis.text = element_text(size = 12), #changing size of x axis labels
+        axis.title = element_text(face = "bold", size = rel(1.7)), #changes axis titles
+        legend.title = element_text(face = 'bold', size = 14), #changes legend title
+        legend.text = element_text(size = 12), #changes legend text
+        strip.text.x = element_text(size = 15, face = "bold"), #changes size of facet x axis 
+        strip.text.y = element_text(size = 15, face = "bold")) + #changes size of facet y axis 
+  labs(x = 'Variable Importance', y = 'Predictor') + #changing axis labels 
+  
+  guides(size = "none")#removing size legend
+```
+
+**Answer**: From the variable importance dataframe and plot, we can see that a sample's location (indicated by longitude and latitude) had the greatest impact on RF followed by pH,stream distance, casing depth, well depth, water sample date, elevation, flow rate, and static water depth. 
+
+<br>
+
+## TYK Question 2
+
+Using casing depth and the feature with the highest variable importance, construct a decision boundary plot. Under what conditions is a well more likely to predict detectable Manganese levels based on a decision boundary plot?
+
+Since longitude has been identified as the predictor with the highest variable importance, it will be used alongside casing depth as a predictor for the decision boundary plot.
+
+### Decision Boundary Calculation
+```{r}
+# Creating a dataframe with variables based on the highest predictors
+highest_predictivity_data = data.frame(manganese_data[,c("Longitude", "Stream_Distance", "Detect_Concentration")])
+
+# Using SMOTE first to balance classes
+balanced_highest_predictivity_data = smotenc(highest_predictivity_data, "Detect_Concentration")
+
+# Training RF
+rf_detect_manganese = randomForest(Detect_Concentration~., data = balanced_highest_predictivity_data)
+```
+
+
+```{r}
+get_grid_df <- function(classification_model, data, resolution = 100) {
+    # This function predicts the outcome (Detect_Concentration) at evenly spaced data points using the two variables (pH and casing depth)
+    # to create a decision boundary between the outcome classes (detect and non-detect samples).
+
+    # :parameters: a classification-based supervised machine learning model, dataset containing the predictors and outcome variable,
+    # specifies the number of data points to make between the minimum and maximum predictor values
+    # :output: a grid of values for both predictors and their corresponding predicted outcome class
+
+    # Grabbing only the predictor data
+    predictor_data <- data[,1:2]
+    
+    # Creating a dataframe that contains the min and max for both features
+    min_max_df <- sapply(predictor_data, range, na.rm = TRUE)
+
+    # Creating a vector of evenly spaced points between the min and max for the first variable (casing depth)
+    variable1_vector <- seq(min_max_df[1,1], min_max_df[2,1], length.out = resolution)
+    # Creating a vector of evenly spaced points between the min and max for the second variable (pH)
+    variable2_vector <- seq(min_max_df[1,2], min_max_df[2,2], length.out = resolution)
+
+    # Creating a dataframe of grid values by combining the two vectors
+    grid_df <- data.frame(cbind(rep(variable1_vector, each = resolution), rep(variable2_vector, time = resolution)))
+    colnames(grid_df) <- colnames(min_max_df)
+    
+    # Predicting class label based on all the predictor pairs of data
+    grid_df$Pred_Class = predict(classification_model, grid_df, type = "class")
+    
+    return(grid_df)
+}
+
+# calling function
+grid_df_rf = get_grid_df(rf_detect_manganese, balanced_highest_predictivity_data)
+head(grid_df_rf)
+```
+
+### Decision Boundary Plot
+```{r warning = FALSE, fig.width=7.5, fig.height=6, fig.align='center', out.width = "90%"}
+options(repr.plot.width=10, repr.plot.height=7) #changing plot size
+
+ggplot() +
+  geom_point(data = manganese_data, aes(x = Stream_Distance, y = Longitude, color = Detect_Concentration),
+            position = position_jitter(w = 0.1, h = 0.1), size = 4, alpha = 0.8) + 
+  geom_contour(data = grid_df_rf, aes(x = Stream_Distance, y = Longitude, z = as.numeric(Pred_Class == "D")), 
+               color = "black", breaks = 0.5) + # adds contour line
+  geom_point(data = grid_df_rf, aes(x = Stream_Distance, y = Longitude, color = Pred_Class), 
+             size = 0.1) + # shades plot
+ 
+ xlim(0, 1900) + # changes the limits of the x axis
+ ylim(-80.84, -80.27) + # changes the limits of the y axis
+
+  theme_light() + 
+  theme(axis.line = element_line(color = "black"), #making x and y axes black
+        axis.text = element_text(size = 10), #changing size of x axis labels
+        axis.title = element_text(face = "bold", size = rel(1.5)), #changes axis titles
+        legend.title = element_text(face = 'bold', size = 12), #changes legend title
+        legend.text = element_text(size = 10), #changes legend text
+        legend.position = "bottom", # move legend to top left corner
+        legend.background = element_rect(color = 'black', fill = 'white', linetype = 'solid')) + # changes legend background
+  labs(x = 'Stream Distance (ft)') + #changing axis labels
+
+  scale_color_discrete(name = "Arsenic Detection", # renaming the legend
+                      labels = c('Non-Detect','Detect')) # renaming the classes
+```
+
+**Answer**: There is a significant amount of overlap between detect and non-detect Manganese samples, however wells contaminated with Manganese were more likely to be found further east (longitude > -80.5). It is difficult to make out any meaninful differences in stream distance between detect and non-detect wells.
