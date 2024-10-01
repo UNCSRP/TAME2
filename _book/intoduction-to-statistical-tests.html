@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Intoduction to Statistical Tests | TAME 2.0</title>
   <meta name="description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Intoduction to Statistical Tests | TAME 2.0" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Rager Lab" />
 
 
-<meta name="date" content="2024-06-24" />
+<meta name="date" content="2024-10-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,9 +52,10 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.32/datatables.js"></script>
+<script src="libs/datatables-binding-0.33/datatables.js"></script>
 <link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
@@ -66,7 +67,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -102,7 +103,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -115,7 +116,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -372,38 +373,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3>Script Preparations<a href="intoduction-to-statistical-tests.html#script-preparations-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="cleaning-the-global-environment-3" class="section level4 hasAnchor">
 <h4>Cleaning the global environment<a href="intoduction-to-statistical-tests.html#cleaning-the-global-environment-3" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="intoduction-to-statistical-tests.html#cb261-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="intoduction-to-statistical-tests.html#cb262-1" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span></code></pre></div>
 </div>
 <div id="installing-required-r-packages-3" class="section level4 hasAnchor">
 <h4>Installing required R packages<a href="intoduction-to-statistical-tests.html#installing-required-r-packages-3" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you</p>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="intoduction-to-statistical-tests.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;tidyverse&quot;</span>))</span>
-<span id="cb262-2"><a href="intoduction-to-statistical-tests.html#cb262-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>);</span>
-<span id="cb262-3"><a href="intoduction-to-statistical-tests.html#cb262-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;car&quot;</span>))</span>
-<span id="cb262-4"><a href="intoduction-to-statistical-tests.html#cb262-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;car&quot;</span>);</span>
-<span id="cb262-5"><a href="intoduction-to-statistical-tests.html#cb262-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;ggpubr&quot;</span>))</span>
-<span id="cb262-6"><a href="intoduction-to-statistical-tests.html#cb262-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;ggpubr&quot;</span>);</span>
-<span id="cb262-7"><a href="intoduction-to-statistical-tests.html#cb262-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;effects&quot;</span>))</span>
-<span id="cb262-8"><a href="intoduction-to-statistical-tests.html#cb262-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;effects&quot;</span>);</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="intoduction-to-statistical-tests.html#cb263-1" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;tidyverse&quot;</span>))</span>
+<span id="cb263-2"><a href="intoduction-to-statistical-tests.html#cb263-2" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>);</span>
+<span id="cb263-3"><a href="intoduction-to-statistical-tests.html#cb263-3" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;car&quot;</span>))</span>
+<span id="cb263-4"><a href="intoduction-to-statistical-tests.html#cb263-4" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;car&quot;</span>);</span>
+<span id="cb263-5"><a href="intoduction-to-statistical-tests.html#cb263-5" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;ggpubr&quot;</span>))</span>
+<span id="cb263-6"><a href="intoduction-to-statistical-tests.html#cb263-6" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;ggpubr&quot;</span>);</span>
+<span id="cb263-7"><a href="intoduction-to-statistical-tests.html#cb263-7" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;effects&quot;</span>))</span>
+<span id="cb263-8"><a href="intoduction-to-statistical-tests.html#cb263-8" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;effects&quot;</span>);</span></code></pre></div>
 </div>
 <div id="loading-r-packages-required-for-this-session-2" class="section level4 hasAnchor">
 <h4>Loading R packages required for this session<a href="intoduction-to-statistical-tests.html#loading-r-packages-required-for-this-session-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="intoduction-to-statistical-tests.html#cb263-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># all tidyverse packages, including dplyr and ggplot2</span></span>
-<span id="cb263-2"><a href="intoduction-to-statistical-tests.html#cb263-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car) <span class="co"># package for statistical tests</span></span>
-<span id="cb263-3"><a href="intoduction-to-statistical-tests.html#cb263-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr) <span class="co"># ggplot2 based plots</span></span>
-<span id="cb263-4"><a href="intoduction-to-statistical-tests.html#cb263-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(effects) <span class="co"># for linear modeling</span></span></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="intoduction-to-statistical-tests.html#cb264-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># all tidyverse packages, including dplyr and ggplot2</span></span>
+<span id="cb264-2"><a href="intoduction-to-statistical-tests.html#cb264-2" tabindex="-1"></a><span class="fu">library</span>(car) <span class="co"># package for statistical tests</span></span>
+<span id="cb264-3"><a href="intoduction-to-statistical-tests.html#cb264-3" tabindex="-1"></a><span class="fu">library</span>(ggpubr) <span class="co"># ggplot2 based plots</span></span>
+<span id="cb264-4"><a href="intoduction-to-statistical-tests.html#cb264-4" tabindex="-1"></a><span class="fu">library</span>(effects) <span class="co"># for linear modeling</span></span></code></pre></div>
 </div>
 <div id="set-your-working-directory-4" class="section level4 hasAnchor">
 <h4>Set your working directory<a href="intoduction-to-statistical-tests.html#set-your-working-directory-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="intoduction-to-statistical-tests.html#cb264-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;/filepath to where your input files are&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="intoduction-to-statistical-tests.html#cb265-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;/filepath to where your input files are&quot;</span>)</span></code></pre></div>
 </div>
 <div id="importing-example-datasets-1" class="section level4 hasAnchor">
 <h4>Importing example datasets<a href="intoduction-to-statistical-tests.html#importing-example-datasets-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Let’s read in our example dataset. Note that these data are similar to those used previously, except that demographic and chemical measurement data were previously merged, and a few additional columns of subject information/demographics were added to serve as more thorough examples of data for use in this training module.</p>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="intoduction-to-statistical-tests.html#cb265-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading data</span></span>
-<span id="cb265-2"><a href="intoduction-to-statistical-tests.html#cb265-2" aria-hidden="true" tabindex="-1"></a>full.data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Module3_4_Input/Module3_4_InputData.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="intoduction-to-statistical-tests.html#cb266-1" tabindex="-1"></a><span class="co"># Loading data</span></span>
+<span id="cb266-2"><a href="intoduction-to-statistical-tests.html#cb266-2" tabindex="-1"></a>full.data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Module3_4_Input/Module3_4_InputData.csv&quot;</span>)</span></code></pre></div>
 <p>Let’s view the top of the first 9 columns of data in this dataframe:</p>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="intoduction-to-statistical-tests.html#cb266-1" aria-hidden="true" tabindex="-1"></a>full.data[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="intoduction-to-statistical-tests.html#cb267-1" tabindex="-1"></a>full.data[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>]</span></code></pre></div>
 <pre><code>##    ID  BMI      BMIcat     MAge           MEdu       BW GA Smoker Smoker3
 ## 1   1 27.7  Overweight 22.99928 College_Degree 3180.058 34     NS   Never
 ## 2   2 26.8  Overweight 30.05142 College_Degree 3210.823 43      S   Never
@@ -429,7 +430,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p><br>
 Let’s now view the remaining columns (columns 10-15) in this dataframe:</p>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="intoduction-to-statistical-tests.html#cb268-1" aria-hidden="true" tabindex="-1"></a>full.data[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="dv">10</span><span class="sc">:</span><span class="dv">15</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="intoduction-to-statistical-tests.html#cb269-1" tabindex="-1"></a>full.data[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="dv">10</span><span class="sc">:</span><span class="dv">15</span>]</span></code></pre></div>
 <pre><code>##        DWAs     DWCd     DWCr       UAs       UCd      UCr
 ## 1  6.426464 1.292941 51.67987 10.192695 0.7537104 42.60187
 ## 2  7.832384 1.798535 50.10409 11.815088 0.9789506 41.30757
@@ -477,15 +478,15 @@ Let’s now view the remaining columns (columns 10-15) in this dataframe:</p>
 <p><br></p>
 <p>Let’s start with the first approach based on data visualizations. In this module, we’ll primarily be generating figures using the <strong><em>ggubr</em></strong> package which is specifically designed to generate ggplot2-based figures using more streamlined coding syntax. In addition, this package has statistical parameters for plotting that are useful for basic statistical analysis, especially for people with introductory experience to plotting in R. For further documentation on <em>ggubr</em>, click <a href="https://jtr13.github.io/cc20/brief-introduction-and-tutorial-of-ggpubr-package.html">here</a>.</p>
 <p>Let’s begin with a <a href="https://en.wikipedia.org/wiki/Histogram">histogram</a> to view the distribution of BMI data using the <code>gghistogram()</code> function from the <em>ggubr</em> package:</p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="intoduction-to-statistical-tests.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gghistogram</span>(<span class="at">data =</span> full.data, <span class="at">x =</span> <span class="st">&quot;BMI&quot;</span>, <span class="at">bins =</span> <span class="dv">20</span>)</span></code></pre></div>
-<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-66-1.png" width="480" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="intoduction-to-statistical-tests.html#cb271-1" tabindex="-1"></a><span class="fu">gghistogram</span>(<span class="at">data =</span> full.data, <span class="at">x =</span> <span class="st">&quot;BMI&quot;</span>, <span class="at">bins =</span> <span class="dv">20</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-220-1.png" width="480" style="display: block; margin: auto;" /></p>
 <p>Let’s also view the <a href="https://en.wikipedia.org/wiki/Q%E2%80%93Q_plot">Q–Q (quantile-quantile) plot</a> using the <code>ggqqplot()</code> function also from the <em>ggubr</em> package:</p>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="intoduction-to-statistical-tests.html#cb271-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggqqplot</span>(full.data<span class="sc">$</span>BMI, <span class="at">ylab =</span> <span class="st">&quot;BMI&quot;</span>)</span></code></pre></div>
-<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-67-1.png" width="480" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="intoduction-to-statistical-tests.html#cb272-1" tabindex="-1"></a><span class="fu">ggqqplot</span>(full.data<span class="sc">$</span>BMI, <span class="at">ylab =</span> <span class="st">&quot;BMI&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-221-1.png" width="480" style="display: block; margin: auto;" /></p>
 <p>From these visualizations, the BMI variable appears to be normally distributed, with data centered in the middle and spreading with a distribution on both the lower and upper sides that follow typical normal data distributions.</p>
 <p><br></p>
 <p>Let’s now implement the second approach based on statistical tests for normality. Here, let’s use the <a href="https://en.wikipedia.org/wiki/Shapiro%E2%80%93Wilk_test">Shapiro-Wilk test</a> as an example, again looking at the BMI data.</p>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="intoduction-to-statistical-tests.html#cb272-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(full.data<span class="sc">$</span>BMI)</span></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="intoduction-to-statistical-tests.html#cb273-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(full.data<span class="sc">$</span>BMI)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
@@ -493,9 +494,9 @@ Let’s now view the remaining columns (columns 10-15) in this dataframe:</p>
 ## W = 0.99232, p-value = 0.3773</code></pre>
 <p>This test resulted in a p-value of 0.3773, so we cannot reject the null hypothesis (that the BMI data are normally distributed). These findings support the assumption that these data are normally distributed.</p>
 <p>Next, we’ll assess homogeneity of variance using the Levene’s test. This will be done using the <code>leveneTest()</code>function from the <em>car</em> package:</p>
-<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="intoduction-to-statistical-tests.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First convert the smoker variable to a factor</span></span>
-<span id="cb274-2"><a href="intoduction-to-statistical-tests.html#cb274-2" aria-hidden="true" tabindex="-1"></a>full.data<span class="sc">$</span>Smoker <span class="ot">=</span> <span class="fu">factor</span>(full.data<span class="sc">$</span>Smoker, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;NS&quot;</span>, <span class="st">&quot;S&quot;</span>))</span>
-<span id="cb274-3"><a href="intoduction-to-statistical-tests.html#cb274-3" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(BMI <span class="sc">~</span> Smoker, <span class="at">data =</span> full.data)</span></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="intoduction-to-statistical-tests.html#cb275-1" tabindex="-1"></a><span class="co"># First convert the smoker variable to a factor</span></span>
+<span id="cb275-2"><a href="intoduction-to-statistical-tests.html#cb275-2" tabindex="-1"></a>full.data<span class="sc">$</span>Smoker <span class="ot">=</span> <span class="fu">factor</span>(full.data<span class="sc">$</span>Smoker, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;NS&quot;</span>, <span class="st">&quot;S&quot;</span>))</span>
+<span id="cb275-3"><a href="intoduction-to-statistical-tests.html#cb275-3" tabindex="-1"></a><span class="fu">leveneTest</span>(BMI <span class="sc">~</span> Smoker, <span class="at">data =</span> full.data)</span></code></pre></div>
 <pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = median)
 ##        Df F value Pr(&gt;F)
 ## group   1  0.2631 0.6086
@@ -508,11 +509,11 @@ Let’s now view the remaining columns (columns 10-15) in this dataframe:</p>
 <p>T-tests are commonly used to test for a significant difference between the means of two groups in normally distributed data. In this example, we will be answering <strong>Environmental Health Question 1</strong>: Are there statistically significant differences in BMI between non-smokers and smokers?</p>
 <p>We will specifically implement a two sample t-test (or independent samples t-test).</p>
 <p>Let’s first visualize the BMI data across these two groups using boxplots:</p>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="intoduction-to-statistical-tests.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggboxplot</span>(<span class="at">data =</span> full.data, <span class="at">x =</span> <span class="st">&quot;Smoker&quot;</span>, <span class="at">y =</span> <span class="st">&quot;BMI&quot;</span>)</span></code></pre></div>
-<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-70-1.png" width="480" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="intoduction-to-statistical-tests.html#cb277-1" tabindex="-1"></a><span class="fu">ggboxplot</span>(<span class="at">data =</span> full.data, <span class="at">x =</span> <span class="st">&quot;Smoker&quot;</span>, <span class="at">y =</span> <span class="st">&quot;BMI&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-224-1.png" width="480" style="display: block; margin: auto;" /></p>
 <p>From this plot, it looks like non-smokers (labeled “NS”) <em>may</em> have significantly higher BMI than smokers (labeled “S”), though we need statistical evaluation of these data to more thoroughly evaluate this potential data trend.</p>
 <p>It is easy to perform a t-test on these data using the <code>t.test()</code> function from the base R stats package:</p>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="intoduction-to-statistical-tests.html#cb277-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="at">data =</span> full.data, BMI <span class="sc">~</span> Smoker)</span></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="intoduction-to-statistical-tests.html#cb278-1" tabindex="-1"></a><span class="fu">t.test</span>(<span class="at">data =</span> full.data, BMI <span class="sc">~</span> Smoker)</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
@@ -533,8 +534,8 @@ Let’s now view the remaining columns (columns 10-15) in this dataframe:</p>
 <p><strong>Answer</strong>: From this statistical output, we can see that the overall mean BMI in non-smokers (group “NS”) is 26.1, and the overall mean BMI in smokers (group “S”) is 23.4. We can also see that the resulting p-value comparison between the means of these two groups is, indeed, significant (p-value = 0.013), meaning that the means between these groups are significantly different (i.e., are not equal).</p>
 </div>
 <p>It’s also helpful to save these results into a variable within the R global environment, which then allows us to access specific output values and extract them more easily for our records. For example, we can run the following to specifically extract the resulting p-value from this test:</p>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="intoduction-to-statistical-tests.html#cb279-1" aria-hidden="true" tabindex="-1"></a>ttest.res <span class="ot">&lt;-</span> <span class="fu">t.test</span>(<span class="at">data =</span> full.data, BMI <span class="sc">~</span> Smoker) <span class="co"># making a list in the R global environment with the statistical results</span></span>
-<span id="cb279-2"><a href="intoduction-to-statistical-tests.html#cb279-2" aria-hidden="true" tabindex="-1"></a><span class="fu">signif</span>(ttest.res<span class="sc">$</span>p.value, <span class="dv">2</span>) <span class="co"># pulling the p-value and using the `signif` function to round to 2 significant figures</span></span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="intoduction-to-statistical-tests.html#cb280-1" tabindex="-1"></a>ttest.res <span class="ot">&lt;-</span> <span class="fu">t.test</span>(<span class="at">data =</span> full.data, BMI <span class="sc">~</span> Smoker) <span class="co"># making a list in the R global environment with the statistical results</span></span>
+<span id="cb280-2"><a href="intoduction-to-statistical-tests.html#cb280-2" tabindex="-1"></a><span class="fu">signif</span>(ttest.res<span class="sc">$</span>p.value, <span class="dv">2</span>) <span class="co"># pulling the p-value and using the `signif` function to round to 2 significant figures</span></span></code></pre></div>
 <pre><code>## [1] 0.013</code></pre>
 <p><br></p>
 </div>
@@ -543,12 +544,12 @@ Let’s now view the remaining columns (columns 10-15) in this dataframe:</p>
 <h2>Three-Group Visualizations and Statistical Comparisons using an ANOVA<a href="intoduction-to-statistical-tests.html#three-group-visualizations-and-statistical-comparisons-using-an-anova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Analysis of Variance (ANOVA) is a statistical method that can be used to compare means across three or more groups in normally distributed data. To demonstrate an ANOVA test on this dataset, let’s answer <strong>Environmental Health Question 2</strong>: Are there statistically significant differences in BMI between current, former, and never smokers? To do this we’ll use the <code>Smoker3</code> variable from our dataset.</p>
 <p>Let’s again start by viewing these data distributions using a boxplot:</p>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="intoduction-to-statistical-tests.html#cb281-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggboxplot</span>(<span class="at">data =</span> full.data, <span class="at">x =</span> <span class="st">&quot;Smoker3&quot;</span>, <span class="at">y =</span> <span class="st">&quot;BMI&quot;</span>)</span></code></pre></div>
-<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-73-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="intoduction-to-statistical-tests.html#cb282-1" tabindex="-1"></a><span class="fu">ggboxplot</span>(<span class="at">data =</span> full.data, <span class="at">x =</span> <span class="st">&quot;Smoker3&quot;</span>, <span class="at">y =</span> <span class="st">&quot;BMI&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-227-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>From this cursory review of the data, it looks like the current smokers likely demonstrate significantly different BMI measures than the former and never smokers, though we need statistical tests to verify this potential trend. We also require statistical tests to evaluate potential differences (or lack of differences) between former and never smokers.</p>
 <p>Let’s now run the ANOVA to compare BMI between smoking groups, using the <code>aov()</code> function to fit an ANOVA model:</p>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="intoduction-to-statistical-tests.html#cb282-1" aria-hidden="true" tabindex="-1"></a>smoker_anova <span class="ot">=</span> <span class="fu">aov</span>(<span class="at">data =</span> full.data, BMI <span class="sc">~</span> Smoker3)</span>
-<span id="cb282-2"><a href="intoduction-to-statistical-tests.html#cb282-2" aria-hidden="true" tabindex="-1"></a>smoker_anova</span></code></pre></div>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="intoduction-to-statistical-tests.html#cb283-1" tabindex="-1"></a>smoker_anova <span class="ot">=</span> <span class="fu">aov</span>(<span class="at">data =</span> full.data, BMI <span class="sc">~</span> Smoker3)</span>
+<span id="cb283-2"><a href="intoduction-to-statistical-tests.html#cb283-2" tabindex="-1"></a>smoker_anova</span></code></pre></div>
 <pre><code>## Call:
 ##    aov(formula = BMI ~ Smoker3, data = full.data)
 ## 
@@ -560,7 +561,7 @@ Let’s now view the remaining columns (columns 10-15) in this dataframe:</p>
 ## Residual standard error: 5.882861
 ## Estimated effects may be unbalanced</code></pre>
 <p>We need to extract the typical ANOVA results table using either the <code>summary()</code> or <code>anova()</code> function on the resulting fitted object:</p>
-<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="intoduction-to-statistical-tests.html#cb284-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(smoker_anova)</span></code></pre></div>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="intoduction-to-statistical-tests.html#cb285-1" tabindex="-1"></a><span class="fu">anova</span>(smoker_anova)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: BMI
@@ -579,8 +580,8 @@ Let’s now view the remaining columns (columns 10-15) in this dataframe:</p>
 <p><strong>Answer</strong>: From this ANOVA output table, we can conclude that the group means across all three groups are not equal given that the p value, written as <code>Pr(&gt;F)</code> is significant (p value = 5.88 x 10<sup>-12</sup>). However, it doesn’t tell us which groups differ from each other and that’s where post hoc tests like Tukey’s are useful.</p>
 </div>
 <p>Let’s run a Tukey’s post hoc test using the <code>TukeyHSD()</code> function in base R to determine which of the current, former, and never smokers have significant differences in BMI:</p>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="intoduction-to-statistical-tests.html#cb286-1" aria-hidden="true" tabindex="-1"></a>smoker_tukey <span class="ot">=</span> <span class="fu">TukeyHSD</span>(smoker_anova)</span>
-<span id="cb286-2"><a href="intoduction-to-statistical-tests.html#cb286-2" aria-hidden="true" tabindex="-1"></a>smoker_tukey</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="intoduction-to-statistical-tests.html#cb287-1" tabindex="-1"></a>smoker_tukey <span class="ot">=</span> <span class="fu">TukeyHSD</span>(smoker_anova)</span>
+<span id="cb287-2"><a href="intoduction-to-statistical-tests.html#cb287-2" tabindex="-1"></a>smoker_tukey</span></code></pre></div>
 <pre><code>##   Tukey multiple comparisons of means
 ##     95% family-wise confidence level
 ## 
@@ -593,14 +594,14 @@ Let’s now view the remaining columns (columns 10-15) in this dataframe:</p>
 ## Never-Former   0.6731092 -2.011764  3.357982 0.8245448</code></pre>
 <p>Although the above Tukey object contains a column <code>p adj</code>, those are the raw unadjusted p values. It is common practice to adjust p values from multiple comparisons to prevent the reporting of false positives or reporting of a significant difference that doesn’t actually exist (<a href="https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/1471-2288-2-8#:~:text=Thus%2C%20the%20main%20benefit%20of,exists%20%5B10%E2%80%9321%5D.">Feise, 2002</a>). There are a couple of different methods that are used to adjust p values including the Bonferroni and the Benjamini &amp; Hochberg approaches.</p>
 <p>For this example, we’ll use the <code>p.adjust()</code> function to obtain the Benjamini &amp; Hochberg adjusted p values. Check out the associated <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/p.adjust">RDocumentation</a> to discover other methods that can be used to adjust p values using the <code>p.adjust()</code> function:</p>
-<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="intoduction-to-statistical-tests.html#cb288-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First converting the Tukey object into a dataframe</span></span>
-<span id="cb288-2"><a href="intoduction-to-statistical-tests.html#cb288-2" aria-hidden="true" tabindex="-1"></a>smoker_tukey_df <span class="ot">=</span> <span class="fu">data.frame</span>(smoker_tukey<span class="sc">$</span>Smoker3) <span class="sc">%&gt;%</span></span>
-<span id="cb288-3"><a href="intoduction-to-statistical-tests.html#cb288-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># renaming the `p adj` to `P Value` for clarity</span></span>
-<span id="cb288-4"><a href="intoduction-to-statistical-tests.html#cb288-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="st">`</span><span class="at">P Value</span><span class="st">`</span> <span class="ot">=</span> p.adj)</span>
-<span id="cb288-5"><a href="intoduction-to-statistical-tests.html#cb288-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb288-6"><a href="intoduction-to-statistical-tests.html#cb288-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding a column with the adjusted p values</span></span>
-<span id="cb288-7"><a href="intoduction-to-statistical-tests.html#cb288-7" aria-hidden="true" tabindex="-1"></a>smoker_tukey_df<span class="sc">$</span><span class="st">`</span><span class="at">P Adj</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">p.adjust</span>(smoker_tukey_df<span class="sc">$</span><span class="st">`</span><span class="at">P Value</span><span class="st">`</span>, <span class="at">method =</span> <span class="st">&quot;fdr&quot;</span>)</span>
-<span id="cb288-8"><a href="intoduction-to-statistical-tests.html#cb288-8" aria-hidden="true" tabindex="-1"></a>smoker_tukey_df</span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="intoduction-to-statistical-tests.html#cb289-1" tabindex="-1"></a><span class="co"># First converting the Tukey object into a dataframe</span></span>
+<span id="cb289-2"><a href="intoduction-to-statistical-tests.html#cb289-2" tabindex="-1"></a>smoker_tukey_df <span class="ot">=</span> <span class="fu">data.frame</span>(smoker_tukey<span class="sc">$</span>Smoker3) <span class="sc">%&gt;%</span></span>
+<span id="cb289-3"><a href="intoduction-to-statistical-tests.html#cb289-3" tabindex="-1"></a>    <span class="co"># renaming the `p adj` to `P Value` for clarity</span></span>
+<span id="cb289-4"><a href="intoduction-to-statistical-tests.html#cb289-4" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="st">`</span><span class="at">P Value</span><span class="st">`</span> <span class="ot">=</span> p.adj)</span>
+<span id="cb289-5"><a href="intoduction-to-statistical-tests.html#cb289-5" tabindex="-1"></a></span>
+<span id="cb289-6"><a href="intoduction-to-statistical-tests.html#cb289-6" tabindex="-1"></a><span class="co"># Adding a column with the adjusted p values</span></span>
+<span id="cb289-7"><a href="intoduction-to-statistical-tests.html#cb289-7" tabindex="-1"></a>smoker_tukey_df<span class="sc">$</span><span class="st">`</span><span class="at">P Adj</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">p.adjust</span>(smoker_tukey_df<span class="sc">$</span><span class="st">`</span><span class="at">P Value</span><span class="st">`</span>, <span class="at">method =</span> <span class="st">&quot;fdr&quot;</span>)</span>
+<span id="cb289-8"><a href="intoduction-to-statistical-tests.html#cb289-8" tabindex="-1"></a>smoker_tukey_df</span></code></pre></div>
 <pre><code>##                     diff       lwr       upr      P Value        P Adj
 ## Former-Current 7.4436765  4.203006 10.684347 5.064863e-07 7.597295e-07
 ## Never-Current  8.1167857  5.595470 10.638102 3.432921e-12 1.029876e-11
@@ -622,25 +623,25 @@ Let’s now view the remaining columns (columns 10-15) in this dataframe:</p>
 <h3>Linear Regression<a href="intoduction-to-statistical-tests.html#linear-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We will first visualize the data and a run simple correlation analysis to evaluate whether these data are generally correlated. Then, we will run a linear regression to evaluate the relationship between these variables in more detail.</p>
 <p>Plotting the variables against one another and adding a linear regression line using the function <code>ggscatter()</code> from the <em>ggubr</em> package:</p>
-<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="intoduction-to-statistical-tests.html#cb290-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggscatter</span>(full.data, <span class="at">x =</span> <span class="st">&quot;BMI&quot;</span>, <span class="at">y =</span> <span class="st">&quot;BW&quot;</span>, </span>
-<span id="cb290-2"><a href="intoduction-to-statistical-tests.html#cb290-2" aria-hidden="true" tabindex="-1"></a>          <span class="co"># Adding a linear line with 95% condfidence intervals as the shaded region</span></span>
-<span id="cb290-3"><a href="intoduction-to-statistical-tests.html#cb290-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">add =</span> <span class="st">&quot;reg.line&quot;</span>, <span class="at">conf.int =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb290-4"><a href="intoduction-to-statistical-tests.html#cb290-4" aria-hidden="true" tabindex="-1"></a>          <span class="co"># Customize reg. line</span></span>
-<span id="cb290-5"><a href="intoduction-to-statistical-tests.html#cb290-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">add.params =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;lightgray&quot;</span>), </span>
-<span id="cb290-6"><a href="intoduction-to-statistical-tests.html#cb290-6" aria-hidden="true" tabindex="-1"></a>          <span class="co"># Adding Pearson&#39;s correlation coefficient</span></span>
-<span id="cb290-7"><a href="intoduction-to-statistical-tests.html#cb290-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">cor.coef =</span> <span class="cn">TRUE</span>, <span class="at">cor.method =</span> <span class="st">&quot;pearson&quot;</span>, <span class="at">cor.coeff.args =</span> <span class="fu">list</span>(<span class="at">label.sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)) </span></code></pre></div>
-<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-78-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="intoduction-to-statistical-tests.html#cb291-1" tabindex="-1"></a><span class="fu">ggscatter</span>(full.data, <span class="at">x =</span> <span class="st">&quot;BMI&quot;</span>, <span class="at">y =</span> <span class="st">&quot;BW&quot;</span>, </span>
+<span id="cb291-2"><a href="intoduction-to-statistical-tests.html#cb291-2" tabindex="-1"></a>          <span class="co"># Adding a linear line with 95% condfidence intervals as the shaded region</span></span>
+<span id="cb291-3"><a href="intoduction-to-statistical-tests.html#cb291-3" tabindex="-1"></a>          <span class="at">add =</span> <span class="st">&quot;reg.line&quot;</span>, <span class="at">conf.int =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb291-4"><a href="intoduction-to-statistical-tests.html#cb291-4" tabindex="-1"></a>          <span class="co"># Customize reg. line</span></span>
+<span id="cb291-5"><a href="intoduction-to-statistical-tests.html#cb291-5" tabindex="-1"></a>          <span class="at">add.params =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;lightgray&quot;</span>), </span>
+<span id="cb291-6"><a href="intoduction-to-statistical-tests.html#cb291-6" tabindex="-1"></a>          <span class="co"># Adding Pearson&#39;s correlation coefficient</span></span>
+<span id="cb291-7"><a href="intoduction-to-statistical-tests.html#cb291-7" tabindex="-1"></a>          <span class="at">cor.coef =</span> <span class="cn">TRUE</span>, <span class="at">cor.method =</span> <span class="st">&quot;pearson&quot;</span>, <span class="at">cor.coeff.args =</span> <span class="fu">list</span>(<span class="at">label.sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)) </span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-232-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>We can also run a basic correlation analysis between these two variables using the <code>cor.test()</code> function. This function uses the Pearson’s correlation test as default, which we can implement here due to the previously discussed assumption of normality for this dataset. Note that other tests are needed in instances when data are not normally distributed (e.g., Spearman Rank). This function is used here to extract the Pearson’s correlation coefficient and p-value (which also appear above in the upper left corner of the graph):</p>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="intoduction-to-statistical-tests.html#cb291-1" aria-hidden="true" tabindex="-1"></a>cor.res <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(full.data<span class="sc">$</span>BW, full.data<span class="sc">$</span>BMI)</span>
-<span id="cb291-2"><a href="intoduction-to-statistical-tests.html#cb291-2" aria-hidden="true" tabindex="-1"></a><span class="fu">signif</span>(cor.res<span class="sc">$</span>estimate, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="intoduction-to-statistical-tests.html#cb292-1" tabindex="-1"></a>cor.res <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(full.data<span class="sc">$</span>BW, full.data<span class="sc">$</span>BMI)</span>
+<span id="cb292-2"><a href="intoduction-to-statistical-tests.html#cb292-2" tabindex="-1"></a><span class="fu">signif</span>(cor.res<span class="sc">$</span>estimate, <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##  cor 
 ## 0.25</code></pre>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="intoduction-to-statistical-tests.html#cb293-1" aria-hidden="true" tabindex="-1"></a><span class="fu">signif</span>(cor.res<span class="sc">$</span>p.value, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="intoduction-to-statistical-tests.html#cb294-1" tabindex="-1"></a><span class="fu">signif</span>(cor.res<span class="sc">$</span>p.value, <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.00039</code></pre>
 <p>Together, it looks like there may be an association between BW and BMI, based on these correlation results, demonstrating a significant p-value of 0.0004.</p>
 <p>To test this further, let’s run a linear regression analysis using the <code>lm()</code> function, using BMI (X) as the independent variable and BW as the dependent variable (Y):</p>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="intoduction-to-statistical-tests.html#cb295-1" aria-hidden="true" tabindex="-1"></a>crude_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> full.data, BW <span class="sc">~</span> BMI)</span>
-<span id="cb295-2"><a href="intoduction-to-statistical-tests.html#cb295-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(crude_lm) <span class="co"># viewing the results summary</span></span></code></pre></div>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="intoduction-to-statistical-tests.html#cb296-1" tabindex="-1"></a>crude_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> full.data, BW <span class="sc">~</span> BMI)</span>
+<span id="cb296-2"><a href="intoduction-to-statistical-tests.html#cb296-2" tabindex="-1"></a><span class="fu">summary</span>(crude_lm) <span class="co"># viewing the results summary</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = BW ~ BMI, data = full.data)
@@ -669,16 +670,16 @@ Let’s now view the remaining columns (columns 10-15) in this dataframe:</p>
 <p><strong>Answer</strong>: Not only is there a slight positive correlation between maternal BMI and BW as indicated by ~0.25 correlation coefficient, this linear relationship is significant due to the p-value being ~0.0004.</p>
 </div>
 <p>Additionally, we can derive confidence intervals for the BMI estimate using:</p>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="intoduction-to-statistical-tests.html#cb297-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(crude_lm)[<span class="st">&quot;BMI&quot;</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="intoduction-to-statistical-tests.html#cb298-1" tabindex="-1"></a><span class="fu">confint</span>(crude_lm)[<span class="st">&quot;BMI&quot;</span>,]</span></code></pre></div>
 <pre><code>##     2.5 %    97.5 % 
 ##  3.270873 11.145740</code></pre>
 <p>Notice that the r-squared (R<sup>2</sup>) value in regression output is the squared value of the previously calculated correlation coefficient (R).</p>
-<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="intoduction-to-statistical-tests.html#cb299-1" aria-hidden="true" tabindex="-1"></a><span class="fu">signif</span>(<span class="fu">sqrt</span>(<span class="fu">summary</span>(crude_lm)<span class="sc">$</span>r.squared), <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="intoduction-to-statistical-tests.html#cb300-1" tabindex="-1"></a><span class="fu">signif</span>(<span class="fu">sqrt</span>(<span class="fu">summary</span>(crude_lm)<span class="sc">$</span>r.squared), <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.25</code></pre>
 <p><br></p>
 <p>In epidemiological studies, the potential influence of confounders is considered by including important covariates within the final regression model. Let’s go ahead and investigate <strong>Environmental Health Question 4</strong>: Are maternal age and gestational age considered potential covariates in the relationship between maternal BMI and birth weight? We can do that by adding those variables to the linear model.</p>
-<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="intoduction-to-statistical-tests.html#cb301-1" aria-hidden="true" tabindex="-1"></a>adjusted_lm <span class="ot">=</span> <span class="fu">lm</span>(<span class="at">data =</span> full.data, BW <span class="sc">~</span> BMI <span class="sc">+</span> MAge <span class="sc">+</span> GA)</span>
-<span id="cb301-2"><a href="intoduction-to-statistical-tests.html#cb301-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(adjusted_lm)</span></code></pre></div>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="intoduction-to-statistical-tests.html#cb302-1" tabindex="-1"></a>adjusted_lm <span class="ot">=</span> <span class="fu">lm</span>(<span class="at">data =</span> full.data, BW <span class="sc">~</span> BMI <span class="sc">+</span> MAge <span class="sc">+</span> GA)</span>
+<span id="cb302-2"><a href="intoduction-to-statistical-tests.html#cb302-2" tabindex="-1"></a><span class="fu">summary</span>(adjusted_lm)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = BW ~ BMI + MAge + GA, data = full.data)
@@ -702,11 +703,11 @@ Let’s now view the remaining columns (columns 10-15) in this dataframe:</p>
 <p><br></p>
 <p>Let’s further visualize these regression modeling results by adding a regression line to the original scatterplot. Before doing so, we’ll use the <code>effect()</code> function from the <em>effects</em> package to make estimated predictions of birth weight values for the crude and adjusted linear models. The crude model only has BMI as the dependent variable, while the adjusted model includes BMI, maternal age, and gestational age as dependent variables. This function creates a table that contains 5 columns: fitted values for BMI (<code>BMI</code>), predictor values (<code>fit</code>), standard errors of the predictions (<code>se</code>), lower confidence limits (<code>lower</code>), and upper confidence limits (<code>upper</code>). An additional column, <code>Model</code>, was added to specify whether the values correspond to the crude or adjusted model.</p>
 <p>For additional information on visualizing adjusted linear models, see <a href="https://nickmichalak.com/post/2019-02-13-plotting-adjusted-associations-in-r/plotting-adjusted-associations-in-r/">Plotting Adjusted Associations in R</a>.</p>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="intoduction-to-statistical-tests.html#cb303-1" aria-hidden="true" tabindex="-1"></a>crude_lm_predtable <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">effect</span>(<span class="at">term =</span> <span class="st">&quot;BMI&quot;</span>, <span class="at">mod =</span> crude_lm), <span class="at">Model =</span> <span class="st">&quot;Crude&quot;</span>) </span>
-<span id="cb303-2"><a href="intoduction-to-statistical-tests.html#cb303-2" aria-hidden="true" tabindex="-1"></a>adjusted_lm_predtable <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">effect</span>(<span class="at">term =</span> <span class="st">&quot;BMI&quot;</span>, <span class="at">mod =</span> adjusted_lm), <span class="at">Model =</span> <span class="st">&quot;Adjusted&quot;</span>) </span>
-<span id="cb303-3"><a href="intoduction-to-statistical-tests.html#cb303-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb303-4"><a href="intoduction-to-statistical-tests.html#cb303-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Viewing one of the tables</span></span>
-<span id="cb303-5"><a href="intoduction-to-statistical-tests.html#cb303-5" aria-hidden="true" tabindex="-1"></a>crude_lm_predtable</span></code></pre></div>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="intoduction-to-statistical-tests.html#cb304-1" tabindex="-1"></a>crude_lm_predtable <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">effect</span>(<span class="at">term =</span> <span class="st">&quot;BMI&quot;</span>, <span class="at">mod =</span> crude_lm), <span class="at">Model =</span> <span class="st">&quot;Crude&quot;</span>) </span>
+<span id="cb304-2"><a href="intoduction-to-statistical-tests.html#cb304-2" tabindex="-1"></a>adjusted_lm_predtable <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">effect</span>(<span class="at">term =</span> <span class="st">&quot;BMI&quot;</span>, <span class="at">mod =</span> adjusted_lm), <span class="at">Model =</span> <span class="st">&quot;Adjusted&quot;</span>) </span>
+<span id="cb304-3"><a href="intoduction-to-statistical-tests.html#cb304-3" tabindex="-1"></a></span>
+<span id="cb304-4"><a href="intoduction-to-statistical-tests.html#cb304-4" tabindex="-1"></a><span class="co"># Viewing one of the tables</span></span>
+<span id="cb304-5"><a href="intoduction-to-statistical-tests.html#cb304-5" tabindex="-1"></a>crude_lm_predtable</span></code></pre></div>
 <pre><code>##   BMI      fit       se    lower    upper Model
 ## 1  10 3141.284 33.63898 3074.948 3207.621 Crude
 ## 2  19 3206.159 18.54497 3169.588 3242.730 Crude
@@ -714,18 +715,18 @@ Let’s now view the remaining columns (columns 10-15) in this dataframe:</p>
 ## 4  36 3328.700 24.86346 3279.669 3377.732 Crude
 ## 5  45 3393.575 41.18575 3312.356 3474.794 Crude</code></pre>
 <p>Now we can plot each linear model and their corresponding 95% confidence intervals (CI). It’s easier to visualize this using <em>ggplot2</em> instead of <em>ggubr</em> so that’s what we’ll use:</p>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="intoduction-to-statistical-tests.html#cb305-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">repr.plot.width=</span><span class="dv">9</span>, <span class="at">repr.plot.height=</span><span class="dv">6</span>) <span class="co"># changing dimensions of the entire figure</span></span>
-<span id="cb305-2"><a href="intoduction-to-statistical-tests.html#cb305-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(full.data, <span class="fu">aes</span>(<span class="at">x =</span> BMI, <span class="at">y =</span> BW)) <span class="sc">+</span> </span>
-<span id="cb305-3"><a href="intoduction-to-statistical-tests.html#cb305-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb305-4"><a href="intoduction-to-statistical-tests.html#cb305-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Crude line</span></span>
-<span id="cb305-5"><a href="intoduction-to-statistical-tests.html#cb305-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> crude_lm_predtable, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> BMI, <span class="at">y =</span> fit, <span class="at">color =</span> Model)) <span class="sc">+</span></span>
-<span id="cb305-6"><a href="intoduction-to-statistical-tests.html#cb305-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Adjusted line</span></span>
-<span id="cb305-7"><a href="intoduction-to-statistical-tests.html#cb305-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> adjusted_lm_predtable, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> BMI, <span class="at">y =</span> fit, <span class="at">color =</span> Model)) <span class="sc">+</span></span>
-<span id="cb305-8"><a href="intoduction-to-statistical-tests.html#cb305-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Crude 95% CI</span></span>
-<span id="cb305-9"><a href="intoduction-to-statistical-tests.html#cb305-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> crude_lm_predtable, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> BMI, <span class="at">y =</span> fit, <span class="at">ymin =</span> lower, <span class="at">ymax =</span> upper, <span class="at">fill =</span> Model), <span class="at">alpha =</span> <span class="fl">0.25</span>) <span class="sc">+</span> </span>
-<span id="cb305-10"><a href="intoduction-to-statistical-tests.html#cb305-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Adjusted 95% CI</span></span>
-<span id="cb305-11"><a href="intoduction-to-statistical-tests.html#cb305-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> adjusted_lm_predtable, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> BMI, <span class="at">y =</span> fit, <span class="at">ymin =</span> lower, <span class="at">ymax =</span> upper, <span class="at">fill =</span> Model), <span class="at">alpha =</span> <span class="fl">0.25</span>)</span></code></pre></div>
-<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-85-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="intoduction-to-statistical-tests.html#cb306-1" tabindex="-1"></a><span class="fu">options</span>(<span class="at">repr.plot.width=</span><span class="dv">9</span>, <span class="at">repr.plot.height=</span><span class="dv">6</span>) <span class="co"># changing dimensions of the entire figure</span></span>
+<span id="cb306-2"><a href="intoduction-to-statistical-tests.html#cb306-2" tabindex="-1"></a><span class="fu">ggplot</span>(full.data, <span class="fu">aes</span>(<span class="at">x =</span> BMI, <span class="at">y =</span> BW)) <span class="sc">+</span> </span>
+<span id="cb306-3"><a href="intoduction-to-statistical-tests.html#cb306-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb306-4"><a href="intoduction-to-statistical-tests.html#cb306-4" tabindex="-1"></a>  <span class="co"># Crude line</span></span>
+<span id="cb306-5"><a href="intoduction-to-statistical-tests.html#cb306-5" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> crude_lm_predtable, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> BMI, <span class="at">y =</span> fit, <span class="at">color =</span> Model)) <span class="sc">+</span></span>
+<span id="cb306-6"><a href="intoduction-to-statistical-tests.html#cb306-6" tabindex="-1"></a>  <span class="co"># Adjusted line</span></span>
+<span id="cb306-7"><a href="intoduction-to-statistical-tests.html#cb306-7" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> adjusted_lm_predtable, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> BMI, <span class="at">y =</span> fit, <span class="at">color =</span> Model)) <span class="sc">+</span></span>
+<span id="cb306-8"><a href="intoduction-to-statistical-tests.html#cb306-8" tabindex="-1"></a>  <span class="co"># Crude 95% CI</span></span>
+<span id="cb306-9"><a href="intoduction-to-statistical-tests.html#cb306-9" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> crude_lm_predtable, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> BMI, <span class="at">y =</span> fit, <span class="at">ymin =</span> lower, <span class="at">ymax =</span> upper, <span class="at">fill =</span> Model), <span class="at">alpha =</span> <span class="fl">0.25</span>) <span class="sc">+</span> </span>
+<span id="cb306-10"><a href="intoduction-to-statistical-tests.html#cb306-10" tabindex="-1"></a>  <span class="co"># Adjusted 95% CI</span></span>
+<span id="cb306-11"><a href="intoduction-to-statistical-tests.html#cb306-11" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> adjusted_lm_predtable, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> BMI, <span class="at">y =</span> fit, <span class="at">ymin =</span> lower, <span class="at">ymax =</span> upper, <span class="at">fill =</span> Model), <span class="at">alpha =</span> <span class="fl">0.25</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-239-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="answer-to-environmental-health-question-4-1" class="section level3 hasAnchor">
 <h3>Answer to Environmental Health Question 4<a href="intoduction-to-statistical-tests.html#answer-to-environmental-health-question-4-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -741,21 +742,21 @@ Let’s now view the remaining columns (columns 10-15) in this dataframe:</p>
 <h3>Logistic Regression<a href="intoduction-to-statistical-tests.html#logistic-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To carry out a logistic regression, we need to evaluate one continuous variable (here, we select gestational age, using the <code>GA</code> variable) and one dichotomous variable (here, we select smoking status, using the <code>Smoker</code> variable) to evaluate <strong>Environmental Health Question 5</strong>: Are there statistically significant differences in gestational age based on whether a subject is a non-smoker or a smoker?</p>
 <p>Because smoking status is a dichotomous variable, we will use logistic regression to look at this relationship. Let’s first visualize these data using a stacked bar plot for the dichotomous smoker dataset:</p>
-<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="intoduction-to-statistical-tests.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggboxplot</span>(<span class="at">data =</span> full.data, <span class="at">x =</span> <span class="st">&quot;Smoker&quot;</span>, <span class="at">y =</span> <span class="st">&quot;GA&quot;</span>)</span></code></pre></div>
-<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-86-1.png" width="480" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="intoduction-to-statistical-tests.html#cb307-1" tabindex="-1"></a><span class="fu">ggboxplot</span>(<span class="at">data =</span> full.data, <span class="at">x =</span> <span class="st">&quot;Smoker&quot;</span>, <span class="at">y =</span> <span class="st">&quot;GA&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-240-1.png" width="480" style="display: block; margin: auto;" /></p>
 <p><br>
 With this visualization, it’s difficult to tell whether or not there are significant differences in maternal education based on smoking status.
 <br></p>
 <p>Let’s now run the statistical analysis, using logistic regression modeling:</p>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="intoduction-to-statistical-tests.html#cb307-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Before running the model, &quot;Smoker&quot;, needs to be binarized to 0&#39;s or 1&#39;s for the glm function</span></span>
-<span id="cb307-2"><a href="intoduction-to-statistical-tests.html#cb307-2" aria-hidden="true" tabindex="-1"></a>glm_data <span class="ot">=</span> full.data <span class="sc">%&gt;%</span></span>
-<span id="cb307-3"><a href="intoduction-to-statistical-tests.html#cb307-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Smoker =</span> <span class="fu">ifelse</span>(Smoker <span class="sc">==</span> <span class="st">&quot;NS&quot;</span>, <span class="dv">0</span>,<span class="dv">1</span>))</span>
-<span id="cb307-4"><a href="intoduction-to-statistical-tests.html#cb307-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb307-5"><a href="intoduction-to-statistical-tests.html#cb307-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Use GLM (generalized linear model) and specify the family as binomial</span></span>
-<span id="cb307-6"><a href="intoduction-to-statistical-tests.html#cb307-6" aria-hidden="true" tabindex="-1"></a><span class="co"># This tells GLM to run a logistic regression</span></span>
-<span id="cb307-7"><a href="intoduction-to-statistical-tests.html#cb307-7" aria-hidden="true" tabindex="-1"></a>log.res <span class="ot">=</span> <span class="fu">glm</span>(Smoker <span class="sc">~</span> GA, <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="at">data =</span> glm_data)</span>
-<span id="cb307-8"><a href="intoduction-to-statistical-tests.html#cb307-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb307-9"><a href="intoduction-to-statistical-tests.html#cb307-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(log.res) <span class="co"># viewing the results</span></span></code></pre></div>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="intoduction-to-statistical-tests.html#cb308-1" tabindex="-1"></a><span class="co"># Before running the model, &quot;Smoker&quot;, needs to be binarized to 0&#39;s or 1&#39;s for the glm function</span></span>
+<span id="cb308-2"><a href="intoduction-to-statistical-tests.html#cb308-2" tabindex="-1"></a>glm_data <span class="ot">=</span> full.data <span class="sc">%&gt;%</span></span>
+<span id="cb308-3"><a href="intoduction-to-statistical-tests.html#cb308-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Smoker =</span> <span class="fu">ifelse</span>(Smoker <span class="sc">==</span> <span class="st">&quot;NS&quot;</span>, <span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb308-4"><a href="intoduction-to-statistical-tests.html#cb308-4" tabindex="-1"></a></span>
+<span id="cb308-5"><a href="intoduction-to-statistical-tests.html#cb308-5" tabindex="-1"></a><span class="co"># Use GLM (generalized linear model) and specify the family as binomial</span></span>
+<span id="cb308-6"><a href="intoduction-to-statistical-tests.html#cb308-6" tabindex="-1"></a><span class="co"># This tells GLM to run a logistic regression</span></span>
+<span id="cb308-7"><a href="intoduction-to-statistical-tests.html#cb308-7" tabindex="-1"></a>log.res <span class="ot">=</span> <span class="fu">glm</span>(Smoker <span class="sc">~</span> GA, <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="at">data =</span> glm_data)</span>
+<span id="cb308-8"><a href="intoduction-to-statistical-tests.html#cb308-8" tabindex="-1"></a></span>
+<span id="cb308-9"><a href="intoduction-to-statistical-tests.html#cb308-9" tabindex="-1"></a><span class="fu">summary</span>(log.res) <span class="co"># viewing the results</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = Smoker ~ GA, family = &quot;binomial&quot;, data = glm_data)
@@ -775,7 +776,7 @@ With this visualization, it’s difficult to tell whether or not there are signi
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
 <p>Similar to the regression modeling analysis, we can also derive confidence intervals:</p>
-<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="intoduction-to-statistical-tests.html#cb309-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(log.res)[<span class="st">&quot;GA&quot;</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="intoduction-to-statistical-tests.html#cb310-1" tabindex="-1"></a><span class="fu">confint</span>(log.res)[<span class="st">&quot;GA&quot;</span>,]</span></code></pre></div>
 <pre><code>## Waiting for profiling to be done...</code></pre>
 <pre><code>##       2.5 %      97.5 % 
 ## -0.14301103  0.00640128</code></pre>
@@ -798,29 +799,29 @@ The difference between a Chi-squared test and the Fisher’s exact test surround
 <p>The number of samples or subjects (<em>n</em>) considered to be sufficiently large enough is subjective, contingent upon the research question being asked, and the experimental design. However, smaller sample sizes can be more permissible if the sample is normally distributed, but generally speaking having <em>n</em> &gt; 30 is a common convention in statistics (<a href="https://datepsychology.com/no-the-sample-size-is-not-too-small/">Alexander, 2022</a>).</p>
 <p>For this example, we are interested in evaluating the potential relationship between two categorical variables: smoking status (using the <code>Smoker</code> variable) and categorical BMI group (using the <code>BMIcat</code> variable) to address <strong>Environmental Health Question 6</strong>: Is there a relationship between smoking status and BMI?</p>
 <p>To run these categorical statistical tests, let’s first create and view a 2-way contingency table describing the frequencies of observations across the categorical BMI and smoking groups:</p>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="intoduction-to-statistical-tests.html#cb312-1" aria-hidden="true" tabindex="-1"></a>ContingencyTable <span class="ot">&lt;-</span> <span class="fu">with</span>(full.data, <span class="fu">table</span>(BMIcat, Smoker))</span>
-<span id="cb312-2"><a href="intoduction-to-statistical-tests.html#cb312-2" aria-hidden="true" tabindex="-1"></a>ContingencyTable</span></code></pre></div>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="intoduction-to-statistical-tests.html#cb313-1" tabindex="-1"></a>ContingencyTable <span class="ot">&lt;-</span> <span class="fu">with</span>(full.data, <span class="fu">table</span>(BMIcat, Smoker))</span>
+<span id="cb313-2"><a href="intoduction-to-statistical-tests.html#cb313-2" tabindex="-1"></a>ContingencyTable</span></code></pre></div>
 <pre><code>##              Smoker
 ## BMIcat        NS  S
 ##   Normal      43 14
 ##   Overweight  87 22
 ##   Underweight 23 11</code></pre>
 <p>Now let’s run the Chi-squared test on this table:</p>
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="intoduction-to-statistical-tests.html#cb314-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(ContingencyTable)</span></code></pre></div>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="intoduction-to-statistical-tests.html#cb315-1" tabindex="-1"></a><span class="fu">chisq.test</span>(ContingencyTable)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test
 ## 
 ## data:  ContingencyTable
 ## X-squared = 2.1849, df = 2, p-value = 0.3354</code></pre>
 <p>Note that we can also run the Chi-squared test using the following code, without having to generate the contingency table:</p>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="intoduction-to-statistical-tests.html#cb316-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(full.data<span class="sc">$</span>BMIcat, full.data<span class="sc">$</span>Smoker)</span></code></pre></div>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="intoduction-to-statistical-tests.html#cb317-1" tabindex="-1"></a><span class="fu">chisq.test</span>(full.data<span class="sc">$</span>BMIcat, full.data<span class="sc">$</span>Smoker)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test
 ## 
 ## data:  full.data$BMIcat and full.data$Smoker
 ## X-squared = 2.1849, df = 2, p-value = 0.3354</code></pre>
 <p>Or:</p>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="intoduction-to-statistical-tests.html#cb318-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(full.data, <span class="fu">chisq.test</span>(BMIcat, Smoker))</span></code></pre></div>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="intoduction-to-statistical-tests.html#cb319-1" tabindex="-1"></a><span class="fu">with</span>(full.data, <span class="fu">chisq.test</span>(BMIcat, Smoker))</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test
 ## 
@@ -836,8 +837,8 @@ The difference between a Chi-squared test and the Fisher’s exact test surround
 </div>
 <p><br>
 We can also run a Fisher’s Exact Test when considering sample sizes. We won’t run this here due to computing time, but here is some example code for your records:</p>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="intoduction-to-statistical-tests.html#cb320-1" aria-hidden="true" tabindex="-1"></a><span class="co">#With small sample sizes, can use Fisher&#39;s Exact Test</span></span>
-<span id="cb320-2"><a href="intoduction-to-statistical-tests.html#cb320-2" aria-hidden="true" tabindex="-1"></a><span class="co">#fisher.test(full.data$BMI, full.data$Smoker)</span></span></code></pre></div>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="intoduction-to-statistical-tests.html#cb321-1" tabindex="-1"></a><span class="co">#With small sample sizes, can use Fisher&#39;s Exact Test</span></span>
+<span id="cb321-2"><a href="intoduction-to-statistical-tests.html#cb321-2" tabindex="-1"></a><span class="co">#fisher.test(full.data$BMI, full.data$Smoker)</span></span></code></pre></div>
 </div>
 </div>
 <div id="concluding-remarks-11" class="section level2 hasAnchor">

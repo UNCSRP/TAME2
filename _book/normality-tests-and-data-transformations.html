@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Normality Tests and Data Transformations | TAME 2.0</title>
   <meta name="description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Normality Tests and Data Transformations | TAME 2.0" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Rager Lab" />
 
 
-<meta name="date" content="2024-06-24" />
+<meta name="date" content="2024-10-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,9 +52,10 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.32/datatables.js"></script>
+<script src="libs/datatables-binding-0.33/datatables.js"></script>
 <link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
@@ -66,7 +67,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -102,7 +103,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -115,7 +116,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -378,35 +379,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3>Script Preparations<a href="normality-tests-and-data-transformations.html#script-preparations-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="cleaning-the-global-environment-2" class="section level4 hasAnchor">
 <h4>Cleaning the global environment<a href="normality-tests-and-data-transformations.html#cleaning-the-global-environment-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="normality-tests-and-data-transformations.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="normality-tests-and-data-transformations.html#cb235-1" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span></code></pre></div>
 </div>
 <div id="installing-required-r-packages-2" class="section level4 hasAnchor">
 <h4>Installing required R packages<a href="normality-tests-and-data-transformations.html#installing-required-r-packages-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you</p>
-<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="normality-tests-and-data-transformations.html#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;openxlsx&quot;</span>))</span>
-<span id="cb235-2"><a href="normality-tests-and-data-transformations.html#cb235-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;openxlsx&quot;</span>);</span>
-<span id="cb235-3"><a href="normality-tests-and-data-transformations.html#cb235-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;tidyverse&quot;</span>))</span>
-<span id="cb235-4"><a href="normality-tests-and-data-transformations.html#cb235-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>);</span>
-<span id="cb235-5"><a href="normality-tests-and-data-transformations.html#cb235-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;ggpubr&quot;</span>))</span>
-<span id="cb235-6"><a href="normality-tests-and-data-transformations.html#cb235-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;ggpubr&quot;</span>);</span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="normality-tests-and-data-transformations.html#cb236-1" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;openxlsx&quot;</span>))</span>
+<span id="cb236-2"><a href="normality-tests-and-data-transformations.html#cb236-2" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;openxlsx&quot;</span>);</span>
+<span id="cb236-3"><a href="normality-tests-and-data-transformations.html#cb236-3" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;tidyverse&quot;</span>))</span>
+<span id="cb236-4"><a href="normality-tests-and-data-transformations.html#cb236-4" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>);</span>
+<span id="cb236-5"><a href="normality-tests-and-data-transformations.html#cb236-5" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;ggpubr&quot;</span>))</span>
+<span id="cb236-6"><a href="normality-tests-and-data-transformations.html#cb236-6" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;ggpubr&quot;</span>);</span></code></pre></div>
 </div>
 <div id="loading-r-packages-required-for-this-session-1" class="section level4 hasAnchor">
 <h4>Loading R packages required for this session<a href="normality-tests-and-data-transformations.html#loading-r-packages-required-for-this-session-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="normality-tests-and-data-transformations.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx) <span class="co"># for importing data</span></span>
-<span id="cb236-2"><a href="normality-tests-and-data-transformations.html#cb236-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># for manipulating and plotting data</span></span>
-<span id="cb236-3"><a href="normality-tests-and-data-transformations.html#cb236-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr) <span class="co"># for making Q-Q plots with ggplot </span></span></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="normality-tests-and-data-transformations.html#cb237-1" tabindex="-1"></a><span class="fu">library</span>(openxlsx) <span class="co"># for importing data</span></span>
+<span id="cb237-2"><a href="normality-tests-and-data-transformations.html#cb237-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># for manipulating and plotting data</span></span>
+<span id="cb237-3"><a href="normality-tests-and-data-transformations.html#cb237-3" tabindex="-1"></a><span class="fu">library</span>(ggpubr) <span class="co"># for making Q-Q plots with ggplot </span></span></code></pre></div>
 </div>
 <div id="set-your-working-directory-3" class="section level4 hasAnchor">
 <h4>Set your working directory<a href="normality-tests-and-data-transformations.html#set-your-working-directory-3" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="normality-tests-and-data-transformations.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;/filepath to where your input files are&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="normality-tests-and-data-transformations.html#cb238-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;/filepath to where your input files are&quot;</span>)</span></code></pre></div>
 </div>
 <div id="importing-example-dataset-3" class="section level4 hasAnchor">
 <h4>Importing example dataset<a href="normality-tests-and-data-transformations.html#importing-example-dataset-3" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="normality-tests-and-data-transformations.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import data</span></span>
-<span id="cb238-2"><a href="normality-tests-and-data-transformations.html#cb238-2" aria-hidden="true" tabindex="-1"></a>wrist_data <span class="ot">&lt;-</span> <span class="fu">read.xlsx</span>(<span class="st">&quot;Module3_3_Input/Module3_3_InputData.xlsx&quot;</span>)</span>
-<span id="cb238-3"><a href="normality-tests-and-data-transformations.html#cb238-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb238-4"><a href="normality-tests-and-data-transformations.html#cb238-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Viewing the data</span></span>
-<span id="cb238-5"><a href="normality-tests-and-data-transformations.html#cb238-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(wrist_data)</span></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="normality-tests-and-data-transformations.html#cb239-1" tabindex="-1"></a><span class="co"># Import data</span></span>
+<span id="cb239-2"><a href="normality-tests-and-data-transformations.html#cb239-2" tabindex="-1"></a>wrist_data <span class="ot">&lt;-</span> <span class="fu">read.xlsx</span>(<span class="st">&quot;Module3_3_Input/Module3_3_InputData.xlsx&quot;</span>)</span>
+<span id="cb239-3"><a href="normality-tests-and-data-transformations.html#cb239-3" tabindex="-1"></a></span>
+<span id="cb239-4"><a href="normality-tests-and-data-transformations.html#cb239-4" tabindex="-1"></a><span class="co"># Viewing the data</span></span>
+<span id="cb239-5"><a href="normality-tests-and-data-transformations.html#cb239-5" tabindex="-1"></a><span class="fu">head</span>(wrist_data)</span></code></pre></div>
 <pre><code>##   S_ID      Age        DEP       DBP       BBP      DEHA       DEHP     DEHT
 ## 1    1 24.76986  335.58857  574.5443  40.67286  755.8157 10621.7029 30420.68
 ## 2    2 25.39452   56.38286 1075.7114 243.48857 2716.7314  3036.5757 23991.82
@@ -450,7 +451,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="what-is-a-normal-distribution" class="section level2 hasAnchor">
 <h2>What is a Normal Distribution?<a href="normality-tests-and-data-transformations.html#what-is-a-normal-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 A normal distribution is a distribution of data in which values are distributed roughly symmetrically out from the mean such that 68.3% of values fall within one standard deviation of the mean, 95.4% of values fall within 2 standard deviations of the mean, and 99.7% of values fall within three standard deviations of the mean.
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-45"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-199"></span>
 <img src="Module3_3_Input/Module3_3_Image1.png" alt="Figure Credit: D Wells, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons" width="800px" />
 <p class="caption">
 Figure 5: Figure Credit: D Wells, CC BY-SA 4.0 <a href="https://creativecommons.org/licenses/by-sa/4.0" class="uri">https://creativecommons.org/licenses/by-sa/4.0</a>, via Wikimedia Commons
@@ -465,41 +466,41 @@ Figure 5: Figure Credit: D Wells, CC BY-SA 4.0 <a href="https://creativecommons.
 <div id="histograms" class="section level3 hasAnchor">
 <h3>Histograms<a href="normality-tests-and-data-transformations.html#histograms" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s start with visualizing the distribution of the participant’s ages using the <code>hist()</code> function that is part of base R.</p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="normality-tests-and-data-transformations.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(wrist_data<span class="sc">$</span>Age)</span></code></pre></div>
-<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-46-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="normality-tests-and-data-transformations.html#cb241-1" tabindex="-1"></a><span class="fu">hist</span>(wrist_data<span class="sc">$</span>Age)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-200-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>We can edit some of the parameters to improve this basic histogram visualization. For example, we can decrease the size of each bin using the breaks parameter:</p>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="normality-tests-and-data-transformations.html#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(wrist_data<span class="sc">$</span>Age, <span class="at">breaks =</span> <span class="dv">10</span>)</span></code></pre></div>
-<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-47-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="normality-tests-and-data-transformations.html#cb242-1" tabindex="-1"></a><span class="fu">hist</span>(wrist_data<span class="sc">$</span>Age, <span class="at">breaks =</span> <span class="dv">10</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-201-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>The <code>hist()</code> function is useful for plotting single distributions, but what if we have many variables that need normality assessment? We can leverage <em>ggplot2</em>’s powerful and flexible graphics functions such as <code>geom_histogram()</code> and <code>facet_wrap()</code> to inspect histograms of all of our variables in one figure panel. For more information on data manipulation in general, see <strong>TAME 2.0 Module 2.3 Data Manipulation &amp; Reshaping</strong> and for more on <em>ggplot2</em> including the use of <code>facet_wrap()</code>, see <strong>TAME 2.0 Module 3.2 Improving Data Visualizations</strong>.</p>
 <p>First, we’ll pivot our data to longer to prepare for plotting. Then, we’ll make our plot. We can use the <code>theme_set()</code> function to set a default graphing theme for the rest of the script. A graphing theme represents a set of default formatting parameters (mostly colors) that ggplot will use to make your graphs. <code>theme_bw()</code> is a basic theme that includes a white background for the plot and dark grey axis text and minor axis lines. The theme that you use is a matter of personal preference. For more on the different themes available through <em>ggplot2</em>, see <a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">here</a>.</p>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="normality-tests-and-data-transformations.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot data longer to prepare for plotting</span></span>
-<span id="cb242-2"><a href="normality-tests-and-data-transformations.html#cb242-2" aria-hidden="true" tabindex="-1"></a>wrist_data_long <span class="ot">&lt;-</span> wrist_data <span class="sc">%&gt;%</span></span>
-<span id="cb242-3"><a href="normality-tests-and-data-transformations.html#cb242-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span>S_ID, <span class="at">names_to =</span> <span class="st">&quot;variable&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>)</span>
-<span id="cb242-4"><a href="normality-tests-and-data-transformations.html#cb242-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb242-5"><a href="normality-tests-and-data-transformations.html#cb242-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Set theme for graphing</span></span>
-<span id="cb242-6"><a href="normality-tests-and-data-transformations.html#cb242-6" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>())</span>
-<span id="cb242-7"><a href="normality-tests-and-data-transformations.html#cb242-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb242-8"><a href="normality-tests-and-data-transformations.html#cb242-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Make figure panel of histograms</span></span>
-<span id="cb242-9"><a href="normality-tests-and-data-transformations.html#cb242-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(wrist_data_long, <span class="fu">aes</span>(value)) <span class="sc">+</span></span>
-<span id="cb242-10"><a href="normality-tests-and-data-transformations.html#cb242-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">&quot;gray40&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">binwidth =</span> <span class="cf">function</span>(x) {(<span class="fu">max</span>(x) <span class="sc">-</span> <span class="fu">min</span>(x))<span class="sc">/</span><span class="dv">25</span>}) <span class="sc">+</span></span>
-<span id="cb242-11"><a href="normality-tests-and-data-transformations.html#cb242-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> variable, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="sc">+</span></span>
-<span id="cb242-12"><a href="normality-tests-and-data-transformations.html#cb242-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;# of Observations&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Value&quot;</span>)</span></code></pre></div>
-<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-48-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="normality-tests-and-data-transformations.html#cb243-1" tabindex="-1"></a><span class="co"># Pivot data longer to prepare for plotting</span></span>
+<span id="cb243-2"><a href="normality-tests-and-data-transformations.html#cb243-2" tabindex="-1"></a>wrist_data_long <span class="ot">&lt;-</span> wrist_data <span class="sc">%&gt;%</span></span>
+<span id="cb243-3"><a href="normality-tests-and-data-transformations.html#cb243-3" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span>S_ID, <span class="at">names_to =</span> <span class="st">&quot;variable&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>)</span>
+<span id="cb243-4"><a href="normality-tests-and-data-transformations.html#cb243-4" tabindex="-1"></a></span>
+<span id="cb243-5"><a href="normality-tests-and-data-transformations.html#cb243-5" tabindex="-1"></a><span class="co"># Set theme for graphing</span></span>
+<span id="cb243-6"><a href="normality-tests-and-data-transformations.html#cb243-6" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>())</span>
+<span id="cb243-7"><a href="normality-tests-and-data-transformations.html#cb243-7" tabindex="-1"></a></span>
+<span id="cb243-8"><a href="normality-tests-and-data-transformations.html#cb243-8" tabindex="-1"></a><span class="co"># Make figure panel of histograms</span></span>
+<span id="cb243-9"><a href="normality-tests-and-data-transformations.html#cb243-9" tabindex="-1"></a><span class="fu">ggplot</span>(wrist_data_long, <span class="fu">aes</span>(value)) <span class="sc">+</span></span>
+<span id="cb243-10"><a href="normality-tests-and-data-transformations.html#cb243-10" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">&quot;gray40&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">binwidth =</span> <span class="cf">function</span>(x) {(<span class="fu">max</span>(x) <span class="sc">-</span> <span class="fu">min</span>(x))<span class="sc">/</span><span class="dv">25</span>}) <span class="sc">+</span></span>
+<span id="cb243-11"><a href="normality-tests-and-data-transformations.html#cb243-11" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> variable, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="sc">+</span></span>
+<span id="cb243-12"><a href="normality-tests-and-data-transformations.html#cb243-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;# of Observations&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Value&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-202-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>From these histograms, we can see that our chemical variables do not appear to be normally distributed.</p>
 </div>
 <div id="q-q-plots" class="section level3 hasAnchor">
 <h3>Q-Q Plots<a href="normality-tests-and-data-transformations.html#q-q-plots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Q-Q (quantile-quantile) plots are another way to visually assess normality. Similar to the histogram above, we can create a single Q-Q plot for the age variable using base R functions. Normal Q-Q plots (Q-Q plots where the theoretical quantiles are based on a normal distribution) have theoretical quantiles on the x-axis and sample quantiles, representing the distribution of the variable of interest from the dataset, on the y-axis. If the variable of interest is normally distributed, the points on the graph will fall along the reference line.</p>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="normality-tests-and-data-transformations.html#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot points</span></span>
-<span id="cb243-2"><a href="normality-tests-and-data-transformations.html#cb243-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(wrist_data<span class="sc">$</span>Age)</span>
-<span id="cb243-3"><a href="normality-tests-and-data-transformations.html#cb243-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb243-4"><a href="normality-tests-and-data-transformations.html#cb243-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a reference line for theoretically normally distributed data</span></span>
-<span id="cb243-5"><a href="normality-tests-and-data-transformations.html#cb243-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(wrist_data<span class="sc">$</span>Age)</span></code></pre></div>
-<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-49-1.png" width="672" style="display: block; margin: auto;" />
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="normality-tests-and-data-transformations.html#cb244-1" tabindex="-1"></a><span class="co"># Plot points</span></span>
+<span id="cb244-2"><a href="normality-tests-and-data-transformations.html#cb244-2" tabindex="-1"></a><span class="fu">qqnorm</span>(wrist_data<span class="sc">$</span>Age)</span>
+<span id="cb244-3"><a href="normality-tests-and-data-transformations.html#cb244-3" tabindex="-1"></a></span>
+<span id="cb244-4"><a href="normality-tests-and-data-transformations.html#cb244-4" tabindex="-1"></a><span class="co"># Add a reference line for theoretically normally distributed data</span></span>
+<span id="cb244-5"><a href="normality-tests-and-data-transformations.html#cb244-5" tabindex="-1"></a><span class="fu">qqline</span>(wrist_data<span class="sc">$</span>Age)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-203-1.png" width="672" style="display: block; margin: auto;" />
 Small variations from the reference line, as seen above, are to be expected for the most extreme values. Overall, we can see that the age data are relatively normally distributed, as the points fall along the reference line.</p>
 <p>To make a figure panel with Q-Q plots for all of our variables of interest, we can use the <code>ggqqplot()</code> function within the <em><a href="https://rpkgs.datanovia.com/ggpubr/">ggpubr</a></em> package. This function generates Q-Q plots and has arguments that are similar to <em>ggplot2</em>.</p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="normality-tests-and-data-transformations.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggqqplot</span>(wrist_data_long, <span class="at">x =</span> <span class="st">&quot;value&quot;</span>, <span class="at">facet.by =</span> <span class="st">&quot;variable&quot;</span>, <span class="at">ggtheme =</span> <span class="fu">theme_bw</span>(), <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
-<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-50-1.png" width="672" style="display: block; margin: auto;" />
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="normality-tests-and-data-transformations.html#cb245-1" tabindex="-1"></a><span class="fu">ggqqplot</span>(wrist_data_long, <span class="at">x =</span> <span class="st">&quot;value&quot;</span>, <span class="at">facet.by =</span> <span class="st">&quot;variable&quot;</span>, <span class="at">ggtheme =</span> <span class="fu">theme_bw</span>(), <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-204-1.png" width="672" style="display: block; margin: auto;" />
 With this figure panel, we can see that the chemical data have very noticeable deviations from the reference, suggesting non-normal distributions.</p>
 <p>To answer our first environmental health question, age is the only variable that appears to be normally distributed in our dataset. This is based on our histograms and Q-Q plots with data centered in the middle and spreading with a distribution on both the lower and upper sides that follow typical normal data distributions. However, chemical concentrations appear to be non-normally distributed.</p>
 <p>Next, we will implement a quantitative approach to assessing normality, based on a statistical test for normality.</p>
@@ -511,7 +512,7 @@ With this figure panel, we can see that the chemical data have very noticeable d
 <div id="single-variable-normality-assessment" class="section level3 hasAnchor">
 <h3>Single Variable Normality Assessment<a href="normality-tests-and-data-transformations.html#single-variable-normality-assessment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We will use the Shapiro-Wilk test to quantitatively assess whether our data distribution is normal, again looking at the age data. This test can be carried out simply using the <code>shapiro.test()</code> function from the base R stats package. When using this test and interpreting its results, it is important to remember that the null hypothesis is that the sample distribution is normal, and a significant p-value means the distribution is non-normal.</p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="normality-tests-and-data-transformations.html#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(wrist_data<span class="sc">$</span>Age)</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="normality-tests-and-data-transformations.html#cb246-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(wrist_data<span class="sc">$</span>Age)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
@@ -522,11 +523,11 @@ With this figure panel, we can see that the chemical data have very noticeable d
 <div id="multiple-variable-normality-assessment" class="section level3 hasAnchor">
 <h3>Multiple Variable Normality Assessment<a href="normality-tests-and-data-transformations.html#multiple-variable-normality-assessment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>With a large dataset containing many variables of interest (e.g., our example data with multiple chemicals), it is more efficient to test each column for normality and then store those results in a dataframe. We can use the base R function <code>apply()</code> to apply the Shapiro Wilk test over all of the numeric columns of our dataframe. This function generates a list of results, with a list element for each variable tested. There are also other ways that you could iterate through each of your columns, such as a <code>for</code> loop or a function as discussed in <strong>TAME 2.0 Module 2.4 Improving Coding Efficiencies</strong>.</p>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="normality-tests-and-data-transformations.html#cb247-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply Shapiro Wilk test</span></span>
-<span id="cb247-2"><a href="normality-tests-and-data-transformations.html#cb247-2" aria-hidden="true" tabindex="-1"></a>shapiro_res <span class="ot">&lt;-</span>  <span class="fu">apply</span>(wrist_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>S_ID), <span class="dv">2</span>, shapiro.test)</span>
-<span id="cb247-3"><a href="normality-tests-and-data-transformations.html#cb247-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb247-4"><a href="normality-tests-and-data-transformations.html#cb247-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View first three list elements</span></span>
-<span id="cb247-5"><a href="normality-tests-and-data-transformations.html#cb247-5" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(shapiro_res[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="normality-tests-and-data-transformations.html#cb248-1" tabindex="-1"></a><span class="co"># Apply Shapiro Wilk test</span></span>
+<span id="cb248-2"><a href="normality-tests-and-data-transformations.html#cb248-2" tabindex="-1"></a>shapiro_res <span class="ot">&lt;-</span>  <span class="fu">apply</span>(wrist_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>S_ID), <span class="dv">2</span>, shapiro.test)</span>
+<span id="cb248-3"><a href="normality-tests-and-data-transformations.html#cb248-3" tabindex="-1"></a></span>
+<span id="cb248-4"><a href="normality-tests-and-data-transformations.html#cb248-4" tabindex="-1"></a><span class="co"># View first three list elements</span></span>
+<span id="cb248-5"><a href="normality-tests-and-data-transformations.html#cb248-5" tabindex="-1"></a><span class="fu">glimpse</span>(shapiro_res[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span></code></pre></div>
 <pre><code>## List of 3
 ##  $ Age:List of 4
 ##   ..$ statistic: Named num 0.992
@@ -550,11 +551,11 @@ With this figure panel, we can see that the chemical data have very noticeable d
 ##   ..$ data.name: chr &quot;newX[, i]&quot;
 ##   ..- attr(*, &quot;class&quot;)= chr &quot;htest&quot;</code></pre>
 <p>We can then convert those list results into a dataframe. Each variable is now in a row, with columns describing outputs of the statistical test.</p>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="normality-tests-and-data-transformations.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create results dataframe</span></span>
-<span id="cb249-2"><a href="normality-tests-and-data-transformations.html#cb249-2" aria-hidden="true" tabindex="-1"></a>shapiro_res <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind.data.frame, shapiro_res)</span>
-<span id="cb249-3"><a href="normality-tests-and-data-transformations.html#cb249-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb249-4"><a href="normality-tests-and-data-transformations.html#cb249-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View results dataframe</span></span>
-<span id="cb249-5"><a href="normality-tests-and-data-transformations.html#cb249-5" aria-hidden="true" tabindex="-1"></a>shapiro_res</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="normality-tests-and-data-transformations.html#cb250-1" tabindex="-1"></a><span class="co"># Create results dataframe</span></span>
+<span id="cb250-2"><a href="normality-tests-and-data-transformations.html#cb250-2" tabindex="-1"></a>shapiro_res <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind.data.frame, shapiro_res)</span>
+<span id="cb250-3"><a href="normality-tests-and-data-transformations.html#cb250-3" tabindex="-1"></a></span>
+<span id="cb250-4"><a href="normality-tests-and-data-transformations.html#cb250-4" tabindex="-1"></a><span class="co"># View results dataframe</span></span>
+<span id="cb250-5"><a href="normality-tests-and-data-transformations.html#cb250-5" tabindex="-1"></a>shapiro_res</span></code></pre></div>
 <pre><code>##      statistic      p.value                      method data.name
 ## Age  0.9917029 8.143367e-01 Shapiro-Wilk normality test newX[, i]
 ## DEP  0.2248611 2.736536e-20 Shapiro-Wilk normality test newX[, i]
@@ -566,17 +567,17 @@ With this figure panel, we can see that the chemical data have very noticeable d
 ## DINP 0.5741864 2.486638e-15 Shapiro-Wilk normality test newX[, i]
 ## TOTM 0.3397424 6.901903e-19 Shapiro-Wilk normality test newX[, i]</code></pre>
 <p>Finally, we can clean up our results dataframe and add a column that will quickly tell us whether our variables are normally or non-normally distributed based on the Shapiro-Wilk normality test results.</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="normality-tests-and-data-transformations.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean dataframe</span></span>
-<span id="cb251-2"><a href="normality-tests-and-data-transformations.html#cb251-2" aria-hidden="true" tabindex="-1"></a>shapiro_res <span class="ot">&lt;-</span> shapiro_res <span class="sc">%&gt;%</span> </span>
-<span id="cb251-3"><a href="normality-tests-and-data-transformations.html#cb251-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb251-4"><a href="normality-tests-and-data-transformations.html#cb251-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add normality conclusion</span></span>
-<span id="cb251-5"><a href="normality-tests-and-data-transformations.html#cb251-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">normal =</span> <span class="fu">ifelse</span>(p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>, F, T)) <span class="sc">%&gt;%</span></span>
-<span id="cb251-6"><a href="normality-tests-and-data-transformations.html#cb251-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb251-7"><a href="normality-tests-and-data-transformations.html#cb251-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove columns that do not contain informative data</span></span>
-<span id="cb251-8"><a href="normality-tests-and-data-transformations.html#cb251-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(p.value, normal)) </span>
-<span id="cb251-9"><a href="normality-tests-and-data-transformations.html#cb251-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb251-10"><a href="normality-tests-and-data-transformations.html#cb251-10" aria-hidden="true" tabindex="-1"></a><span class="co"># View cleaned up dataframe</span></span>
-<span id="cb251-11"><a href="normality-tests-and-data-transformations.html#cb251-11" aria-hidden="true" tabindex="-1"></a>shapiro_res</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="normality-tests-and-data-transformations.html#cb252-1" tabindex="-1"></a><span class="co"># Clean dataframe</span></span>
+<span id="cb252-2"><a href="normality-tests-and-data-transformations.html#cb252-2" tabindex="-1"></a>shapiro_res <span class="ot">&lt;-</span> shapiro_res <span class="sc">%&gt;%</span> </span>
+<span id="cb252-3"><a href="normality-tests-and-data-transformations.html#cb252-3" tabindex="-1"></a>  </span>
+<span id="cb252-4"><a href="normality-tests-and-data-transformations.html#cb252-4" tabindex="-1"></a>  <span class="co"># Add normality conclusion</span></span>
+<span id="cb252-5"><a href="normality-tests-and-data-transformations.html#cb252-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">normal =</span> <span class="fu">ifelse</span>(p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>, F, T)) <span class="sc">%&gt;%</span></span>
+<span id="cb252-6"><a href="normality-tests-and-data-transformations.html#cb252-6" tabindex="-1"></a>  </span>
+<span id="cb252-7"><a href="normality-tests-and-data-transformations.html#cb252-7" tabindex="-1"></a>  <span class="co"># Remove columns that do not contain informative data</span></span>
+<span id="cb252-8"><a href="normality-tests-and-data-transformations.html#cb252-8" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(p.value, normal)) </span>
+<span id="cb252-9"><a href="normality-tests-and-data-transformations.html#cb252-9" tabindex="-1"></a></span>
+<span id="cb252-10"><a href="normality-tests-and-data-transformations.html#cb252-10" tabindex="-1"></a><span class="co"># View cleaned up dataframe</span></span>
+<span id="cb252-11"><a href="normality-tests-and-data-transformations.html#cb252-11" tabindex="-1"></a>shapiro_res</span></code></pre></div>
 <pre><code>##           p.value normal
 ## Age  8.143367e-01   TRUE
 ## DEP  2.736536e-20  FALSE
@@ -623,41 +624,41 @@ With this figure panel, we can see that the chemical data have very noticeable d
 <h3>Transformation of example data<a href="normality-tests-and-data-transformations.html#transformation-of-example-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>When data are non-normally distributed, such as with the chemical concentrations in our example dataset, it may be desirable to transform the data so that the distribution becomes closer to a normal distribution, particularly if there are only parametric tests available to test your hypothesis. A common transformation used in environmental health research is log<sub>2</sub> transformation, in which data are transformed by taking the log<sub>2</sub> of each value in the dataframe.</p>
 <p>Let’s log<sub>2</sub> transform our chemical data and examine the resulting histograms and Q-Q plots to qualitatively assess whether data appear more normal following transformation. We will apply a pseudo-log<sub>2</sub> transformation, where we will add 1 to each value before log<sub>2</sub> transforming so that all resulting values are positive and any zeroes in the dataframe do not return -Inf.</p>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="normality-tests-and-data-transformations.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply psuedo log2 (pslog2) transformation to chemical data</span></span>
-<span id="cb253-2"><a href="normality-tests-and-data-transformations.html#cb253-2" aria-hidden="true" tabindex="-1"></a>wrist_data_pslog2 <span class="ot">&lt;-</span> wrist_data <span class="sc">%&gt;%</span></span>
-<span id="cb253-3"><a href="normality-tests-and-data-transformations.html#cb253-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(DEP<span class="sc">:</span>TOTM, <span class="sc">~</span> <span class="fu">log2</span>(.x <span class="sc">+</span> <span class="dv">1</span>)))</span>
-<span id="cb253-4"><a href="normality-tests-and-data-transformations.html#cb253-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb253-5"><a href="normality-tests-and-data-transformations.html#cb253-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot data longer</span></span>
-<span id="cb253-6"><a href="normality-tests-and-data-transformations.html#cb253-6" aria-hidden="true" tabindex="-1"></a>wrist_data_pslog2_long <span class="ot">&lt;-</span> wrist_data_pslog2 <span class="sc">%&gt;%</span></span>
-<span id="cb253-7"><a href="normality-tests-and-data-transformations.html#cb253-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span>S_ID, <span class="at">names_to =</span> <span class="st">&quot;variable&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>)</span>
-<span id="cb253-8"><a href="normality-tests-and-data-transformations.html#cb253-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb253-9"><a href="normality-tests-and-data-transformations.html#cb253-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Make figure panel of histograms</span></span>
-<span id="cb253-10"><a href="normality-tests-and-data-transformations.html#cb253-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(wrist_data_pslog2_long, <span class="fu">aes</span>(value)) <span class="sc">+</span></span>
-<span id="cb253-11"><a href="normality-tests-and-data-transformations.html#cb253-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">&quot;gray40&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">binwidth =</span> <span class="cf">function</span>(x) {(<span class="fu">max</span>(x) <span class="sc">-</span> <span class="fu">min</span>(x))<span class="sc">/</span><span class="dv">25</span>}) <span class="sc">+</span></span>
-<span id="cb253-12"><a href="normality-tests-and-data-transformations.html#cb253-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> variable, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="sc">+</span></span>
-<span id="cb253-13"><a href="normality-tests-and-data-transformations.html#cb253-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;# of Observations&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Value&quot;</span>)</span></code></pre></div>
-<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-55-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="normality-tests-and-data-transformations.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a figure panel of Q-Q plots</span></span>
-<span id="cb254-2"><a href="normality-tests-and-data-transformations.html#cb254-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggqqplot</span>(wrist_data_pslog2_long, <span class="at">x =</span> <span class="st">&quot;value&quot;</span>, <span class="at">facet.by =</span> <span class="st">&quot;variable&quot;</span>, <span class="at">ggtheme =</span> <span class="fu">theme_bw</span>(), <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
-<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-56-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="normality-tests-and-data-transformations.html#cb254-1" tabindex="-1"></a><span class="co"># Apply psuedo log2 (pslog2) transformation to chemical data</span></span>
+<span id="cb254-2"><a href="normality-tests-and-data-transformations.html#cb254-2" tabindex="-1"></a>wrist_data_pslog2 <span class="ot">&lt;-</span> wrist_data <span class="sc">%&gt;%</span></span>
+<span id="cb254-3"><a href="normality-tests-and-data-transformations.html#cb254-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(DEP<span class="sc">:</span>TOTM, <span class="sc">~</span> <span class="fu">log2</span>(.x <span class="sc">+</span> <span class="dv">1</span>)))</span>
+<span id="cb254-4"><a href="normality-tests-and-data-transformations.html#cb254-4" tabindex="-1"></a></span>
+<span id="cb254-5"><a href="normality-tests-and-data-transformations.html#cb254-5" tabindex="-1"></a><span class="co"># Pivot data longer</span></span>
+<span id="cb254-6"><a href="normality-tests-and-data-transformations.html#cb254-6" tabindex="-1"></a>wrist_data_pslog2_long <span class="ot">&lt;-</span> wrist_data_pslog2 <span class="sc">%&gt;%</span></span>
+<span id="cb254-7"><a href="normality-tests-and-data-transformations.html#cb254-7" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span>S_ID, <span class="at">names_to =</span> <span class="st">&quot;variable&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>)</span>
+<span id="cb254-8"><a href="normality-tests-and-data-transformations.html#cb254-8" tabindex="-1"></a></span>
+<span id="cb254-9"><a href="normality-tests-and-data-transformations.html#cb254-9" tabindex="-1"></a><span class="co"># Make figure panel of histograms</span></span>
+<span id="cb254-10"><a href="normality-tests-and-data-transformations.html#cb254-10" tabindex="-1"></a><span class="fu">ggplot</span>(wrist_data_pslog2_long, <span class="fu">aes</span>(value)) <span class="sc">+</span></span>
+<span id="cb254-11"><a href="normality-tests-and-data-transformations.html#cb254-11" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">&quot;gray40&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">binwidth =</span> <span class="cf">function</span>(x) {(<span class="fu">max</span>(x) <span class="sc">-</span> <span class="fu">min</span>(x))<span class="sc">/</span><span class="dv">25</span>}) <span class="sc">+</span></span>
+<span id="cb254-12"><a href="normality-tests-and-data-transformations.html#cb254-12" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> variable, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="sc">+</span></span>
+<span id="cb254-13"><a href="normality-tests-and-data-transformations.html#cb254-13" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;# of Observations&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Value&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-209-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="normality-tests-and-data-transformations.html#cb255-1" tabindex="-1"></a><span class="co"># Make a figure panel of Q-Q plots</span></span>
+<span id="cb255-2"><a href="normality-tests-and-data-transformations.html#cb255-2" tabindex="-1"></a><span class="fu">ggqqplot</span>(wrist_data_pslog2_long, <span class="at">x =</span> <span class="st">&quot;value&quot;</span>, <span class="at">facet.by =</span> <span class="st">&quot;variable&quot;</span>, <span class="at">ggtheme =</span> <span class="fu">theme_bw</span>(), <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-210-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Both the histograms and the Q-Q plots demonstrate that our log<sub>2</sub> transformed data are more normally distributed than the raw data graphed above. Let’s apply the Shapiro-Wilk test to our log<sub>2</sub> transformed data to determine if the chemical distributions are normally distributed.</p>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="normality-tests-and-data-transformations.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply Shapiro Wilk test</span></span>
-<span id="cb255-2"><a href="normality-tests-and-data-transformations.html#cb255-2" aria-hidden="true" tabindex="-1"></a>shapiro_res_pslog2 <span class="ot">&lt;-</span>  <span class="fu">apply</span>(wrist_data_pslog2 <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>S_ID), <span class="dv">2</span>, shapiro.test)</span>
-<span id="cb255-3"><a href="normality-tests-and-data-transformations.html#cb255-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb255-4"><a href="normality-tests-and-data-transformations.html#cb255-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create results dataframe</span></span>
-<span id="cb255-5"><a href="normality-tests-and-data-transformations.html#cb255-5" aria-hidden="true" tabindex="-1"></a>shapiro_res_pslog2 <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind.data.frame, shapiro_res_pslog2)</span>
-<span id="cb255-6"><a href="normality-tests-and-data-transformations.html#cb255-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb255-7"><a href="normality-tests-and-data-transformations.html#cb255-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean dataframe</span></span>
-<span id="cb255-8"><a href="normality-tests-and-data-transformations.html#cb255-8" aria-hidden="true" tabindex="-1"></a>shapiro_res_pslog2 <span class="ot">&lt;-</span> shapiro_res_pslog2 <span class="sc">%&gt;%</span> </span>
-<span id="cb255-9"><a href="normality-tests-and-data-transformations.html#cb255-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb255-10"><a href="normality-tests-and-data-transformations.html#cb255-10" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Add normality conclusion</span></span>
-<span id="cb255-11"><a href="normality-tests-and-data-transformations.html#cb255-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">normal =</span> <span class="fu">ifelse</span>(p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>, F, T)) <span class="sc">%&gt;%</span></span>
-<span id="cb255-12"><a href="normality-tests-and-data-transformations.html#cb255-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb255-13"><a href="normality-tests-and-data-transformations.html#cb255-13" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Remove columns that do not contain informative data</span></span>
-<span id="cb255-14"><a href="normality-tests-and-data-transformations.html#cb255-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(p.value, normal)) </span>
-<span id="cb255-15"><a href="normality-tests-and-data-transformations.html#cb255-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb255-16"><a href="normality-tests-and-data-transformations.html#cb255-16" aria-hidden="true" tabindex="-1"></a><span class="co"># View cleaned up dataframe</span></span>
-<span id="cb255-17"><a href="normality-tests-and-data-transformations.html#cb255-17" aria-hidden="true" tabindex="-1"></a>shapiro_res_pslog2</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="normality-tests-and-data-transformations.html#cb256-1" tabindex="-1"></a><span class="co"># Apply Shapiro Wilk test</span></span>
+<span id="cb256-2"><a href="normality-tests-and-data-transformations.html#cb256-2" tabindex="-1"></a>shapiro_res_pslog2 <span class="ot">&lt;-</span>  <span class="fu">apply</span>(wrist_data_pslog2 <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>S_ID), <span class="dv">2</span>, shapiro.test)</span>
+<span id="cb256-3"><a href="normality-tests-and-data-transformations.html#cb256-3" tabindex="-1"></a></span>
+<span id="cb256-4"><a href="normality-tests-and-data-transformations.html#cb256-4" tabindex="-1"></a><span class="co"># Create results dataframe</span></span>
+<span id="cb256-5"><a href="normality-tests-and-data-transformations.html#cb256-5" tabindex="-1"></a>shapiro_res_pslog2 <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind.data.frame, shapiro_res_pslog2)</span>
+<span id="cb256-6"><a href="normality-tests-and-data-transformations.html#cb256-6" tabindex="-1"></a></span>
+<span id="cb256-7"><a href="normality-tests-and-data-transformations.html#cb256-7" tabindex="-1"></a><span class="co"># Clean dataframe</span></span>
+<span id="cb256-8"><a href="normality-tests-and-data-transformations.html#cb256-8" tabindex="-1"></a>shapiro_res_pslog2 <span class="ot">&lt;-</span> shapiro_res_pslog2 <span class="sc">%&gt;%</span> </span>
+<span id="cb256-9"><a href="normality-tests-and-data-transformations.html#cb256-9" tabindex="-1"></a>  </span>
+<span id="cb256-10"><a href="normality-tests-and-data-transformations.html#cb256-10" tabindex="-1"></a>  <span class="do">## Add normality conclusion</span></span>
+<span id="cb256-11"><a href="normality-tests-and-data-transformations.html#cb256-11" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">normal =</span> <span class="fu">ifelse</span>(p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>, F, T)) <span class="sc">%&gt;%</span></span>
+<span id="cb256-12"><a href="normality-tests-and-data-transformations.html#cb256-12" tabindex="-1"></a>  </span>
+<span id="cb256-13"><a href="normality-tests-and-data-transformations.html#cb256-13" tabindex="-1"></a>  <span class="do">## Remove columns that do not contain informative data</span></span>
+<span id="cb256-14"><a href="normality-tests-and-data-transformations.html#cb256-14" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(p.value, normal)) </span>
+<span id="cb256-15"><a href="normality-tests-and-data-transformations.html#cb256-15" tabindex="-1"></a></span>
+<span id="cb256-16"><a href="normality-tests-and-data-transformations.html#cb256-16" tabindex="-1"></a><span class="co"># View cleaned up dataframe</span></span>
+<span id="cb256-17"><a href="normality-tests-and-data-transformations.html#cb256-17" tabindex="-1"></a>shapiro_res_pslog2</span></code></pre></div>
 <pre><code>##          p.value normal
 ## Age  0.814336705   TRUE
 ## DEP  0.001335217  FALSE
@@ -669,11 +670,11 @@ With this figure panel, we can see that the chemical data have very noticeable d
 ## DINP 0.883662530   TRUE
 ## TOTM 0.004399442  FALSE</code></pre>
 <p>The results from the Shapiro-Wilk test demonstrate that the the log<sub>2</sub> chemical concentration data are more normally distributed than the raw data. Overall, the p-values, even for the chemicals that are still non-normally distributed, are much higher, and only 2 out of the 8 chemicals are non-normally distributed by the Shapiro-Wilk test. We can also calculate average p-values across all variables for our raw and log<sub>2</sub> transformed data to further demonstrate this point.</p>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="normality-tests-and-data-transformations.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the mean Shapiro-Wilk p-value for the raw chemical data</span></span>
-<span id="cb257-2"><a href="normality-tests-and-data-transformations.html#cb257-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(shapiro_res<span class="sc">$</span>p.value)</span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="normality-tests-and-data-transformations.html#cb258-1" tabindex="-1"></a><span class="co"># Calculate the mean Shapiro-Wilk p-value for the raw chemical data</span></span>
+<span id="cb258-2"><a href="normality-tests-and-data-transformations.html#cb258-2" tabindex="-1"></a><span class="fu">mean</span>(shapiro_res<span class="sc">$</span>p.value)</span></code></pre></div>
 <pre><code>## [1] 0.09048186</code></pre>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="normality-tests-and-data-transformations.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the mean Shapiro-Wilk p-value for the pslog2 transformed chemical data</span></span>
-<span id="cb259-2"><a href="normality-tests-and-data-transformations.html#cb259-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(shapiro_res_pslog2<span class="sc">$</span>p.value)</span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="normality-tests-and-data-transformations.html#cb260-1" tabindex="-1"></a><span class="co"># Calculate the mean Shapiro-Wilk p-value for the pslog2 transformed chemical data</span></span>
+<span id="cb260-2"><a href="normality-tests-and-data-transformations.html#cb260-2" tabindex="-1"></a><span class="fu">mean</span>(shapiro_res_pslog2<span class="sc">$</span>p.value)</span></code></pre></div>
 <pre><code>## [1] 0.4643995</code></pre>
 <p>Therefore, the log<sub>2</sub> chemical data would be most appropriate to use if researchers are wanting to perform parametric statistical testing (and particularly if there is not a non-parametric statistical test for a given experimental design). It is important to note that if you proceed to statistical testing using log<sub>2</sub> or other transformed data, graphs you make of significant results should use the transformed values on the y-axis, and findings should be interpreted in the context of the transformed values.</p>
 <p><br></p>

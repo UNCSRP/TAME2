@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Data Visualizations | TAME 2.0</title>
   <meta name="description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Data Visualizations | TAME 2.0" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Rager Lab" />
 
 
-<meta name="date" content="2024-06-24" />
+<meta name="date" content="2024-10-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,9 +52,10 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.32/datatables.js"></script>
+<script src="libs/datatables-binding-0.33/datatables.js"></script>
 <link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
@@ -66,7 +67,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -102,7 +103,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -115,7 +116,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -405,38 +406,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3>Script Preparations<a href="data-visualizations.html#script-preparations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="cleaning-the-global-environment" class="section level4 hasAnchor">
 <h4>Cleaning the global environment<a href="data-visualizations.html#cleaning-the-global-environment" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="data-visualizations.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="data-visualizations.html#cb181-1" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span></code></pre></div>
 </div>
 <div id="installing-required-r-packages" class="section level4 hasAnchor">
 <h4>Installing required R packages<a href="data-visualizations.html#installing-required-r-packages" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="data-visualizations.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;GGally&quot;</span>))</span>
-<span id="cb181-2"><a href="data-visualizations.html#cb181-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;GGally&quot;</span>);</span>
-<span id="cb181-3"><a href="data-visualizations.html#cb181-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;corrplot&quot;</span>))</span>
-<span id="cb181-4"><a href="data-visualizations.html#cb181-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;corrplot&quot;</span>);</span>
-<span id="cb181-5"><a href="data-visualizations.html#cb181-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;pheatmap&quot;</span>))</span>
-<span id="cb181-6"><a href="data-visualizations.html#cb181-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;pheatmap&quot;</span>);</span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="data-visualizations.html#cb182-1" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;GGally&quot;</span>))</span>
+<span id="cb182-2"><a href="data-visualizations.html#cb182-2" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;GGally&quot;</span>);</span>
+<span id="cb182-3"><a href="data-visualizations.html#cb182-3" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;corrplot&quot;</span>))</span>
+<span id="cb182-4"><a href="data-visualizations.html#cb182-4" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;corrplot&quot;</span>);</span>
+<span id="cb182-5"><a href="data-visualizations.html#cb182-5" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;pheatmap&quot;</span>))</span>
+<span id="cb182-6"><a href="data-visualizations.html#cb182-6" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;pheatmap&quot;</span>);</span></code></pre></div>
 </div>
 <div id="loading-r-packages-required-for-this-session" class="section level4 hasAnchor">
 <h4>Loading R packages required for this session<a href="data-visualizations.html#loading-r-packages-required-for-this-session" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="data-visualizations.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb182-2"><a href="data-visualizations.html#cb182-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
-<span id="cb182-3"><a href="data-visualizations.html#cb182-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span>
-<span id="cb182-4"><a href="data-visualizations.html#cb182-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
-<span id="cb182-5"><a href="data-visualizations.html#cb182-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="data-visualizations.html#cb183-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb183-2"><a href="data-visualizations.html#cb183-2" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb183-3"><a href="data-visualizations.html#cb183-3" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span>
+<span id="cb183-4"><a href="data-visualizations.html#cb183-4" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb183-5"><a href="data-visualizations.html#cb183-5" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span></code></pre></div>
 </div>
 <div id="set-your-working-directory-1" class="section level4 hasAnchor">
 <h4>Set your working directory<a href="data-visualizations.html#set-your-working-directory-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="data-visualizations.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;/filepath to where your input files are&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="data-visualizations.html#cb184-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;/filepath to where your input files are&quot;</span>)</span></code></pre></div>
 </div>
 <div id="importing-example-dataset-1" class="section level4 hasAnchor">
 <h4>Importing example dataset<a href="data-visualizations.html#importing-example-dataset-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Then let’s read in our example dataset. As mentioned in the introduction, this example dataset represents chemical measurements across 12 different biomass burn scenarios representing potential wildfire events. Let’s upload and view these data:</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="data-visualizations.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
-<span id="cb184-2"><a href="data-visualizations.html#cb184-2" aria-hidden="true" tabindex="-1"></a>smoke_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Module3_1_Input/Module3_1_InputData.csv&quot;</span>)</span>
-<span id="cb184-3"><a href="data-visualizations.html#cb184-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb184-4"><a href="data-visualizations.html#cb184-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View the top of the dataset</span></span>
-<span id="cb184-5"><a href="data-visualizations.html#cb184-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(smoke_data) </span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="data-visualizations.html#cb185-1" tabindex="-1"></a><span class="co"># Load the data</span></span>
+<span id="cb185-2"><a href="data-visualizations.html#cb185-2" tabindex="-1"></a>smoke_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Module3_1_Input/Module3_1_InputData.csv&quot;</span>)</span>
+<span id="cb185-3"><a href="data-visualizations.html#cb185-3" tabindex="-1"></a></span>
+<span id="cb185-4"><a href="data-visualizations.html#cb185-4" tabindex="-1"></a><span class="co"># View the top of the dataset</span></span>
+<span id="cb185-5"><a href="data-visualizations.html#cb185-5" tabindex="-1"></a><span class="fu">head</span>(smoke_data) </span></code></pre></div>
 <pre><code>##   Chemical.Category           Chemical     CASRN Eucalyptus_Smoldering
 ## 1         n-Alkanes 2-Methylnonadecane 1560-86-7                  0.06
 ## 2         n-Alkanes 3-Methylnonadecane 6418-45-7                  0.04
@@ -479,10 +480,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We can create a <strong>density plot</strong> to answer the first question. Similar to a histogram, density plots are an effective way to show overall distributions of data and can be useful to compare across various test conditions or other stratifications of the data.</p>
 <p>In this example of a density plot, we’ll visualize the distributions of chemical concentration data on the x axis. A density plot automatically displays where values are concentrated on the y axis. Additionally, we’ll want to have multiple density plots within the same figure for each biomass burn condition.</p>
 <p>Before the data can be visualized, it needs to be converted from a wide to long format. This is because we need to have variable or column names entitled <code>Chemical_Concentration</code> and <code>Biomass_Burn_Condition</code> that can be placed into <code>ggplot()</code>. For review on converting between long and wide formats and using other tidyverse tools, see <strong>TAME 2.0 Module 2.3 Data Manipulation &amp; Reshaping</strong>.</p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="data-visualizations.html#cb186-1" aria-hidden="true" tabindex="-1"></a>longer_smoke_data <span class="ot">=</span> <span class="fu">pivot_longer</span>(smoke_data, <span class="at">cols =</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">13</span>, <span class="at">names_to =</span> <span class="st">&quot;Biomass_Burn_Condition&quot;</span>, </span>
-<span id="cb186-2"><a href="data-visualizations.html#cb186-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">values_to =</span> <span class="st">&quot;Chemical_Concentration&quot;</span>)</span>
-<span id="cb186-3"><a href="data-visualizations.html#cb186-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb186-4"><a href="data-visualizations.html#cb186-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(longer_smoke_data)</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="data-visualizations.html#cb187-1" tabindex="-1"></a>longer_smoke_data <span class="ot">=</span> <span class="fu">pivot_longer</span>(smoke_data, <span class="at">cols =</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">13</span>, <span class="at">names_to =</span> <span class="st">&quot;Biomass_Burn_Condition&quot;</span>, </span>
+<span id="cb187-2"><a href="data-visualizations.html#cb187-2" tabindex="-1"></a>                                 <span class="at">values_to =</span> <span class="st">&quot;Chemical_Concentration&quot;</span>)</span>
+<span id="cb187-3"><a href="data-visualizations.html#cb187-3" tabindex="-1"></a></span>
+<span id="cb187-4"><a href="data-visualizations.html#cb187-4" tabindex="-1"></a><span class="fu">head</span>(longer_smoke_data)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 6
 ##   Chemical.Category Chemical           CASRN     Units    Biomass_Burn_Condition
 ##   &lt;chr&gt;             &lt;chr&gt;              &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;                 
@@ -498,13 +499,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>A data preparation method that is commonly used to convert values into those that can be used to better illustrate overall data trends is <strong>data scaling</strong>. Scaling can be achieved through data transformations or normalization procedures, depending on the specific dataset and goal of analysis/visualization. Scaling is often carried out using data vectors or columns of a dataframe.</p>
 <p>For this example, we will normalize the chemical concentration dataset using a basic scaling and centering procedure using the base R function, <code>scale()</code>. This algorithm results in the normalization of a dataset using the mean value and standard deviation. This scaling step will convert chemical concentration values in our dataset into normalized values across samples, such that each chemical’s concentration distributions are more easily comparable between the different biomass burn conditions.</p>
 <p>For more information on the <code>scale()</code> function, see its associated <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/scale">RDocumentation</a> and helpful tutorial on <a href="https://www.journaldev.com/47818/r-scale-function">Implementing the scale() function in R</a>.</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="data-visualizations.html#cb188-1" aria-hidden="true" tabindex="-1"></a>scaled_longer_smoke_data <span class="ot">=</span> longer_smoke_data <span class="sc">%&gt;%</span></span>
-<span id="cb188-2"><a href="data-visualizations.html#cb188-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># scaling within each chemical</span></span>
-<span id="cb188-3"><a href="data-visualizations.html#cb188-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Chemical) <span class="sc">%&gt;%</span></span>
-<span id="cb188-4"><a href="data-visualizations.html#cb188-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Scaled_Chemical_Concentration =</span> <span class="fu">scale</span>(Chemical_Concentration)) <span class="sc">%&gt;%</span></span>
-<span id="cb188-5"><a href="data-visualizations.html#cb188-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
-<span id="cb188-6"><a href="data-visualizations.html#cb188-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb188-7"><a href="data-visualizations.html#cb188-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(scaled_longer_smoke_data) <span class="co"># see the new scaled values now in the last column (column 7)</span></span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="data-visualizations.html#cb189-1" tabindex="-1"></a>scaled_longer_smoke_data <span class="ot">=</span> longer_smoke_data <span class="sc">%&gt;%</span></span>
+<span id="cb189-2"><a href="data-visualizations.html#cb189-2" tabindex="-1"></a>    <span class="co"># scaling within each chemical</span></span>
+<span id="cb189-3"><a href="data-visualizations.html#cb189-3" tabindex="-1"></a>    <span class="fu">group_by</span>(Chemical) <span class="sc">%&gt;%</span></span>
+<span id="cb189-4"><a href="data-visualizations.html#cb189-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Scaled_Chemical_Concentration =</span> <span class="fu">scale</span>(Chemical_Concentration)) <span class="sc">%&gt;%</span></span>
+<span id="cb189-5"><a href="data-visualizations.html#cb189-5" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
+<span id="cb189-6"><a href="data-visualizations.html#cb189-6" tabindex="-1"></a></span>
+<span id="cb189-7"><a href="data-visualizations.html#cb189-7" tabindex="-1"></a><span class="fu">head</span>(scaled_longer_smoke_data) <span class="co"># see the new scaled values now in the last column (column 7)</span></span></code></pre></div>
 <pre><code>## # A tibble: 6 × 7
 ##   Chemical.Category Chemical           CASRN     Units    Biomass_Burn_Condition
 ##   &lt;chr&gt;             &lt;chr&gt;              &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;                 
@@ -524,9 +525,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="density-plot-visualization" class="section level2 hasAnchor">
 <h2>Density Plot Visualization<a href="data-visualizations.html#density-plot-visualization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The following code can be used to generate a density plot:</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="data-visualizations.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(scaled_longer_smoke_data, <span class="fu">aes</span>(<span class="at">x =</span> Scaled_Chemical_Concentration, <span class="at">color =</span> Biomass_Burn_Condition)) <span class="sc">+</span> </span>
-<span id="cb190-2"><a href="data-visualizations.html#cb190-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>()</span></code></pre></div>
-<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="data-visualizations.html#cb191-1" tabindex="-1"></a><span class="fu">ggplot</span>(scaled_longer_smoke_data, <span class="fu">aes</span>(<span class="at">x =</span> Scaled_Chemical_Concentration, <span class="at">color =</span> Biomass_Burn_Condition)) <span class="sc">+</span> </span>
+<span id="cb191-2"><a href="data-visualizations.html#cb191-2" tabindex="-1"></a>  <span class="fu">geom_density</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-161-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div id="answer-to-environmental-health-question-1-method-i" class="section level3 hasAnchor">
 <h3>Answer to Environmental Health Question 1, Method I<a href="data-visualizations.html#answer-to-environmental-health-question-1-method-i" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="question">
@@ -542,10 +543,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2>Boxplot Visualization<a href="data-visualizations.html#boxplot-visualization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>A <strong>boxplot</strong> can also be used to answer our first environmental health question: <strong>How do the distributions of the chemical concentration data differ based on each biomass burn scenario?</strong>. A boxplot also displays a data’s distribution, but it incorporates a visualization of a five number summary (i.e., minimum, first quartile, median, third quartile, and maximum). Any outliers are displayed as dots.</p>
 <p>For this example, let’s have <code>Scaled_Chemical_Concentration</code> on the x axis and <code>Biomass_Burn_Condition</code> on the y axis. The <code>scaled_longer_smoke_data</code> dataframe is the format we need, so we’ll use that for plotting.</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="data-visualizations.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(scaled_longer_smoke_data, <span class="fu">aes</span>(<span class="at">x =</span> Scaled_Chemical_Concentration, <span class="at">y =</span> Biomass_Burn_Condition, </span>
-<span id="cb191-2"><a href="data-visualizations.html#cb191-2" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">color =</span> Biomass_Burn_Condition)) <span class="sc">+</span> </span>
-<span id="cb191-3"><a href="data-visualizations.html#cb191-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="data-visualizations.html#cb192-1" tabindex="-1"></a><span class="fu">ggplot</span>(scaled_longer_smoke_data, <span class="fu">aes</span>(<span class="at">x =</span> Scaled_Chemical_Concentration, <span class="at">y =</span> Biomass_Burn_Condition, </span>
+<span id="cb192-2"><a href="data-visualizations.html#cb192-2" tabindex="-1"></a>                                     <span class="at">color =</span> Biomass_Burn_Condition)) <span class="sc">+</span> </span>
+<span id="cb192-3"><a href="data-visualizations.html#cb192-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-162-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div id="answer-to-environmental-health-question-1-method-ii" class="section level3 hasAnchor">
 <h3>Answer to Environmental Health Question 1, Method II<a href="data-visualizations.html#answer-to-environmental-health-question-1-method-ii" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="question">
@@ -562,15 +563,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Let’s turn our attention to the second environmental health question: <strong>Are there correlations between biomass burn conditions based on the chemical concentration data?</strong> We’ll use two different correlation visualizations to answer this question using the <em>GGally</em> package.</p>
 <p><em>GGally</em> is a package that serves as an extension of <em>ggplot2</em>, the baseline R plotting system based on the grammar of graphics. GGally is very useful for creating plots that compare groups or features within a dataset, among many other utilities. Here we will demonstrate the <code>ggpairs()</code> function within <em>GGally</em> using the scaled chemistry dataset. This function will produce an image that shows correlation values between biomass burn sample pairs and also illustrates the overall distributions of values in the samples. For more information on <em>GGally</em>, see its associated <a href="https://www.rdocumentation.org/packages/GGally/versions/1.5.0">RDocumentation</a> and <a href="http://www.sthda.com/english/wiki/ggally-r-package-extension-to-ggplot2-for-correlation-matrix-and-survival-plots-r-software-and-data-visualization">example helpful tutorial</a>.</p>
 <p><em>GGally</em> requires a wide dataframe with ids (i.e.,<code>Chemical</code>) as the rows and the variables that will be compared to each other (i.e.,<code>Biomass_Burn_Condition</code>) as the columns. Let’s create that dataframe.</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="data-visualizations.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first selecting the chemical, biomass burn condition, and </span></span>
-<span id="cb192-2"><a href="data-visualizations.html#cb192-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the scaled chemical concentration columns</span></span>
-<span id="cb192-3"><a href="data-visualizations.html#cb192-3" aria-hidden="true" tabindex="-1"></a>wide_scaled_data <span class="ot">=</span> scaled_longer_smoke_data <span class="sc">%&gt;%</span></span>
-<span id="cb192-4"><a href="data-visualizations.html#cb192-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> Chemical, <span class="at">names_from =</span> <span class="st">&quot;Biomass_Burn_Condition&quot;</span>, </span>
-<span id="cb192-5"><a href="data-visualizations.html#cb192-5" aria-hidden="true" tabindex="-1"></a>                               <span class="at">values_from =</span> <span class="st">&quot;Scaled_Chemical_Concentration&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb192-6"><a href="data-visualizations.html#cb192-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># converting the chemical names to row names</span></span>
-<span id="cb192-7"><a href="data-visualizations.html#cb192-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column_to_rownames</span>(<span class="at">var =</span> <span class="st">&quot;Chemical&quot;</span>)</span>
-<span id="cb192-8"><a href="data-visualizations.html#cb192-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb192-9"><a href="data-visualizations.html#cb192-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(wide_scaled_data)</span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="data-visualizations.html#cb193-1" tabindex="-1"></a><span class="co"># first selecting the chemical, biomass burn condition, and </span></span>
+<span id="cb193-2"><a href="data-visualizations.html#cb193-2" tabindex="-1"></a><span class="co"># the scaled chemical concentration columns</span></span>
+<span id="cb193-3"><a href="data-visualizations.html#cb193-3" tabindex="-1"></a>wide_scaled_data <span class="ot">=</span> scaled_longer_smoke_data <span class="sc">%&gt;%</span></span>
+<span id="cb193-4"><a href="data-visualizations.html#cb193-4" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> Chemical, <span class="at">names_from =</span> <span class="st">&quot;Biomass_Burn_Condition&quot;</span>, </span>
+<span id="cb193-5"><a href="data-visualizations.html#cb193-5" tabindex="-1"></a>                               <span class="at">values_from =</span> <span class="st">&quot;Scaled_Chemical_Concentration&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb193-6"><a href="data-visualizations.html#cb193-6" tabindex="-1"></a>    <span class="co"># converting the chemical names to row names</span></span>
+<span id="cb193-7"><a href="data-visualizations.html#cb193-7" tabindex="-1"></a>    <span class="fu">column_to_rownames</span>(<span class="at">var =</span> <span class="st">&quot;Chemical&quot;</span>)</span>
+<span id="cb193-8"><a href="data-visualizations.html#cb193-8" tabindex="-1"></a></span>
+<span id="cb193-9"><a href="data-visualizations.html#cb193-9" tabindex="-1"></a><span class="fu">head</span>(wide_scaled_data)</span></code></pre></div>
 <pre><code>##                    Eucalyptus_Smoldering Eucalyptus_Flaming Peat_Smoldering
 ## 2-Methylnonadecane            -0.3347765         -0.3347765        2.841935
 ## 3-Methylnonadecane            -0.8794448         -0.8794448        1.649829
@@ -600,13 +601,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Eicosane                   -0.3628981      -0.2632960
 ## Heneicosane                -0.3895328      -0.1175398</code></pre>
 <p>By default, <code>ggpairs()</code> displays Pearson’s correlations. To show Spearman’s correlations takes more nuance, but can be done using the code that has been commented out below.</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="data-visualizations.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ggpairs with Pearson&#39;s correlations</span></span>
-<span id="cb194-2"><a href="data-visualizations.html#cb194-2" aria-hidden="true" tabindex="-1"></a>wide_scaled_data <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">as.matrix</span>(wide_scaled_data))</span>
-<span id="cb194-3"><a href="data-visualizations.html#cb194-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(wide_scaled_data)</span></code></pre></div>
-<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-10-1.png" width="1440" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="data-visualizations.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ggpairs with Spearman&#39;s correlations</span></span>
-<span id="cb195-2"><a href="data-visualizations.html#cb195-2" aria-hidden="true" tabindex="-1"></a><span class="co"># pearson_correlations = cor(wide_scaled_data, method = &quot;spearman&quot;)</span></span>
-<span id="cb195-3"><a href="data-visualizations.html#cb195-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ggpairs(wide_scaled_data, upper = list(continuous = wrap(ggally_cor, method = &quot;spearman&quot;)))</span></span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="data-visualizations.html#cb195-1" tabindex="-1"></a><span class="co"># ggpairs with Pearson&#39;s correlations</span></span>
+<span id="cb195-2"><a href="data-visualizations.html#cb195-2" tabindex="-1"></a>wide_scaled_data <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">as.matrix</span>(wide_scaled_data))</span>
+<span id="cb195-3"><a href="data-visualizations.html#cb195-3" tabindex="-1"></a><span class="fu">ggpairs</span>(wide_scaled_data)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-164-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="data-visualizations.html#cb196-1" tabindex="-1"></a><span class="co"># ggpairs with Spearman&#39;s correlations</span></span>
+<span id="cb196-2"><a href="data-visualizations.html#cb196-2" tabindex="-1"></a><span class="co"># pearson_correlations = cor(wide_scaled_data, method = &quot;spearman&quot;)</span></span>
+<span id="cb196-3"><a href="data-visualizations.html#cb196-3" tabindex="-1"></a><span class="co"># ggpairs(wide_scaled_data, upper = list(continuous = wrap(ggally_cor, method = &quot;spearman&quot;)))</span></span></code></pre></div>
 <p>Many of these biomass burn conditions have significant correlations denoted by the asterisks.</p>
 <ul>
 <li>’*’: p value &lt; 0.1</li>
@@ -623,15 +624,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Answer</strong>: There is low correlation between many of the variables (-0.5 &lt; correlation value &lt; 0.5). Eucalyptus flaming and pine flaming are significantly positively correlated along with peat flaming and pine needles flaming (correlation value ~0.7 and p value &lt; 0.001).</p>
 </div>
 <p>We can visualize correlations another way using the other function from <em>GGally</em>, <code>ggcorr()</code>, which visualizes each correlation as a square. Note that this function calculates Pearson’s correlations by default. However, this can be changed using the <code>method</code> parameter shown in the code commented out below.</p>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="data-visualizations.html#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pearson&#39;s correlations</span></span>
-<span id="cb196-2"><a href="data-visualizations.html#cb196-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcorr</span>(wide_scaled_data)</span></code></pre></div>
-<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-11-1.png" width="960" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="data-visualizations.html#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Spearman&#39;s correlations</span></span>
-<span id="cb197-2"><a href="data-visualizations.html#cb197-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ggcorr(wide_scaled_data, method = &quot;spearman&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="data-visualizations.html#cb197-1" tabindex="-1"></a><span class="co"># Pearson&#39;s correlations</span></span>
+<span id="cb197-2"><a href="data-visualizations.html#cb197-2" tabindex="-1"></a><span class="fu">ggcorr</span>(wide_scaled_data)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-165-1.png" width="960" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="data-visualizations.html#cb198-1" tabindex="-1"></a><span class="co"># Spearman&#39;s correlations</span></span>
+<span id="cb198-2"><a href="data-visualizations.html#cb198-2" tabindex="-1"></a><span class="co"># ggcorr(wide_scaled_data, method = &quot;spearman&quot;)</span></span></code></pre></div>
 <p>We’ll visualize correlations between each of the groups using one more figure using the <code>corrplot()</code> function from the <em>corrplot</em> package.</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="data-visualizations.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Need to supply corrplot with a correlation matrix, here, using the &#39;cor&#39; function</span></span>
-<span id="cb198-2"><a href="data-visualizations.html#cb198-2" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="fu">cor</span>(wide_scaled_data))</span></code></pre></div>
-<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="data-visualizations.html#cb199-1" tabindex="-1"></a><span class="co"># Need to supply corrplot with a correlation matrix, here, using the &#39;cor&#39; function</span></span>
+<span id="cb199-2"><a href="data-visualizations.html#cb199-2" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="fu">cor</span>(wide_scaled_data))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-166-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Each of these correlation figures displays the same information, but the one you choose to use is a matter of personal preference. Click on the following resources for additional information on <a href="https://r-charts.com/correlation/ggpairs/">ggpairs()</a> and <a href="https://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html">corrplot()</a>.</p>
 <p><br></p>
 </div>
@@ -642,12 +643,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Heatmaps</strong> are a highly effective method of viewing an entire dataset at once. Heatmaps can appear similar to correlation plots, but typically illustrate other values (e.g., concentrations, expression levels, presence/absence, etc) besides correlation values. They are used to draw patterns between two variables of highest interest (that comprise the x and y axis, though additional bars can be added to display other layers of information). In this instance, we’ll use a heatmap to determine whether there are patterns apparent between chemical categories and biomass burn condition on chemical concentrations.</p>
 <p>For this example, we can plot <code>Biomass_Burn_Condition</code> and <code>Chemical.Category</code> on the axes and fill in the values with <code>Scaled_Chemical_Concentration</code>. When generating heatmaps, scaled values are often used to better distinguish patterns between groups/samples.</p>
 <p>In this example, we also plan to display the median scaled concentration value within the heatmap as an additional layer of helpful information to aid in interpretation. To do so, we’ll need to take the median chemical concentration for each biomass burn condition within each chemical category. However, since we want <code>ggplot()</code> to visualize the median scaled values with the color of the tiles this step was already necessary.</p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="data-visualizations.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We&#39;ll find the median value and add that data to the dataframe as an additional column</span></span>
-<span id="cb199-2"><a href="data-visualizations.html#cb199-2" aria-hidden="true" tabindex="-1"></a>heatmap_df <span class="ot">=</span> scaled_longer_smoke_data <span class="sc">%&gt;%</span></span>
-<span id="cb199-3"><a href="data-visualizations.html#cb199-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Biomass_Burn_Condition, Chemical.Category) <span class="sc">%&gt;%</span></span>
-<span id="cb199-4"><a href="data-visualizations.html#cb199-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Median_Scaled_Concentration =</span> <span class="fu">median</span>(Scaled_Chemical_Concentration))</span>
-<span id="cb199-5"><a href="data-visualizations.html#cb199-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb199-6"><a href="data-visualizations.html#cb199-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(heatmap_df)</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="data-visualizations.html#cb200-1" tabindex="-1"></a><span class="co"># We&#39;ll find the median value and add that data to the dataframe as an additional column</span></span>
+<span id="cb200-2"><a href="data-visualizations.html#cb200-2" tabindex="-1"></a>heatmap_df <span class="ot">=</span> scaled_longer_smoke_data <span class="sc">%&gt;%</span></span>
+<span id="cb200-3"><a href="data-visualizations.html#cb200-3" tabindex="-1"></a>    <span class="fu">group_by</span>(Biomass_Burn_Condition, Chemical.Category) <span class="sc">%&gt;%</span></span>
+<span id="cb200-4"><a href="data-visualizations.html#cb200-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Median_Scaled_Concentration =</span> <span class="fu">median</span>(Scaled_Chemical_Concentration))</span>
+<span id="cb200-5"><a href="data-visualizations.html#cb200-5" tabindex="-1"></a></span>
+<span id="cb200-6"><a href="data-visualizations.html#cb200-6" tabindex="-1"></a><span class="fu">head</span>(heatmap_df)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 8
 ## # Groups:   Biomass_Burn_Condition, Chemical.Category [6]
 ##   Chemical.Category Chemical           CASRN     Units    Biomass_Burn_Condition
@@ -661,11 +662,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## # ℹ 3 more variables: Chemical_Concentration &lt;dbl&gt;,
 ## #   Scaled_Chemical_Concentration &lt;dbl[,1]&gt;, Median_Scaled_Concentration &lt;dbl&gt;</code></pre>
 <p>Now we can plot the data and add the <code>Median_Scaled_Concentration</code> to the figure using <code>geom_text()</code>. Note that specifying the original <code>Scaled_Chemical_Concentration</code> in the <strong>fill</strong> parameter will NOT give you the same heatmap as specifying the median values in <code>ggplot()</code>.</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="data-visualizations.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> heatmap_df, <span class="fu">aes</span>(<span class="at">x =</span> Chemical.Category, <span class="at">y =</span> Biomass_Burn_Condition,</span>
-<span id="cb201-2"><a href="data-visualizations.html#cb201-2" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">fill =</span> Median_Scaled_Concentration)) <span class="sc">+</span> </span>
-<span id="cb201-3"><a href="data-visualizations.html#cb201-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span> <span class="co"># function used to specify a heatmap for ggplot</span></span>
-<span id="cb201-4"><a href="data-visualizations.html#cb201-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(Median_Scaled_Concentration, <span class="dv">2</span>))) <span class="co"># adding concentration values as text, rounding to two values after the decimal</span></span></code></pre></div>
-<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-14-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="data-visualizations.html#cb202-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> heatmap_df, <span class="fu">aes</span>(<span class="at">x =</span> Chemical.Category, <span class="at">y =</span> Biomass_Burn_Condition,</span>
+<span id="cb202-2"><a href="data-visualizations.html#cb202-2" tabindex="-1"></a>                                           <span class="at">fill =</span> Median_Scaled_Concentration)) <span class="sc">+</span> </span>
+<span id="cb202-3"><a href="data-visualizations.html#cb202-3" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span> <span class="co"># function used to specify a heatmap for ggplot</span></span>
+<span id="cb202-4"><a href="data-visualizations.html#cb202-4" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(Median_Scaled_Concentration, <span class="dv">2</span>))) <span class="co"># adding concentration values as text, rounding to two values after the decimal</span></span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-168-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <div id="answer-to-environmental-health-question-3-1" class="section level3 hasAnchor">
 <h3>Answer to Environmental Health Question 3<a href="data-visualizations.html#answer-to-environmental-health-question-3-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="question">
@@ -675,17 +676,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Answer</strong>: Peat flaming has the highest concentrations of inorganics and ions. Eucalyptus smoldering has the highest concentrations of levoglucosans. Pine smoldering has the highest concentrations of methoxyphenols. Peat smoldering has the highest concentrations of n-alkanes. Pine needles smoldering has highest concentrations of PAHs.</p>
 </div>
 <p>This same heatmap can be achieved another way using the <code>pheatmap()</code> function from the <em>pheatmap</em> package. Using this function requires us to use a wide dataset, which we need to create. It will contain <code>Chemical.Category</code>, <code>Biomass_Burn_Condition</code> and <code>Scaled_Chemical_Concentration</code>.</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="data-visualizations.html#cb202-1" aria-hidden="true" tabindex="-1"></a>heatmap_df2 <span class="ot">=</span> scaled_longer_smoke_data <span class="sc">%&gt;%</span></span>
-<span id="cb202-2"><a href="data-visualizations.html#cb202-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Biomass_Burn_Condition, Chemical.Category) <span class="sc">%&gt;%</span></span>
-<span id="cb202-3"><a href="data-visualizations.html#cb202-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># using the summarize function instead of mutate function as was done previously since we only need the median values now</span></span>
-<span id="cb202-4"><a href="data-visualizations.html#cb202-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">Median_Scaled_Concentration =</span> <span class="fu">median</span>(Scaled_Chemical_Concentration)) <span class="sc">%&gt;%</span></span>
-<span id="cb202-5"><a href="data-visualizations.html#cb202-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># transforming the data to a wide format</span></span>
-<span id="cb202-6"><a href="data-visualizations.html#cb202-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> Biomass_Burn_Condition, <span class="at">names_from =</span> <span class="st">&quot;Chemical.Category&quot;</span>, </span>
-<span id="cb202-7"><a href="data-visualizations.html#cb202-7" aria-hidden="true" tabindex="-1"></a>                               <span class="at">values_from =</span> <span class="st">&quot;Median_Scaled_Concentration&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb202-8"><a href="data-visualizations.html#cb202-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># converting the chemical names to row names</span></span>
-<span id="cb202-9"><a href="data-visualizations.html#cb202-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column_to_rownames</span>(<span class="at">var =</span> <span class="st">&quot;Biomass_Burn_Condition&quot;</span>)</span>
-<span id="cb202-10"><a href="data-visualizations.html#cb202-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb202-11"><a href="data-visualizations.html#cb202-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(heatmap_df2)</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="data-visualizations.html#cb203-1" tabindex="-1"></a>heatmap_df2 <span class="ot">=</span> scaled_longer_smoke_data <span class="sc">%&gt;%</span></span>
+<span id="cb203-2"><a href="data-visualizations.html#cb203-2" tabindex="-1"></a>    <span class="fu">group_by</span>(Biomass_Burn_Condition, Chemical.Category) <span class="sc">%&gt;%</span></span>
+<span id="cb203-3"><a href="data-visualizations.html#cb203-3" tabindex="-1"></a>    <span class="co"># using the summarize function instead of mutate function as was done previously since we only need the median values now</span></span>
+<span id="cb203-4"><a href="data-visualizations.html#cb203-4" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">Median_Scaled_Concentration =</span> <span class="fu">median</span>(Scaled_Chemical_Concentration)) <span class="sc">%&gt;%</span></span>
+<span id="cb203-5"><a href="data-visualizations.html#cb203-5" tabindex="-1"></a>    <span class="co"># transforming the data to a wide format</span></span>
+<span id="cb203-6"><a href="data-visualizations.html#cb203-6" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> Biomass_Burn_Condition, <span class="at">names_from =</span> <span class="st">&quot;Chemical.Category&quot;</span>, </span>
+<span id="cb203-7"><a href="data-visualizations.html#cb203-7" tabindex="-1"></a>                               <span class="at">values_from =</span> <span class="st">&quot;Median_Scaled_Concentration&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb203-8"><a href="data-visualizations.html#cb203-8" tabindex="-1"></a>    <span class="co"># converting the chemical names to row names</span></span>
+<span id="cb203-9"><a href="data-visualizations.html#cb203-9" tabindex="-1"></a>    <span class="fu">column_to_rownames</span>(<span class="at">var =</span> <span class="st">&quot;Biomass_Burn_Condition&quot;</span>)</span>
+<span id="cb203-10"><a href="data-visualizations.html#cb203-10" tabindex="-1"></a></span>
+<span id="cb203-11"><a href="data-visualizations.html#cb203-11" tabindex="-1"></a><span class="fu">head</span>(heatmap_df2)</span></code></pre></div>
 <pre><code>##                        Inorganics        Ions Levoglucosan Methoxyphenols
 ## Eucalyptus_Flaming     0.05405359  0.05273246    0.4208870    -0.44781893
 ## Eucalyptus_Smoldering -0.68595076 -0.80160192    1.7772753    -0.06449444
@@ -701,12 +702,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Pine_Flaming           1.7825403 -0.3347765
 ## Pine_Needles_Flaming  -0.4179505 -0.3850613</code></pre>
 <p>Now let’s generate the same heatmap this time using the <code>pheatmap()</code> function:</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="data-visualizations.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pheatmap</span>(heatmap_df2, </span>
-<span id="cb204-2"><a href="data-visualizations.html#cb204-2" aria-hidden="true" tabindex="-1"></a>        <span class="co"># removing the clustering option from both rows and columns</span></span>
-<span id="cb204-3"><a href="data-visualizations.html#cb204-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_rows =</span> <span class="cn">FALSE</span>, <span class="at">cluster_cols =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb204-4"><a href="data-visualizations.html#cb204-4" aria-hidden="true" tabindex="-1"></a>        <span class="co"># adding the values for each cell, making those values black, and changing the font size</span></span>
-<span id="cb204-5"><a href="data-visualizations.html#cb204-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">display_numbers =</span> <span class="cn">TRUE</span>, <span class="at">number_color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">fontsize =</span> <span class="dv">12</span>) </span></code></pre></div>
-<p><img src="03-Chapter3_files/figure-html/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="data-visualizations.html#cb205-1" tabindex="-1"></a><span class="fu">pheatmap</span>(heatmap_df2, </span>
+<span id="cb205-2"><a href="data-visualizations.html#cb205-2" tabindex="-1"></a>        <span class="co"># removing the clustering option from both rows and columns</span></span>
+<span id="cb205-3"><a href="data-visualizations.html#cb205-3" tabindex="-1"></a>        <span class="at">cluster_rows =</span> <span class="cn">FALSE</span>, <span class="at">cluster_cols =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb205-4"><a href="data-visualizations.html#cb205-4" tabindex="-1"></a>        <span class="co"># adding the values for each cell, making those values black, and changing the font size</span></span>
+<span id="cb205-5"><a href="data-visualizations.html#cb205-5" tabindex="-1"></a>        <span class="at">display_numbers =</span> <span class="cn">TRUE</span>, <span class="at">number_color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">fontsize =</span> <span class="dv">12</span>) </span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-170-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Notice that the <code>pheatmap()</code> function does not include axes or legend titles as with <code>ggplot()</code>, however those can be added to the figure after exporting from R in MS Powerpoint or Adobe. Additional parameters, including <code>cluster_rows</code>, for the <code>pheatmap()</code> function are discussed further in <strong>TAME 2.0 Module 5.4 Unsupervised Machine Learning</strong>. For basic heatmaps like the ones shown here, <code>ggplot()</code> or <code>pheatmap()</code> can both be used however, both have their pros and cons. For example, <code>ggplot()</code> figures tend to be more customizable and easily combined with other figures, while <code>pheatmap()</code> has additional parameters built into the function that can make plotting certain features advantageous like clustering.</p>
 <p><br></p>
 </div>

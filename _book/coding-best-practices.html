@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Coding “Best” Practices | TAME 2.0</title>
   <meta name="description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Coding “Best” Practices | TAME 2.0" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Rager Lab" />
 
 
-<meta name="date" content="2024-06-24" />
+<meta name="date" content="2024-10-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,9 +52,10 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.32/datatables.js"></script>
+<script src="libs/datatables-binding-0.33/datatables.js"></script>
 <link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
@@ -66,7 +67,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -102,7 +103,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -115,7 +116,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -404,17 +405,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Description - Provides a more detailed description of the purpose of the script and any notes or special considerations for this particular script.</li>
 </ul>
 <p>In R, it is common to include multiple <code>#</code>, the comment operator, or a <code>#</code> followed by another special character, to start and end a block of coding annotation or the script header. An example of this in an .R file is shown below:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="coding-best-practices.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="do">########################################################################</span></span>
-<span id="cb36-2"><a href="coding-best-practices.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="do">########################################################################</span></span>
-<span id="cb36-3"><a href="coding-best-practices.html#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="do">### Script Longer Title</span></span>
-<span id="cb36-4"><a href="coding-best-practices.html#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="do">### </span></span>
-<span id="cb36-5"><a href="coding-best-practices.html#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="do">### Description of what this script does!</span></span>
-<span id="cb36-6"><a href="coding-best-practices.html#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="do">### Also can include special notes or anything else here.</span></span>
-<span id="cb36-7"><a href="coding-best-practices.html#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="do">###</span></span>
-<span id="cb36-8"><a href="coding-best-practices.html#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="do">### Created by: Kyle Roell and Julia Rager</span></span>
-<span id="cb36-9"><a href="coding-best-practices.html#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="do">### Last updated: 01 May 2023</span></span>
-<span id="cb36-10"><a href="coding-best-practices.html#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="do">########################################################################</span></span>
-<span id="cb36-11"><a href="coding-best-practices.html#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="do">########################################################################</span></span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="coding-best-practices.html#cb37-1" tabindex="-1"></a><span class="do">########################################################################</span></span>
+<span id="cb37-2"><a href="coding-best-practices.html#cb37-2" tabindex="-1"></a><span class="do">########################################################################</span></span>
+<span id="cb37-3"><a href="coding-best-practices.html#cb37-3" tabindex="-1"></a><span class="do">### Script Longer Title</span></span>
+<span id="cb37-4"><a href="coding-best-practices.html#cb37-4" tabindex="-1"></a><span class="do">### </span></span>
+<span id="cb37-5"><a href="coding-best-practices.html#cb37-5" tabindex="-1"></a><span class="do">### Description of what this script does!</span></span>
+<span id="cb37-6"><a href="coding-best-practices.html#cb37-6" tabindex="-1"></a><span class="do">### Also can include special notes or anything else here.</span></span>
+<span id="cb37-7"><a href="coding-best-practices.html#cb37-7" tabindex="-1"></a><span class="do">###</span></span>
+<span id="cb37-8"><a href="coding-best-practices.html#cb37-8" tabindex="-1"></a><span class="do">### Created by: Kyle Roell and Julia Rager</span></span>
+<span id="cb37-9"><a href="coding-best-practices.html#cb37-9" tabindex="-1"></a><span class="do">### Last updated: 01 May 2023</span></span>
+<span id="cb37-10"><a href="coding-best-practices.html#cb37-10" tabindex="-1"></a><span class="do">########################################################################</span></span>
+<span id="cb37-11"><a href="coding-best-practices.html#cb37-11" tabindex="-1"></a><span class="do">########################################################################</span></span></code></pre></div>
 <p>This block of comment operators is common in .R but not .Rmd files because .Rmd files have their own specific type of header, known as the <a href="https://zsmith27.github.io/rmarkdown_crash-course/lesson-4-yaml-headers.html">YAML</a>, which contains the title, author, date, and formatting outputs for the .Rmd file:</p>
 <p><img src="Module2_2_Input/Image2.png" width="300px" style="display: block; margin: auto;" /></p>
 <p>We will now review how annotations within the script itself can make a huge difference in understanding the code within.</p>
@@ -426,28 +427,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="general-annotation-style" class="section level4 hasAnchor">
 <h4>General annotation style<a href="coding-best-practices.html#general-annotation-style" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>In general, annotations will be short sentences that describe what your code does or why you are executing that specific code. This can be helpful when you are defining a covariate a specific way, performing a specific analytical technique, or just generally explaining why you are doing what you’re doing.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="coding-best-practices.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Performing logistic regression to assess association between xyz and abc</span></span>
-<span id="cb37-2"><a href="coding-best-practices.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Regression confounders: V1, V2, V3 ...</span></span>
-<span id="cb37-3"><a href="coding-best-practices.html#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-4"><a href="coding-best-practices.html#cb37-4" aria-hidden="true" tabindex="-1"></a>xyz.regression.output <span class="ot">=</span> <span class="fu">glm</span>(xyz <span class="sc">~</span> abc <span class="sc">+</span> V1 <span class="sc">+</span> V2 <span class="sc">+</span> V3, <span class="at">family=</span><span class="fu">binomial</span>(), <span class="at">data=</span>example.data)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="coding-best-practices.html#cb38-1" tabindex="-1"></a><span class="co"># Performing logistic regression to assess association between xyz and abc</span></span>
+<span id="cb38-2"><a href="coding-best-practices.html#cb38-2" tabindex="-1"></a><span class="co"># Regression confounders: V1, V2, V3 ...</span></span>
+<span id="cb38-3"><a href="coding-best-practices.html#cb38-3" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="coding-best-practices.html#cb38-4" tabindex="-1"></a>xyz.regression.output <span class="ot">=</span> <span class="fu">glm</span>(xyz <span class="sc">~</span> abc <span class="sc">+</span> V1 <span class="sc">+</span> V2 <span class="sc">+</span> V3, <span class="at">family=</span><span class="fu">binomial</span>(), <span class="at">data=</span>example.data)</span></code></pre></div>
 </div>
 <div id="mid-script-headings" class="section level4 hasAnchor">
 <h4>Mid-script headings<a href="coding-best-practices.html#mid-script-headings" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Another common approach to annotations is to use mid-script type headings to separate out the script into various sections. For example, you might want to create distinct sections for “Loading Packages, Data, and Setup”, “Covariate Definition”, “Correlation Analysis”, “Regression Analysis”, etc. This can help you, and others, reading your script, to navigate the script more easily. It also can be more visually pleasing to see the script split up into multiple sections as opposed to one giant chunk of code interspersed with comments. Similar to above, the following example is specific to .R files. For .Rmd files, sub headers can be created by increasing the number of <code>#</code> before the header.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="coding-best-practices.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="do">###########################################################################</span></span>
-<span id="cb38-2"><a href="coding-best-practices.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="do">###########################################################################</span></span>
-<span id="cb38-3"><a href="coding-best-practices.html#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="do">###</span></span>
-<span id="cb38-4"><a href="coding-best-practices.html#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="do">### Regression Analyses</span></span>
-<span id="cb38-5"><a href="coding-best-practices.html#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="do">###</span></span>
-<span id="cb38-6"><a href="coding-best-practices.html#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="do">### You can even add some descriptions or notes here about this section!</span></span>
-<span id="cb38-7"><a href="coding-best-practices.html#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="do">###</span></span>
-<span id="cb38-8"><a href="coding-best-practices.html#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="do">###########################################################################</span></span>
-<span id="cb38-9"><a href="coding-best-practices.html#cb38-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-10"><a href="coding-best-practices.html#cb38-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-11"><a href="coding-best-practices.html#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Performing logistic regression to assess association between xyz and abc</span></span>
-<span id="cb38-12"><a href="coding-best-practices.html#cb38-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Regression confounders: V1, V2, V3 ...</span></span>
-<span id="cb38-13"><a href="coding-best-practices.html#cb38-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-14"><a href="coding-best-practices.html#cb38-14" aria-hidden="true" tabindex="-1"></a>xyz.regression.output <span class="ot">=</span> <span class="fu">glm</span>(xyz <span class="sc">~</span> abc <span class="sc">+</span> V1 <span class="sc">+</span> V2 <span class="sc">+</span> V3, <span class="at">family=</span><span class="fu">binomial</span>(), <span class="at">data=</span>example.data)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="coding-best-practices.html#cb39-1" tabindex="-1"></a><span class="do">###########################################################################</span></span>
+<span id="cb39-2"><a href="coding-best-practices.html#cb39-2" tabindex="-1"></a><span class="do">###########################################################################</span></span>
+<span id="cb39-3"><a href="coding-best-practices.html#cb39-3" tabindex="-1"></a><span class="do">###</span></span>
+<span id="cb39-4"><a href="coding-best-practices.html#cb39-4" tabindex="-1"></a><span class="do">### Regression Analyses</span></span>
+<span id="cb39-5"><a href="coding-best-practices.html#cb39-5" tabindex="-1"></a><span class="do">###</span></span>
+<span id="cb39-6"><a href="coding-best-practices.html#cb39-6" tabindex="-1"></a><span class="do">### You can even add some descriptions or notes here about this section!</span></span>
+<span id="cb39-7"><a href="coding-best-practices.html#cb39-7" tabindex="-1"></a><span class="do">###</span></span>
+<span id="cb39-8"><a href="coding-best-practices.html#cb39-8" tabindex="-1"></a><span class="do">###########################################################################</span></span>
+<span id="cb39-9"><a href="coding-best-practices.html#cb39-9" tabindex="-1"></a></span>
+<span id="cb39-10"><a href="coding-best-practices.html#cb39-10" tabindex="-1"></a></span>
+<span id="cb39-11"><a href="coding-best-practices.html#cb39-11" tabindex="-1"></a><span class="co"># Performing logistic regression to assess association between xyz and abc</span></span>
+<span id="cb39-12"><a href="coding-best-practices.html#cb39-12" tabindex="-1"></a><span class="co"># Regression confounders: V1, V2, V3 ...</span></span>
+<span id="cb39-13"><a href="coding-best-practices.html#cb39-13" tabindex="-1"></a></span>
+<span id="cb39-14"><a href="coding-best-practices.html#cb39-14" tabindex="-1"></a>xyz.regression.output <span class="ot">=</span> <span class="fu">glm</span>(xyz <span class="sc">~</span> abc <span class="sc">+</span> V1 <span class="sc">+</span> V2 <span class="sc">+</span> V3, <span class="at">family=</span><span class="fu">binomial</span>(), <span class="at">data=</span>example.data)</span></code></pre></div>
 <p><b>General tips for annotations:</b></p>
 <ul>
 <li>Make comments that are useful and meaningful</li>
@@ -460,9 +461,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="quick-short-comments-and-annotations" class="section level4 hasAnchor">
 <h4>Quick, short comments and annotations<a href="coding-best-practices.html#quick-short-comments-and-annotations" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>While it is important to provide descriptive annotations, not every one needs to be a sentence or longer. As stated previously, it is not necessary to comment every single line. Here is an example of very brief commenting:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="coding-best-practices.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading necessary packages</span></span>
-<span id="cb39-2"><a href="coding-best-practices.html#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-3"><a href="coding-best-practices.html#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)  <span class="co"># Plotting package</span></span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="coding-best-practices.html#cb40-1" tabindex="-1"></a><span class="co"># Loading necessary packages</span></span>
+<span id="cb40-2"><a href="coding-best-practices.html#cb40-2" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="coding-best-practices.html#cb40-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)  <span class="co"># Plotting package</span></span></code></pre></div>
 <p>In the example above, we can see that these short comments clearly convey what the script does – load the necessary package and indicate what the package is needed for. Short, one line annotations can also be placed after lines to clarify that specific line or within the larger mid-script headings to split up these larger sections of code.</p>
 </div>
 </div>
@@ -470,10 +471,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="coding-style" class="section level2 hasAnchor">
 <h2>Coding Style<a href="coding-best-practices.html#coding-style" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Coding style is often a contentious topic! There are MANY styles of coding, and no two coders have the same exact style, even if they are following the same reference. Here, we will provide some guides to coding style and go over some of the basic, general tips for making your code readable and efficient. Here is an example showing how you can use spacing to align variable assignment:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="coding-best-practices.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example of using spacing for alignment of variable assignment</span></span>
-<span id="cb40-2"><a href="coding-best-practices.html#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-3"><a href="coding-best-practices.html#cb40-3" aria-hidden="true" tabindex="-1"></a>Longer_variable_name_x <span class="ot">=</span> <span class="dv">1</span></span>
-<span id="cb40-4"><a href="coding-best-practices.html#cb40-4" aria-hidden="true" tabindex="-1"></a>Short_name_y           <span class="ot">=</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="coding-best-practices.html#cb41-1" tabindex="-1"></a><span class="co"># Example of using spacing for alignment of variable assignment</span></span>
+<span id="cb41-2"><a href="coding-best-practices.html#cb41-2" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="coding-best-practices.html#cb41-3" tabindex="-1"></a>Longer_variable_name_x <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb41-4"><a href="coding-best-practices.html#cb41-4" tabindex="-1"></a>Short_name_y           <span class="ot">=</span> <span class="dv">2</span></span></code></pre></div>
 <p>Note that guides will suggest you use <code>&lt;-</code> as the assignment operator. However, for most situations, <code>&lt;-</code> and <code>=</code> will do the same thing.</p>
 <p>For spacing around certain symbols and operators:</p>
 <ul>
@@ -481,15 +482,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Include a space on either side of symbols such as <code>&lt;</code></li>
 <li>The first (opening) curly brace should not be on its own line, but the second (closing) should</li>
 </ul>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="coding-best-practices.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example of poor style</span></span>
-<span id="cb41-2"><a href="coding-best-practices.html#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-3"><a href="coding-best-practices.html#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(Longer_variable_name_x <span class="sc">&lt;</span>Short_name_y) {Short_name_y <span class="ot">=</span> <span class="dv">0</span>}</span>
-<span id="cb41-4"><a href="coding-best-practices.html#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-5"><a href="coding-best-practices.html#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Example of better style</span></span>
-<span id="cb41-6"><a href="coding-best-practices.html#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-7"><a href="coding-best-practices.html#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (Longer_variable_name_x <span class="sc">&lt;</span> Short_name_y) {</span>
-<span id="cb41-8"><a href="coding-best-practices.html#cb41-8" aria-hidden="true" tabindex="-1"></a>  Short_name_y <span class="ot">=</span> <span class="dv">0</span></span>
-<span id="cb41-9"><a href="coding-best-practices.html#cb41-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="coding-best-practices.html#cb42-1" tabindex="-1"></a><span class="co"># Example of poor style</span></span>
+<span id="cb42-2"><a href="coding-best-practices.html#cb42-2" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="coding-best-practices.html#cb42-3" tabindex="-1"></a><span class="cf">if</span>(Longer_variable_name_x <span class="sc">&lt;</span>Short_name_y) {Short_name_y <span class="ot">=</span> <span class="dv">0</span>}</span>
+<span id="cb42-4"><a href="coding-best-practices.html#cb42-4" tabindex="-1"></a></span>
+<span id="cb42-5"><a href="coding-best-practices.html#cb42-5" tabindex="-1"></a><span class="co"># Example of better style</span></span>
+<span id="cb42-6"><a href="coding-best-practices.html#cb42-6" tabindex="-1"></a></span>
+<span id="cb42-7"><a href="coding-best-practices.html#cb42-7" tabindex="-1"></a><span class="cf">if</span> (Longer_variable_name_x <span class="sc">&lt;</span> Short_name_y) {</span>
+<span id="cb42-8"><a href="coding-best-practices.html#cb42-8" tabindex="-1"></a>  Short_name_y <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb42-9"><a href="coding-best-practices.html#cb42-9" tabindex="-1"></a>}</span></code></pre></div>
 <p><strong>Summary of general tips for coding style:</strong></p>
 <ul>
 <li>Variable names

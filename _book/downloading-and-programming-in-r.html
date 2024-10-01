@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Downloading and Programming in R | TAME 2.0</title>
   <meta name="description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Downloading and Programming in R | TAME 2.0" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Rager Lab" />
 
 
-<meta name="date" content="2024-06-24" />
+<meta name="date" content="2024-10-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,9 +52,10 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.32/datatables.js"></script>
+<script src="libs/datatables-binding-0.33/datatables.js"></script>
 <link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
@@ -66,7 +67,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -102,7 +103,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -115,7 +116,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -429,11 +430,11 @@ often written by R users and submitted to the <a href="https://cran.r-project.or
 <div id="downloadinginstalling-r-packages" class="section level3 hasAnchor">
 <h3>Downloading/Installing R Packages<a href="downloading-and-programming-in-r.html#downloadinginstalling-r-packages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>R packages often do not need to be downloaded from a website. Instead, you can install packages and load them through running script in R. Note that you only need to install packages one time, but packages must be loaded each time you start a new R session.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="downloading-and-programming-in-r.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install the package</span></span>
-<span id="cb1-2"><a href="downloading-and-programming-in-r.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(“tidyverse”)</span>
-<span id="cb1-3"><a href="downloading-and-programming-in-r.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="downloading-and-programming-in-r.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the package for use</span></span>
-<span id="cb1-5"><a href="downloading-and-programming-in-r.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="downloading-and-programming-in-r.html#cb1-1" tabindex="-1"></a><span class="co"># Install the package</span></span>
+<span id="cb1-2"><a href="downloading-and-programming-in-r.html#cb1-2" tabindex="-1"></a><span class="fu">install.packages</span>(“tidyverse”)</span>
+<span id="cb1-3"><a href="downloading-and-programming-in-r.html#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="downloading-and-programming-in-r.html#cb1-4" tabindex="-1"></a><span class="co"># Load the package for use</span></span>
+<span id="cb1-5"><a href="downloading-and-programming-in-r.html#cb1-5" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p>Many packages also exist as part of the baseline configuration of an R working environment, and do not require manual loading each time you launch R. These include the following packages:</p>
 <ul>
 <li>datasets</li>
@@ -443,10 +444,11 @@ often written by R users and submitted to the <a href="https://cran.r-project.or
 <li>utils</li>
 </ul>
 <p>You can learn more about a function by typing one question mark before the name of the function, which will bring up documentation in the Help tab of the Viewer window. Importantly, this documentation includes a description of the different arguments that can be passed to the function and examples for how to use the function.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="downloading-and-programming-in-r.html#cb2-1" aria-hidden="true" tabindex="-1"></a>?install.packages</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="downloading-and-programming-in-r.html#cb2-1" tabindex="-1"></a>?install.packages</span></code></pre></div>
+<pre><code>## starting httpd help server ... done</code></pre>
 <p><img src="Module2_1_Input/Image3.png" width="400px" style="display: block; margin: auto;" /></p>
 <p>You can learn more about a package by typing two question marks before the name of the package. This will bring up vingettes and help pages associated with that package.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="downloading-and-programming-in-r.html#cb3-1" aria-hidden="true" tabindex="-1"></a>??tidyverse</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="downloading-and-programming-in-r.html#cb4-1" tabindex="-1"></a>??tidyverse</span></code></pre></div>
 <p><img src="Module2_1_Input/Image4.png" width="400px" style="display: block; margin: auto;" /></p>
 <p><br></p>
 </div>
@@ -472,7 +474,7 @@ often written by R users and submitted to the <a href="https://cran.r-project.or
 <li><strong>Data frames:</strong> similar to a matrix but can contain different data types and additional attributes such as row names (and is one of the most common data structures in environmental health research). Tibbles are a stricter type of data frame implemented in the <em>tidyverse</em> package.</li>
 <li><strong>Lists:</strong> a special type of vector that acts as a container – other data structures can be stored within the list, and lists can contain other lists. Lists can contain elements that are different data structures.</li>
 </ul>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-8"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-54"></span>
 <img src="Module2_1_Input/Image5.png" alt="Created with *BioRender.com*" width="1152" />
 <p class="caption">
 Figure 1: Created with <em>BioRender.com</em>
@@ -483,25 +485,25 @@ Figure 1: Created with <em>BioRender.com</em>
 <h3>Writing Script<a href="downloading-and-programming-in-r.html#writing-script" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>R code is written line by line. It may take just one line or many lines of code for one step to be executed, depending on the number of arguments to the function you are using. R code is executed (run) by selecting the line(s) of code to run and pressing return/enter (or a keyboard shortcut), or by clicking “Run” in the upper right corner of the script.</p>
 <p>A very simple example of running code is as follows:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="downloading-and-programming-in-r.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">+</span> <span class="dv">4</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="downloading-and-programming-in-r.html#cb5-1" tabindex="-1"></a><span class="dv">3</span> <span class="sc">+</span> <span class="dv">4</span></span></code></pre></div>
 <pre><code>## [1] 7</code></pre>
 <p>We can see that when we ran our code, the answer was returned. But what if we want to store that answer? We can assign that number to a variable named <code>x</code> using the assignment operator <code>&lt;-</code>:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="downloading-and-programming-in-r.html#cb6-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">4</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="downloading-and-programming-in-r.html#cb7-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">4</span></span></code></pre></div>
 <p>Then, if we run a line of code with our variable, we will get that value:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="downloading-and-programming-in-r.html#cb7-1" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="downloading-and-programming-in-r.html#cb8-1" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] 7</code></pre>
 <p>The assignment operator can also be used to assign values to any of the data structures discussed above, such as vectors and data frames, as shown here:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="downloading-and-programming-in-r.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a vector of values called my_values</span></span>
-<span id="cb9-2"><a href="downloading-and-programming-in-r.html#cb9-2" aria-hidden="true" tabindex="-1"></a>my_values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">3</span>, <span class="dv">8</span>, <span class="dv">9</span>)</span>
-<span id="cb9-3"><a href="downloading-and-programming-in-r.html#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="downloading-and-programming-in-r.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Viewing the vector</span></span>
-<span id="cb9-5"><a href="downloading-and-programming-in-r.html#cb9-5" aria-hidden="true" tabindex="-1"></a>my_values</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="downloading-and-programming-in-r.html#cb10-1" tabindex="-1"></a><span class="co"># Creating a vector of values called my_values</span></span>
+<span id="cb10-2"><a href="downloading-and-programming-in-r.html#cb10-2" tabindex="-1"></a>my_values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">3</span>, <span class="dv">8</span>, <span class="dv">9</span>)</span>
+<span id="cb10-3"><a href="downloading-and-programming-in-r.html#cb10-3" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="downloading-and-programming-in-r.html#cb10-4" tabindex="-1"></a><span class="co"># Viewing the vector</span></span>
+<span id="cb10-5"><a href="downloading-and-programming-in-r.html#cb10-5" tabindex="-1"></a>my_values</span></code></pre></div>
 <pre><code>## [1] 7 3 8 9</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="downloading-and-programming-in-r.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a data frame of values corresponding to colors</span></span>
-<span id="cb11-2"><a href="downloading-and-programming-in-r.html#cb11-2" aria-hidden="true" tabindex="-1"></a>my_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">values =</span> my_values, <span class="at">color =</span> <span class="fu">c</span>(<span class="st">&quot;Blue&quot;</span>, <span class="st">&quot;Red&quot;</span>, <span class="st">&quot;Yellow&quot;</span>, <span class="st">&quot;Purple&quot;</span>))</span>
-<span id="cb11-3"><a href="downloading-and-programming-in-r.html#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="downloading-and-programming-in-r.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Viewing the data frame</span></span>
-<span id="cb11-5"><a href="downloading-and-programming-in-r.html#cb11-5" aria-hidden="true" tabindex="-1"></a>my_df</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="downloading-and-programming-in-r.html#cb12-1" tabindex="-1"></a><span class="co"># Creating a data frame of values corresponding to colors</span></span>
+<span id="cb12-2"><a href="downloading-and-programming-in-r.html#cb12-2" tabindex="-1"></a>my_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">values =</span> my_values, <span class="at">color =</span> <span class="fu">c</span>(<span class="st">&quot;Blue&quot;</span>, <span class="st">&quot;Red&quot;</span>, <span class="st">&quot;Yellow&quot;</span>, <span class="st">&quot;Purple&quot;</span>))</span>
+<span id="cb12-3"><a href="downloading-and-programming-in-r.html#cb12-3" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="downloading-and-programming-in-r.html#cb12-4" tabindex="-1"></a><span class="co"># Viewing the data frame</span></span>
+<span id="cb12-5"><a href="downloading-and-programming-in-r.html#cb12-5" tabindex="-1"></a>my_df</span></code></pre></div>
 <pre><code>##   values  color
 ## 1      7   Blue
 ## 2      3    Red
@@ -512,25 +514,25 @@ Figure 1: Created with <em>BioRender.com</em>
 <h3>Comments<a href="downloading-and-programming-in-r.html#comments" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>You may have noticed in the code chunks above that there were <code>#</code> followed by phrases describing the code. R allows for scripts to contain non-code elements, called comments, that will not be run or interpreted. Comments are useful to help make code more interpretable for others or to add reminders of what and why parts of code may have been written.</p>
 <p>To make a comment, simply use a <code>#</code> followed by the comment. A <code>#</code> only comments out a single line of code. In other words, only that line will be commented and therefore not be run, but lines directly above/below it will still be run:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="downloading-and-programming-in-r.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is an R comment!</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="downloading-and-programming-in-r.html#cb14-1" tabindex="-1"></a><span class="co"># This is an R comment!</span></span></code></pre></div>
 <p>For more on comments, see <strong>TAME 2.0 Module 2.2 Coding Best Practices</strong>.</p>
 </div>
 <div id="autofilling" class="section level3 hasAnchor">
 <h3>Autofilling<a href="downloading-and-programming-in-r.html#autofilling" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>RStudio will autofill function names and object names as you type, which can save a lot of time. When you are typing a variable or function name, you can press tab while typing. RStudio will look for variables or functions that match the first few letters you’ve typed. If multiple matches are found, RStudio will provide you with a drop down list to select from, which may be useful when searching through newly installed packages or trying to quickly type variable names in an R script.</p>
 <p>For example, let’s say we instead named our example data frame something much longer, and we had two data frames with similar names. If we start typing in <code>my_</code> and pause our typing, all of the objects that start with that name will appear as options in a list. To select which one to autofill, navigate down the list and click return/enter.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="downloading-and-programming-in-r.html#cb14-1" aria-hidden="true" tabindex="-1"></a>my_df_with_really_long_name <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">values =</span> my_values, <span class="at">color =</span> <span class="fu">c</span>(<span class="st">&quot;Blue&quot;</span>, <span class="st">&quot;Red&quot;</span>, <span class="st">&quot;Yellow&quot;</span>, <span class="st">&quot;Purple&quot;</span>))</span>
-<span id="cb14-2"><a href="downloading-and-programming-in-r.html#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="downloading-and-programming-in-r.html#cb14-3" aria-hidden="true" tabindex="-1"></a>my_df_with_really_long_name_2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">values =</span> my_values, <span class="at">color =</span> <span class="fu">c</span>(<span class="st">&quot;Green&quot;</span>, <span class="st">&quot;Teal&quot;</span>, <span class="st">&quot;Magenta&quot;</span>, <span class="st">&quot;Orange&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="downloading-and-programming-in-r.html#cb15-1" tabindex="-1"></a>my_df_with_really_long_name <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">values =</span> my_values, <span class="at">color =</span> <span class="fu">c</span>(<span class="st">&quot;Blue&quot;</span>, <span class="st">&quot;Red&quot;</span>, <span class="st">&quot;Yellow&quot;</span>, <span class="st">&quot;Purple&quot;</span>))</span>
+<span id="cb15-2"><a href="downloading-and-programming-in-r.html#cb15-2" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="downloading-and-programming-in-r.html#cb15-3" tabindex="-1"></a>my_df_with_really_long_name_2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">values =</span> my_values, <span class="at">color =</span> <span class="fu">c</span>(<span class="st">&quot;Green&quot;</span>, <span class="st">&quot;Teal&quot;</span>, <span class="st">&quot;Magenta&quot;</span>, <span class="st">&quot;Orange&quot;</span>))</span></code></pre></div>
 <p><img src="Module2_1_Input/Image6.png" width="233" style="display: block; margin: auto;" /></p>
 </div>
 <div id="finding-and-setting-your-working-directory" class="section level3 hasAnchor">
 <h3>Finding and Setting Your Working Directory<a href="downloading-and-programming-in-r.html#finding-and-setting-your-working-directory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Another step that is commonly done at the very beginning of your code is setting your working direction. This tells your computer where to look for files that you want to import and where to deposit output files produced during your scripted activities.</p>
 <p>To view your current working directory, run the following:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="downloading-and-programming-in-r.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="downloading-and-programming-in-r.html#cb16-1" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
 <p>To set or change the location of your working directory, run the following:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="downloading-and-programming-in-r.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;/file path to where your input files are&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="downloading-and-programming-in-r.html#cb17-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;/file path to where your input files are&quot;</span>)</span></code></pre></div>
 <p>Note that macOS file paths use <code>/</code> to separate folders, whereas PC file paths use <code>\</code>.</p>
 <p>You can easily find the file path to your desired working directory by navigating to “Session”, then “Set Working Directory”, and “Choose Directory”:</p>
 <p><img src="Module2_1_Input/Image7.png" width="500px" style="display: block; margin: auto;" /></p>
@@ -556,11 +558,11 @@ Figure 1: Created with <em>BioRender.com</em>
 <p>After setting the working directory, you can import and export files using various functions based on the type of file being imported or exported. Often, it is easiest to import data into R that are in a comma separated value / comma delimited file (.csv) or tab / text delimited file (.txt).</p>
 <p>Other datatypes such as SAS data files or large .csv files may require different functions to be more efficiently read in, and some of these file formats will be discussed in future modules. Files can also be imported and exported from Excel using the <a href="https://ycphs.github.io/openxlsx/"><em>openxlsx</em></a> package.</p>
 <p>Below, we will demonstrate how to read in .csv and .txt files:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="downloading-and-programming-in-r.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in the .csv data that&#39;s located in our working directory</span></span>
-<span id="cb17-2"><a href="downloading-and-programming-in-r.html#cb17-2" aria-hidden="true" tabindex="-1"></a>csv.dataset <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Module2_1_Input/Module2_1_InputData1.csv&quot;</span>)</span>
-<span id="cb17-3"><a href="downloading-and-programming-in-r.html#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="downloading-and-programming-in-r.html#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in the .txt data</span></span>
-<span id="cb17-5"><a href="downloading-and-programming-in-r.html#cb17-5" aria-hidden="true" tabindex="-1"></a>txt.dataset <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;Module2_1_Input/Module2_1_InputData1.txt&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="downloading-and-programming-in-r.html#cb18-1" tabindex="-1"></a><span class="co"># Read in the .csv data that&#39;s located in our working directory</span></span>
+<span id="cb18-2"><a href="downloading-and-programming-in-r.html#cb18-2" tabindex="-1"></a>csv.dataset <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Module2_1_Input/Module2_1_InputData1.csv&quot;</span>)</span>
+<span id="cb18-3"><a href="downloading-and-programming-in-r.html#cb18-3" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="downloading-and-programming-in-r.html#cb18-4" tabindex="-1"></a><span class="co"># Read in the .txt data</span></span>
+<span id="cb18-5"><a href="downloading-and-programming-in-r.html#cb18-5" tabindex="-1"></a>txt.dataset <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;Module2_1_Input/Module2_1_InputData1.txt&quot;</span>)</span></code></pre></div>
 <p>These datasets now appear as saved dataframes (“csv.dataset” and “txt.dataset”) in our working environment.</p>
 </div>
 <div id="viewing-data" class="section level3 hasAnchor">
@@ -568,7 +570,7 @@ Figure 1: Created with <em>BioRender.com</em>
 <p>After data have been loaded into R, or created within R, you will likely want to view what these datasets look like.
 Datasets can be viewed in their entirety, or datasets can be subsetted to quickly look at part of the data.</p>
 <p>Here’s some example script to view just the beginnings of a dataframe using the <code>head()</code> function:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="downloading-and-programming-in-r.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(csv.dataset)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="downloading-and-programming-in-r.html#cb19-1" tabindex="-1"></a><span class="fu">head</span>(csv.dataset)</span></code></pre></div>
 <pre><code>##    Sample Var1 Var2 Var3
 ## 1 sample1    1    2    1
 ## 2 sample2    2    4    4
@@ -577,7 +579,7 @@ Datasets can be viewed in their entirety, or datasets can be subsetted to quickl
 ## 5 sample5    5   10   25</code></pre>
 <p>Here, you can see that this automatically brings up a view of the first five rows of the dataframe.</p>
 <p>Another way to view the first five rows of a dataframe is to run the following:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="downloading-and-programming-in-r.html#cb20-1" aria-hidden="true" tabindex="-1"></a>csv.dataset[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="downloading-and-programming-in-r.html#cb21-1" tabindex="-1"></a>csv.dataset[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,]</span></code></pre></div>
 <pre><code>##    Sample Var1 Var2 Var3
 ## 1 sample1    1    2    1
 ## 2 sample2    2    4    4
@@ -586,7 +588,7 @@ Datasets can be viewed in their entirety, or datasets can be subsetted to quickl
 ## 5 sample5    5   10   25</code></pre>
 <p>This brings us to an important concept - indexing! Brackets are used in R to index. Within the bracket, the first argument represents the row numbers, and the second argument represents the column numbers. A colon between two numbers means to select all of the columns in between the left and right numbers. The above line of code told R to select rows 1 to 5, and, by leaving the column argument blank, all of the columns.</p>
 <p>Expanding on this, to view the first 5 rows and 2 columns, we can run the following:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="downloading-and-programming-in-r.html#cb22-1" aria-hidden="true" tabindex="-1"></a>csv.dataset[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="downloading-and-programming-in-r.html#cb23-1" tabindex="-1"></a>csv.dataset[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span></code></pre></div>
 <pre><code>##    Sample Var1
 ## 1 sample1    1
 ## 2 sample2    2
@@ -594,21 +596,21 @@ Datasets can be viewed in their entirety, or datasets can be subsetted to quickl
 ## 4 sample4    4
 ## 5 sample5    5</code></pre>
 <p>For another example: What if we want to only view the first and third row, and first and fourth column? We can use a vector within the index to do this:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="downloading-and-programming-in-r.html#cb24-1" aria-hidden="true" tabindex="-1"></a>csv.dataset[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>), <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="downloading-and-programming-in-r.html#cb25-1" tabindex="-1"></a>csv.dataset[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>), <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>)]</span></code></pre></div>
 <pre><code>##    Sample Var3
 ## 1 sample1    1
 ## 3 sample3    9</code></pre>
 <p>To view the entire dataset, use the <code>View()</code> function:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="downloading-and-programming-in-r.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(csv.dataset)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="downloading-and-programming-in-r.html#cb27-1" tabindex="-1"></a><span class="fu">View</span>(csv.dataset)</span></code></pre></div>
 <p>Another way to view a dataset is to just click on the name of the data in the environment pane. The view window will pop up in the same way that it did with the <code>View()</code> function.</p>
 </div>
 <div id="determining-data-structures-and-data-types" class="section level3 hasAnchor">
 <h3>Determining Data Structures and Data Types<a href="downloading-and-programming-in-r.html#determining-data-structures-and-data-types" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>As discussed above, there are a number of different data structures and types that can be used in R. Here, we will demonstrate functions that can be used to identify data structures and types within R objects. The <code>glimpse()</code> function, which is part of the <em>tidyverse</em> package, is helpful because it allows us to see an overview of our column names and the types of data contained within those columns.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="downloading-and-programming-in-r.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load tidyverse package</span></span>
-<span id="cb27-2"><a href="downloading-and-programming-in-r.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb27-3"><a href="downloading-and-programming-in-r.html#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="downloading-and-programming-in-r.html#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(csv.dataset)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="downloading-and-programming-in-r.html#cb28-1" tabindex="-1"></a><span class="co"># Load tidyverse package</span></span>
+<span id="cb28-2"><a href="downloading-and-programming-in-r.html#cb28-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb28-3"><a href="downloading-and-programming-in-r.html#cb28-3" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="downloading-and-programming-in-r.html#cb28-4" tabindex="-1"></a><span class="fu">glimpse</span>(csv.dataset)</span></code></pre></div>
 <pre><code>## Rows: 5
 ## Columns: 4
 ## $ Sample &lt;chr&gt; &quot;sample1&quot;, &quot;sample2&quot;, &quot;sample3&quot;, &quot;sample4&quot;, &quot;sample5&quot;
@@ -617,11 +619,11 @@ Datasets can be viewed in their entirety, or datasets can be subsetted to quickl
 ## $ Var3   &lt;int&gt; 1, 4, 9, 16, 25</code></pre>
 <p>Here, we see that our <code>Sample</code> column is a character column, while the rest are integers.</p>
 <p>The <code>class()</code> function is also helpful for understanding objects in our global environment:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="downloading-and-programming-in-r.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># What class (data structure) is our object?</span></span>
-<span id="cb29-2"><a href="downloading-and-programming-in-r.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(csv.dataset)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="downloading-and-programming-in-r.html#cb30-1" tabindex="-1"></a><span class="co"># What class (data structure) is our object?</span></span>
+<span id="cb30-2"><a href="downloading-and-programming-in-r.html#cb30-2" tabindex="-1"></a><span class="fu">class</span>(csv.dataset)</span></code></pre></div>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="downloading-and-programming-in-r.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># What class (data type) is a specific column in our data?</span></span>
-<span id="cb31-2"><a href="downloading-and-programming-in-r.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(csv.dataset<span class="sc">$</span>Sample)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="downloading-and-programming-in-r.html#cb32-1" tabindex="-1"></a><span class="co"># What class (data type) is a specific column in our data?</span></span>
+<span id="cb32-2"><a href="downloading-and-programming-in-r.html#cb32-2" tabindex="-1"></a><span class="fu">class</span>(csv.dataset<span class="sc">$</span>Sample)</span></code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
 <p>These functions are particularly helpful when introducing new functions or troubleshooting code because functions often require input data to be a specific structure or data type.</p>
 </div>
@@ -630,27 +632,27 @@ Datasets can be viewed in their entirety, or datasets can be subsetted to quickl
 <p>Now that we have these datasets saved as dataframes, we can use these as examples to export data files from the R environment back into our local directory.</p>
 <p>There are many ways to export data in R. Data can be written out into a .csv file, tab delimited .txt file, or RData file, for example. There are also many functions within packages that write out specific datasets generated by that package.</p>
 <p>To write out to a .csv file:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="downloading-and-programming-in-r.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(csv.dataset, <span class="st">&quot;Module2_1_SameCSVFileNowOut.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="downloading-and-programming-in-r.html#cb34-1" tabindex="-1"></a><span class="fu">write.csv</span>(csv.dataset, <span class="st">&quot;Module2_1_SameCSVFileNowOut.csv&quot;</span>)</span></code></pre></div>
 <p>To write out a .txt tab delimited file:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="downloading-and-programming-in-r.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(txt.dataset, <span class="st">&quot;Module2_1_SameTXTFileNowOut.txt&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="downloading-and-programming-in-r.html#cb35-1" tabindex="-1"></a><span class="fu">write.table</span>(txt.dataset, <span class="st">&quot;Module2_1_SameTXTFileNowOut.txt&quot;</span>)</span></code></pre></div>
 <p>R also allows objects to be saved in RData files. These files can be read into R, as well, and will load the object into the current workspace. Entire workspaces are also able to be saved in RData files, such that when you open an RData file, your script and Global Environment will be just as you saved them. Below includes example code to carry out these tasks, and though these files are not provided, they are just example code for future reference.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="downloading-and-programming-in-r.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in saved single R data object </span></span>
-<span id="cb35-2"><a href="downloading-and-programming-in-r.html#cb35-2" aria-hidden="true" tabindex="-1"></a>r.obj <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="st">&quot;data.rds&quot;</span>)</span>
-<span id="cb35-3"><a href="downloading-and-programming-in-r.html#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-4"><a href="downloading-and-programming-in-r.html#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Write single R object to file</span></span>
-<span id="cb35-5"><a href="downloading-and-programming-in-r.html#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(object, <span class="st">&quot;single_object.rds&quot;</span>)</span>
-<span id="cb35-6"><a href="downloading-and-programming-in-r.html#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-7"><a href="downloading-and-programming-in-r.html#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in multiple saved R objects</span></span>
-<span id="cb35-8"><a href="downloading-and-programming-in-r.html#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;multiple_data.RData&quot;</span>)</span>
-<span id="cb35-9"><a href="downloading-and-programming-in-r.html#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-10"><a href="downloading-and-programming-in-r.html#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Save multiple R objects </span></span>
-<span id="cb35-11"><a href="downloading-and-programming-in-r.html#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(object1, object2, <span class="st">&quot;multiple_objects.RData&quot;</span>)</span>
-<span id="cb35-12"><a href="downloading-and-programming-in-r.html#cb35-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-13"><a href="downloading-and-programming-in-r.html#cb35-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Save entire workspace</span></span>
-<span id="cb35-14"><a href="downloading-and-programming-in-r.html#cb35-14" aria-hidden="true" tabindex="-1"></a><span class="fu">save.image</span>(<span class="st">&quot;entire_workspace.RData&quot;</span>)</span>
-<span id="cb35-15"><a href="downloading-and-programming-in-r.html#cb35-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-16"><a href="downloading-and-programming-in-r.html#cb35-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Load entire workspace</span></span>
-<span id="cb35-17"><a href="downloading-and-programming-in-r.html#cb35-17" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;entire_workspace.RData&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="downloading-and-programming-in-r.html#cb36-1" tabindex="-1"></a><span class="co"># Read in saved single R data object </span></span>
+<span id="cb36-2"><a href="downloading-and-programming-in-r.html#cb36-2" tabindex="-1"></a>r.obj <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="st">&quot;data.rds&quot;</span>)</span>
+<span id="cb36-3"><a href="downloading-and-programming-in-r.html#cb36-3" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="downloading-and-programming-in-r.html#cb36-4" tabindex="-1"></a><span class="co"># Write single R object to file</span></span>
+<span id="cb36-5"><a href="downloading-and-programming-in-r.html#cb36-5" tabindex="-1"></a><span class="fu">saveRDS</span>(object, <span class="st">&quot;single_object.rds&quot;</span>)</span>
+<span id="cb36-6"><a href="downloading-and-programming-in-r.html#cb36-6" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="downloading-and-programming-in-r.html#cb36-7" tabindex="-1"></a><span class="co"># Read in multiple saved R objects</span></span>
+<span id="cb36-8"><a href="downloading-and-programming-in-r.html#cb36-8" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;multiple_data.RData&quot;</span>)</span>
+<span id="cb36-9"><a href="downloading-and-programming-in-r.html#cb36-9" tabindex="-1"></a></span>
+<span id="cb36-10"><a href="downloading-and-programming-in-r.html#cb36-10" tabindex="-1"></a><span class="co"># Save multiple R objects </span></span>
+<span id="cb36-11"><a href="downloading-and-programming-in-r.html#cb36-11" tabindex="-1"></a><span class="fu">save</span>(object1, object2, <span class="st">&quot;multiple_objects.RData&quot;</span>)</span>
+<span id="cb36-12"><a href="downloading-and-programming-in-r.html#cb36-12" tabindex="-1"></a></span>
+<span id="cb36-13"><a href="downloading-and-programming-in-r.html#cb36-13" tabindex="-1"></a><span class="co"># Save entire workspace</span></span>
+<span id="cb36-14"><a href="downloading-and-programming-in-r.html#cb36-14" tabindex="-1"></a><span class="fu">save.image</span>(<span class="st">&quot;entire_workspace.RData&quot;</span>)</span>
+<span id="cb36-15"><a href="downloading-and-programming-in-r.html#cb36-15" tabindex="-1"></a></span>
+<span id="cb36-16"><a href="downloading-and-programming-in-r.html#cb36-16" tabindex="-1"></a><span class="co"># Load entire workspace</span></span>
+<span id="cb36-17"><a href="downloading-and-programming-in-r.html#cb36-17" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;entire_workspace.RData&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="code-troubleshooting" class="section level2 hasAnchor">

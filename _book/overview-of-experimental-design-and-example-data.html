@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Overview of Experimental Design and Example Data | TAME 2.0</title>
   <meta name="description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Overview of Experimental Design and Example Data | TAME 2.0" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Rager Lab" />
 
 
-<meta name="date" content="2024-06-24" />
+<meta name="date" content="2024-10-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,9 +52,10 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.32/datatables.js"></script>
+<script src="libs/datatables-binding-0.33/datatables.js"></script>
 <link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
@@ -66,7 +67,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -102,7 +103,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -115,7 +116,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -364,7 +365,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3>Biological Replicates<a href="overview-of-experimental-design-and-example-data.html#biological-replicates" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Biological replicates are the preferred unit of statistical comparison because they represent biologically distinct samples, demonstrating biological variation in the system. What is considered to be a biological replicate can depend on what model system is being used. For example, in studies with human clinical samples or cells from different human donors, the different humans are considered the biological replicates. In studies using animals as model organisms, individual animals are typically considered biological replicates, although this can vary depending on the experimental design. In studies that use cell lines, which are derived from one human or animal and are modified to continuously grow in culture, a biological replicate could be either cells from different passages (different thawed aliquots) grown in completely separate flasks, all experimented with on the same day, or repeating an experiment on the same set of cells (one thawed aliquot) but on separate experimental days, so the cells have grown/replicated between experiments.</p>
 <p>The final “N” that you report should reflect your biological replicates, or independent experiments. What constitutes an independent experiment or biological replicate is highly field-, lab-, organism-, and endpoint-dependent, so make sure to discuss this within your research group in the experiment planning phase and again before your analysis begins. No matter what you choose, ensure that when you report your results, you are transparent about what your biological replicates are. For example, the below diagram (adapted from <a href="https://bitesizebio.com/47982/n-number-cell-lines/">BitesizeBio</a>) illustrates different ways of defining replicates in experiments with cell lines:</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-248"></span>
 <img src="Module4_1_Input/Module4_1_Image1.png" alt="Created with *BioRender.com*" width="650px" />
 <p class="caption">
 Figure 6: Created with <em>BioRender.com</em>
@@ -377,7 +378,7 @@ Figure 6: Created with <em>BioRender.com</em>
 <div id="technical-replicates" class="section level3 hasAnchor">
 <h3>Technical Replicates<a href="overview-of-experimental-design-and-example-data.html#technical-replicates" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Technical replicates are repeated measurements on the same sample or biological source, demonstrating the variation underlying protocols, equipment, and sample handling. In environmental health research, there can be technical replicates separately related to either the experimental design or the downstream analyses. Technical replicates related to experimental design refer to the chemical exposure for cell-based (<em>in vitro</em>) experiments, where there may be multiple wells of cells from the same passage or human/mouse exposed to the same treatment. Technical replicates related to downstream analyses refer to the endpoints that are measured after chemical exposure in each sample. To illustrate this, consider an experiment where cells from four unique human donors (D1-D4) are grown in cell culture plates, and then three wells of cells from each donor are exposed to a chemical treatment (Tx) or a vehicle control (Ctrl). The plate layout might look something like this, with technical replicates related to experimental design, i.e. chemical exposure, in the same color:</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-249"></span>
 <img src="Module4_1_Input/Module4_1_Image2.png" alt="Created with *BioRender.com*" width="500px" />
 <p class="caption">
 Figure 7: Created with <em>BioRender.com</em>
@@ -385,7 +386,7 @@ Figure 7: Created with <em>BioRender.com</em>
 </div>
 <p>For this experiment, we have four biological replicates (the four donors) and three technical exposure replicates per dose (because three wells from each donor were exposed to each condition). The technical replicates here capture potential unintended variation between wells in cell growth and chemical exposure.</p>
 <p>Following the exposure of the cells to a chemical of interest, the media is collected from each well and assayed using a plate reader assay for concentrations of a marker of inflammation. For each sample collected (from each well), there are three technical replicates used to measure the concentration of the inflammatory marker. The purpose of these technical replicates is to capture potential unintended well-to-well variation in the plate reader assay. The plate layout might look something like this, <strong><em>with the letter and number in each well of the plate layout representing the well in the exposure plate layout that the media sample being assayed came from</em></strong>:</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-3"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-250"></span>
 <img src="Module4_1_Input/Module4_1_Image3.png" alt="Created with *BioRender.com*" width="800px" />
 <p class="caption">
 Figure 8: Created with <em>BioRender.com</em>
@@ -418,7 +419,7 @@ Figure 8: Created with <em>BioRender.com</em>
 <div id="experimental-design" class="section level3 hasAnchor">
 <h3>Experimental Design<a href="overview-of-experimental-design-and-example-data.html#experimental-design" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In this experiment, primary human bronchial epithelial cells (HBECs) from sixteen different donors were exposed to the gas acrolein, which is emitted from the combustion of fossil fuels, tobacco, wood, and plastic. Inhalation exposure to acrolein is associated with airway inhalation, and this study aimed to understand how exposure to acrolein changes secretion of markers of inflammation. Prior to experimentation, the HBECs were grown on a permeable membrane support for 24 days with air on one side and liquid media on the other side, allowing them to differentiate into a form that is very similar to what is found in the human body. The cells were then exposed for 2 hours to 0 (filtered air), 0.6, 1, 2, or 4 ppm acrolein, with two technical replicate wells from each donor per dose. Twenty-four hours later, the media was collected, and concentrations of inflammatory markers were measured using an <a href="https://www.thermofisher.com/us/en/home/life-science/protein-biology/protein-biology-learning-center/protein-biology-resource-library/pierce-protein-methods/overview-elisa.html">enzyme-linked immunosorbent assay (ELISA)</a>.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-4"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-251"></span>
 <img src="Module4_1_Input/Module4_1_Image4.png" alt="Created with *BioRender.com*" width="900px" />
 <p class="caption">
 Figure 9: Created with <em>BioRender.com</em>
