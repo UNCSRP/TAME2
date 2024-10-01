@@ -1,1 +1,1 @@
-# (PART\*) Chapter 5 Machine Learning & Artificial Intelligence {-}
+(PART*) Chapter 5 Machine Learning & Artificial Intelligence {-}

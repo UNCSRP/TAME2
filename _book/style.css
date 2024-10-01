@@ -153,3 +153,8 @@ li.appendix span, li.part span { /* for TOC part names */
   opacity: .9 !important;
   text-transform: uppercase;
 } 
+
+.toc-logo img {
+  width: 200px;  
+  height: auto;  
+}
