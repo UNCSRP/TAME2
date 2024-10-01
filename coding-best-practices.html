@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Coding “Best” Practices | TAME 2.0: An Update to the TAME Toolkit for Introductory Data Science, Chemical-Biological Analyses, Machine Learning and Predictive Modeling, and Database Mining for Environmental Health Research</title>
+  <meta name="description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Coding “Best” Practices | TAME 2.0: An Update to the TAME Toolkit for Introductory Data Science, Chemical-Biological Analyses, Machine Learning and Predictive Modeling, and Database Mining for Environmental Health Research" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Coding “Best” Practices | TAME 2.0: An Update to the TAME Toolkit for Introductory Data Science, Chemical-Biological Analyses, Machine Learning and Predictive Modeling, and Database Mining for Environmental Health Research" />
+  
+  <meta name="twitter:description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
+  
+
+<meta name="author" content="Rager Lab" />
+
+
+<meta name="date" content="2024-10-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="Icons_Used_Throughout/Favicon.png" type="image/x-icon" />
+<link rel="prev" href="downloading-and-programming-in-r.html"/>
+<link rel="next" href="data-manipulation-and-reshaping.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.33/datatables.js"></script>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/tabwid-1.1.3/tabwid.css" rel="stylesheet" />
+<script src="libs/tabwid-1.1.3/tabwid.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="Icons_Used_Throughout/TAME 2.0 Logo.png"><br></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="part"><span><b>Chapter 1 Introductory <br>Data Science</b></span></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html"><i class="fa fa-check"></i>FAIR Data Management Practices</a>
+<ul>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#introduction-to-training-module"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#introduction-to-fair"><i class="fa fa-check"></i>Introduction to FAIR</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#breaking-down-fair-letter-by-letter"><i class="fa fa-check"></i>Breaking Down FAIR, Letter-by-Letter</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#what-does-this-mean-for-you"><i class="fa fa-check"></i>What Does This Mean for You?</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#data-repositories-for-sharing-of-data"><i class="fa fa-check"></i>Data Repositories for Sharing of Data</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#recent-shifts-in-regulatory-policies-for-data-sharing"><i class="fa fa-check"></i>Recent Shifts in Regulatory Policies for Data Sharing</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#additional-training-resources-on-fair"><i class="fa fa-check"></i>Additional Training Resources on FAIR</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html"><i class="fa fa-check"></i>Data Sharing through Online Repositories</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#an-overview-and-example-with-the-dataverse-repository"><i class="fa fa-check"></i>An Overview and Example with the Dataverse Repository</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#introduction-to-training-module-1"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#data-repositories"><i class="fa fa-check"></i>Data Repositories</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#the-dataverse-project"><i class="fa fa-check"></i>The Dataverse Project</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#what-is-a-dataverse"><i class="fa fa-check"></i>What is a Dataverse?</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#metadata"><i class="fa fa-check"></i>Metadata</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#creating-a-dataverse"><i class="fa fa-check"></i>Creating a Dataverse</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#creating-a-dataset"><i class="fa fa-check"></i>Creating a Dataset</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#concluding-remarks-1"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html"><i class="fa fa-check"></i>File Management using Github</a>
+<ul>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#introduction-to-training-module-2"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#creating-an-account"><i class="fa fa-check"></i>Creating an Account</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#creating-a-repository"><i class="fa fa-check"></i>Creating a Repository</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#uploading-code"><i class="fa fa-check"></i>Uploading Code</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#adding-subfolders-in-a-repository"><i class="fa fa-check"></i>Adding Subfolders in a Repository</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#updating-code"><i class="fa fa-check"></i>Updating Code</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#updating-repository-titles-and-structure-to-support-a-manuscript"><i class="fa fa-check"></i>Updating Repository Titles and Structure to Support a Manuscript</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#tracking-code-changes-using-github-branches"><i class="fa fa-check"></i>Tracking Code Changes using Github Branches</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#concluding-remarks-2"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html"><i class="fa fa-check"></i>Data Wrangling in Excel</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#introduction-to-training-module-3"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#save-a-copy-of-the-soon-to-be-organized-and-cleaned-dataset-as-a-new-file"><i class="fa fa-check"></i>Save a Copy of the Soon-To-Be Organized and Cleaned Dataset as a New File</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#remove-extraneous-white-space"><i class="fa fa-check"></i>Remove Extraneous White Space</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#replace-missing-data-with-na"><i class="fa fa-check"></i>Replace Missing Data with “NA”</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#create-a-metadata-tab"><i class="fa fa-check"></i>Create a Metadata Tab</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#abbreviate-and-capitalize-categorical-data"><i class="fa fa-check"></i>Abbreviate and Capitalize Categorical Data</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#alphabetize-sort-the-data-by-the-categorical-variable-of-interest"><i class="fa fa-check"></i>Alphabetize (Sort) the Data by the Categorical Variable of Interest</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#create-a-new-subject-number-column"><i class="fa fa-check"></i>Create a New Subject Number Column</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#remove-special-symbols-and-dashes"><i class="fa fa-check"></i>Remove Special Symbols and Dashes</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#bold-all-column-names-and-center-all-data"><i class="fa fa-check"></i>Bold all Column Names and Center all Data</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#create-a-subject-identifier-column"><i class="fa fa-check"></i>Create a Subject Identifier Column</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#separate-subject-demographic-data-from-experimental-measurements"><i class="fa fa-check"></i>Separate Subject Demographic Data from Experimental Measurements</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#convert-data-from-wide-to-long-format"><i class="fa fa-check"></i>Convert Data from Wide to Long Format</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#pivoting-data-from-a-wide-to-long-format"><i class="fa fa-check"></i>Pivoting Data from a Wide to Long Format</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#generating-summary-level-statistics-with-pivot-tables"><i class="fa fa-check"></i>Generating Summary-Level Statistics with Pivot Tables</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#excel-vs.-r-which-should-you-use"><i class="fa fa-check"></i>Excel vs. R: Which Should You Use?</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#concluding-remarks-3"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 2 Coding in R</b></span></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html"><i class="fa fa-check"></i>Downloading and Programming in R</a>
+<ul>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#introduction-to-training-module-4"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#general-introduction-and-installation-of-r-and-rstudio"><i class="fa fa-check"></i>General Introduction and Installation of R and RStudio</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#introduction-to-r-packages"><i class="fa fa-check"></i>Introduction to R Packages</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#scripting-basics"><i class="fa fa-check"></i>Scripting Basics</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#code-troubleshooting"><i class="fa fa-check"></i>Code Troubleshooting</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#concluding-remarks-4"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html"><i class="fa fa-check"></i>Coding “Best” Practices</a>
+<ul>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#introduction-to-training-module-5"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#scripting-file-types"><i class="fa fa-check"></i>Scripting File Types</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#script-headers-and-annotation"><i class="fa fa-check"></i>Script Headers and Annotation</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#coding-style"><i class="fa fa-check"></i>Coding Style</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#script-organization"><i class="fa fa-check"></i>Script Organization</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#concluding-remarks-5"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html"><i class="fa fa-check"></i>Data Manipulation and Reshaping</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#introduction-to-training-module-6"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#data-manipulation-using-base-r"><i class="fa fa-check"></i>Data Manipulation Using Base R</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#introduction-to-tidyverse"><i class="fa fa-check"></i>Introduction to Tidyverse</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#concluding-remarks-6"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html"><i class="fa fa-check"></i>Improving Coding Efficiencies</a>
+<ul>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#introduction-to-training-module-7"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#loops"><i class="fa fa-check"></i>Loops</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#functions"><i class="fa fa-check"></i>Functions</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#list-operations"><i class="fa fa-check"></i>List operations</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#concluding-remarks-7"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#additional-resources-2"><i class="fa fa-check"></i>Additional Resources</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 3 Basics of <br>Data Analysis and Visualizations</b></span></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html"><i class="fa fa-check"></i>Data Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#introduction-to-data-visualizations"><i class="fa fa-check"></i>Introduction to Data Visualizations</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#introduction-to-training-module-8"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#density-plot-visualization"><i class="fa fa-check"></i>Density Plot Visualization</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#boxplot-visualization"><i class="fa fa-check"></i>Boxplot Visualization</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#correlation-visualizations"><i class="fa fa-check"></i>Correlation Visualizations</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#heatmap-visualization"><i class="fa fa-check"></i>Heatmap Visualization</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#concluding-remarks-8"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html"><i class="fa fa-check"></i>Improving Data Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#introduction-to-data-visulization-conventions"><i class="fa fa-check"></i>Introduction to Data Visulization Conventions</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#introduction-to-training-module-9"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#creating-an-improved-boxplot-visualization"><i class="fa fa-check"></i>Creating an Improved Boxplot Visualization</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#creating-an-improved-heatmap-visualization"><i class="fa fa-check"></i>Creating an Improved Heatmap Visualization</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#creating-multi-plot-figures"><i class="fa fa-check"></i>Creating Multi-Plot Figures</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#concluding-remarks-9"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html"><i class="fa fa-check"></i>Normality Tests and Data Transformations</a>
+<ul>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#introduction-to-training-module-10"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#what-is-a-normal-distribution"><i class="fa fa-check"></i>What is a Normal Distribution?</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#qualitative-assessment-of-normality"><i class="fa fa-check"></i>Qualitative Assessment of Normality</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#quantitative-normality-assessment"><i class="fa fa-check"></i>Quantitative Normality Assessment</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#data-transformation"><i class="fa fa-check"></i>Data Transformation</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#additional-considerations-regarding-normality"><i class="fa fa-check"></i>Additional Considerations Regarding Normality</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#concluding-remarks-10"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html"><i class="fa fa-check"></i>Intoduction to Statistical Tests</a>
+<ul>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#introduction-to-training-module-11"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#assessing-normality-homogeneity-of-variance"><i class="fa fa-check"></i>Assessing Normality &amp; Homogeneity of Variance</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#two-group-visualizations-and-statistical-comparisons-using-the-t-test"><i class="fa fa-check"></i>Two-Group Visualizations and Statistical Comparisons using the T-Test</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#three-group-visualizations-and-statistical-comparisons-using-an-anova"><i class="fa fa-check"></i>Three-Group Visualizations and Statistical Comparisons using an ANOVA</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#regression-modeling-and-visualization-linear-and-logistic-regressions"><i class="fa fa-check"></i>Regression Modeling and Visualization: Linear and Logistic Regressions</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#statistical-evaluations-of-categorical-data-using-the-chi-squared-test-and-fishers-exact-test"><i class="fa fa-check"></i>Statistical Evaluations of Categorical Data using the Chi-Squared Test and Fisher’s Exact Test</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#concluding-remarks-11"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 4 Converting Wet Lab Data into Dry Lab Analyses</b></span></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html"><i class="fa fa-check"></i>Overview of Experimental Design and Example Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#introduction-to-training-module-12"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#replicates"><i class="fa fa-check"></i>Replicates</a></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#orientation-to-example-data-for-chapter-4"><i class="fa fa-check"></i>Orientation to Example Data for Chapter 4</a></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#concluding-remarks-12"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html"><i class="fa fa-check"></i>Data Import, Processing, and Summary Statistics</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#introduction-to-training-module-13"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#data-import"><i class="fa fa-check"></i>Data Import</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#handling-missing-values"><i class="fa fa-check"></i>Handling Missing Values</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#averaging-replicates"><i class="fa fa-check"></i>Averaging Replicates</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#descriptive-statistics"><i class="fa fa-check"></i>Descriptive Statistics</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#normality-assessment-and-data-transformation"><i class="fa fa-check"></i>Normality Assessment and Data Transformation</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#concluding-remarks-13"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html"><i class="fa fa-check"></i>Data Import from PDF Sources</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#introduction-to-training-module-14"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#importing-data-from-many-single-pdfs-with-the-same-formatting"><i class="fa fa-check"></i>Importing Data from Many Single PDFs with the Same Formatting</a></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#importing-data-stored-in-pdf-tables"><i class="fa fa-check"></i>Importing Data Stored in PDF Tables</a></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#concluding-remarks-14"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html"><i class="fa fa-check"></i>Two-Group Comparisons and Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#introduction-to-training-module-15"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#overview-of-two-group-statistical-tests"><i class="fa fa-check"></i>Overview of Two Group Statistical Tests</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#statistical-vs-biological-significance"><i class="fa fa-check"></i>Statistical vs Biological Significance</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#unpaired-test-example"><i class="fa fa-check"></i>Unpaired Test Example</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#paired-test-example"><i class="fa fa-check"></i>Paired Test Example</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#visualizing-results"><i class="fa fa-check"></i>Visualizing Results</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#concluding-remarks-15"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html"><i class="fa fa-check"></i>Multi-Group and Multi-Variable Comparisons and Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#introduction-to-training-module-16"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#overview-of-multi-group-statistical-tests"><i class="fa fa-check"></i>Overview of Multi-Group Statistical Tests</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#multi-group-analysis-example"><i class="fa fa-check"></i>Multi-Group Analysis Example</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#visualization-of-multi-group-statistical-results"><i class="fa fa-check"></i>Visualization of Multi-Group Statistical Results</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#concluding-remarks-16"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 5 Machine Learning &amp; Artificial Intelligence</b></span></li>
+<li class="chapter" data-level="" data-path="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html"><a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html"><i class="fa fa-check"></i>Introduction to Artificial Intelligence, Machine Learning, and Predictive Modeling for Environmental Health</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html"><a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html#introduction-to-training-module-17"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html"><a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html#general-historical-context-and-taxonomy-of-modern-aiml"><i class="fa fa-check"></i>General Historical Context and Taxonomy of Modern AI/ML</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html"><a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html#application-of-machine-learning-in-environmental-health-science"><i class="fa fa-check"></i>Application of Machine Learning in Environmental Health Science</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html"><a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html#concluding-remarks-17"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html"><i class="fa fa-check"></i>Supervised Machine Learning</a>
+<ul>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#introduction-to-training-module-18"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#types-of-machine-learning"><i class="fa fa-check"></i>Types of Machine Learning</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#types-of-supervised-machine-learning-algorithms"><i class="fa fa-check"></i>Types of Supervised Machine Learning Algorithms</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#training-supervised-machine-learning-models"><i class="fa fa-check"></i>Training Supervised Machine Learning Models</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#assessing-classification-based-model-performance"><i class="fa fa-check"></i>Assessing Classification-Based Model Performance</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#introduction-to-activity-and-example-dataset"><i class="fa fa-check"></i>Introduction to Activity and Example Dataset</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#testing-for-differences-in-predictor-variables-across-the-outcome-classes"><i class="fa fa-check"></i>Testing for Differences in Predictor Variables across the Outcome Classes</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#predicting-ias-detection-with-a-random-forest-rf-model"><i class="fa fa-check"></i>Predicting iAs Detection with a Random Forest (RF) Model</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#class-imbalance"><i class="fa fa-check"></i>Class Imbalance</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#concluding-remarks-18"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html"><i class="fa fa-check"></i>Supervised Machine Learning Model Interpretation</a>
+<ul>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#introduction-to-training-module-19"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#variable-importance"><i class="fa fa-check"></i>Variable Importance</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#decision-boundary"><i class="fa fa-check"></i>Decision Boundary</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#introduction-to-example-dataset-and-activity"><i class="fa fa-check"></i>Introduction to Example Dataset and Activity</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#predicting-ias-detection-with-a-random-forest-rf-model-1"><i class="fa fa-check"></i>Predicting iAs Detection with a Random Forest (RF) Model</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#variable-importance-plot"><i class="fa fa-check"></i>Variable Importance Plot</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#decision-boundary-plot"><i class="fa fa-check"></i>Decision Boundary Plot</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#decision-boundary-plot-incorporating-smote"><i class="fa fa-check"></i>Decision Boundary Plot Incorporating SMOTE</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#concluding-remarks-19"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><i class="fa fa-check"></i>Unsupervised Machine Learning Part 1: K-Means Clustering &amp; PCA</a>
+<ul>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html#introduction-to-training-module-20"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html#introduction-to-unsupervised-machine-learning"><i class="fa fa-check"></i>Introduction to Unsupervised Machine Learning</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html#introduction-to-example-data"><i class="fa fa-check"></i>Introduction to Example Data</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html#identifying-clusters-of-chemicals-through-k-means"><i class="fa fa-check"></i>Identifying Clusters of Chemicals through <em>K</em>-Means</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html#principal-component-analysis-pca-1"><i class="fa fa-check"></i>Principal Component Analysis (PCA)</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html#incorporating-k-means-into-pca-for-predictive-modeling"><i class="fa fa-check"></i>Incorporating <em>K</em>-Means into PCA for Predictive Modeling</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html#concluding-remarks-20"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><i class="fa fa-check"></i>Unsupervised Machine Learning Part 2: Additional Clustering Applications</a>
+<ul>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#introduction-to-training-module-21"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#k-means-clustering-1"><i class="fa fa-check"></i><em>K</em>-Means Clustering</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#hierarchical-clustering"><i class="fa fa-check"></i>Hierarchical Clustering</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#introduction-to-example-data-1"><i class="fa fa-check"></i>Introduction to Example Data</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#hierarchical-clustering-1"><i class="fa fa-check"></i>Hierarchical Clustering</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#clustering-plot"><i class="fa fa-check"></i>Clustering Plot</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#hierarchical-clustering-visualization"><i class="fa fa-check"></i>Hierarchical Clustering Visualization</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#variable-contributions"><i class="fa fa-check"></i>Variable Contributions</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#concluding-remarks-21"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 6 Applications in Toxicology &amp; Exposure Science</b></span></li>
+<li class="part"><span><b>Chapter 7 Environmental Health Database Mining</b></span></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">TAME 2.0: An Update to the TAME Toolkit for Introductory Data Science, Chemical-Biological Analyses, Machine Learning and Predictive Modeling, and Database Mining for Environmental Health Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="coding-best-practices" class="section level1 hasAnchor">
+<h1>Coding “Best” Practices<a href="coding-best-practices.html#coding-best-practices" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This training module was developed by Kyle Roell, Alexis Payton, Elise Hickman, and Julia E. Rager.</p>
+<p>All input files (script, data, and figures) can be downloaded from the <a href="https://github.com/UNCSRP/TAME2">UNC-SRP TAME2 GitHub website</a>.</p>
+<div id="introduction-to-training-module-5" class="section level2 hasAnchor">
+<h2>Introduction to Training Module<a href="coding-best-practices.html#introduction-to-training-module-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this training module, we will be going over coding “best” practices. The reason we put “best” in quotes is because these practices are what we currently consider best or better, though everyone has different coding styles, annotation styles, etc that also change over time. Here, we hope to give you a sense of what we do when coding, why we do it, and why we think it is important. We will also be pointing out other guides to style, annotations, and best practices that we suggest implementing into your own coding.</p>
+<p>Some of the questions we hope to answer in this module are:</p>
+<ul>
+<li>What type of scripting file should I use?</li>
+<li>What should I name my script?</li>
+<li>What should I put at the top of every script and why is it important?</li>
+<li>How should I annotate my code?</li>
+<li>Why are annotations important?</li>
+<li>How do I implement these coding practices into my own code?</li>
+<li>Where can I find other resources to help with coding best practices?</li>
+</ul>
+<p>In the following sections, we will be addressing these questions. Keep in mind that the advice and suggestions in this section are just that: advice and suggestions. So please take them into consideration and integrate them into your own coding style as appropriate.</p>
+</div>
+<div id="scripting-file-types" class="section level2 hasAnchor">
+<h2>Scripting File Types<a href="coding-best-practices.html#scripting-file-types" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Two of the most common scripting file types applicable to the R language are .R (normal R files) and .Rmd (R Markdown). Normal R files appear as plain text and can be used for running any normal R code. R Markdown files are used for more intensive documentation of code and allow for a combination of code, non-code text explaining the code, and viewing of code output, tables, and figures that are rendered together into an output file (typically .html, although other formats such as .pdf are also offered). For example, TAME is coded using R Markdown, which allows us to include blocks of non-code text, hyperlinks, annotated code, schematics, and output figures all in one place. We highly encourage the use of R Markdown as the default scripting file type for R-based projects because it produces a polished final document that is easy for others to follow, whereas .R files are more appropriate for short, one-off analyses and writing in-depth functions and packages. However, code executed in normal .R files and R Markdown will produce the same results, and ultimately, which file type to use is personal preference.</p>
+<p>See below for screenshots that demonstrate some of the stylistic differences between .R, .Rmd, and .Rmd knitted to HTML format:
+<img src="Module2_2_Input/Image1.png" width="1000px" style="display: block; margin: auto;" /></p>
+<p>If you are interested in learning more about the basic features of R Markdown and how to use them, see the following resources:</p>
+<ul>
+<li><a href="https://rmarkdown.rstudio.com/lesson-1.html">RStudio introduction to R Markdown</a></li>
+<li><a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">R Markdown Cheat Sheet</a></li>
+<li><a href="https://bookdown.org/yihui/rmarkdown/html-document.html">Bookdown R Markdown guide</a></li>
+<li><a href="https://www.r-bloggers.com/2021/02/external-graphics-with-knitr/">Including external images in R Markdown with knitr</a></li>
+<li><a href="https://cengel.github.io/R-data-viz/interactive-graphs.html">Interactive plots with plotly</a></li>
+<li><a href="https://rstudio.github.io/DT/">Interactive data tables with DT</a></li>
+</ul>
+<div id="naming-the-script-file" class="section level3 hasAnchor">
+<h3>Naming the Script File<a href="coding-best-practices.html#naming-the-script-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The first thing we need to talk about, which is sometimes overlooked in the discussion of coding practices, is script file naming conventions and high level descriptive headers within a script. It is important to remember to name your code something concise, but descriptive. You want to be able to easily recognize what the script is for and does without a cumbersome, lengthy title. Some tips for naming conventions:</p>
+<ul>
+<li>Be concise, but descriptive</li>
+<li>Use dates when appropriate</li>
+<li>Avoid special characters</li>
+<li>Use full words if possible, avoiding non-standard acronyms</li>
+</ul>
+<p>Keep in mind that each script should have a clear purpose within a given project. And, it is sometimes necessary, and often common, to have multiple scripts within one project that all pertain to different parts of the analysis. For example, it may be appropriate to have one script for data cleaning and pre-processing and another script for analyzing data. When scripting an analysis with multiple sub-analyses, some prefer to keep code for each sub-analysis separate (e.g., one file for an ANOVA and one file for a k-means analysis on the same data input), while others prefer to have longer code files with more subsections. Whichever method you choose, we recommend maintaining clear documentation that indicates locations for input and output files for each sub-analysis (e.g., whether global environment objects or output files from a previous script are needed to run the current script).</p>
+</div>
+</div>
+<div id="script-headers-and-annotation" class="section level2 hasAnchor">
+<h2>Script Headers and Annotation<a href="coding-best-practices.html#script-headers-and-annotation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="script-header" class="section level3 hasAnchor">
+<h3>Script Header<a href="coding-best-practices.html#script-header" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Once your script is created and named, it is generally recommended to include a header at the top of the script. The script header can be used for describing:</p>
+<ul>
+<li>Title of Script - This can be a longer or more readable name than script file name.</li>
+<li>Author(s) - Who wrote the script?</li>
+<li>Date - When was the script developed?</li>
+<li>Description - Provides a more detailed description of the purpose of the script and any notes or special considerations for this particular script.</li>
+</ul>
+<p>In R, it is common to include multiple <code>#</code>, the comment operator, or a <code>#</code> followed by another special character, to start and end a block of coding annotation or the script header. An example of this in an .R file is shown below:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="coding-best-practices.html#cb37-1" tabindex="-1"></a><span class="do">########################################################################</span></span>
+<span id="cb37-2"><a href="coding-best-practices.html#cb37-2" tabindex="-1"></a><span class="do">########################################################################</span></span>
+<span id="cb37-3"><a href="coding-best-practices.html#cb37-3" tabindex="-1"></a><span class="do">### Script Longer Title</span></span>
+<span id="cb37-4"><a href="coding-best-practices.html#cb37-4" tabindex="-1"></a><span class="do">### </span></span>
+<span id="cb37-5"><a href="coding-best-practices.html#cb37-5" tabindex="-1"></a><span class="do">### Description of what this script does!</span></span>
+<span id="cb37-6"><a href="coding-best-practices.html#cb37-6" tabindex="-1"></a><span class="do">### Also can include special notes or anything else here.</span></span>
+<span id="cb37-7"><a href="coding-best-practices.html#cb37-7" tabindex="-1"></a><span class="do">###</span></span>
+<span id="cb37-8"><a href="coding-best-practices.html#cb37-8" tabindex="-1"></a><span class="do">### Created by: Kyle Roell and Julia Rager</span></span>
+<span id="cb37-9"><a href="coding-best-practices.html#cb37-9" tabindex="-1"></a><span class="do">### Last updated: 01 May 2023</span></span>
+<span id="cb37-10"><a href="coding-best-practices.html#cb37-10" tabindex="-1"></a><span class="do">########################################################################</span></span>
+<span id="cb37-11"><a href="coding-best-practices.html#cb37-11" tabindex="-1"></a><span class="do">########################################################################</span></span></code></pre></div>
+<p>This block of comment operators is common in .R but not .Rmd files because .Rmd files have their own specific type of header, known as the <a href="https://zsmith27.github.io/rmarkdown_crash-course/lesson-4-yaml-headers.html">YAML</a>, which contains the title, author, date, and formatting outputs for the .Rmd file:</p>
+<p><img src="Module2_2_Input/Image2.png" width="300px" style="display: block; margin: auto;" /></p>
+<p>We will now review how annotations within the script itself can make a huge difference in understanding the code within.</p>
+</div>
+<div id="annotations" class="section level3 hasAnchor">
+<h3>Annotations<a href="coding-best-practices.html#annotations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Before we review coding style considerations, it is important to address code annotating. So, what are annotations and why are they important?</p>
+<p>Annotations are notes embedded within your code as comments that will not be run. The beauty of annotating your code is that not only others, but future you, will be able to read through and better understand what a particular piece of code does. We suggest annotating your code while you write it and incorporate a lot of description. While not every single line needs an annotation, or a very detailed one, it is helpful to provide comments and annotation as much as you can while maintaining feasibility.</p>
+<div id="general-annotation-style" class="section level4 hasAnchor">
+<h4>General annotation style<a href="coding-best-practices.html#general-annotation-style" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>In general, annotations will be short sentences that describe what your code does or why you are executing that specific code. This can be helpful when you are defining a covariate a specific way, performing a specific analytical technique, or just generally explaining why you are doing what you’re doing.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="coding-best-practices.html#cb38-1" tabindex="-1"></a><span class="co"># Performing logistic regression to assess association between xyz and abc</span></span>
+<span id="cb38-2"><a href="coding-best-practices.html#cb38-2" tabindex="-1"></a><span class="co"># Regression confounders: V1, V2, V3 ...</span></span>
+<span id="cb38-3"><a href="coding-best-practices.html#cb38-3" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="coding-best-practices.html#cb38-4" tabindex="-1"></a>xyz.regression.output <span class="ot">=</span> <span class="fu">glm</span>(xyz <span class="sc">~</span> abc <span class="sc">+</span> V1 <span class="sc">+</span> V2 <span class="sc">+</span> V3, <span class="at">family=</span><span class="fu">binomial</span>(), <span class="at">data=</span>example.data)</span></code></pre></div>
+</div>
+<div id="mid-script-headings" class="section level4 hasAnchor">
+<h4>Mid-script headings<a href="coding-best-practices.html#mid-script-headings" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Another common approach to annotations is to use mid-script type headings to separate out the script into various sections. For example, you might want to create distinct sections for “Loading Packages, Data, and Setup”, “Covariate Definition”, “Correlation Analysis”, “Regression Analysis”, etc. This can help you, and others, reading your script, to navigate the script more easily. It also can be more visually pleasing to see the script split up into multiple sections as opposed to one giant chunk of code interspersed with comments. Similar to above, the following example is specific to .R files. For .Rmd files, sub headers can be created by increasing the number of <code>#</code> before the header.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="coding-best-practices.html#cb39-1" tabindex="-1"></a><span class="do">###########################################################################</span></span>
+<span id="cb39-2"><a href="coding-best-practices.html#cb39-2" tabindex="-1"></a><span class="do">###########################################################################</span></span>
+<span id="cb39-3"><a href="coding-best-practices.html#cb39-3" tabindex="-1"></a><span class="do">###</span></span>
+<span id="cb39-4"><a href="coding-best-practices.html#cb39-4" tabindex="-1"></a><span class="do">### Regression Analyses</span></span>
+<span id="cb39-5"><a href="coding-best-practices.html#cb39-5" tabindex="-1"></a><span class="do">###</span></span>
+<span id="cb39-6"><a href="coding-best-practices.html#cb39-6" tabindex="-1"></a><span class="do">### You can even add some descriptions or notes here about this section!</span></span>
+<span id="cb39-7"><a href="coding-best-practices.html#cb39-7" tabindex="-1"></a><span class="do">###</span></span>
+<span id="cb39-8"><a href="coding-best-practices.html#cb39-8" tabindex="-1"></a><span class="do">###########################################################################</span></span>
+<span id="cb39-9"><a href="coding-best-practices.html#cb39-9" tabindex="-1"></a></span>
+<span id="cb39-10"><a href="coding-best-practices.html#cb39-10" tabindex="-1"></a></span>
+<span id="cb39-11"><a href="coding-best-practices.html#cb39-11" tabindex="-1"></a><span class="co"># Performing logistic regression to assess association between xyz and abc</span></span>
+<span id="cb39-12"><a href="coding-best-practices.html#cb39-12" tabindex="-1"></a><span class="co"># Regression confounders: V1, V2, V3 ...</span></span>
+<span id="cb39-13"><a href="coding-best-practices.html#cb39-13" tabindex="-1"></a></span>
+<span id="cb39-14"><a href="coding-best-practices.html#cb39-14" tabindex="-1"></a>xyz.regression.output <span class="ot">=</span> <span class="fu">glm</span>(xyz <span class="sc">~</span> abc <span class="sc">+</span> V1 <span class="sc">+</span> V2 <span class="sc">+</span> V3, <span class="at">family=</span><span class="fu">binomial</span>(), <span class="at">data=</span>example.data)</span></code></pre></div>
+<p><b>General tips for annotations:</b></p>
+<ul>
+<li>Make comments that are useful and meaningful</li>
+<li>You don’t need to comment every single line</li>
+<li>In general, you probably won’t over-comment your script, so more is generally better</li>
+<li>That being said, don’t write super long paragraphs every few lines</li>
+<li>Split up your script into various sections using mid-script headings when appropriate</li>
+</ul>
+</div>
+<div id="quick-short-comments-and-annotations" class="section level4 hasAnchor">
+<h4>Quick, short comments and annotations<a href="coding-best-practices.html#quick-short-comments-and-annotations" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>While it is important to provide descriptive annotations, not every one needs to be a sentence or longer. As stated previously, it is not necessary to comment every single line. Here is an example of very brief commenting:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="coding-best-practices.html#cb40-1" tabindex="-1"></a><span class="co"># Loading necessary packages</span></span>
+<span id="cb40-2"><a href="coding-best-practices.html#cb40-2" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="coding-best-practices.html#cb40-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)  <span class="co"># Plotting package</span></span></code></pre></div>
+<p>In the example above, we can see that these short comments clearly convey what the script does – load the necessary package and indicate what the package is needed for. Short, one line annotations can also be placed after lines to clarify that specific line or within the larger mid-script headings to split up these larger sections of code.</p>
+</div>
+</div>
+</div>
+<div id="coding-style" class="section level2 hasAnchor">
+<h2>Coding Style<a href="coding-best-practices.html#coding-style" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Coding style is often a contentious topic! There are MANY styles of coding, and no two coders have the same exact style, even if they are following the same reference. Here, we will provide some guides to coding style and go over some of the basic, general tips for making your code readable and efficient. Here is an example showing how you can use spacing to align variable assignment:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="coding-best-practices.html#cb41-1" tabindex="-1"></a><span class="co"># Example of using spacing for alignment of variable assignment</span></span>
+<span id="cb41-2"><a href="coding-best-practices.html#cb41-2" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="coding-best-practices.html#cb41-3" tabindex="-1"></a>Longer_variable_name_x <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb41-4"><a href="coding-best-practices.html#cb41-4" tabindex="-1"></a>Short_name_y           <span class="ot">=</span> <span class="dv">2</span></span></code></pre></div>
+<p>Note that guides will suggest you use <code>&lt;-</code> as the assignment operator. However, for most situations, <code>&lt;-</code> and <code>=</code> will do the same thing.</p>
+<p>For spacing around certain symbols and operators:</p>
+<ul>
+<li>Include a space after <code>if</code>, before parenthesis</li>
+<li>Include a space on either side of symbols such as <code>&lt;</code></li>
+<li>The first (opening) curly brace should not be on its own line, but the second (closing) should</li>
+</ul>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="coding-best-practices.html#cb42-1" tabindex="-1"></a><span class="co"># Example of poor style</span></span>
+<span id="cb42-2"><a href="coding-best-practices.html#cb42-2" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="coding-best-practices.html#cb42-3" tabindex="-1"></a><span class="cf">if</span>(Longer_variable_name_x <span class="sc">&lt;</span>Short_name_y) {Short_name_y <span class="ot">=</span> <span class="dv">0</span>}</span>
+<span id="cb42-4"><a href="coding-best-practices.html#cb42-4" tabindex="-1"></a></span>
+<span id="cb42-5"><a href="coding-best-practices.html#cb42-5" tabindex="-1"></a><span class="co"># Example of better style</span></span>
+<span id="cb42-6"><a href="coding-best-practices.html#cb42-6" tabindex="-1"></a></span>
+<span id="cb42-7"><a href="coding-best-practices.html#cb42-7" tabindex="-1"></a><span class="cf">if</span> (Longer_variable_name_x <span class="sc">&lt;</span> Short_name_y) {</span>
+<span id="cb42-8"><a href="coding-best-practices.html#cb42-8" tabindex="-1"></a>  Short_name_y <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb42-9"><a href="coding-best-practices.html#cb42-9" tabindex="-1"></a>}</span></code></pre></div>
+<p><strong>Summary of general tips for coding style:</strong></p>
+<ul>
+<li>Variable names
+<ul>
+<li>Make them intuitive, short, but descriptive</li>
+<li>Use the same convention throughout (ex: separating words with <code>.</code> or <code>_</code>)</li>
+</ul></li>
+<li>Data names
+<ul>
+<li>Use _datatype (e.g., cytokines_df for a dataframe data type) following a short, concise name for your data so that readers know what type of input is being used AND/OR</li>
+<li>Clearly define important data frames or other input in your code comments (e.g., “cytokines” refers to a data frame containing all of the cytokine data from this experiment)</li>
+</ul></li>
+<li>Separate long lines onto two or more lines (typically for loops or functions)</li>
+<li>Use <code>&lt;-</code> for assignment operator</li>
+<li>Using spacing appropriately for readability
+<ul>
+<li>Alignment of lines</li>
+<li>After certain keywords when appropriate</li>
+</ul></li>
+<li>Be consistent throughout
+<ul>
+<li>Example: if you use Tidyverse conventions, continue to use it throughout your script</li>
+</ul></li>
+<li>Try to make your code as readable as possible</li>
+</ul>
+<p><strong>Common style guides:</strong></p>
+<ul>
+<li><a href="https://web.stanford.edu/class/cs109l/unrestricted/resources/google-style.html">Google’s Style Guide</a></li>
+<li><a href="https://style.tidyverse.org">Tidyverse Style Guide</a></li>
+<li><a href="https://bookdown.org/content/d1e53ac9-28ce-472f-bc2c-f499f18264a3/">R Blogger’s Best Coding Practices</a></li>
+</ul>
+</div>
+<div id="script-organization" class="section level2 hasAnchor">
+<h2>Script Organization<a href="coding-best-practices.html#script-organization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Lastly, it is important to note that organizing your script efficiently can help with readability as well. In general, as stated before, the beginning of your script should contain some sort of header lines to describe the script. The basic ordering we suggest for most scripts is:</p>
+<ol style="list-style-type: decimal">
+<li>Header section</li>
+<li>Loading libraries and data</li>
+<li>Function definitions (if any user defined functions exist)</li>
+<li>Data and variables manipulation</li>
+<li>Analyses</li>
+</ol>
+<p>While following this exact organization isn’t absolute, using this structure or something similar can greatly improve the clarity of your analyses and make them easier for others to follow.</p>
+</div>
+<div id="concluding-remarks-5" class="section level2 hasAnchor">
+<h2>Concluding Remarks<a href="coding-best-practices.html#concluding-remarks-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this module, we demonstrate basic coding style and best practices. Please reference additional style guides (above) and create your own style from best practices that work for you. Aim to make your code understandable and readable, and consider what a future reader, including yourself, will need to understand why you wrote your code the way you did and how to apply your code to new analyses.</p>
+<p><br></p>
+<p><label class="tykfont">
+Test Your Knowledge
+</label></p>
+<div class="tyk">
+<p>Using the input file provided (“Module2_2_TYKInput.R”):</p>
+<ol style="list-style-type: decimal">
+<li>Convert the script and annotations into R Markdown format.</li>
+<li>Improve the organization, comments, and scripting to follow the coding best practices described in this module. List the changes you made at the bottom of the new R Markdown file.</li>
+</ol>
+<p><em>Notes on the starting code:</em></p>
+<ol style="list-style-type: decimal">
+<li>This starting code uses dummy data to demonstrate how to make a graph in R that includes bars representing the mean, with standard deviation error bars overlaid.</li>
+<li>You don’t need to understand every step in the code to be able to improve the existing coding style! You can run each step of the code if needed to understand better what it does.</li>
+</ol>
+</div>
+<!-- ############################################################################################################################# -->
+<!-- ################################################## -->
+<!-- ################################################## -->
+<!-- START SECTION THREE  -->
+<!-- ################################################## -->
+<!-- ################################################## -->
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="downloading-and-programming-in-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-manipulation-and-reshaping.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

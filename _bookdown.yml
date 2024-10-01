@@ -2,3 +2,6 @@ delete_merged_file: true
 language:
   ui:
     chapter_name: "Chapter "
+    
+# Specify the output directory for the Bookdown build (output directly to main directory)
+output_dir: "."

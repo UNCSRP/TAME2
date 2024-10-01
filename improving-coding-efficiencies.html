@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Improving Coding Efficiencies | TAME 2.0: An Update to the TAME Toolkit for Introductory Data Science, Chemical-Biological Analyses, Machine Learning and Predictive Modeling, and Database Mining for Environmental Health Research</title>
+  <meta name="description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Improving Coding Efficiencies | TAME 2.0: An Update to the TAME Toolkit for Introductory Data Science, Chemical-Biological Analyses, Machine Learning and Predictive Modeling, and Database Mining for Environmental Health Research" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Improving Coding Efficiencies | TAME 2.0: An Update to the TAME Toolkit for Introductory Data Science, Chemical-Biological Analyses, Machine Learning and Predictive Modeling, and Database Mining for Environmental Health Research" />
+  
+  <meta name="twitter:description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
+  
+
+<meta name="author" content="Rager Lab" />
+
+
+<meta name="date" content="2024-10-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="Icons_Used_Throughout/Favicon.png" type="image/x-icon" />
+<link rel="prev" href="data-manipulation-and-reshaping.html"/>
+<link rel="next" href="data-visualizations.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.33/datatables.js"></script>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/tabwid-1.1.3/tabwid.css" rel="stylesheet" />
+<script src="libs/tabwid-1.1.3/tabwid.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="Icons_Used_Throughout/TAME 2.0 Logo.png"><br></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="part"><span><b>Chapter 1 Introductory <br>Data Science</b></span></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html"><i class="fa fa-check"></i>FAIR Data Management Practices</a>
+<ul>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#introduction-to-training-module"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#introduction-to-fair"><i class="fa fa-check"></i>Introduction to FAIR</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#breaking-down-fair-letter-by-letter"><i class="fa fa-check"></i>Breaking Down FAIR, Letter-by-Letter</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#what-does-this-mean-for-you"><i class="fa fa-check"></i>What Does This Mean for You?</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#data-repositories-for-sharing-of-data"><i class="fa fa-check"></i>Data Repositories for Sharing of Data</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#recent-shifts-in-regulatory-policies-for-data-sharing"><i class="fa fa-check"></i>Recent Shifts in Regulatory Policies for Data Sharing</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#additional-training-resources-on-fair"><i class="fa fa-check"></i>Additional Training Resources on FAIR</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html"><i class="fa fa-check"></i>Data Sharing through Online Repositories</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#an-overview-and-example-with-the-dataverse-repository"><i class="fa fa-check"></i>An Overview and Example with the Dataverse Repository</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#introduction-to-training-module-1"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#data-repositories"><i class="fa fa-check"></i>Data Repositories</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#the-dataverse-project"><i class="fa fa-check"></i>The Dataverse Project</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#what-is-a-dataverse"><i class="fa fa-check"></i>What is a Dataverse?</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#metadata"><i class="fa fa-check"></i>Metadata</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#creating-a-dataverse"><i class="fa fa-check"></i>Creating a Dataverse</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#creating-a-dataset"><i class="fa fa-check"></i>Creating a Dataset</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#concluding-remarks-1"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html"><i class="fa fa-check"></i>File Management using Github</a>
+<ul>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#introduction-to-training-module-2"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#creating-an-account"><i class="fa fa-check"></i>Creating an Account</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#creating-a-repository"><i class="fa fa-check"></i>Creating a Repository</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#uploading-code"><i class="fa fa-check"></i>Uploading Code</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#adding-subfolders-in-a-repository"><i class="fa fa-check"></i>Adding Subfolders in a Repository</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#updating-code"><i class="fa fa-check"></i>Updating Code</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#updating-repository-titles-and-structure-to-support-a-manuscript"><i class="fa fa-check"></i>Updating Repository Titles and Structure to Support a Manuscript</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#tracking-code-changes-using-github-branches"><i class="fa fa-check"></i>Tracking Code Changes using Github Branches</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#concluding-remarks-2"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html"><i class="fa fa-check"></i>Data Wrangling in Excel</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#introduction-to-training-module-3"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#save-a-copy-of-the-soon-to-be-organized-and-cleaned-dataset-as-a-new-file"><i class="fa fa-check"></i>Save a Copy of the Soon-To-Be Organized and Cleaned Dataset as a New File</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#remove-extraneous-white-space"><i class="fa fa-check"></i>Remove Extraneous White Space</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#replace-missing-data-with-na"><i class="fa fa-check"></i>Replace Missing Data with “NA”</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#create-a-metadata-tab"><i class="fa fa-check"></i>Create a Metadata Tab</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#abbreviate-and-capitalize-categorical-data"><i class="fa fa-check"></i>Abbreviate and Capitalize Categorical Data</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#alphabetize-sort-the-data-by-the-categorical-variable-of-interest"><i class="fa fa-check"></i>Alphabetize (Sort) the Data by the Categorical Variable of Interest</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#create-a-new-subject-number-column"><i class="fa fa-check"></i>Create a New Subject Number Column</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#remove-special-symbols-and-dashes"><i class="fa fa-check"></i>Remove Special Symbols and Dashes</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#bold-all-column-names-and-center-all-data"><i class="fa fa-check"></i>Bold all Column Names and Center all Data</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#create-a-subject-identifier-column"><i class="fa fa-check"></i>Create a Subject Identifier Column</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#separate-subject-demographic-data-from-experimental-measurements"><i class="fa fa-check"></i>Separate Subject Demographic Data from Experimental Measurements</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#convert-data-from-wide-to-long-format"><i class="fa fa-check"></i>Convert Data from Wide to Long Format</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#pivoting-data-from-a-wide-to-long-format"><i class="fa fa-check"></i>Pivoting Data from a Wide to Long Format</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#generating-summary-level-statistics-with-pivot-tables"><i class="fa fa-check"></i>Generating Summary-Level Statistics with Pivot Tables</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#excel-vs.-r-which-should-you-use"><i class="fa fa-check"></i>Excel vs. R: Which Should You Use?</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#concluding-remarks-3"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 2 Coding in R</b></span></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html"><i class="fa fa-check"></i>Downloading and Programming in R</a>
+<ul>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#introduction-to-training-module-4"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#general-introduction-and-installation-of-r-and-rstudio"><i class="fa fa-check"></i>General Introduction and Installation of R and RStudio</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#introduction-to-r-packages"><i class="fa fa-check"></i>Introduction to R Packages</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#scripting-basics"><i class="fa fa-check"></i>Scripting Basics</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#code-troubleshooting"><i class="fa fa-check"></i>Code Troubleshooting</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#concluding-remarks-4"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html"><i class="fa fa-check"></i>Coding “Best” Practices</a>
+<ul>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#introduction-to-training-module-5"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#scripting-file-types"><i class="fa fa-check"></i>Scripting File Types</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#script-headers-and-annotation"><i class="fa fa-check"></i>Script Headers and Annotation</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#coding-style"><i class="fa fa-check"></i>Coding Style</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#script-organization"><i class="fa fa-check"></i>Script Organization</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#concluding-remarks-5"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html"><i class="fa fa-check"></i>Data Manipulation and Reshaping</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#introduction-to-training-module-6"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#data-manipulation-using-base-r"><i class="fa fa-check"></i>Data Manipulation Using Base R</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#introduction-to-tidyverse"><i class="fa fa-check"></i>Introduction to Tidyverse</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#concluding-remarks-6"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html"><i class="fa fa-check"></i>Improving Coding Efficiencies</a>
+<ul>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#introduction-to-training-module-7"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#loops"><i class="fa fa-check"></i>Loops</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#functions"><i class="fa fa-check"></i>Functions</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#list-operations"><i class="fa fa-check"></i>List operations</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#concluding-remarks-7"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#additional-resources-2"><i class="fa fa-check"></i>Additional Resources</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 3 Basics of <br>Data Analysis and Visualizations</b></span></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html"><i class="fa fa-check"></i>Data Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#introduction-to-data-visualizations"><i class="fa fa-check"></i>Introduction to Data Visualizations</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#introduction-to-training-module-8"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#density-plot-visualization"><i class="fa fa-check"></i>Density Plot Visualization</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#boxplot-visualization"><i class="fa fa-check"></i>Boxplot Visualization</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#correlation-visualizations"><i class="fa fa-check"></i>Correlation Visualizations</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#heatmap-visualization"><i class="fa fa-check"></i>Heatmap Visualization</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#concluding-remarks-8"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html"><i class="fa fa-check"></i>Improving Data Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#introduction-to-data-visulization-conventions"><i class="fa fa-check"></i>Introduction to Data Visulization Conventions</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#introduction-to-training-module-9"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#creating-an-improved-boxplot-visualization"><i class="fa fa-check"></i>Creating an Improved Boxplot Visualization</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#creating-an-improved-heatmap-visualization"><i class="fa fa-check"></i>Creating an Improved Heatmap Visualization</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#creating-multi-plot-figures"><i class="fa fa-check"></i>Creating Multi-Plot Figures</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#concluding-remarks-9"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html"><i class="fa fa-check"></i>Normality Tests and Data Transformations</a>
+<ul>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#introduction-to-training-module-10"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#what-is-a-normal-distribution"><i class="fa fa-check"></i>What is a Normal Distribution?</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#qualitative-assessment-of-normality"><i class="fa fa-check"></i>Qualitative Assessment of Normality</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#quantitative-normality-assessment"><i class="fa fa-check"></i>Quantitative Normality Assessment</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#data-transformation"><i class="fa fa-check"></i>Data Transformation</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#additional-considerations-regarding-normality"><i class="fa fa-check"></i>Additional Considerations Regarding Normality</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#concluding-remarks-10"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html"><i class="fa fa-check"></i>Intoduction to Statistical Tests</a>
+<ul>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#introduction-to-training-module-11"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#assessing-normality-homogeneity-of-variance"><i class="fa fa-check"></i>Assessing Normality &amp; Homogeneity of Variance</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#two-group-visualizations-and-statistical-comparisons-using-the-t-test"><i class="fa fa-check"></i>Two-Group Visualizations and Statistical Comparisons using the T-Test</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#three-group-visualizations-and-statistical-comparisons-using-an-anova"><i class="fa fa-check"></i>Three-Group Visualizations and Statistical Comparisons using an ANOVA</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#regression-modeling-and-visualization-linear-and-logistic-regressions"><i class="fa fa-check"></i>Regression Modeling and Visualization: Linear and Logistic Regressions</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#statistical-evaluations-of-categorical-data-using-the-chi-squared-test-and-fishers-exact-test"><i class="fa fa-check"></i>Statistical Evaluations of Categorical Data using the Chi-Squared Test and Fisher’s Exact Test</a></li>
+<li class="chapter" data-level="" data-path="intoduction-to-statistical-tests.html"><a href="intoduction-to-statistical-tests.html#concluding-remarks-11"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 4 Converting Wet Lab Data into Dry Lab Analyses</b></span></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html"><i class="fa fa-check"></i>Overview of Experimental Design and Example Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#introduction-to-training-module-12"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#replicates"><i class="fa fa-check"></i>Replicates</a></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#orientation-to-example-data-for-chapter-4"><i class="fa fa-check"></i>Orientation to Example Data for Chapter 4</a></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#concluding-remarks-12"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html"><i class="fa fa-check"></i>Data Import, Processing, and Summary Statistics</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#introduction-to-training-module-13"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#data-import"><i class="fa fa-check"></i>Data Import</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#handling-missing-values"><i class="fa fa-check"></i>Handling Missing Values</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#averaging-replicates"><i class="fa fa-check"></i>Averaging Replicates</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#descriptive-statistics"><i class="fa fa-check"></i>Descriptive Statistics</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#normality-assessment-and-data-transformation"><i class="fa fa-check"></i>Normality Assessment and Data Transformation</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#concluding-remarks-13"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html"><i class="fa fa-check"></i>Data Import from PDF Sources</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#introduction-to-training-module-14"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#importing-data-from-many-single-pdfs-with-the-same-formatting"><i class="fa fa-check"></i>Importing Data from Many Single PDFs with the Same Formatting</a></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#importing-data-stored-in-pdf-tables"><i class="fa fa-check"></i>Importing Data Stored in PDF Tables</a></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#concluding-remarks-14"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html"><i class="fa fa-check"></i>Two-Group Comparisons and Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#introduction-to-training-module-15"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#overview-of-two-group-statistical-tests"><i class="fa fa-check"></i>Overview of Two Group Statistical Tests</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#statistical-vs-biological-significance"><i class="fa fa-check"></i>Statistical vs Biological Significance</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#unpaired-test-example"><i class="fa fa-check"></i>Unpaired Test Example</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#paired-test-example"><i class="fa fa-check"></i>Paired Test Example</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#visualizing-results"><i class="fa fa-check"></i>Visualizing Results</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#concluding-remarks-15"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html"><i class="fa fa-check"></i>Multi-Group and Multi-Variable Comparisons and Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#introduction-to-training-module-16"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#overview-of-multi-group-statistical-tests"><i class="fa fa-check"></i>Overview of Multi-Group Statistical Tests</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#multi-group-analysis-example"><i class="fa fa-check"></i>Multi-Group Analysis Example</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#visualization-of-multi-group-statistical-results"><i class="fa fa-check"></i>Visualization of Multi-Group Statistical Results</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#concluding-remarks-16"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 5 Machine Learning &amp; Artificial Intelligence</b></span></li>
+<li class="chapter" data-level="" data-path="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html"><a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html"><i class="fa fa-check"></i>Introduction to Artificial Intelligence, Machine Learning, and Predictive Modeling for Environmental Health</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html"><a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html#introduction-to-training-module-17"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html"><a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html#general-historical-context-and-taxonomy-of-modern-aiml"><i class="fa fa-check"></i>General Historical Context and Taxonomy of Modern AI/ML</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html"><a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html#application-of-machine-learning-in-environmental-health-science"><i class="fa fa-check"></i>Application of Machine Learning in Environmental Health Science</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html"><a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html#concluding-remarks-17"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html"><i class="fa fa-check"></i>Supervised Machine Learning</a>
+<ul>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#introduction-to-training-module-18"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#types-of-machine-learning"><i class="fa fa-check"></i>Types of Machine Learning</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#types-of-supervised-machine-learning-algorithms"><i class="fa fa-check"></i>Types of Supervised Machine Learning Algorithms</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#training-supervised-machine-learning-models"><i class="fa fa-check"></i>Training Supervised Machine Learning Models</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#assessing-classification-based-model-performance"><i class="fa fa-check"></i>Assessing Classification-Based Model Performance</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#introduction-to-activity-and-example-dataset"><i class="fa fa-check"></i>Introduction to Activity and Example Dataset</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#testing-for-differences-in-predictor-variables-across-the-outcome-classes"><i class="fa fa-check"></i>Testing for Differences in Predictor Variables across the Outcome Classes</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#predicting-ias-detection-with-a-random-forest-rf-model"><i class="fa fa-check"></i>Predicting iAs Detection with a Random Forest (RF) Model</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#class-imbalance"><i class="fa fa-check"></i>Class Imbalance</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#concluding-remarks-18"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html"><i class="fa fa-check"></i>Supervised Machine Learning Model Interpretation</a>
+<ul>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#introduction-to-training-module-19"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#variable-importance"><i class="fa fa-check"></i>Variable Importance</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#decision-boundary"><i class="fa fa-check"></i>Decision Boundary</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#introduction-to-example-dataset-and-activity"><i class="fa fa-check"></i>Introduction to Example Dataset and Activity</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#predicting-ias-detection-with-a-random-forest-rf-model-1"><i class="fa fa-check"></i>Predicting iAs Detection with a Random Forest (RF) Model</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#variable-importance-plot"><i class="fa fa-check"></i>Variable Importance Plot</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#decision-boundary-plot"><i class="fa fa-check"></i>Decision Boundary Plot</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#decision-boundary-plot-incorporating-smote"><i class="fa fa-check"></i>Decision Boundary Plot Incorporating SMOTE</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#concluding-remarks-19"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><i class="fa fa-check"></i>Unsupervised Machine Learning Part 1: K-Means Clustering &amp; PCA</a>
+<ul>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html#introduction-to-training-module-20"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html#introduction-to-unsupervised-machine-learning"><i class="fa fa-check"></i>Introduction to Unsupervised Machine Learning</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html#introduction-to-example-data"><i class="fa fa-check"></i>Introduction to Example Data</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html#identifying-clusters-of-chemicals-through-k-means"><i class="fa fa-check"></i>Identifying Clusters of Chemicals through <em>K</em>-Means</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html#principal-component-analysis-pca-1"><i class="fa fa-check"></i>Principal Component Analysis (PCA)</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html#incorporating-k-means-into-pca-for-predictive-modeling"><i class="fa fa-check"></i>Incorporating <em>K</em>-Means into PCA for Predictive Modeling</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html#concluding-remarks-20"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><i class="fa fa-check"></i>Unsupervised Machine Learning Part 2: Additional Clustering Applications</a>
+<ul>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#introduction-to-training-module-21"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#k-means-clustering-1"><i class="fa fa-check"></i><em>K</em>-Means Clustering</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#hierarchical-clustering"><i class="fa fa-check"></i>Hierarchical Clustering</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#introduction-to-example-data-1"><i class="fa fa-check"></i>Introduction to Example Data</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#hierarchical-clustering-1"><i class="fa fa-check"></i>Hierarchical Clustering</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#clustering-plot"><i class="fa fa-check"></i>Clustering Plot</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#hierarchical-clustering-visualization"><i class="fa fa-check"></i>Hierarchical Clustering Visualization</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#variable-contributions"><i class="fa fa-check"></i>Variable Contributions</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#concluding-remarks-21"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 6 Applications in Toxicology &amp; Exposure Science</b></span></li>
+<li class="part"><span><b>Chapter 7 Environmental Health Database Mining</b></span></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">TAME 2.0: An Update to the TAME Toolkit for Introductory Data Science, Chemical-Biological Analyses, Machine Learning and Predictive Modeling, and Database Mining for Environmental Health Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="improving-coding-efficiencies" class="section level1 hasAnchor">
+<h1>Improving Coding Efficiencies<a href="improving-coding-efficiencies.html#improving-coding-efficiencies" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This training module was developed by Elise Hickman, Alexis Payton, Kyle Roell, and Julia E. Rager.</p>
+<p>All input files (script, data, and figures) can be downloaded from the <a href="https://github.com/UNCSRP/TAME2">UNC-SRP TAME2 GitHub website</a>.</p>
+<div id="introduction-to-training-module-7" class="section level2 hasAnchor">
+<h2>Introduction to Training Module<a href="improving-coding-efficiencies.html#introduction-to-training-module-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this module, we’ll explore how to improve coding efficiency. Coding efficiency involves performing a task in as few lines as possible and can…</p>
+<ul>
+<li>Shorten code by eliminating redundancies</li>
+<li>Reduce the number of typos</li>
+<li>Help other coders understand script better</li>
+</ul>
+<p>Specific approaches that we will discuss in this module include loops, functions, and list operations, which can all be used to make code more succinct. A <strong>loop</strong> is employed when we want to perform a repetitive task, while a <strong>function</strong> contains a block of code organized together to perform one specific task. <strong>List operations</strong>, in which the same function is applied to a list of dataframes, can also be used to code more efficiently.</p>
+<div id="training-modules-environmental-health-questions-1" class="section level3 hasAnchor">
+<h3>Training Module’s Environmental Health Questions<a href="improving-coding-efficiencies.html#training-modules-environmental-health-questions-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This training module was specifically developed to answer the following environmental health questions:</p>
+<ol style="list-style-type: decimal">
+<li><p>Are there statistically significant differences in drinking water arsenic, cadmium, and chromium between normal weight (BMI &lt; 25) and overweight (BMI <span class="math inline">\(\geq\)</span> 25) subjects?</p></li>
+<li><p>Are there statistically significant differences in drinking water arsenic, cadmium, and chromium between underweight (BMI &lt; 18.5) and non-underweight (BMI <span class="math inline">\(\geq\)</span> 18.5) subjects?</p></li>
+<li><p>Are there statistically significant difference in drinking water arsenic, cadmium, and chromium between non-obese (BMI &lt; 29.9) and obese (BMI <span class="math inline">\(\geq\)</span> 29.9) subjects?</p></li>
+</ol>
+<p>We will demonstrate how this analysis can be approached using for loops, functions, or list operations. We will introduce the syntax and structure of each approach first, followed by application of the approach to our data. First, let’s prepare the workspace and familiarize ourselves with the dataset we are going to use.</p>
+</div>
+<div id="data-import-and-workspace-preparation" class="section level3 hasAnchor">
+<h3>Data Import and Workspace Preparation<a href="improving-coding-efficiencies.html#data-import-and-workspace-preparation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="installing-required-packages" class="section level4 hasAnchor">
+<h4>Installing required packages<a href="improving-coding-efficiencies.html#installing-required-packages" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you. We will be using the <em>tidyverse</em> package for data manipulation steps and the <a href="https://github.com/kassambara/rstatix"><em>rstatix</em></a> package for statistical tests, as it provides pipe friendly adaptations of the base R statistical tests and returns results in a dataframe rather than a list format, making results easier to access. This brings up an important aspect of coding efficiency - sometimes, there is already a package that has been designed with functions to help you execute your desired analysis in an efficient way, so you don’t need to write custom functions yourself! So, don’t forget to explore packages relevant to your analysis before spending a lot of time developing custom solutions (although, sometimes this is necessary).</p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="improving-coding-efficiencies.html#cb118-1" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;tidyverse&quot;</span>))</span>
+<span id="cb118-2"><a href="improving-coding-efficiencies.html#cb118-2" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span>
+<span id="cb118-3"><a href="improving-coding-efficiencies.html#cb118-3" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;rstatix&quot;</span>))</span>
+<span id="cb118-4"><a href="improving-coding-efficiencies.html#cb118-4" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;rstatix&quot;</span>)</span></code></pre></div>
+</div>
+<div id="loading-required-packages" class="section level4 hasAnchor">
+<h4>Loading required packages<a href="improving-coding-efficiencies.html#loading-required-packages" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="improving-coding-efficiencies.html#cb119-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb119-2"><a href="improving-coding-efficiencies.html#cb119-2" tabindex="-1"></a><span class="fu">library</span>(rstatix)</span></code></pre></div>
+</div>
+<div id="setting-your-working-directory" class="section level4 hasAnchor">
+<h4>Setting your working directory<a href="improving-coding-efficiencies.html#setting-your-working-directory" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="improving-coding-efficiencies.html#cb120-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;/file path to where your input files are&quot;</span>)</span></code></pre></div>
+</div>
+<div id="importing-example-dataset" class="section level4 hasAnchor">
+<h4>Importing example dataset<a href="improving-coding-efficiencies.html#importing-example-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The first example dataset contains subject demographic data, and the second dataset contains corresponding chemical data. Familiarize yourself with these data used previously in <strong>TAME 2.0 Module 2.3 Data Manipulation and Reshaping</strong>.</p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="improving-coding-efficiencies.html#cb121-1" tabindex="-1"></a><span class="co"># Load the demographic data</span></span>
+<span id="cb121-2"><a href="improving-coding-efficiencies.html#cb121-2" tabindex="-1"></a>demographic_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Module2_4_Input/Module2_4_InputData1.csv&quot;</span>)</span>
+<span id="cb121-3"><a href="improving-coding-efficiencies.html#cb121-3" tabindex="-1"></a></span>
+<span id="cb121-4"><a href="improving-coding-efficiencies.html#cb121-4" tabindex="-1"></a><span class="co"># View the top of the demographic dataset</span></span>
+<span id="cb121-5"><a href="improving-coding-efficiencies.html#cb121-5" tabindex="-1"></a><span class="fu">head</span>(demographic_data) </span></code></pre></div>
+<pre><code>##   ID  BMI     MAge MEdu       BW GA
+## 1  1 27.7 22.99928    3 3180.058 34
+## 2  2 26.8 30.05142    3 3210.823 43
+## 3  3 33.2 28.04660    3 3311.551 40
+## 4  4 30.1 34.81796    3 3266.844 32
+## 5  5 37.4 42.68440    3 3664.088 35
+## 6  6 33.3 24.94960    3 3328.988 40</code></pre>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="improving-coding-efficiencies.html#cb123-1" tabindex="-1"></a><span class="co"># Load the chemical data</span></span>
+<span id="cb123-2"><a href="improving-coding-efficiencies.html#cb123-2" tabindex="-1"></a>chemical_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Module2_4_Input/Module2_4_InputData2.csv&quot;</span>)</span>
+<span id="cb123-3"><a href="improving-coding-efficiencies.html#cb123-3" tabindex="-1"></a></span>
+<span id="cb123-4"><a href="improving-coding-efficiencies.html#cb123-4" tabindex="-1"></a><span class="co"># View the top of the chemical dataset</span></span>
+<span id="cb123-5"><a href="improving-coding-efficiencies.html#cb123-5" tabindex="-1"></a><span class="fu">head</span>(chemical_data)</span></code></pre></div>
+<pre><code>##   ID     DWAs     DWCd     DWCr       UAs       UCd      UCr
+## 1  1 6.426464 1.292941 51.67987 10.192695 0.7537104 42.60187
+## 2  2 7.832384 1.798535 50.10409 11.815088 0.9789506 41.30757
+## 3  3 7.516569 1.288461 48.74001 10.079057 0.1903262 36.47716
+## 4  4 5.906656 2.075259 50.92745  8.719123 0.9364825 42.47987
+## 5  5 7.181873 2.762643 55.16882  9.436559 1.4977829 47.78528
+## 6  6 9.723429 3.054057 51.14812 11.589403 1.6645837 38.26386</code></pre>
+</div>
+<div id="preparing-the-example-dataset" class="section level4 hasAnchor">
+<h4>Preparing the example dataset<a href="improving-coding-efficiencies.html#preparing-the-example-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>For ease of analysis, we will merge these two datasets before proceeding.</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="improving-coding-efficiencies.html#cb125-1" tabindex="-1"></a><span class="co"># Merging data</span></span>
+<span id="cb125-2"><a href="improving-coding-efficiencies.html#cb125-2" tabindex="-1"></a>full_data <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(demographic_data, chemical_data, <span class="at">by =</span> <span class="st">&quot;ID&quot;</span>)</span>
+<span id="cb125-3"><a href="improving-coding-efficiencies.html#cb125-3" tabindex="-1"></a></span>
+<span id="cb125-4"><a href="improving-coding-efficiencies.html#cb125-4" tabindex="-1"></a><span class="co"># Previewing new data</span></span>
+<span id="cb125-5"><a href="improving-coding-efficiencies.html#cb125-5" tabindex="-1"></a><span class="fu">head</span>(full_data)</span></code></pre></div>
+<pre><code>##   ID  BMI     MAge MEdu       BW GA     DWAs     DWCd     DWCr       UAs
+## 1  1 27.7 22.99928    3 3180.058 34 6.426464 1.292941 51.67987 10.192695
+## 2  2 26.8 30.05142    3 3210.823 43 7.832384 1.798535 50.10409 11.815088
+## 3  3 33.2 28.04660    3 3311.551 40 7.516569 1.288461 48.74001 10.079057
+## 4  4 30.1 34.81796    3 3266.844 32 5.906656 2.075259 50.92745  8.719123
+## 5  5 37.4 42.68440    3 3664.088 35 7.181873 2.762643 55.16882  9.436559
+## 6  6 33.3 24.94960    3 3328.988 40 9.723429 3.054057 51.14812 11.589403
+##         UCd      UCr
+## 1 0.7537104 42.60187
+## 2 0.9789506 41.30757
+## 3 0.1903262 36.47716
+## 4 0.9364825 42.47987
+## 5 1.4977829 47.78528
+## 6 1.6645837 38.26386</code></pre>
+<p>Continuous demographic variables, like BMI, are often dichotomized (or converted to a categorical variable with two categories representing higher vs. lower values) to increase statistical power in analyses. This is particularly important for clinical data that tend to have smaller sample sizes. In our initial dataframe, BMI is a continuous or numeric variable; however, our questions require us to dichotomize BMI. We can use the following code, which relies on if/else logic (see <strong>TAME 2.0 Module 2.3 Data Manipulation and Reshaping</strong> for more information) to generate a new column representing our dichotomized BMI variable for our first environmental health question.</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="improving-coding-efficiencies.html#cb127-1" tabindex="-1"></a><span class="co"># Adding dichotomized BMI column</span></span>
+<span id="cb127-2"><a href="improving-coding-efficiencies.html#cb127-2" tabindex="-1"></a>full_data <span class="ot">&lt;-</span> full_data <span class="sc">%&gt;%</span></span>
+<span id="cb127-3"><a href="improving-coding-efficiencies.html#cb127-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Dichotomized_BMI =</span> <span class="fu">ifelse</span>(BMI <span class="sc">&lt;</span> <span class="dv">25</span>, <span class="st">&quot;Normal&quot;</span>, <span class="st">&quot;Overweight&quot;</span>))</span>
+<span id="cb127-4"><a href="improving-coding-efficiencies.html#cb127-4" tabindex="-1"></a></span>
+<span id="cb127-5"><a href="improving-coding-efficiencies.html#cb127-5" tabindex="-1"></a><span class="co"># Previewing new data</span></span>
+<span id="cb127-6"><a href="improving-coding-efficiencies.html#cb127-6" tabindex="-1"></a><span class="fu">head</span>(full_data)</span></code></pre></div>
+<pre><code>##   ID  BMI     MAge MEdu       BW GA     DWAs     DWCd     DWCr       UAs
+## 1  1 27.7 22.99928    3 3180.058 34 6.426464 1.292941 51.67987 10.192695
+## 2  2 26.8 30.05142    3 3210.823 43 7.832384 1.798535 50.10409 11.815088
+## 3  3 33.2 28.04660    3 3311.551 40 7.516569 1.288461 48.74001 10.079057
+## 4  4 30.1 34.81796    3 3266.844 32 5.906656 2.075259 50.92745  8.719123
+## 5  5 37.4 42.68440    3 3664.088 35 7.181873 2.762643 55.16882  9.436559
+## 6  6 33.3 24.94960    3 3328.988 40 9.723429 3.054057 51.14812 11.589403
+##         UCd      UCr Dichotomized_BMI
+## 1 0.7537104 42.60187       Overweight
+## 2 0.9789506 41.30757       Overweight
+## 3 0.1903262 36.47716       Overweight
+## 4 0.9364825 42.47987       Overweight
+## 5 1.4977829 47.78528       Overweight
+## 6 1.6645837 38.26386       Overweight</code></pre>
+<p>We can see that we now have created a new column entitled <code>Dichotomized_BMI</code> that we can use to perform a statistical test to assess if there are differences between drinking water metals between normal and overweight subjects.</p>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="loops" class="section level2 hasAnchor">
+<h2>Loops<a href="improving-coding-efficiencies.html#loops" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We will start with loops. There are three main types of loops in R: <code>for</code>, <code>while</code>, and <code>repeat</code>. We will focus on <code>for</code> loops in this module, but for more in-depth information on loops, including the additional types of loops, see <a href="https://intro2r.com/loops.html">here</a>. Before applying loops to our data, let’s discuss how <code>for</code> loops work.</p>
+<p>The basic structure of a <code>for</code> loop is shown here:</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="improving-coding-efficiencies.html#cb129-1" tabindex="-1"></a><span class="co"># Basic structure of a for loop</span></span>
+<span id="cb129-2"><a href="improving-coding-efficiencies.html#cb129-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>){</span>
+<span id="cb129-3"><a href="improving-coding-efficiencies.html#cb129-3" tabindex="-1"></a>    <span class="fu">print</span>(i)</span>
+<span id="cb129-4"><a href="improving-coding-efficiencies.html#cb129-4" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4</code></pre>
+<p><code>for</code> loops always start with <code>for</code> followed by a statement in parentheses. The argument in the parentheses tells R how to iterate (or repeat) through the code in the curly brackets. Here, we are telling R to iterate through the code in curly brackets 4 times. Each time we told R to print the value of our iterator, or <code>i</code>, which has a value of 1, 2, 3, and then 4. Loops can also iterate through columns in a dataset. For example, we can use a <code>for</code> loop to print the ages of each subject:</p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="improving-coding-efficiencies.html#cb131-1" tabindex="-1"></a><span class="co"># Creating a smaller dataframe for our loop example</span></span>
+<span id="cb131-2"><a href="improving-coding-efficiencies.html#cb131-2" tabindex="-1"></a>full_data_subset <span class="ot">&lt;-</span> full_data[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, ]</span>
+<span id="cb131-3"><a href="improving-coding-efficiencies.html#cb131-3" tabindex="-1"></a></span>
+<span id="cb131-4"><a href="improving-coding-efficiencies.html#cb131-4" tabindex="-1"></a><span class="co"># Finding the total number of rows or subjects in the dataset</span></span>
+<span id="cb131-5"><a href="improving-coding-efficiencies.html#cb131-5" tabindex="-1"></a>number_of_rows <span class="ot">&lt;-</span> <span class="fu">length</span>(full_data_subset<span class="sc">$</span>MAge)</span>
+<span id="cb131-6"><a href="improving-coding-efficiencies.html#cb131-6" tabindex="-1"></a></span>
+<span id="cb131-7"><a href="improving-coding-efficiencies.html#cb131-7" tabindex="-1"></a><span class="co"># Creating a for loop to iterate from 1 to the last row</span></span>
+<span id="cb131-8"><a href="improving-coding-efficiencies.html#cb131-8" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>number_of_rows){</span>
+<span id="cb131-9"><a href="improving-coding-efficiencies.html#cb131-9" tabindex="-1"></a>    <span class="co"># Printing each subject age</span></span>
+<span id="cb131-10"><a href="improving-coding-efficiencies.html#cb131-10" tabindex="-1"></a>    <span class="co"># Need to put `[i]` to index the correct value corresponding to the row we are evaluating</span></span>
+<span id="cb131-11"><a href="improving-coding-efficiencies.html#cb131-11" tabindex="-1"></a>    <span class="fu">print</span>(full_data_subset<span class="sc">$</span>MAge[i])</span>
+<span id="cb131-12"><a href="improving-coding-efficiencies.html#cb131-12" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] 22.99928
+## [1] 30.05142
+## [1] 28.0466
+## [1] 34.81796
+## [1] 42.6844
+## [1] 24.9496</code></pre>
+<p>Now that we know how a <code>for</code> loop works, how can we apply this approach to determine whether there are statistically significant differences in drinking water arsenic, cadmium, and chromium between normal weight (BMI &lt; 25) and overweight (BMI <span class="math inline">\(\geq\)</span> 25) subjects.</p>
+<p>Because our data are normally distributed and there are two groups that we are comparing, we will use a t-test applied to each metal measured in drinking water. Testing for assumptions is outside the scope of this module, but see <strong>TAME 2.0 Module 3.3 Normality Tests and Data Transformation</strong> for more information on this topic.</p>
+<p>Running a t-test in R is very simple, which we can demonstrate by running a t-test on the drinking water arsenic data:</p>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="improving-coding-efficiencies.html#cb133-1" tabindex="-1"></a><span class="co"># Running t-test and storing results in t_test_res</span></span>
+<span id="cb133-2"><a href="improving-coding-efficiencies.html#cb133-2" tabindex="-1"></a>t_test_res <span class="ot">&lt;-</span> full_data <span class="sc">%&gt;%</span> </span>
+<span id="cb133-3"><a href="improving-coding-efficiencies.html#cb133-3" tabindex="-1"></a>  <span class="fu">t_test</span>(DWAs <span class="sc">~</span> Dichotomized_BMI)</span>
+<span id="cb133-4"><a href="improving-coding-efficiencies.html#cb133-4" tabindex="-1"></a></span>
+<span id="cb133-5"><a href="improving-coding-efficiencies.html#cb133-5" tabindex="-1"></a><span class="co"># Viewing results</span></span>
+<span id="cb133-6"><a href="improving-coding-efficiencies.html#cb133-6" tabindex="-1"></a>t_test_res</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 8
+##   .y.   group1 group2        n1    n2 statistic    df     p
+## * &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;      &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 DWAs  Normal Overweight    96   104    -0.728  192. 0.468</code></pre>
+<p>We can see that our p-value is 0.468. Because this is greater than 0.05, we cannot reject the null hypothesis that normal weight and overweight subjects are exposed to the same drinking water arsenic concentrations. Although this was a very simple line of code to run, what if we have many columns we want to run the same t-test on? We can use a <code>for</code> loop to iterate through these columns.</p>
+<p>Let’s break down the steps of our <code>for</code> loop before executing the code.</p>
+<ol style="list-style-type: decimal">
+<li><p>First, we will define the variables (columns) we want to run our t-test on. This is different from our approach above, because in those code chunks, we were using numbers to indicate the number of iterations through the loop. Here, we are naming the specific variables instead, and R will iterate though each of these variables. Note that we could omit this step and instead use the numeric column index of our variables of interest <code>[7:9]</code>. However, naming the specific columns makes this approach more robust because if additional data are added to or removed from our dataframe, the numeric column index of our variables could change. Which approach you choose really depends on the purpose of your loop!</p></li>
+<li><p>Second, we will create an empty dataframe where we will store the results generated by our <code>for</code> loop.</p></li>
+<li><p>Third, we will actually run our for loop. This will tell R: for each variable in our <code>vars_of_interest</code> vector, run a t-test with that variable (and store the results in a temporary dataframe called “res”), then add those results to our final results dataframe. A row will be added to the results dataframe each time R iterates through a new variable, resulting in a dataframe that stores the results of all of our t-tests.</p></li>
+</ol>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="improving-coding-efficiencies.html#cb135-1" tabindex="-1"></a><span class="co"># Defining variables (columns) we want to run a t-test on</span></span>
+<span id="cb135-2"><a href="improving-coding-efficiencies.html#cb135-2" tabindex="-1"></a>vars_of_interest <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;DWAs&quot;</span>, <span class="st">&quot;DWCd&quot;</span>, <span class="st">&quot;DWCr&quot;</span>)</span>
+<span id="cb135-3"><a href="improving-coding-efficiencies.html#cb135-3" tabindex="-1"></a></span>
+<span id="cb135-4"><a href="improving-coding-efficiencies.html#cb135-4" tabindex="-1"></a><span class="co"># Creating an empty dataframe to store results</span></span>
+<span id="cb135-5"><a href="improving-coding-efficiencies.html#cb135-5" tabindex="-1"></a>t_test_res_DW <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb135-6"><a href="improving-coding-efficiencies.html#cb135-6" tabindex="-1"></a></span>
+<span id="cb135-7"><a href="improving-coding-efficiencies.html#cb135-7" tabindex="-1"></a><span class="co"># Running for loop</span></span>
+<span id="cb135-8"><a href="improving-coding-efficiencies.html#cb135-8" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> vars_of_interest) {</span>
+<span id="cb135-9"><a href="improving-coding-efficiencies.html#cb135-9" tabindex="-1"></a>  </span>
+<span id="cb135-10"><a href="improving-coding-efficiencies.html#cb135-10" tabindex="-1"></a>  <span class="co"># Storing the results of each iteration of the loop in a temporary results dataframe</span></span>
+<span id="cb135-11"><a href="improving-coding-efficiencies.html#cb135-11" tabindex="-1"></a>  res <span class="ot">&lt;-</span> full_data <span class="sc">%&gt;%</span></span>
+<span id="cb135-12"><a href="improving-coding-efficiencies.html#cb135-12" tabindex="-1"></a>    </span>
+<span id="cb135-13"><a href="improving-coding-efficiencies.html#cb135-13" tabindex="-1"></a>    <span class="co"># Writing the formula needed for each iteration of the loop</span></span>
+<span id="cb135-14"><a href="improving-coding-efficiencies.html#cb135-14" tabindex="-1"></a>    <span class="fu">t_test</span>(<span class="fu">as.formula</span>(<span class="fu">paste</span>(i, <span class="st">&quot;~ Dichotomized_BMI&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)))</span>
+<span id="cb135-15"><a href="improving-coding-efficiencies.html#cb135-15" tabindex="-1"></a>  </span>
+<span id="cb135-16"><a href="improving-coding-efficiencies.html#cb135-16" tabindex="-1"></a>  <span class="co"># Adding a row to the results dataframe each time the loop is iterated</span></span>
+<span id="cb135-17"><a href="improving-coding-efficiencies.html#cb135-17" tabindex="-1"></a>  t_test_res_DW <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(t_test_res_DW, res)</span>
+<span id="cb135-18"><a href="improving-coding-efficiencies.html#cb135-18" tabindex="-1"></a>}</span>
+<span id="cb135-19"><a href="improving-coding-efficiencies.html#cb135-19" tabindex="-1"></a></span>
+<span id="cb135-20"><a href="improving-coding-efficiencies.html#cb135-20" tabindex="-1"></a><span class="co"># Viewing our results</span></span>
+<span id="cb135-21"><a href="improving-coding-efficiencies.html#cb135-21" tabindex="-1"></a>t_test_res_DW</span></code></pre></div>
+<pre><code>##    .y. group1     group2 n1  n2  statistic       df     p
+## 1 DWAs Normal Overweight 96 104 -0.7279621 192.3363 0.468
+## 2 DWCd Normal Overweight 96 104 -0.5894360 196.1147 0.556
+## 3 DWCr Normal Overweight 96 104  0.1102933 197.9870 0.912</code></pre>
+<div class="question">
+<p><i> With this, we can answer <strong>Environmental Health Question #1</strong>:</i></p>
+<p>Are there statistically significant differences in drinking water arsenic, cadmium, and chromium between normal weight (BMI &lt; 25) and overweight (BMI <span class="math inline">\(\geq\)</span> 25) subjects?</p>
+</div>
+<div class="answer">
+<p><strong>Answer</strong>: No, there are not any statistically significant differences in drinking water metals between normal weight and overweight subjects.</p>
+</div>
+<p><br></p>
+<div id="formulas-and-pasting" class="section level3 hasAnchor">
+<h3>Formulas and Pasting<a href="improving-coding-efficiencies.html#formulas-and-pasting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Note the use of the code <code>as.formula(paste0(i, "~ Dichotomized_BMI"))</code>. Let’s take a quick detour to discuss the use of the <code>as.formula()</code> and <code>paste()</code> functions, as these are important functions often used in loops and user-defined functions.</p>
+<p>Many statistical test functions and regression functions require one argument to be a formula, which is typically formatted as <code>y ~ x</code>, where y is the dependent variable of interest and x is an independent variable. For some functions, additional variables can be included on the right side of the formula to represent covariates (additional variables of interest). The function <code>as.formula()</code> returns the argument in parentheses in formula format so that it can be correctly passed to other functions. We can demonstrate that here by assigning a dummy variable <code>j</code> the character string <code>var1</code>:</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="improving-coding-efficiencies.html#cb137-1" tabindex="-1"></a><span class="co"># Assigning variable</span></span>
+<span id="cb137-2"><a href="improving-coding-efficiencies.html#cb137-2" tabindex="-1"></a>j <span class="ot">&lt;-</span> <span class="st">&quot;var1&quot;</span></span>
+<span id="cb137-3"><a href="improving-coding-efficiencies.html#cb137-3" tabindex="-1"></a></span>
+<span id="cb137-4"><a href="improving-coding-efficiencies.html#cb137-4" tabindex="-1"></a><span class="co"># Demonstrating output of as.formula()</span></span>
+<span id="cb137-5"><a href="improving-coding-efficiencies.html#cb137-5" tabindex="-1"></a><span class="fu">as.formula</span>(<span class="fu">paste</span>(j, <span class="st">&quot; ~ Dichotomized_BMI&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>))</span></code></pre></div>
+<pre><code>## var1 ~ Dichotomized_BMI</code></pre>
+<p>We can use the <code>paste()</code> function to combine strings of characters. The paste function takes each argument (as many arguments as is needed) and pastes them together into one character string, with the separator between arguments set by the <code>sep =</code> argument. When our y variable is changing with each iteration of our for loop, we can use the <code>paste()</code> function to write our formula correctly by telling the function to paste the variable <code>i</code>, followed by the rest of our formula, which stays the same for each iteration of the loop. Let’s examine the output of just the <code>paste()</code> part of our code:</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="improving-coding-efficiencies.html#cb139-1" tabindex="-1"></a><span class="fu">paste</span>(j, <span class="st">&quot; ~ Dichotomized_BMI&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;var1 ~ Dichotomized_BMI&quot;</code></pre>
+<p>The <code>paste()</code> function is very flexible and can be useful in many other settings when you need to create one character string from arguments from different sources! Notice that the output looks different from the output of <code>as.formula()</code>. There is a returned index (<code>[1]</code>), and there are quotes around the character string. The last function we will highlight here is the <code>noquote()</code> function, which can be helpful if you’d like a string without quotes:</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="improving-coding-efficiencies.html#cb141-1" tabindex="-1"></a><span class="fu">noquote</span>(<span class="fu">paste</span>(j, <span class="st">&quot; ~ Dichotomized_BMI&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>))</span></code></pre></div>
+<pre><code>## [1] var1 ~ Dichotomized_BMI</code></pre>
+<p>However, this still returns an indexed number, so there are times when it will not allow code to execute properly (for example, when we need a formula format).</p>
+<p>Next, we will learn about functions and apply them to our dataset to answer our additional environmental health questions.</p>
+<p><br></p>
+</div>
+</div>
+<div id="functions" class="section level2 hasAnchor">
+<h2>Functions<a href="improving-coding-efficiencies.html#functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Functions are useful when you want to execute a block of code organized together to perform one specific task, and you want to be able to change parameters for that task easily rather than having to copy and paste code over and over that largely stays the same but might have small modifications in certain arguments. The basic structure of a function is as follows:</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="improving-coding-efficiencies.html#cb143-1" tabindex="-1"></a>function_name <span class="ot">&lt;-</span> <span class="cf">function</span>(parameter_1, parameter_2...){</span>
+<span id="cb143-2"><a href="improving-coding-efficiencies.html#cb143-2" tabindex="-1"></a>  </span>
+<span id="cb143-3"><a href="improving-coding-efficiencies.html#cb143-3" tabindex="-1"></a>    <span class="co"># Function body (where the code goes)</span></span>
+<span id="cb143-4"><a href="improving-coding-efficiencies.html#cb143-4" tabindex="-1"></a>    insert_code_here  </span>
+<span id="cb143-5"><a href="improving-coding-efficiencies.html#cb143-5" tabindex="-1"></a>  </span>
+<span id="cb143-6"><a href="improving-coding-efficiencies.html#cb143-6" tabindex="-1"></a>    <span class="co"># What the function returns</span></span>
+<span id="cb143-7"><a href="improving-coding-efficiencies.html#cb143-7" tabindex="-1"></a>    <span class="fu">return</span>()</span>
+<span id="cb143-8"><a href="improving-coding-efficiencies.html#cb143-8" tabindex="-1"></a>}</span></code></pre></div>
+<p>A function requires you to name it as we did with <code>function_name</code>. In parentheses, the function requires you to specify the arguments or parameters. Parameters (i.e., <code>parameter_1</code>) act as placeholders in the body of the function. This allows us to change the values of the parameters each time a function is called, while the majority of the code remains the same. Lastly, we have a <code>return()</code> statement, which specifies what object (i.e., vector, dataframe, etc.) we want to retrieve from a function. Although a function can display the last expression from the function body in the absence of a <code>return()</code> statement, it’s a good habit to include it as the last expression. It is important to note that, although functions can take many input parameters and execute large code chunks, they can only return one item, whether that is a value, vector, dataframe, plot, code output, or list.</p>
+<p>When writing your own functions, it is important to describe the purpose of the function, its input, its parameters, and its output so that others can understand what your functions does and how to use it. This can be defined either in text above a code chunk if you are using R Markdown or as comments within the code itself. We’ll start with a simple function. Let’s say we want to convert temperatures from Fahrenheit to Celsius. We can write a function that takes the temperature in Fahrenheit and converts it to Celsius. Note that we have given our parameters descriptive names (<code>fahrenheit_temperature</code>, <code>celsius_temperature</code>), which makes our code more readable than if we assigned them dummy names such as x and y.</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="improving-coding-efficiencies.html#cb144-1" tabindex="-1"></a><span class="co"># Function to convert temperatures in Fahrenheit to Celsius</span></span>
+<span id="cb144-2"><a href="improving-coding-efficiencies.html#cb144-2" tabindex="-1"></a><span class="do">## Parameters: temperature in Fahrenheit (input)</span></span>
+<span id="cb144-3"><a href="improving-coding-efficiencies.html#cb144-3" tabindex="-1"></a><span class="do">## Output: temperature in Celsius</span></span>
+<span id="cb144-4"><a href="improving-coding-efficiencies.html#cb144-4" tabindex="-1"></a></span>
+<span id="cb144-5"><a href="improving-coding-efficiencies.html#cb144-5" tabindex="-1"></a>fahrenheit_to_celsius <span class="ot">&lt;-</span> <span class="cf">function</span>(fahrenheit_temperature){</span>
+<span id="cb144-6"><a href="improving-coding-efficiencies.html#cb144-6" tabindex="-1"></a></span>
+<span id="cb144-7"><a href="improving-coding-efficiencies.html#cb144-7" tabindex="-1"></a>    celsius_temperature <span class="ot">&lt;-</span> (fahrenheit_temperature <span class="sc">-</span> <span class="dv">32</span>) <span class="sc">*</span> (<span class="dv">5</span><span class="sc">/</span><span class="dv">9</span>)</span>
+<span id="cb144-8"><a href="improving-coding-efficiencies.html#cb144-8" tabindex="-1"></a>    </span>
+<span id="cb144-9"><a href="improving-coding-efficiencies.html#cb144-9" tabindex="-1"></a>    <span class="fu">return</span>(celsius_temperature)</span>
+<span id="cb144-10"><a href="improving-coding-efficiencies.html#cb144-10" tabindex="-1"></a>}</span></code></pre></div>
+<p>Notice that the above code block was run, but there isn’t an output. Rather, running the code assigns the function code to that function. When you run code defining a function, that function will appear in your Global Environment under the “Functions” section. We can see the output of the function by providing an input value. Let’s start by converting 41 degrees Fahrenheit to Celsius:</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="improving-coding-efficiencies.html#cb145-1" tabindex="-1"></a><span class="co"># Calling the function</span></span>
+<span id="cb145-2"><a href="improving-coding-efficiencies.html#cb145-2" tabindex="-1"></a><span class="co"># Here, 41 is the `fahrenheit_temperature` in the function</span></span>
+<span id="cb145-3"><a href="improving-coding-efficiencies.html#cb145-3" tabindex="-1"></a><span class="fu">fahrenheit_to_celsius</span>(<span class="dv">41</span>)</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<p>41 degrees Fahrenheit is equivalent to 5 degrees Celsius. We can also have the function convert a vector of values.</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="improving-coding-efficiencies.html#cb147-1" tabindex="-1"></a><span class="co"># Defining vector of temperatures</span></span>
+<span id="cb147-2"><a href="improving-coding-efficiencies.html#cb147-2" tabindex="-1"></a>vector_of_temperatures <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">81</span>,<span class="dv">74</span>,<span class="dv">23</span>,<span class="dv">65</span>)</span>
+<span id="cb147-3"><a href="improving-coding-efficiencies.html#cb147-3" tabindex="-1"></a></span>
+<span id="cb147-4"><a href="improving-coding-efficiencies.html#cb147-4" tabindex="-1"></a><span class="co"># Calling the function</span></span>
+<span id="cb147-5"><a href="improving-coding-efficiencies.html#cb147-5" tabindex="-1"></a><span class="fu">fahrenheit_to_celsius</span>(vector_of_temperatures)</span></code></pre></div>
+<pre><code>## [1] 27.22222 23.33333 -5.00000 18.33333</code></pre>
+<p>Before getting back to answer our environmental health related questions, let’s look at one more example of a function. This time we’ll create a function that can calculate the circumference of a circle based on its radius in inches. Here you can also see a different style of commenting to describe the function’s purpose, inputs, and outputs.</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="improving-coding-efficiencies.html#cb149-1" tabindex="-1"></a>circle_circumference <span class="ot">&lt;-</span> <span class="cf">function</span>(radius){</span>
+<span id="cb149-2"><a href="improving-coding-efficiencies.html#cb149-2" tabindex="-1"></a>    <span class="co"># Calculating a circle&#39;s circumference based on the radius inches</span></span>
+<span id="cb149-3"><a href="improving-coding-efficiencies.html#cb149-3" tabindex="-1"></a></span>
+<span id="cb149-4"><a href="improving-coding-efficiencies.html#cb149-4" tabindex="-1"></a>    <span class="co"># :parameters: radius</span></span>
+<span id="cb149-5"><a href="improving-coding-efficiencies.html#cb149-5" tabindex="-1"></a>    <span class="co"># :output: circumference and radius</span></span>
+<span id="cb149-6"><a href="improving-coding-efficiencies.html#cb149-6" tabindex="-1"></a>    </span>
+<span id="cb149-7"><a href="improving-coding-efficiencies.html#cb149-7" tabindex="-1"></a>    <span class="co"># Calculating diameter first</span></span>
+<span id="cb149-8"><a href="improving-coding-efficiencies.html#cb149-8" tabindex="-1"></a>    diameter <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> radius</span>
+<span id="cb149-9"><a href="improving-coding-efficiencies.html#cb149-9" tabindex="-1"></a>    </span>
+<span id="cb149-10"><a href="improving-coding-efficiencies.html#cb149-10" tabindex="-1"></a>    <span class="co"># Calculating circumference</span></span>
+<span id="cb149-11"><a href="improving-coding-efficiencies.html#cb149-11" tabindex="-1"></a>    circumference <span class="ot">&lt;-</span> pi <span class="sc">*</span> diameter</span>
+<span id="cb149-12"><a href="improving-coding-efficiencies.html#cb149-12" tabindex="-1"></a>    </span>
+<span id="cb149-13"><a href="improving-coding-efficiencies.html#cb149-13" tabindex="-1"></a>    <span class="fu">return</span>(circumference)</span>
+<span id="cb149-14"><a href="improving-coding-efficiencies.html#cb149-14" tabindex="-1"></a>}</span>
+<span id="cb149-15"><a href="improving-coding-efficiencies.html#cb149-15" tabindex="-1"></a></span>
+<span id="cb149-16"><a href="improving-coding-efficiencies.html#cb149-16" tabindex="-1"></a><span class="co"># Calling function</span></span>
+<span id="cb149-17"><a href="improving-coding-efficiencies.html#cb149-17" tabindex="-1"></a><span class="fu">circle_circumference</span>(<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] 18.84956</code></pre>
+<p>So, if a circle had a radius of 3 inches, its circumference would be ~19 inches. What if we were interested in seeing the diameter to double check our code?</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="improving-coding-efficiencies.html#cb151-1" tabindex="-1"></a>diameter</span></code></pre></div>
+<pre><code>## Error in eval(expr, envir, enclos): object &#39;diameter&#39; not found</code></pre>
+<p>R throws an error, because the variable <code>diameter</code> was created inside the function and the function only returned the <code>circumference</code> variable. This is actually one of the ways that functions can improve coding efficiency - by not needing to store intermediate variables that aren’t of interest to the main goal of the code or analysis. However, there are two ways we can still see the <code>diameter</code> variable:</p>
+<ol style="list-style-type: decimal">
+<li>Put print statements in the body of the function (<code>print(diameter)</code>).</li>
+<li>Have the function return a different variable or list of variables (<code>c(circumference, diameter)</code>). See the below section on <strong>List Operation</strong> for more on this topic.</li>
+</ol>
+<p>We can now move on to using a more complicated function to answer all three of our environmental health questions without repeating our earlier code three times. The main difference between each of our first three environmental health questions is the BMI cutoff used to dichotomize the BMI variable, so we can use that as one of the parameters for our function. We can also use arguments in our function to name our groups.</p>
+<p>We can adapt our previous <code>for</code> loop code into a function that will take different BMI cutoffs and return statistical results by including parameters to define the parts of the analysis that will change with each unique question. For example:</p>
+<ul>
+<li>Changing the BMI cutoff from a number (in our previous code) to our parameter name that specifies the cutoff</li>
+<li>Changing the group names for assigning category (in our previous code) to our parameter names</li>
+</ul>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="improving-coding-efficiencies.html#cb153-1" tabindex="-1"></a><span class="co"># Function to dichotomize BMI into different categories and return results of t-test on drinking water metals between dichotomized groups</span></span>
+<span id="cb153-2"><a href="improving-coding-efficiencies.html#cb153-2" tabindex="-1"></a></span>
+<span id="cb153-3"><a href="improving-coding-efficiencies.html#cb153-3" tabindex="-1"></a><span class="do">## Parameters: </span></span>
+<span id="cb153-4"><a href="improving-coding-efficiencies.html#cb153-4" tabindex="-1"></a><span class="do">### input_data: dataframe containing BMI and drinking water metals levels</span></span>
+<span id="cb153-5"><a href="improving-coding-efficiencies.html#cb153-5" tabindex="-1"></a><span class="do">### bmi_cutoff: numeric value specifying the cut point for dichotomizing BMI</span></span>
+<span id="cb153-6"><a href="improving-coding-efficiencies.html#cb153-6" tabindex="-1"></a><span class="do">### lower_group_name: name for the group of subjects with BMIs lower than the cutoff</span></span>
+<span id="cb153-7"><a href="improving-coding-efficiencies.html#cb153-7" tabindex="-1"></a><span class="do">### upper_group_name: name for the group of subjects with BMIs higher than the cutoff</span></span>
+<span id="cb153-8"><a href="improving-coding-efficiencies.html#cb153-8" tabindex="-1"></a><span class="do">### variables: vector of variable names that statistical test should be run on </span></span>
+<span id="cb153-9"><a href="improving-coding-efficiencies.html#cb153-9" tabindex="-1"></a></span>
+<span id="cb153-10"><a href="improving-coding-efficiencies.html#cb153-10" tabindex="-1"></a><span class="do">## Output: dataframe with statistical results for each variable in the variables vector</span></span>
+<span id="cb153-11"><a href="improving-coding-efficiencies.html#cb153-11" tabindex="-1"></a></span>
+<span id="cb153-12"><a href="improving-coding-efficiencies.html#cb153-12" tabindex="-1"></a>bmi_DW_ttest <span class="ot">&lt;-</span> <span class="cf">function</span>(input_data, bmi_cutoff, lower_group_name, upper_group_name, variables){</span>
+<span id="cb153-13"><a href="improving-coding-efficiencies.html#cb153-13" tabindex="-1"></a>  </span>
+<span id="cb153-14"><a href="improving-coding-efficiencies.html#cb153-14" tabindex="-1"></a>  <span class="co"># Creating dichotomized variable</span></span>
+<span id="cb153-15"><a href="improving-coding-efficiencies.html#cb153-15" tabindex="-1"></a>  dichotomized_data <span class="ot">&lt;-</span> input_data <span class="sc">%&gt;%</span> </span>
+<span id="cb153-16"><a href="improving-coding-efficiencies.html#cb153-16" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Dichotomized_BMI =</span> <span class="fu">ifelse</span>(BMI <span class="sc">&lt;</span> bmi_cutoff, lower_group_name, upper_group_name))</span>
+<span id="cb153-17"><a href="improving-coding-efficiencies.html#cb153-17" tabindex="-1"></a>  </span>
+<span id="cb153-18"><a href="improving-coding-efficiencies.html#cb153-18" tabindex="-1"></a>  <span class="co"># Creating an empty dataframe to store results</span></span>
+<span id="cb153-19"><a href="improving-coding-efficiencies.html#cb153-19" tabindex="-1"></a>  t_test_res_DW <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb153-20"><a href="improving-coding-efficiencies.html#cb153-20" tabindex="-1"></a>  </span>
+<span id="cb153-21"><a href="improving-coding-efficiencies.html#cb153-21" tabindex="-1"></a>  <span class="co"># Running for loop</span></span>
+<span id="cb153-22"><a href="improving-coding-efficiencies.html#cb153-22" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> variables) {</span>
+<span id="cb153-23"><a href="improving-coding-efficiencies.html#cb153-23" tabindex="-1"></a>    </span>
+<span id="cb153-24"><a href="improving-coding-efficiencies.html#cb153-24" tabindex="-1"></a>    <span class="co"># Storing the results of each iteration of the loop in a temporary results dataframe</span></span>
+<span id="cb153-25"><a href="improving-coding-efficiencies.html#cb153-25" tabindex="-1"></a>    res <span class="ot">&lt;-</span> dichotomized_data <span class="sc">%&gt;%</span></span>
+<span id="cb153-26"><a href="improving-coding-efficiencies.html#cb153-26" tabindex="-1"></a>      </span>
+<span id="cb153-27"><a href="improving-coding-efficiencies.html#cb153-27" tabindex="-1"></a>    <span class="co"># Writing the formula needed for each iteration of the loop</span></span>
+<span id="cb153-28"><a href="improving-coding-efficiencies.html#cb153-28" tabindex="-1"></a>    <span class="fu">t_test</span>(<span class="fu">as.formula</span>(<span class="fu">paste</span>(i, <span class="st">&quot;~ Dichotomized_BMI&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)))</span>
+<span id="cb153-29"><a href="improving-coding-efficiencies.html#cb153-29" tabindex="-1"></a>    </span>
+<span id="cb153-30"><a href="improving-coding-efficiencies.html#cb153-30" tabindex="-1"></a>    <span class="co"># Adding a row to the results dataframe each time the loop is iterated</span></span>
+<span id="cb153-31"><a href="improving-coding-efficiencies.html#cb153-31" tabindex="-1"></a>    t_test_res_DW <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(t_test_res_DW, res)</span>
+<span id="cb153-32"><a href="improving-coding-efficiencies.html#cb153-32" tabindex="-1"></a>  }</span>
+<span id="cb153-33"><a href="improving-coding-efficiencies.html#cb153-33" tabindex="-1"></a></span>
+<span id="cb153-34"><a href="improving-coding-efficiencies.html#cb153-34" tabindex="-1"></a>  <span class="co"># Return results</span></span>
+<span id="cb153-35"><a href="improving-coding-efficiencies.html#cb153-35" tabindex="-1"></a>  <span class="fu">return</span>(t_test_res_DW)</span>
+<span id="cb153-36"><a href="improving-coding-efficiencies.html#cb153-36" tabindex="-1"></a>  </span>
+<span id="cb153-37"><a href="improving-coding-efficiencies.html#cb153-37" tabindex="-1"></a>}</span></code></pre></div>
+<p>For the first example of using the function, we have included the name of each argument for clarity, but this isn’t necessary <em>if</em> you pass in the arguments <em>in the order they were defined when writing the function</em>.</p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="improving-coding-efficiencies.html#cb154-1" tabindex="-1"></a><span class="co"># Defining variables (columns) we want to run a t-test on</span></span>
+<span id="cb154-2"><a href="improving-coding-efficiencies.html#cb154-2" tabindex="-1"></a>vars_of_interest <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;DWAs&quot;</span>, <span class="st">&quot;DWCd&quot;</span>, <span class="st">&quot;DWCr&quot;</span>)</span>
+<span id="cb154-3"><a href="improving-coding-efficiencies.html#cb154-3" tabindex="-1"></a></span>
+<span id="cb154-4"><a href="improving-coding-efficiencies.html#cb154-4" tabindex="-1"></a><span class="co"># Apply function for normal vs. overweight (bmi_cutoff = 25)</span></span>
+<span id="cb154-5"><a href="improving-coding-efficiencies.html#cb154-5" tabindex="-1"></a><span class="fu">bmi_DW_ttest</span>(<span class="at">input_data =</span> full_data, <span class="at">bmi_cutoff =</span> <span class="dv">25</span>, <span class="at">lower_group_name =</span> <span class="st">&quot;Normal&quot;</span>, </span>
+<span id="cb154-6"><a href="improving-coding-efficiencies.html#cb154-6" tabindex="-1"></a>             <span class="at">upper_group_name =</span> <span class="st">&quot;Overweight&quot;</span>, <span class="at">variables =</span> vars_of_interest)</span></code></pre></div>
+<pre><code>##    .y. group1     group2 n1  n2  statistic       df     p
+## 1 DWAs Normal Overweight 96 104 -0.7279621 192.3363 0.468
+## 2 DWCd Normal Overweight 96 104 -0.5894360 196.1147 0.556
+## 3 DWCr Normal Overweight 96 104  0.1102933 197.9870 0.912</code></pre>
+<p>Here, we can see the same results as above in the <strong>Loops</strong> section. We can next apply the function to answer our additional environmental health questions:</p>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="improving-coding-efficiencies.html#cb156-1" tabindex="-1"></a><span class="co"># Apply function for underweight vs. non-underweight (bmi_cutoff = 18.5)</span></span>
+<span id="cb156-2"><a href="improving-coding-efficiencies.html#cb156-2" tabindex="-1"></a><span class="fu">bmi_DW_ttest</span>(full_data, <span class="fl">18.5</span>, <span class="st">&quot;Underweight&quot;</span>, <span class="st">&quot;Non-Underweight&quot;</span>, vars_of_interest)</span></code></pre></div>
+<pre><code>##    .y.          group1      group2  n1 n2   statistic       df     p
+## 1 DWAs Non-Underweight Underweight 166 34 -0.86947835 53.57143 0.388
+## 2 DWCd Non-Underweight Underweight 166 34 -0.97359810 55.45450 0.334
+## 3 DWCr Non-Underweight Underweight 166 34  0.04305105 56.08814 0.966</code></pre>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="improving-coding-efficiencies.html#cb158-1" tabindex="-1"></a><span class="co"># Apply function for non-obese vs. obese (bmi_cutoff = 29.9)</span></span>
+<span id="cb158-2"><a href="improving-coding-efficiencies.html#cb158-2" tabindex="-1"></a><span class="fu">bmi_DW_ttest</span>(full_data, <span class="fl">29.9</span>, <span class="st">&quot;Non-Obese&quot;</span>, <span class="st">&quot;Obese&quot;</span>, vars_of_interest)</span></code></pre></div>
+<pre><code>##    .y.    group1 group2  n1 n2  statistic       df      p
+## 1 DWAs Non-Obese  Obese 144 56 -1.9312097 86.80253 0.0567
+## 2 DWCd Non-Obese  Obese 144 56  0.3431076 94.52209 0.7320
+## 3 DWCr Non-Obese  Obese 144 56 -0.6878311 89.61818 0.4930</code></pre>
+<div class="question">
+<p><i> With this, we can answer <strong>Environmental Health Questions #2 &amp; #3</strong>:</i></p>
+<p>Are there statistically significant differences in drinking water arsenic, cadmium, and chromium between underweight (BMI &lt; 18.5) and non-underweight (BMI <span class="math inline">\(\geq\)</span> 18.5) subjects or between non-obese (BMI &lt; 29.9) and obese (BMI <span class="math inline">\(\geq\)</span> 29.9) subjects?</p>
+</div>
+<div class="answer">
+<p><strong>Answer</strong>: No, there are not any statistically significant differences in drinking water metals between underweight and non-underweight subjects or between non-obese and obese subjects.</p>
+</div>
+<p>Here, we were able to answer all three of our environmental health questions within relatively few lines of code by using a function to efficiently assess different variations on our analysis.</p>
+<p>In the last section of this module, we will demonstrate how to use list operations to improve coding efficiency.</p>
+<p><br></p>
+</div>
+<div id="list-operations" class="section level2 hasAnchor">
+<h2>List operations<a href="improving-coding-efficiencies.html#list-operations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Lists are a data type in R that can store other data types (including lists, to make nested lists). This allows you to store multiple dataframes in one object and apply the same functions to each dataframe in the list. Lists can also be helpful for storing the results of a function if you would like to be able to access multiple outputs. For example, if we return to our example of a function that calculates the circumference of a circle, we can store both the diameter and circumference as list objects. The function will then return a list containing both of these values when called.</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="improving-coding-efficiencies.html#cb160-1" tabindex="-1"></a><span class="co"># Adding list element to our function</span></span>
+<span id="cb160-2"><a href="improving-coding-efficiencies.html#cb160-2" tabindex="-1"></a>circle_circumference_4 <span class="ot">&lt;-</span> <span class="cf">function</span>(radius){</span>
+<span id="cb160-3"><a href="improving-coding-efficiencies.html#cb160-3" tabindex="-1"></a>    <span class="co"># Calculating a circle&#39;s circumference and diameter based on the radius in inches</span></span>
+<span id="cb160-4"><a href="improving-coding-efficiencies.html#cb160-4" tabindex="-1"></a></span>
+<span id="cb160-5"><a href="improving-coding-efficiencies.html#cb160-5" tabindex="-1"></a>    <span class="co"># :parameters: radius</span></span>
+<span id="cb160-6"><a href="improving-coding-efficiencies.html#cb160-6" tabindex="-1"></a>    <span class="co"># :output: list that contains diameter [1] and circumference [2]</span></span>
+<span id="cb160-7"><a href="improving-coding-efficiencies.html#cb160-7" tabindex="-1"></a>    </span>
+<span id="cb160-8"><a href="improving-coding-efficiencies.html#cb160-8" tabindex="-1"></a>    <span class="co"># Calculating diameter first</span></span>
+<span id="cb160-9"><a href="improving-coding-efficiencies.html#cb160-9" tabindex="-1"></a>    diameter <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> radius</span>
+<span id="cb160-10"><a href="improving-coding-efficiencies.html#cb160-10" tabindex="-1"></a>    </span>
+<span id="cb160-11"><a href="improving-coding-efficiencies.html#cb160-11" tabindex="-1"></a>    <span class="co"># Calculating circumference</span></span>
+<span id="cb160-12"><a href="improving-coding-efficiencies.html#cb160-12" tabindex="-1"></a>    circumference <span class="ot">&lt;-</span> pi <span class="sc">*</span> diameter</span>
+<span id="cb160-13"><a href="improving-coding-efficiencies.html#cb160-13" tabindex="-1"></a>    </span>
+<span id="cb160-14"><a href="improving-coding-efficiencies.html#cb160-14" tabindex="-1"></a>    <span class="co"># Storing results in a named list</span></span>
+<span id="cb160-15"><a href="improving-coding-efficiencies.html#cb160-15" tabindex="-1"></a>    results <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;diameter&quot;</span> <span class="ot">=</span> diameter, <span class="st">&quot;circumference&quot;</span> <span class="ot">=</span> circumference)</span>
+<span id="cb160-16"><a href="improving-coding-efficiencies.html#cb160-16" tabindex="-1"></a>    </span>
+<span id="cb160-17"><a href="improving-coding-efficiencies.html#cb160-17" tabindex="-1"></a>    <span class="co"># Return results</span></span>
+<span id="cb160-18"><a href="improving-coding-efficiencies.html#cb160-18" tabindex="-1"></a>    results</span>
+<span id="cb160-19"><a href="improving-coding-efficiencies.html#cb160-19" tabindex="-1"></a>}</span>
+<span id="cb160-20"><a href="improving-coding-efficiencies.html#cb160-20" tabindex="-1"></a></span>
+<span id="cb160-21"><a href="improving-coding-efficiencies.html#cb160-21" tabindex="-1"></a><span class="co"># Calling function</span></span>
+<span id="cb160-22"><a href="improving-coding-efficiencies.html#cb160-22" tabindex="-1"></a><span class="fu">circle_circumference_4</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## $diameter
+## [1] 20
+## 
+## $circumference
+## [1] 62.83185</code></pre>
+<p>We can also call the results individually using the following code:</p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="improving-coding-efficiencies.html#cb162-1" tabindex="-1"></a><span class="co"># Storing results of function</span></span>
+<span id="cb162-2"><a href="improving-coding-efficiencies.html#cb162-2" tabindex="-1"></a>circle_10 <span class="ot">&lt;-</span> <span class="fu">circle_circumference_4</span>(<span class="dv">10</span>)</span>
+<span id="cb162-3"><a href="improving-coding-efficiencies.html#cb162-3" tabindex="-1"></a></span>
+<span id="cb162-4"><a href="improving-coding-efficiencies.html#cb162-4" tabindex="-1"></a><span class="co"># Viewing only diameter</span></span>
+<span id="cb162-5"><a href="improving-coding-efficiencies.html#cb162-5" tabindex="-1"></a></span>
+<span id="cb162-6"><a href="improving-coding-efficiencies.html#cb162-6" tabindex="-1"></a><span class="do">## Method 1</span></span>
+<span id="cb162-7"><a href="improving-coding-efficiencies.html#cb162-7" tabindex="-1"></a>circle_10<span class="sc">$</span>diameter</span></code></pre></div>
+<pre><code>## [1] 20</code></pre>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="improving-coding-efficiencies.html#cb164-1" tabindex="-1"></a><span class="do">## Method 2</span></span>
+<span id="cb164-2"><a href="improving-coding-efficiencies.html#cb164-2" tabindex="-1"></a>circle_10[<span class="dv">1</span>]</span></code></pre></div>
+<pre><code>## $diameter
+## [1] 20</code></pre>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="improving-coding-efficiencies.html#cb166-1" tabindex="-1"></a><span class="co"># Viewing only circumference</span></span>
+<span id="cb166-2"><a href="improving-coding-efficiencies.html#cb166-2" tabindex="-1"></a></span>
+<span id="cb166-3"><a href="improving-coding-efficiencies.html#cb166-3" tabindex="-1"></a><span class="do">## Method 1</span></span>
+<span id="cb166-4"><a href="improving-coding-efficiencies.html#cb166-4" tabindex="-1"></a>circle_10<span class="sc">$</span>circumference</span></code></pre></div>
+<pre><code>## [1] 62.83185</code></pre>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="improving-coding-efficiencies.html#cb168-1" tabindex="-1"></a><span class="do">## Method 2</span></span>
+<span id="cb168-2"><a href="improving-coding-efficiencies.html#cb168-2" tabindex="-1"></a>circle_10[<span class="dv">2</span>]</span></code></pre></div>
+<pre><code>## $circumference
+## [1] 62.83185</code></pre>
+<p>In the context of our dataset, we can use list operations to clean up and combine our results from all three BMI stratification approaches. This is often necessary to prepare data to share with collaborators or for supplementary tables in a manuscript. Let’s revisit our code for producing our statistical results, this time assigning our results to a dataframe rather than viewing them.</p>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="improving-coding-efficiencies.html#cb170-1" tabindex="-1"></a><span class="co"># Defining variables (columns) we want to run a t-test on</span></span>
+<span id="cb170-2"><a href="improving-coding-efficiencies.html#cb170-2" tabindex="-1"></a>vars_of_interest <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;DWAs&quot;</span>, <span class="st">&quot;DWCd&quot;</span>, <span class="st">&quot;DWCr&quot;</span>)</span>
+<span id="cb170-3"><a href="improving-coding-efficiencies.html#cb170-3" tabindex="-1"></a></span>
+<span id="cb170-4"><a href="improving-coding-efficiencies.html#cb170-4" tabindex="-1"></a><span class="co"># Normal vs. overweight (bmi_cutoff = 25)</span></span>
+<span id="cb170-5"><a href="improving-coding-efficiencies.html#cb170-5" tabindex="-1"></a>norm_vs_overweight <span class="ot">&lt;-</span> <span class="fu">bmi_DW_ttest</span>(<span class="at">input_data =</span> full_data, <span class="at">bmi_cutoff =</span> <span class="dv">25</span>, <span class="at">lower_group_name =</span> <span class="st">&quot;Normal&quot;</span>, </span>
+<span id="cb170-6"><a href="improving-coding-efficiencies.html#cb170-6" tabindex="-1"></a>             <span class="at">upper_group_name =</span> <span class="st">&quot;Overweight&quot;</span>, <span class="at">variables =</span> vars_of_interest)</span>
+<span id="cb170-7"><a href="improving-coding-efficiencies.html#cb170-7" tabindex="-1"></a></span>
+<span id="cb170-8"><a href="improving-coding-efficiencies.html#cb170-8" tabindex="-1"></a><span class="co"># Underweight vs. non-underweight (bmi_cutoff = 18.5)</span></span>
+<span id="cb170-9"><a href="improving-coding-efficiencies.html#cb170-9" tabindex="-1"></a>under_vs_nonunderweight <span class="ot">&lt;-</span> <span class="fu">bmi_DW_ttest</span>(full_data, <span class="fl">18.5</span>, <span class="st">&quot;Underweight&quot;</span>, <span class="st">&quot;Non-Underweight&quot;</span>, vars_of_interest)</span>
+<span id="cb170-10"><a href="improving-coding-efficiencies.html#cb170-10" tabindex="-1"></a></span>
+<span id="cb170-11"><a href="improving-coding-efficiencies.html#cb170-11" tabindex="-1"></a><span class="co"># Non-obese vs. obese (bmi_cutoff = 29.9)</span></span>
+<span id="cb170-12"><a href="improving-coding-efficiencies.html#cb170-12" tabindex="-1"></a>nonobese_vs_obese <span class="ot">&lt;-</span> <span class="fu">bmi_DW_ttest</span>(full_data, <span class="fl">29.9</span>, <span class="st">&quot;Non-Obese&quot;</span>, <span class="st">&quot;Obese&quot;</span>, vars_of_interest)</span>
+<span id="cb170-13"><a href="improving-coding-efficiencies.html#cb170-13" tabindex="-1"></a></span>
+<span id="cb170-14"><a href="improving-coding-efficiencies.html#cb170-14" tabindex="-1"></a><span class="co"># Viewing one results dataframe as an example</span></span>
+<span id="cb170-15"><a href="improving-coding-efficiencies.html#cb170-15" tabindex="-1"></a>norm_vs_overweight</span></code></pre></div>
+<pre><code>##    .y. group1     group2 n1  n2  statistic       df     p
+## 1 DWAs Normal Overweight 96 104 -0.7279621 192.3363 0.468
+## 2 DWCd Normal Overweight 96 104 -0.5894360 196.1147 0.556
+## 3 DWCr Normal Overweight 96 104  0.1102933 197.9870 0.912</code></pre>
+<p>For publication purposes, let’s say we want to make the following formatting changes:</p>
+<ul>
+<li>Keep only the comparison of interest (for example Normal vs. Overweight) and the associated p-value, removing columns that are not as useful for interpreting or sharing the results</li>
+<li>Rename the <code>.y.</code> column so that its contents are clearer</li>
+<li>Collapse all of our data into one final dataframe</li>
+</ul>
+<p>We can first write a function to execute these cleaning steps:</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="improving-coding-efficiencies.html#cb172-1" tabindex="-1"></a><span class="co"># Function to clean results dataframes</span></span>
+<span id="cb172-2"><a href="improving-coding-efficiencies.html#cb172-2" tabindex="-1"></a></span>
+<span id="cb172-3"><a href="improving-coding-efficiencies.html#cb172-3" tabindex="-1"></a><span class="do">## Parameters: </span></span>
+<span id="cb172-4"><a href="improving-coding-efficiencies.html#cb172-4" tabindex="-1"></a><span class="do">### input_data: dataframe containing results of t-test</span></span>
+<span id="cb172-5"><a href="improving-coding-efficiencies.html#cb172-5" tabindex="-1"></a></span>
+<span id="cb172-6"><a href="improving-coding-efficiencies.html#cb172-6" tabindex="-1"></a><span class="do">## Output: cleaned dataframe</span></span>
+<span id="cb172-7"><a href="improving-coding-efficiencies.html#cb172-7" tabindex="-1"></a></span>
+<span id="cb172-8"><a href="improving-coding-efficiencies.html#cb172-8" tabindex="-1"></a>data_cleaning <span class="ot">&lt;-</span> <span class="cf">function</span>(input_data) {</span>
+<span id="cb172-9"><a href="improving-coding-efficiencies.html#cb172-9" tabindex="-1"></a>  </span>
+<span id="cb172-10"><a href="improving-coding-efficiencies.html#cb172-10" tabindex="-1"></a>  data <span class="ot">&lt;-</span> input_data <span class="sc">%&gt;%</span></span>
+<span id="cb172-11"><a href="improving-coding-efficiencies.html#cb172-11" tabindex="-1"></a>    </span>
+<span id="cb172-12"><a href="improving-coding-efficiencies.html#cb172-12" tabindex="-1"></a>    <span class="co"># Rename .y. column</span></span>
+<span id="cb172-13"><a href="improving-coding-efficiencies.html#cb172-13" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="st">&quot;Variable&quot;</span> <span class="ot">=</span> <span class="st">&quot;.y.&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb172-14"><a href="improving-coding-efficiencies.html#cb172-14" tabindex="-1"></a>    </span>
+<span id="cb172-15"><a href="improving-coding-efficiencies.html#cb172-15" tabindex="-1"></a>    <span class="co"># Merge group1 and group2</span></span>
+<span id="cb172-16"><a href="improving-coding-efficiencies.html#cb172-16" tabindex="-1"></a>    <span class="fu">unite</span>(Comparison, group1, group2, <span class="at">sep =</span> <span class="st">&quot; vs. &quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb172-17"><a href="improving-coding-efficiencies.html#cb172-17" tabindex="-1"></a>    </span>
+<span id="cb172-18"><a href="improving-coding-efficiencies.html#cb172-18" tabindex="-1"></a>    <span class="co"># Keep only columns of interest </span></span>
+<span id="cb172-19"><a href="improving-coding-efficiencies.html#cb172-19" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">c</span>(Variable, Comparison, p))</span>
+<span id="cb172-20"><a href="improving-coding-efficiencies.html#cb172-20" tabindex="-1"></a>  </span>
+<span id="cb172-21"><a href="improving-coding-efficiencies.html#cb172-21" tabindex="-1"></a>  <span class="fu">return</span>(data)</span>
+<span id="cb172-22"><a href="improving-coding-efficiencies.html#cb172-22" tabindex="-1"></a>}</span></code></pre></div>
+<p>Then, we can make a list of our dataframes to clean and apply:</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="improving-coding-efficiencies.html#cb173-1" tabindex="-1"></a><span class="co"># Making list of dataframes</span></span>
+<span id="cb173-2"><a href="improving-coding-efficiencies.html#cb173-2" tabindex="-1"></a>t_test_res_list <span class="ot">&lt;-</span> <span class="fu">list</span>(norm_vs_overweight, under_vs_nonunderweight, nonobese_vs_obese)</span>
+<span id="cb173-3"><a href="improving-coding-efficiencies.html#cb173-3" tabindex="-1"></a></span>
+<span id="cb173-4"><a href="improving-coding-efficiencies.html#cb173-4" tabindex="-1"></a><span class="co"># Viewing list of dataframes</span></span>
+<span id="cb173-5"><a href="improving-coding-efficiencies.html#cb173-5" tabindex="-1"></a><span class="fu">head</span>(t_test_res_list)</span></code></pre></div>
+<pre><code>## [[1]]
+##    .y. group1     group2 n1  n2  statistic       df     p
+## 1 DWAs Normal Overweight 96 104 -0.7279621 192.3363 0.468
+## 2 DWCd Normal Overweight 96 104 -0.5894360 196.1147 0.556
+## 3 DWCr Normal Overweight 96 104  0.1102933 197.9870 0.912
+## 
+## [[2]]
+##    .y.          group1      group2  n1 n2   statistic       df     p
+## 1 DWAs Non-Underweight Underweight 166 34 -0.86947835 53.57143 0.388
+## 2 DWCd Non-Underweight Underweight 166 34 -0.97359810 55.45450 0.334
+## 3 DWCr Non-Underweight Underweight 166 34  0.04305105 56.08814 0.966
+## 
+## [[3]]
+##    .y.    group1 group2  n1 n2  statistic       df      p
+## 1 DWAs Non-Obese  Obese 144 56 -1.9312097 86.80253 0.0567
+## 2 DWCd Non-Obese  Obese 144 56  0.3431076 94.52209 0.7320
+## 3 DWCr Non-Obese  Obese 144 56 -0.6878311 89.61818 0.4930</code></pre>
+<p>And we can apply the cleaning function to each of the dataframes using the <code>lapply()</code> function, which takes a list as the first argument and the function to apply to each list element as the second argument:</p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="improving-coding-efficiencies.html#cb175-1" tabindex="-1"></a><span class="co"># Applying cleaning function</span></span>
+<span id="cb175-2"><a href="improving-coding-efficiencies.html#cb175-2" tabindex="-1"></a>t_test_res_list_cleaned <span class="ot">&lt;-</span> <span class="fu">lapply</span>(t_test_res_list, data_cleaning)</span>
+<span id="cb175-3"><a href="improving-coding-efficiencies.html#cb175-3" tabindex="-1"></a></span>
+<span id="cb175-4"><a href="improving-coding-efficiencies.html#cb175-4" tabindex="-1"></a><span class="co"># Vieweing cleaned dataframes</span></span>
+<span id="cb175-5"><a href="improving-coding-efficiencies.html#cb175-5" tabindex="-1"></a><span class="fu">head</span>(t_test_res_list_cleaned)</span></code></pre></div>
+<pre><code>## [[1]]
+##   Variable            Comparison     p
+## 1     DWAs Normal vs. Overweight 0.468
+## 2     DWCd Normal vs. Overweight 0.556
+## 3     DWCr Normal vs. Overweight 0.912
+## 
+## [[2]]
+##   Variable                      Comparison     p
+## 1     DWAs Non-Underweight vs. Underweight 0.388
+## 2     DWCd Non-Underweight vs. Underweight 0.334
+## 3     DWCr Non-Underweight vs. Underweight 0.966
+## 
+## [[3]]
+##   Variable          Comparison      p
+## 1     DWAs Non-Obese vs. Obese 0.0567
+## 2     DWCd Non-Obese vs. Obese 0.7320
+## 3     DWCr Non-Obese vs. Obese 0.4930</code></pre>
+<p>Last, we can collapse our list down into one dataframe using the <code>do.call()</code> and <code>rbind.data.frame()</code> functions, which together, take the elements of the list and collapse them into a dataframe by binding the rows together:</p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="improving-coding-efficiencies.html#cb177-1" tabindex="-1"></a>t_test_res_cleaned <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind.data.frame, t_test_res_list_cleaned)</span>
+<span id="cb177-2"><a href="improving-coding-efficiencies.html#cb177-2" tabindex="-1"></a></span>
+<span id="cb177-3"><a href="improving-coding-efficiencies.html#cb177-3" tabindex="-1"></a><span class="co"># Viewing final dataframe</span></span>
+<span id="cb177-4"><a href="improving-coding-efficiencies.html#cb177-4" tabindex="-1"></a>t_test_res_cleaned</span></code></pre></div>
+<pre><code>##   Variable                      Comparison      p
+## 1     DWAs           Normal vs. Overweight 0.4680
+## 2     DWCd           Normal vs. Overweight 0.5560
+## 3     DWCr           Normal vs. Overweight 0.9120
+## 4     DWAs Non-Underweight vs. Underweight 0.3880
+## 5     DWCd Non-Underweight vs. Underweight 0.3340
+## 6     DWCr Non-Underweight vs. Underweight 0.9660
+## 7     DWAs             Non-Obese vs. Obese 0.0567
+## 8     DWCd             Non-Obese vs. Obese 0.7320
+## 9     DWCr             Non-Obese vs. Obese 0.4930</code></pre>
+<p>The above example is just that - an example to demonstrate the mechanics of using list operations. However, there are actually a couple of even more efficient ways to execute the above cleaning steps:</p>
+<ol style="list-style-type: decimal">
+<li>Build cleaning steps into the analysis function if you know you will not need to access the raw results dataframe.</li>
+<li>Bind all three dataframes together, then execute the cleaning steps.</li>
+</ol>
+<p>We will demonstrate #2 below:</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="improving-coding-efficiencies.html#cb179-1" tabindex="-1"></a><span class="co"># Start by binding the rows of each of the results dataframes</span></span>
+<span id="cb179-2"><a href="improving-coding-efficiencies.html#cb179-2" tabindex="-1"></a>t_test_res_cleaned_2 <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(norm_vs_overweight, under_vs_nonunderweight, nonobese_vs_obese) <span class="sc">%&gt;%</span></span>
+<span id="cb179-3"><a href="improving-coding-efficiencies.html#cb179-3" tabindex="-1"></a>  </span>
+<span id="cb179-4"><a href="improving-coding-efficiencies.html#cb179-4" tabindex="-1"></a>  <span class="co"># Rename .y. column</span></span>
+<span id="cb179-5"><a href="improving-coding-efficiencies.html#cb179-5" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="st">&quot;Variable&quot;</span> <span class="ot">=</span> <span class="st">&quot;.y.&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb179-6"><a href="improving-coding-efficiencies.html#cb179-6" tabindex="-1"></a>    </span>
+<span id="cb179-7"><a href="improving-coding-efficiencies.html#cb179-7" tabindex="-1"></a>  <span class="co"># Merge group1 and group2</span></span>
+<span id="cb179-8"><a href="improving-coding-efficiencies.html#cb179-8" tabindex="-1"></a>  <span class="fu">unite</span>(Comparison, group1, group2, <span class="at">sep =</span> <span class="st">&quot; vs. &quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb179-9"><a href="improving-coding-efficiencies.html#cb179-9" tabindex="-1"></a>    </span>
+<span id="cb179-10"><a href="improving-coding-efficiencies.html#cb179-10" tabindex="-1"></a>  <span class="co"># Keep only columns of interest </span></span>
+<span id="cb179-11"><a href="improving-coding-efficiencies.html#cb179-11" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(Variable, Comparison, p))</span>
+<span id="cb179-12"><a href="improving-coding-efficiencies.html#cb179-12" tabindex="-1"></a></span>
+<span id="cb179-13"><a href="improving-coding-efficiencies.html#cb179-13" tabindex="-1"></a><span class="co"># Viewing results</span></span>
+<span id="cb179-14"><a href="improving-coding-efficiencies.html#cb179-14" tabindex="-1"></a>t_test_res_cleaned_2</span></code></pre></div>
+<pre><code>##   Variable                      Comparison      p
+## 1     DWAs           Normal vs. Overweight 0.4680
+## 2     DWCd           Normal vs. Overweight 0.5560
+## 3     DWCr           Normal vs. Overweight 0.9120
+## 4     DWAs Non-Underweight vs. Underweight 0.3880
+## 5     DWCd Non-Underweight vs. Underweight 0.3340
+## 6     DWCr Non-Underweight vs. Underweight 0.9660
+## 7     DWAs             Non-Obese vs. Obese 0.0567
+## 8     DWCd             Non-Obese vs. Obese 0.7320
+## 9     DWCr             Non-Obese vs. Obese 0.4930</code></pre>
+<p>As you can see, this dataframe is the same as the one we produced using list operations. It was produced using fewer lines of code and without the need for a user-defined function! For our purposes, this was a more efficient approach. However, we felt it was important to demonstrate the mechanics of list operations because there may be times where you do need to keep dataframes separate during specific analyses.</p>
+<p><br></p>
+</div>
+<div id="concluding-remarks-7" class="section level2 hasAnchor">
+<h2>Concluding Remarks<a href="improving-coding-efficiencies.html#concluding-remarks-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This module provided an introduction to loops, functions, and list operations and demonstrated how to use them to efficiently analyze an environmentally relevant dataset. When and how you implement these approaches depends on your coding style and the goals of your analysis. Although here we were focused on statistical tests and data cleaning, these flexible approaches can be used in a variety of data analysis steps. We encourage you to implement loops, functions, and list operations in your analyses when you find the need to iterate through statistical tests, visualizations, data cleaning, or other common workflow elements!</p>
+</div>
+<div id="additional-resources-2" class="section level2 hasAnchor">
+<h2>Additional Resources<a href="improving-coding-efficiencies.html#additional-resources-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><a href="https://intro2r.com/functions-in-r.html">Intro2r Loops</a></li>
+<li><a href="https://intro2r.com/prog_r.html">Intro2r Functions in R</a></li>
+<li><a href="http://adv-r.had.co.nz/Functionals.html">Hadley Wickham Advanced R - Functionals</a></li>
+</ul>
+<p><br></p>
+<p><label class="tykfont">
+Test Your Knowledge
+</label></p>
+<div class="tyk">
+<p>Use the same input data we used in this module to answer the following questions and produce a cleaned, publication-ready data table of results. Note that these data are normally distributed, so you can use a t-test.</p>
+<ol style="list-style-type: decimal">
+<li>Are there statistically significant differences in urine metal concentrations (ie. arsenic levels, cadmium levels, etc.) between younger (MAge &lt; 40) and older (MAge <span class="math inline">\(\geq\)</span> 40) mothers?</li>
+<li>Are there statistically significant differences in urine metal concentrations (ie. arsenic levels, cadmium levels, etc.) between between normal weight (BMI &lt; 25) and overweight (BMI <span class="math inline">\(\geq\)</span> 25) subjects?</li>
+</ol>
+</div>
+
+</div>
+</div>
+
+
+
+<!-- ################################################## -->
+<!-- ################################################## -->
+<!-- START SECTION ONE  -->
+<!-- ################################################## -->
+<!-- ################################################## -->
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-manipulation-and-reshaping.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-visualizations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
