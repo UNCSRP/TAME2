@@ -34,7 +34,7 @@ We aimed to address this critical gap by developing the in**T**elligence **A**nd
 + **Rebecca C. Fry**, PhD, University of North Carolina at Chapel Hill (UNC-Chapel Hill)
 + **Elise Hickman**, PhD, University of North Carolina at Chapel Hill (UNC-Chapel Hill)
 + **Ilona Jaspers**, PhD, University of North Carolina at Chapel Hill (UNC-Chapel Hill)
-+ **Lauren E. Koval**, PhD Candidate, University of North Carolina at Chapel Hill (UNC-Chapel Hill)
++ **Lauren E. Koval**, PhD, University of North Carolina at Chapel Hill (UNC-Chapel Hill)
 + **Paul Kruse**, PhD, U.S. Environmental Protection Agency (U.S. EPA)
 + **Sarah Miller**, PhD Candidate, University of North Carolina at Chapel Hill (UNC-Chapel Hill)
 + **David M. Reif**, PhD, Division of Translational Toxicology (DTT), National Institutes of Environmental Health Science (NIEHS)
