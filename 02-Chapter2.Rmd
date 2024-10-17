@@ -1,18 +1,7 @@
 # (PART\*) Chapter 2 Coding in R {-}
 
 
-
-
-<!-- ############################################################################################################################# -->
-
-<!-- ################################################## -->
-<!-- ################################################## -->
-<!-- START SECTION ONE  -->
-<!-- ################################################## -->
-<!-- ################################################## -->
-
-
-# Downloading and Programming in R
+# 2.1 Downloading and Programming in R
 
 This training module was developed by Kyle Roell, Elise Hickman, and Julia E. Rager.
 
@@ -454,18 +443,7 @@ Test Your Knowledge
 4. Make a data frame of the letters A-E in one column and their corresponding number in the alphabet order in the second column (e.g., A corresponds with 1).
 :::
 
-
-<!-- ############################################################################################################################# -->
-
-<!-- ################################################## -->
-<!-- ################################################## -->
-<!-- START SECTION TWO  -->
-<!-- ################################################## -->
-<!-- ################################################## -->
-
-
-
-# Coding "Best" Practices
+# 2.2 Coding "Best" Practices
 
 This training module was developed by Kyle Roell, Alexis Payton, Elise Hickman, and Julia E. Rager.
 
@@ -669,6 +647,7 @@ if (Longer_variable_name_x < Short_name_y) {
 + [Google's Style Guide](https://web.stanford.edu/class/cs109l/unrestricted/resources/google-style.html)
 + [Tidyverse Style Guide](https://style.tidyverse.org)
 + [R Blogger's Best Coding Practices](https://bookdown.org/content/d1e53ac9-28ce-472f-bc2c-f499f18264a3/)
++ [RMarkdown for Scientists](https://rmd4sci.njtierney.com/)
 
 
 ## Script Organization
@@ -705,18 +684,7 @@ Using the input file provided ("Module2_2_TYKInput.R"):
 2. You don't need to understand every step in the code to be able to improve the existing coding style! You can run each step of the code if needed to understand better what it does.
 :::
 
-
-<!-- ############################################################################################################################# -->
-
-<!-- ################################################## -->
-<!-- ################################################## -->
-<!-- START SECTION THREE  -->
-<!-- ################################################## -->
-<!-- ################################################## -->
-
-
-
-# Data Manipulation and Reshaping
+# 2.3 Data Manipulation and Reshaping
 
 This training module was developed by Kyle Roell, Alexis Payton, Elise Hickman, and Julia E. Rager.
 
@@ -1199,17 +1167,7 @@ What subjects, arranged from highest to lowest drinking water cadmium levels, ha
 **Hint**: Try using the `arrange()` function from the *tidyverse* package.
 :::
 
-
-<!-- ############################################################################################################################# -->
-
-<!-- ################################################## -->
-<!-- ################################################## -->
-<!-- START SECTION FOUR  -->
-<!-- ################################################## -->
-<!-- ################################################## -->
-
-
-# Improving Coding Efficiencies
+# 2.4 Improving Coding Efficiencies
 
 This training module was developed by Elise Hickman, Alexis Payton, Kyle Roell, and Julia E. Rager.
 

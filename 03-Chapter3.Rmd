@@ -1,18 +1,6 @@
 # (PART\*) Chapter 3 Basics of <br>Data Analysis and Visualizations {-}
 
-
-
-
-<!-- ############################################################################################################################# -->
-
-<!-- ################################################## -->
-<!-- ################################################## -->
-<!-- START SECTION ONE  -->
-<!-- ################################################## -->
-<!-- ################################################## -->
-
-
-# Data Visualizations
+# 3.1 Data Visualizations
 
 This training module was developed by Alexis Payton, Kyle Roell, Lauren E. Koval, Elise Hickman, and Julia E. Rager.
 
@@ -74,7 +62,7 @@ rm(list=ls())
 
 #### Installing required R packages
 If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you
-```{r install_libs2, echo=TRUE, eval=TRUE, warning=FALSE, results='hide', message=FALSE}
+```{r install_libs1, echo=TRUE, eval=TRUE, warning=FALSE, results='hide', message=FALSE}
 if (!requireNamespace("GGally"))
   install.packages("GGally");
 if (!requireNamespace("corrplot"))
@@ -340,19 +328,7 @@ For additional figures available and to view aspects of figures that can be chan
 knitr::include_graphics("Module3_1_Input/Module3_1_Image1.png")
 ```
 
-
-
-<!-- ############################################################################################################################# -->
-
-<!-- ################################################## -->
-<!-- ################################################## -->
-<!-- START SECTION TWO  -->
-<!-- ################################################## -->
-<!-- ################################################## -->
-
-
-
-# Improving Data Visualizations
+# 3.2 Improving Data Visualizations
 
 This training module was developed by Alexis Payton, Elise Hickman, and Julia E. Rager.
 
@@ -393,19 +369,23 @@ Keys to successful data visualizations:
   Color can be used to visualize a variable. There are three ways to categorize color schemes - sequential, diverging, and qualitative. Below, definitions are provided for each along with example figures that we've previously published that illustrate each color scheme. In addition, figure titles and captions are also provided for context. Note that some of these figures have been simplified from what was originally published to show more streamlined examples for TAME. 
 
   - **Sequential**: intended for ordered categorical data (i.e., disease severity, likert scale, quintiles). The choropleth map below is from [Winker, Payton et. al](https://doi.org/10.3389/fpubh.2024.1339700). 
-```{r, echo=FALSE, out.width = "65%", fig.align='center', fig.cap= "**Figure 1. Geospatial distribution of the risk of future wildfire events across North Carolina.** Census tracts in North Carolina were binned into quintiles based on Wildfire Hazard Potential (WHP) with 1 (pale orange) having the lowest risk and 5 (dark red) having the highest risk. Figure regenerated here in alignment with its published [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/)"}
+```{r, echo=FALSE, out.width = "65%", fig.align='center'}
 knitr::include_graphics("Module3_2_Input/Module3_2_Image1.png")
 ```
+<center>**Figure 1. Geospatial distribution of the risk of future wildfire events across North Carolina.** Census tracts in North Carolina were binned into quintiles based on Wildfire Hazard Potential (WHP) with 1 (pale orange) having the lowest risk and 5 (dark red) having the highest risk. Figure regenerated here in alignment with its published
+[Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/)] </center>
 
   - **Diverging**: intended to emphasize continuous data at extremes of the data range (typically using darker colors) and mid-range values (typically using lighter colors). This color scheme is ideal for charts like heatmaps. The heatmap below is from [Payton, Perryman et. al](0.1152/ajplung.00299.2021).
-```{r, echo=FALSE, out.width = "90%", fig.align='center', fig.cap= "**Figure 6. Individual cytokine expression levels across all subjects.** Cytokine concentrations were derived from nasal lavage fluid samples. On the x axis, subjects were ordered first according to tobacco use status, starting with non-smokers then cigarette smokers and e-cigarette users. Within tobacco use groups, subjects are ordered from lowest to highest average cytokine concentration from left to right. Within each cluster shown on the y axis, cytokines are ordered from lowest to highest average cytokine concentration from bottom to top. Figure regenerated here in alignment with its published [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/)"}
+```{r, echo=FALSE, out.width = "90%", fig.align='center'}
 knitr::include_graphics("Module3_2_Input/Module3_2_Image2.png")
 ```
+<center> **Figure 2. Individual cytokine expression levels across all subjects.** Cytokine concentrations were derived from nasal lavage fluid samples. On the x axis, subjects were ordered first according to tobacco use status, starting with non-smokers then cigarette smokers and e-cigarette users. Within tobacco use groups, subjects are ordered from lowest to highest average cytokine concentration from left to right. Within each cluster shown on the y axis, cytokines are ordered from lowest to highest average cytokine concentration from bottom to top. Figure regenerated here in alignment with its published [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/) </center>
 
   - **Qualitative**: intended for nominal categorical data to visualize clear differences between groups (i.e., soil types and exposure groups). The dendrogram below is from [Koval et. al](10.1038/s41370-022-00451-8).
-```{r, echo=FALSE, out.width = "75%", fig.align='center', fig.cap= "**Figure 2. Translating chemical use inventory data to inform human exposure patterning.** Groups A-I illustrate the identified clusters of exposure source categories. Figure regenerated here in alignment with its published [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/)"}
+```{r, echo=FALSE, out.width = "75%", fig.align='center'}
 knitr::include_graphics("Module3_2_Input/Module3_2_Image3.png")
 ```
+<center>**Figure 3. Translating chemical use inventory data to inform human exposure patterning.** Groups A-I illustrate the identified clusters of exposure source categories. Figure regenerated here in alignment with its published [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/)</center>
 
 + **Consider ordering axes to reveal patterns relevant to the research questions**
 
@@ -421,13 +401,13 @@ In this module, *ggplot2*, R's data visualization package will be used to walk t
 ### Script Preparations
 
 #### Cleaning the global environment
-```{r, clear_env, echo=TRUE, eval=TRUE}
+```{r, clear_ env, echo=TRUE, eval=TRUE}
 rm(list=ls())
 ```
 
 #### Installing required R packages
 If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you
-```{r, install_libs1, echo=TRUE, eval=TRUE, warning=FALSE, results='hide', message=FALSE}
+```{r, install_libs2, echo=TRUE, eval=TRUE, warning=FALSE, results='hide', message=FALSE}
 if (!requireNamespace("MetBrewer"))
   install.packages("MetBrewer");
 if (!requireNamespace("RColorBrewer"))
@@ -789,19 +769,7 @@ Replicate the figure below! The heatmap is the same as the "Test Your Knowledge"
 knitr::include_graphics("Module3_2_Input/Module3_2_Image4.png")
 ```
 
-
-
-<!-- ############################################################################################################################# -->
-
-<!-- ################################################## -->
-<!-- ################################################## -->
-<!-- START SECTION THREE  -->
-<!-- ################################################## -->
-<!-- ################################################## -->
-
-
-
-# Normality Tests and Data Transformations
+# 3.3 Normality Tests and Data Transformations
 
 This training module was developed by Elise Hickman, Alexis Payton, and Julia E. Rager.
 
@@ -903,9 +871,10 @@ Before answering these questions, let's define normality and how to test for it 
 ## What is a Normal Distribution?
 
 A normal distribution is a distribution of data in which values are distributed roughly symmetrically out from the mean such that 68.3% of values fall within one standard deviation of the mean, 95.4% of values fall within 2 standard deviations of the mean, and 99.7% of values fall within three standard deviations of the mean.
-```{r out.width = "800px", echo = FALSE, fig.align = 'center', fig.cap = "Figure Credit: D Wells, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons"}
+```{r out.width = "800px", echo = FALSE, fig.align = 'center'}
 knitr::include_graphics("Module3_3_Input/Module3_3_Image1.png")
 ```
+<center> Figure Credit: D Wells, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons</center>
 
 Common parametric statistical tests, such as t-tests, one-way ANOVAs, and Pearson correlations, rely on the assumption that data fall within the normal distribution for calculation of z-scores and p-values. Non-parametric tests, such as the Wilcoxon Rank Sum test, Kruskal-Wallis test, and Spearman Rank correlation, do not rely on assumptions about data distribution. Some of the aforementioned between-group comparisons were introduced in **TAME 2.0 Module 3.4 Introduction to Statistical Tests**. They, along with non-parametric tests, are explored further in later modules including **TAME 2.0 Module 4.4 Two-Group Comparisons & Visualizations** and **TAME 2.0 Module 4.5 Multi-group Comparisons & Visualizations**.  
 
@@ -1156,18 +1125,7 @@ Use the input file provided ("Module3_3_TYKInput.xlsx"), which represents a simi
 3. What are the average Shapiro-Wilk p-values for the raw and psuedo log~2~ transformed data?
 :::
 
-
-<!-- ############################################################################################################################# -->
-
-<!-- ################################################## -->
-<!-- ################################################## -->
-<!-- START SECTION FOUR  -->
-<!-- ################################################## -->
-<!-- ################################################## -->
-
-
-
-# Intoduction to Statistical Tests
+# 3.4 Intoduction to Statistical Tests
 
 This training module was developed by Alexis Payton, Kyle Roell, Elise Hickman, and Julia E. Rager.
 

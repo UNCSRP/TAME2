@@ -2350,7 +2350,7 @@ This training module was developed by Cynthia Rider, with contributions from Lau
 
 All input files (script, data, and figures) can be downloaded from the [UNC-SRP TAME2 GitHub website](https://github.com/UNCSRP/TAME2).
 
-```{r setup, include=FALSE}
+```{r set_up, include=FALSE}
 #set default values for R Markdown "knitting" to HTML, Word, or PDF
 knitr::opts_chunk$set(echo = TRUE) #print code chunks
 ```

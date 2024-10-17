@@ -1,19 +1,6 @@
 # (PART\*) Chapter 1 Introductory <br>Data Science {-}
 
-
-
-<!-- ############################################################################################################################# -->
-
-<!-- ################################################## -->
-<!-- ################################################## -->
-<!-- START SECTION ONE  -->
-<!-- ################################################## -->
-<!-- ################################################## -->
-
-
-
-
-# FAIR Data Management Practices
+# 1.1 FAIR Data Management Practices
 
 This training module was developed by Rebecca Boyles, with contributions from Julia E. Rager.
 
@@ -326,16 +313,7 @@ Test Your Knowledge
 Let’s imagine that you’re a researcher who is planning on gathering a lot of data using the zebrafish model. In order to adequately prepare your studies and steps to ensure data are deposited into proper repositories, you have the idea to check repository information obtained in [FAIRsharing.org](https://fairsharing.org/). What are some example repositories and relevant ontology resources that you could use to organize, deposit, and share your zebrafish data (hint: use the search tool)?
 :::
 
-
-<!-- ############################################################################################################################# -->
-
-<!-- ################################################## -->
-<!-- ################################################## -->
-<!-- START SECTION TWO  -->
-<!-- ################################################## -->
-<!-- ################################################## -->
-
-# Data Sharing through Online Repositories
+# 1.2 Data Sharing through Online Repositories
 ## An Overview and Example with the Dataverse Repository
 
 This training module was developed by Kyle R. Roell, Alexis Payton, and Julia E. Rager.
@@ -573,18 +551,7 @@ Test Your Knowledge
 Try creating your own Dataverse repository, format your files to be uploaded to Dataverse, and upload those files to your new repository!
 :::
 
-
-<!-- ############################################################################################################################# -->
-
-<!-- ################################################## -->
-<!-- ################################################## -->
-<!-- START SECTION THREE  -->
-<!-- ################################################## -->
-<!-- ################################################## -->
-
-
-
-# File Management using Github
+# 1.3 File Management using Github
 
 This training module was developed by Alexis Payton, Lauren E. Koval, Julia E. Rager.
 
@@ -792,17 +759,7 @@ Test Your Knowledge
 Try creating your own Github profile, set up a practice repo with subfolders, and a detailed READ.md file paralleling the suggested formatting and content detailed above for your own data analyses!
 :::
 
-
-<!-- ############################################################################################################################# -->
-
-<!-- ################################################## -->
-<!-- ################################################## -->
-<!-- START SECTION FOUR  -->
-<!-- ################################################## -->
-<!-- ################################################## -->
-
-
-# Data Wrangling in Excel
+# 1.4 Data Wrangling in Excel
 
 This training module was developed by Alexis Payton, Elise Hickman, and Julia E. Rager.
 
@@ -1094,3 +1051,4 @@ Test Your Knowledge
 1. Try wrangling the "Module1_4_TYKInput.xlsx" to mimic the cleaned versions of the data found in "Module1_4_TYKSolution.xlsx". This dataset includes sterol and cytokine concentration levels extracted from induced sputum samples collected after ozone exposure. After wrangling, you should end up with a sheet for subject information and a sheet for experimental data.
 2. Using the a PivotTable on the cleaned dataset, find the standard deviation of each cytokine variable stratified by the disease status.
 :::
+

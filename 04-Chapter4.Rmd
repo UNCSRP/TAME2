@@ -1,18 +1,6 @@
 # (PART\*) Chapter 4 Converting Wet Lab Data into Dry Lab Analyses {-}
 
-
-
-<!-- ############################################################################################################################# -->
-
-<!-- ################################################## -->
-<!-- ################################################## -->
-<!-- START SECTION ONE  -->
-<!-- ################################################## -->
-<!-- ################################################## -->
-
-
-
-# Overview of Experimental Design and Example Data 
+# 4.1 Overview of Experimental Design and Example Data 
 
 This training module was developed by Elise Hickman, Sarah Miller, and Julia E. Rager.
 
@@ -36,7 +24,7 @@ Biological replicates are the preferred unit of statistical comparison because t
 
 The final "N" that you report should reflect your biological replicates, or independent experiments. What constitutes an independent experiment or biological replicate is highly field-, lab-, organism-, and endpoint-dependent, so make sure to discuss this within your research group in the experiment planning phase and again before your analysis begins. No matter what you choose, ensure that when you report your results, you are transparent about what your biological replicates are. For example, the below diagram (adapted from [BitesizeBio](https://bitesizebio.com/47982/n-number-cell-lines/)) illustrates different ways of defining replicates in experiments with cell lines: 
 
-```{r, echo = FALSE, fig.align = "center", out.width = "650px", fig.cap= "Created with *BioRender.com*"} 
+```{r, echo = FALSE, fig.align = "center", out.width = "650px"} 
 knitr::include_graphics("Module4_1_Input/Module4_1_Image1.png")
 ```
 
@@ -51,7 +39,7 @@ Also note that to perform statistical analyses, an N of at least 3 biological re
 
 Technical replicates are repeated measurements on the same sample or biological source, demonstrating the variation underlying protocols, equipment, and sample handling. In environmental health research, there can be technical replicates separately related to either the experimental design or the downstream analyses. Technical replicates related to experimental design refer to the chemical exposure for cell-based (*in vitro*) experiments, where there may be multiple wells of cells from the same passage or human/mouse exposed to the same treatment. Technical replicates related to downstream analyses refer to the endpoints that are measured after chemical exposure in each sample. To illustrate this, consider an experiment where cells from four unique human donors (D1-D4) are grown in cell culture plates, and then three wells of cells from each donor are exposed to a chemical treatment (Tx) or a vehicle control (Ctrl). The plate layout might look something like this, with technical replicates related to experimental design, i.e. chemical exposure, in the same color:
 
-```{r, echo = FALSE, fig.align = "center", out.width = "500px", fig.cap= "Created with *BioRender.com*"} 
+```{r, echo = FALSE, fig.align = "center", out.width = "500px"} 
 knitr::include_graphics("Module4_1_Input/Module4_1_Image2.png")
 ```
 
@@ -59,7 +47,7 @@ For this experiment, we have four biological replicates (the four donors) and th
 
 Following the exposure of the cells to a chemical of interest, the media is collected from each well and assayed using a plate reader assay for concentrations of a marker of inflammation. For each sample collected (from each well), there are three technical replicates used to measure the concentration of the inflammatory marker. The purpose of these technical replicates is to capture potential unintended well-to-well variation in the plate reader assay. The plate layout might look something like this, ***with the letter and number in each well of the plate layout representing the well in the exposure plate layout that the media sample being assayed came from***:
 
-```{r, echo = FALSE, fig.align = "center", out.width = "800px", fig.cap= "Created with *BioRender.com*"} 
+```{r, echo = FALSE, fig.align = "center", out.width = "800px"} 
 knitr::include_graphics("Module4_1_Input/Module4_1_Image3.png")
 ```
 
@@ -94,7 +82,7 @@ In this chapter, we will be using an example dataset derived from an *in vitro*,
 
 In this experiment, primary human bronchial epithelial cells (HBECs) from sixteen different donors were exposed to the gas acrolein, which is emitted from the combustion of fossil fuels, tobacco, wood, and plastic. Inhalation exposure to acrolein is associated with airway inhalation, and this study aimed to understand how exposure to acrolein changes secretion of markers of inflammation. Prior to experimentation, the HBECs were grown on a permeable membrane support for 24 days with air on one side and liquid media on the other side, allowing them to differentiate into a form that is very similar to what is found in the human body. The cells were then exposed for 2 hours to 0 (filtered air), 0.6, 1, 2, or 4 ppm acrolein, with two technical replicate wells from each donor per dose. Twenty-four hours later, the media was collected, and concentrations of inflammatory markers were measured using an [enzyme-linked immunosorbent assay (ELISA)](https://www.thermofisher.com/us/en/home/life-science/protein-biology/protein-biology-learning-center/protein-biology-resource-library/pierce-protein-methods/overview-elisa.html). 
 
-```{r, echo = FALSE, fig.align = "center", out.width = "900px", fig.cap= "Created with *BioRender.com*"} 
+```{r, echo = FALSE, fig.align = "center", out.width = "900px"} 
 knitr::include_graphics("Module4_1_Input/Module4_1_Image4.png")
 ```
 
@@ -126,19 +114,7 @@ Read the following experimental design descriptions. For each description, deter
 2. Twenty mice are used in a study aiming to understand the effects of particulate matter on cardiovascular health. The mice are randomized such that half of the mice are exposed to filtered air and half are exposed to particulate matter. During the exposures, the mice are continuously monitored for endpoints such as heart rate and heart function. One month later, the mice that were exposed to particulate matter are exposed to filtered air, and the mice that were exposed to filtered air are exposed to particulate matter, with the same cardiovascular endpoints collected. 
 :::
 
-
-
-
-<!-- ############################################################################################################################# -->
-
-<!-- ################################################## -->
-<!-- ################################################## -->
-<!-- START SECTION TWO  -->
-<!-- ################################################## -->
-<!-- ################################################## -->
-
-
-# Data Import, Processing, and Summary Statistics 
+# 4.2 Data Import, Processing, and Summary Statistics 
 
 This training module was developed by Elise Hickman, Alexis Payton, Sarah Miller, and Julia E. Rager.
 
@@ -156,10 +132,11 @@ This training module was specifically developed to answer the following environm
 
 2. Are our data normally distributed?
 
+<br>
+
 ## Data Import
 
 First, we need to import our data. Data can be imported into R from many different file formats, including .csv (as demonstrated in previous chapters), .txt, .xlsx, and .pdf. Often, data are formatted in Excel prior to import, and the [*openxlsx*](https://ycphs.github.io/openxlsx/) package provides helpful functions that allow the user to import data from Excel, create workbooks for storing results generated in R, and export data from R to Excel workbooks. Below, we will use the `read.xlsx()` function to import our data directly from Excel. Other useful packages include [*pdftools*](https://github.com/ropensci/pdftools) (PDF import),  [*tm*](https://cran.r-project.org/web/packages/tm/vignettes/tm.pdf) (text mining of PDFs), and [*plater*](https://cran.r-project.org/web/packages/plater/vignettes/plater-basics.html) (plate reader formatted data import).
-
 ```{r, echo = FALSE, fig.align = "center", out.width = "850px"} 
 knitr::include_graphics("Module4_2_Input/Module4_2_Image1.png")
 ```
@@ -169,15 +146,27 @@ knitr::include_graphics("Module4_2_Input/Module4_2_Image1.png")
 #### Set working directory
 
 In preparation, first let's set our working directory to the folder path that contains our input files:
-
 ```{r eval = FALSE}
 setwd("/filepath to where your input files are")
 ```
 
+#### Installing required R packages
+If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you
+```{r, install__libs, echo=TRUE, eval=TRUE, warning=FALSE, results='hide', message=FALSE}
+if (!requireNamespace("table1"))
+  install.packages("table1");
+if (!requireNamespace("vtable"))
+  install.packages("vtable");
+# some packages need to be installed through Bioconductor/ BiocManager
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("pcaMethods")
+BiocManager::install("impute")
+BiocManager::install("imputeLCMD")
+```
 #### Load required packages
 
 And load required packages:
-
 ```{r message = FALSE}
 library(openxlsx) # for importing Excel files
 library(DT) # for easier viewing of data tables
@@ -187,7 +176,6 @@ library(table1) # for summary table
 library(vtable) # for summary table
 library(ggpubr) # for making Q-Q plots with ggplot 
 ```
-
 
 #### Import example datasets
 
@@ -205,17 +193,17 @@ datatable(biomarker_data)
 ```
 
 We can see that our biomarker data are arranged with samples in rows and sample information and biomarker measurements in the columns. 
-
 ```{r}
 datatable(demographic_data)
 ```
 
 Our demographic data provide information about the donors that our cells came from, matching to the `Donor` column in our biomarker data. 
 
+<br>
+
 ## Handling Missing Values
 
 Next, we will investigate whether we have missing values and which variables and donors have missing values.
-
 ```{r}
 # Calculate the total number of NAs per variable
 biomarker_data %>% 
@@ -275,17 +263,17 @@ biomarker_data %>%
 
 Here, we can see that only about 3-4% of values are missing for our variables with missing data, so we will proceed to imputation with our dataset as-is. 
 
-We will impute values using QRILC, which pulls from the left side of the data distribution (the lower values) to impute missing values. We will write a function that will apply QRILC imputation to our dataframe. This function takes a data frame with missing values as input and returns a dataframe with QRILC imputed values in place of NAs as output. 
+We will impute values using QRILC, which pulls from the left side of the data distribution (the lower values) to impute missing values. We will write a function that will apply QRILC imputation to our dataframe. This function takes a dataframe with missing values as input and returns a dataframe with QRILC imputed values in place of NAs as output. 
 ```{r}
 QRILC_imputation = function(df){
-  
     # Normalize data before applying QRILC per QRILC documentation
-    ## Select only numeric columns, log2 transform, and convert to a matrix
+    ## Select only numeric columns, psuedo log2 transform, and convert to a matrix
     ### 4 comes from there being 3 metadata columns before the numeric data starts
     QRILC_prep = df[,4:dim(df)[2]] %>% 
          mutate_all(., function(x) log2(x + 1)) %>%
          as.matrix()
-
+    
+    # QRILC imputation
     imputed_QRILC_object = impute.QRILC(QRILC_prep, tune.sigma = 0.1)
     QRILC_log2_df = data.frame(imputed_QRILC_object[1]) 
     
@@ -303,7 +291,7 @@ QRILC_imputation = function(df){
 }
 ```
 
-Now we can apply the QRILC function to our dataframe. We use the function `set.seed()` to ensure that the QRILC function generates the same numbers each time we run the script. For more on setting seeds, see [here](https://www.statology.org/set-seed-in-r/).
+Now we can apply the `QRILC_imputation()` function to our dataframe. We use the function `set.seed()` to ensure that the QRILC function generates the same numbers each time we run the script. For more on setting seeds, see [here](https://www.statology.org/set-seed-in-r/).
 ```{r}
 # Set random seed to ensure reproducibility in results
 set.seed(1104)
@@ -311,6 +299,7 @@ set.seed(1104)
 # Apply function
 biomarker_data_imp <- QRILC_imputation(biomarker_data)
 ```
+<br>
 
 ## Averaging Replicates
 
@@ -331,9 +320,10 @@ biomarker_data_imp_avg <- biomarker_data_imp %>%
   # Separate back out the Donor_Dose column
   separate(Donor_Dose, into = c("Donor", "Dose"), sep = "_")
 
-# View new data frame
+# View new dataframe
 datatable(biomarker_data_imp_avg)
 ```
+<br>
 
 ## Descriptive Statistics
 
@@ -342,7 +332,6 @@ Generating descriptive statistics (e.g., mean, median, mode, range, standard dev
 ### Method #1 - Tidyverse and Basic Functions
 
 The mean, or average of data points, is one of the most commonly reported summary statistics and is often reported as mean ± standard deviation to demonstrate the spread in the data. Here, we will make a table of mean ± standard deviation for each of our biomarkers across each of the dose groups using *tidyverse* functions. 
-
 ```{r}
 # Calculate means
 biomarker_group_means <- biomarker_data_imp_avg %>%
@@ -354,7 +343,6 @@ datatable(biomarker_group_means)
 ```
 
 You'll notice that there are a lot of decimal places in our calculated means, while in our original data, there are only two decimal places. We can add a step to round the data to our above code chunk to produce cleaner results.
-
 ```{r}
 # Calculate means
 biomarker_group_means <- biomarker_data_imp_avg %>%
@@ -366,18 +354,16 @@ biomarker_group_means <- biomarker_data_imp_avg %>%
 datatable(biomarker_group_means)
 ```
 
+### Answer to Environmental Health Question 1
 :::question
-<i>With this, we can answer **Environmental Health Question 1**:</i> 
-
-What is the mean concentration of each inflammatory biomarker by acrolein concentration?
+<i>With this, we can answer **Environmental Health Question 1**:</i> What is the mean concentration of each inflammatory biomarker by acrolein concentration?
 :::
 
 :::answer
-**Answer:** With the above table, we can see the mean concentrations for each of our inflammatory biomarkers by acrolein dose. IL-8 overall has the highest concentrations, followed by VEGF and IL-6. For IL1B, IL8, TNFa, and VEGF, it appears that the concentration of the biomarker goes up with increasing dose. 
+**Answer:** With the above table, we can see the mean concentrations for each of our inflammatory biomarkers by acrolein dose. IL-8 overall has the highest concentrations, followed by VEGF and IL-6. For IL-1$\beta$, IL-8, TNF-$\alpha$, and VEGF, it appears that the concentration of the biomarker goes up with increasing dose. 
 :::
 
 We can use very similar code to calculate our standard deviations:
-
 ```{r}
 # Calculate means
 biomarker_group_sds <- biomarker_data_imp_avg %>%
@@ -393,7 +379,7 @@ Now we've calculated both the means and standard deviations! However, these are 
 
 1. Pivot each dataframe to a long format, with each row containing the value for one biomarker at one dose.
 2. Create a variable that represents each unique row (combination of `Dose` and `variable`).
-3. Join the data frames by row. 
+3. Join the dataframes by row. 
 4. Unite the two columns with mean and standard deviation, with `±` in between them.
 5. Pivot the dataframe wider so that the dataframe resembles what we started with for the means and standard deviations. 
 
@@ -413,7 +399,7 @@ biomarker_group_sds_long <- pivot_longer(biomarker_group_means,
 datatable(biomarker_group_means_long)
 ```
 
-Next, we will join the mean and standard deviation datasets. Notice that we are only joining the `Dose_variable` and `sd` columns from the standard deviation data frame to prevent duplicate columns (`Dose`, `variable`) from being included.
+Next, we will join the mean and standard deviation datasets. Notice that we are only joining the `Dose_variable` and `sd` columns from the standard deviation dataframe to prevent duplicate columns (`Dose`, `variable`) from being included.
 ```{r}
 # Merge the dataframes by row
 biomarker_group_summstats <- left_join(biomarker_group_means_long, 
@@ -438,7 +424,7 @@ biomarker_group_summstats <- biomarker_group_summstats %>%
 datatable(biomarker_group_summstats)
 ```
 
-Last, we can pivot the dataframe wider to revert it to its original layout, which is more digestible to read.
+Last, we can pivot the dataframe wider to revert it to its original layout, which is easier to read.
 ```{r}
 # Pivot dataframe wider
 biomarker_group_summstats <- biomarker_group_summstats %>%
@@ -453,12 +439,11 @@ biomarker_group_summstats <- biomarker_group_summstats %>%
 datatable(biomarker_group_summstats)
 ```
 
-These data are now in a publication-ready format that can be exported to a .txt, .csv., or .xlsx file for easy sharing. 
+These data are now in a publication-ready format that can be exported to a .txt, .csv., or .xlsx file for sharing. 
 
 ### Method #2 - Applying a List of Functions
 
 Calculating our mean and standard deviation separately using *tidyverse* wasn't too difficult, but what if we want to calculate other descriptive statistics, such as minimum, median, and maximum? We could use the above approach, but we would need to make a separate dataframe for each and then merge them all together. Instead, we can use the `map_dfr()` function from the *purrr* package, which is also part of *tidyverse.* This function takes a list of functions you want to apply to your data and applies these functions over specified columns in the data. Let's see how it works:
-
 ```{r}
 # Define summary functions
 summary_functs <- lst(min, median, mean, max, sd)
@@ -499,7 +484,6 @@ knitr::include_graphics("Module4_2_Input/Module4_2_Image2.png")
 #### Vtable
 
 The *vtable* package includes the function `st()`, which can also be used to make HTML tables (and other output formats; see `out` argument). For example: 
-
 ```{r}
 # HTML output
 st(biomarker_data_imp_avg, group = 'Dose')
@@ -510,9 +494,11 @@ st(biomarker_data_imp_avg, group = 'Dose', out = 'return')
 
 Similar to *table1*, see the package vignette for detailed information about how to customize tables using this package.
 
+<br>
+
 ## Normality Assessment and Data Transformation
 
-The last step we will take before beginning to test our data for statistical differences between groups (in the next module) is to understand our data's distribution through normality assessment. This will inform which statistical tests we will perform on our data. For more detail on normality testing, including detailed explanations of each type of normality assessment and explanations of the code underlying the following graphs and tables, see **TAME Module 3.3, Normality Tests and Data Transformations**.
+The last step we will take before beginning to test our data for statistical differences between groups (in the next module) is to understand our data's distribution through normality assessment. This will inform which statistical tests we will perform on our data. For more detail on normality testing, including detailed explanations of each type of normality assessment and explanations of the code underlying the following graphs and tables, see **TAME 2.0 Module 3.3 Normality Tests and Data Transformations**.
 
 We'll start by looking at histograms of our data for qualitative normality assessment:
 ```{r message = FALSE, fig.align = 'center'}
@@ -530,7 +516,7 @@ ggplot(biomarker_data_imp_avg_long, aes(value)) +
   labs(y = "# of Observations", x = "Value")
 ```
 
-From these histograms, we can see that IL-1B appears to be normally distributed, while the other endpoints do not appear to be normally distributed. 
+From these histograms, we can see that IL-1$\beta$ appears to be normally distributed, while the other endpoints do not appear to be normally distributed. 
 
 We can also use Q-Q plots to assess normality qualitatively:
 ```{r fig.align = 'center'}
@@ -544,10 +530,10 @@ To assess normality quantitatively, we can use the Shapiro-Wilk test. Note that 
 # Apply Shapiro Wilk test to dataframe
 shapiro_res <-  apply(biomarker_data_imp_avg %>% select(IL1B:VEGF), 2, shapiro.test)
 
-# Create results data frame
+# Create results dataframe
 shapiro_res <- do.call(rbind.data.frame, shapiro_res)
 
-# Clean data frame
+# Clean dataframe
 shapiro_res <- shapiro_res %>% 
   
   ## Add normality conclusion
@@ -556,25 +542,22 @@ shapiro_res <- shapiro_res %>%
   ## Remove columns that do not contain informative data
   select(c(p.value, normal)) 
 
-# View cleaned up data frame
+# View cleaned up dataframe
 datatable(shapiro_res)
 ```
 
+### Answer to Environmental Health Question 2
 :::question
-
-<i>With this, we can answer **Environmental Health Question 2**:</i> 
-
-Are our data normally distributed?
+<i>With this, we can answer **Environmental Health Question 2**:</i> Are our data normally distributed?
 :::
 
 :::answer
-**Answer:** The results from the Shapiro-Wilk test demonstrate that the IL1B data are normally distributed, while the other variables are non-normally distributed. These results support the conclusions we made based on our qualitative assessment above with histograms and Q-Q plots. 
+**Answer:** The results from the Shapiro-Wilk test demonstrate that the IL-1$\beta$ data are normally distributed, while the other variables are non-normally distributed. These results support the conclusions we made based on our qualitative assessment above with histograms and Q-Q plots. 
 :::
 
-### Log2 Transforming and Re-Assessing Normality
+### Log~2~ Transforming and Re-Assessing Normality
 
-Log2 transformation is a common transformation used in environmental health research and can move data closer to a normal distribution. For more on data transformation, see **TAME Module 3.3, Normality Tests and Data Transformations**. We will pseudo-log2 transform our data, which adds a 1 to each value before log2 transformation and ensures that resulting values are positive real numbers. Let's see if the log2 data are more normally distributed than the raw data. 
-
+Log~2~ transformation is a common transformation used in environmental health research and can move data closer to a normal distribution. For more on data transformation, see **TAME 2.0 Module 3.3 Normality Tests and Data Transformations**. We will pseudo-log~2~ transform our data, which adds a 1 to each value before log~2~ transformation and ensures that resulting values are positive real numbers. Let's see if the log~2~ data are more normally distributed than the raw data. 
 ```{r}
 # Apply log2 transformation to data
 biomarker_data_imp_avg_log2 <- biomarker_data_imp_avg %>%
@@ -604,10 +587,10 @@ Run Shapiro-Wilk test:
 # Apply Shapiro Wilk test
 shapiro_res_log2 <-  apply(biomarker_data_imp_avg_log2 %>% select(IL1B:VEGF), 2, shapiro.test)
 
-# Create results data frame
+# Create results dataframe
 shapiro_res_log2 <- do.call(rbind.data.frame, shapiro_res_log2)
 
-# Clean data frame
+# Clean dataframe
 shapiro_res_log2 <- shapiro_res_log2 %>% 
   
   ## Add normality conclusion
@@ -616,20 +599,23 @@ shapiro_res_log2 <- shapiro_res_log2 %>%
   ## Remove columns that do not contain informative data
   select(c(p.value, normal)) 
 
-# View cleaned up data frame
+# View cleaned up dataframe
 shapiro_res_log2
 ```
 
-The histograms and Q-Q plots demonstrate that the log2 data are more normally distributed than the raw data. The results from the Shapiro-Wilk test also demonstrate that the the log2 data are more normally distributed as a whole than the raw data. Overall, the p-values, even for the variables that are still non-normally distributed, are much higher. 
+The histograms and Q-Q plots demonstrate that the log~2~ data are more normally distributed than the raw data. The results from the Shapiro-Wilk test also demonstrate that the the log~2~ data are more normally distributed as a whole than the raw data. Overall, the p-values, even for the variables that are still non-normally distributed, are much higher. 
 
-So, should we proceed with the raw data or the log2 data? This depends on what analyses we plan to do. In general, it is best to keep the data in as close to its raw format as possible, so if all of our analyses are available with a non-parametric test, we could use our raw data. However, some statistical tests do not have a non-parametric equivalent, in which case it would likely be best to use the log2-transformed data. For subsequent modules, we will proceed with the log2 data for consistency; however, choices regarding normality assessment can vary, so be sure to discuss these choices within your research group before proceeding with your analysis. 
+So, should we proceed with the raw data or the log~2~ data? This depends on what analyses we plan to do. In general, it is best to keep the data in as close to its raw format as possible, so if all of our analyses are available with a non-parametric test, we could use our raw data. However, some statistical tests do not have a non-parametric equivalent, in which case it would likely be best to use the log~2~ transformed data. For subsequent modules, we will proceed with the log~2~ data for consistency; however, choices regarding normality assessment can vary, so be sure to discuss these choices within your research group before proceeding with your analysis. 
 
-For more on decisions regarding normality, see **TAME Module 3.3 Normality Tests and Data Transformations**. For more on parametric vs. non-parametric tests, see **TAME Module 4.4 Two Group Comparisons and Visualizations** and **TAME Module 4.5 Multi-Group Comparisons and Visualizations**.
+For more on decisions regarding normality, see **TAME 2.0 Module 3.3 Normality Tests and Data Transformations**. For more on parametric vs. non-parametric tests, see **TAME 2.0 Module 4.4 Two Group Comparisons and Visualizations** and **TAME 2.0 Module 4.5 Multi-Group Comparisons and Visualizations**.
 
+<br>
 
 ## Concluding Remarks
 
 Taken together, this module demonstrates important data processing steps necessary before proceeding with between-group statistical testing, including data import, handling missing values, averaging replicates, generating descriptive statistics tables, and assessing normality. Careful consideration and description of these steps in the methods section of a manuscript or report increases reproducibility of analyses and helps to improve the accuracy and statistical validity of subsequent statistical results. 
+
+<br>
 
 <label class="tykfont">
 Test Your Knowledge 
@@ -645,23 +631,7 @@ Functional endpoints from these cultures were also measured. These endpoints wer
 4. Are the raw data normally distributed? 
 :::
 
-
-
-
-
-
-
-<!-- ############################################################################################################################# -->
-
-<!-- ################################################## -->
-<!-- ################################################## -->
-<!-- START SECTION THREE  -->
-<!-- ################################################## -->
-<!-- ################################################## -->
-
-
-
-# Data Import from PDF Sources
+# 4.3 Data Import from PDF Sources
 
 This training module was developed by Elise Hickman, Alexis Payton, and Julia E. Rager.
 
@@ -1273,19 +1243,7 @@ Using the same input files that we used in part 1, "Importing Data from Many Sin
 :::
 
 
-
-
-<!-- ############################################################################################################################# -->
-
-<!-- ################################################## -->
-<!-- ################################################## -->
-<!-- START SECTION FOUR  -->
-<!-- ################################################## -->
-<!-- ################################################## -->
-
-
-
-# Two-Group Comparisons and Visualizations
+# 4.4 Two Group Comparisons and Visualizations
 
 This training module was developed by Elise Hickman, Alexis Payton, and Julia E. Rager.
 
@@ -1328,14 +1286,14 @@ datatable(demographic_data)
 
 ## Overview of Two Group Statistical Tests
 
-Before applying statistical tests to our data, let's first review common two-group statistical tests, their underlying assumptions, and variations on these tests. 
+Before applying statistical tests to our data, let's first review common two group statistical tests, their underlying assumptions, and variations on these tests. 
 
 ### Common Tests
 
-The two most common two-group statistical tests are the...
+The two most common two group statistical tests are the...
 
-+ t-test (also known as the student's t-test) and the 
-+ Wilcoxon test (also known as the Wilcox test, Wilcoxon test, or Mann Whitney test) 
++ **T-test** (also known as the student's t-test) and the 
++ **Wilcoxon test** (also known as the Wilcox test, Wilcoxon test, or Mann Whitney test) 
 
 Both of these tests are testing the null hypothesis that the means of the two populations (groups) are the same; the alternative hypothesis is that they are not the same. A significant p-value means that we can reject the null hypothesis that the means of the two groups are the same. Whether or not a p-value meets criteria for significance is experiment-specific, though commonly implemented p-value filters for significance include p<0.05 and p<0.01. P-values can also be called alpha values, and they indicate the probability of a **type I error**, or false positive, where the null hypothesis is rejected despite it actually being true. On the other hand, a **type II error**, or false negative, occurs when the null hypothesis is not rejected when it actually should have been. 
 
@@ -1366,17 +1324,16 @@ This decision matters more when dealing with smaller sample sizes (*n*<10) as sm
 
 **One vs Two-Sided:** A one-sided test evaluates the hypothesis that the mean of the treatment group significantly differs in a specific direction from the control. A two-sided test evaluates the hypothesis that the mean of the treatment group significantly differs from the control but does not specify a direction for that change. A two-sided test is the preferred approach and the default in R because, typically, either direction of change is possible and represents an informative finding. However, one-sided tests may be appropriate if an effect can only possibly occur in one direction. This can be implemented by setting `alternative = "one.sided"` within the statistical testing function. 
 
-
 ### Which test should I choose?
 
 We provide the following flowchart to help guide your choice of statistical test to compare two groups:
-```{r, echo = FALSE, fig.align = "center", fig.cap= "Created with *BioRender.com*", out.width = "800px"} 
+```{r, echo = FALSE, fig.align = "center", out.width = "800px"} 
 knitr::include_graphics("Module4_4_Input/Module4_4_Image1.png")
 ```
 
 <br>
 
-## Statistical vs Biological Significance
+## Statistical vs. Biological Significance
 
 Another important topic to discuss before proceeding to statistical testing is the true meaning of statistical significance. Statistical significance simply means that it is unlikely that the patterns being observed are due to random chance. However, just because an effect is statistically significant does not mean that it is biologically significant (i.e., has notable biological consequences). Often, there also needs to be a sufficient magnitude of effect (also called effect size) for the effects on a system to be meaningful. Although a p-value < 0.05 is often considered the threshold for significance, this is just a standard threshold set to a generally "acceptable" amount of error (5%). What about a p-value of 0.058 with a very large biological effect? Accounting for effect size is also why filters such as log~2~ fold change are often applied alongside p-value filters in -omics based analysis. 
 
@@ -1387,7 +1344,6 @@ In discussions of effect size, the population size is also a consideration - a s
 ## Unpaired Test Example
 
 We will start by performing a statistical test to determine whether there are significant differences in biomarker concentrations between male and female donors at baseline (0 ppm exposure). Previously we determined that the majority of our data was non-normally distributed (see **TAME 2.0 Module 4.2 Data Import, Processing, and Summary Statistics**), so we'll skip testing for that assumption in this module. Based on those results, we will use the Wilcoxon test to determine if there are significant differences between groups. The Wilcoxon test does not assume homogeneity of variance, so we do not need to test for that prior to applying the test. This is an unpaired analysis because samples collected from the cells derived from male and female donor cells are different sets of cells (i.e., independent from each other). Thus, the specific statistical test applied will be the Wilcoxon Rank Sum test. 
-
 First, we will filter our dataframe to only data representing the control (0 ppm) exposure:
 ```{r}
 biomarker_data_malevsfemale <- biomarker_data %>% filter(Dose == "0")
@@ -1474,7 +1430,7 @@ For this analysis, we will not adjust for multiple hypothesis testing due to our
 
 ## Paired Test Example
 
-To demonstrate an example of a paired two-group test, we can also determine whether exposure to 4 ppm acrolein significantly changes biomarker concentrations. This is now a paired design because each donor's cells were exposed to both 0 and 4 ppm acrolein. 
+To demonstrate an example of a paired two group test, we can also determine whether exposure to 4 ppm acrolein significantly changes biomarker concentrations. This is now a paired design because each donor's cells were exposed to both 0 and 4 ppm acrolein. 
 
 To prepare the data, we will filter the dataframe to only include 0 and 4 ppm:
 ```{r}
@@ -1650,13 +1606,13 @@ ggplot(biomarker_data_0vs4_long, aes(x = Dose, y = value)) +
 
 An appropriate title for this figure could be: 
 
-"**Figure X. Exposure to 4 ppm acrolein increases inflammatory biomarker secretion in primary human bronchial epithelial cells.** Groups were compared using the Wilcoxon signed rank test. * p < 0.05, ** p < 0.01, *** p < 0.001, **** p < 0.0001, n = 16 per group (paired)." 
+"**Figure X. Exposure to 4 ppm acrolein increases inflammatory biomarker secretion in primary human bronchial epithelial cells.** Groups were compared using the Wilcoxon signed rank test. * p < 0.05, ** p < 0.01, *** p < 0.001, **** p < 0.0001, *n* = 16 per group (paired)." 
 
 <br>
 
 ## Concluding Remarks
 
-In this module, we introduced two-group statistical tests, which are some of the most common statistical tests applied in biomedical research. We applied these tests to our example dataset and demonstrated how to produce publication-quality tables and figures of our results. Implementing a workflow such as this enables efficient analysis of wet-bench generated data and customization of output figures and tables suited to your personal preferences. 
+In this module, we introduced two group statistical tests, which are some of the most common statistical tests applied in biomedical research. We applied these tests to our example dataset and demonstrated how to produce publication-quality tables and figures of our results. Implementing a workflow such as this enables efficient analysis of wet-bench generated data and customization of output figures and tables suited to your personal preferences. 
 
 <br>
 
@@ -1673,19 +1629,7 @@ Use the same processes demonstrated in this module and the provided data (“Mod
 2. Are there significant differences in functional endpoints between cells exposed to 0 and 4 ppm acrolein? Go ahead and use non-parametric tests for these analyses. 
 :::
 
-
-
-
-<!-- ############################################################################################################################# -->
-
-<!-- ################################################## -->
-<!-- ################################################## -->
-<!-- START SECTION FIVE  -->
-<!-- ################################################## -->
-<!-- ################################################## -->
-
-
-# Multi-Group and Multi-Variable Comparisons and Visualizations
+# 4.5 Multi-Group and Multi-Variable Comparisons and Visualizations
 
 This training module was developed by Elise Hickman, Alexis Payton, and Julia E. Rager.
 
@@ -1706,8 +1650,13 @@ This training module was specifically developed to answer the following environm
 
 Here, we will import the processed data that we generated at the end of TAME 2.0 Module 4.2, introduced in **TAME 2.0 Module 4.1 Overview of Experimental Design and Example Data** and the associated demographic data. These data represent log~2~ concentrations of inflammatory biomarkers secreted by airway epithelial cells after exposure to four different concentrations of acrolein (plus filtered air as a control). We will also load packages that will be needed for the analysis, including previously introduced packages such as *openxlsx*, *tidyverse*, *DT*, *ggpubr*, and *rstatix*. 
 
-```{r message = FALSE}
-# Load packages
+#### Cleaning the global environment
+```{r, clear_envi, echo=TRUE, eval=TRUE}
+rm(list=ls())
+```
+
+#### Loading R packages required for this session
+```{r, load_ libs, echo=TRUE, eval=TRUE, warning=FALSE, error=FALSE, results='hide', message=FALSE}
 library(openxlsx)
 library(tidyverse)
 library(DT)
@@ -1715,8 +1664,13 @@ library(rstatix)
 library(ggpubr)
 ```
 
-```{r}
-# Import data
+#### Set your working directory
+```{r, file_path, echo=TRUE, eval=FALSE, error=FALSE, results='hide', message=FALSE}
+setwd("/filepath to where your input files are")
+```
+
+#### Importing example dataset
+```{r, read_ data, echo=TRUE, eval=TRUE}
 biomarker_data <- read.xlsx("Module4_5_Input/Module4_5_InputData1.xlsx")
 demographic_data <- read.xlsx("Module4_5_Input/Module4_5_InputData2.xlsx")
 
@@ -1724,11 +1678,12 @@ demographic_data <- read.xlsx("Module4_5_Input/Module4_5_InputData2.xlsx")
 datatable(biomarker_data)
 datatable(demographic_data)
 ```
+<br>
 
 ## Overview of Multi-Group Statistical Tests
 
 Before applying statistical tests to our data, let's first review the mechanics of multi-group statistical tests, including overall effects tests and post-hoc tests. 
-```{r, echo = FALSE, fig.align = "center", fig.cap= "Created with *BioRender.com*", out.width = "600px"} 
+```{r, echo = FALSE, fig.align = "center", out.width = "600px"} 
 knitr::include_graphics("Module4_5_Input/Module4_5_Image1.png")
 ```
 
@@ -1736,7 +1691,7 @@ knitr::include_graphics("Module4_5_Input/Module4_5_Image1.png")
 
 The first step for multi-group statistical testing is to run an overall effects test. The null hypothesis for the overall effects test is that there are no differences among group means. A significant p-value rejects the null hypothesis that the groups are drawn from populations with the same mean and indicates that at least one group differs significantly from the overall mean. Similar to two-group statistical testing, choice of the specific overall statistical test to run depends on whether the data are normally or non-normally distributed and whether the experimental design is paired:
 
-```{r, echo = FALSE, fig.align = "center", fig.cap= "Created with *BioRender.com*", out.width = "700px"} 
+```{r, echo = FALSE, fig.align = "center", out.width = "700px"} 
 knitr::include_graphics("Module4_5_Input/Module4_5_Image2.png")
 ```
 
@@ -1745,7 +1700,7 @@ Importantly, overall effects tests return **one** p-value regardless of the numb
 ### Post-Hoc Testing
 
 If significance is obtained with an overall effects test, we can use post-hoc testing to determine which specific pairs of groups are significantly different from each other. Just as with two group statistical tests and overall effects multi-group statistical tests, choosing the appropriate post-hoc test depends on the data's normality and whether the experimental design is paired:
-```{r, echo = FALSE, fig.align = "center", fig.cap= "Created with *BioRender.com*", out.width = "700px"} 
+```{r, echo = FALSE, fig.align = "center", out.width = "700px"} 
 knitr::include_graphics("Module4_5_Input/Module4_5_Image3.png")
 ```
 
@@ -1760,7 +1715,7 @@ When applying a post-hoc test, you may choose to compare every group to every ot
 ### Which test should I choose?
 
 Use the following flowchart to help guide your choice of statistical test to compare multiple groups:
-```{r, echo = FALSE, fig.align = "center", fig.cap= "Created with *BioRender.com*", out.width = "900px"} 
+```{r, echo = FALSE, fig.align = "center", out.width = "900px"} 
 knitr::include_graphics("Module4_5_Input/Module4_5_Image4.png")
 ```
 
@@ -1775,7 +1730,7 @@ biomarker_data %>% friedman_test(IL1B ~ Dose | Donor)
 
 A p-value of 0.01 indicates that we can reject the null hypothesis that all of our data are drawn from groups that have equivalent means. 
 
-Now, we can run a `for` loop similar to our two-group comparisons in **TAME 2.0 Module 4.4, Two Group Comparisons and Visualizations** to determine the overall p-value for each endpoint:
+Now, we can run a `for` loop similar to our two-group comparisons in **TAME 2.0 Module 4.4 Two Group Comparisons and Visualizations** to determine the overall p-value for each endpoint:
 ```{r}
 # Create a vector with the names of the variables you want to run the test on
 endpoints <- colnames(biomarker_data %>% select(IL1B:VEGF))
@@ -2112,13 +2067,511 @@ Use the same processes demonstrated in this module and the provided data (“Mod
 For an extra challenge, try also making your faceted plot in the style of option #1 above, with different symbols, letters, or group names above columns to indicate which group that column in significant in comparison with. 
 :::
 
+# 4.6 Advanced Multi-Group Comparisons 
+
+This training module was developed by Elise Hickman, Alexis Payton, and Julia E. Rager. 
+
+All input files (script, data, and figures) can be downloaded from the [UNC-SRP TAME2 GitHub website](https://github.com/UNCSRP/TAME2).
+
+## Introduction to Training Module
+
+In the previous module, we covered how to apply multi-group statistical testing, in which we tested for significant differences in endpoints across different values for one independent variable. In this module, we will build on the concepts introduced previously to test for significant differences in endpoints while considering two or more independent variables. We will review relevant statistical approaches and demonstrate how to apply these tests using the same example dataset as in previous modules in this chapter. As a reminder, this dataset includes concentrations of inflammatory biomarkers secreted by airway epithelial cells after exposure to different concentrations of acrolein.
+
+### Training Module's Environmental Health Questions
+
+This training module was specifically developed to answer the following environmental health questions:
+
+1. Are there significant differences in inflammatory biomarker concentrations between sex and different doses of acrolein?
+
+2. Are there significant differences in inflammatory biomarker concentrations across different doses of acrolein after controlling for sex and age?
+
+### Workspace Preparation and Data Import
+
+Here, we will import the processed data that we generated at the end of TAME 2.0 Module 4.2, introduced in **TAME 2.0 Module 4.1 Overview of Experimental Design and Example Data** and associated demographic data. These data represent log~2~ concentrations of inflammatory biomarkers secreted by airway epithelial cells after exposure to four different concentrations of acrolein (plus filtered air as a control). We will also load packages that will be needed for the analysis, including previously introduced packages such as *openxlsx*, *tidyverse*, *DT*, *ggpubr*, and *rstatix*.
+
+#### Cleaning the global environment
+```{r, clear__env, echo=TRUE, eval=TRUE}
+rm(list=ls())
+```
+
+#### Loading R packages required for this session
+```{r, load__libs, echo=TRUE, eval=TRUE, warning=FALSE, error=FALSE, results='hide', message=FALSE}
+library(openxlsx)
+library(tidyverse)
+library(DT)
+library(rstatix)
+library(ggpubr)
+library(multcomp)
+library(pander)
+
+theme_set(theme_bw()) # Set graphing theme
+```
+
+#### Set your working directory
+```{r, file path, echo=TRUE, eval=FALSE, error=FALSE, results='hide', message=FALSE}
+setwd("/filepath to where your input files are")
+```
+
+#### Importing example dataset
+```{r, read__data, echo=TRUE, eval=TRUE}
+biomarker_data <- read.xlsx("Module4_6_Input/Module4_6_InputData1.xlsx")
+demographic_data <- read.xlsx("Module4_6_Input/Module4_6_InputData2.xlsx")
+
+# View data
+datatable(biomarker_data)
+datatable(demographic_data)
+```
+
+## Advanced Multi-Group Comparisons
+
+### Two-way ANOVA
+The first test that we'll introduce is a  **two-way ANOVA**. This test involves testing for mean differences in a continuous dependent variable across two categorical independent variables. (As a refresher, a one-way ANOVA uses a single independent variable to compare mean differences between groups.) Subjects or samples can be matched based upon their between-group factors (i.e., exposure duration) and/or their within-group factors (i.e., batch effects). Models that include both between-group and within-group factors are known as **mixed two-way ANOVAs**.
+
+Like other parametric tests, two-way ANOVAs assume:
+
++ Homogeneity of variance
++ Independent observations
++ Normal distribution
 
 
-<!-- ############################################################################################################################# -->
+### ANCOVA
 
-<!-- ################################################## -->
-<!-- ################################################## -->
-<!-- START SECTION SIX  -->
-<!-- ################################################## -->
-<!-- ################################################## -->
+An **Analysis of Covariances (ANCOVA)** tests for mean differences in a continuous dependent variable and at least one categorical independent variable. It also includes another variable, known as a covariate, that needs to be controlled or adjusted for to more accurately capture the relationship between the independent and dependent variables. Potential covariates can include either between-group factors like exposure duration and/or within-group factors like batch effects or sex. Note that if the dataset has a smaller sample size, stratification of the dataset based on that covariate is another option to determine its effects rather than adjusting for it using an ANCOVA. 
 
+ANCOVAs have the same assumptions listed above. 
+
+
+**Note**: It is possible to run *two-way ANCOVA* models, where the model contains two independent variables and at least one covariate to be adjusted for. 
+
+<br>
+
+## Two-way ANOVA Example
+
+Our first environmental health question can be answered using a two-way ANOVA. We can test three different null hypotheses using this test:
+
+1. There is no difference in average biomarker concentrations based on sex.
+2. There is no difference in average biomarker concentrations based on dose.
+3. The effect of sex on average biomarker concentration does not depend on the effect of dose and vice versa.
+
+<br>
+
+The first step would be to check that the assumptions (independence, homogeneity of variance, and normal distribution) have been met, but this was done previously in **TAME 2.0 Module 4.4 Two Group Comparisions and Visualizations**. 
+
+To run our two-way ANOVA, we will use the `anova_test()` function from the *rstatix* package. This function allows us to define subject identifiers for matching between-subject factor variables (such as sex - factors that differ between subjects) and within-subject factors (such as dose - factors that are measured within each subject). Since we have both between- and within- subject factors, we will specifically be running a two-way mixed ANOVA.
+
+First, we need to add our demographic data to our biomarker data so that these variables can be incorporated into the analysis. Also, we need to convert `Dose` into a factor to specify the levels.
+```{r}
+biomarker_data <- biomarker_data %>%
+  left_join(demographic_data, by = "Donor") %>%
+  mutate(Dose = factor(Dose, levels = c("0", "0.6", "1", "2", "4")))
+
+# viewing data
+datatable(biomarker_data)
+```
+
+Then, we can demonstrate how to run the two-way ANOVA and what the results look like by running the test on just one of our variables (IL-1$\beta$).
+```{r}
+get_anova_table(anova_test(data = biomarker_data, 
+           dv = IL1B, 
+           wid = Donor, 
+           between = Sex, 
+           within = Dose))
+```
+The column names are described below:
+
++ `Effect`: the name of the variable tested
++ `DFn`: degrees of freedom in the numerator
++ `Dfd`: degrees of freedom in the denominator
++ `F`: F distribution test
++ `p`: p-value
++ `p<.05`: denotes whether the p-value is significant
++ `ges`: generalized effect size
+
+Based on the table above, there are significant differences in IL-1$\beta$ concentrations based on dose (p-value = 0.02). There are no significant differences in IL-1$\beta$ between the sexes nor are there significant differences in IL-1$\beta$ with an interaction between sex and dose. 
+
+Similar to previous modules, we now want to apply our two-way ANOVA to each of our variables of interest. To do this, we can use a for loop that will:
+
+1. Loop through each column in the data and apply the test to each column.
+2. Pull out statistics we are interested in (for example, p-value) and bind the results from each column together into a results dataframe. 
+```{r}
+# Create a vector with the names of the variables you want to run the test on
+endpoints <- colnames(biomarker_data %>% dplyr::select(IL1B:VEGF))
+
+# Create data frame to store results
+twoway_aov_res <- data.frame(Factor = c("Dose", "Sex", "Sex:Dose"))
+
+# Run for loop
+for (i in 1:length(endpoints)) {
+  
+  # Assign a name to the endpoint variable
+  endpoint <- endpoints[i]
+  
+  # Run two-way mixed ANOVA and store results in res_aov
+  res_aov <- anova_test(data = biomarker_data,
+                        dv = paste0(endpoint),
+                        wid = Donor,
+                        between = Sex,
+                        within = Dose)
+  
+  # Extract the results we are interested in (from the ANOVA table)
+  res_df <- data.frame(get_anova_table(res_aov)) %>%
+    dplyr::select(c(Effect, p)) %>%
+    rename("Factor" = "Effect")
+  
+  # Rename columns in the results dataframe so that the output is more nicely formatted
+  names(res_df)[names(res_df) == 'p'] <- noquote(paste0(endpoint))
+  
+  # Bind the results to the results dataframe
+  twoway_aov_res <- merge(twoway_aov_res, res_df, by = "Factor", all.y = TRUE)
+}
+
+# View results
+datatable(twoway_aov_res)
+```
+
+An appropriate title for this table could be:
+
+“**Figure X. Statistical test results for differences in cytokine concentrations.** A two-way ANOVA was performed using sex and dose as independent variables to test for statistical differences in concentration across 6 cytokines." 
+
+From this table, dose is the only variable with significant differences in concentrations in all 6 biomarkers (p-value < 0.05).
+
+Although we know that dose has significant differences overall, an ANOVA test doesn't tell us which doses of acrolein differ from each other or the directionality of each biomarker's change in concentration after exposure to each dose. Therefore, we need to use a post-hoc test. One common post-hoc test following a one-way or two-way ANOVA is a Tukey’s HSD. However, there is no way to pass the output of the `anova_test()` function to the `TukeyHSD()` function. A good alternative is a pairwise t-test with a Bonferroni correction. Our data are paired in that there are repeated measures (doses) on each subject.
+```{r}
+# Create data frame to store results
+twoway_aov_pairedt <- data.frame(Comparison = c("0_0.6", "0_1", "0_2", "0_4", "0.6_1", "0.6_2", "0.6_4", "1_2", "1_4", "2_4"))  
+
+# Run for loop
+for (i in 1:length(endpoints)) {
+  
+  # Assign a name to the endpoint variable.
+  endpoint <- endpoints[i]
+  
+  # Run pairwise t-tests
+  res_df <- biomarker_data %>%
+    pairwise_t_test(as.formula(paste0(paste0(endpoint), "~", "Dose", sep = "")),
+                    paired = TRUE, 
+                    p.adjust.method = "bonferroni") %>%
+  unite(Comparison, group1, group2, sep = "_", remove = FALSE) %>%
+  dplyr::select(Comparison, p.adj) 
+  
+  # Rename columns in the results data frame so that the output is more nicely formatted.
+  names(res_df)[names(res_df) == 'p.adj'] <- noquote(paste0(endpoint))
+  
+  # Bind the results to the results data frame. 
+  twoway_aov_pairedt <- merge(twoway_aov_pairedt, res_df, by = "Comparison", all.y = TRUE)
+}
+
+# View results
+datatable(twoway_aov_pairedt)
+```
+
+An appropriate title for this table could be:
+
+“**Figure X. Post hoc testing for differences in cytokine concentrations.** Paired t-tests were run as a post hoc test using dose as an independent variable to test for statistical differences in concentration across 6 cytokines." 
+
+Note that this table and the two-way ANOVA table would likely be put into supplemental material for a publication. Before including this table in supplemental material, it would be best to clean it up (make the two comparison groups more clear, round all results to the same number of decimals) as demonstrated in **TAME 2.0 Module 4.5 Multi-Group Comparisons and Visualizations**.
+
+### Answer to Environmental Health Question 1
+:::question
+*With this, we can answer **Environmental Health Question #1***: Are there significant differences in inflammatory biomarker concentrations between sex and different doses of acrolein?
+:::
+
+:::answer
+**Answer**: Based on the two-way ANOVA and post-hoc t-tests, there are only significant differences in cytokine concentrations based on dose (p adj < 0.05). All biomarkers, with the exception of IL-6, had at least 1 significantly different concentration when comparing doses.  
+:::
+
+### Visualizing Two-Way ANOVA Results
+
+Since our overall p-values associated with dose were significant for a number of mediators, we will proceed with creating our final figures with our endpoints by dose, showing the overall two-way ANOVA p-value and the pairwise comparisons from our post hoc paired pairwise t-tests. 
+
+To facilitate plotting in a faceted panel, we'll first pivot our `biomarker_data` dataframe longer. 
+```{r}
+biomarker_data_long <- biomarker_data %>%
+  dplyr::select(-c(Age_yr, Sex)) %>%
+  pivot_longer(-c(Donor, Dose), names_to = "Variable", values_to = "Value")
+
+datatable(biomarker_data_long)
+```
+
+Then, we will create an annotation dataframe for adding our overall two-way ANOVA p-values. This dataframe needs to contain a column for our variables (to match with our variable column in our `biomarker_data_long` dataframe) and the p-value for annotation. We can extract these from our `two_way_aov_res` dataframe generated above. 
+```{r}
+overall_dose_pvals <- twoway_aov_res %>%
+  # Transpose dataframe
+  column_to_rownames("Factor") %>%
+  t() %>% data.frame() %>%
+  rownames_to_column("Variable") %>%
+  # Keep only the dose results and rename them to p-value
+  dplyr::select(c(Variable, Dose)) %>%
+  rename(`P Value` = Dose)
+
+datatable(overall_dose_pvals)
+```
+
+We now have our p-values for each biomarker. Next, we'll make a column where our p-values are formatted with "p = " for annotation on the graph.
+```{r}
+overall_dose_pvals <- overall_dose_pvals %>%
+  mutate(`P Value` = formatC(`P Value`, format = "e", digits = 2),
+         label = paste("p = ", `P Value`, sep = "")) 
+
+datatable(overall_dose_pvals)
+```
+
+Finally, we'll add a column indicating where to add the labels on the y-axis. This will be different for each variable because each variable is on a different scale. We can approach this by computing the maximum value of each variable, then increasing that by 10% to add some space on top of the points.
+```{r}
+sig_labs_y <- biomarker_data %>%
+  summarise(across(IL1B:VEGF, \(x) max(x))) %>%
+  t() %>% as.data.frame() %>%
+  rownames_to_column("Variable") %>%
+  rename("y_pos" = "V1") %>%
+  # moving the significance asterisks higher on the y axis
+  mutate(y_pos = y_pos * 1.1)
+
+sig_labs_y
+
+
+overall_dose_pvals <- overall_dose_pvals %>%
+  left_join(sig_labs_y, by = "Variable")
+
+datatable(overall_dose_pvals)
+```
+
+Now, we'll use the `biomarker_data` dataframe to plot our individual points and boxplots (similar to the plotting demonstrated in previous TAME Chapter 4 modules) and our `overall_dose_pvals` dataframe to add our p value annotation.
+```{r fig.width = 12, fig.height = 6, fig.align='center'}
+# Create clean labels for the graph titles
+new_labels <- c("IL10" = "IL-10", "IL1B" = "IL-1\u03B2 ", "IL6" = "IL-6", "IL8" = "IL-8", 
+                "TNFa" = "TNF-\u03b1", "VEGF" = "VEGF")
+
+# Make graph
+ggplot(biomarker_data_long, aes(x = Dose, y = Value)) +
+  # outlier.shape = NA removes outliers
+  geom_boxplot(aes(fill = Dose), outlier.shape = NA) +
+  geom_jitter(size = 1.5, position = position_jitter(0.15), alpha = 0.7) +
+  # Add label
+  geom_text(data = overall_dose_pvals, aes(x = 1.3, y = y_pos, label = label,
+                                       size = 5)) +
+  # Adding padding y axis 
+  scale_y_continuous(expand = expansion(mult = c(0.1, 0.1))) +
+
+  # Faceting by each biomarker
+  facet_wrap(~ Variable, nrow = 2, scales = "free_y", labeller = labeller(variable = new_labels)) +
+  
+  theme(legend.position = "none", # Removing legend
+        axis.title = element_text(face = "bold", size = rel(1.3)),
+        axis.title.x = element_text(vjust = -0.75),
+        axis.title.y = element_text(vjust = 2),
+        axis.text = element_text(color = "black", size = 10),
+        strip.text = element_text(size = 12, face = "bold")) + 
+  
+  # Changing axes labels
+  labs(x = "Acrolein (ppm)", y = expression(bold(Log[2]*"(Concentration (pg/ml))")))
+```
+
+
+It's a bit more difficult to add the pairwise t test results to the boxplots comparing each treatment group to each other as was done similarly in **TAME 2.0 Module 4.5 Multi-Group Comparisons and Visualizations**, so that addition to the figure was omitted here. 
+
+<br>
+
+## ANCOVA Example
+
+In the following ANCOVA example, we'll still investigate potential differences in cytokine concentrations as result of varying doses of acrolein. However, this time we'll adjust for sex and age to answer our second environmental health question: **Are there significant differences in inflammatory biomarker concentrations across different doses of acrolein after controlling for sex and age?**. 
+
+Let's first demonstrate how to run an ANCOVA and what the results look like by running the test on just one of our variables (IL-1$\beta$). The `Anova()` function was specifically designed to run type II or III ANOVA tests, which have different approaches to dealing with interactions terms and unbalanced datasets. For more information on Type I, II, III ANOVA tests, check out [Anova – Type I/II/III SS explained](https://md.psych.bio.uni-goettingen.de/mv/unit/lm_cat/lm_cat_unbal_ss_explained.html). For the purposes of this example just know that isn't much of a difference between the type I, II, or III results. 
+```{r}
+anova_test = aov(IL1B ~ Dose + Sex + Age_yr, data = biomarker_data)
+type3_anova = Anova(anova_test, type = 'III')
+type3_anova
+```
+Based on the table above, there are significant differences in IL-1$\beta$ concentrations in dose after adjusting for sex and age (p-value = 0.009). 
+
+Now we'll run ANCOVA tests across all of our biomarkers. 
+```{r}
+# Create data frame to store results
+ancova_res = data.frame()
+
+# Add row names to data frame so that it will be able to add ANCOVA results
+rownames <- c("(Intercept)", "Dose", "Sex", "Age_yr")
+ancova_res <- data.frame(cbind(rownames))
+
+# Assign row names 
+ancova_res <- data.frame(ancova_res[, -1], row.names = ancova_res$rownames)
+
+# Perform ANCOVA over all columns
+for (i in 3:8) {
+  
+  fit = aov(as.formula(paste0(names(biomarker_data)[i], "~ Dose + Sex + Age_yr", sep = "")),
+            biomarker_data)
+  res <- data.frame(car::Anova(fit, type = "III"))
+  res <- subset(res, select = Pr..F.)
+  names(res)[names(res) == 'Pr..F.'] <- noquote(paste0(names(biomarker_data[i])))
+  ancova_res <- transform(merge(ancova_res, res, by = 0), row.names = Row.names, Row.names = NULL)
+
+}
+
+# Transpose for easy viewing, keep columns of interest, and apply BH adjustment
+ancova_res <- data.frame(t(ancova_res)) %>%
+  dplyr::select(Dose) %>%
+  mutate(across(everything(), \(x) format(p.adjust(x, "BH"), scientific = TRUE)))
+
+# View results
+datatable(ancova_res)
+```
+
+Looking at the table above, there are statistically differences in all cytokine concentrations with the exception of IL-6 based on dose (p adj < 0.05). To determine what doses were significantly different from one another we'll need to run Tukey's post hoc tests. 
+```{r}
+# Create results data frame with a column showing the comparisons (extracted from single run vs for loop)
+tukey_res <- data.frame(Comparison = c("0.6 - 0", "1 - 0", "2 - 0", "4 - 0", "1 - 0.6", "2 - 0.6", 
+"4 - 0.6", "2 - 1", "4 - 1", "4 - 2"))
+
+# Perform Tukey's test
+for (i in 3:8) {
+  
+  # need to run ANCOVA first
+  fit = aov(as.formula(paste0(names(biomarker_data)[i], "~ Dose + Sex + Age_yr", sep = "")),
+            biomarker_data)
+  
+  # Tukey's
+  posthoc <- summary(glht(fit, linfct = mcp(Dose = "Tukey")), test = adjusted("BH"))
+  res <- summary(posthoc)$test
+  
+  # Formatting the df with the Tukey's values
+  res_df <- data.frame(cbind (res$coefficients, res$sigma, res$tstat, res$pvalues))
+  colnames(res_df) <- c("Estimate", "Std.Error", "t.value", "Pr(>|t|)")
+  res_df <- round(res_df[4],4)
+  names(res_df)[names(res_df) == 'Pr(>|t|)'] <- noquote(paste0(names(biomarker_data[i])))
+  res_df <- res_df %>% rownames_to_column("Comparison")
+  
+  tukey_res <- left_join(tukey_res, res_df, by = "Comparison")
+}
+
+datatable(tukey_res)
+```
+
+### Answer to Environmental Health Question 2
+:::question
+*With this, we can answer **Environmental Health Question #2***: Are there significant differences in inflammatory biomarker concentrations across different doses of acrolein after controlling for sex and age?
+:::
+
+:::answer
+**Answer**: Based on the ANCOVA tests, there are significant differences resulting from various doses of acrolein (p adj < 0.05) across all cytokine concentrations with the exception of IL-6. All biomarkers, with the exception of IL-6, had at least 1 significantly different biomarker concentration when comparing doses.
+:::
+
+### Visualizing ANCOVA Results
+
+Before graphing these results, we first need to think about which ones we want to display. For simplicity's sake, we will demonstrate graphing only comparisons that are with the control("0") group and that are significant. To do this, we'll:
+
+1. Separate our `Comparison` column into a `group1` and `group2` column.
+2. Filter to comparisons including only the 0 group.
+3. Pivot the dataframe longer, to match the format of our data used as input for facet plotting.
+4. Filter to only p-values that are less that 0.05.
+```{r}
+tukey_res_forgraph <- tukey_res %>%
+  separate(Comparison, into = c("group1", "group2"), sep = " - ") %>%
+  filter(group2 == "0") %>%
+  dplyr::select(-group2) %>%
+  pivot_longer(!group1, names_to = "Variable", values_to = "P Value") %>%
+  filter(`P Value` < 0.05) %>%
+  # rounding the p values to 4 digits for readability
+  mutate(`P Value` = round(`P Value`, 4))
+
+datatable(tukey_res_forgraph)
+```
+
+Next, we can take a few steps to add columns to the dataframe that will aid in graphing:
+
+1. Add a column for significance stars.
+2. Add a column to indicate the y position for the significance annotation (similar to the above example with the two-way ANOVA).
+```{r}
+# Add column for significance stars
+tukey_res_forgraph <- tukey_res_forgraph %>%
+  mutate(p.signif = ifelse(`P Value` < 0.0001, "****", 
+                           ifelse(`P Value` < 0.001, "***", 
+                                  ifelse(`P Value` < 0.01, "**", 
+                                         ifelse(`P Value` < 0.05, "*", NA)))))
+
+# Calculate y positions to plot significance stars
+sig_labs_y_tukey <- biomarker_data %>%
+  summarise(across(IL1B:VEGF, \(x) max(x))) %>%
+  t() %>% as.data.frame() %>%
+  rownames_to_column("Variable") %>%
+  rename("y_pos" = "V1") %>%
+  mutate(y_pos = y_pos * 1.15)
+
+sig_labs_y_tukey
+
+# Join y positions to tukey_res
+tukey_res_forgraph <- tukey_res_forgraph %>%
+  left_join(sig_labs_y_tukey, by = "Variable") %>%
+  rename("Dose" = "group1")
+
+datatable(tukey_res_forgraph)
+```
+
+We also need to prepare our overall p-values from our ANCOVA for display:
+```{r}
+ancova_res_forgraphing <- ancova_res %>%
+  rename(`P Value` = Dose) %>%
+  rownames_to_column("Variable") %>%
+  left_join(sig_labs_y, by = "Variable") %>%
+  mutate(`P Value` = formatC(as.numeric(`P Value`), format = "e", digits = 2),
+         label = paste("p = ", `P Value`, sep = ""))
+
+```
+
+Now, we are ready to make our graph! We will use similar code to the above, this time adding in our significance stars over specific columns.
+```{r fig.width = 12, fig.height = 7, fig.align='center'}
+# Make graph
+ggplot(biomarker_data_long, aes(x = Dose, y = Value)) +
+  # outlier.shape = NA removes outliers
+  geom_boxplot(aes(fill = Dose), outlier.shape = NA) +
+  # Changing box plot colors
+  scale_fill_manual(values = c("#BFBFBF", "#D5A298", "#E38273", "#EB5F4E", "#EE2B2B")) +
+  geom_jitter(size = 1.5, position = position_jitter(0.15), alpha = 0.7) +
+  # Add overall ANCOVA label
+  geom_text(data = ancova_res_forgraphing, aes(x = 1.3, y = y_pos * 1.15, label = label, size = 10)) +
+  # Add tukey annotation 
+  geom_text(data = tukey_res_forgraph, aes(x = Dose, y = y_pos, label = p.signif, size = 10, hjust = 0.5)) +
+  
+  # Faceting by each biomarker
+  facet_wrap(~ Variable, nrow = 2, scales = "free_y", labeller = labeller(Variable = new_labels)) +
+  # Removing legend
+  theme(legend.position = "none",
+        axis.title = element_text(face = "bold", size = rel(1.5)),
+        axis.title.x = element_text(vjust = -0.75),
+        axis.title.y = element_text(vjust = 2),
+        axis.text = element_text(color = "black", size = 10),
+        strip.text = element_text(size = 12, face = "bold")) + 
+  
+  # Changing axes labels
+  labs(x = "Acrolein (ppm)", y = expression(bold(Log[2]*"(Concentration (pg/ml))")))
+```
+An appropriate title for this figure could be:
+
+“**Figure X. Acrolein exposure increases inflammatory cytokine secretion in most primary human bronchial epithelial cells.** Overall p-values from ANCOVA tests adjusting for age and sex are in the left-hand corner. Tukey's post hoc tests were subsequently run and significant Benjamini-Hochberg adjusted p-values are denoted with asterisks compared to the control (0ppm) dose only. p < 0.05, ** p < 0.01, *** p < 0.001, **** p < 0.0001, *n* = 16 per group.”  
+
+<br>
+
+## Concluding Remarks
+In this module, we introduced advanced multi-group comparisons using two-way ANOVA and ANCOVA tests. These overall effect tests along with post-hoc testing were used on an example dataset to provide a basis for publication-ready tables and figures to present these results. This training module provides code and text for advanced multi-group comparisons necessary to answer more complex research questions. 
+
+<br>
+
+
+### Additional Resources
+ + [Two-Way ANOVA](https://www.scribbr.com/statistics/two-way-anova/)
+ + [Repeated Measure ANOVA in R](https://www.datanovia.com/en/lessons/repeated-measures-anova-in-r/)
+ + [ANCOVA Example](https://ibecav.github.io/ancova_example/)
+ + [Nonparametric ANOVA RDocumentation](https://cran.r-project.org/web/packages/fANCOVA/fANCOVA.pdf)
+ + [Nonparametric ANCOVA RDocumentation](https://www.rdocumentation.org/packages/sm/versions/2.2-6.0/topics/sm.ancova)
+ 
+<br>
+
+<label class="tykfont">
+Test Your Knowledge 
+</label>
+
+:::tyk
+Functional endpoints from these cultures were also measured. These endpoints were: 1) Membrane Permeability (MemPerm), 2) Trans-Epithelial Electrical Resistance (TEER), 3) Ciliary Beat Frequency (CBF), and 4) Expression of Mucin (MUC5AC). These data were already processed and tested for normality (see Test Your Knowledge for **TAME 2.0 Module 4.2 Data Import, Processing, and Summary Statistics**), with results indicating that two of the endpoints are normally distributed and two non-normally distributed. 
+Using the data found in “Module4_5_TYKInput.xlsx”, answer the following research question: Are there significant differences in functional endpoints based on doses of acrolein and sex after adjusting for age? To streamline the analysis, we'll only include doses of acrolein at 0, 1, and 4ppm. 
+
+**Hint**: You'll need to run a two-way ANCOVA. Given that some of the assumptions for parametric tests (i.e., normality and homogeneity of variance) and the size of the data is on the smaller side, we likely wouldn't run a parametric test. However, we'll do so here just to illustrate an example of how to run a two-way ANCOVA.
+:::

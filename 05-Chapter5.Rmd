@@ -1,6 +1,6 @@
 # (PART\*) Chapter 5 Machine Learning & Artificial Intelligence {-}
 
-# Introduction to Artificial Intelligence, Machine Learning, and Predictive Modeling for Environmental Health
+# 5.1 Introduction to Artificial Intelligence, Machine Learning, and Predictive Modeling for Environmental Health
 
 This training module was developed by David M. Reif, with contributions from Elise Hickman, Alexis Payton, and Julia E. Rager
 
@@ -172,7 +172,7 @@ For additional case studies that leverage more advanced ML techniques, see the f
 
 + Payton AD, Perryman AN, Hoffman JR, Avula V, Wells H, Robinette C, Alexis NE, Jaspers I, Rager JE, Rebuli ME. Cytokine signature clusters as a tool to compare changes associated with tobacco product use in upper and lower airway samples. American Journal of Physiology-Lung Cellular and Molecular Physiology 2022 322:5, L722-L736. PMID: [35318855](https://journals.physiology.org/doi/abs/10.1152/ajplung.00299.2021) *[k-means clustering, principal component analysis]*
 
-# Supervised Machine Learning 
+# 5.2 Supervised Machine Learning 
 
 This training module was developed by Alexis Payton, Oyemwenosa N. Avenbuan, Lauren E. Koval, and Julia E. Rager.
 
@@ -338,7 +338,7 @@ This training module was specifically developed to answer the following environm
 ### Script Preparations
 
 #### Cleaning the global environment
-```{r, clear__env, echo=TRUE, eval=TRUE}
+```{r, clear__envi, echo=TRUE, eval=TRUE}
 rm(list=ls())
 ```
 
@@ -630,7 +630,7 @@ Using the "Module5_2TYKInput.xlsx", use RF to determine if well water data can b
 + `Elevation`: Surface elevation of the sample location (feet)
 :::
 
-# Supervised Machine Learning Model Interpretation
+# 5.3 Supervised Machine Learning Model Interpretation
 
 This training module was developed by Alexis Payton, Lauren E. Koval, and Julia E. Rager.
 
@@ -1170,7 +1170,7 @@ Test Your Knowledge
 2. Using casing depth and the feature with the highest variable importance, construct a decision boundary plot. Under what conditions are a well more likely to predict detectable manganese levels based on a decision boundary plot?
 :::
 
-# Unsupervised Machine Learning Part 1: K-Means Clustering & PCA
+# 5.4 Unsupervised Machine Learning Part 1: K-Means Clustering & PCA
 
 This training module was developed by David M. Reif with contributions from Alexis Payton, Lauren E. Koval, and Julia E. Rager.
 
@@ -1262,7 +1262,7 @@ This training module was specifically developed to answer the following environm
 ### Script Preparations
 
 #### Cleaning the global environment
-```{r, clear.env, echo=TRUE, eval=TRUE}
+```{r, clear_env, echo=TRUE, eval=TRUE}
 rm(list=ls())
 ```
 
@@ -1656,7 +1656,7 @@ Using the accompanying flame retardant and pesticide physicochemical property va
 3. If we did not have information telling us which chemical belonged to which class, could we use PCA and *k*-means to accurately predict whether a chemical is a PFAS or a statin?
 ::: 
 
-# Unsupervised Machine Learning Part 2: Additional Clustering Applications
+# 5.5 Unsupervised Machine Learning Part 2: Additional Clustering Applications
 
 This training module was developed by Alexis Payton, Lauren E. Koval, David M. Reif, and Julia E. Rager.
 
