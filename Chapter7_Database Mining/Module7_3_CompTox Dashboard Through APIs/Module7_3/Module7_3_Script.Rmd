@@ -32,11 +32,6 @@ registerS3method(
 
 
 ```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
-# This code chunk is included during the development of this rmd and must be removed when deployed!!!
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# JESSIE, PLEASE REMOVE THIS ONCE YOU HAVE A COPY OF ctxR AVAILABLE #
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-#
 if (!library(ctxR, logical.return = TRUE)){
   devtools::load_all('C:/Users/pkruse/ctxR')
 }
@@ -99,12 +94,7 @@ if (!requireNamespace('ggplot2'))
 ### Loading R Packages
 
 ```{r}
-# Used to access the CTX APIs
-#
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# JESSIE, PLEASE UNCOMMENT 'library(ctxR)' ONCE YOU HAVE A COPY OF ctxR AVAILABLE #
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
-#
+# Used to interface with CompTox Chemicals Dashboard
 library(ctxR)
 
 # Used to visualize data in a variety of plot designs
@@ -122,9 +112,9 @@ The CCD can be searched either one chemical at a time, or using a batch search.
 
 ### Searching One Chemical at a Time (Single-substance Search)
 
-In single-substance search, the user types a full or partial chemical identifier (name, CASRN, InChiKey, or DSSTox ID) into a search box on the CCD homepage. Autocomplete provides a list of possible matches; the user selects one by clicking on it, and is then taken to the CCD page for that substance. Figure 1 shows an example: the CCD page for the chemical Bisphenol A. 
+In single-substance search, the user types a full or partial chemical identifier (name, CASRN, InChiKey, or DSSTox ID) into a search box on the CCD homepage. Autocomplete provides a list of possible matches; the user selects one by clicking on it, and is then taken to the CCD page for that substance. Here is an example of the CCD page for the chemical Bisphenol A: 
 
-```{r, echo = FALSE, out.width= "90%", fig.align= 'center', fig.cap= "Fig 1: Bisphenol A landing page"}
+```{r, echo = FALSE, out.width= "90%", fig.align= 'center'}
 knitr::include_graphics('Module7_3_Input/Module7_3_Image1.png')
 ```
 
@@ -136,13 +126,13 @@ The different domains of data available for this chemical are shown by the tabs 
 In batch search, the user enters a list of search inputs, separated by newlines, into a batch-search box on https://comptox.epa.gov/dashboard/batch-search . The user selects the type(s) of inputs by selecting one or more checkboxes – these may include chemical identifiers, monoisotopic masses, or molecular formulas. Then, the user selects “Display All Chemicals” to display the list of substances matching the batch-search inputs, or “Choose Export Options” to choose options for exporting the batch-search results as a spreadsheet. The exported spreadsheet may include data from most of the domains available on an individual substance’s CCD page.
 
 
-```{r, echo = FALSE, out.width = "90%", fig.align = 'center', fig.cap="Fig 2: CCD Batch Search"}
+```{r, echo = FALSE, out.width = "90%", fig.align = 'center'}
 knitr::include_graphics('Module7_3_Input/Module7_3_Image2.png')
 ```
 
 The user can download the selected information in various formats, such as Excel (.xlsx), comma-separated values (.csv), or different types of chemical table files (.e.g, MOL). 
 
-```{r, echo=FALSE, out.width="90%", fig.align='center', fig.cap='Fig 3: CCD Batch Search Customize Export'}
+```{r, echo=FALSE, out.width="90%", fig.align='center'}
 knitr::include_graphics('Module7_3_Input/Module7_3_Image3.png')
 ```
 
@@ -180,20 +170,20 @@ Recently, the [Center for Computational Toxicology and Exposure](https://www.epa
 
 The [CTX APIs](https://www.epa.gov/comptox-tools/computational-toxicology-and-exposure-apis) are publicly available at no cost to the user. However, in order to use the CTX APIs, you must have an API key. The API key uniquely identifies you to the CTX servers and verifies that you have permission to access the database. Getting an API key is free, but requires contacting the API support team at [ccte_api@epa.gov](mailto:ccte_api@epa.gov).
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!KYLE start gray box here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-':::txtbx'
+
+:::txtbx
 
 For more information on the data accessible through the CTX APIs and related tools, please visit the US EPA page on [Computational Toxicology and Exposure Online Resources](https://www.epa.gov/comptox-tools). The CTX APIs are one of many resources developed within this research realm and make available many of the data resources beyond the CCD.
 
-':::'
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Kyle end gray box here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+:::
 
 
-The APIs are organized into four sets of "endpoints" (chemical data domains): `Chemical`, `Hazard`, `Bioactivity`, and `Exposure`. Pictured below in Figure 4 is what the `Chemical` section looks like and can be found at [CTX API Chemical Endpoints](https://api-ccte.epa.gov/docs/chemical.html).
 
-```{r, echo = FALSE, out.width = "90%", fig.align='center', fig.cap="Fig 4: CTX API Chemical Endpoints"}
+
+The APIs are organized into four sets of "endpoints" (chemical data domains): `Chemical`, `Hazard`, `Bioactivity`, and `Exposure`. Pictured below is what the `Chemical` section looks like and can be found at [CTX API Chemical Endpoints](https://api-ccte.epa.gov/docs/chemical.html).
+
+```{r, echo = FALSE, out.width = "90%", fig.align='center'}
 knitr::include_graphics('Module7_3_Input/Module7_3_Image4.png')
 ```
 
@@ -203,7 +193,7 @@ The APIs can be explored through the pictured web interface at https://api-ccte.
 
 `Authentication` is the first tab on the left. Authentication is required to use the APIs. To authenticate yourself in the API web interface, input your unique API key.
 
-```{r, echo = FALSE, out.width = "90%", fig.align='center', fig.cap="Fig 5: CTX API Key Authentication"}
+```{r, echo = FALSE, out.width = "90%", fig.align='center'}
 knitr::include_graphics('Module7_3_Input/Module7_3_Image5.png')
 ```
 
@@ -222,7 +212,7 @@ In the CTX API web interface, the colored boxes next to each endpoint indicate t
 
 Click on the second item under `Chemical Details Resource`, the tab labeled `Get data by dtxsid`. The following page will appear.
 
-```{r, echo = FALSE, out.width = "90%", fig.align='center', fig.cap="Fig 6: CTX Get Details by DTXSID"}
+```{r, echo = FALSE, out.width = "90%", fig.align='center'}
 knitr::include_graphics('Module7_3_Input/Module7_3_Image6.png')
 ```
 
@@ -233,21 +223,21 @@ This page has two subheadings: "Path Parameters" and "Query-String Parameters". 
 
 The default return format is displayed below and includes a variety of fields with data types represented.
 
-```{r, echo = FALSE, out.width = "90%", fig.align='center', fig.cap= "Fig 7: CTX Get Details by DTXSID data types"}
+```{r, echo = FALSE, out.width = "90%", fig.align='center'}
 knitr::include_graphics('Module7_3_Input/Module7_3_Image7.png')
 ```
 
 
 We show what returned data from searching Bisphenol A looks like using this endpoint with the `chemicaldetailstandard` value for `projection` selected.
 
-```{r, echo = FALSE, out.width = "90%", fig.align='center', fig.cap="Fig 8: Bisphenol A output"}
+```{r, echo = FALSE, out.width = "90%", fig.align='center'}
 knitr::include_graphics('Module7_3_Input/Module7_3_Image8.png')
 ```
 
 
 Formatting an http request is not necessarily intuitive nor worth the time for someone not already familiar with the process, so these endpoints may provide a resource that for many would require a significant investment in time and energy to learn how to use. However, there is a solution to this in the form of the R package *ctxR*.
 
-*ctxR* was developed to streamline the process of accessing the information available through the CTX APIs without requiring prior knowledge of how to use APIs. The [*ctxR](https://CRAN.R-project.org/package=ctxR) package is available in stable form on CRAN and a development version may be found at the [USEPA ctxR GitHub](https://github.com/USEPA/ctxR/) repository. As an example, we demonstrate the ease with which one may retrieve the information given by this endpoint for Bisphenol A using the *ctxR* approach and contrast it with the approach using the CCD website or CTX `Chemical` API Endpoint website.
+*ctxR* was developed to streamline the process of accessing the information available through the CTX APIs without requiring prior knowledge of how to use APIs. The [*ctxR*](https://CRAN.R-project.org/package=ctxR) package is available in stable form on CRAN and a development version may be found at the [USEPA ctxR GitHub](https://github.com/USEPA/ctxR/) repository. As an example, we demonstrate the ease with which one may retrieve the information given by this endpoint for Bisphenol A using the *ctxR* approach and contrast it with the approach using the CCD website or CTX `Chemical` API Endpoint website.
 
 
 
@@ -673,21 +663,21 @@ Now, having examined some of the distributions of the physico-chemical propertie
 
 Using the standard CompTox Chemicals Dashboard approach to access genotoxicity, one would again navigate to the individual chemical page 
 
-```{r, echo = FALSE, out.width = "90%", fig.align='center', fig.cap="Fig 9: CompTox Chemicals Dashboard Genotoxicity"}
+```{r, echo = FALSE, out.width = "90%", fig.align='center'}
 knitr::include_graphics('Module7_3_Input/Module7_3_Image9.png')
 ```
 
-Once one navigates to the genotoxicity tab highlighted in the previous page, the following is displayed as seen in Figure 10.
+Once one navigates to the genotoxicity tab highlighted in the previous page, the following is displayed as seen here:
 
-```{r, echo = FALSE, out.width = "90%", fig.align='center', fig.cap="Fig 10: CompTox Chemicals Dashboard BPA Genotoxicity"}
+```{r, echo = FALSE, out.width = "90%", fig.align='center'}
 knitr::include_graphics('Module7_3_Input/Module7_3_Image10.png')
 ```
 
 This page includes two sets of information, the first of which provides a summary of available genotoxicity data while the second provides the individual reports and samples of such data.
 
-We again use the CTX APIs to streamline the process of retrieving this information in a programmatic fashion. To this end, we will use the genotoxicity endpoints found within the `Hazard` endpoints of the CTX APIs. Pictured below in Figure 11 is the particular set of genotoxicity resources available in the `Hazard` endpoints of the CTX APIs.
+We again use the CTX APIs to streamline the process of retrieving this information in a programmatic fashion. To this end, we will use the genotoxicity endpoints found within the `Hazard` endpoints of the CTX APIs. Pictured below is the particular set of genotoxicity resources available in the `Hazard` endpoints of the CTX APIs.
 
-```{r, echo = FALSE, out.width = "90%", fig.align='center', fig.cap="Fig 11: CTX APIs Hazard endpoint genotoxicity resources"}
+```{r, echo = FALSE, out.width = "90%", fig.align='center'}
 knitr::include_graphics('Module7_3_Input/Module7_3_Image11.png')
 ```
 
@@ -715,7 +705,7 @@ colnames(ccl4_genotox)
 head(ccl4_genotox)
 ```
 
-The information returned is of the first variety highlighted in the Figure 10, that is, summary data on the available genotoxicity data for each chemical.
+The information returned is of the first variety highlighted in the image above, that is, the summary data on the available genotoxicity data for each chemical.
 
 Observe that we have information on 71 chemicals from the CCL4 data and 153 from the NATA data. We note the chemicals not included in the results and then dig into the returned results.
 
