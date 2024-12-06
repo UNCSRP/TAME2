@@ -1,4 +1,4 @@
-# (PART\*) Chapter 3 Basics of <br>Data Analysis and Visualizations {-}
+# (PART\*) Chapter 3 Basics of Data <br>Analysis and Visualizations {-}
 
 # 3.1 Data Visualizations
 

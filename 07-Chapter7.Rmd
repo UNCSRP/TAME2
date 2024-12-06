@@ -1,4 +1,4 @@
-# (PART\*) Chapter 7 Environmental Health Database Mining {-}
+# (PART\*) Chapter 7 Environmental<br> Health Database Mining {-}
 
 # 7.1 Comparative Toxicogenomics Database
 

@@ -64,13 +64,10 @@ Site viewers are encouraged to follow along each module, either starting at the 
 
 This site is covered by the BY-NC-ND Creative Commons license. This license allows reusers to copy and distribute the material in any medium or format in unadapted form only, for noncommercial purposes only, and only so long as attribution is given to the creator.
 
-<br>
-
 *Figure credit*
 
 Figures included in TAME 2.0 were either generated in R, created within [Biorender.com](https://www.biorender.com/), and/or pulled from online publications with site licensing and author attribution throughout.
 
-<br>
 
 #### Concluding Remarks {-}
 Together, this valuable resource provides unique opportunities to obtain introductory-level training on current data analysis methods applicable to 21st century exposure science, toxicology, and environmental health. These modules serve as applications-based examples on how to “TAME” data within the environmental health research field, expanding the toolbox for career development and cross-training of scientists in multiple specialties, as well as supporting the next generation of data scientists.

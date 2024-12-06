@@ -151,7 +151,7 @@ Data are stored in data structures. There are many different data structures in 
 + **Data frames:** similar to a matrix but can contain different data types and additional attributes such as row names (and is one of the most common data structures in environmental health research). Tibbles are a stricter type of data frame implemented in the *tidyverse* package.
 + **Lists:** a special type of vector that acts as a container – other data structures can be stored within the list, and lists can contain other lists. Lists can contain elements that are different data structures. 
 
-```{r, echo=FALSE, fig.align = "center", fig.cap= "Created with *BioRender.com*"}
+```{r, echo=FALSE, fig.align = "center"}
 knitr::include_graphics("Module2_1_Input/Image5.png")
 ```
 

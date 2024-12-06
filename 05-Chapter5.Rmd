@@ -1,4 +1,4 @@
-# (PART\*) Chapter 5 Machine Learning & Artificial Intelligence {-}
+# (PART\*) Chapter 5 Machine Learning <br>& Artificial Intelligence {-}
 
 # 5.1 Introduction to Artificial Intelligence, Machine Learning, and Predictive Modeling for Environmental Health
 

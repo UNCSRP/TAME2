@@ -1,4 +1,4 @@
-# (PART\*) Chapter 4 Converting Wet Lab Data into Dry Lab Analyses {-}
+# (PART\*) Chapter 4 Converting Wet <br>Lab Data into Dry Lab <br>Analyses {-}
 
 # 4.1 Overview of Experimental Design and Example Data 
 

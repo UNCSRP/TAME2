@@ -1,4 +1,4 @@
-# (PART\*) Chapter 6 Applications in Toxicology & Exposure Science {-}
+# (PART\*) Chapter 6 Applications in <br>Toxicology & Exposure <br>Science {-}
 
 # 6.1 Descriptive Cohort Analyses
 
@@ -525,7 +525,7 @@ Using a more expanded demographics file ("Module6_1_TYKInput.xlsx"), create a de
 + The two new variables (home location and home type) included
 + The table split by which site the participant visited
 + Variable names and values presented in a publication-quality format (first letters capitalized, spaces between words, no underscores) 
-::: 
+:::
 
 # 6.2 -Omics and System Biology: Transcriptomic Applications
 
@@ -1423,11 +1423,11 @@ Test Your Knowledge
 </label>
 
 :::tyk
-
 Using "Module6_2_TYKInput1.csv" (gene counts) and "Module6_2_TYKInput2.csv" (sample info) data sets, which have already been run through the QC process described in this module and are ready for analysis: 
 
 1. Conduct a differential expression analysis associated with "Season" using DESeq2. (Don't worry about including any covariates or using RUV).
 2. Find the number of significant differentially expressed genes associated with "Season", at the .05 level.
+:::
 
 # 6.3 Mixtures Analysis Methods Part 1: Overview and Example with Quantile G-Computation 
 
