@@ -324,10 +324,10 @@ pca_chemplot
 
 By visual inspection, it looks like there may be some outliers, so we can use a formula to detect outliers. One standard way to detect outliers is the criterion of being “more than 6 standard deviations away from the mean" ([Source](https://privefl.github.io/blog/detecting-outlier-samples-in-pca/)). 
 
-We can apply this approach to our data by first creating a scoring function to detect PCA outliers based on whether or not that participant passed a certain standard deviation cutoff. 
+We can apply this approach to our data by first creating a function to detect PCA outliers based on whether or not that participant passed a certain standard deviation cutoff. 
 
 ```{r}
-# Create a scoring function to detect PCA sample outliers. The input is the PCA results data frame and the number of standard deviations for the cutoff. The output is outlier names. 
+# Create a function to detect PCA sample outliers. The input is the PCA results data frame and the number of standard deviations for the cutoff. The output is outlier names. 
 outlier_detection = function(pca_df, sd){
 
     # getting scores
@@ -666,7 +666,6 @@ library(piano)
 ```
 
 
-
 #### Set your working directory
 ```{r, eval=FALSE, echo=TRUE}
 setwd("/filepath to where your input files are")
@@ -687,17 +686,17 @@ sampleinfo <- read.csv(file = "Module6_2_Input/Module6_2_InputData2_SampleInfo.c
 
 ### Data Viewing
 
-#### Let's see how many rows and columns of data are present in the countdata dataframe 
+Let's see how many rows and columns of data are present in the countdata dataframe 
 ```{r}
 dim(countdata)
 ```
 
-#### Let's also view the column headers
+Let's also view the column headers
 ```{r}
 colnames(countdata)
 ```
 
-#### And finally let's view the top few rows of data
+And finally let's view the top few rows of data
 ```{r}
 head(countdata)
 ```
@@ -706,17 +705,17 @@ Together, this dataframe contains information across 30146 mRNA identifiers, tha
 A total of 23 columns are included in this dataframe, the first of which represents the gene identifier, followed by gene count data across 22 samples.
 
 
-#### Let's also see what the metadata dataframe looks like
+Let's also see what the metadata dataframe looks like
 ```{r}
 dim(sampleinfo)
 ```
 
-#### Let's also view the column headers
+Let's also view the column headers
 ```{r}
 colnames(sampleinfo)
 ```
 
-#### And finally let's view the top few rows of data
+And finally let's view the top few rows of data
 ```{r}
 head(sampleinfo)
 ```
@@ -724,18 +723,19 @@ Together, this dataframe contains information across the 22 total samples, that 
 
 A total of 9 columns are included in this dataframe, including the following:
 
-+ 'SampleID_BioSpyderCountFile': The unique sample identifers (total n=22)
-+ 'PlateBatch': The plate number that was used in the generation of these data.
++ `SampleID_BioSpyderCountFile`: The unique sample identifers (total n=22)
++ `PlateBatch`: The plate number that was used in the generation of these data.
 + 'MouseID': The unique identifier, that starts with "M" followed by a number, for each mouse used in this study
-+ 'NumericID': The unique numeric identifier for each mouse.
-+ 'Treatment': The type of exposure condition that each mouse was administered. These include smoldering pine needles, flaming pine needles, vehicle control (saline), and positive inflammation control (LPS, or lipopolysaccharide)
-+ 'ID': Another form of identifier that combines the mouse identifier with the exposure condition
-+ 'Timepoint': The timepoint at which samples were collected (here, all 4h post-exposure)
-+ 'Tissue': The type of tissue that was collected and analyzed (here, all lung tissue)
-+ 'Group': The higher level identifier that groups samples together based on exposure condition, timepoint, and tissue
++ `NumericID`: The unique numeric identifier for each mouse.
++ `Treatment`: The type of exposure condition that each mouse was administered. These include smoldering pine needles, flaming pine needles, vehicle control (saline), and positive inflammation control (LPS, or lipopolysaccharide)
++ `ID`: Another form of identifier that combines the mouse identifier with the exposure condition
++ `Timepoint`: The timepoint at which samples were collected (here, all 4h post-exposure)
++ `Tissue`: The type of tissue that was collected and analyzed (here, all lung tissue)
++ `Group`: The higher level identifier that groups samples together based on exposure condition, timepoint, and tissue
 
+### Checking for Duplicate mRNA IDs
 
-#### One common QC/preparation step that is helpful when organizing transcriptomics data is to check for potential duplicate mRNA IDs in the countdata. 
+One common QC/preparation step that is helpful when organizing transcriptomics data is to check for potential duplicate mRNA IDs in the countdata. 
 ```{r}
 # Visualize this data quickly by viewing top left corner, to check where ID column is located:
 countdata[1:3,1:5]
@@ -762,13 +762,13 @@ In this case, because all potential duplicate checks turn up "FALSE", these data
 
 Most of the statistical analyses included in this training module will be carried out using the DESeq2 pipeline. This package requires that the count data and sample information data be formatted in a certain manner, which will expedite the downstream coding needed to carry out the statistics. Here, we will walk users through these initial formatting steps.
 
-DESeq2 first requires a 'coldata' dataframe, which includes the sample information (i.e., metadata). Let's create this new dataframe based on the original 'sampleinfo' dataframe:
+DESeq2 first requires a `coldata` dataframe, which includes the sample information (i.e., metadata). Let's create this new dataframe based on the original `sampleinfo` dataframe:
 ```{r, message=F, warning=F, error=F}
 coldata <- sampleinfo
 ```
 
 
-DESeq2 also requires a 'countdata' dataframe, which we've previously created; however, this dataframe requires some minor formatting before it can be used as input for downstream script. 
+DESeq2 also requires a `countdata` dataframe, which we've previously created; however, this dataframe requires some minor formatting before it can be used as input for downstream script. 
 
 First, the gene identifiers need to be converted into row names:
 ```{r, message=F, warning=F, error=F}
@@ -780,13 +780,12 @@ Then, the column names need to be edited. Let's remind ourselves what the column
 colnames(countdata)
 ```
 
-These column identifiers need to be converted into more intuitive sample IDs, that also indicate treatment. This information can be found in the coldata dataframe. Specifically, information in the column labeled 'SampleID_BioSpyderCountFile' will be helpful for these purposes.
+These column identifiers need to be converted into more intuitive sample IDs, that also indicate treatment. This information can be found in the coldata dataframe. Specifically, information in the column labeled `SampleID_BioSpyderCountFile` will be helpful for these purposes.
 
-To replace these original column identifiers with these more helpful sample identifiers, let's first make sure the order of the countdata columns are in the same order as the coldata column of 'SampleID_BioSpyderCountFile':
+To replace these original column identifiers with these more helpful sample identifiers, let's first make sure the order of the countdata columns are in the same order as the coldata column of `SampleID_BioSpyderCountFile`:
 ```{r, message=F, warning=F, error=F}
 countdata <- setcolorder(countdata, as.character(coldata$SampleID_BioSpyderCountFile))
 ```
-
 
 Now, we can rename the column names within the countdata dataframe with these more helpful identifiers, since both dataframes are now arranged in the same order:
 ```{r, message=F, warning=F, error=F}
@@ -826,18 +825,23 @@ countdata <- countdata %>% rownames_to_column("Gene")
 
 # Then we can apply a set of filters and organization steps (using the tidyverse) to result in a list of genes that have an expression greater than the total median in at least 20% of the samples
 genes_above_background <- countdata %>% # Start from the 'countdata' dataframe
-  pivot_longer(cols=!Gene, names_to = "sampleID", values_to="expression") %>% # Melt the data so that we have three columns: gene, exposure condition, and expression counts
-  mutate(above_median=ifelse(expression>total_median,1,0)) %>% # Add a column that indicates whether the expression of a gene for the corresponding exposure condition is above (1) or not above (0) the median of all count data
+  # Melt the data so that we have three columns: gene, exposure condition, and expression counts
+  pivot_longer(cols=!Gene, names_to = "sampleID", values_to="expression") %>% 
+  # Add a column that indicates whether the expression of a gene for the corresponding exposure condition is above (1) or not above (0) the median of all count data
+  mutate(above_median=ifelse(expression>total_median,1,0)) %>% 
   group_by(Gene) %>% # Group the dataframe by the gene
-  summarize(total_above_median=sum(above_median)) %>% # For each gene, count the number of exposure conditions where the expression was greater than the median of all count data
-  filter(total_above_median>=.2*nsamp) %>% # Filter for genes that have expression above the median in at least 20% of the samples
-  select(Gene) # Select just the genes that pass the filter
+  # For each gene, count the number of exposure conditions where the expression was greater than the median of all count data
+  summarize(total_above_median=sum(above_median)) %>% 
+  # Filter for genes that have expression above the median in at least 20% of the samples
+  filter(total_above_median>=.2*nsamp) %>% 
+  # Select just the genes that pass the filter
+  select(Gene) 
 
 # Then filter the original 'countdata' dataframe for only the genes above background. 
 countdata <- left_join(genes_above_background, countdata, by="Gene")
 ```
 
-Here, the 'countdata' dataframe went from having 30,146 rows of data (representing genes) to 16,664 rows of data (representing genes with expression levels that passed this background filter)
+Here, the `countdata` dataframe went from having 30,146 rows of data (representing genes) to 16,664 rows of data (representing genes with expression levels that passed this background filter)
 
 
 
@@ -870,15 +874,15 @@ countdata <- countdata_T %>%
 ### Identifying & Removing Sample Outliers
 Prior to final statistical analysis, raw transcriptomic data are commonly evaluated for the presence of potential sample outliers. Outliers can result from experimental error, technical error/measurement error, and/or huge sources of variation in biology. For many analyses, it is beneficial to remove such outliers to enhance computational abilities to identify biologically meaningful signals across data. Here, we present two methods to check for the presence of sample outliers:
 
-**1. Principal component analysis (PCA)** can be used to identify potential outliers in a dataset through visualization of summary-level values illustrating reduced representations of the entire dataset. Note that a more detailed description of PCA is provided in **Training Module 2.2**. Here, PCA is run on the raw count data and further analyzed using scree plots, assessing principal components (PCs), and visualized using biplots displaying the first two principal components as a scatter plot. 
+**1. Principal component analysis (PCA)** can be used to identify potential outliers in a dataset through visualization of summary-level values illustrating reduced representations of the entire dataset. Note that a more detailed description of PCA is provided in **TAME 2.0 Module 5.4 Unsupervised Machine Learning Part 1: K-Means & PCA**. Here, PCA is run on the raw count data and further analyzed using scree plots, assessing principal components (PCs), and visualized using biplots displaying the first two principal components as a scatter plot. 
 
 
-**2. Hierarchical clustering** is another approach that can be used to identify potential outliers. Hierarchical clustering aims to cluster data based on a similarity measure, defined by the function and/or specified by the user. There are several R packages and functions that will run hierarchical clustering, but it is often helpful visually to do this in conjuction with a heatmap. Here, we use the package pheatmap (introduced in **Training Module 1.4**) with hierarchical clustering across samples to identify potential outliers. 
+**2. Hierarchical clustering** is another approach that can be used to identify potential outliers. Hierarchical clustering aims to cluster data based on a similarity measure, defined by the function and/or specified by the user. There are several R packages and functions that will run hierarchical clustering, but it is often helpful visually to do this in conjuction with a heatmap. Here, we use the package *pheatmap* (introduced in **TAME 2.0 Module 5.5 Unsupervised Machine Learning Part 2: Additional Clustering Applications**) with hierarchical clustering across samples to identify potential outliers. 
 
 
 Let's start by using PCA to identify potential outliers, while providing a visualization of potential sources of variation across the dataset.
 
-#### First we need to move the Gene column back to the rownames so our dataframe is numeric and we can run the PCA script
+First we need to move the Gene column back to the rownames so our dataframe is numeric and we can run the PCA script
 ```{r, message=FALSE, warning=FALSE, error=FALSE}
 countdata <- countdata %>% column_to_rownames("Gene")
 
@@ -887,23 +891,24 @@ countdata[1:10,1:5] #viewing first 10 rows and 5 columns
 ```
 
 
-#### Then we can calculate principal components using transposed count data 
+Then we can calculate principal components using transposed count data 
 ```{r}
 pca <- prcomp(t(countdata))
 ```
 
 
-#### And visualize the percent variation captured by each principal component (PC) with a scree plot.
+And visualize the percent variation captured by each principal component (PC) with a scree plot
 ```{r, fig.align='center'}
 # We can generate a scree plot that shows the eigenvalues of each component, indicating how much of the total variation is captured by each component
-fviz_eig(pca)
+fviz_eig(pca, addlabels = TRUE)
 ```
   
 This scree plot indicates that nearly all variation is explained in PC1 and PC2, so we are comfortable with viewing these first two PCs when evaluating whether or not potential outliers exist in this dataset.
 
+#### Visualization of Transcriptomic Data using PCA
 
-#### Further visualization of how these transcriptomic data appear through PCA can be produced through a scatter plot showing the data reduced values per sample:
-```{r, fig.align='center'}
+Further visualization of how these transcriptomic data appear through PCA can be produced through a scatter plot showing the data reduced values per sample:
+```{r, fig.align='center', warning = FALSE}
 # Calculate the percent variation captured by each PC
 pca_percent <- round(100*pca$sdev^2/sum(pca$sdev^2),1)
 
@@ -928,7 +933,7 @@ With this plot, we can see that samples do not demonstrate obvious groupings, wh
 
 #### Now lets implement hierarchical clustering to identify potential outliers
 
-First we need to create a dataframe of our transposed 'countdata' such that samples are rows and genes are columns to input into the clustering algorithm.
+First we need to create a dataframe of our transposed `countdata` such that samples are rows and genes are columns to input into the clustering algorithm.
 ```{r}
 countdata_for_clustering <- t(countdata)
 countdata_for_clustering[1:5,1:10] # Viewing what this transposed dataframe looks like
@@ -972,7 +977,7 @@ Therefore, *neither approach points to outliers that should be removed in this a
 ## Controlling for Sources of Sample Heterogeneity
 Because these transcriptomic data were generated from mouse lung tissues, there is potential for these samples to show heterogeneity based on underlying shifts in cell populations (e.g., neutrophil influx) or other aspects of sample heterogeneity (e.g., batch effects from plating, among other sources of heterogeneity that we may want to control for). For these kinds of complex samples, there are data processing methods that can be leveraged to minimize the influence of these sources of heterogeneity. Example methods include Remove Unwanted Variable (RUV), which is discussed here, as well as others (e.g., [Surrogate Variable Analysis (SVA)](https://academic.oup.com/nar/article/42/21/e161/2903156)).  
 
-Here, we leverage the package called **RUVseq** to employ RUV on this sequencing dataset. Script was developed based off [Bioconductor website](https://bioconductor.org/packages/release/bioc/html/RUVSeq.html), [vignette](http://bioconductor.org/packages/release/bioc/vignettes/RUVSeq/inst/doc/RUVSeq.pdf), and original [publication](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4404308/).
+Here, we leverage the package called *RUVseq* to employ RUV on this sequencing dataset. Script was developed based off [Bioconductor website](https://bioconductor.org/packages/release/bioc/html/RUVSeq.html), [vignette](http://bioconductor.org/packages/release/bioc/vignettes/RUVSeq/inst/doc/RUVSeq.pdf), and original [publication](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4404308/).
 
 
 #### Steps in carrying out RUV using RUVseq on this example dataset:
@@ -996,14 +1001,13 @@ trt_groups <- setdiff(groups,ctrl)
 trt_groups
 ```
 
-
-RUVseq contains its own set of plotting and normalization functions, though requires input of what's called an object of S4 class SeqExpressionSet. Let's go ahead and make this object, using the RUVseq function 'newSeqExpressionSet':
+*RUVseq* contains its own set of plotting and normalization functions, though requires input of what's called an object of S4 class SeqExpressionSet. Let's go ahead and make this object, using the *RUVseq* function `newSeqExpressionSet()`:
 ```{r}
 exprSet <- newSeqExpressionSet(as.matrix(countdata),phenoData = data.frame(groups,row.names=colnames(countdata)))
 ```
 
 
-And then use this object to generate some exploratory plots using built-in tools within RUVseq.
+And then use this object to generate some exploratory plots using built-in tools within *RUVseq*.
 First starting with some bar charts summarizing overall data distributions per sample:
 ```{r, fig.align='center'}
 colors <- brewer.pal(4, "Set2")
@@ -1041,7 +1045,7 @@ ruv_set <- RUVs(exprSet, rownames(countdata), k=1, differences)
 ```
 
 
-This results in a list of objects within 'ruv_set', which include the following important pieces of information:
+This results in a list of objects within `ruv_set`, which include the following important pieces of information:
 
 (1) Estimated factors of unwanted variation are provided in the phenoData object, as viewed using the following:
 ```{r}
@@ -1050,7 +1054,7 @@ pData(ruv_set)
 ```
 
 
-(2) Normalized counts obtained by regressing the original counts on the unwanted factors (normalizedCounts object within 'ruv_set'). Note that the normalized counts should only used for exploratory purposes and not subsequent differential expression analyses. For additional information on this topic, please refer official RUVSeq documentation. The normalized counts can be viewed using the following:
+(2) Normalized counts obtained by regressing the original counts on the unwanted factors (normalizedCounts object within `ruv_set`). Note that the normalized counts should only used for exploratory purposes and not subsequent differential expression analyses. For additional information on this topic, please refer official *RUVSeq* documentation. The normalized counts can be viewed using the following:
 ```{r}
 # Viewing the head of the normalized count data, accounting for unwanted variation
 head(normCounts(ruv_set))
@@ -1080,7 +1084,7 @@ This plot shows overall tighter data that are more similarly distributed across 
 ## Identifying Genes that are Significantly Differentially Expressed by Environmental Exposure Conditions (e.g., Biomass Smoke Exposure)
 At this point, we have completed several data pre-processing, QA/QC, and additional steps to prepare our example transcriptomics data for statistical analysis. And finally, we are ready to run the overall statistical model to identify genes that are altered in expression in association with different biomass burn conditions.  
 
-Here we leverage the DESeq2 package to carry out these statistical comparisons. This package is now the most commonly implemented analysis pipeline used for transcriptomic data, including sequencing data as well as transcriptomic data produced via other technologies (e.g., Nanostring, Fluidigm, and other gene expression technologies). This package is extremely well-documented and we encourage trainees to leverage these resources in parallel with the current training module when carrying out their own transcriptomics analyses in R:
+Here we leverage the *DESeq2* package to carry out these statistical comparisons. This package is now the most commonly implemented analysis pipeline used for transcriptomic data, including sequencing data as well as transcriptomic data produced via other technologies (e.g., Nanostring, Fluidigm, and other gene expression technologies). This package is extremely well-documented and we encourage trainees to leverage these resources in parallel with the current training module when carrying out their own transcriptomics analyses in R:
 
 
 + [Bioconductor website](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)  
@@ -1118,9 +1122,9 @@ dds <- DESeqDataSetFromMatrix(countData = counts(ruv_set), # Grabbing count data
                                  design = ~0+groups+W_1) # Setting up the statistical formula (see below)
 ```
 
-For the formula design, we use a '~0' at the front to not include an intercept term, and then also account for the exposure condition (groups) and the previously calculated factors of unwanted variation (W_1) of the samples. Formula design is an important step and should be carefully considered for each individual analysis. Other resources, including official DESeq2 documentation, are availble for consultation regarding formula design, as the specifics of formula design are beyond the scope of this training module.
+For the formula design, we use a '~0' at the front to not include an intercept term, and then also account for the exposure condition (groups) and the previously calculated factors of unwanted variation (W_1) of the samples. Formula design is an important step and should be carefully considered for each individual analysis. Other resources, including official *DESeq2* documentation, are available for consultation regarding formula design, as the specifics of formula design are beyond the scope of this training module.
 
-It is worth noting that, by default, DESeq2 will use the last variable in the design formula ("W_1") in this case, as the default variable to be output from the "results" function. Additionally, if the variable is categorical, it will display results comparing the reference level to the last level of that variable. To get results for other variables or to see other comparisions within a categorical variable, we can use the "contrast" parameter, which will be demonstrated below. 
+It is worth noting that, by default, *DESeq2* will use the last variable in the design formula (`W_1`) in this case, as the default variable to be output from the "results" function. Additionally, if the variable is categorical, it will display results comparing the reference level to the last level of that variable. To get results for other variables or to see other comparisons within a categorical variable, we can use the `contrast` parameter, which will be demonstrated below. 
 
 
 #### Estimating size factors
@@ -1132,7 +1136,7 @@ sizeFactors(dds)  # viewing the size factors
 
 #### Calculating and exporting normalized counts
 
-Here, we extract normalized counts and variance stablized counts. 
+Here, we extract normalized counts and variance stabilized counts. 
 ``` {r, message=FALSE, warning=FALSE, error=FALSE}
 # Extract normalized count data
 normcounts <- as.data.frame(counts(dds, normalized=TRUE))
@@ -1141,7 +1145,6 @@ normcounts <- as.data.frame(counts(dds, normalized=TRUE))
 vsd <- varianceStabilizingTransformation(dds, blind=FALSE)
 vsd_matrix <- as.matrix(assay(vsd))
 ```
-
 
 We could also export them using code such as:
 ```{r eval = FALSE}
@@ -1207,7 +1210,7 @@ for (trt in trt_groups){ # Iterate for each of the treatments listed in 'trt_gro
 :::
 
 :::answer
-**Answer:** 4813 genes
+**Answer:** 4,813 genes
 :::
 
 
@@ -1221,11 +1224,10 @@ for (trt in trt_groups){ # Iterate for each of the treatments listed in 'trt_gro
 
 Here, we leverage MA plots to show how log fold changes relate to expression levels. In these plots, the log fold change is plotted on the y-axis and expression values are plotted along the x-axis, and dots are colored according to statistical significance (using padj<0.05 as the statistical filter). Here we will generate an MA plot for Flaming Pine Needles.
 
-
 ```{r, message=F, warning=F, error=F, fig.align='center'}
 
-res <- results(dds_run, pAdjustMethod = "BH", contrast = c("groups","PineNeedlesFlame_4h_Lung",ctrl)) # Re-extract the DESeq2 results for the flamming pine needles 
-MA <- data.frame(res) # Make a prelimiary dataframe of the flaming pine needle results
+res <- results(dds_run, pAdjustMethod = "BH", contrast = c("groups","PineNeedlesFlame_4h_Lung",ctrl)) # Re-extract the DESeq2 results for the flaming pine needles 
+MA <- data.frame(res) # Make a preliminary dataframe of the flaming pine needle results
 MA_ns <- MA[ which(MA$padj>=0.05),]  # Non-significant genes to plot
 MA_up <- MA[ which(MA$padj<0.05 & MA$log2FoldChange > 0),]   # Significant up-regulated genes to plot
 MA_down <- MA[ which(MA$padj<0.05 & MA$log2FoldChange < 0),]  #Significant down-regulated genes to plot
@@ -1243,19 +1245,21 @@ ggplot(MA_ns, aes(x = baseMean, y = log2FoldChange)) + # Plot data with counts o
   # We will bound y axis as well to better fit data while not leaving out too many points
   scale_y_continuous(limits=c(-2, 2)) +
   
-  xlab("Expression (Normalized Count)") + ylab("Fold Change (log2)") + # Add labels for axes
-  labs(title="MA Plot Flaming Pine Needles 4h Lung") +   # Add title
+  xlab("Expression (Normalized Count)") + ylab(expression(Log[2]*" Fold Change")) + # Add labels for axes
   geom_hline(yintercept=0) # Add horizontal line at 0
 ```
 
+An appropriate title for this figure could be:
+
+“**Figure X. MA Plot of lung genes resulting from 4 hours of exposure to flaming pine needles.** XX mice were exposed to XXX. XXX is displayed on the y axis and XX is displayed on the x axis. Significantly upregulated genes (log~2~FC > 0 and p adjust < 0.05) are shown in red and Significantly downregulated genes (log~2~FC < 0 and p adjust < 0.05) are shown in blue".
 
 
 ## Visualizing Statistical Results using Volcano Plots
 
-Similar to MA plots, volcano plots provide visualizations of fold changes in expression from transcriptomic data. However, instead of plotting these values against expression, log fold change is plotted against (adjusted) p-values in volcano plots. Here, we use functions within the [EnhancedVolcano package](https://www.rdocumentation.org/packages/EnhancedVolcano/versions/1.11.3/topics/EnhancedVolcano) to generate a volcano plot for Flaming Pine Needles. 
+Similar to MA plots, volcano plots provide visualizations of fold changes in expression from transcriptomic data. However, instead of plotting these values against expression, log fold change is plotted against (adjusted) p-values in volcano plots. Here, we use functions within the *[EnhancedVolcano package](https://www.rdocumentation.org/packages/EnhancedVolcano/versions/1.11.3/topics/EnhancedVolcano)* to generate a volcano plot for Flaming Pine Needles. 
 
-Running the 'EnhancedVolcano' function to generate an example volcano plot:
-```{r, message=FALSE, warning=FALSE, error=FALSE, fig.align='center'}
+Running the `EnhancedVolcano()` function to generate an example volcano plot:
+```{r, message=FALSE, warning=FALSE, error=FALSE, fig.align='center', out.height = "85%"}
 Vol <- data.frame(res) # Dataset to use for plotting
 EnhancedVolcano(Vol, 
                 lab = rownames(res), # Label information from dataset (can be a column name)
@@ -1270,16 +1274,21 @@ EnhancedVolcano(Vol,
                 legendPosition = 'bottom') # Put legend on bottom
 ```
 
+An appropriate title for this figure could be: CHANGE!!
+
+“**Figure X. MA Plot of lung genes resulting from 4 hours of exposure to flaming pine needles.** XX mice were exposed to XXX. XXX is displayed on the y axis and XX is displayed on the x axis. Significantly upregulated genes (log~2~FC > 0 and p adjust < 0.05) are shown in red and Significantly downregulated genes (log~2~FC < 0 and p adjust < 0.05) are shown in blue".
 
 <br>
 
 ## Interpretting Findings at the Systems Level through Pathway Enrichment Analysis
 
-Pathway enrichment analysis is a very helpful tool that can be applied to interpret transcriptomic changes of interest in terms of systems biology. In these types of analyses, gene lists of interest are used to identify biological pathways that include genes present in your dataset more often than expected by chance alone.  There are many tools that can be used to carry out pathway enrichment analyses. Here, we are using the R package, PIANO, to carry out the statistical enrichment analysis based on the lists of genes we previously identified with differential expression associated with flaming pine needles exposure. 
+Pathway enrichment analysis is a very helpful tool that can be applied to interpret transcriptomic changes of interest in terms of systems biology. In these types of analyses, gene lists of interest are used to identify biological pathways that include genes present in your dataset more often than expected by chance alone.  There are many tools that can be used to carry out pathway enrichment analyses. Here, we are using the R package, *PIANO*, to carry out the statistical enrichment analysis based on the lists of genes we previously identified with differential expression associated with flaming pine needles exposure. 
 
-To detail, the following input data are required to run PIANO:  
+To detail, the following input data are required to run *PIANO*:  
 (1) Your background gene sets, which represent all genes queried from your experiment (aka your 'gene universe') 
+
 (2) The list of genes you are interested in evaluating pathway enrichment of; here, this represents the genes identified with significant differential expression associated with flaming pine needles  
+
 (3) A underlying pathway dataset; here, we're using the KEGG PATHWAY Database ([KEGG](https://www.genome.jp/kegg/pathway.html)), summarized through the Molecular Signature Database ([MSigDB](https://www.gsea-msigdb.org/gsea/msigdb/)) into pre-formatted input files (.gmt) ready for PIANO.
 
 *Let's organize these three required data inputs.*
@@ -1316,7 +1325,7 @@ Therefore, this gene set includes 488 *unique* genes significantly associated wi
 
 
 (3) The underlying KEGG pathway dataset.
-Note that this file was simply downloaded from [MSigDB](https://www.gsea-msigdb.org/gsea/msigdb/), ready for upload as a .gmt file. Here, we use the 'loadGSC' function enabled through the PIANO package to upload and organize these pathways.
+Note that this file was simply downloaded from [MSigDB](https://www.gsea-msigdb.org/gsea/msigdb/), ready for upload as a .gmt file. Here, we use the `loadGSC()` function enabled through the *PIANO* package to upload and organize these pathways.
 ```{r}
 KEGG_Pathways <- loadGSC(file="Module6_2_Input/Module6_2_InputData3_KEGGv7.gmt", type="gmt")
 
@@ -1325,7 +1334,7 @@ length(KEGG_Pathways$gsc) # viewing the number of biological pathways contained 
 This KEGG pathway database therefore includes 186 biological pathways available to query
 
 
-With these data inputs ready, we can now run the pathway enrichment analysis. The enrichment statistic that is commonly employed through the PIANO package is based of a hypergeometric test, run through the 'runGSAhyper' function. This returns a p-value for each gene set from which you can determine enrichment status.
+With these data inputs ready, we can now run the pathway enrichment analysis. The enrichment statistic that is commonly employed through the *PIANO* package is based of a hypergeometric test, run through the `runGSAhyper()` function. This returns a p-value for each gene set from which you can determine enrichment status.
 ```{r, message=F, warning=F, error=F}
 # Running the piano function based on the hypergeometric statistic
 Results_GSA <- piano::runGSAhyper(genes=SigGenes, universe=Background,gsc=KEGG_Pathways, gsSizeLim=c(1,Inf), adjMethod = "fdr")
@@ -1337,7 +1346,7 @@ PathwayResults <- as.data.frame(Results_GSA$resTab)
 head(PathwayResults)
 
 ```
-This dataframe therefore summarizes the enrichment p-value for each pathway, FDR adjusted p-value, number of significant genes in the gene set that intersect with genes in the pathway, etc
+This dataframe therefore summarizes the enrichment p-value for each pathway, FDR adjusted p-value, number of significant genes in the gene set that intersect with genes in the pathway, etc.
 
 
 With these results, let's identify which pathways meet a statistical enrichment p-value filter of 0.05:
