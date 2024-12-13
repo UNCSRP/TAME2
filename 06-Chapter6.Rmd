@@ -1251,7 +1251,7 @@ ggplot(MA_ns, aes(x = baseMean, y = log2FoldChange)) + # Plot data with counts o
 
 An appropriate title for this figure could be:
 
-“**Figure X. MA Plot of lung genes resulting from 4 hours of exposure to flaming pine needles.** XX mice were exposed to XXX. XXX is displayed on the y axis and XX is displayed on the x axis. Significantly upregulated genes (log~2~FC > 0 and p adjust < 0.05) are shown in red and Significantly downregulated genes (log~2~FC < 0 and p adjust < 0.05) are shown in blue".
+“**Figure X. MA plot of fold change in expression as function of gene expression resulting from 4 hours of exposure to flaming pine needles in mice lung tissues.** Significantly upregulated genes (log~2~FC > 0 and p adjust < 0.05) are shown in red and significantly downregulated genes (log~2~FC < 0 and p adjust < 0.05) are shown in blue. Genes significantly associated are displayed in gray."
 
 
 ## Visualizing Statistical Results using Volcano Plots
@@ -1259,24 +1259,26 @@ An appropriate title for this figure could be:
 Similar to MA plots, volcano plots provide visualizations of fold changes in expression from transcriptomic data. However, instead of plotting these values against expression, log fold change is plotted against (adjusted) p-values in volcano plots. Here, we use functions within the *[EnhancedVolcano package](https://www.rdocumentation.org/packages/EnhancedVolcano/versions/1.11.3/topics/EnhancedVolcano)* to generate a volcano plot for Flaming Pine Needles. 
 
 Running the `EnhancedVolcano()` function to generate an example volcano plot:
-```{r, message=FALSE, warning=FALSE, error=FALSE, fig.align='center', out.height = "85%"}
+```{r, message=FALSE, warning=FALSE, error=FALSE, fig.align='center', out.width = 700, out.height = 580}
 Vol <- data.frame(res) # Dataset to use for plotting
+
 EnhancedVolcano(Vol, 
-                lab = rownames(res), # Label information from dataset (can be a column name)
+                lab = rownames(res), # Label significant genes from dataset (can be a column name)
                 x = 'log2FoldChange', # Column name in dataset with l2fc information
                 y = 'padj', # Column name in dataset with adjusted p-value information
-                ylab = "-Log(FDR-adjusted p)", # Y-axis label
+                ylab = "-Log(FDR-adjusted p value)", # Y-axis label
                 pCutoff= 0.05, # Set p-value cutoff
                 ylim=c(0,5), # Limit y-axis for better plot visuals
                 xlim=c(-2,2), # Limit x-axis (similar to in MA plot y-axis)
-                title="Volcano Plot", # Set title
-                subtitle = "Flaming Pine Needles 4h Lung", # Set subtitle
+                title= NULL, # Removing title
+                subtitle = NULL, # Removing subtitle
                 legendPosition = 'bottom') # Put legend on bottom
 ```
 
-An appropriate title for this figure could be: CHANGE!!
 
-“**Figure X. MA Plot of lung genes resulting from 4 hours of exposure to flaming pine needles.** XX mice were exposed to XXX. XXX is displayed on the y axis and XX is displayed on the x axis. Significantly upregulated genes (log~2~FC > 0 and p adjust < 0.05) are shown in red and Significantly downregulated genes (log~2~FC < 0 and p adjust < 0.05) are shown in blue".
+An appropriate title for this figure could be:
+
+“**Figure X. Volcano plot of lung genes resulting from 4 hours of exposure to flaming pine needles.** Genes are colored according to level of significant differential loading in exposed vs unexposed (vehicle control) samples, using the following statistical cut-offs: P adjust (multiple test corrected p-value) <0.05 and fold change(FC) ±1.3 (log2FC ≥±0.3785)." 
 
 <br>
 
@@ -1552,22 +1554,22 @@ The following are the metals of interest: arsenic, lead, cadmium, chromium, mang
 
 For each metal there are three exposure variables:   
   
-1. [metal]_perc: 0: less than or equal to the 50th percentile, 1: above the 50th percentile and less than or equal to the 90th percentile, 3: above the 90th percentile
-2. [metal]_limit: 0: <25% f well water tests for a given metal exceeded EPA regulatory standard, 1: 25% or over of well water tests for a given metal exceeded EPA regulatory standard
-3. [metal].Mean_avg: the mean concentration of the metal in the tract (ppb). 
+1. `[metal]_perc`: 0: less than or equal to the 50th percentile, 1: above the 50th percentile and less than or equal to the 90th percentile, 3: above the 90th percentile
+2. `[metal]_limit`: 0: <25% f well water tests for a given metal exceeded EPA regulatory standard, 1: 25% or over of well water tests for a given metal exceeded EPA regulatory standard
+3. `[metal].Mean_avg`: the mean concentration of the metal in the tract (ppb). 
 Please see the Eaves et al. 2023 paper linked above for further information on these variables. 
 
 Other variables of interest (outcome and covariates) in this dataset:   
   
- * preterm:	0= 37 weeks gestational age or greater, 1= less than 37 weeks gestational age 
- * mage: maternal age in years, continuous
- * sex: sex of baby at birth: 1=M, 2=F
- * racegp: maternal race ethnicity: 1=white non-Hispanic, 2=Black non-Hispanic, 3=Hispanic, 4=Asian/Pacific Islander, 5=American Indian, 6=other/unknown
- * smoke: maternal smoking in pregnany: 0=non-smoker, 1=smoker 
- * season_conep: season of conception: 1=winter (Dec, Jan, Feb), 2=spring (Mar, Apr, May), 3=summer (June, Jul, Aug), 4=fall (Sept, Oct, Nov) 
- * mothed: mother's education: 1=<HS, 2=HS, 3=more than HS
- * pov_perc: ACS estimates for poverty rate in tract: 0=less than or equal to 25th percentile, 1= greater than 25th percentile and less than or equal to 50th percentile, 2= greater than 50th percentile and less than or equal to 75th percentile, 3= greater than 75th percentile
- * Nitr_perc: average of nitrites and nitrates in well water: 0= less than or equal to the 50th percentile, 1= above the 50th percentile and less than or equal to the 90th percentile, 2: above the 90th percentile
+ * `preterm`:	0= 37 weeks gestational age or greater, 1= less than 37 weeks gestational age 
+ * `mage`: maternal age in years, continuous
+ * `sex`: sex of baby at birth: 1=M, 2=F
+ * `racegp`: maternal race ethnicity: 1=white non-Hispanic, 2=Black non-Hispanic, 3=Hispanic, 4=Asian/Pacific Islander, 5=American Indian, 6=other/unknown
+ * `smoke`: maternal smoking in pregnany: 0=non-smoker, 1=smoker 
+ * `season_conep`: season of conception: 1=winter (Dec, Jan, Feb), 2=spring (Mar, Apr, May), 3=summer (June, Jul, Aug), 4=fall (Sept, Oct, Nov) 
+ * `mothed`: mother's education: 1=<HS, 2=HS, 3=more than HS
+ * `pov_perc`: ACS estimates for poverty rate in tract: 0=less than or equal to 25th percentile, 1= greater than 25th percentile and less than or equal to 50th percentile, 2= greater than 50th percentile and less than or equal to 75th percentile, 3= greater than 75th percentile
+ * `Nitr_perc`: average of nitrites and nitrates in well water: 0= less than or equal to the 50th percentile, 1= above the 50th percentile and less than or equal to the 90th percentile, 2: above the 90th percentile
 
 #### Check variable formats
 
@@ -1959,7 +1961,7 @@ knitr::opts_chunk$set(echo = TRUE) #print code chunks
 
 ## Introduction to Training Module 
 
-In this training module, we will continue to explore mixtures analysis method, this time with a scripted example of Bayesian Kernel Machine Regression (BKMR). Please refer to **TAME 2.0 Module 6.3, Mixtures Analysis Methods Part 1: Overview and Example with Quantile G-Computation** for an overview of mixtures methodologies and a scripted example using Quantile g-Computation. 
+In this training module, we will continue to explore mixtures analysis method, this time with a scripted example of Bayesian Kernel Machine Regression (BKMR). Please refer to **TAME 2.0 Module 6.3 Mixtures Analysis Methods Part 1: Overview and Example with Quantile G-Computation** for an overview of mixtures methodologies and a scripted example using Quantile g-Computation. 
 
 ## Introduction to Example Data
 
