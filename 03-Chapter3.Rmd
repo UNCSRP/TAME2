@@ -17,18 +17,18 @@ Selecting an approach to visualize data is an important consideration when prese
 
 [A Guide To Getting Data Visualization Right](https://www.smashingmagazine.com/2023/01/guide-getting-data-visualization-right/) is a great resource for determining which figure is best suited for various types of data. More complex methodology-specific charts are presented in succeeding TAME modules. These include visualizations for:
 
-+ Two Group Comparisons (e.g.,boxplots and logistic regression) in [Module 3.4 Introduction to Statistical Tests](insert link) and [Module 4.4 Two Group Comparisons and Visualizations](insert link)
-+ Multi-Group Comparisons (e.g.,boxplots) in [Module 3.4 Introduction to Statistical Tests](insert link) and [Module 4.5 Mult-Group Comparisons and Visualizations](insert link)
-+ Supervised Machine Learning (e.g.,decision boundary plots, variable importance plots) in [Module 5.3 Supervised ML Model Interpretation](insert link)
++ Two Group Comparisons (e.g.,boxplots and logistic regression) in **Module 3.4 Introduction to Statistical Tests** and **Module 4.4 Two Group Comparisons and Visualizations**
++ Multi-Group Comparisons (e.g.,boxplots) in **Module 3.4 Introduction to Statistical Tests** and **Module 4.5 Multi-Group Comparisons and Visualizations**
++ Supervised Machine Learning (e.g.,decision boundary plots, variable importance plots) in **Module 5.3 Supervised ML Model Interpretation**
 + Unsupervised Machine Learning 
-  + Principal Component Analysis (PCA) plots and heatmaps in  [Module 5.4 Unsupervised Machine Learning I: K-Means Clustering & PCA](insert link)
-  + Dendrograms, clustering visualizations, heatmaps, and variable contribution plots in [Module 5.5 Unsupervised Machine Learning II: Additional Clustering Applications](insert link)
-+ -Omics Expression (e.g.,MA plots and volcano plots) in [Module 6.2 -Omics and Systems Biology: Transcriptomic Applications](insert link)
+  + Principal Component Analysis (PCA) plots and heatmaps in  **Module 5.4 Unsupervised Machine Learning Part 1: K-Means Clustering & PCA**
+  + Dendrograms, clustering visualizations, heatmaps, and variable contribution plots in **Module 5.5 Unsupervised Machine Learning Part 2: Additional Clustering Applications**
++ -Omics Expression (e.g.,MA plots and volcano plots) in **Module 6.2 -Omics and Systems Biology: Transcriptomic Applications**
 + Mixtures Methods
-  + Forest Plots in [Module 6.3 Mixtures I: Overview and Quantile G-Computation Application](insert link)
-  + Trace Plots in [Module 6.4 Mixtures II: BKMR Application](insert link)
-  + Sufficient Similarity (e.g.,heatmaps, clustering) in [Module 6.5 Mixtures III: Sufficient Similarity](insert link)
-+ Toxicokinetic Modeling (e.g.,line graph, dose response) in [Module 6.6 Toxicokinetic Modeling](insert link)
+  + Forest Plots in **Module 6.3 Mixtures I: Overview and Quantile G-Computation Application**
+  + Trace Plots in **Module 6.4 Mixtures II: BKMR Application**
+  + Sufficient Similarity (e.g.,heatmaps, clustering) in **Module 6.5 Mixtures III: Sufficient Similarity**
++ Toxicokinetic Modeling (e.g.,line graph, dose response) in **Module 6.6 Toxicokinetic Modeling**
 
 <br>
 
@@ -302,7 +302,7 @@ pheatmap(heatmap_df2,
         display_numbers = TRUE, number_color = "black", fontsize = 12) 
 ```
 
-Notice that the `pheatmap()` function does not include axes or legend titles as with `ggplot()`, however those can be added to the figure after exporting from R in MS Powerpoint or Adobe. Additional parameters, including `cluster_rows`, for the `pheatmap()` function are discussed further in **TAME 2.0 Module 5.4 Unsupervised Machine Learning**. For basic heatmaps like the ones shown here, `ggplot()` or `pheatmap()` can both be used however, both have their pros and cons. For example, `ggplot()` figures tend to be more customizable and easily combined with other figures, while `pheatmap()` has additional parameters built into the function that can make plotting certain features advantageous like clustering.
+Notice that the `pheatmap()` function does not include axes or legend titles as with `ggplot()`, however those can be added to the figure after exporting from R in MS Powerpoint or Adobe. Additional parameters, including `cluster_rows`, for the `pheatmap()` function are discussed further in **TAME 2.0 Module 5.5 Unsupervised Machine Learning Part 2: Additional Clustering Applications**. For basic heatmaps like the ones shown here, `ggplot()` or `pheatmap()` can both be used however, both have their pros and cons. For example, `ggplot()` figures tend to be more customizable and easily combined with other figures, while `pheatmap()` has additional parameters built into the function that can make plotting certain features advantageous like clustering.
 
 <br>
 
@@ -1133,7 +1133,7 @@ All input files (script, data, and figures) can be downloaded from the [UNC-SRP 
 
 ## Introduction to Training Module
 
-This training module provides a brief introduction to some of the most commonly implemented statistics and associated visualizations used in exposure science, toxicology, and environmental health studies. This module first uploads an example dataset that is similar to the data used in **TAME 2.0 Module 2.3 Data Manipulation & Reshaping]**, though it includes some expanded subject information data to allow for more example statistical tests. Then, methods to evaluate data normality are presented, including visualization-based and statistical-based approaches. 
+This training module provides a brief introduction to some of the most commonly implemented statistics and associated visualizations used in exposure science, toxicology, and environmental health studies. This module first uploads an example dataset that is similar to the data used in **TAME 2.0 Module 2.3 Data Manipulation & Reshaping**, though it includes some expanded subject information data to allow for more example statistical tests. Then, methods to evaluate data normality are presented, including visualization-based and statistical-based approaches. 
 
 Basic statistical tests discussed in this module include: 
 
@@ -1207,7 +1207,6 @@ These represent the subject information/demographic data, which include the foll
 + `Smoker`: "NS" = non-smoker, "S" = smoker
 + `Smoker3`: "Never", "Former", or "Current" smoking status
 
-<br>
 Let's now view the remaining columns (columns 10-15) in this dataframe:
 ```{r}
 full.data[1:10,10:15]
