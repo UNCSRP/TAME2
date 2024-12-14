@@ -529,7 +529,7 @@ Using a more expanded demographics file ("Module6_1_TYKInput.xlsx"), create a de
 
 # 6.2 -Omics and System Biology: Transcriptomic Applications
 
-This training module was developed by Lauren Koval, Dr. Kyle Roell, and Dr. Julia E. Rager.
+This training module was developed by Lauren E. Koval, Dr. Kyle Roell, and Dr. Julia E. Rager.
 
 All input files (script, data, and figures) can be downloaded from the [UNC-SRP TAME2 GitHub website](https://github.com/UNCSRP/TAME2).
 
@@ -1434,7 +1434,7 @@ Test Your Knowledge
 </label>
 
 :::tyk
-Using "Module6_2_TYKInput1.csv" (gene counts) and "Module6_2_TYKInput2.csv" (sample info) data sets, which have already been run through the QC process described in this module and are ready for analysis: 
+Using "Module6_2_TYKInput1.csv" (gene counts) and "Module6_2_TYKInput2.csv" (sample info) datasets, which have already been run through the QC process described in this module and are ready for analysis: 
 
 1. Conduct a differential expression analysis associated with "Season" using DESeq2. (Don't worry about including any covariates or using RUV).
 2. Find the number of significant differentially expressed genes associated with "Season", at the .05 level.
@@ -1714,6 +1714,7 @@ We can also run the analysis using limit variables:
 ```
 Note: you will get this warning for some of the models:   
 "Warning: glm.fit: fitted probabilities numerically 0 or 1". 
+
 This is because for the variability in the exposure data, ideally the sample size would be larger (as noted above the analysis this draws from was completed on >1.3million observations). 
 
 Plot the results:
@@ -1790,7 +1791,7 @@ PTB_adj_ppb <- qgcomp.noboot(preterm~.,
 
 ```
 
-In English, "preterm~." is saying fit a model that has preterm (1/0) as the dependent variable and then the independent variables (exposures and covariates) are all other variables in the dataset ("."). "expnms=Xnm" is saying that the mixture of exposures is given by the vector "Xnm," defined above. "dat=cohort[,c(Xnm,covars,'preterm')]" is saying that the dataset to be used to fit this model includes all columns in the cohort dataset that are listed in the "Xnm" and "covars" vectors and also the "preterm" variable. "family=binomial()" is saying that the outcome is a binary outcome and therefore the model will fit a logistic regression model. "q=4" is saying break the exposures into quartiles, other options woudl be q=3 for teriltes, q=5 for quintiles and so forth. 
+In English, `preterm~.` is saying fit a model that has preterm (1/0) as the dependent variable and then the independent variables (exposures and covariates) are all other variables in the dataset (`.`). `expnms=Xnm` is saying that the mixture of exposures is given by the vector `Xnm,` defined above. `dat=cohort[,c(Xnm,covars,'preterm')]` is saying that the dataset to be used to fit this model includes all columns in the cohort dataset that are listed in the `Xnm` and `covars` vectors and also the `preterm` variable. `family=binomial()` is saying that the outcome is a binary outcome and therefore the model will fit a logistic regression model. `q=4` is saying break the exposures into quartiles, other options would be q=3 for teriltes, q=5 for quintiles and so forth. 
 
 This is a summary of the qgcomp model output
 ```{r, message=F, warning=F, error=F}
@@ -1936,13 +1937,13 @@ Test Your Knowledge
 
 :::tyk
 
-Using the metals dataset within the qgcomp package (see the [package vignette](https://cran.r-project.org/web/packages/qgcomp/vignettes/qgcomp-vignette.html) for how to access), answer the following three mixtures-related environmental health questions using quantile g-computation, focusing on a mixture of arsenic, copper, zinc and lead:
+Using the metals dataset within the *qgcomp* package (see the [package vignette](https://cran.r-project.org/web/packages/qgcomp/vignettes/qgcomp-vignette.html) for how to access), answer the following three mixtures-related environmental health questions using quantile g-computation, focusing on a mixture of arsenic, copper, zinc and lead:
 
 1. What is the risk of disease associated with combined exposure to each of the chemicals?
 2. Which of these chemicals has the strongest effect on disease?
 3. Which of these chemicals increases the risk of disease and which decreases the risk of disease?
 
-Note that disease is given by the variable "disease_state" (1 = case, 0 = non-case).
+Note that disease is given by the variable `disease_state` (1 = case, 0 = non-case).
 
 :::
 
@@ -1969,12 +1970,13 @@ In this scripted example, we will use a dataset from the [Extremely Low Gestatio
 
 For more information on the cord tissue metals data, please see the following two publications:
 
- + Eaves LA, Bulka CM, Rager JE, Galusha AL, Parsons PJ, O’Shea TM and Fry RC. [Metals mixtures modeling identifies birth weight-associated gene networks in the placentas of children born extremely preterm](https://pubmed.ncbi.nlm.nih.gov/36493891/). Chemosphere. 2022;137469. doi:10.1016/j.chemosphere.2022.137469.
- + Bulka CM, Eaves LA, Gardner AJ, Parsons PJ, Kyle RR, Smeester L, O"Shea TM, Fry RC. [Prenatal exposure to multiple metallic and metalloid trace elements and the risk of bacterial sepsis in extremely low gestational age newborns: A prospective cohort study](https://pubmed.ncbi.nlm.nih.gov/36405975/). Front Epidemiol. 2022;2. doi:10.3389/fepid.2022.958389
+ + Eaves LA, Bulka CM, Rager JE, Galusha AL, Parsons PJ, O’Shea TM and Fry RC. Metals mixtures modeling identifies birth weight-associated gene networks in the placentas of children born extremely preterm. Chemosphere. 2022;137469. PMID: [36493891](https://pubmed.ncbi.nlm.nih.gov/36493891/)
+ 
++ Bulka CM, Eaves LA, Gardner AJ, Parsons PJ, Kyle RR, Smeester L, O"Shea TM, Fry RC. Prenatal exposure to multiple metallic and metalloid trace elements and the risk of bacterial sepsis in extremely low gestational age newborns: A prospective cohort study. Front Epidemiol. 2022;2. PMID:[36405975] (https://pubmed.ncbi.nlm.nih.gov/36405975/)
  
 For more information on the neonatal inflammation data, please see the following publication: 
 
- + Eaves LA, Enggasser AE, Camerota M, Gogcu S, Gower WA, Hartwell H, Jackson WM, Jensen E, Joseph RM, Marsit CJ, Roell K, Santos HP Jr, Shenberger JS, Smeester L, Yanni D, Kuban KCK, O'Shea TM, Fry RC. [CpG methylation patterns in placenta and neonatal blood are differentially associated with neonatal inflammation](https://pubmed.ncbi.nlm.nih.gov/35764815/). Pediatr Res. June 2022. doi:10.1038/s41390-022-02150-4
+ + Eaves LA, Enggasser AE, Camerota M, Gogcu S, Gower WA, Hartwell H, Jackson WM, Jensen E, Joseph RM, Marsit CJ, Roell K, Santos HP Jr, Shenberger JS, Smeester L, Yanni D, Kuban KCK, O'Shea TM, Fry RC. CpG methylation patterns in placenta and neonatal blood are differentially associated with neonatal inflammation. Pediatr Res. June 2022. PMID: [35764815](https://pubmed.ncbi.nlm.nih.gov/35764815/)
  
 Here, we have a dataset of n=254 participants for which we have complete data on neonatal inflammation, cord tissue metals and key demographic variables that will be included as confounders in the analysis.
 
@@ -2004,7 +2006,7 @@ While BKMR can do many things other methods cannot, it can require a lot of comp
 
 
 ### Training Module's **Environmental Health Questions**
-This training module was specifically developed to answer the following questions, which mirror the questions in **TAME 2.0 Module 6.3**, but are just in a different order:
+This training module was specifically developed to answer the following questions, which mirror the questions in **TAME 2.0 Module 6.3 Mixtures Analysis Methods Part 1**, but are just in a different order:
 
 1. Which of these chemicals has the strongest effect on neonatal inflammation risk?
 2. Which of these chemicals increases the risk of neonatal inflammation and which decreases the risk of neonatal inflammation?
@@ -2050,35 +2052,35 @@ The variables in this dataset include sample and demographic information and cor
 
 *Sample and Demographic Variables*
 
-+ "id": unique study ID  
++ `id`: unique study ID  
  outcome:
-+ "inflam_intense": 1= high inflammation, 0=low inflammation 
++ `inflam_intense`: 1= high inflammation, 0=low inflammation 
  covariates: 
-+ "race1": maternal race, 1=White, 2=Black, 0=Other          
-+ "sex": neonatal sex, 0=female, 1=male           
-+ "gadays": gestational age at delivery in days         
-+ "magecat": maternal age, 1= <21, 2=21-35, 3= > 35  
-+ "medu":maternal education: 1= <12, 2=12, 3=13-15, 4=16, 5= >16        
-+ "smoke": maternal smoking while pregnant, 0=no, 1=yes 
++ `race1`: maternal race, 1=White, 2=Black, 0=Other          
++ `sex`: neonatal sex, 0=female, 1=male           
++ `gadays`: gestational age at delivery in days         
++ `magecat`: maternal age, 1= <21, 2=21-35, 3= > 35  
++ `medu`:maternal education: 1= <12, 2=12, 3=13-15, 4=16, 5= >16        
++ `smoke`: maternal smoking while pregnant, 0=no, 1=yes 
 
 *Exposure Variables*
 
-+ "Mn_ugg"         
-+ "Cu_ugg"         
-+ "Zn_ugg"        
-+ "As_ngg"         
-+ "Se_ugg"         
-+ "Cd_ngg"         
-+ "Hg_ngg"        
-+ "Pb_ngg"     
++ `Mn_ugg`         
++ `Cu_ugg`         
++ `Zn_ugg`        
++ `As_ngg`         
++ `Se_ugg`         
++ `Cd_ngg`         
++ `Hg_ngg`        
++ `Pb_ngg`     
 
 
 There are many steps prior to the modeling steps outlined below. These are being skipped for educational purposes. Additional steps include assessment of normality and transformations as needed, generation of a demographics table and assessing for missing data, imputation of missing data if needed, visualizing trends and distributions in the data, assessing correlations between exposures, functional form assessments, and decisions regarding what confounders to include.
 
-In addition, it is highly recommended to conduct single-contaminant modeling initially to understand individual chemical relationships with the outcomes of focus before conducting mixtures assessment. For an example of this, see **TAME 2.0 Module 6.3, Mixtures Analysis Methods Part 1: Overview and Example with Quantile G-Computation**. BKMR, as a flexible non-parametric modeling approach, does not allow for classical null-hypothesis testing, and 95% CI are interpreted as credible intervals, not confidence intervals. One approach therefore could be to explore non-linearities and interactions within BKMR to then validate generated hypotheses using quantile g-computation. 
+In addition, it is highly recommended to conduct single-contaminant modeling initially to understand individual chemical relationships with the outcomes of focus before conducting mixtures assessment. For an example of this, see **TAME 2.0 Module 6.3 Mixtures Analysis Methods Part 1: Overview and Example with Quantile G-Computation**. BKMR, as a flexible non-parametric modeling approach, does not allow for classical null-hypothesis testing, and 95% CI are interpreted as credible intervals, not confidence intervals. One approach therefore could be to explore non-linearities and interactions within BKMR to then validate generated hypotheses using quantile g-computation. 
 
 ### Fit the BKMR Model
-First, define a matrix/vector of the exposure mixture, outcome, and confounders/covariates. BKMR performs better when the exposures are on a similar scale and when there are not outliers. Thus, we center and scale the exposure variables first. As noted above, in a complete analysis, thorough examination of exposure variable distributions, including outliers and normality, would be conducted before any exposure-outcome modeling. For more information on normality testing, see **TAME 2.0 Module 3.3, Normality Tests and Data Transformations.** 
+First, define a matrix/vector of the exposure mixture, outcome, and confounders/covariates. BKMR performs better when the exposures are on a similar scale and when there are not outliers. Thus, we center and scale the exposure variables first. As noted above, in a complete analysis, thorough examination of exposure variable distributions, including outliers and normality, would be conducted before any exposure-outcome modeling. For more information on normality testing, see **TAME 2.0 Module 3.3 Normality Tests and Data Transformations.** 
 
 First, we'll assign the matrix variables to their own data frame and scale the data.
 ```{r, message=F, warning=F, error=F}
@@ -2149,7 +2151,7 @@ TracePlot(fit = fitkm, par = "beta", sel=sel)
 #### Single exposure effects
 As described above, one way to examine single effects is to calculate the odds ratio of inflammation when a single exposure is at its 75th percentile compared to its 25th percentile, with other exposures are at their 50th percentile and covariates are held constant.
 
-Here, we use the `PredictorResponseUnivar()` function to generate a dataset that details, at varying levels of each exposure ("z"), the relationship between that exposure and the outcome, holding other exposures at their 50th percentile and covariates constant. This relationship is given by a beta value, which because we have a binomial outcome and fit a probit model represents the log(odds) ("est"). The standard error for the beta value is also calculated ("se"). 
+Here, we use the `PredictorResponseUnivar()` function to generate a dataset that details, at varying levels of each exposure (`z`), the relationship between that exposure and the outcome, holding other exposures at their 50th percentile and covariates constant. This relationship is given by a beta value, which because we have a binomial outcome and fit a probit model represents the log(odds) (`est`). The standard error for the beta value is also calculated (`se`). 
 
 ```{r, message=F, warning=F, error=F, fig.align = "center"}
 pred.resp.univar <- PredictorResponseUnivar(fit=fitkm, sel=sel, 
@@ -2166,7 +2168,7 @@ ggplot(pred.resp.univar, aes(z, est, ymin = est - 1.96*se,
   geom_smooth(stat = "identity") + ylab("h(z)") + facet_wrap(~ variable) 
 ```
 
-Then, we can generate a dataset that contains for each exposure ("variable"), the log(OR) ("est") (and its standard deviation ("sd")) corresponding to the odds of neonatal inflammation when an exposure is at its 75th compared to the odds when at the 25th percentile. The log(OR) is estimated at three levels of the other exposures (25th, 50th and 75th percentiles). We can use this dataset to identify odds ratios for neonatal inflammation (comparing the 75th to 25th percentile odds) for each exposure at differing levels of the other exposures. These odds ratios approximate risk, whereby an odds ratio >1 means there is increased risk of neonatal inflammation when that exposure is at its 75th percentile compared to its 25th percentile. We can then plot these data to see the logOR for each metal in relation to neonatal inflammation at varying levels of the rest of the exposures. 
+Then, we can generate a dataset that contains for each exposure (`variable`), the log(OR) (`est`) (and its standard deviation (`sd`)) corresponding to the odds of neonatal inflammation when an exposure is at its 75th compared to the odds when at the 25th percentile. The log(OR) is estimated at three levels of the other exposures (25th, 50th and 75th percentiles). We can use this dataset to identify odds ratios for neonatal inflammation (comparing the 75th to 25th percentile odds) for each exposure at differing levels of the other exposures. These odds ratios approximate risk, whereby an odds ratio >1 means there is increased risk of neonatal inflammation when that exposure is at its 75th percentile compared to its 25th percentile. We can then plot these data to see the logOR for each metal in relation to neonatal inflammation at varying levels of the rest of the exposures. 
 
 ```{r, message=F, warning=F, error=F, fig.align = "center"}
 risks.singvar <- SingVarRiskSummaries(fit=fitkm, qs.diff = c(0.25, 0.75),
@@ -2206,7 +2208,7 @@ ggplot(risks.singvar, aes(variable, est, ymin = est - 1.96*sd,
 
 #### Calculating the overall mixture effect 
 
-Next, we can generate a dataset that details the effect (ie. log(OR) ("est") and corresponding standard deviation ("sd")) on neonatal inflammation of all exposures when at a particular quantile ("quantile") compared to all exposures being at the 50th percentile. We can use this dataset to identify odds ratios for neonatal inflammation upon simultaneous exposure to the entire mixture for different quantile threshold comparisons. These odds ratios approximate risk, whereby an odds ratio >1 means there is increased risk of neonatal inflammation when the entire mixture is set at the index quantile, compared to the 50th percentile. We can also plot these results to visualize the overall mixture effect dose-response relationship. 
+Next, we can generate a dataset that details the effect (ie. log(OR) (`est`) and corresponding standard deviation (`sd`)) on neonatal inflammation of all exposures when at a particular quantile (`quantile`) compared to all exposures being at the 50th percentile. We can use this dataset to identify odds ratios for neonatal inflammation upon simultaneous exposure to the entire mixture for different quantile threshold comparisons. These odds ratios approximate risk, whereby an odds ratio >1 means there is increased risk of neonatal inflammation when the entire mixture is set at the index quantile, compared to the 50th percentile. We can also plot these results to visualize the overall mixture effect dose-response relationship. 
 
 ```{r, message=F, warning=F, error=F, fig.align = "center"}
 risks.overall <- OverallRiskSummaries(fit=fitkm, qs=seq(0.25, 0.75, by=0.05), 
@@ -2232,7 +2234,7 @@ ggplot(risks.overall, aes(quantile, est, ymin = est - 1.96*sd,
 
 ### Evaluating interactive effects  
 
-To understand bivariate interactions, we can generate a dataset that for each pairing of exposures details at varying levels of both exposures, the log(odds) ("est", and associated standard deviation ("sd")) of neonatal inflammation when all the other exposures are held constant. These plots can be tricky to interpret, so another way of looking at these results is to take "cross sections" at specific quantiles of the second exposure (see next step). 
+To understand bivariate interactions, we can generate a dataset that for each pairing of exposures details at varying levels of both exposures, the log(odds) (`est`, and associated standard deviation (`sd`)) of neonatal inflammation when all the other exposures are held constant. These plots can be tricky to interpret, so another way of looking at these results is to take "cross sections" at specific quantiles of the second exposure (see next step). 
 ```{r, message=F, warning=F, error=F, fig.align = "center"}
 pred.resp.bivar  <- PredictorResponseBivar(fit=fitkm,  min.plot.dist = 1, 
                                            sel=sel,  method="approx")
@@ -2246,7 +2248,7 @@ ggplot(pred.resp.bivar, aes(z1, z2, fill = est)) +
   ggtitle("h(expos1, expos2)")
 ```
 
-Next, we generate a dataset that includes for each pairing of exposures, the log(odds) ("est" and associated standard deviation "sd") of neonatal inflammation at varying concentrations ("z1") of the first exposure ("variable 1") when the second exposure ("variable 2" is at its 25th, 50th and 75th percentile ("quantile"). 
+Next, we generate a dataset that includes for each pairing of exposures, the log(odds) (`est` and associated standard deviation `sd`) of neonatal inflammation at varying concentrations (`z1`) of the first exposure (`variable 1`) when the second exposure (`variable 2` is at its 25th, 50th and 75th percentile (`quantile`). 
 
 ```{r, message=F, warning=F, error=F, fig.align = "center"}
 pred.resp.bivar.levels <- PredictorResponseBivarLevels(pred.resp.df= 
@@ -2283,7 +2285,7 @@ ggplot(CdHg, aes(z1, est)) +
  xlab("expos1")
 ```
 
-To visualize interactions between one exposure and the rest of the exposure components, we generate a dataset that details the difference in each exposure's ("variable") log(OR) comparing 75th to 25th percentile ("est", and associated standard deviation "sd") when the other exposure components are at their 75th versus 25th percentile. Perhaps more intuitively, these estimates represent the blue - red points plotted in the second figure under the single exposure effects section. 
+To visualize interactions between one exposure and the rest of the exposure components, we generate a dataset that details the difference in each exposure's (`variable`) log(OR) comparing 75th to 25th percentile (`est`, and associated standard deviation `sd`) when the other exposure components are at their 75th versus 25th percentile. Perhaps more intuitively, these estimates represent the blue - red points plotted in the second figure under the single exposure effects section. 
 ```{r, message=F, warning=F, error=F, fig.align = "center"}
 
 risks.int <- SingVarIntSummaries(fit=fitkm, qs.diff = c(0.25, 0.75),
@@ -2308,7 +2310,7 @@ ggplot(risks.int, aes(variable, est, ymin = est - 1.96*sd,
 
 
 ## Concluding Remarks
-In conclusion, this module extends upon **TAME 2.0 Module 6.3, Mixtures Analysis Methods Part 1: Overview and Example with Quantile G-Computation**. In this scripted example, we used a dataset from a human population study (n=246) of cord tissue metals and examined the outcome of neonatal inflammation. We found that increasing the entire mixture of metals reduced the risk of neonatal inflammation; however, certain metals increased the risk and others decreased the risk. There was also a suggestive interactive effect found between cadmium and mercury. 
+In conclusion, this module extends upon **TAME 2.0 Module 6.3 Mixtures Analysis Methods Part 1: Overview and Example with Quantile G-Computation**. In this scripted example, we used a dataset from a human population study (n=246) of cord tissue metals and examined the outcome of neonatal inflammation. We found that increasing the entire mixture of metals reduced the risk of neonatal inflammation; however, certain metals increased the risk and others decreased the risk. There was also a suggestive interactive effect found between cadmium and mercury. 
 
 ## Additional Resources
 The field of mixtures is vast, with many different approaches and example studies to learn from as analysts lead in their own analyses. Some resources that can be helpful include the following reviews:
@@ -2413,19 +2415,14 @@ If you already have these packages installed, you can skip this step, or you can
 ```{r, results=FALSE, message=FALSE}
 if (!requireNamespace("tidyverse"))
   install.packages("tidyverse");
-
 if (!requireNamespace("readxl"))
   install.packages("readxl");
-
 if (!requireNamespace("factoextra"))
   install.packages("factoextra");
-
 if (!requireNamespace("pheatmap"))
   install.packages("pheatmap");
-
 if (!requireNamespace("gridExtra"))
   install.packages("gridExtra");
-
 if (!requireNamespace("ggplotify"))
   install.packages("ggplotify")
 ```
@@ -2490,7 +2487,7 @@ head(tox)
 
 ## Chemistry-Based Sufficient Similarity Analysis
 
-The first method employed in this Sufficient Similarity analysis is Principal Component Analysis (PCA). PCA is a very common dimensionality reduction technique, as detailed in **TAME 2.0 Module 5.4 Unsupervised Machine Learning**.
+The first method employed in this Sufficient Similarity analysis is Principal Component Analysis (PCA). PCA is a very common dimensionality reduction technique, as detailed in **TAME 2.0 Module 5.4 Unsupervised Machine Learning Part 1: K-Means Clustering & PCA**.
 
 In summary, PCA finds dimensions (eigenvectors) in the higher dimensional original data that capture as much of the variation as possible, which you can then plot. This allows you to project higher dimensional data, in this case 12 dimensions (representing 12 measured chemicals), in fewer dimensions (we'll use 2). These dimensions, or components, capture the "essence" of the original dataset.
 
@@ -2522,7 +2519,7 @@ chem_pca <- princomp(chem)
 
 Looking at the scree plot, we see the first two principal components capture most of the variance in the data (~64%):
 ```{r fig.align = "center"}
-fviz_eig(chem_pca)
+fviz_eig(chem_pca, addlabels = TRUE)
 ```
 
 
@@ -2600,10 +2597,10 @@ This plot tells us a lot about sample groupings based on chemical profiles!
 :::
 
 
-As an alternative way of viewing the chemical profile data, we can make a heat map of the scaled chemistry data. We concurrently run hierarchical clustering that shows us how closely samples are related to each other, based on different algorithms than data reduction-based PCA. Samples that fall on nearby branches are more similar. Samples that don't share branches with many/any others are often considered outliers.
+As an alternative way of viewing the chemical profile data, we can make a heatmap of the scaled chemistry data. We concurrently run hierarchical clustering that shows us how closely samples are related to each other, based on different algorithms than data reduction-based PCA. Samples that fall on nearby branches are more similar. Samples that don't share branches with many/any others are often considered outliers.
 
-By default, pheatmap uses a Euclidean distance to cluster the observations, which is a very common clustering algorithm.
-For more details, see the following description of [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance).
+By default, `pheatmap()` uses a Euclidean distance to cluster the observations, which is a very common clustering algorithm.
+For more details, see the following description of [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) and for more information on hierarchical clustering, see **TAME 2.0 Module 5.5 Unsupervised Machine Learning Part 2: Additional Clustering Applications**.
 ```{r, warning=FALSE, message=FALSE, fig.align = "center"}
 chem_hm <- pheatmap(chem, main="GbE Sample Heatmap by Chemistry Profiles",
                     cluster_rows=TRUE, cluster_cols = FALSE,
@@ -2680,10 +2677,11 @@ grid.arrange(chem_pca_plt, chem_filt_pca_plt)
 **Answer:** Yes! Removal of the potential outliers basically spreads the rest of the remaining data points out, since there is less variance in the overall dataset, and thus, more room to show variance amongst the remaining samples. The general locations of the samples on the PCA plot, however, remain consistent. We now feel confident that our similarity analysis is producing consistent grouping results.
 :::
 
+<br>
 
 ## Toxicity-Based Sufficient Similarity Analysis
 
-Now, we will perform sufficient similarity analysis using the toxicity data.Unlike the chemistry dataset, we can use the toxicity dataset as is without scaling because we want to focus on genes that are showing a large response. Similarly, we want to de-emphasize genes that are showing a strong response to the exposure condition. If we scale these data, we will reduce this needed variability.
+Now, we will perform sufficient similarity analysis using the toxicity data. Unlike the chemistry dataset, we can use the toxicity dataset as is without scaling because we want to focus on genes that are showing a large response. Similarly, we want to de-emphasize genes that are showing a strong response to the exposure condition. If we scale these data, we will reduce this needed variability.
 
 Here, we first move the sample column to row names:
 ```{r, warning=FALSE, message=FALSE}
@@ -2697,7 +2695,7 @@ tox_pca <- princomp(tox)
 
 Looking at the scree plot, we see the first two principal components capture most of the variation (~93%):
 ```{r, warning=FALSE, message=FALSE, fig.align = "center"}
-fviz_eig(tox_pca)
+fviz_eig(tox_pca, addlabels = TRUE)
 ```
 
 We can then create a plot of the samples by principal components:
@@ -2755,6 +2753,8 @@ This plot tells us a lot about the individual genes that differentiate the sampl
 **Answer:** It looks like the CYP enzyme genes, particularly CYP2B6, are highly up-regulated in response to several of these sample exposures, and thus dictate a lot of these groupings.
 :::
 
+<br>
+
 ## Comparing Chemistry vs. Toxicity Sufficient Similarity Analyses
 
 Let's view the PCA plots for both datasets together, side-by-side:
@@ -2786,6 +2786,8 @@ knitr::include_graphics("Module6_5_Input/Module6_5_Image1.png")
 ### Additional Methods
 
 Although we focused on sufficient similarity for this module, a number of other approaches exist to evaluate mixutres. For example, **relative potency factors** is another component-based approach that can be used to evalaute mixtures. Component-based approaches use data from individual chemicals (components of the mixture) and additivity models to estimate the effects of the mixture. For other methods, also see **TAME 2.0 Module 6.3 Mixtures I: Overview and Quantile G-Computation Application** and **TAME 2.0 Module 6.4 Mixtures II: BKMR Application**.
+
+<br>
 
 ## Concluding Remarks
 
@@ -2831,7 +2833,7 @@ We recently published a study evaluating similarities across wildfire chemistry 
 
 # 6.6 Toxicokinetic Modeling
 
-This training module was developed by Caroline Ring and Lauren Koval. 
+This training module was developed by Caroline Ring and Lauren E. Koval. 
 
 All input files (script, data, and figures) can be downloaded from the [UNC-SRP TAME2 GitHub website](https://github.com/UNCSRP/TAME2).
 
@@ -2939,22 +2941,22 @@ library(eulerr) #eulerr package will be used to generate Venn/Euler diagram grap
 ```
 
 
-For more information on the **ggplot2 package**, see its associated [CRAN webpage](https://cran.r-project.org/web/packages/ggplot2/index.html) and [RDocumentation webpage](https://www.rdocumentation.org/packages/ggplot2/versions/3.3.5).
+For more information on the *ggplot2* package, see its associated [CRAN webpage](https://cran.r-project.org/web/packages/ggplot2/index.html) and [RDocumentation webpage](https://www.rdocumentation.org/packages/ggplot2/versions/3.3.5).
 
-For more information on the **reshape2 package**, see its associated [CRAN webpage](https://cran.r-project.org/web/packages/reshape2/index.html) and [RDocumentation webpage](https://www.rdocumentation.org/packages/reshape2/versions/1.4.4).
+For more information on the *reshape2* package, see its associated [CRAN webpage](https://cran.r-project.org/web/packages/reshape2/index.html) and [RDocumentation webpage](https://www.rdocumentation.org/packages/reshape2/versions/1.4.4).
 
-For more information on the **stringr package**, see its associated [CRAN webpage](https://cran.r-project.org/web/packages/stringr/index.html) and [RDocumentation webpage](https://www.rdocumentation.org/packages/stringr/versions/1.4.0).
+For more information on the *stringr* package, see its associated [CRAN webpage](https://cran.r-project.org/web/packages/stringr/index.html) and [RDocumentation webpage](https://www.rdocumentation.org/packages/stringr/versions/1.4.0).
 
-For more information on the **httk package**, see its associated [CRAN webpage](https://cran.r-project.org/web/packages/httk/index.html) and parent publication by [Pearce et al. (2017)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6134854/).
+For more information on the *httk* package, see its associated [CRAN webpage](https://cran.r-project.org/web/packages/httk/index.html) and parent publication by [Pearce et al. (2017)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6134854/).
 
 #### More information on the httk package
-You can see an overview of the `httk` package by typing `?httk` at the R command line. 
+You can see an overview of the *httk* package by typing `?httk` at the R command line. 
 
-You can see a browsable index of all functions in the `httk` package by typing `help(package="httk")` at the R command line.
+You can see a browsable index of all functions in the *httk* package by typing `help(package="httk")` at the R command line.
 
-You can see a browsable list of vignettes by typing `browseVignettes("httk")` at the R command line. (Please note that some of these vignettes were written using older versions of the package and may no longer work as written -- specifically the Ring (2017) vignette, which I wrote back in 2016. The `httk` team is actively working on updating these.)
+You can see a browsable list of vignettes by typing `browseVignettes("httk")` at the R command line. (Please note that some of these vignettes were written using older versions of the package and may no longer work as written -- specifically the Ring (2017) vignette, which I wrote back in 2016. The *httk* team is actively working on updating these.)
 
-You can get information about any function in `httk`, or indeed any function in any R package, by typing `help()` and placing the function name in quotation marks inside the parentheses. For example, to get information about the `httk` function `solve_model()`, type this:
+You can get information about any function in *httk*, or indeed any function in any R package, by typing `help()` and placing the function name in quotation marks inside the parentheses. For example, to get information about the *httk* function `solve_model()`, type this:
 
 ```{r, eval=FALSE}
 help("solve_model")
@@ -2966,8 +2968,6 @@ Note that this module was run with `httk` version 2.4.0.
 ```{r, eval=FALSE, echo=TRUE}
 setwd("/filepath to where your input files are")
 ```
-
-
 
 
 ### Training Module's Environmental Health Questions 
@@ -2991,19 +2991,21 @@ This training module was specifically developed to answer the following environm
 
 (9) How are chemical prioritization results different when using only hazard information vs. only exposure information vs. bioactivity-exposure ratios?
 
-(10) Of the three data sets used in this training module -- bioactivity from ToxCast, TK data from `httk`, and exposure inferred from NHANES urinary biomonitoring -- which one most limits the number of chemicals that can be prioritized using BERs?
+(10) Of the three datasets used in this training module -- bioactivity from ToxCast, TK data from *httk*, and exposure inferred from NHANES urinary biomonitoring -- which one most limits the number of chemicals that can be prioritized using BERs?
+
+<br>
 
 ## Data and Models used in Toxicokinetic Modeling (TK)
 
-### Common Models used in TK Modeling, that are Provided as Built-in Models in 'httk'
+### Common Models used in TK Modeling, that are Provided as Built-in Models in httk
 
-There are five TK models currently built into `httk`. They are:
+There are five TK models currently built into *httk*. They are:
 
-* `pbtk`: A physiologically-based TK model with oral absorption. Contains the following compartments: gutlumen, gut, liver, kidneys, veins, arteries, lungs, and the rest of the body. Chemical is metabolized by the liver and excreted by the kidneys via glomerular filtration.
-* `gas_pbtk`: A PBTK model with absorption via inhalation. Contains the same compartments as `pbtk`.
-* `1compartment`: A simple one-compartment TK model with oral absorption.
-* `3compartment`:  A three-compartment TK model with oral absorption. Compartments are gut, liver, and rest of body.
-* `3compartmentss`: The steady-state solution to the 3-compartment model under an assumption of constant infusion dosing, without considering tissue partitioning. This was the first `httk` model (see Wambaugh et al. 2015, Wetmore et al. 2012, Rotroff et al. 2010).
+* **pbtk**: A physiologically-based TK model with oral absorption. Contains the following compartments: gutlumen, gut, liver, kidneys, veins, arteries, lungs, and the rest of the body. Chemical is metabolized by the liver and excreted by the kidneys via glomerular filtration.
+* **gas_pbtk**: A PBTK model with absorption via inhalation. Contains the same compartments as `pbtk`.
+* **1compartment**: A simple one-compartment TK model with oral absorption.
+* **3compartment**:  A three-compartment TK model with oral absorption. Compartments are gut, liver, and rest of body.
+* **3compartmentss**: The steady-state solution to the 3-compartment model under an assumption of constant infusion dosing, without considering tissue partitioning. This was the first *httk* model (see Wambaugh et al. 2015, Wetmore et al. 2012, Rotroff et al. 2010).
 
 ### Chemical-Specific TK Data Built Into 'httk'
 
@@ -3025,7 +3027,7 @@ You can easily get a list of all the chemicals for which a specific TK model can
 
 For example, here is how you get a list of all the chemicals for which the PBTK model can be parameterized for humans.
 
-```{r}
+```{r, warning = FALSE}
 chems_pbtk <- get_cheminfo(info = c("Compound", "CAS", "DTXSID"),
                            model = "pbtk",
                            species = "Human")
@@ -3034,13 +3036,11 @@ head(chems_pbtk) #first few rows
 ```
 
 How many such chemicals have parameter data to run a PBTK model in this package?
-
 ```{r}
 nrow(chems_pbtk)
 ```
 
 Here is how you get all the chemicals for which the 3-compartment steady-state model can be parameterized for humans.
-
 ```{r}
 chems_3compss <- get_cheminfo(info = c("Compound", "CAS", "DTXSID"),
                            model = "3compartmentss",
@@ -3048,7 +3048,6 @@ chems_3compss <- get_cheminfo(info = c("Compound", "CAS", "DTXSID"),
 ```
 
 How many such chemicals have parameter data to run a 3-compartment steady-state model in this package?
-
 ```{r}
 nrow(chems_3compss)
 ```
@@ -3071,7 +3070,7 @@ sol_pbtk <- solve_model(chem.name = "Bisphenol-A", #chemical to simulate
 
 There are some cryptic-sounding warnings that can safely be ignored. (They are providing information about certain assumptions that were made while solving the model). Then there is a final message providing the units of the output.
 
-The output, assigned to `sol_pbtk`, is a matrix with concentration vs. time data for each of the compartments in the `pbtk` model. Time is in units of days. Additionally, the output traces the amount excreted via passive renal filtration (`Atubules`), the amount metabolized in the liver (`Ametabolized`), and the cumulative area under the curve for plasma concentration vs. time (`AUC`). Here are the first few rows of `sol_pbtk` so you can see the format.
+The output, assigned to `sol_pbtk`, is a matrix with concentration vs. time data for each of the compartments in the pbtk model. Time is in units of days. Additionally, the output traces the amount excreted via passive renal filtration (`Atubules`), the amount metabolized in the liver (`Ametabolized`), and the cumulative area under the curve for plasma concentration vs. time (`AUC`). Here are the first few rows of `sol_pbtk` so you can see the format.
 
 ```{r}
 head(sol_pbtk)
@@ -3118,7 +3117,6 @@ print(tkstats)
 :::
 
 
-
 ### Calculating steady-state concentration
 
 Another summary metric is the steady-state concentration: If the same dose is given repeatedly over many days, the body concentration will (usually) reach a steady state after some time. The value of this steady-state concentration, and the time needed to achieve steady state, are different for different chemicals. Steady-state concentrations are useful when considering long-term, low-level exposures, which is frequently the situation in environmental health.
@@ -3141,8 +3139,7 @@ ggplot(foo) +
   ylab("Cplasma, uM")
 ```
 
-
-`httk` includes a function `calc_analytic_css()` to calculate the steady-state plasma concentration ($C_{ss}$ for short) analytically for each model, for a specified chemical and daily oral dose. This function assumes that the daily oral dose is administered as an oral infusion, rather than a single oral bolus dose -- in effect, that the daily dose is divided into many small doses over the day. Therefore, the result of `calc_analytic_css()` may be slightly different than our previous estimate based on the concentration vs. time plot from a single oral bolus dose every day.
+*httk* includes a function `calc_analytic_css()` to calculate the steady-state plasma concentration ($C_{ss}$ for short) analytically for each model, for a specified chemical and daily oral dose. This function assumes that the daily oral dose is administered as an oral infusion, rather than a single oral bolus dose -- in effect, that the daily dose is divided into many small doses over the day. Therefore, the result of `calc_analytic_css()` may be slightly different than our previous estimate based on the concentration vs. time plot from a single oral bolus dose every day.
 
 Here is the result of `calc_analytic_css()` for a 1 mg/kg/day dose of bisphenol-A.
 
@@ -3166,10 +3163,9 @@ calc_analytic_css(chem.name = "Bisphenol-A",
 
 
 
+### Steady-state concentration is linear with dose for httk models
 
-### Steady-state concentration is linear with dose for `httk` models
-
-For the TK models included in the `httk` package, steady-state concentration is linear with dose for a given chemical. The slope of the line is simply the steady-state concentration for a dose of 1 mg/kg/day. This can be shown by solving `calc_analytic_css()` for several doses, and plotting the dose-$C_{ss}$ points along a line whose slope is equal to $C_{ss}$ for 1 mg/kg/day.
+For the TK models included in the *httk* package, steady-state concentration is linear with dose for a given chemical. The slope of the line is simply the steady-state concentration for a dose of 1 mg/kg/day. This can be shown by solving `calc_analytic_css()` for several doses, and plotting the dose-$C_{ss}$ points along a line whose slope is equal to $C_{ss}$ for 1 mg/kg/day.
 
 ```{r fig.align = "center"}
 #choose five doses at which to find the Css
@@ -3217,14 +3213,13 @@ However, risk assessors and risk managers typically control *external* exposure 
 
 The solution is *reverse toxicokinetics* (reverse TK). Starting with a specified internal exposure metric (body concentration), solve the TK model *in reverse* to find the corresponding external exposure that produced that concentration.
 
-When exposures are long-term and low-level (as environmental exposures often are), then the relevant internal exposure metric is the steady-state concentration. In this case, it is useful to remember the linear relationship between $C_{ss}$ and dose for the `httk` TK models. It gives you a quick and easy way to perform reverse TK for the steady-state case.
+When exposures are long-term and low-level (as environmental exposures often are), then the relevant internal exposure metric is the steady-state concentration. In this case, it is useful to remember the linear relationship between $C_{ss}$ and dose for the *httk* TK models. It gives you a quick and easy way to perform reverse TK for the steady-state case.
 
 The procedure is illustrated graphically below. 
 
 1. Begin with a "target" concentration on the y-axis (labeled $C_{\textrm{target}}$). For example, $C_{\textrm{target}}$ may be the *in vitro* concentration associated with bioactivity in a ToxCast assay, or the plasma concentration associated with an adverse health effect in an epidemiological study.
 2. Draw a horizontal line over to the $C_{ss}$-dose line.
 3. Drop down vertically to the x-axis and read off the corresponding dose. This is the *administered equivalent dose* (AED): the the external dose or exposure rate, in mg/kg/day, that would produce an internal steady-state plasma concentration equal to the target concentration.
-
 
 ```{r, echo = FALSE, warning = FALSE, fig.align = "center"}
 reverseTKfig <- Cssdosefig +
@@ -3284,6 +3279,7 @@ $$ AED = \frac{C_{\textrm{target}}}{C_{ss}\textrm{-dose slope}} $$
 Since the $C_{ss}$-dose slope is simply $C_{ss}$ for a daily dose of 1 mg/kg/day, this equation can be rewritten as
 
 $$ AED = \frac{C_{\textrm{target}}}{C_{ss}\textrm{ for 1 mg/kg/day}} $$
+<br>
 
 ## Capturing Population Variability in Toxicokinetics, and Uncertainty in Chemical-Specific Parameters
 
@@ -3325,7 +3321,7 @@ The $C_{ss}$-dose relationship is still linear when variability and uncertainty 
 A distribution of $C_{ss}$-dose slopes is illustrated in the figure below, along with boxplots illustrating the distributions for $C_{ss}$ itself at five different dose levels: 0.05, 0.25, 0.5, 0.75, and 0.95 mg/kg/day.
 
 
-```{r, echo = FALSE, fig.align = "center", fig.cap = "Boxplots: Distributions of Css for five daily dose levels of Bisphenol-A. Boxes extend from 25th to 75th percentile. Lower whisker = 5th percentile; upper whisker = 95th percentile. Lines: Css-dose relations for each quantile." }
+```{r, echo = FALSE, warning = FALSE, fig.align = "center"}
 
 suppressWarnings(css_examp <- calc_mc_css(chem.name = "Bisphenol-A",
             which.quantile = c(0.05, #specify which quantiles to return
@@ -3385,9 +3381,11 @@ ggplot(css_dist_wide) +
   ylab("Css, uM") +
   theme(legend.position = c(0.1,0.7))
 
-
-
 ```
+
+An appropriate title for this figure could be:
+
+“**Boxplots: Distributions of Css for five daily dose levels of Bisphenol-A.** Boxes extend from 25th to 75th percentile. Lower whisker = 5th percentile; upper whisker = 95th percentile. Lines: Css-dose relations for each quantile."
 
 ### Variability and Uncertainty in Reverse Toxicokinetics
 
@@ -3442,15 +3440,15 @@ In general, the 95th-percentile $C_{ss}$-dose slope represents the most-sensitiv
 
 
 ### Monte Carlo approach to simulating variability and uncertainty
-The `httk` package implements a Monte Carlo approach for simulating variability and uncertainty in TK.  
+The *httk* package implements a Monte Carlo approach for simulating variability and uncertainty in TK.  
 
-`httk` first defines distributions for the TK model parameters, representing population variabilty. These distributions are defined based on real data about U.S. population demographics and physiology collected as part of the Centers for Disease Control's National Health and Nutrition Examination Survey (NHANES) [(Ring et al., 2017)](https://pubmed.ncbi.nlm.nih.gov/28628784/). TK parameters with known measurement uncertainty (intrinsic hepatic clearance rate and fraction of chemical unbound in plasma) additionally have distributions defined to represent their uncertainty [(Wambaugh et al., 2019)](https://pubmed.ncbi.nlm.nih.gov/31532498/).
+*httk* first defines distributions for the TK model parameters, representing population variabilty. These distributions are defined based on real data about U.S. population demographics and physiology collected as part of the Centers for Disease Control's National Health and Nutrition Examination Survey (NHANES) [(Ring et al., 2017)](https://pubmed.ncbi.nlm.nih.gov/28628784/). TK parameters with known measurement uncertainty (intrinsic hepatic clearance rate and fraction of chemical unbound in plasma) additionally have distributions defined to represent their uncertainty [(Wambaugh et al., 2019)](https://pubmed.ncbi.nlm.nih.gov/31532498/).
 
-Then, `httk` samples sets of TK parameter values from these distributions (including appropriate correlations: for example, liver mass is correlated with body weight). Each sampled set of TK parameter values represents one "simulated individual." 
+Then, *httk* samples sets of TK parameter values from these distributions (including appropriate correlations: for example, liver mass is correlated with body weight). Each sampled set of TK parameter values represents one "simulated individual." 
 
-Next, `httk` calculates the $C_{ss}$-dose slope for each "simulated individual." The resulting sample of $C_{ss}$-dose slopes can be used to characterize the distribution of $C_{ss}$-dose slopes -- for example, by calculating percentiles.
+Next, *httk* calculates the $C_{ss}$-dose slope for each "simulated individual." The resulting sample of $C_{ss}$-dose slopes can be used to characterize the distribution of $C_{ss}$-dose slopes -- for example, by calculating percentiles.
 
-`httk` makes this whole Monte Carlo process simple and transparent for the user, You just need to call one function, `calc_mc_css()`, specifying the chemical whose $C_{ss}$-dose slope distribution you want to calculate. Behind the scenes, `httk` will perform all the Monte Carlo calculations. It will return percentiles of the $C_{ss}$-dose slope (by default), or it can return all individual samples of $C_{ss}$-dose slope (if you want to do some calculations of your own).
+*httk* makes this whole Monte Carlo process simple and transparent for the user, You just need to call one function, `calc_mc_css()`, specifying the chemical whose $C_{ss}$-dose slope distribution you want to calculate. Behind the scenes, *httk* will perform all the Monte Carlo calculations. It will return percentiles of the $C_{ss}$-dose slope (by default), or it can return all individual samples of $C_{ss}$-dose slope (if you want to do some calculations of your own).
 
 ### Chemical-Specific Example Capturing Population Variability for Bisphenol-A Plasma Concentration Estimates
 
@@ -3472,7 +3470,6 @@ Recall that the $C_{ss}$-dose slope is the same as $C_{ss}$ for a daily dose of 
 The steady-state plasma concentration for 1 mg/kg/day dose is returned in units of uM. The three requested quantiles are returned as a named numeric vector (whose names in this case are `5%`, `50%`, and `95%`).
 
 
-
 ### Answer to Environmental Health Question 3
 :::question
 *With this, we can answer **Environmental Health Question #3***: What is the predicted range of bisphenol-A concentrations in plasma that can occur in a human population, assuming a long-term exposure rate of 1 mg/kg/day and steady-state conditions? Provide estimates at the 5th, 50th, and 95th percentile?
@@ -3481,8 +3478,6 @@ The steady-state plasma concentration for 1 mg/kg/day dose is returned in units 
 :::answer
 **Answer**:  For a human population exposed to 1 mg/kg/day bisphenol-A, plasma concentrations are estimated to be `r unname(css_examp[1])` uM at the 5th percentile, `r unname(css_examp[2])` uM at the 50th percentile, and `r unname(css_examp[3])` uM at the 95th percentile.
 :::
-
-
 
 
 ### High-Throughput Example Capturing Population Variability for ~1000 Chemicals
@@ -3526,7 +3521,7 @@ head(css_3compss) #View first few rows
 
 Here, we will plot the resulting concentration distribution quantiles for each chemical, while sorting the chemicals from lowest to highest median value.
 
-By default, `ggplot2` will plot the chemical CASRNs in alphabetically-sorted order. To force it to plot them in another order, we have to explicitly specify the desired order. The easiest way to do this is to add a column in the data.frame that contains the chemical names as a factor (categorical) variable, whose levels (categories) are explicitly set to be the CASRNs in our desired plotting order. Then we can tell `ggplot2` to plot that factor variable on the x-axis, rather than the original CASRN variable.
+By default, *ggplot2* will plot the chemical CASRNs in alphabetically-sorted order. To force it to plot them in another order, we have to explicitly specify the desired order. The easiest way to do this is to add a column in the data.frame that contains the chemical names as a factor (categorical) variable, whose levels (categories) are explicitly set to be the CASRNs in our desired plotting order. Then we can tell *ggplot2* to plot that factor variable on the x-axis, rather than the original CASRN variable.
 
 Set the ordering of the chemical CASRNs from lowest to highest median value
 ```{r}
@@ -3534,14 +3529,12 @@ chemical_order <- order(css_3compss$`50%`)
 ```
 
 Create a factor (categorical) CAS column where the factor levels are given by the CASRNs with this ordering.
-
 ```{r}
 css_3compss$CAS_factor <- factor(css_3compss$CAS, levels = css_3compss$CAS[chemical_order])
 ```
 
-For plotting ease, reshape the data.frame into "long" format -- rather than having one column for each quantile of the $C_{ss}$ distribution, have a row for each chemical/quantile combination. We use the `melt` function from the `reshape2` package.
-
-```{r}
+For plotting ease, reshape the data.frame into "long" format -- rather than having one column for each quantile of the $C_{ss}$ distribution, have a row for each chemical/quantile combination. We use the `melt()` function from the *reshape2* package.
+```{r, warning = FALSE}
 css_3compss_melt <- melt(css_3compss,
                                    id.vars = "CAS_factor",
                                    measure.vars = c("5%", "50%", "95%"),
@@ -3551,7 +3544,6 @@ head(css_3compss_melt)
 ```
 
 Plot the slope percentiles. Use a log scale for the y-axis because the slopes span orders of magnitude. Suppress the x-axis labels (the CASRNs) because they are not readable anyway.
-
 ```{r fig.align = "center"}
 ggplot(css_3compss_melt) +
   geom_point(aes(x=CAS_factor,
@@ -3569,9 +3561,7 @@ ggplot(css_3compss_melt) +
         ) 
 ```
 
-
 Chemicals along the x-axis are in order from lowest to highest median (50th percentile) predicted $C_{ss}$-dose slope. The orange points represent that 50th percentile $C_{ss}$-dose slope for each chemical. The green points represent the 5th percentile $C_{ss}$-dose slopes, and the purple points represent the 95th percentile $C_{ss}$-dose slope for each chemical. Each chemical has one orange point (50th percentile), one green point (5th percentile), and one purple point (95th percentile), characterizing the distribution of $C_{ss}$-dose slopes across the U.S. population for that chemical. The width of the distribution for each chemical is roughly represented by the vertical distance between the green and purple points for that chemical.
-
 
 
 ### Answer to Environmental Health Question 4
@@ -3583,13 +3573,13 @@ Chemicals along the x-axis are in order from lowest to highest median (50th perc
 **Answer**: No -- the $C_{ss}$-dose slope distributions generally become narrower as the median $C_{ss}$-dose slope increases. This can be seen by looking at the right end of the plot, where the highest-median chemicals are located -- the distance between the green points and purple points, representing the 5th and 95th percentiles, are much smaller for these higher-median chemicals.
 :::
 
-
+<br>
 
 ## Reverse TK: Calculating Administered Equivalent Doses for ToxCast Bioactive Concentrations
 
 As described in an earlier section of this document, the slope defining the linear relation between $C_{ss}$ and dose is useful for reverse toxicokinetics: converting an internal dose metric to an external dose metric. The internal dose metric may, for example, be a concentration associated with an *in vivo* health effect, or *in vitro* bioactivity. Here, we will consider *in vitro* bioactivity -- specifically, from the ToxCast program. ToxCast tests chemicals in multiple concentration-response format across a battery of *in vitro* assays that measure activity in a wide variety of biological endpoints. If a chemical showed any activity in an assay at any of its tested concentrations, then one metric of concentration associated with bioactivity is AC50 -- the concentration at which the assay response is halfway between its minimum and its maximum. 
 
-The module won't address the details of how ToxCast determines assay activity and AC50s from raw concentration-response data. There is an entire R package for the ToxCast data processing workflow, called `tcpl`. If you want to learn more about those details, [start here](https://www.epa.gov/chemical-research/toxcast-data-generation-toxcast-pipeline-tcpl). Lots of information is available if you install the `tcpl` R package and look at the package vignette; it essentially walks you through the full ToxCast data processing workflow.
+The module won't address the details of how ToxCast determines assay activity and AC50s from raw concentration-response data. There is an entire R package for the ToxCast data processing workflow, called *tcpl*. If you want to learn more about those details, [start here](https://www.epa.gov/chemical-research/toxcast-data-generation-toxcast-pipeline-tcpl). Lots of information is available if you install the *tcpl* R package and look at the package vignette; it essentially walks you through the full ToxCast data processing workflow.
 
 In this module, we will begin with pre-computed ToxCast AC50 values for various chemicals and assays. We will use `httk` to convert ToxCast AC50 values into administered equivalent doses (AEDs).
 
@@ -3597,7 +3587,7 @@ In this module, we will begin with pre-computed ToxCast AC50 values for various 
 
 The latest public release of ToxCast high-throughput screening assay data can be downloaded [here](https://www.epa.gov/chemical-research/exploring-toxcast-data-downloadable-data). Previous public releases of ToxCast data included a matrix of AC50s by chemical and assay. The data format of the latest public release does not contain this kind of matrix. So this dataset was pre-processed to prepare a simple data.frame of AC50s for each chemical/assay combination for the purposes of this training module.
 
-Read in the pre-processed data set and view the first few rows.
+Read in the pre-processed dataset and view the first few rows.
 
 ```{r}
 toxcast <- read.csv("Module6_6_Input/Module6_6_InputData1.csv")
@@ -3607,16 +3597,12 @@ head(toxcast)
 The columns of this data frame are:
 
 * `Compound`: The compound name.
-
 * `CAS`: The compound's CASRN.
-
 * `DTXSID`: The compound's DSSTox Substance ID.
-
 * `aenm`: Assay identifier. "aenm" stands for "Assay Endpoint Name." More information about the ToxCast assays is available on the [ToxCast data download page](https://www.epa.gov/chemical-research/exploring-toxcast-data-downloadable-data).
-
 * `log10_ac50`: The AC50 for the chemical/assay combination on each row, in log10 uM units.
 
-How many ToxCast chemicals are in this data set?
+How many ToxCast chemicals are in this dataset?
 
 ```{r}
 length(unique(toxcast$DTXSID))
@@ -3633,9 +3619,9 @@ length(unique(toxcast$DTXSID))
 :::
 
 
-### Subsetting the ToxCast Chemicals to include those that are also in `httk`
+### Subsetting the ToxCast Chemicals to include those that are also in httk
 
-Not all of the ToxCast chemicals have TK data built into `httk` such that we can perform reverse TK using the HTTK models. Let's subset the ToxCast data to include only the chemicals for which we can run the 3-compartment steady-state models. 
+Not all of the ToxCast chemicals have TK data built into *httk* such that we can perform reverse TK using the HTTK models. Let's subset the ToxCast data to include only the chemicals for which we can run the 3-compartment steady-state models. 
 
 Previously, we used `get_cheminfo()` to get a list of chemicals for which we could run the 3-compartment steady state model, including the names, CASRNs, and DSSTox IDs of those chemicals. That list is stored in variable `chems_3compss`, a data.frame with compound name, CASRN, and DTXSID. Now, we can use that chemical list to subset the ToxCast data.
 
@@ -3651,7 +3637,7 @@ How many chemicals are in this subset?
 length(unique(toxcast_httk$DTXSID))
 ```
 
-There were 869 `httk` chemicals for which we could run the 3-compartment steady-state model; only 911 of them had ToxCast data. Conversely, most of the 7863 ToxCast chemicals do not have TK data in `httk` such that we can run the 3-compartment steady state model.
+There were 869 *httk* chemicals for which we could run the 3-compartment steady-state model; only 911 of them had ToxCast data. Conversely, most of the 7863 ToxCast chemicals do not have TK data in *httk* such that we can run the 3-compartment steady state model.
 
 ### Identifying the Lower-Bound *In Vitro* AC50 Value per Chemical
 ToxCast/Tox21 screens chemicals across multiple assays, such that each chemical has multiple resulting AC50 values, spanning a range of values. For example, here are boxplots of the AC50s for the first 20 chemicals listed in `chems_3compss`. Note that the chemical identifiers, DTXSID, are used here in these visualizations to represent unique chemicals.
@@ -3674,7 +3660,7 @@ Sometimes we have an interest in getting the equivalent dose for an AC50 for one
 
 However, sometimes we just want a general idea of what concentrations showed bioactivity in *any* of the ToxCast assays, regardless of the specific biological endpoint of each assay. In this case, typically, we are interested in a "reasonable lower bound" of bioactive concentrations across assays for each chemical. Intuitively, we suspect that the very lowest AC50s for each chemical might represent false activity. Therefore, we often select the tenth percentile of ToxCast AC50s for each chemical as that "reasonable lower bound" on bioactive concentrations.
 
-Let's calculate the tenth percentile ToxCast AC50 for each chemical. Here, we use the base-R function `aggregate`, which groups a vector (specified in the `x` argument) by a list of factors (specified in the `by` argument), and applies a function to each group (specified in the `FUN` argument). You can add any extra arguments to the `FUN` function as named arguments to `aggregate`.
+Let's calculate the tenth percentile ToxCast AC50 for each chemical. Here, we use the base R function `aggregate()`, which groups a vector (specified in the `x` argument) by a list of factors (specified in the `by` argument), and applies a function to each group (specified in the `FUN` argument). You can add any extra arguments to the `FUN` function as named arguments to `aggregate()`.
 
 ```{r}
 toxcast_httk_P10 <- aggregate(x = toxcast_httk$log10_ac50, #aggregate the AC50s
@@ -3701,7 +3687,7 @@ head(toxcast_httk_P10)
 
 ### Calculating Equivalent Doses for 10th Percentile ToxCast AC50s
 
-We can calculate equivalent doses in one line of R code -- again including all of the Monte Carlo for TK uncertainty and variability -- just by using the `httk` function `calc_mc_oral_equiv()`.
+We can calculate equivalent doses in one line of R code -- again including all of the Monte Carlo for TK uncertainty and variability -- just by using the *httk* function `calc_mc_oral_equiv()`.
 
 Note that in `calc_mc_oral_equiv()`, the `which.quantile` argument refers to the quantile of the $C_{ss}$-dose slope, not the quantile of the equivalent dose itself. So specifying `which.quantile = 0.95` will yield a *lower* equivalent dose than `which.quantile = 0.05`. 
 
@@ -3737,12 +3723,11 @@ Let's add the DTXSIDs back into this data.frame.
 toxcast_equiv_dose$DTXSID <- toxcast_httk_P10$DTXSID
 ```
 
-We can get the names of these chemicals by using the list of chemicals for which the 3-compartment steady-state model can be parameterized, which was stored in the variable ``chems_3compss`. In that dataframe, we have the compound name and CASRN corresponding to each DTXSID.
+We can get the names of these chemicals by using the list of chemicals for which the 3-compartment steady-state model can be parameterized, which was stored in the variable `chems_3compss`. In that dataframe, we have the compound name and CASRN corresponding to each DTXSID.
 
 ```{r}
 head(chems_3compss)
 ```
-
 
 Merge `chems_3compss` with `toxcast_equiv_dose`.
 
@@ -3773,6 +3758,7 @@ head(toxcast_equiv_dose, 10) #first ten rows of sorted table
 **Answer**: 2,4-d; secbumeton, and 1,4-dioxane
 :::
 
+<br>
 
 ## Comparing Equivalent Doses Estimated to Elicit Toxicity (Hazard) to External Exposure Estimates (Exposure), for Chemical Prioritization by Bioactivity-Exposure Ratios (BERs)
 
@@ -3795,7 +3781,7 @@ To calculate a BER for a chemical, it needs to have both an equivalent dose and 
 length(intersect(toxcast_equiv_dose$DTXSID, exposure$DTXSID))
 ```
 
-This means that, using the ToxCast AC50 data for bioactive concentrations, the NHANES urinary inference data for exposures, and the `httk` package to convert bioactive concentrations to equivalent doses, we can compute BERs for `r length(intersect(toxcast_equiv_dose$DTXSID, exposure$DTXSID))` chemicals.
+This means that, using the ToxCast AC50 data for bioactive concentrations, the NHANES urinary inference data for exposures, and the *httk* package to convert bioactive concentrations to equivalent doses, we can compute BERs for `r length(intersect(toxcast_equiv_dose$DTXSID, exposure$DTXSID))` chemicals.
 
 Merge together the ToxCast equivalent doses and the exposure data into a single data frame. Keep only the chemicals that have data in both ToxCast equivalent doses and exposure data frames.
 
@@ -3899,7 +3885,7 @@ ggplot(hazard_exposure) +
 ```
 
 
-Now, the chemicals are displayed in order of increasing BER. From left to right, you can visually see the distance increase between the lower bound of equivalent doses (the bottom of the black boxes) and the upper bound of exposure estimates (the top of the orange boxes). Since the y-axis is put on a log10 scale, the distance between the boxes corresponds to the BER. We can gather a lot of information from this plot!
+Now, the chemicals are displayed in order of increasing BER. From left to right, you can visually see the distance increase between the lower bound of equivalent doses (the bottom of the black boxes) and the upper bound of exposure estimates (the top of the orange boxes). Since the y-axis is put on a log~10~ scale, the distance between the boxes corresponds to the BER. We can gather a lot of information from this plot!
 
 
 ### Answer to Environmental Health Question 7
@@ -3933,10 +3919,9 @@ Now, the chemicals are displayed in order of increasing BER. From left to right,
 :::
 
 
-
 ### Filling Hazard and Exposure Data Gaps to Prioritize More Chemicals
 
-To calculate a BER for a chemical, both bioactivity and exposure data are required, as well as sufficient TK data to perform reverse TK. In this training module, bioactivity data came from ToxCast AC50s; exposure data consisted of exposure inferences made from NHANES urinary biomonitoring data; and TK data consisted of parameter values measured *in vitro* and built into the `httk` R package. The intersections are illustrated in an Euler diagram below. BERs can only be calculated for chemicals in the triple intersection.
+To calculate a BER for a chemical, both bioactivity and exposure data are required, as well as sufficient TK data to perform reverse TK. In this training module, bioactivity data came from ToxCast AC50s; exposure data consisted of exposure inferences made from NHANES urinary biomonitoring data; and TK data consisted of parameter values measured *in vitro* and built into the *httk* R package. The intersections are illustrated in an Euler diagram below. BERs can only be calculated for chemicals in the triple intersection.
 
 ```{r fig.align = "center"}
 fit <- eulerr::euler(list('ToxCast AC50s' = unique(toxcast$DTXSID),
@@ -3956,28 +3941,27 @@ Clearly, it would be useful to gather more data to allow calculation of BERs for
 
 ### Answer to Environmental Health Question 10
 :::question
-*With this, we can also answer **Environmental Health Question #10***:  Of the three data sets used in this training module -- bioactivity from ToxCast, TK data from `httk`, and exposure inferred from NHANES urinary biomonitoring -- which one most limits the number of chemicals that can be prioritized using BERs?
- 
+*With this, we can also answer **Environmental Health Question #10***:  Of the three datasets used in this training module -- bioactivity from ToxCast, TK data from *httk*, and exposure inferred from NHANES urinary biomonitoring -- which one most limits the number of chemicals that can be prioritized using BERs?
+:::
+
 :::answer
-**Answer**: The exposure data set includes the fewest chemicals and is therefore the most limiting.
+**Answer**: The exposure dataset includes the fewest chemicals and is therefore the most limiting.
 :::
 
 
-The exposure data set used in this training module is limited to chemicals for which NHANES did urinary biomonitoring for markers of exposure, which is a fairly small set of chemicals that were of interest to NHANES due to existing concerns about health effects of exposure, and/or other reasons. This data set was chosen because it is a convenient set of exposure estimates to use for demonstration purposes, but it could be expanded by including other sources of exposure data and exposure model predictions. Further discussion is beyond the scope of this training module, but as an example of this kind of high-throughput exposure modeling, see [Ring et al., 2019](https://pubmed.ncbi.nlm.nih.gov/30516957/).
+The exposure dataset used in this training module is limited to chemicals for which NHANES did urinary biomonitoring for markers of exposure, which is a fairly small set of chemicals that were of interest to NHANES due to existing concerns about health effects of exposure, and/or other reasons. This dataset was chosen because it is a convenient set of exposure estimates to use for demonstration purposes, but it could be expanded by including other sources of exposure data and exposure model predictions. Further discussion is beyond the scope of this training module, but as an example of this kind of high-throughput exposure modeling, see [Ring et al., 2019](https://pubmed.ncbi.nlm.nih.gov/30516957/).
 
 It would additionally be useful to gather TK data for additional chemicals. *In vitro* measurement efforts are ongoing. Additonally, *in silico* modeling can produce useful predictions of TK properties to facilitate chemical prioritization. Efforts are ongoing to develop computational models to predict TK parameters from chemical structure and properties.
 
 ## Concluding Remarks
 
-This training module provides an overview of toxicokinetic modeling using the `httk` R package, and its application to *in vitro*-*in vivo* extrapolation in the form of placing *in vitro* data in the context of exposure by calculating equivalent doses for *in vitro* bioactive concentrations. 
+This training module provides an overview of toxicokinetic modeling using the *httk* R package, and its application to *in vitro*-*in vivo* extrapolation in the form of placing *in vitro* data in the context of exposure by calculating equivalent doses for *in vitro* bioactive concentrations. 
 
-We would like to acknowledge the developers of the httk package, as detailed below via the CRAN website:
+We would like to acknowledge the developers of the *httk* package, as detailed below via the CRAN website:
 
 ```{r, echo=FALSE, fig.align='center'} 
 knitr::include_graphics("Module6_6_Input/Module6_6_Image2.png")
 ```
-
-
 
 This module also summarizes the use of the Bioactivity-Exposure Ratio (BER) for chemical prioritization, and provides examples of calculating the BER and ranking chemicals accordingly.
 
@@ -4012,7 +3996,7 @@ Test Your Knowledge
 </label>
 
 :::tyk
-1. After exposure to a single daily dose of 1 mg/kg/day methylparaben, what is the maximum concentration of methylparaben estimated to occur in human liver, estimated by the 3-comprtment model implemented in `httk`?
+1. After exposure to a single daily dose of 1 mg/kg/day methylparaben, what is the maximum concentration of methylparaben estimated to occur in human liver, estimated by the 3-comprtment model implemented in *httk*?
 2. What is the predicted range of methylparaben concentrations in plasma that can occur in a human population, assuming a long-term exposure rate of 1 mg/kg/day and 3-compartment steady-state conditions? Provide estimates at the 5th, 50th, and 95th percentile.
 :::
 
