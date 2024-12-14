@@ -205,6 +205,7 @@ knitr::include_graphics("Module5_2_Input/Module5_2_Image2.png")
 ```
 <center> Langs, G., Röhrich, S., Hofmanninger, J., Prayer, F., Pan, J., Herold, C., & Prosch, H. (2018). Machine learning: from radiomics to discovery and routine. Der Radiologe, 58(S1), 1–6. PMID: [34013136](https://doi.org/10.1007/s00117-018-0407-3). Figure regenerated here in alignment with its published [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/). </center>
 
+
 Overall, the distinction between supervised and unsupervised learning is an important concept in machine learning, as it can inform the choice of algorithms and techniques used to analyze and make predictions from data. It is worth noting that there are also other types of machine learning, such as [semi-supervised learning](https://www.altexsoft.com/blog/semi-supervised-learning/), [reinforcement learning](https://www.geeksforgeeks.org/what-is-reinforcement-learning/), and [deep learning](https://www.geeksforgeeks.org/introduction-deep-learning/), though we will not further discuss these topics in this module. 
 
 <br>
@@ -1208,7 +1209,7 @@ Unsupervised machine learning includes:
   + Partial Least Squares-Discriminant Analysis (PLS-DA)
   
 
-In this module, we'll focus on methods for ***K*-means clustering** and **Principal Component Analysis** described in more detail in the following sections. In the next module, **TAME 2.0 Module 5.5 Unsupervised Machine Learning II: Hierarchical Clustering**, we'll focus on hierarchical clustering. For further information on types of unsupervised machine learning, check out [Unsupervised Learning](https://cloud.google.com/discover/what-is-unsupervised-learning#section-3). 
+In this module, we'll focus on methods for ***K*-means clustering** and **Principal Component Analysis** described in more detail in the following sections. In the next module, **TAME 2.0 Module 5.5 Unsupervised Machine Learning Part 2: Additional Clustering Applications**, we'll focus on hierarchical clustering. For further information on types of unsupervised machine learning, check out [Unsupervised Learning](https://cloud.google.com/discover/what-is-unsupervised-learning#section-3). 
 
 
 <br>
@@ -1664,7 +1665,7 @@ All input files (script, data, and figures) can be downloaded from the [UNC-SRP 
 
 ## Introduction to Training Module
 
-The previous module **TAME 2.0 Module 5.4 Unsupervised Machine Learning**, served as introduction to unsupervised machine learning (ML). **Unsupervised ML** involves training a model on a dataset lacking ground truths or response variables. However, in the previous module, the number of clusters was selected based on prior information (i.e., chemical class), but what if you're in a situation where you don't know how many clusters to investigate a priori? This commonly occurs, particularly in the field of environmental health research in instances when investigators want to take a more unbiased view of their data and/or do not have information that can be used to inform the optimal number of clusters to select. In these instances,unsupervised ML techniques can be very helpful, and in this module, we'll explore the following concepts to further understand unsupervised ML:
+The previous module **TAME 2.0 Module 5.4 Unsupervised Machine Learning Part 1: K-Means Clustering & PCA**, served as introduction to unsupervised machine learning (ML). **Unsupervised ML** involves training a model on a dataset lacking ground truths or response variables. However, in the previous module, the number of clusters was selected based on prior information (i.e., chemical class), but what if you're in a situation where you don't know how many clusters to investigate a priori? This commonly occurs, particularly in the field of environmental health research in instances when investigators want to take a more unbiased view of their data and/or do not have information that can be used to inform the optimal number of clusters to select. In these instances,unsupervised ML techniques can be very helpful, and in this module, we'll explore the following concepts to further understand unsupervised ML:
 
 + *K*-Means and hierarchical clustering
 + Deriving the optimal number of clusters
