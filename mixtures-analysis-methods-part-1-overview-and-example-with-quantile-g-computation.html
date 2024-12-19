@@ -23,7 +23,7 @@
 <meta name="author" content="Rager Lab" />
 
 
-<meta name="date" content="2024-12-06" />
+<meta name="date" content="2024-12-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -462,6 +462,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#capturing-population-variability-in-toxicokinetics-and-uncertainty-in-chemical-specific-parameters"><i class="fa fa-check"></i>Capturing Population Variability in Toxicokinetics, and Uncertainty in Chemical-Specific Parameters</a></li>
 <li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#reverse-tk-calculating-administered-equivalent-doses-for-toxcast-bioactive-concentrations"><i class="fa fa-check"></i>Reverse TK: Calculating Administered Equivalent Doses for ToxCast Bioactive Concentrations</a></li>
 <li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#comparing-equivalent-doses-estimated-to-elicit-toxicity-hazard-to-external-exposure-estimates-exposure-for-chemical-prioritization-by-bioactivity-exposure-ratios-bers"><i class="fa fa-check"></i>Comparing Equivalent Doses Estimated to Elicit Toxicity (Hazard) to External Exposure Estimates (Exposure), for Chemical Prioritization by Bioactivity-Exposure Ratios (BERs)</a></li>
+<li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#concluding-remarks-28"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html"><i class="fa fa-check"></i>Chemical Read-Across for Toxicity Predictions</a>
+<ul>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#introduction-to-training-module-29"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#introduction-to-activity"><i class="fa fa-check"></i>Introduction to Activity</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#read-across-example-analysis"><i class="fa fa-check"></i>Read-Across Example Analysis</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#calculating-chemical-similarities"><i class="fa fa-check"></i>Calculating Chemical Similarities</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#chemical-read-across-to-predict-acute-toxicity"><i class="fa fa-check"></i>Chemical Read-Across to Predict Acute Toxicity</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#concluding-remarks-29"><i class="fa fa-check"></i>Concluding Remarks</a></li>
 </ul></li>
 <li class="part"><span><b>Chapter 7 Environmental<br> Health Database Mining</b></span></li>
 <li class="chapter" data-level="" data-path="comparative-toxicogenomics-database.html"><a href="comparative-toxicogenomics-database.html"><i class="fa fa-check"></i>7.1 Comparative Toxicogenomics Database</a>
@@ -710,22 +720,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The following are the metals of interest: arsenic, lead, cadmium, chromium, manganese, copper, zinc.</p>
 <p>For each metal there are three exposure variables:</p>
 <ol style="list-style-type: decimal">
-<li>[metal]_perc: 0: less than or equal to the 50th percentile, 1: above the 50th percentile and less than or equal to the 90th percentile, 3: above the 90th percentile</li>
-<li>[metal]_limit: 0: &lt;25% f well water tests for a given metal exceeded EPA regulatory standard, 1: 25% or over of well water tests for a given metal exceeded EPA regulatory standard</li>
-<li>[metal].Mean_avg: the mean concentration of the metal in the tract (ppb).
+<li><code>[metal]_perc</code>: 0: less than or equal to the 50th percentile, 1: above the 50th percentile and less than or equal to the 90th percentile, 3: above the 90th percentile</li>
+<li><code>[metal]_limit</code>: 0: &lt;25% f well water tests for a given metal exceeded EPA regulatory standard, 1: 25% or over of well water tests for a given metal exceeded EPA regulatory standard</li>
+<li><code>[metal].Mean_avg</code>: the mean concentration of the metal in the tract (ppb).
 Please see the Eaves et al. 2023 paper linked above for further information on these variables.</li>
 </ol>
 <p>Other variables of interest (outcome and covariates) in this dataset:</p>
 <ul>
-<li>preterm: 0= 37 weeks gestational age or greater, 1= less than 37 weeks gestational age</li>
-<li>mage: maternal age in years, continuous</li>
-<li>sex: sex of baby at birth: 1=M, 2=F</li>
-<li>racegp: maternal race ethnicity: 1=white non-Hispanic, 2=Black non-Hispanic, 3=Hispanic, 4=Asian/Pacific Islander, 5=American Indian, 6=other/unknown</li>
-<li>smoke: maternal smoking in pregnany: 0=non-smoker, 1=smoker</li>
-<li>season_conep: season of conception: 1=winter (Dec, Jan, Feb), 2=spring (Mar, Apr, May), 3=summer (June, Jul, Aug), 4=fall (Sept, Oct, Nov)</li>
-<li>mothed: mother’s education: 1=&lt;HS, 2=HS, 3=more than HS</li>
-<li>pov_perc: ACS estimates for poverty rate in tract: 0=less than or equal to 25th percentile, 1= greater than 25th percentile and less than or equal to 50th percentile, 2= greater than 50th percentile and less than or equal to 75th percentile, 3= greater than 75th percentile</li>
-<li>Nitr_perc: average of nitrites and nitrates in well water: 0= less than or equal to the 50th percentile, 1= above the 50th percentile and less than or equal to the 90th percentile, 2: above the 90th percentile</li>
+<li><code>preterm</code>: 0= 37 weeks gestational age or greater, 1= less than 37 weeks gestational age</li>
+<li><code>mage</code>: maternal age in years, continuous</li>
+<li><code>sex</code>: sex of baby at birth: 1=M, 2=F</li>
+<li><code>racegp</code>: maternal race ethnicity: 1=white non-Hispanic, 2=Black non-Hispanic, 3=Hispanic, 4=Asian/Pacific Islander, 5=American Indian, 6=other/unknown</li>
+<li><code>smoke</code>: maternal smoking in pregnany: 0=non-smoker, 1=smoker</li>
+<li><code>season_conep</code>: season of conception: 1=winter (Dec, Jan, Feb), 2=spring (Mar, Apr, May), 3=summer (June, Jul, Aug), 4=fall (Sept, Oct, Nov)</li>
+<li><code>mothed</code>: mother’s education: 1=&lt;HS, 2=HS, 3=more than HS</li>
+<li><code>pov_perc</code>: ACS estimates for poverty rate in tract: 0=less than or equal to 25th percentile, 1= greater than 25th percentile and less than or equal to 50th percentile, 2= greater than 50th percentile and less than or equal to 75th percentile, 3= greater than 75th percentile</li>
+<li><code>Nitr_perc</code>: average of nitrites and nitrates in well water: 0= less than or equal to the 50th percentile, 1= above the 50th percentile and less than or equal to the 90th percentile, 2: above the 90th percentile</li>
 </ul>
 <div id="check-variable-formats" class="section level4 hasAnchor">
 <h4>Check variable formats<a href="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html#check-variable-formats" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -877,8 +887,8 @@ Please see the Eaves et al. 2023 paper linked above for further information on 
 ## Zinc
 ## [1] TRUE</code></pre>
 <p>Note: you will get this warning for some of the models:<br />
-“Warning: glm.fit: fitted probabilities numerically 0 or 1”.
-This is because for the variability in the exposure data, ideally the sample size would be larger (as noted above the analysis this draws from was completed on &gt;1.3million observations).</p>
+“Warning: glm.fit: fitted probabilities numerically 0 or 1”.</p>
+<p>This is because for the variability in the exposure data, ideally the sample size would be larger (as noted above the analysis this draws from was completed on &gt;1.3million observations).</p>
 <p>Plot the results:</p>
 <div class="sourceCode" id="cb737"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb737-1"><a href="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html#cb737-1" tabindex="-1"></a>limit_plots <span class="ot">&lt;-</span> <span class="fu">ggarrange</span>(Arsenic_adj_limit_plot,</span>
 <span id="cb737-2"><a href="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html#cb737-2" tabindex="-1"></a>                        Cadmium_adj_limit_plot,</span>
@@ -939,7 +949,7 @@ This is because for the variability in the exposure data, ideally the sample siz
 <span id="cb742-6"><a href="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html#cb742-6" tabindex="-1"></a><span class="co">#fit adjusted model</span></span>
 <span id="cb742-7"><a href="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html#cb742-7" tabindex="-1"></a>PTB_adj_ppb <span class="ot">&lt;-</span> <span class="fu">qgcomp.noboot</span>(preterm<span class="sc">~</span>.,</span>
 <span id="cb742-8"><a href="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html#cb742-8" tabindex="-1"></a>                          <span class="at">expnms=</span>Xnm, <span class="at">dat=</span>cohort[,<span class="fu">c</span>(Xnm,covars,<span class="st">&#39;preterm&#39;</span>)], <span class="at">family=</span><span class="fu">binomial</span>(), <span class="at">q=</span><span class="dv">4</span>)</span></code></pre></div>
-<p>In English, “preterm~.” is saying fit a model that has preterm (1/0) as the dependent variable and then the independent variables (exposures and covariates) are all other variables in the dataset (“.”). “expnms=Xnm” is saying that the mixture of exposures is given by the vector “Xnm,” defined above. “dat=cohort[,c(Xnm,covars,‘preterm’)]” is saying that the dataset to be used to fit this model includes all columns in the cohort dataset that are listed in the “Xnm” and “covars” vectors and also the “preterm” variable. “family=binomial()” is saying that the outcome is a binary outcome and therefore the model will fit a logistic regression model. “q=4” is saying break the exposures into quartiles, other options woudl be q=3 for teriltes, q=5 for quintiles and so forth.</p>
+<p>In English, <code>preterm~.</code> is saying fit a model that has preterm (1/0) as the dependent variable and then the independent variables (exposures and covariates) are all other variables in the dataset (<code>.</code>). <code>expnms=Xnm</code> is saying that the mixture of exposures is given by the vector <code>Xnm,</code> defined above. <code>dat=cohort[,c(Xnm,covars,'preterm')]</code> is saying that the dataset to be used to fit this model includes all columns in the cohort dataset that are listed in the <code>Xnm</code> and <code>covars</code> vectors and also the <code>preterm</code> variable. <code>family=binomial()</code> is saying that the outcome is a binary outcome and therefore the model will fit a logistic regression model. <code>q=4</code> is saying break the exposures into quartiles, other options would be q=3 for teriltes, q=5 for quintiles and so forth.</p>
 <p>This is a summary of the qgcomp model output</p>
 <div class="sourceCode" id="cb743"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb743-1"><a href="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html#cb743-1" tabindex="-1"></a>PTB_adj_ppb</span></code></pre></div>
 <pre><code>## Scaled effect size (positive direction, sum of positive coefficients = 0.0969)
@@ -1081,13 +1091,13 @@ This is because for the variability in the exposure data, ideally the sample siz
 Test Your Knowledge
 </label></p>
 <div class="tyk">
-<p>Using the metals dataset within the qgcomp package (see the <a href="https://cran.r-project.org/web/packages/qgcomp/vignettes/qgcomp-vignette.html">package vignette</a> for how to access), answer the following three mixtures-related environmental health questions using quantile g-computation, focusing on a mixture of arsenic, copper, zinc and lead:</p>
+<p>Using the metals dataset within the <em>qgcomp</em> package (see the <a href="https://cran.r-project.org/web/packages/qgcomp/vignettes/qgcomp-vignette.html">package vignette</a> for how to access), answer the following three mixtures-related environmental health questions using quantile g-computation, focusing on a mixture of arsenic, copper, zinc and lead:</p>
 <ol style="list-style-type: decimal">
 <li>What is the risk of disease associated with combined exposure to each of the chemicals?</li>
 <li>Which of these chemicals has the strongest effect on disease?</li>
 <li>Which of these chemicals increases the risk of disease and which decreases the risk of disease?</li>
 </ol>
-<p>Note that disease is given by the variable “disease_state” (1 = case, 0 = non-case).</p>
+<p>Note that disease is given by the variable <code>disease_state</code> (1 = case, 0 = non-case).</p>
 </div>
 </div>
 </div>

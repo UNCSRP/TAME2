@@ -23,7 +23,7 @@
 <meta name="author" content="Rager Lab" />
 
 
-<meta name="date" content="2024-12-06" />
+<meta name="date" content="2024-12-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -462,6 +462,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#capturing-population-variability-in-toxicokinetics-and-uncertainty-in-chemical-specific-parameters"><i class="fa fa-check"></i>Capturing Population Variability in Toxicokinetics, and Uncertainty in Chemical-Specific Parameters</a></li>
 <li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#reverse-tk-calculating-administered-equivalent-doses-for-toxcast-bioactive-concentrations"><i class="fa fa-check"></i>Reverse TK: Calculating Administered Equivalent Doses for ToxCast Bioactive Concentrations</a></li>
 <li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#comparing-equivalent-doses-estimated-to-elicit-toxicity-hazard-to-external-exposure-estimates-exposure-for-chemical-prioritization-by-bioactivity-exposure-ratios-bers"><i class="fa fa-check"></i>Comparing Equivalent Doses Estimated to Elicit Toxicity (Hazard) to External Exposure Estimates (Exposure), for Chemical Prioritization by Bioactivity-Exposure Ratios (BERs)</a></li>
+<li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#concluding-remarks-28"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html"><i class="fa fa-check"></i>Chemical Read-Across for Toxicity Predictions</a>
+<ul>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#introduction-to-training-module-29"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#introduction-to-activity"><i class="fa fa-check"></i>Introduction to Activity</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#read-across-example-analysis"><i class="fa fa-check"></i>Read-Across Example Analysis</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#calculating-chemical-similarities"><i class="fa fa-check"></i>Calculating Chemical Similarities</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#chemical-read-across-to-predict-acute-toxicity"><i class="fa fa-check"></i>Chemical Read-Across to Predict Acute Toxicity</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#concluding-remarks-29"><i class="fa fa-check"></i>Concluding Remarks</a></li>
 </ul></li>
 <li class="part"><span><b>Chapter 7 Environmental<br> Health Database Mining</b></span></li>
 <li class="chapter" data-level="" data-path="comparative-toxicogenomics-database.html"><a href="comparative-toxicogenomics-database.html"><i class="fa fa-check"></i>7.1 Comparative Toxicogenomics Database</a>
@@ -523,7 +533,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="toxicokinetic-modeling" class="section level1 hasAnchor">
 <h1>6.6 Toxicokinetic Modeling<a href="toxicokinetic-modeling.html#toxicokinetic-modeling" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This training module was developed by Caroline Ring and Lauren Koval.</p>
+<p>This training module was developed by Caroline Ring and Lauren E. Koval.</p>
 <p>All input files (script, data, and figures) can be downloaded from the <a href="https://github.com/UNCSRP/TAME2">UNC-SRP TAME2 GitHub website</a>.</p>
 <p><em>Disclaimer: The views expressed in this document are those of the author and do not necessarily reflect the views or policies of the U.S. EPA.</em></p>
 <div id="introduction-to-training-module-28" class="section level2 hasAnchor">
@@ -609,17 +619,17 @@ To place this term into the context of TK, TK models describe ADME mathematicall
 <span id="cb832-3"><a href="toxicokinetic-modeling.html#cb832-3" tabindex="-1"></a><span class="fu">library</span>(stringr) <span class="co"># stringr will be used to aid in various data manipulation steps through this module</span></span>
 <span id="cb832-4"><a href="toxicokinetic-modeling.html#cb832-4" tabindex="-1"></a><span class="fu">library</span>(httk) <span class="co"># httk package will be used to carry out all toxicokinetic modeling steps</span></span>
 <span id="cb832-5"><a href="toxicokinetic-modeling.html#cb832-5" tabindex="-1"></a><span class="fu">library</span>(eulerr) <span class="co">#eulerr package will be used to generate Venn/Euler diagram graphics</span></span></code></pre></div>
-<p>For more information on the <strong>ggplot2 package</strong>, see its associated <a href="https://cran.r-project.org/web/packages/ggplot2/index.html">CRAN webpage</a> and <a href="https://www.rdocumentation.org/packages/ggplot2/versions/3.3.5">RDocumentation webpage</a>.</p>
-<p>For more information on the <strong>reshape2 package</strong>, see its associated <a href="https://cran.r-project.org/web/packages/reshape2/index.html">CRAN webpage</a> and <a href="https://www.rdocumentation.org/packages/reshape2/versions/1.4.4">RDocumentation webpage</a>.</p>
-<p>For more information on the <strong>stringr package</strong>, see its associated <a href="https://cran.r-project.org/web/packages/stringr/index.html">CRAN webpage</a> and <a href="https://www.rdocumentation.org/packages/stringr/versions/1.4.0">RDocumentation webpage</a>.</p>
-<p>For more information on the <strong>httk package</strong>, see its associated <a href="https://cran.r-project.org/web/packages/httk/index.html">CRAN webpage</a> and parent publication by <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6134854/">Pearce et al. (2017)</a>.</p>
+<p>For more information on the <em>ggplot2</em> package, see its associated <a href="https://cran.r-project.org/web/packages/ggplot2/index.html">CRAN webpage</a> and <a href="https://www.rdocumentation.org/packages/ggplot2/versions/3.3.5">RDocumentation webpage</a>.</p>
+<p>For more information on the <em>reshape2</em> package, see its associated <a href="https://cran.r-project.org/web/packages/reshape2/index.html">CRAN webpage</a> and <a href="https://www.rdocumentation.org/packages/reshape2/versions/1.4.4">RDocumentation webpage</a>.</p>
+<p>For more information on the <em>stringr</em> package, see its associated <a href="https://cran.r-project.org/web/packages/stringr/index.html">CRAN webpage</a> and <a href="https://www.rdocumentation.org/packages/stringr/versions/1.4.0">RDocumentation webpage</a>.</p>
+<p>For more information on the <em>httk</em> package, see its associated <a href="https://cran.r-project.org/web/packages/httk/index.html">CRAN webpage</a> and parent publication by <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6134854/">Pearce et al. (2017)</a>.</p>
 </div>
 <div id="more-information-on-the-httk-package" class="section level4 hasAnchor">
 <h4>More information on the httk package<a href="toxicokinetic-modeling.html#more-information-on-the-httk-package" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>You can see an overview of the <code>httk</code> package by typing <code>?httk</code> at the R command line.</p>
-<p>You can see a browsable index of all functions in the <code>httk</code> package by typing <code>help(package="httk")</code> at the R command line.</p>
-<p>You can see a browsable list of vignettes by typing <code>browseVignettes("httk")</code> at the R command line. (Please note that some of these vignettes were written using older versions of the package and may no longer work as written – specifically the Ring (2017) vignette, which I wrote back in 2016. The <code>httk</code> team is actively working on updating these.)</p>
-<p>You can get information about any function in <code>httk</code>, or indeed any function in any R package, by typing <code>help()</code> and placing the function name in quotation marks inside the parentheses. For example, to get information about the <code>httk</code> function <code>solve_model()</code>, type this:</p>
+<p>You can see an overview of the <em>httk</em> package by typing <code>?httk</code> at the R command line.</p>
+<p>You can see a browsable index of all functions in the <em>httk</em> package by typing <code>help(package="httk")</code> at the R command line.</p>
+<p>You can see a browsable list of vignettes by typing <code>browseVignettes("httk")</code> at the R command line. (Please note that some of these vignettes were written using older versions of the package and may no longer work as written – specifically the Ring (2017) vignette, which I wrote back in 2016. The <em>httk</em> team is actively working on updating these.)</p>
+<p>You can get information about any function in <em>httk</em>, or indeed any function in any R package, by typing <code>help()</code> and placing the function name in quotation marks inside the parentheses. For example, to get information about the <em>httk</em> function <code>solve_model()</code>, type this:</p>
 <div class="sourceCode" id="cb833"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb833-1"><a href="toxicokinetic-modeling.html#cb833-1" tabindex="-1"></a><span class="fu">help</span>(<span class="st">&quot;solve_model&quot;</span>)</span></code></pre></div>
 <p>Note that this module was run with <code>httk</code> version 2.4.0.</p>
 </div>
@@ -641,21 +651,22 @@ To place this term into the context of TK, TK models describe ADME mathematicall
 <li><p>Based on httk modeling estimates, are chemicals with higher bioactivity-exposure ratios always less potent than chemicals with lower bioactivity-exposure ratios?</p></li>
 <li><p>Based on httk modeling estimates, do chemicals with higher bioactivity-exposure ratios always have lower estimated exposures than chemicals with lower bioactivity-exposure ratios?</p></li>
 <li><p>How are chemical prioritization results different when using only hazard information vs. only exposure information vs. bioactivity-exposure ratios?</p></li>
-<li><p>Of the three data sets used in this training module – bioactivity from ToxCast, TK data from <code>httk</code>, and exposure inferred from NHANES urinary biomonitoring – which one most limits the number of chemicals that can be prioritized using BERs?</p></li>
+<li><p>Of the three datasets used in this training module – bioactivity from ToxCast, TK data from <em>httk</em>, and exposure inferred from NHANES urinary biomonitoring – which one most limits the number of chemicals that can be prioritized using BERs?</p></li>
 </ol>
+<p><br></p>
 </div>
 </div>
 <div id="data-and-models-used-in-toxicokinetic-modeling-tk" class="section level2 hasAnchor">
 <h2>Data and Models used in Toxicokinetic Modeling (TK)<a href="toxicokinetic-modeling.html#data-and-models-used-in-toxicokinetic-modeling-tk" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="common-models-used-in-tk-modeling-that-are-provided-as-built-in-models-in-httk" class="section level3 hasAnchor">
-<h3>Common Models used in TK Modeling, that are Provided as Built-in Models in ‘httk’<a href="toxicokinetic-modeling.html#common-models-used-in-tk-modeling-that-are-provided-as-built-in-models-in-httk" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>There are five TK models currently built into <code>httk</code>. They are:</p>
+<h3>Common Models used in TK Modeling, that are Provided as Built-in Models in httk<a href="toxicokinetic-modeling.html#common-models-used-in-tk-modeling-that-are-provided-as-built-in-models-in-httk" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>There are five TK models currently built into <em>httk</em>. They are:</p>
 <ul>
-<li><code>pbtk</code>: A physiologically-based TK model with oral absorption. Contains the following compartments: gutlumen, gut, liver, kidneys, veins, arteries, lungs, and the rest of the body. Chemical is metabolized by the liver and excreted by the kidneys via glomerular filtration.</li>
-<li><code>gas_pbtk</code>: A PBTK model with absorption via inhalation. Contains the same compartments as <code>pbtk</code>.</li>
-<li><code>1compartment</code>: A simple one-compartment TK model with oral absorption.</li>
-<li><code>3compartment</code>: A three-compartment TK model with oral absorption. Compartments are gut, liver, and rest of body.</li>
-<li><code>3compartmentss</code>: The steady-state solution to the 3-compartment model under an assumption of constant infusion dosing, without considering tissue partitioning. This was the first <code>httk</code> model (see Wambaugh et al. 2015, Wetmore et al. 2012, Rotroff et al. 2010).</li>
+<li><strong>pbtk</strong>: A physiologically-based TK model with oral absorption. Contains the following compartments: gutlumen, gut, liver, kidneys, veins, arteries, lungs, and the rest of the body. Chemical is metabolized by the liver and excreted by the kidneys via glomerular filtration.</li>
+<li><strong>gas_pbtk</strong>: A PBTK model with absorption via inhalation. Contains the same compartments as <code>pbtk</code>.</li>
+<li><strong>1compartment</strong>: A simple one-compartment TK model with oral absorption.</li>
+<li><strong>3compartment</strong>: A three-compartment TK model with oral absorption. Compartments are gut, liver, and rest of body.</li>
+<li><strong>3compartmentss</strong>: The steady-state solution to the 3-compartment model under an assumption of constant infusion dosing, without considering tissue partitioning. This was the first <em>httk</em> model (see Wambaugh et al. 2015, Wetmore et al. 2012, Rotroff et al. 2010).</li>
 </ul>
 </div>
 <div id="chemical-specific-tk-data-built-into-httk" class="section level3 hasAnchor">
@@ -825,24 +836,9 @@ To place this term into the context of TK, TK models describe ADME mathematicall
 <p>For example, here is how you get a list of all the chemicals for which the PBTK model can be parameterized for humans.</p>
 <div class="sourceCode" id="cb837"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb837-1"><a href="toxicokinetic-modeling.html#cb837-1" tabindex="-1"></a>chems_pbtk <span class="ot">&lt;-</span> <span class="fu">get_cheminfo</span>(<span class="at">info =</span> <span class="fu">c</span>(<span class="st">&quot;Compound&quot;</span>, <span class="st">&quot;CAS&quot;</span>, <span class="st">&quot;DTXSID&quot;</span>),</span>
 <span id="cb837-2"><a href="toxicokinetic-modeling.html#cb837-2" tabindex="-1"></a>                           <span class="at">model =</span> <span class="st">&quot;pbtk&quot;</span>,</span>
-<span id="cb837-3"><a href="toxicokinetic-modeling.html#cb837-3" tabindex="-1"></a>                           <span class="at">species =</span> <span class="st">&quot;Human&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning in get_cheminfo(info = c(&quot;Compound&quot;, &quot;CAS&quot;, &quot;DTXSID&quot;), model = &quot;pbtk&quot;, : Excluding compounds that have one or more needed parameters missing in chem.physical_and_invitro.table.
-## 
-## For model pbtk each chemical must have non-NA values for:Human.Clint, Human.Funbound.plasma, logP, MW</code></pre>
-<pre><code>## Warning in get_cheminfo(info = c(&quot;Compound&quot;, &quot;CAS&quot;, &quot;DTXSID&quot;), model = &quot;pbtk&quot;,
-## : Excluding compounds without a &#39;fup&#39; value (i.e. fup value = NA) or a &#39;fup&#39;
-## value of 0.</code></pre>
-<pre><code>## Warning in get_cheminfo(info = c(&quot;Compound&quot;, &quot;CAS&quot;, &quot;DTXSID&quot;), model = &quot;pbtk&quot;,
-## : Excluding compounds with uncertain &#39;fup&#39; confidence/credible intervals.</code></pre>
-<pre><code>## Warning in get_cheminfo(info = c(&quot;Compound&quot;, &quot;CAS&quot;, &quot;DTXSID&quot;), model = &quot;pbtk&quot;,
-## : Excluding compounds that do not have a clint value or distribution of clint
-## values.</code></pre>
-<pre><code>## Warning in get_cheminfo(info = c(&quot;Compound&quot;, &quot;CAS&quot;, &quot;DTXSID&quot;), model = &quot;pbtk&quot;,
-## : Excluding volatile compounds defined as log.Henry &gt;= -4.5.</code></pre>
-<pre><code>## Warning in get_cheminfo(info = c(&quot;Compound&quot;, &quot;CAS&quot;, &quot;DTXSID&quot;), model = &quot;pbtk&quot;,
-## : Excluding compounds that are categorized in one or more of the following
-## chemical classes: PFAS.</code></pre>
-<div class="sourceCode" id="cb844"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb844-1"><a href="toxicokinetic-modeling.html#cb844-1" tabindex="-1"></a><span class="fu">head</span>(chems_pbtk) <span class="co">#first few rows</span></span></code></pre></div>
+<span id="cb837-3"><a href="toxicokinetic-modeling.html#cb837-3" tabindex="-1"></a>                           <span class="at">species =</span> <span class="st">&quot;Human&quot;</span>)</span>
+<span id="cb837-4"><a href="toxicokinetic-modeling.html#cb837-4" tabindex="-1"></a></span>
+<span id="cb837-5"><a href="toxicokinetic-modeling.html#cb837-5" tabindex="-1"></a><span class="fu">head</span>(chems_pbtk) <span class="co">#first few rows</span></span></code></pre></div>
 <pre><code>##                 Compound        CAS        DTXSID
 ## 1                  2,4-d    94-75-7 DTXSID0020442
 ## 2                 2,4-db    94-82-6 DTXSID7024035
@@ -851,12 +847,12 @@ To place this term into the context of TK, TK models describe ADME mathematicall
 ## 5              Abamectin 71751-41-2 DTXSID8023892
 ## 6               Acephate 30560-19-1 DTXSID8023846</code></pre>
 <p>How many such chemicals have parameter data to run a PBTK model in this package?</p>
-<div class="sourceCode" id="cb846"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb846-1"><a href="toxicokinetic-modeling.html#cb846-1" tabindex="-1"></a><span class="fu">nrow</span>(chems_pbtk)</span></code></pre></div>
+<div class="sourceCode" id="cb839"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb839-1"><a href="toxicokinetic-modeling.html#cb839-1" tabindex="-1"></a><span class="fu">nrow</span>(chems_pbtk)</span></code></pre></div>
 <pre><code>## [1] 957</code></pre>
 <p>Here is how you get all the chemicals for which the 3-compartment steady-state model can be parameterized for humans.</p>
-<div class="sourceCode" id="cb848"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb848-1"><a href="toxicokinetic-modeling.html#cb848-1" tabindex="-1"></a>chems_3compss <span class="ot">&lt;-</span> <span class="fu">get_cheminfo</span>(<span class="at">info =</span> <span class="fu">c</span>(<span class="st">&quot;Compound&quot;</span>, <span class="st">&quot;CAS&quot;</span>, <span class="st">&quot;DTXSID&quot;</span>),</span>
-<span id="cb848-2"><a href="toxicokinetic-modeling.html#cb848-2" tabindex="-1"></a>                           <span class="at">model =</span> <span class="st">&quot;3compartmentss&quot;</span>,</span>
-<span id="cb848-3"><a href="toxicokinetic-modeling.html#cb848-3" tabindex="-1"></a>                           <span class="at">species =</span> <span class="st">&quot;Human&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb841"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb841-1"><a href="toxicokinetic-modeling.html#cb841-1" tabindex="-1"></a>chems_3compss <span class="ot">&lt;-</span> <span class="fu">get_cheminfo</span>(<span class="at">info =</span> <span class="fu">c</span>(<span class="st">&quot;Compound&quot;</span>, <span class="st">&quot;CAS&quot;</span>, <span class="st">&quot;DTXSID&quot;</span>),</span>
+<span id="cb841-2"><a href="toxicokinetic-modeling.html#cb841-2" tabindex="-1"></a>                           <span class="at">model =</span> <span class="st">&quot;3compartmentss&quot;</span>,</span>
+<span id="cb841-3"><a href="toxicokinetic-modeling.html#cb841-3" tabindex="-1"></a>                           <span class="at">species =</span> <span class="st">&quot;Human&quot;</span>)</span></code></pre></div>
 <pre><code>## Warning in get_cheminfo(info = c(&quot;Compound&quot;, &quot;CAS&quot;, &quot;DTXSID&quot;), model = &quot;3compartmentss&quot;, : Excluding compounds that have one or more needed parameters missing in chem.physical_and_invitro.table.
 ## 
 ## For model 3compartmentss each chemical must have non-NA values for:Human.Clint, Human.Funbound.plasma, logP, MW</code></pre>
@@ -875,7 +871,7 @@ To place this term into the context of TK, TK models describe ADME mathematicall
 ## &quot;3compartmentss&quot;, : Excluding compounds that are categorized in one or more of
 ## the following chemical classes: PFAS.</code></pre>
 <p>How many such chemicals have parameter data to run a 3-compartment steady-state model in this package?</p>
-<div class="sourceCode" id="cb855"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb855-1"><a href="toxicokinetic-modeling.html#cb855-1" tabindex="-1"></a><span class="fu">nrow</span>(chems_3compss)</span></code></pre></div>
+<div class="sourceCode" id="cb848"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb848-1"><a href="toxicokinetic-modeling.html#cb848-1" tabindex="-1"></a><span class="fu">nrow</span>(chems_3compss)</span></code></pre></div>
 <pre><code>## [1] 1021</code></pre>
 <p>The 3-compartment steady-state model can be parameterized for a few more chemicals than the PBTK model, because it is a simpler model and requires less data to parameterize. Specifically, the 3-compartment steady-state model does not require estimating tissue partition coefficients, unlike the PBTK model.</p>
 </div>
@@ -883,13 +879,13 @@ To place this term into the context of TK, TK models describe ADME mathematicall
 <div id="solving-toxicokinetic-models-to-obtain-internal-chemical-concentration-vs.-time-predictions" class="section level3 hasAnchor">
 <h3>Solving Toxicokinetic Models to Obtain Internal Chemical Concentration vs. Time Predictions<a href="toxicokinetic-modeling.html#solving-toxicokinetic-models-to-obtain-internal-chemical-concentration-vs.-time-predictions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>You can solve any of the models for a specified chemical and specified dosing protocol, and get concentration vs. time predictions, using the function <code>solve_model()</code>. For example:</p>
-<div class="sourceCode" id="cb857"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb857-1"><a href="toxicokinetic-modeling.html#cb857-1" tabindex="-1"></a>sol_pbtk <span class="ot">&lt;-</span> <span class="fu">solve_model</span>(<span class="at">chem.name =</span> <span class="st">&quot;Bisphenol-A&quot;</span>, <span class="co">#chemical to simulate</span></span>
-<span id="cb857-2"><a href="toxicokinetic-modeling.html#cb857-2" tabindex="-1"></a>            <span class="at">model =</span> <span class="st">&quot;pbtk&quot;</span>, <span class="co">#TK model to use</span></span>
-<span id="cb857-3"><a href="toxicokinetic-modeling.html#cb857-3" tabindex="-1"></a>            <span class="at">dosing =</span> <span class="fu">list</span>(<span class="at">initial.dose =</span> <span class="cn">NULL</span>, <span class="co">#for repeated dosing, if first dose is different from the rest, specify first dose here</span></span>
-<span id="cb857-4"><a href="toxicokinetic-modeling.html#cb857-4" tabindex="-1"></a>                          <span class="at">doses.per.day =</span> <span class="dv">1</span>, <span class="co">#number of doses per day</span></span>
-<span id="cb857-5"><a href="toxicokinetic-modeling.html#cb857-5" tabindex="-1"></a>                          <span class="at">daily.dose =</span> <span class="dv">1</span>, <span class="co">#total daily dose in mg/kg units</span></span>
-<span id="cb857-6"><a href="toxicokinetic-modeling.html#cb857-6" tabindex="-1"></a>                          <span class="at">dosing.matrix =</span> <span class="cn">NULL</span>), <span class="co">#used to specify more complicated dosing protocols</span></span>
-<span id="cb857-7"><a href="toxicokinetic-modeling.html#cb857-7" tabindex="-1"></a>            <span class="at">days =</span> <span class="dv">1</span>) <span class="co">#number of days to simulate</span></span></code></pre></div>
+<div class="sourceCode" id="cb850"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb850-1"><a href="toxicokinetic-modeling.html#cb850-1" tabindex="-1"></a>sol_pbtk <span class="ot">&lt;-</span> <span class="fu">solve_model</span>(<span class="at">chem.name =</span> <span class="st">&quot;Bisphenol-A&quot;</span>, <span class="co">#chemical to simulate</span></span>
+<span id="cb850-2"><a href="toxicokinetic-modeling.html#cb850-2" tabindex="-1"></a>            <span class="at">model =</span> <span class="st">&quot;pbtk&quot;</span>, <span class="co">#TK model to use</span></span>
+<span id="cb850-3"><a href="toxicokinetic-modeling.html#cb850-3" tabindex="-1"></a>            <span class="at">dosing =</span> <span class="fu">list</span>(<span class="at">initial.dose =</span> <span class="cn">NULL</span>, <span class="co">#for repeated dosing, if first dose is different from the rest, specify first dose here</span></span>
+<span id="cb850-4"><a href="toxicokinetic-modeling.html#cb850-4" tabindex="-1"></a>                          <span class="at">doses.per.day =</span> <span class="dv">1</span>, <span class="co">#number of doses per day</span></span>
+<span id="cb850-5"><a href="toxicokinetic-modeling.html#cb850-5" tabindex="-1"></a>                          <span class="at">daily.dose =</span> <span class="dv">1</span>, <span class="co">#total daily dose in mg/kg units</span></span>
+<span id="cb850-6"><a href="toxicokinetic-modeling.html#cb850-6" tabindex="-1"></a>                          <span class="at">dosing.matrix =</span> <span class="cn">NULL</span>), <span class="co">#used to specify more complicated dosing protocols</span></span>
+<span id="cb850-7"><a href="toxicokinetic-modeling.html#cb850-7" tabindex="-1"></a>            <span class="at">days =</span> <span class="dv">1</span>) <span class="co">#number of days to simulate</span></span></code></pre></div>
 <pre><code>## None of the monitored components undergo unit conversions  (i.e. conversion factor of 1).
 ## 
 ## AUC is area under the plasma concentration curve in uM*days units with Rblood2plasma = 0.795.
@@ -898,8 +894,8 @@ To place this term into the context of TK, TK models describe ADME mathematicall
 ##  uM: Cgut, Cliver, Cven, Clung, Cart, Crest, Ckidney, Cplasma
 ##  uM*days: AUC</code></pre>
 <p>There are some cryptic-sounding warnings that can safely be ignored. (They are providing information about certain assumptions that were made while solving the model). Then there is a final message providing the units of the output.</p>
-<p>The output, assigned to <code>sol_pbtk</code>, is a matrix with concentration vs. time data for each of the compartments in the <code>pbtk</code> model. Time is in units of days. Additionally, the output traces the amount excreted via passive renal filtration (<code>Atubules</code>), the amount metabolized in the liver (<code>Ametabolized</code>), and the cumulative area under the curve for plasma concentration vs. time (<code>AUC</code>). Here are the first few rows of <code>sol_pbtk</code> so you can see the format.</p>
-<div class="sourceCode" id="cb859"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb859-1"><a href="toxicokinetic-modeling.html#cb859-1" tabindex="-1"></a><span class="fu">head</span>(sol_pbtk)</span></code></pre></div>
+<p>The output, assigned to <code>sol_pbtk</code>, is a matrix with concentration vs. time data for each of the compartments in the pbtk model. Time is in units of days. Additionally, the output traces the amount excreted via passive renal filtration (<code>Atubules</code>), the amount metabolized in the liver (<code>Ametabolized</code>), and the cumulative area under the curve for plasma concentration vs. time (<code>AUC</code>). Here are the first few rows of <code>sol_pbtk</code> so you can see the format.</p>
+<div class="sourceCode" id="cb852"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb852-1"><a href="toxicokinetic-modeling.html#cb852-1" tabindex="-1"></a><span class="fu">head</span>(sol_pbtk)</span></code></pre></div>
 <pre><code>##        time Agutlumen    Cgut    Cliver     Cven  Clung    Cart    Crest
 ## [1,] 0.0000       0.0  0.0000  0.000000 0.000000 0.0000 0.00000 0.000000
 ## [2,] 0.0001     197.3  0.1582  0.000479 0.000001 0.0000 0.00000 0.000000
@@ -915,30 +911,30 @@ To place this term into the context of TK, TK models describe ADME mathematicall
 ## [5,]  3.2900 0.203700 0.011570     0.045260 0.002818
 ## [6,]  4.5510 0.260300 0.021980     0.080160 0.005247</code></pre>
 <p>You can plot the results, for example plasma concentration vs. time.</p>
-<div class="sourceCode" id="cb861"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb861-1"><a href="toxicokinetic-modeling.html#cb861-1" tabindex="-1"></a>sol_pbtk <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(sol_pbtk) <span class="co">#because ggplot2 requires data.frame input, not matrix</span></span>
-<span id="cb861-2"><a href="toxicokinetic-modeling.html#cb861-2" tabindex="-1"></a></span>
-<span id="cb861-3"><a href="toxicokinetic-modeling.html#cb861-3" tabindex="-1"></a><span class="fu">ggplot</span>(sol_pbtk) <span class="sc">+</span></span>
-<span id="cb861-4"><a href="toxicokinetic-modeling.html#cb861-4" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time,</span>
-<span id="cb861-5"><a href="toxicokinetic-modeling.html#cb861-5" tabindex="-1"></a>                <span class="at">y =</span> Cplasma)) <span class="sc">+</span></span>
-<span id="cb861-6"><a href="toxicokinetic-modeling.html#cb861-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb861-7"><a href="toxicokinetic-modeling.html#cb861-7" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time, days&quot;</span>) <span class="sc">+</span></span>
-<span id="cb861-8"><a href="toxicokinetic-modeling.html#cb861-8" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cplasma, uM&quot;</span>) <span class="sc">+</span></span>
-<span id="cb861-9"><a href="toxicokinetic-modeling.html#cb861-9" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Plasma concentration vs. time for single dose 1 mg/kg Bisphenol-A&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb854"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb854-1"><a href="toxicokinetic-modeling.html#cb854-1" tabindex="-1"></a>sol_pbtk <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(sol_pbtk) <span class="co">#because ggplot2 requires data.frame input, not matrix</span></span>
+<span id="cb854-2"><a href="toxicokinetic-modeling.html#cb854-2" tabindex="-1"></a></span>
+<span id="cb854-3"><a href="toxicokinetic-modeling.html#cb854-3" tabindex="-1"></a><span class="fu">ggplot</span>(sol_pbtk) <span class="sc">+</span></span>
+<span id="cb854-4"><a href="toxicokinetic-modeling.html#cb854-4" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time,</span>
+<span id="cb854-5"><a href="toxicokinetic-modeling.html#cb854-5" tabindex="-1"></a>                <span class="at">y =</span> Cplasma)) <span class="sc">+</span></span>
+<span id="cb854-6"><a href="toxicokinetic-modeling.html#cb854-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb854-7"><a href="toxicokinetic-modeling.html#cb854-7" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time, days&quot;</span>) <span class="sc">+</span></span>
+<span id="cb854-8"><a href="toxicokinetic-modeling.html#cb854-8" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cplasma, uM&quot;</span>) <span class="sc">+</span></span>
+<span id="cb854-9"><a href="toxicokinetic-modeling.html#cb854-9" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Plasma concentration vs. time for single dose 1 mg/kg Bisphenol-A&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-631-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="calculating-summary-metrics-of-internal-dose-produced-from-tk-models" class="section level3 hasAnchor">
 <h3>Calculating summary metrics of internal dose produced from TK models<a href="toxicokinetic-modeling.html#calculating-summary-metrics-of-internal-dose-produced-from-tk-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We can calculate summary metrics of internal dose – peak concentration, average concentration, and AUC – using the function <code>calc_tkstats()</code>. We have to specify the dosing protocol and length of simulation. Here, we use the same dosing protocol and simulation length as in the plot above.</p>
-<div class="sourceCode" id="cb862"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb862-1"><a href="toxicokinetic-modeling.html#cb862-1" tabindex="-1"></a>tkstats <span class="ot">&lt;-</span> <span class="fu">calc_tkstats</span>(<span class="at">chem.name =</span> <span class="st">&quot;Bisphenol-A&quot;</span>, <span class="co">#chemical to simulate</span></span>
-<span id="cb862-2"><a href="toxicokinetic-modeling.html#cb862-2" tabindex="-1"></a>             <span class="at">stats =</span> <span class="fu">c</span>(<span class="st">&quot;AUC&quot;</span>, <span class="st">&quot;peak&quot;</span>, <span class="st">&quot;mean&quot;</span>), <span class="co">#which metrics to return (these are the only three choices)</span></span>
-<span id="cb862-3"><a href="toxicokinetic-modeling.html#cb862-3" tabindex="-1"></a>             <span class="at">model =</span> <span class="st">&quot;pbtk&quot;</span>, <span class="co">#model to use</span></span>
-<span id="cb862-4"><a href="toxicokinetic-modeling.html#cb862-4" tabindex="-1"></a>             <span class="at">tissue =</span> <span class="st">&quot;plasma&quot;</span>, <span class="co">#tissue for which to return internal dose metrics</span></span>
-<span id="cb862-5"><a href="toxicokinetic-modeling.html#cb862-5" tabindex="-1"></a>             <span class="at">days =</span> <span class="dv">1</span>, <span class="co">#length of simulation</span></span>
-<span id="cb862-6"><a href="toxicokinetic-modeling.html#cb862-6" tabindex="-1"></a>             <span class="at">daily.dose =</span> <span class="dv">1</span>, <span class="co">#total daily dose in mg/kg/day</span></span>
-<span id="cb862-7"><a href="toxicokinetic-modeling.html#cb862-7" tabindex="-1"></a>             <span class="at">doses.per.day =</span> <span class="dv">1</span>) <span class="co">#number of doses per day</span></span></code></pre></div>
+<div class="sourceCode" id="cb855"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb855-1"><a href="toxicokinetic-modeling.html#cb855-1" tabindex="-1"></a>tkstats <span class="ot">&lt;-</span> <span class="fu">calc_tkstats</span>(<span class="at">chem.name =</span> <span class="st">&quot;Bisphenol-A&quot;</span>, <span class="co">#chemical to simulate</span></span>
+<span id="cb855-2"><a href="toxicokinetic-modeling.html#cb855-2" tabindex="-1"></a>             <span class="at">stats =</span> <span class="fu">c</span>(<span class="st">&quot;AUC&quot;</span>, <span class="st">&quot;peak&quot;</span>, <span class="st">&quot;mean&quot;</span>), <span class="co">#which metrics to return (these are the only three choices)</span></span>
+<span id="cb855-3"><a href="toxicokinetic-modeling.html#cb855-3" tabindex="-1"></a>             <span class="at">model =</span> <span class="st">&quot;pbtk&quot;</span>, <span class="co">#model to use</span></span>
+<span id="cb855-4"><a href="toxicokinetic-modeling.html#cb855-4" tabindex="-1"></a>             <span class="at">tissue =</span> <span class="st">&quot;plasma&quot;</span>, <span class="co">#tissue for which to return internal dose metrics</span></span>
+<span id="cb855-5"><a href="toxicokinetic-modeling.html#cb855-5" tabindex="-1"></a>             <span class="at">days =</span> <span class="dv">1</span>, <span class="co">#length of simulation</span></span>
+<span id="cb855-6"><a href="toxicokinetic-modeling.html#cb855-6" tabindex="-1"></a>             <span class="at">daily.dose =</span> <span class="dv">1</span>, <span class="co">#total daily dose in mg/kg/day</span></span>
+<span id="cb855-7"><a href="toxicokinetic-modeling.html#cb855-7" tabindex="-1"></a>             <span class="at">doses.per.day =</span> <span class="dv">1</span>) <span class="co">#number of doses per day</span></span></code></pre></div>
 <pre><code>## Human plasma concentrations returned in uM units.
 ## AUC is area under plasma concentration curve in uM * days units with Rblood2plasma = 0.7949 .</code></pre>
-<div class="sourceCode" id="cb864"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb864-1"><a href="toxicokinetic-modeling.html#cb864-1" tabindex="-1"></a><span class="fu">print</span>(tkstats)</span></code></pre></div>
+<div class="sourceCode" id="cb857"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb857-1"><a href="toxicokinetic-modeling.html#cb857-1" tabindex="-1"></a><span class="fu">print</span>(tkstats)</span></code></pre></div>
 <pre><code>## $AUC
 ## [1] 0.3163
 ## 
@@ -961,12 +957,12 @@ To place this term into the context of TK, TK models describe ADME mathematicall
 <h3>Calculating steady-state concentration<a href="toxicokinetic-modeling.html#calculating-steady-state-concentration" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Another summary metric is the steady-state concentration: If the same dose is given repeatedly over many days, the body concentration will (usually) reach a steady state after some time. The value of this steady-state concentration, and the time needed to achieve steady state, are different for different chemicals. Steady-state concentrations are useful when considering long-term, low-level exposures, which is frequently the situation in environmental health.</p>
 <p>For example, here is a plot of plasma concentration vs. time for 1 mg/kg/day Bisphenol-A, administered for 12 days. You can see how the average plasma concentration reaches a steady state around 1.5 uM. Each peak represents one day’s dose.</p>
-<div class="sourceCode" id="cb866"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb866-1"><a href="toxicokinetic-modeling.html#cb866-1" tabindex="-1"></a>foo <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">solve_pbtk</span>(</span>
-<span id="cb866-2"><a href="toxicokinetic-modeling.html#cb866-2" tabindex="-1"></a>    <span class="at">chem.name=</span><span class="st">&#39;Bisphenol-A&#39;</span>,</span>
-<span id="cb866-3"><a href="toxicokinetic-modeling.html#cb866-3" tabindex="-1"></a>    <span class="at">daily.dose=</span><span class="dv">1</span>,</span>
-<span id="cb866-4"><a href="toxicokinetic-modeling.html#cb866-4" tabindex="-1"></a>    <span class="at">days=</span><span class="dv">12</span>,</span>
-<span id="cb866-5"><a href="toxicokinetic-modeling.html#cb866-5" tabindex="-1"></a>    <span class="at">doses.per.day=</span><span class="dv">1</span>,</span>
-<span id="cb866-6"><a href="toxicokinetic-modeling.html#cb866-6" tabindex="-1"></a>    <span class="at">tsteps=</span><span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb859"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb859-1"><a href="toxicokinetic-modeling.html#cb859-1" tabindex="-1"></a>foo <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">solve_pbtk</span>(</span>
+<span id="cb859-2"><a href="toxicokinetic-modeling.html#cb859-2" tabindex="-1"></a>    <span class="at">chem.name=</span><span class="st">&#39;Bisphenol-A&#39;</span>,</span>
+<span id="cb859-3"><a href="toxicokinetic-modeling.html#cb859-3" tabindex="-1"></a>    <span class="at">daily.dose=</span><span class="dv">1</span>,</span>
+<span id="cb859-4"><a href="toxicokinetic-modeling.html#cb859-4" tabindex="-1"></a>    <span class="at">days=</span><span class="dv">12</span>,</span>
+<span id="cb859-5"><a href="toxicokinetic-modeling.html#cb859-5" tabindex="-1"></a>    <span class="at">doses.per.day=</span><span class="dv">1</span>,</span>
+<span id="cb859-6"><a href="toxicokinetic-modeling.html#cb859-6" tabindex="-1"></a>    <span class="at">tsteps=</span><span class="dv">2</span>))</span></code></pre></div>
 <pre><code>## None of the monitored components undergo unit conversions  (i.e. conversion factor of 1).
 ## 
 ## AUC is area under the plasma concentration curve in uM*days units with Rblood2plasma = 0.795.
@@ -974,20 +970,20 @@ To place this term into the context of TK, TK models describe ADME mathematicall
 ##  umol: Agutlumen, Atubules, Ametabolized
 ##  uM: Cgut, Cliver, Cven, Clung, Cart, Crest, Ckidney, Cplasma
 ##  uM*days: AUC</code></pre>
-<div class="sourceCode" id="cb868"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb868-1"><a href="toxicokinetic-modeling.html#cb868-1" tabindex="-1"></a><span class="fu">ggplot</span>(foo) <span class="sc">+</span></span>
-<span id="cb868-2"><a href="toxicokinetic-modeling.html#cb868-2" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time,</span>
-<span id="cb868-3"><a href="toxicokinetic-modeling.html#cb868-3" tabindex="-1"></a>                <span class="at">y=</span> Cplasma)) <span class="sc">+</span></span>
-<span id="cb868-4"><a href="toxicokinetic-modeling.html#cb868-4" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">12</span>)) <span class="sc">+</span></span>
-<span id="cb868-5"><a href="toxicokinetic-modeling.html#cb868-5" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time, days&quot;</span>) <span class="sc">+</span></span>
-<span id="cb868-6"><a href="toxicokinetic-modeling.html#cb868-6" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cplasma, uM&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb861"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb861-1"><a href="toxicokinetic-modeling.html#cb861-1" tabindex="-1"></a><span class="fu">ggplot</span>(foo) <span class="sc">+</span></span>
+<span id="cb861-2"><a href="toxicokinetic-modeling.html#cb861-2" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time,</span>
+<span id="cb861-3"><a href="toxicokinetic-modeling.html#cb861-3" tabindex="-1"></a>                <span class="at">y=</span> Cplasma)) <span class="sc">+</span></span>
+<span id="cb861-4"><a href="toxicokinetic-modeling.html#cb861-4" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">12</span>)) <span class="sc">+</span></span>
+<span id="cb861-5"><a href="toxicokinetic-modeling.html#cb861-5" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time, days&quot;</span>) <span class="sc">+</span></span>
+<span id="cb861-6"><a href="toxicokinetic-modeling.html#cb861-6" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cplasma, uM&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-633-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p><code>httk</code> includes a function <code>calc_analytic_css()</code> to calculate the steady-state plasma concentration (<span class="math inline">\(C_{ss}\)</span> for short) analytically for each model, for a specified chemical and daily oral dose. This function assumes that the daily oral dose is administered as an oral infusion, rather than a single oral bolus dose – in effect, that the daily dose is divided into many small doses over the day. Therefore, the result of <code>calc_analytic_css()</code> may be slightly different than our previous estimate based on the concentration vs. time plot from a single oral bolus dose every day.</p>
+<p><em>httk</em> includes a function <code>calc_analytic_css()</code> to calculate the steady-state plasma concentration (<span class="math inline">\(C_{ss}\)</span> for short) analytically for each model, for a specified chemical and daily oral dose. This function assumes that the daily oral dose is administered as an oral infusion, rather than a single oral bolus dose – in effect, that the daily dose is divided into many small doses over the day. Therefore, the result of <code>calc_analytic_css()</code> may be slightly different than our previous estimate based on the concentration vs. time plot from a single oral bolus dose every day.</p>
 <p>Here is the result of <code>calc_analytic_css()</code> for a 1 mg/kg/day dose of bisphenol-A.</p>
-<div class="sourceCode" id="cb869"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb869-1"><a href="toxicokinetic-modeling.html#cb869-1" tabindex="-1"></a><span class="fu">calc_analytic_css</span>(<span class="at">chem.name =</span> <span class="st">&quot;Bisphenol-A&quot;</span>,</span>
-<span id="cb869-2"><a href="toxicokinetic-modeling.html#cb869-2" tabindex="-1"></a>                  <span class="at">daily.dose =</span> <span class="dv">1</span>,</span>
-<span id="cb869-3"><a href="toxicokinetic-modeling.html#cb869-3" tabindex="-1"></a>                  <span class="at">output.units =</span> <span class="st">&quot;uM&quot;</span>,</span>
-<span id="cb869-4"><a href="toxicokinetic-modeling.html#cb869-4" tabindex="-1"></a>                  <span class="at">model =</span> <span class="st">&quot;pbtk&quot;</span>,</span>
-<span id="cb869-5"><a href="toxicokinetic-modeling.html#cb869-5" tabindex="-1"></a>                  <span class="at">concentration =</span> <span class="st">&quot;plasma&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb862"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb862-1"><a href="toxicokinetic-modeling.html#cb862-1" tabindex="-1"></a><span class="fu">calc_analytic_css</span>(<span class="at">chem.name =</span> <span class="st">&quot;Bisphenol-A&quot;</span>,</span>
+<span id="cb862-2"><a href="toxicokinetic-modeling.html#cb862-2" tabindex="-1"></a>                  <span class="at">daily.dose =</span> <span class="dv">1</span>,</span>
+<span id="cb862-3"><a href="toxicokinetic-modeling.html#cb862-3" tabindex="-1"></a>                  <span class="at">output.units =</span> <span class="st">&quot;uM&quot;</span>,</span>
+<span id="cb862-4"><a href="toxicokinetic-modeling.html#cb862-4" tabindex="-1"></a>                  <span class="at">model =</span> <span class="st">&quot;pbtk&quot;</span>,</span>
+<span id="cb862-5"><a href="toxicokinetic-modeling.html#cb862-5" tabindex="-1"></a>                  <span class="at">concentration =</span> <span class="st">&quot;plasma&quot;</span>)</span></code></pre></div>
 <pre><code>## Plasma concentration returned in uM units.</code></pre>
 <pre><code>## [1] 0.9417</code></pre>
 </div>
@@ -1001,40 +997,40 @@ To place this term into the context of TK, TK models describe ADME mathematicall
 </div>
 </div>
 <div id="steady-state-concentration-is-linear-with-dose-for-httk-models" class="section level3 hasAnchor">
-<h3>Steady-state concentration is linear with dose for <code>httk</code> models<a href="toxicokinetic-modeling.html#steady-state-concentration-is-linear-with-dose-for-httk-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>For the TK models included in the <code>httk</code> package, steady-state concentration is linear with dose for a given chemical. The slope of the line is simply the steady-state concentration for a dose of 1 mg/kg/day. This can be shown by solving <code>calc_analytic_css()</code> for several doses, and plotting the dose-<span class="math inline">\(C_{ss}\)</span> points along a line whose slope is equal to <span class="math inline">\(C_{ss}\)</span> for 1 mg/kg/day.</p>
-<div class="sourceCode" id="cb872"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb872-1"><a href="toxicokinetic-modeling.html#cb872-1" tabindex="-1"></a><span class="co">#choose five doses at which to find the Css</span></span>
-<span id="cb872-2"><a href="toxicokinetic-modeling.html#cb872-2" tabindex="-1"></a>doses <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="co">#all mg/kg/day</span></span>
-<span id="cb872-3"><a href="toxicokinetic-modeling.html#cb872-3" tabindex="-1"></a>           <span class="fl">0.5</span>,</span>
-<span id="cb872-4"><a href="toxicokinetic-modeling.html#cb872-4" tabindex="-1"></a>           <span class="fl">1.0</span>,</span>
-<span id="cb872-5"><a href="toxicokinetic-modeling.html#cb872-5" tabindex="-1"></a>           <span class="fl">1.5</span>,</span>
-<span id="cb872-6"><a href="toxicokinetic-modeling.html#cb872-6" tabindex="-1"></a>           <span class="fl">2.0</span>)</span>
-<span id="cb872-7"><a href="toxicokinetic-modeling.html#cb872-7" tabindex="-1"></a><span class="fu">suppressWarnings</span>(bpa_css <span class="ot">&lt;-</span> <span class="fu">sapply</span>(doses,</span>
-<span id="cb872-8"><a href="toxicokinetic-modeling.html#cb872-8" tabindex="-1"></a>                  <span class="cf">function</span>(dose) <span class="fu">calc_analytic_css</span>(<span class="at">chem.name =</span> <span class="st">&quot;Bisphenol-A&quot;</span>,</span>
-<span id="cb872-9"><a href="toxicokinetic-modeling.html#cb872-9" tabindex="-1"></a>                  <span class="at">daily.dose =</span> dose,</span>
-<span id="cb872-10"><a href="toxicokinetic-modeling.html#cb872-10" tabindex="-1"></a>                  <span class="at">output.units =</span> <span class="st">&quot;uM&quot;</span>,</span>
-<span id="cb872-11"><a href="toxicokinetic-modeling.html#cb872-11" tabindex="-1"></a>                  <span class="at">model =</span> <span class="st">&quot;pbtk&quot;</span>,</span>
-<span id="cb872-12"><a href="toxicokinetic-modeling.html#cb872-12" tabindex="-1"></a>                  <span class="at">concentration =</span> <span class="st">&quot;plasma&quot;</span>,</span>
-<span id="cb872-13"><a href="toxicokinetic-modeling.html#cb872-13" tabindex="-1"></a>                  <span class="at">suppress.messages =</span> <span class="cn">TRUE</span>)))</span>
-<span id="cb872-14"><a href="toxicokinetic-modeling.html#cb872-14" tabindex="-1"></a></span>
-<span id="cb872-15"><a href="toxicokinetic-modeling.html#cb872-15" tabindex="-1"></a>DF <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">dose =</span> doses,</span>
-<span id="cb872-16"><a href="toxicokinetic-modeling.html#cb872-16" tabindex="-1"></a>                 <span class="at">Css =</span> bpa_css)</span>
-<span id="cb872-17"><a href="toxicokinetic-modeling.html#cb872-17" tabindex="-1"></a></span>
-<span id="cb872-18"><a href="toxicokinetic-modeling.html#cb872-18" tabindex="-1"></a><span class="co">#Plot the results</span></span>
-<span id="cb872-19"><a href="toxicokinetic-modeling.html#cb872-19" tabindex="-1"></a>Cssdosefig  <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(DF) <span class="sc">+</span></span>
-<span id="cb872-20"><a href="toxicokinetic-modeling.html#cb872-20" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> dose,</span>
-<span id="cb872-21"><a href="toxicokinetic-modeling.html#cb872-21" tabindex="-1"></a>                 <span class="at">y =</span> Css),</span>
-<span id="cb872-22"><a href="toxicokinetic-modeling.html#cb872-22" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb872-23"><a href="toxicokinetic-modeling.html#cb872-23" tabindex="-1"></a>  <span class="fu">geom_abline</span>( <span class="co">#plot a straight line</span></span>
-<span id="cb872-24"><a href="toxicokinetic-modeling.html#cb872-24" tabindex="-1"></a>    <span class="at">intercept =</span> <span class="dv">0</span>, <span class="co">#intercept 0</span></span>
-<span id="cb872-25"><a href="toxicokinetic-modeling.html#cb872-25" tabindex="-1"></a>              <span class="at">slope =</span> DF[DF<span class="sc">$</span>dose<span class="sc">==</span><span class="dv">1</span>, <span class="co">#slope = Css for 1 mg/kg/day</span></span>
-<span id="cb872-26"><a href="toxicokinetic-modeling.html#cb872-26" tabindex="-1"></a>                         <span class="st">&quot;Css&quot;</span>],</span>
-<span id="cb872-27"><a href="toxicokinetic-modeling.html#cb872-27" tabindex="-1"></a>    <span class="at">linetype =</span> <span class="dv">2</span></span>
-<span id="cb872-28"><a href="toxicokinetic-modeling.html#cb872-28" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb872-29"><a href="toxicokinetic-modeling.html#cb872-29" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Daily dose, mg/kg/day&quot;</span>) <span class="sc">+</span></span>
-<span id="cb872-30"><a href="toxicokinetic-modeling.html#cb872-30" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Css, uM&quot;</span>)</span>
-<span id="cb872-31"><a href="toxicokinetic-modeling.html#cb872-31" tabindex="-1"></a></span>
-<span id="cb872-32"><a href="toxicokinetic-modeling.html#cb872-32" tabindex="-1"></a><span class="fu">print</span>(Cssdosefig)</span></code></pre></div>
+<h3>Steady-state concentration is linear with dose for httk models<a href="toxicokinetic-modeling.html#steady-state-concentration-is-linear-with-dose-for-httk-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For the TK models included in the <em>httk</em> package, steady-state concentration is linear with dose for a given chemical. The slope of the line is simply the steady-state concentration for a dose of 1 mg/kg/day. This can be shown by solving <code>calc_analytic_css()</code> for several doses, and plotting the dose-<span class="math inline">\(C_{ss}\)</span> points along a line whose slope is equal to <span class="math inline">\(C_{ss}\)</span> for 1 mg/kg/day.</p>
+<div class="sourceCode" id="cb865"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb865-1"><a href="toxicokinetic-modeling.html#cb865-1" tabindex="-1"></a><span class="co">#choose five doses at which to find the Css</span></span>
+<span id="cb865-2"><a href="toxicokinetic-modeling.html#cb865-2" tabindex="-1"></a>doses <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="co">#all mg/kg/day</span></span>
+<span id="cb865-3"><a href="toxicokinetic-modeling.html#cb865-3" tabindex="-1"></a>           <span class="fl">0.5</span>,</span>
+<span id="cb865-4"><a href="toxicokinetic-modeling.html#cb865-4" tabindex="-1"></a>           <span class="fl">1.0</span>,</span>
+<span id="cb865-5"><a href="toxicokinetic-modeling.html#cb865-5" tabindex="-1"></a>           <span class="fl">1.5</span>,</span>
+<span id="cb865-6"><a href="toxicokinetic-modeling.html#cb865-6" tabindex="-1"></a>           <span class="fl">2.0</span>)</span>
+<span id="cb865-7"><a href="toxicokinetic-modeling.html#cb865-7" tabindex="-1"></a><span class="fu">suppressWarnings</span>(bpa_css <span class="ot">&lt;-</span> <span class="fu">sapply</span>(doses,</span>
+<span id="cb865-8"><a href="toxicokinetic-modeling.html#cb865-8" tabindex="-1"></a>                  <span class="cf">function</span>(dose) <span class="fu">calc_analytic_css</span>(<span class="at">chem.name =</span> <span class="st">&quot;Bisphenol-A&quot;</span>,</span>
+<span id="cb865-9"><a href="toxicokinetic-modeling.html#cb865-9" tabindex="-1"></a>                  <span class="at">daily.dose =</span> dose,</span>
+<span id="cb865-10"><a href="toxicokinetic-modeling.html#cb865-10" tabindex="-1"></a>                  <span class="at">output.units =</span> <span class="st">&quot;uM&quot;</span>,</span>
+<span id="cb865-11"><a href="toxicokinetic-modeling.html#cb865-11" tabindex="-1"></a>                  <span class="at">model =</span> <span class="st">&quot;pbtk&quot;</span>,</span>
+<span id="cb865-12"><a href="toxicokinetic-modeling.html#cb865-12" tabindex="-1"></a>                  <span class="at">concentration =</span> <span class="st">&quot;plasma&quot;</span>,</span>
+<span id="cb865-13"><a href="toxicokinetic-modeling.html#cb865-13" tabindex="-1"></a>                  <span class="at">suppress.messages =</span> <span class="cn">TRUE</span>)))</span>
+<span id="cb865-14"><a href="toxicokinetic-modeling.html#cb865-14" tabindex="-1"></a></span>
+<span id="cb865-15"><a href="toxicokinetic-modeling.html#cb865-15" tabindex="-1"></a>DF <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">dose =</span> doses,</span>
+<span id="cb865-16"><a href="toxicokinetic-modeling.html#cb865-16" tabindex="-1"></a>                 <span class="at">Css =</span> bpa_css)</span>
+<span id="cb865-17"><a href="toxicokinetic-modeling.html#cb865-17" tabindex="-1"></a></span>
+<span id="cb865-18"><a href="toxicokinetic-modeling.html#cb865-18" tabindex="-1"></a><span class="co">#Plot the results</span></span>
+<span id="cb865-19"><a href="toxicokinetic-modeling.html#cb865-19" tabindex="-1"></a>Cssdosefig  <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(DF) <span class="sc">+</span></span>
+<span id="cb865-20"><a href="toxicokinetic-modeling.html#cb865-20" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> dose,</span>
+<span id="cb865-21"><a href="toxicokinetic-modeling.html#cb865-21" tabindex="-1"></a>                 <span class="at">y =</span> Css),</span>
+<span id="cb865-22"><a href="toxicokinetic-modeling.html#cb865-22" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb865-23"><a href="toxicokinetic-modeling.html#cb865-23" tabindex="-1"></a>  <span class="fu">geom_abline</span>( <span class="co">#plot a straight line</span></span>
+<span id="cb865-24"><a href="toxicokinetic-modeling.html#cb865-24" tabindex="-1"></a>    <span class="at">intercept =</span> <span class="dv">0</span>, <span class="co">#intercept 0</span></span>
+<span id="cb865-25"><a href="toxicokinetic-modeling.html#cb865-25" tabindex="-1"></a>              <span class="at">slope =</span> DF[DF<span class="sc">$</span>dose<span class="sc">==</span><span class="dv">1</span>, <span class="co">#slope = Css for 1 mg/kg/day</span></span>
+<span id="cb865-26"><a href="toxicokinetic-modeling.html#cb865-26" tabindex="-1"></a>                         <span class="st">&quot;Css&quot;</span>],</span>
+<span id="cb865-27"><a href="toxicokinetic-modeling.html#cb865-27" tabindex="-1"></a>    <span class="at">linetype =</span> <span class="dv">2</span></span>
+<span id="cb865-28"><a href="toxicokinetic-modeling.html#cb865-28" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb865-29"><a href="toxicokinetic-modeling.html#cb865-29" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Daily dose, mg/kg/day&quot;</span>) <span class="sc">+</span></span>
+<span id="cb865-30"><a href="toxicokinetic-modeling.html#cb865-30" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Css, uM&quot;</span>)</span>
+<span id="cb865-31"><a href="toxicokinetic-modeling.html#cb865-31" tabindex="-1"></a></span>
+<span id="cb865-32"><a href="toxicokinetic-modeling.html#cb865-32" tabindex="-1"></a><span class="fu">print</span>(Cssdosefig)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-635-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
@@ -1044,7 +1040,7 @@ To place this term into the context of TK, TK models describe ADME mathematicall
 <p>For example, when health effects of environmental chemicals are studied in epidemiological cohorts, adverse health effects are often related to <em>internal</em> exposure metrics, such as blood or plasma concentration of a chemical. Similarly, <em>in vitro</em> studies of chemical bioactivity (for example, the ToxCast program) relate bioactivity to <em>in vitro</em> concentration, which can be consdered analogous to internal exposure or body concentration. So we may know the <em>internal</em> exposure level associated with some adverse health effect of a chemical.</p>
 <p>However, risk assessors and risk managers typically control <em>external</em> exposure to reduce the risk of adverse health effects. They need some way to start from an internal exposure associated with adverse health effects, and convert to the corresponding external exposure.</p>
 <p>The solution is <em>reverse toxicokinetics</em> (reverse TK). Starting with a specified internal exposure metric (body concentration), solve the TK model <em>in reverse</em> to find the corresponding external exposure that produced that concentration.</p>
-<p>When exposures are long-term and low-level (as environmental exposures often are), then the relevant internal exposure metric is the steady-state concentration. In this case, it is useful to remember the linear relationship between <span class="math inline">\(C_{ss}\)</span> and dose for the <code>httk</code> TK models. It gives you a quick and easy way to perform reverse TK for the steady-state case.</p>
+<p>When exposures are long-term and low-level (as environmental exposures often are), then the relevant internal exposure metric is the steady-state concentration. In this case, it is useful to remember the linear relationship between <span class="math inline">\(C_{ss}\)</span> and dose for the <em>httk</em> TK models. It gives you a quick and easy way to perform reverse TK for the steady-state case.</p>
 <p>The procedure is illustrated graphically below.</p>
 <ol style="list-style-type: decimal">
 <li>Begin with a “target” concentration on the y-axis (labeled <span class="math inline">\(C_{\textrm{target}}\)</span>). For example, <span class="math inline">\(C_{\textrm{target}}\)</span> may be the <em>in vitro</em> concentration associated with bioactivity in a ToxCast assay, or the plasma concentration associated with an adverse health effect in an epidemiological study.</li>
@@ -1055,7 +1051,8 @@ To place this term into the context of TK, TK models describe ADME mathematicall
 <p>Mathematically, the relation is very simple:</p>
 <p><span class="math display">\[ AED = \frac{C_{\textrm{target}}}{C_{ss}\textrm{-dose slope}} \]</span></p>
 <p>Since the <span class="math inline">\(C_{ss}\)</span>-dose slope is simply <span class="math inline">\(C_{ss}\)</span> for a daily dose of 1 mg/kg/day, this equation can be rewritten as</p>
-<p><span class="math display">\[ AED = \frac{C_{\textrm{target}}}{C_{ss}\textrm{ for 1 mg/kg/day}} \]</span></p>
+<p><span class="math display">\[ AED = \frac{C_{\textrm{target}}}{C_{ss}\textrm{ for 1 mg/kg/day}} \]</span>
+<br></p>
 </div>
 <div id="capturing-population-variability-in-toxicokinetics-and-uncertainty-in-chemical-specific-parameters" class="section level2 hasAnchor">
 <h2>Capturing Population Variability in Toxicokinetics, and Uncertainty in Chemical-Specific Parameters<a href="toxicokinetic-modeling.html#capturing-population-variability-in-toxicokinetics-and-uncertainty-in-chemical-specific-parameters" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -1124,18 +1121,9 @@ To place this term into the context of TK, TK models describe ADME mathematicall
 <p>Since the <span class="math inline">\(C_{ss}\)</span>-dose relation is determined by these parameters, variability and uncertainty in the TK parameters translates directly into variability and uncertainty in <span class="math inline">\(C_{ss}\)</span> for a given dose. In other words, there is a distribution of <span class="math inline">\(C_{ss}\)</span> values for each daily dose level of a chemical.</p>
 <p>The <span class="math inline">\(C_{ss}\)</span>-dose relationship is still linear when variability and uncertainty are taken into account. However, rather than a single <span class="math inline">\(C_{ss}\)</span>-dose slope, there is a distribution of <span class="math inline">\(C_{ss}\)</span>-dose slopes. Because the <span class="math inline">\(C_{ss}\)</span>-dose slope is simply the <span class="math inline">\(C_{ss}\)</span> value for an exposure rate of 1 mg/kg/day, the distribution of the <span class="math inline">\(C_{ss}\)</span>-dose slope is the same as the <span class="math inline">\(C_{ss}\)</span> distribution for an exposure rate of 1 mg/kg/day.</p>
 <p>A distribution of <span class="math inline">\(C_{ss}\)</span>-dose slopes is illustrated in the figure below, along with boxplots illustrating the distributions for <span class="math inline">\(C_{ss}\)</span> itself at five different dose levels: 0.05, 0.25, 0.5, 0.75, and 0.95 mg/kg/day.</p>
-<pre><code>## Warning: A numeric `legend.position` argument in `theme()` was deprecated in ggplot2
-## 3.5.0.
-## ℹ Please use the `legend.position.inside` argument of `theme()` instead.
-## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-## generated.</code></pre>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-638"></span>
-<img src="_main_files/figure-html/unnamed-chunk-638-1.png" alt="Boxplots: Distributions of Css for five daily dose levels of Bisphenol-A. Boxes extend from 25th to 75th percentile. Lower whisker = 5th percentile; upper whisker = 95th percentile. Lines: Css-dose relations for each quantile." width="672" />
-<p class="caption">
-Figure 1: Boxplots: Distributions of Css for five daily dose levels of Bisphenol-A. Boxes extend from 25th to 75th percentile. Lower whisker = 5th percentile; upper whisker = 95th percentile. Lines: Css-dose relations for each quantile.
-</p>
-</div>
+<p><img src="_main_files/figure-html/unnamed-chunk-638-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>An appropriate title for this figure could be:</p>
+<p>“<strong>Boxplots: Distributions of Css for five daily dose levels of Bisphenol-A.</strong> Boxes extend from 25th to 75th percentile. Lower whisker = 5th percentile; upper whisker = 95th percentile. Lines: Css-dose relations for each quantile.”</p>
 <div id="variability-and-uncertainty-in-reverse-toxicokinetics" class="section level3 hasAnchor">
 <h3>Variability and Uncertainty in Reverse Toxicokinetics<a href="toxicokinetic-modeling.html#variability-and-uncertainty-in-reverse-toxicokinetics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Earlier, we found that with a linear <span class="math inline">\(C_{ss}\)</span>-dose relation, reverse toxicokinetics became a matter of a simple linear equation. For a given target concentration – for example, a plasma concentration associated with adverse health effects <em>in vivo</em>, or a concentration associated with bioactivity <em>in vitro</em> – we could predict an AED (administered equivalent dose), the external exposure rate in mg/kg/day that would produce the target concentration at steady state.</p>
@@ -1154,23 +1142,23 @@ Figure 1: Boxplots: Distributions of Css for five daily dose levels of Bisphenol
 </div>
 <div id="monte-carlo-approach-to-simulating-variability-and-uncertainty" class="section level3 hasAnchor">
 <h3>Monte Carlo approach to simulating variability and uncertainty<a href="toxicokinetic-modeling.html#monte-carlo-approach-to-simulating-variability-and-uncertainty" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The <code>httk</code> package implements a Monte Carlo approach for simulating variability and uncertainty in TK.</p>
-<p><code>httk</code> first defines distributions for the TK model parameters, representing population variabilty. These distributions are defined based on real data about U.S. population demographics and physiology collected as part of the Centers for Disease Control’s National Health and Nutrition Examination Survey (NHANES) <a href="https://pubmed.ncbi.nlm.nih.gov/28628784/">(Ring et al., 2017)</a>. TK parameters with known measurement uncertainty (intrinsic hepatic clearance rate and fraction of chemical unbound in plasma) additionally have distributions defined to represent their uncertainty <a href="https://pubmed.ncbi.nlm.nih.gov/31532498/">(Wambaugh et al., 2019)</a>.</p>
-<p>Then, <code>httk</code> samples sets of TK parameter values from these distributions (including appropriate correlations: for example, liver mass is correlated with body weight). Each sampled set of TK parameter values represents one “simulated individual.”</p>
-<p>Next, <code>httk</code> calculates the <span class="math inline">\(C_{ss}\)</span>-dose slope for each “simulated individual.” The resulting sample of <span class="math inline">\(C_{ss}\)</span>-dose slopes can be used to characterize the distribution of <span class="math inline">\(C_{ss}\)</span>-dose slopes – for example, by calculating percentiles.</p>
-<p><code>httk</code> makes this whole Monte Carlo process simple and transparent for the user, You just need to call one function, <code>calc_mc_css()</code>, specifying the chemical whose <span class="math inline">\(C_{ss}\)</span>-dose slope distribution you want to calculate. Behind the scenes, <code>httk</code> will perform all the Monte Carlo calculations. It will return percentiles of the <span class="math inline">\(C_{ss}\)</span>-dose slope (by default), or it can return all individual samples of <span class="math inline">\(C_{ss}\)</span>-dose slope (if you want to do some calculations of your own).</p>
+<p>The <em>httk</em> package implements a Monte Carlo approach for simulating variability and uncertainty in TK.</p>
+<p><em>httk</em> first defines distributions for the TK model parameters, representing population variabilty. These distributions are defined based on real data about U.S. population demographics and physiology collected as part of the Centers for Disease Control’s National Health and Nutrition Examination Survey (NHANES) <a href="https://pubmed.ncbi.nlm.nih.gov/28628784/">(Ring et al., 2017)</a>. TK parameters with known measurement uncertainty (intrinsic hepatic clearance rate and fraction of chemical unbound in plasma) additionally have distributions defined to represent their uncertainty <a href="https://pubmed.ncbi.nlm.nih.gov/31532498/">(Wambaugh et al., 2019)</a>.</p>
+<p>Then, <em>httk</em> samples sets of TK parameter values from these distributions (including appropriate correlations: for example, liver mass is correlated with body weight). Each sampled set of TK parameter values represents one “simulated individual.”</p>
+<p>Next, <em>httk</em> calculates the <span class="math inline">\(C_{ss}\)</span>-dose slope for each “simulated individual.” The resulting sample of <span class="math inline">\(C_{ss}\)</span>-dose slopes can be used to characterize the distribution of <span class="math inline">\(C_{ss}\)</span>-dose slopes – for example, by calculating percentiles.</p>
+<p><em>httk</em> makes this whole Monte Carlo process simple and transparent for the user, You just need to call one function, <code>calc_mc_css()</code>, specifying the chemical whose <span class="math inline">\(C_{ss}\)</span>-dose slope distribution you want to calculate. Behind the scenes, <em>httk</em> will perform all the Monte Carlo calculations. It will return percentiles of the <span class="math inline">\(C_{ss}\)</span>-dose slope (by default), or it can return all individual samples of <span class="math inline">\(C_{ss}\)</span>-dose slope (if you want to do some calculations of your own).</p>
 </div>
 <div id="chemical-specific-example-capturing-population-variability-for-bisphenol-a-plasma-concentration-estimates" class="section level3 hasAnchor">
 <h3>Chemical-Specific Example Capturing Population Variability for Bisphenol-A Plasma Concentration Estimates<a href="toxicokinetic-modeling.html#chemical-specific-example-capturing-population-variability-for-bisphenol-a-plasma-concentration-estimates" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The following code estimates the 5th percentile, 50th percentile, and 95th percentile of the <span class="math inline">\(C_{ss}\)</span>-dose slope for the chemical bisphenol-A. For the sake of simplicity, we will use the 3-compartment steady-state model (rather than the PBTK model used in the previous examples).</p>
-<div class="sourceCode" id="cb874"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb874-1"><a href="toxicokinetic-modeling.html#cb874-1" tabindex="-1"></a>css_examp <span class="ot">&lt;-</span> <span class="fu">calc_mc_css</span>(<span class="at">chem.name =</span> <span class="st">&quot;Bisphenol-A&quot;</span>,</span>
-<span id="cb874-2"><a href="toxicokinetic-modeling.html#cb874-2" tabindex="-1"></a>            <span class="at">which.quantile =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="co">#specify which quantiles to return</span></span>
-<span id="cb874-3"><a href="toxicokinetic-modeling.html#cb874-3" tabindex="-1"></a>                               <span class="fl">0.5</span>,</span>
-<span id="cb874-4"><a href="toxicokinetic-modeling.html#cb874-4" tabindex="-1"></a>                               <span class="fl">0.95</span>),</span>
-<span id="cb874-5"><a href="toxicokinetic-modeling.html#cb874-5" tabindex="-1"></a>            <span class="at">model =</span> <span class="st">&quot;3compartmentss&quot;</span>, <span class="co">#which model to use to calculate Css</span></span>
-<span id="cb874-6"><a href="toxicokinetic-modeling.html#cb874-6" tabindex="-1"></a>            <span class="at">output.units =</span> <span class="st">&quot;uM&quot;</span>) <span class="co">#could also choose mg/Lo</span></span></code></pre></div>
+<div class="sourceCode" id="cb866"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb866-1"><a href="toxicokinetic-modeling.html#cb866-1" tabindex="-1"></a>css_examp <span class="ot">&lt;-</span> <span class="fu">calc_mc_css</span>(<span class="at">chem.name =</span> <span class="st">&quot;Bisphenol-A&quot;</span>,</span>
+<span id="cb866-2"><a href="toxicokinetic-modeling.html#cb866-2" tabindex="-1"></a>            <span class="at">which.quantile =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="co">#specify which quantiles to return</span></span>
+<span id="cb866-3"><a href="toxicokinetic-modeling.html#cb866-3" tabindex="-1"></a>                               <span class="fl">0.5</span>,</span>
+<span id="cb866-4"><a href="toxicokinetic-modeling.html#cb866-4" tabindex="-1"></a>                               <span class="fl">0.95</span>),</span>
+<span id="cb866-5"><a href="toxicokinetic-modeling.html#cb866-5" tabindex="-1"></a>            <span class="at">model =</span> <span class="st">&quot;3compartmentss&quot;</span>, <span class="co">#which model to use to calculate Css</span></span>
+<span id="cb866-6"><a href="toxicokinetic-modeling.html#cb866-6" tabindex="-1"></a>            <span class="at">output.units =</span> <span class="st">&quot;uM&quot;</span>) <span class="co">#could also choose mg/Lo</span></span></code></pre></div>
 <pre><code>## Human plasma concentration returned in uM units for 0.05 0.5 0.95 quantile.</code></pre>
-<div class="sourceCode" id="cb876"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb876-1"><a href="toxicokinetic-modeling.html#cb876-1" tabindex="-1"></a><span class="fu">print</span>(css_examp)</span></code></pre></div>
+<div class="sourceCode" id="cb868"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb868-1"><a href="toxicokinetic-modeling.html#cb868-1" tabindex="-1"></a><span class="fu">print</span>(css_examp)</span></code></pre></div>
 <pre><code>##     5%    50%    95% 
 ## 0.2974 1.3460 8.5100</code></pre>
 <p>Recall that the <span class="math inline">\(C_{ss}\)</span>-dose slope is the same as <span class="math inline">\(C_{ss}\)</span> for a daily dose of 1 mg/kg/day. The function <code>calc_mc_css()</code> therefore assumes a dose of 1 mg/kg/day and calculates the resulting <span class="math inline">\(C_{ss}\)</span> distribution. If you need to calculate the <span class="math inline">\(C_{ss}\)</span> distribution for a different dose, e.g. 2 mg/kg/day, you can simply multiply the <span class="math inline">\(C_{ss}\)</span> percentiles from <code>calc_mc_css()</code> by your desired dose.</p>
@@ -1189,32 +1177,32 @@ Figure 1: Boxplots: Distributions of Css for five daily dose levels of Bisphenol
 <h3>High-Throughput Example Capturing Population Variability for ~1000 Chemicals<a href="toxicokinetic-modeling.html#high-throughput-example-capturing-population-variability-for-1000-chemicals" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We can easily and (fairly) quickly do this for all 998 chemicals for which the 3-compartment steady-state model can be parameterized, using <code>sapply()</code> to loop over the chemicals. This will take a few minutes to run (for example, it takes about 10-15 minutes on a Dell Latitude with an Intel i7 processor).</p>
 <p>In order to make the Monte Carlo sampling reproducible, set a seed for the random number generator. It doesn’t matter what seed you choose – it can be any integer. Here, the seed is set to 42, because it’s the answer to the ultimate question of life, the universe, and everything <a href="https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy_(novel)">(Adams, 1979)</a>.</p>
-<div class="sourceCode" id="cb878"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb878-1"><a href="toxicokinetic-modeling.html#cb878-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb878-2"><a href="toxicokinetic-modeling.html#cb878-2" tabindex="-1"></a></span>
-<span id="cb878-3"><a href="toxicokinetic-modeling.html#cb878-3" tabindex="-1"></a><span class="fu">system.time</span>(</span>
-<span id="cb878-4"><a href="toxicokinetic-modeling.html#cb878-4" tabindex="-1"></a>  <span class="fu">suppressWarnings</span>(</span>
-<span id="cb878-5"><a href="toxicokinetic-modeling.html#cb878-5" tabindex="-1"></a>    css_3compss <span class="ot">&lt;-</span> <span class="fu">sapply</span>(chems_3compss<span class="sc">$</span>CAS,</span>
-<span id="cb878-6"><a href="toxicokinetic-modeling.html#cb878-6" tabindex="-1"></a>              calc_mc_css,</span>
-<span id="cb878-7"><a href="toxicokinetic-modeling.html#cb878-7" tabindex="-1"></a>              <span class="co">#additional arguments to calc_mc_css()</span></span>
-<span id="cb878-8"><a href="toxicokinetic-modeling.html#cb878-8" tabindex="-1"></a>              <span class="at">model =</span> <span class="st">&quot;3compartmentss&quot;</span>,</span>
-<span id="cb878-9"><a href="toxicokinetic-modeling.html#cb878-9" tabindex="-1"></a>              <span class="at">which.quantile =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.5</span>, <span class="fl">0.95</span>),</span>
-<span id="cb878-10"><a href="toxicokinetic-modeling.html#cb878-10" tabindex="-1"></a>              <span class="at">output.units =</span> <span class="st">&quot;uM&quot;</span>,</span>
-<span id="cb878-11"><a href="toxicokinetic-modeling.html#cb878-11" tabindex="-1"></a>              <span class="at">suppress.messages =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb878-12"><a href="toxicokinetic-modeling.html#cb878-12" tabindex="-1"></a>              )</span>
-<span id="cb878-13"><a href="toxicokinetic-modeling.html#cb878-13" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb870"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb870-1"><a href="toxicokinetic-modeling.html#cb870-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb870-2"><a href="toxicokinetic-modeling.html#cb870-2" tabindex="-1"></a></span>
+<span id="cb870-3"><a href="toxicokinetic-modeling.html#cb870-3" tabindex="-1"></a><span class="fu">system.time</span>(</span>
+<span id="cb870-4"><a href="toxicokinetic-modeling.html#cb870-4" tabindex="-1"></a>  <span class="fu">suppressWarnings</span>(</span>
+<span id="cb870-5"><a href="toxicokinetic-modeling.html#cb870-5" tabindex="-1"></a>    css_3compss <span class="ot">&lt;-</span> <span class="fu">sapply</span>(chems_3compss<span class="sc">$</span>CAS,</span>
+<span id="cb870-6"><a href="toxicokinetic-modeling.html#cb870-6" tabindex="-1"></a>              calc_mc_css,</span>
+<span id="cb870-7"><a href="toxicokinetic-modeling.html#cb870-7" tabindex="-1"></a>              <span class="co">#additional arguments to calc_mc_css()</span></span>
+<span id="cb870-8"><a href="toxicokinetic-modeling.html#cb870-8" tabindex="-1"></a>              <span class="at">model =</span> <span class="st">&quot;3compartmentss&quot;</span>,</span>
+<span id="cb870-9"><a href="toxicokinetic-modeling.html#cb870-9" tabindex="-1"></a>              <span class="at">which.quantile =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.5</span>, <span class="fl">0.95</span>),</span>
+<span id="cb870-10"><a href="toxicokinetic-modeling.html#cb870-10" tabindex="-1"></a>              <span class="at">output.units =</span> <span class="st">&quot;uM&quot;</span>,</span>
+<span id="cb870-11"><a href="toxicokinetic-modeling.html#cb870-11" tabindex="-1"></a>              <span class="at">suppress.messages =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb870-12"><a href="toxicokinetic-modeling.html#cb870-12" tabindex="-1"></a>              )</span>
+<span id="cb870-13"><a href="toxicokinetic-modeling.html#cb870-13" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##  895.94   51.87 1018.38</code></pre>
+##  816.75   15.83  890.53</code></pre>
 <p>Organizing the results:</p>
-<div class="sourceCode" id="cb880"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb880-1"><a href="toxicokinetic-modeling.html#cb880-1" tabindex="-1"></a><span class="co">#css_3compss comes out as a 3 x 998 array,</span></span>
-<span id="cb880-2"><a href="toxicokinetic-modeling.html#cb880-2" tabindex="-1"></a><span class="co">#where rows are quantiles and columns are chemicals</span></span>
-<span id="cb880-3"><a href="toxicokinetic-modeling.html#cb880-3" tabindex="-1"></a><span class="co">#transpose it so that rows are chemicals and columns are quantiles</span></span>
-<span id="cb880-4"><a href="toxicokinetic-modeling.html#cb880-4" tabindex="-1"></a>css_3compss <span class="ot">&lt;-</span> <span class="fu">t</span>(css_3compss)</span>
-<span id="cb880-5"><a href="toxicokinetic-modeling.html#cb880-5" tabindex="-1"></a><span class="co">#convert to data.frame</span></span>
-<span id="cb880-6"><a href="toxicokinetic-modeling.html#cb880-6" tabindex="-1"></a>css_3compss <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(css_3compss)</span>
-<span id="cb880-7"><a href="toxicokinetic-modeling.html#cb880-7" tabindex="-1"></a><span class="co">#make a column for CAS, rather than just leaving it as the row names</span></span>
-<span id="cb880-8"><a href="toxicokinetic-modeling.html#cb880-8" tabindex="-1"></a>css_3compss<span class="sc">$</span>CAS <span class="ot">&lt;-</span> <span class="fu">row.names</span>(css_3compss)</span>
-<span id="cb880-9"><a href="toxicokinetic-modeling.html#cb880-9" tabindex="-1"></a></span>
-<span id="cb880-10"><a href="toxicokinetic-modeling.html#cb880-10" tabindex="-1"></a><span class="fu">head</span>(css_3compss) <span class="co">#View first few rows</span></span></code></pre></div>
+<div class="sourceCode" id="cb872"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb872-1"><a href="toxicokinetic-modeling.html#cb872-1" tabindex="-1"></a><span class="co">#css_3compss comes out as a 3 x 998 array,</span></span>
+<span id="cb872-2"><a href="toxicokinetic-modeling.html#cb872-2" tabindex="-1"></a><span class="co">#where rows are quantiles and columns are chemicals</span></span>
+<span id="cb872-3"><a href="toxicokinetic-modeling.html#cb872-3" tabindex="-1"></a><span class="co">#transpose it so that rows are chemicals and columns are quantiles</span></span>
+<span id="cb872-4"><a href="toxicokinetic-modeling.html#cb872-4" tabindex="-1"></a>css_3compss <span class="ot">&lt;-</span> <span class="fu">t</span>(css_3compss)</span>
+<span id="cb872-5"><a href="toxicokinetic-modeling.html#cb872-5" tabindex="-1"></a><span class="co">#convert to data.frame</span></span>
+<span id="cb872-6"><a href="toxicokinetic-modeling.html#cb872-6" tabindex="-1"></a>css_3compss <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(css_3compss)</span>
+<span id="cb872-7"><a href="toxicokinetic-modeling.html#cb872-7" tabindex="-1"></a><span class="co">#make a column for CAS, rather than just leaving it as the row names</span></span>
+<span id="cb872-8"><a href="toxicokinetic-modeling.html#cb872-8" tabindex="-1"></a>css_3compss<span class="sc">$</span>CAS <span class="ot">&lt;-</span> <span class="fu">row.names</span>(css_3compss)</span>
+<span id="cb872-9"><a href="toxicokinetic-modeling.html#cb872-9" tabindex="-1"></a></span>
+<span id="cb872-10"><a href="toxicokinetic-modeling.html#cb872-10" tabindex="-1"></a><span class="fu">head</span>(css_3compss) <span class="co">#View first few rows</span></span></code></pre></div>
 <pre><code>##                 5%     50%      95%        CAS
 ## 2971-36-0   0.1449   0.678    6.102  2971-36-0
 ## 94-75-7    18.1500  68.390  431.300    94-75-7
@@ -1226,26 +1214,18 @@ Figure 1: Boxplots: Distributions of Css for five daily dose levels of Bisphenol
 <div id="plotting-the-c_ss-dose-slope-distribution-quantiles-across-these-1000-chemicals" class="section level3 hasAnchor">
 <h3>Plotting the <span class="math inline">\(C_{ss}\)</span>-dose slope distribution quantiles across these ~1000 chemicals<a href="toxicokinetic-modeling.html#plotting-the-c_ss-dose-slope-distribution-quantiles-across-these-1000-chemicals" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Here, we will plot the resulting concentration distribution quantiles for each chemical, while sorting the chemicals from lowest to highest median value.</p>
-<p>By default, <code>ggplot2</code> will plot the chemical CASRNs in alphabetically-sorted order. To force it to plot them in another order, we have to explicitly specify the desired order. The easiest way to do this is to add a column in the data.frame that contains the chemical names as a factor (categorical) variable, whose levels (categories) are explicitly set to be the CASRNs in our desired plotting order. Then we can tell <code>ggplot2</code> to plot that factor variable on the x-axis, rather than the original CASRN variable.</p>
+<p>By default, <em>ggplot2</em> will plot the chemical CASRNs in alphabetically-sorted order. To force it to plot them in another order, we have to explicitly specify the desired order. The easiest way to do this is to add a column in the data.frame that contains the chemical names as a factor (categorical) variable, whose levels (categories) are explicitly set to be the CASRNs in our desired plotting order. Then we can tell <em>ggplot2</em> to plot that factor variable on the x-axis, rather than the original CASRN variable.</p>
 <p>Set the ordering of the chemical CASRNs from lowest to highest median value</p>
-<div class="sourceCode" id="cb882"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb882-1"><a href="toxicokinetic-modeling.html#cb882-1" tabindex="-1"></a>chemical_order <span class="ot">&lt;-</span> <span class="fu">order</span>(css_3compss<span class="sc">$</span><span class="st">`</span><span class="at">50%</span><span class="st">`</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb874"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb874-1"><a href="toxicokinetic-modeling.html#cb874-1" tabindex="-1"></a>chemical_order <span class="ot">&lt;-</span> <span class="fu">order</span>(css_3compss<span class="sc">$</span><span class="st">`</span><span class="at">50%</span><span class="st">`</span>)</span></code></pre></div>
 <p>Create a factor (categorical) CAS column where the factor levels are given by the CASRNs with this ordering.</p>
-<div class="sourceCode" id="cb883"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb883-1"><a href="toxicokinetic-modeling.html#cb883-1" tabindex="-1"></a>css_3compss<span class="sc">$</span>CAS_factor <span class="ot">&lt;-</span> <span class="fu">factor</span>(css_3compss<span class="sc">$</span>CAS, <span class="at">levels =</span> css_3compss<span class="sc">$</span>CAS[chemical_order])</span></code></pre></div>
-<p>For plotting ease, reshape the data.frame into “long” format – rather than having one column for each quantile of the <span class="math inline">\(C_{ss}\)</span> distribution, have a row for each chemical/quantile combination. We use the <code>melt</code> function from the <code>reshape2</code> package.</p>
-<div class="sourceCode" id="cb884"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb884-1"><a href="toxicokinetic-modeling.html#cb884-1" tabindex="-1"></a>css_3compss_melt <span class="ot">&lt;-</span> <span class="fu">melt</span>(css_3compss,</span>
-<span id="cb884-2"><a href="toxicokinetic-modeling.html#cb884-2" tabindex="-1"></a>                                   <span class="at">id.vars =</span> <span class="st">&quot;CAS_factor&quot;</span>,</span>
-<span id="cb884-3"><a href="toxicokinetic-modeling.html#cb884-3" tabindex="-1"></a>                                   <span class="at">measure.vars =</span> <span class="fu">c</span>(<span class="st">&quot;5%&quot;</span>, <span class="st">&quot;50%&quot;</span>, <span class="st">&quot;95%&quot;</span>),</span>
-<span id="cb884-4"><a href="toxicokinetic-modeling.html#cb884-4" tabindex="-1"></a>                                   <span class="at">variable.name =</span> <span class="st">&quot;Percentile&quot;</span>,</span>
-<span id="cb884-5"><a href="toxicokinetic-modeling.html#cb884-5" tabindex="-1"></a>                                   <span class="at">value.name =</span> <span class="st">&quot;Css_slope&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning in melt.default(css_3compss, id.vars = &quot;CAS_factor&quot;, measure.vars =
-## c(&quot;5%&quot;, : The melt generic in data.table has been passed a data.frame and will
-## attempt to redirect to the relevant reshape2 method; please note that reshape2
-## is superseded and is no longer actively developed, and this redirection is now
-## deprecated. To continue using melt methods from reshape2 while both libraries
-## are attached, e.g. melt.list, you can prepend the namespace, i.e.
-## reshape2::melt(css_3compss). In the next version, this warning will become an
-## error.</code></pre>
-<div class="sourceCode" id="cb886"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb886-1"><a href="toxicokinetic-modeling.html#cb886-1" tabindex="-1"></a><span class="fu">head</span>(css_3compss_melt)</span></code></pre></div>
+<div class="sourceCode" id="cb875"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb875-1"><a href="toxicokinetic-modeling.html#cb875-1" tabindex="-1"></a>css_3compss<span class="sc">$</span>CAS_factor <span class="ot">&lt;-</span> <span class="fu">factor</span>(css_3compss<span class="sc">$</span>CAS, <span class="at">levels =</span> css_3compss<span class="sc">$</span>CAS[chemical_order])</span></code></pre></div>
+<p>For plotting ease, reshape the data.frame into “long” format – rather than having one column for each quantile of the <span class="math inline">\(C_{ss}\)</span> distribution, have a row for each chemical/quantile combination. We use the <code>melt()</code> function from the <em>reshape2</em> package.</p>
+<div class="sourceCode" id="cb876"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb876-1"><a href="toxicokinetic-modeling.html#cb876-1" tabindex="-1"></a>css_3compss_melt <span class="ot">&lt;-</span> <span class="fu">melt</span>(css_3compss,</span>
+<span id="cb876-2"><a href="toxicokinetic-modeling.html#cb876-2" tabindex="-1"></a>                                   <span class="at">id.vars =</span> <span class="st">&quot;CAS_factor&quot;</span>,</span>
+<span id="cb876-3"><a href="toxicokinetic-modeling.html#cb876-3" tabindex="-1"></a>                                   <span class="at">measure.vars =</span> <span class="fu">c</span>(<span class="st">&quot;5%&quot;</span>, <span class="st">&quot;50%&quot;</span>, <span class="st">&quot;95%&quot;</span>),</span>
+<span id="cb876-4"><a href="toxicokinetic-modeling.html#cb876-4" tabindex="-1"></a>                                   <span class="at">variable.name =</span> <span class="st">&quot;Percentile&quot;</span>,</span>
+<span id="cb876-5"><a href="toxicokinetic-modeling.html#cb876-5" tabindex="-1"></a>                                   <span class="at">value.name =</span> <span class="st">&quot;Css_slope&quot;</span>)</span>
+<span id="cb876-6"><a href="toxicokinetic-modeling.html#cb876-6" tabindex="-1"></a><span class="fu">head</span>(css_3compss_melt)</span></code></pre></div>
 <pre><code>##   CAS_factor Percentile Css_slope
 ## 1  2971-36-0         5%    0.1449
 ## 2    94-75-7         5%   18.1500
@@ -1254,20 +1234,20 @@ Figure 1: Boxplots: Distributions of Css for five daily dose levels of Bisphenol
 ## 5  1007-28-9         5%    2.6670
 ## 6 71751-41-2         5%    0.7825</code></pre>
 <p>Plot the slope percentiles. Use a log scale for the y-axis because the slopes span orders of magnitude. Suppress the x-axis labels (the CASRNs) because they are not readable anyway.</p>
-<div class="sourceCode" id="cb888"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb888-1"><a href="toxicokinetic-modeling.html#cb888-1" tabindex="-1"></a><span class="fu">ggplot</span>(css_3compss_melt) <span class="sc">+</span></span>
-<span id="cb888-2"><a href="toxicokinetic-modeling.html#cb888-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>CAS_factor,</span>
-<span id="cb888-3"><a href="toxicokinetic-modeling.html#cb888-3" tabindex="-1"></a>                 <span class="at">y =</span> Css_slope,</span>
-<span id="cb888-4"><a href="toxicokinetic-modeling.html#cb888-4" tabindex="-1"></a>                 <span class="at">color =</span> Percentile)) <span class="sc">+</span></span>
-<span id="cb888-5"><a href="toxicokinetic-modeling.html#cb888-5" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set2&quot;</span>) <span class="sc">+</span> <span class="co">#use better color scheme than default</span></span>
-<span id="cb888-6"><a href="toxicokinetic-modeling.html#cb888-6" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span> <span class="co">#use log scale for y axis</span></span>
-<span id="cb888-7"><a href="toxicokinetic-modeling.html#cb888-7" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Chemical&quot;</span>) <span class="sc">+</span></span>
-<span id="cb888-8"><a href="toxicokinetic-modeling.html#cb888-8" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Css-dose slope (uM per mg/kg/day)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb888-9"><a href="toxicokinetic-modeling.html#cb888-9" tabindex="-1"></a>  <span class="fu">annotation_logticks</span>(<span class="at">sides =</span> <span class="st">&quot;l&quot;</span>) <span class="sc">+</span> <span class="co">#add log ticks to y axis</span></span>
-<span id="cb888-10"><a href="toxicokinetic-modeling.html#cb888-10" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="co">#plot with white plot background instead of gray</span></span>
-<span id="cb888-11"><a href="toxicokinetic-modeling.html#cb888-11" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(), <span class="co">#suppress x-axis labels</span></span>
-<span id="cb888-12"><a href="toxicokinetic-modeling.html#cb888-12" tabindex="-1"></a>        <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>(), <span class="co">#suppress vertical grid lines</span></span>
-<span id="cb888-13"><a href="toxicokinetic-modeling.html#cb888-13" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.1</span>,<span class="fl">0.8</span>) <span class="co">#place legend in lower right corner</span></span>
-<span id="cb888-14"><a href="toxicokinetic-modeling.html#cb888-14" tabindex="-1"></a>        ) </span></code></pre></div>
+<div class="sourceCode" id="cb878"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb878-1"><a href="toxicokinetic-modeling.html#cb878-1" tabindex="-1"></a><span class="fu">ggplot</span>(css_3compss_melt) <span class="sc">+</span></span>
+<span id="cb878-2"><a href="toxicokinetic-modeling.html#cb878-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>CAS_factor,</span>
+<span id="cb878-3"><a href="toxicokinetic-modeling.html#cb878-3" tabindex="-1"></a>                 <span class="at">y =</span> Css_slope,</span>
+<span id="cb878-4"><a href="toxicokinetic-modeling.html#cb878-4" tabindex="-1"></a>                 <span class="at">color =</span> Percentile)) <span class="sc">+</span></span>
+<span id="cb878-5"><a href="toxicokinetic-modeling.html#cb878-5" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set2&quot;</span>) <span class="sc">+</span> <span class="co">#use better color scheme than default</span></span>
+<span id="cb878-6"><a href="toxicokinetic-modeling.html#cb878-6" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span> <span class="co">#use log scale for y axis</span></span>
+<span id="cb878-7"><a href="toxicokinetic-modeling.html#cb878-7" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Chemical&quot;</span>) <span class="sc">+</span></span>
+<span id="cb878-8"><a href="toxicokinetic-modeling.html#cb878-8" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Css-dose slope (uM per mg/kg/day)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb878-9"><a href="toxicokinetic-modeling.html#cb878-9" tabindex="-1"></a>  <span class="fu">annotation_logticks</span>(<span class="at">sides =</span> <span class="st">&quot;l&quot;</span>) <span class="sc">+</span> <span class="co">#add log ticks to y axis</span></span>
+<span id="cb878-10"><a href="toxicokinetic-modeling.html#cb878-10" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="co">#plot with white plot background instead of gray</span></span>
+<span id="cb878-11"><a href="toxicokinetic-modeling.html#cb878-11" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(), <span class="co">#suppress x-axis labels</span></span>
+<span id="cb878-12"><a href="toxicokinetic-modeling.html#cb878-12" tabindex="-1"></a>        <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>(), <span class="co">#suppress vertical grid lines</span></span>
+<span id="cb878-13"><a href="toxicokinetic-modeling.html#cb878-13" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.1</span>,<span class="fl">0.8</span>) <span class="co">#place legend in lower right corner</span></span>
+<span id="cb878-14"><a href="toxicokinetic-modeling.html#cb878-14" tabindex="-1"></a>        ) </span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-646-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Chemicals along the x-axis are in order from lowest to highest median (50th percentile) predicted <span class="math inline">\(C_{ss}\)</span>-dose slope. The orange points represent that 50th percentile <span class="math inline">\(C_{ss}\)</span>-dose slope for each chemical. The green points represent the 5th percentile <span class="math inline">\(C_{ss}\)</span>-dose slopes, and the purple points represent the 95th percentile <span class="math inline">\(C_{ss}\)</span>-dose slope for each chemical. Each chemical has one orange point (50th percentile), one green point (5th percentile), and one purple point (95th percentile), characterizing the distribution of <span class="math inline">\(C_{ss}\)</span>-dose slopes across the U.S. population for that chemical. The width of the distribution for each chemical is roughly represented by the vertical distance between the green and purple points for that chemical.</p>
 </div>
@@ -1279,19 +1259,20 @@ Figure 1: Boxplots: Distributions of Css for five daily dose levels of Bisphenol
 <div class="answer">
 <p><strong>Answer</strong>: No – the <span class="math inline">\(C_{ss}\)</span>-dose slope distributions generally become narrower as the median <span class="math inline">\(C_{ss}\)</span>-dose slope increases. This can be seen by looking at the right end of the plot, where the highest-median chemicals are located – the distance between the green points and purple points, representing the 5th and 95th percentiles, are much smaller for these higher-median chemicals.</p>
 </div>
+<p><br></p>
 </div>
 </div>
 <div id="reverse-tk-calculating-administered-equivalent-doses-for-toxcast-bioactive-concentrations" class="section level2 hasAnchor">
 <h2>Reverse TK: Calculating Administered Equivalent Doses for ToxCast Bioactive Concentrations<a href="toxicokinetic-modeling.html#reverse-tk-calculating-administered-equivalent-doses-for-toxcast-bioactive-concentrations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>As described in an earlier section of this document, the slope defining the linear relation between <span class="math inline">\(C_{ss}\)</span> and dose is useful for reverse toxicokinetics: converting an internal dose metric to an external dose metric. The internal dose metric may, for example, be a concentration associated with an <em>in vivo</em> health effect, or <em>in vitro</em> bioactivity. Here, we will consider <em>in vitro</em> bioactivity – specifically, from the ToxCast program. ToxCast tests chemicals in multiple concentration-response format across a battery of <em>in vitro</em> assays that measure activity in a wide variety of biological endpoints. If a chemical showed any activity in an assay at any of its tested concentrations, then one metric of concentration associated with bioactivity is AC50 – the concentration at which the assay response is halfway between its minimum and its maximum.</p>
-<p>The module won’t address the details of how ToxCast determines assay activity and AC50s from raw concentration-response data. There is an entire R package for the ToxCast data processing workflow, called <code>tcpl</code>. If you want to learn more about those details, <a href="https://www.epa.gov/chemical-research/toxcast-data-generation-toxcast-pipeline-tcpl">start here</a>. Lots of information is available if you install the <code>tcpl</code> R package and look at the package vignette; it essentially walks you through the full ToxCast data processing workflow.</p>
+<p>The module won’t address the details of how ToxCast determines assay activity and AC50s from raw concentration-response data. There is an entire R package for the ToxCast data processing workflow, called <em>tcpl</em>. If you want to learn more about those details, <a href="https://www.epa.gov/chemical-research/toxcast-data-generation-toxcast-pipeline-tcpl">start here</a>. Lots of information is available if you install the <em>tcpl</em> R package and look at the package vignette; it essentially walks you through the full ToxCast data processing workflow.</p>
 <p>In this module, we will begin with pre-computed ToxCast AC50 values for various chemicals and assays. We will use <code>httk</code> to convert ToxCast AC50 values into administered equivalent doses (AEDs).</p>
 <div id="loading-toxcast-ac50s" class="section level3 hasAnchor">
 <h3>Loading ToxCast AC50s<a href="toxicokinetic-modeling.html#loading-toxcast-ac50s" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The latest public release of ToxCast high-throughput screening assay data can be downloaded <a href="https://www.epa.gov/chemical-research/exploring-toxcast-data-downloadable-data">here</a>. Previous public releases of ToxCast data included a matrix of AC50s by chemical and assay. The data format of the latest public release does not contain this kind of matrix. So this dataset was pre-processed to prepare a simple data.frame of AC50s for each chemical/assay combination for the purposes of this training module.</p>
-<p>Read in the pre-processed data set and view the first few rows.</p>
-<div class="sourceCode" id="cb889"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb889-1"><a href="toxicokinetic-modeling.html#cb889-1" tabindex="-1"></a>toxcast <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Module6_6_Input/Module6_6_InputData1.csv&quot;</span>)</span>
-<span id="cb889-2"><a href="toxicokinetic-modeling.html#cb889-2" tabindex="-1"></a><span class="fu">head</span>(toxcast)</span></code></pre></div>
+<p>Read in the pre-processed dataset and view the first few rows.</p>
+<div class="sourceCode" id="cb879"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb879-1"><a href="toxicokinetic-modeling.html#cb879-1" tabindex="-1"></a>toxcast <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Module6_6_Input/Module6_6_InputData1.csv&quot;</span>)</span>
+<span id="cb879-2"><a href="toxicokinetic-modeling.html#cb879-2" tabindex="-1"></a><span class="fu">head</span>(toxcast)</span></code></pre></div>
 <pre><code>##                         Compound        CAS        DTXSID         aenm
 ## 1                  Acetohexamide   968-81-0 DTXSID7020007 ACEA_ER_80hr
 ## 2 2-Methoxyaniline hydrochloride   134-29-2 DTXSID8020092 ACEA_ER_80hr
@@ -1308,14 +1289,14 @@ Figure 1: Boxplots: Distributions of Css for five daily dose levels of Bisphenol
 ## 6 -0.3299611</code></pre>
 <p>The columns of this data frame are:</p>
 <ul>
-<li><p><code>Compound</code>: The compound name.</p></li>
-<li><p><code>CAS</code>: The compound’s CASRN.</p></li>
-<li><p><code>DTXSID</code>: The compound’s DSSTox Substance ID.</p></li>
-<li><p><code>aenm</code>: Assay identifier. “aenm” stands for “Assay Endpoint Name.” More information about the ToxCast assays is available on the <a href="https://www.epa.gov/chemical-research/exploring-toxcast-data-downloadable-data">ToxCast data download page</a>.</p></li>
-<li><p><code>log10_ac50</code>: The AC50 for the chemical/assay combination on each row, in log10 uM units.</p></li>
+<li><code>Compound</code>: The compound name.</li>
+<li><code>CAS</code>: The compound’s CASRN.</li>
+<li><code>DTXSID</code>: The compound’s DSSTox Substance ID.</li>
+<li><code>aenm</code>: Assay identifier. “aenm” stands for “Assay Endpoint Name.” More information about the ToxCast assays is available on the <a href="https://www.epa.gov/chemical-research/exploring-toxcast-data-downloadable-data">ToxCast data download page</a>.</li>
+<li><code>log10_ac50</code>: The AC50 for the chemical/assay combination on each row, in log10 uM units.</li>
 </ul>
-<p>How many ToxCast chemicals are in this data set?</p>
-<div class="sourceCode" id="cb891"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb891-1"><a href="toxicokinetic-modeling.html#cb891-1" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(toxcast<span class="sc">$</span>DTXSID))</span></code></pre></div>
+<p>How many ToxCast chemicals are in this dataset?</p>
+<div class="sourceCode" id="cb881"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb881-1"><a href="toxicokinetic-modeling.html#cb881-1" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(toxcast<span class="sc">$</span>DTXSID))</span></code></pre></div>
 <pre><code>## [1] 7863</code></pre>
 </div>
 <div id="answer-to-environmental-health-question-5-7" class="section level3 hasAnchor">
@@ -1328,45 +1309,45 @@ Figure 1: Boxplots: Distributions of Css for five daily dose levels of Bisphenol
 </div>
 </div>
 <div id="subsetting-the-toxcast-chemicals-to-include-those-that-are-also-in-httk" class="section level3 hasAnchor">
-<h3>Subsetting the ToxCast Chemicals to include those that are also in <code>httk</code><a href="toxicokinetic-modeling.html#subsetting-the-toxcast-chemicals-to-include-those-that-are-also-in-httk" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Not all of the ToxCast chemicals have TK data built into <code>httk</code> such that we can perform reverse TK using the HTTK models. Let’s subset the ToxCast data to include only the chemicals for which we can run the 3-compartment steady-state models.</p>
+<h3>Subsetting the ToxCast Chemicals to include those that are also in httk<a href="toxicokinetic-modeling.html#subsetting-the-toxcast-chemicals-to-include-those-that-are-also-in-httk" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Not all of the ToxCast chemicals have TK data built into <em>httk</em> such that we can perform reverse TK using the HTTK models. Let’s subset the ToxCast data to include only the chemicals for which we can run the 3-compartment steady-state models.</p>
 <p>Previously, we used <code>get_cheminfo()</code> to get a list of chemicals for which we could run the 3-compartment steady state model, including the names, CASRNs, and DSSTox IDs of those chemicals. That list is stored in variable <code>chems_3compss</code>, a data.frame with compound name, CASRN, and DTXSID. Now, we can use that chemical list to subset the ToxCast data.</p>
-<div class="sourceCode" id="cb893"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb893-1"><a href="toxicokinetic-modeling.html#cb893-1" tabindex="-1"></a>toxcast_httk <span class="ot">&lt;-</span> <span class="fu">subset</span>(toxcast,</span>
-<span id="cb893-2"><a href="toxicokinetic-modeling.html#cb893-2" tabindex="-1"></a>                       <span class="at">subset =</span> toxcast<span class="sc">$</span>DTXSID <span class="sc">%in%</span></span>
-<span id="cb893-3"><a href="toxicokinetic-modeling.html#cb893-3" tabindex="-1"></a>                         chems_3compss<span class="sc">$</span>DTXSID)</span></code></pre></div>
+<div class="sourceCode" id="cb883"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb883-1"><a href="toxicokinetic-modeling.html#cb883-1" tabindex="-1"></a>toxcast_httk <span class="ot">&lt;-</span> <span class="fu">subset</span>(toxcast,</span>
+<span id="cb883-2"><a href="toxicokinetic-modeling.html#cb883-2" tabindex="-1"></a>                       <span class="at">subset =</span> toxcast<span class="sc">$</span>DTXSID <span class="sc">%in%</span></span>
+<span id="cb883-3"><a href="toxicokinetic-modeling.html#cb883-3" tabindex="-1"></a>                         chems_3compss<span class="sc">$</span>DTXSID)</span></code></pre></div>
 <p>How many chemicals are in this subset?</p>
-<div class="sourceCode" id="cb894"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb894-1"><a href="toxicokinetic-modeling.html#cb894-1" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(toxcast_httk<span class="sc">$</span>DTXSID))</span></code></pre></div>
+<div class="sourceCode" id="cb884"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb884-1"><a href="toxicokinetic-modeling.html#cb884-1" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(toxcast_httk<span class="sc">$</span>DTXSID))</span></code></pre></div>
 <pre><code>## [1] 869</code></pre>
-<p>There were 869 <code>httk</code> chemicals for which we could run the 3-compartment steady-state model; only 911 of them had ToxCast data. Conversely, most of the 7863 ToxCast chemicals do not have TK data in <code>httk</code> such that we can run the 3-compartment steady state model.</p>
+<p>There were 869 <em>httk</em> chemicals for which we could run the 3-compartment steady-state model; only 911 of them had ToxCast data. Conversely, most of the 7863 ToxCast chemicals do not have TK data in <em>httk</em> such that we can run the 3-compartment steady state model.</p>
 </div>
 <div id="identifying-the-lower-bound-in-vitro-ac50-value-per-chemical" class="section level3 hasAnchor">
 <h3>Identifying the Lower-Bound <em>In Vitro</em> AC50 Value per Chemical<a href="toxicokinetic-modeling.html#identifying-the-lower-bound-in-vitro-ac50-value-per-chemical" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>ToxCast/Tox21 screens chemicals across multiple assays, such that each chemical has multiple resulting AC50 values, spanning a range of values. For example, here are boxplots of the AC50s for the first 20 chemicals listed in <code>chems_3compss</code>. Note that the chemical identifiers, DTXSID, are used here in these visualizations to represent unique chemicals.</p>
-<div class="sourceCode" id="cb896"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb896-1"><a href="toxicokinetic-modeling.html#cb896-1" tabindex="-1"></a><span class="fu">ggplot</span>(toxcast_httk[toxcast_httk<span class="sc">$</span>DTXSID <span class="sc">%in%</span></span>
-<span id="cb896-2"><a href="toxicokinetic-modeling.html#cb896-2" tabindex="-1"></a>                      chems_3compss[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,</span>
-<span id="cb896-3"><a href="toxicokinetic-modeling.html#cb896-3" tabindex="-1"></a>                                    <span class="st">&quot;DTXSID&quot;</span>],</span>
-<span id="cb896-4"><a href="toxicokinetic-modeling.html#cb896-4" tabindex="-1"></a>                    ]</span>
-<span id="cb896-5"><a href="toxicokinetic-modeling.html#cb896-5" tabindex="-1"></a>       ) <span class="sc">+</span></span>
-<span id="cb896-6"><a href="toxicokinetic-modeling.html#cb896-6" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>DTXSID, <span class="at">y =</span> log10_ac50)) <span class="sc">+</span></span>
-<span id="cb896-7"><a href="toxicokinetic-modeling.html#cb896-7" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;log10 AC50&quot;</span>) <span class="sc">+</span></span>
-<span id="cb896-8"><a href="toxicokinetic-modeling.html#cb896-8" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb896-9"><a href="toxicokinetic-modeling.html#cb896-9" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>,</span>
-<span id="cb896-10"><a href="toxicokinetic-modeling.html#cb896-10" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb886"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb886-1"><a href="toxicokinetic-modeling.html#cb886-1" tabindex="-1"></a><span class="fu">ggplot</span>(toxcast_httk[toxcast_httk<span class="sc">$</span>DTXSID <span class="sc">%in%</span></span>
+<span id="cb886-2"><a href="toxicokinetic-modeling.html#cb886-2" tabindex="-1"></a>                      chems_3compss[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,</span>
+<span id="cb886-3"><a href="toxicokinetic-modeling.html#cb886-3" tabindex="-1"></a>                                    <span class="st">&quot;DTXSID&quot;</span>],</span>
+<span id="cb886-4"><a href="toxicokinetic-modeling.html#cb886-4" tabindex="-1"></a>                    ]</span>
+<span id="cb886-5"><a href="toxicokinetic-modeling.html#cb886-5" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb886-6"><a href="toxicokinetic-modeling.html#cb886-6" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>DTXSID, <span class="at">y =</span> log10_ac50)) <span class="sc">+</span></span>
+<span id="cb886-7"><a href="toxicokinetic-modeling.html#cb886-7" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;log10 AC50&quot;</span>) <span class="sc">+</span></span>
+<span id="cb886-8"><a href="toxicokinetic-modeling.html#cb886-8" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb886-9"><a href="toxicokinetic-modeling.html#cb886-9" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>,</span>
+<span id="cb886-10"><a href="toxicokinetic-modeling.html#cb886-10" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-651-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Sometimes we have an interest in getting the equivalent dose for an AC50 for one specific assay. For example, if we happen to be interested in estrogen-receptor activity, we might look specifically at one of the assays that measures estrogen receptor activity.</p>
 <p>However, sometimes we just want a general idea of what concentrations showed bioactivity in <em>any</em> of the ToxCast assays, regardless of the specific biological endpoint of each assay. In this case, typically, we are interested in a “reasonable lower bound” of bioactive concentrations across assays for each chemical. Intuitively, we suspect that the very lowest AC50s for each chemical might represent false activity. Therefore, we often select the tenth percentile of ToxCast AC50s for each chemical as that “reasonable lower bound” on bioactive concentrations.</p>
-<p>Let’s calculate the tenth percentile ToxCast AC50 for each chemical. Here, we use the base-R function <code>aggregate</code>, which groups a vector (specified in the <code>x</code> argument) by a list of factors (specified in the <code>by</code> argument), and applies a function to each group (specified in the <code>FUN</code> argument). You can add any extra arguments to the <code>FUN</code> function as named arguments to <code>aggregate</code>.</p>
-<div class="sourceCode" id="cb897"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb897-1"><a href="toxicokinetic-modeling.html#cb897-1" tabindex="-1"></a>toxcast_httk_P10 <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(<span class="at">x =</span> toxcast_httk<span class="sc">$</span>log10_ac50, <span class="co">#aggregate the AC50s</span></span>
-<span id="cb897-2"><a href="toxicokinetic-modeling.html#cb897-2" tabindex="-1"></a>                              <span class="at">by =</span> <span class="fu">list</span>(<span class="at">DTXSID =</span> toxcast_httk<span class="sc">$</span>DTXSID), <span class="co">#group AC50s by DTXSID</span></span>
-<span id="cb897-3"><a href="toxicokinetic-modeling.html#cb897-3" tabindex="-1"></a>                              <span class="at">FUN =</span> quantile, <span class="co">#the function to apply to each group</span></span>
-<span id="cb897-4"><a href="toxicokinetic-modeling.html#cb897-4" tabindex="-1"></a>                              <span class="at">prob =</span> <span class="fl">0.1</span>) <span class="co">#an argument to the quantile() function</span></span>
-<span id="cb897-5"><a href="toxicokinetic-modeling.html#cb897-5" tabindex="-1"></a><span class="co">#by default the names of the output data.frame will be &#39;DTXSID&#39; and &#39;x&#39;</span></span>
-<span id="cb897-6"><a href="toxicokinetic-modeling.html#cb897-6" tabindex="-1"></a><span class="co">#let&#39;s change &#39;x&#39; to be a more informative name</span></span>
-<span id="cb897-7"><a href="toxicokinetic-modeling.html#cb897-7" tabindex="-1"></a><span class="fu">names</span>(toxcast_httk_P10) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;DTXSID&quot;</span>, <span class="st">&quot;log10_ac50_P10&quot;</span>)</span></code></pre></div>
+<p>Let’s calculate the tenth percentile ToxCast AC50 for each chemical. Here, we use the base R function <code>aggregate()</code>, which groups a vector (specified in the <code>x</code> argument) by a list of factors (specified in the <code>by</code> argument), and applies a function to each group (specified in the <code>FUN</code> argument). You can add any extra arguments to the <code>FUN</code> function as named arguments to <code>aggregate()</code>.</p>
+<div class="sourceCode" id="cb887"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb887-1"><a href="toxicokinetic-modeling.html#cb887-1" tabindex="-1"></a>toxcast_httk_P10 <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(<span class="at">x =</span> toxcast_httk<span class="sc">$</span>log10_ac50, <span class="co">#aggregate the AC50s</span></span>
+<span id="cb887-2"><a href="toxicokinetic-modeling.html#cb887-2" tabindex="-1"></a>                              <span class="at">by =</span> <span class="fu">list</span>(<span class="at">DTXSID =</span> toxcast_httk<span class="sc">$</span>DTXSID), <span class="co">#group AC50s by DTXSID</span></span>
+<span id="cb887-3"><a href="toxicokinetic-modeling.html#cb887-3" tabindex="-1"></a>                              <span class="at">FUN =</span> quantile, <span class="co">#the function to apply to each group</span></span>
+<span id="cb887-4"><a href="toxicokinetic-modeling.html#cb887-4" tabindex="-1"></a>                              <span class="at">prob =</span> <span class="fl">0.1</span>) <span class="co">#an argument to the quantile() function</span></span>
+<span id="cb887-5"><a href="toxicokinetic-modeling.html#cb887-5" tabindex="-1"></a><span class="co">#by default the names of the output data.frame will be &#39;DTXSID&#39; and &#39;x&#39;</span></span>
+<span id="cb887-6"><a href="toxicokinetic-modeling.html#cb887-6" tabindex="-1"></a><span class="co">#let&#39;s change &#39;x&#39; to be a more informative name</span></span>
+<span id="cb887-7"><a href="toxicokinetic-modeling.html#cb887-7" tabindex="-1"></a><span class="fu">names</span>(toxcast_httk_P10) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;DTXSID&quot;</span>, <span class="st">&quot;log10_ac50_P10&quot;</span>)</span></code></pre></div>
 <p>Let’s transform the tenth-percentile AC50 values back to the natural scale (they are currently on the log10 scale) and put them in a new column <code>AC50</code>. These AC50s will be in uM.</p>
-<div class="sourceCode" id="cb898"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb898-1"><a href="toxicokinetic-modeling.html#cb898-1" tabindex="-1"></a>toxcast_httk_P10<span class="sc">$</span>AC50 <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">^</span>(toxcast_httk_P10<span class="sc">$</span>log10_ac50_P10)</span></code></pre></div>
+<div class="sourceCode" id="cb888"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb888-1"><a href="toxicokinetic-modeling.html#cb888-1" tabindex="-1"></a>toxcast_httk_P10<span class="sc">$</span>AC50 <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">^</span>(toxcast_httk_P10<span class="sc">$</span>log10_ac50_P10)</span></code></pre></div>
 <p>View the first few rows:</p>
-<div class="sourceCode" id="cb899"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb899-1"><a href="toxicokinetic-modeling.html#cb899-1" tabindex="-1"></a><span class="fu">head</span>(toxcast_httk_P10)</span></code></pre></div>
+<div class="sourceCode" id="cb889"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb889-1"><a href="toxicokinetic-modeling.html#cb889-1" tabindex="-1"></a><span class="fu">head</span>(toxcast_httk_P10)</span></code></pre></div>
 <pre><code>##          DTXSID log10_ac50_P10        AC50
 ## 1 DTXSID0020022      0.8932512  7.82079968
 ## 2 DTXSID0020232      0.2903537  1.95143342
@@ -1377,33 +1358,33 @@ Figure 1: Boxplots: Distributions of Css for five daily dose levels of Bisphenol
 </div>
 <div id="calculating-equivalent-doses-for-10th-percentile-toxcast-ac50s" class="section level3 hasAnchor">
 <h3>Calculating Equivalent Doses for 10th Percentile ToxCast AC50s<a href="toxicokinetic-modeling.html#calculating-equivalent-doses-for-10th-percentile-toxcast-ac50s" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We can calculate equivalent doses in one line of R code – again including all of the Monte Carlo for TK uncertainty and variability – just by using the <code>httk</code> function <code>calc_mc_oral_equiv()</code>.</p>
+<p>We can calculate equivalent doses in one line of R code – again including all of the Monte Carlo for TK uncertainty and variability – just by using the <em>httk</em> function <code>calc_mc_oral_equiv()</code>.</p>
 <p>Note that in <code>calc_mc_oral_equiv()</code>, the <code>which.quantile</code> argument refers to the quantile of the <span class="math inline">\(C_{ss}\)</span>-dose slope, not the quantile of the equivalent dose itself. So specifying <code>which.quantile = 0.95</code> will yield a <em>lower</em> equivalent dose than <code>which.quantile = 0.05</code>.</p>
 <p>Under the hood, <code>calc_mc_oral_equiv()</code> first calls <code>calc_mc_css()</code> to get percentiles of the <span class="math inline">\(C_{ss}\)</span>-dose slope for a chemical. It then divides a user-specified target concentration (specified in argument <code>conc</code>) by each quantile of <span class="math inline">\(C_{ss}\)</span>-dose slope to get the equivalent dose corresponding to that target concentration for each slope quantile.</p>
 <p>Here, we’re using the <code>mapply()</code> function in base R to call <code>calc_mc_oral_equiv()</code> in a loop over chemicals. This is because <code>calc_mc_oral_equiv()</code> requires two chemical-specific arguments – the chemical identifier and the concentration for which to compute the equivalent dose. <code>mapply()</code> lets us provide vectors of values for each argument (in the named arguments <code>dtxsid</code> and <code>conc</code>), and will automatically loop over those vectors. We also use the argument <code>MoreArgs</code>, a named list of additional arguments to the function in <code>FUN</code> that will be the same for every iteration of the loop. Note that this line of code takes a few minutes to run.</p>
-<div class="sourceCode" id="cb901"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb901-1"><a href="toxicokinetic-modeling.html#cb901-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb901-2"><a href="toxicokinetic-modeling.html#cb901-2" tabindex="-1"></a></span>
-<span id="cb901-3"><a href="toxicokinetic-modeling.html#cb901-3" tabindex="-1"></a><span class="fu">system.time</span>(</span>
-<span id="cb901-4"><a href="toxicokinetic-modeling.html#cb901-4" tabindex="-1"></a>  <span class="fu">suppressWarnings</span>(</span>
-<span id="cb901-5"><a href="toxicokinetic-modeling.html#cb901-5" tabindex="-1"></a>  toxcast_equiv_dose <span class="ot">&lt;-</span> <span class="fu">mapply</span>(<span class="at">FUN =</span> calc_mc_oral_equiv,</span>
-<span id="cb901-6"><a href="toxicokinetic-modeling.html#cb901-6" tabindex="-1"></a>  <span class="at">conc =</span> toxcast_httk_P10<span class="sc">$</span>AC50,</span>
-<span id="cb901-7"><a href="toxicokinetic-modeling.html#cb901-7" tabindex="-1"></a>    <span class="at">dtxsid =</span> toxcast_httk_P10<span class="sc">$</span>DTXSID,</span>
-<span id="cb901-8"><a href="toxicokinetic-modeling.html#cb901-8" tabindex="-1"></a>  <span class="at">MoreArgs =</span> <span class="fu">list</span>(<span class="at">model =</span> <span class="st">&quot;3compartmentss&quot;</span>,  <span class="co">#model to use</span></span>
-<span id="cb901-9"><a href="toxicokinetic-modeling.html#cb901-9" tabindex="-1"></a>                  <span class="at">which.quantile =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.5</span>, <span class="fl">0.95</span>), <span class="co">#quantiles of Css-dose slope</span></span>
-<span id="cb901-10"><a href="toxicokinetic-modeling.html#cb901-10" tabindex="-1"></a>                       <span class="at">suppress.messages =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb901-11"><a href="toxicokinetic-modeling.html#cb901-11" tabindex="-1"></a>  )</span>
-<span id="cb901-12"><a href="toxicokinetic-modeling.html#cb901-12" tabindex="-1"></a>)</span>
-<span id="cb901-13"><a href="toxicokinetic-modeling.html#cb901-13" tabindex="-1"></a>)</span>
-<span id="cb901-14"><a href="toxicokinetic-modeling.html#cb901-14" tabindex="-1"></a></span>
-<span id="cb901-15"><a href="toxicokinetic-modeling.html#cb901-15" tabindex="-1"></a><span class="co">#by default, the results are a 3 x 869 matrix, where rows are quantiles and columns are chemicals</span></span>
-<span id="cb901-16"><a href="toxicokinetic-modeling.html#cb901-16" tabindex="-1"></a></span>
-<span id="cb901-17"><a href="toxicokinetic-modeling.html#cb901-17" tabindex="-1"></a>toxcast_equiv_dose <span class="ot">&lt;-</span> <span class="fu">t</span>(toxcast_equiv_dose) <span class="co">#transpose so that rows are chemicals</span></span>
-<span id="cb901-18"><a href="toxicokinetic-modeling.html#cb901-18" tabindex="-1"></a>toxcast_equiv_dose <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(toxcast_equiv_dose) <span class="co">#convert to data.frame</span></span>
-<span id="cb901-19"><a href="toxicokinetic-modeling.html#cb901-19" tabindex="-1"></a><span class="fu">head</span>(toxcast_equiv_dose) <span class="co">#look at first few rows</span></span></code></pre></div>
+<div class="sourceCode" id="cb891"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb891-1"><a href="toxicokinetic-modeling.html#cb891-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb891-2"><a href="toxicokinetic-modeling.html#cb891-2" tabindex="-1"></a></span>
+<span id="cb891-3"><a href="toxicokinetic-modeling.html#cb891-3" tabindex="-1"></a><span class="fu">system.time</span>(</span>
+<span id="cb891-4"><a href="toxicokinetic-modeling.html#cb891-4" tabindex="-1"></a>  <span class="fu">suppressWarnings</span>(</span>
+<span id="cb891-5"><a href="toxicokinetic-modeling.html#cb891-5" tabindex="-1"></a>  toxcast_equiv_dose <span class="ot">&lt;-</span> <span class="fu">mapply</span>(<span class="at">FUN =</span> calc_mc_oral_equiv,</span>
+<span id="cb891-6"><a href="toxicokinetic-modeling.html#cb891-6" tabindex="-1"></a>  <span class="at">conc =</span> toxcast_httk_P10<span class="sc">$</span>AC50,</span>
+<span id="cb891-7"><a href="toxicokinetic-modeling.html#cb891-7" tabindex="-1"></a>    <span class="at">dtxsid =</span> toxcast_httk_P10<span class="sc">$</span>DTXSID,</span>
+<span id="cb891-8"><a href="toxicokinetic-modeling.html#cb891-8" tabindex="-1"></a>  <span class="at">MoreArgs =</span> <span class="fu">list</span>(<span class="at">model =</span> <span class="st">&quot;3compartmentss&quot;</span>,  <span class="co">#model to use</span></span>
+<span id="cb891-9"><a href="toxicokinetic-modeling.html#cb891-9" tabindex="-1"></a>                  <span class="at">which.quantile =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.5</span>, <span class="fl">0.95</span>), <span class="co">#quantiles of Css-dose slope</span></span>
+<span id="cb891-10"><a href="toxicokinetic-modeling.html#cb891-10" tabindex="-1"></a>                       <span class="at">suppress.messages =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb891-11"><a href="toxicokinetic-modeling.html#cb891-11" tabindex="-1"></a>  )</span>
+<span id="cb891-12"><a href="toxicokinetic-modeling.html#cb891-12" tabindex="-1"></a>)</span>
+<span id="cb891-13"><a href="toxicokinetic-modeling.html#cb891-13" tabindex="-1"></a>)</span>
+<span id="cb891-14"><a href="toxicokinetic-modeling.html#cb891-14" tabindex="-1"></a></span>
+<span id="cb891-15"><a href="toxicokinetic-modeling.html#cb891-15" tabindex="-1"></a><span class="co">#by default, the results are a 3 x 869 matrix, where rows are quantiles and columns are chemicals</span></span>
+<span id="cb891-16"><a href="toxicokinetic-modeling.html#cb891-16" tabindex="-1"></a></span>
+<span id="cb891-17"><a href="toxicokinetic-modeling.html#cb891-17" tabindex="-1"></a>toxcast_equiv_dose <span class="ot">&lt;-</span> <span class="fu">t</span>(toxcast_equiv_dose) <span class="co">#transpose so that rows are chemicals</span></span>
+<span id="cb891-18"><a href="toxicokinetic-modeling.html#cb891-18" tabindex="-1"></a>toxcast_equiv_dose <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(toxcast_equiv_dose) <span class="co">#convert to data.frame</span></span>
+<span id="cb891-19"><a href="toxicokinetic-modeling.html#cb891-19" tabindex="-1"></a><span class="fu">head</span>(toxcast_equiv_dose) <span class="co">#look at first few rows</span></span></code></pre></div>
 <p>Let’s add the DTXSIDs back into this data.frame.</p>
-<div class="sourceCode" id="cb902"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb902-1"><a href="toxicokinetic-modeling.html#cb902-1" tabindex="-1"></a>toxcast_equiv_dose<span class="sc">$</span>DTXSID <span class="ot">&lt;-</span> toxcast_httk_P10<span class="sc">$</span>DTXSID</span></code></pre></div>
-<p>We can get the names of these chemicals by using the list of chemicals for which the 3-compartment steady-state model can be parameterized, which was stored in the variable `<code>chems_3compss</code>. In that dataframe, we have the compound name and CASRN corresponding to each DTXSID.</p>
-<div class="sourceCode" id="cb903"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb903-1"><a href="toxicokinetic-modeling.html#cb903-1" tabindex="-1"></a><span class="fu">head</span>(chems_3compss)</span></code></pre></div>
+<div class="sourceCode" id="cb892"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb892-1"><a href="toxicokinetic-modeling.html#cb892-1" tabindex="-1"></a>toxcast_equiv_dose<span class="sc">$</span>DTXSID <span class="ot">&lt;-</span> toxcast_httk_P10<span class="sc">$</span>DTXSID</span></code></pre></div>
+<p>We can get the names of these chemicals by using the list of chemicals for which the 3-compartment steady-state model can be parameterized, which was stored in the variable <code>chems_3compss</code>. In that dataframe, we have the compound name and CASRN corresponding to each DTXSID.</p>
+<div class="sourceCode" id="cb893"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb893-1"><a href="toxicokinetic-modeling.html#cb893-1" tabindex="-1"></a><span class="fu">head</span>(chems_3compss)</span></code></pre></div>
 <pre><code>##                                                Compound        CAS
 ## 1 2,2-bis(4-hydroxyphenyl)-1,1,1-trichloroethane (hpte)  2971-36-0
 ## 2                                                 2,4-d    94-75-7
@@ -1419,13 +1400,13 @@ Figure 1: Boxplots: Distributions of Css for five daily dose levels of Bisphenol
 ## 5 DTXSID0037495
 ## 6 DTXSID8023892</code></pre>
 <p>Merge <code>chems_3compss</code> with <code>toxcast_equiv_dose</code>.</p>
-<div class="sourceCode" id="cb905"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb905-1"><a href="toxicokinetic-modeling.html#cb905-1" tabindex="-1"></a>toxcast_equiv_dose <span class="ot">&lt;-</span> <span class="fu">merge</span>(chems_3compss,</span>
-<span id="cb905-2"><a href="toxicokinetic-modeling.html#cb905-2" tabindex="-1"></a>                            toxcast_equiv_dose,</span>
-<span id="cb905-3"><a href="toxicokinetic-modeling.html#cb905-3" tabindex="-1"></a>                            <span class="at">by =</span> <span class="st">&quot;DTXSID&quot;</span>,</span>
-<span id="cb905-4"><a href="toxicokinetic-modeling.html#cb905-4" tabindex="-1"></a>                            <span class="at">all.x =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb905-5"><a href="toxicokinetic-modeling.html#cb905-5" tabindex="-1"></a>                            <span class="at">all.y =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb905-6"><a href="toxicokinetic-modeling.html#cb905-6" tabindex="-1"></a></span>
-<span id="cb905-7"><a href="toxicokinetic-modeling.html#cb905-7" tabindex="-1"></a><span class="fu">head</span>(toxcast_equiv_dose)</span></code></pre></div>
+<div class="sourceCode" id="cb895"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb895-1"><a href="toxicokinetic-modeling.html#cb895-1" tabindex="-1"></a>toxcast_equiv_dose <span class="ot">&lt;-</span> <span class="fu">merge</span>(chems_3compss,</span>
+<span id="cb895-2"><a href="toxicokinetic-modeling.html#cb895-2" tabindex="-1"></a>                            toxcast_equiv_dose,</span>
+<span id="cb895-3"><a href="toxicokinetic-modeling.html#cb895-3" tabindex="-1"></a>                            <span class="at">by =</span> <span class="st">&quot;DTXSID&quot;</span>,</span>
+<span id="cb895-4"><a href="toxicokinetic-modeling.html#cb895-4" tabindex="-1"></a>                            <span class="at">all.x =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb895-5"><a href="toxicokinetic-modeling.html#cb895-5" tabindex="-1"></a>                            <span class="at">all.y =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb895-6"><a href="toxicokinetic-modeling.html#cb895-6" tabindex="-1"></a></span>
+<span id="cb895-7"><a href="toxicokinetic-modeling.html#cb895-7" tabindex="-1"></a><span class="fu">head</span>(toxcast_equiv_dose)</span></code></pre></div>
 <pre><code>##          DTXSID                 Compound        CAS      5%      50%     95%
 ## 1 DTXSID0020022              Acifluorfen 50594-66-6  0.3224  0.10940 0.03568
 ## 2 DTXSID0020232                 Caffeine    58-08-2  2.1720  0.89270 0.32510
@@ -1434,8 +1415,8 @@ Figure 1: Boxplots: Distributions of Css for five daily dose levels of Bisphenol
 ## 5 DTXSID0020319           Chlorothalonil  1897-45-6  8.4260  0.05517 0.01892
 ## 6 DTXSID0020365            Cyclosporin a 59865-13-3  3.1970  0.57990 0.05113</code></pre>
 <p>To find the chemicals with the lowest equivalent doses at the 95th percentile level (corresponding to the most-sensitive 5% of the population), sort this data.frame in ascending order on the <code>95%</code> column.</p>
-<div class="sourceCode" id="cb907"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb907-1"><a href="toxicokinetic-modeling.html#cb907-1" tabindex="-1"></a>toxcast_equiv_dose <span class="ot">&lt;-</span> toxcast_equiv_dose[<span class="fu">order</span>(toxcast_equiv_dose<span class="sc">$</span><span class="st">`</span><span class="at">95%</span><span class="st">`</span>), ]</span>
-<span id="cb907-2"><a href="toxicokinetic-modeling.html#cb907-2" tabindex="-1"></a><span class="fu">head</span>(toxcast_equiv_dose, <span class="dv">10</span>) <span class="co">#first ten rows of sorted table</span></span></code></pre></div>
+<div class="sourceCode" id="cb897"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb897-1"><a href="toxicokinetic-modeling.html#cb897-1" tabindex="-1"></a>toxcast_equiv_dose <span class="ot">&lt;-</span> toxcast_equiv_dose[<span class="fu">order</span>(toxcast_equiv_dose<span class="sc">$</span><span class="st">`</span><span class="at">95%</span><span class="st">`</span>), ]</span>
+<span id="cb897-2"><a href="toxicokinetic-modeling.html#cb897-2" tabindex="-1"></a><span class="fu">head</span>(toxcast_equiv_dose, <span class="dv">10</span>) <span class="co">#first ten rows of sorted table</span></span></code></pre></div>
 <pre><code>##            DTXSID                       Compound         CAS        5%
 ## 8   DTXSID0020442                          2,4-d     94-75-7 3.260e-06
 ## 771 DTXSID8037594                     Secbumeton  26259-45-0 6.757e-05
@@ -1467,6 +1448,7 @@ Figure 1: Boxplots: Distributions of Css for five daily dose levels of Bisphenol
 <div class="answer">
 <p><strong>Answer</strong>: 2,4-d; secbumeton, and 1,4-dioxane</p>
 </div>
+<p><br></p>
 </div>
 </div>
 <div id="comparing-equivalent-doses-estimated-to-elicit-toxicity-hazard-to-external-exposure-estimates-exposure-for-chemical-prioritization-by-bioactivity-exposure-ratios-bers" class="section level2 hasAnchor">
@@ -1475,8 +1457,8 @@ Figure 1: Boxplots: Distributions of Css for five daily dose levels of Bisphenol
 <div id="human-exposure-estimates" class="section level3 hasAnchor">
 <h3>Human Exposure Estimates<a href="toxicokinetic-modeling.html#human-exposure-estimates" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Here, we will use exposure estimates that have been inferred from CDC NHANES urinary biomonitoring data (Ring et al., 2019). These estimates consist of an estimated median, and estimated upper and lower 95% credible interval bounds representing uncertainty in that estimated median. These estimates are provided here in the following csv file:</p>
-<div class="sourceCode" id="cb909"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb909-1"><a href="toxicokinetic-modeling.html#cb909-1" tabindex="-1"></a>exposure <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Module6_6_Input/Module6_6_InputData2.csv&quot;</span>)</span>
-<span id="cb909-2"><a href="toxicokinetic-modeling.html#cb909-2" tabindex="-1"></a><span class="fu">head</span>(exposure) <span class="co">#view first few rows</span></span></code></pre></div>
+<div class="sourceCode" id="cb899"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb899-1"><a href="toxicokinetic-modeling.html#cb899-1" tabindex="-1"></a>exposure <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Module6_6_Input/Module6_6_InputData2.csv&quot;</span>)</span>
+<span id="cb899-2"><a href="toxicokinetic-modeling.html#cb899-2" tabindex="-1"></a><span class="fu">head</span>(exposure) <span class="co">#view first few rows</span></span></code></pre></div>
 <pre><code>##                                                                                   Compound
 ## 1                                        1,2,3,4,5,6-Hexachlorocyclohexane (mixed isomers)
 ## 2                                                                   1,2,4-Trichlorobenzene
@@ -1495,15 +1477,15 @@ Figure 1: Boxplots: Distributions of Css for five daily dose levels of Bisphenol
 <div id="merging-exposure-estimates-with-equivalent-dose-estimates-of-toxicity-hazard" class="section level3 hasAnchor">
 <h3>Merging Exposure Estimates with Equivalent Dose Estimates of Toxicity (Hazard)<a href="toxicokinetic-modeling.html#merging-exposure-estimates-with-equivalent-dose-estimates-of-toxicity-hazard" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To calculate a BER for a chemical, it needs to have both an equivalent dose and an exposure estimate. Not all of the chemicals for which equivalent doses could be computed (<em>i.e.</em>, chemicals with both ToxCast AC50s and <code>httk</code> data) also have exposure estimates inferred from NHANES. Find out how many do.</p>
-<div class="sourceCode" id="cb911"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb911-1"><a href="toxicokinetic-modeling.html#cb911-1" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">intersect</span>(toxcast_equiv_dose<span class="sc">$</span>DTXSID, exposure<span class="sc">$</span>DTXSID))</span></code></pre></div>
+<div class="sourceCode" id="cb901"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb901-1"><a href="toxicokinetic-modeling.html#cb901-1" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">intersect</span>(toxcast_equiv_dose<span class="sc">$</span>DTXSID, exposure<span class="sc">$</span>DTXSID))</span></code></pre></div>
 <pre><code>## [1] 58</code></pre>
-<p>This means that, using the ToxCast AC50 data for bioactive concentrations, the NHANES urinary inference data for exposures, and the <code>httk</code> package to convert bioactive concentrations to equivalent doses, we can compute BERs for 58 chemicals.</p>
+<p>This means that, using the ToxCast AC50 data for bioactive concentrations, the NHANES urinary inference data for exposures, and the <em>httk</em> package to convert bioactive concentrations to equivalent doses, we can compute BERs for 58 chemicals.</p>
 <p>Merge together the ToxCast equivalent doses and the exposure data into a single data frame. Keep only the chemicals that have data in both ToxCast equivalent doses and exposure data frames.</p>
-<div class="sourceCode" id="cb913"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb913-1"><a href="toxicokinetic-modeling.html#cb913-1" tabindex="-1"></a>hazard_exposure <span class="ot">&lt;-</span> <span class="fu">merge</span>(toxcast_equiv_dose,</span>
-<span id="cb913-2"><a href="toxicokinetic-modeling.html#cb913-2" tabindex="-1"></a>                         exposure,</span>
-<span id="cb913-3"><a href="toxicokinetic-modeling.html#cb913-3" tabindex="-1"></a>                         <span class="at">by =</span> <span class="st">&quot;DTXSID&quot;</span>,</span>
-<span id="cb913-4"><a href="toxicokinetic-modeling.html#cb913-4" tabindex="-1"></a>                         <span class="at">all =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb913-5"><a href="toxicokinetic-modeling.html#cb913-5" tabindex="-1"></a><span class="fu">head</span>(hazard_exposure) <span class="co">#view first few rows of result</span></span></code></pre></div>
+<div class="sourceCode" id="cb903"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb903-1"><a href="toxicokinetic-modeling.html#cb903-1" tabindex="-1"></a>hazard_exposure <span class="ot">&lt;-</span> <span class="fu">merge</span>(toxcast_equiv_dose,</span>
+<span id="cb903-2"><a href="toxicokinetic-modeling.html#cb903-2" tabindex="-1"></a>                         exposure,</span>
+<span id="cb903-3"><a href="toxicokinetic-modeling.html#cb903-3" tabindex="-1"></a>                         <span class="at">by =</span> <span class="st">&quot;DTXSID&quot;</span>,</span>
+<span id="cb903-4"><a href="toxicokinetic-modeling.html#cb903-4" tabindex="-1"></a>                         <span class="at">all =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb903-5"><a href="toxicokinetic-modeling.html#cb903-5" tabindex="-1"></a><span class="fu">head</span>(hazard_exposure) <span class="co">#view first few rows of result</span></span></code></pre></div>
 <pre><code>##          DTXSID           Compound.x      CAS.x        5%       50%       95%
 ## 1 DTXSID0020442                2,4-d    94-75-7 3.260e-06 8.940e-07 1.790e-07
 ## 2 DTXSID0021389          Trichlorfon    52-68-6 3.252e+01 5.706e+00 7.463e-01
@@ -1529,44 +1511,44 @@ Figure 1: Boxplots: Distributions of Css for five daily dose levels of Bisphenol
 <div id="plotting-hazard-and-exposure-together" class="section level3 hasAnchor">
 <h3>Plotting Hazard and Exposure Together<a href="toxicokinetic-modeling.html#plotting-hazard-and-exposure-together" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We can visually compare the equivalent doses and the inferred exposure estimates by plotting them together.</p>
-<div class="sourceCode" id="cb915"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb915-1"><a href="toxicokinetic-modeling.html#cb915-1" tabindex="-1"></a><span class="fu">ggplot</span>(hazard_exposure) <span class="sc">+</span></span>
-<span id="cb915-2"><a href="toxicokinetic-modeling.html#cb915-2" tabindex="-1"></a>  <span class="fu">geom_crossbar</span>(<span class="fu">aes</span>(<span class="at">x =</span> Compound.x, <span class="co">#Boxes for equivalent doses</span></span>
-<span id="cb915-3"><a href="toxicokinetic-modeling.html#cb915-3" tabindex="-1"></a>                     <span class="at">y =</span> <span class="st">`</span><span class="at">50%</span><span class="st">`</span>,</span>
-<span id="cb915-4"><a href="toxicokinetic-modeling.html#cb915-4" tabindex="-1"></a>                    <span class="at">ymax =</span> <span class="st">`</span><span class="at">5%</span><span class="st">`</span>,</span>
-<span id="cb915-5"><a href="toxicokinetic-modeling.html#cb915-5" tabindex="-1"></a>                    <span class="at">ymin =</span> <span class="st">`</span><span class="at">95%</span><span class="st">`</span>,</span>
-<span id="cb915-6"><a href="toxicokinetic-modeling.html#cb915-6" tabindex="-1"></a>                    <span class="at">color =</span> <span class="st">&quot;Equiv. dose&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb915-7"><a href="toxicokinetic-modeling.html#cb915-7" tabindex="-1"></a>  <span class="fu">geom_crossbar</span>(<span class="fu">aes</span>( <span class="at">x=</span> Compound.x, <span class="co">#Boxes for exposures</span></span>
-<span id="cb915-8"><a href="toxicokinetic-modeling.html#cb915-8" tabindex="-1"></a>                     <span class="at">y =</span> Median,</span>
-<span id="cb915-9"><a href="toxicokinetic-modeling.html#cb915-9" tabindex="-1"></a>                     <span class="at">ymax =</span> up95,</span>
-<span id="cb915-10"><a href="toxicokinetic-modeling.html#cb915-10" tabindex="-1"></a>                     <span class="at">ymin =</span> low95,</span>
-<span id="cb915-11"><a href="toxicokinetic-modeling.html#cb915-11" tabindex="-1"></a>                     <span class="at">color =</span> <span class="st">&quot;Exposure&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb915-12"><a href="toxicokinetic-modeling.html#cb915-12" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Equiv. dose&quot;</span> <span class="ot">=</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb915-13"><a href="toxicokinetic-modeling.html#cb915-13" tabindex="-1"></a>                                <span class="st">&quot;Exposure&quot;</span> <span class="ot">=</span> <span class="st">&quot;Orange&quot;</span>),</span>
-<span id="cb915-14"><a href="toxicokinetic-modeling.html#cb915-14" tabindex="-1"></a>                     <span class="at">name =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb915-15"><a href="toxicokinetic-modeling.html#cb915-15" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">label =</span> <span class="cf">function</span>(x) <span class="fu">str_trunc</span>(x, <span class="dv">20</span>)</span>
-<span id="cb915-16"><a href="toxicokinetic-modeling.html#cb915-16" tabindex="-1"></a>                   ) <span class="sc">+</span> <span class="co">#truncate chemical names to 20 chars</span></span>
-<span id="cb915-17"><a href="toxicokinetic-modeling.html#cb915-17" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
-<span id="cb915-18"><a href="toxicokinetic-modeling.html#cb915-18" tabindex="-1"></a>  <span class="fu">annotation_logticks</span>(<span class="at">sides =</span> <span class="st">&quot;l&quot;</span>) <span class="sc">+</span></span>
-<span id="cb915-19"><a href="toxicokinetic-modeling.html#cb915-19" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Equiv. dose or Exposure, mg/kg/day&quot;</span>) <span class="sc">+</span></span>
-<span id="cb915-20"><a href="toxicokinetic-modeling.html#cb915-20" tabindex="-1"></a> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb915-21"><a href="toxicokinetic-modeling.html#cb915-21" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>,</span>
-<span id="cb915-22"><a href="toxicokinetic-modeling.html#cb915-22" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>,</span>
-<span id="cb915-23"><a href="toxicokinetic-modeling.html#cb915-23" tabindex="-1"></a>                                   <span class="at">size =</span> <span class="dv">6</span>),</span>
-<span id="cb915-24"><a href="toxicokinetic-modeling.html#cb915-24" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb915-25"><a href="toxicokinetic-modeling.html#cb915-25" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb905"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb905-1"><a href="toxicokinetic-modeling.html#cb905-1" tabindex="-1"></a><span class="fu">ggplot</span>(hazard_exposure) <span class="sc">+</span></span>
+<span id="cb905-2"><a href="toxicokinetic-modeling.html#cb905-2" tabindex="-1"></a>  <span class="fu">geom_crossbar</span>(<span class="fu">aes</span>(<span class="at">x =</span> Compound.x, <span class="co">#Boxes for equivalent doses</span></span>
+<span id="cb905-3"><a href="toxicokinetic-modeling.html#cb905-3" tabindex="-1"></a>                     <span class="at">y =</span> <span class="st">`</span><span class="at">50%</span><span class="st">`</span>,</span>
+<span id="cb905-4"><a href="toxicokinetic-modeling.html#cb905-4" tabindex="-1"></a>                    <span class="at">ymax =</span> <span class="st">`</span><span class="at">5%</span><span class="st">`</span>,</span>
+<span id="cb905-5"><a href="toxicokinetic-modeling.html#cb905-5" tabindex="-1"></a>                    <span class="at">ymin =</span> <span class="st">`</span><span class="at">95%</span><span class="st">`</span>,</span>
+<span id="cb905-6"><a href="toxicokinetic-modeling.html#cb905-6" tabindex="-1"></a>                    <span class="at">color =</span> <span class="st">&quot;Equiv. dose&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb905-7"><a href="toxicokinetic-modeling.html#cb905-7" tabindex="-1"></a>  <span class="fu">geom_crossbar</span>(<span class="fu">aes</span>( <span class="at">x=</span> Compound.x, <span class="co">#Boxes for exposures</span></span>
+<span id="cb905-8"><a href="toxicokinetic-modeling.html#cb905-8" tabindex="-1"></a>                     <span class="at">y =</span> Median,</span>
+<span id="cb905-9"><a href="toxicokinetic-modeling.html#cb905-9" tabindex="-1"></a>                     <span class="at">ymax =</span> up95,</span>
+<span id="cb905-10"><a href="toxicokinetic-modeling.html#cb905-10" tabindex="-1"></a>                     <span class="at">ymin =</span> low95,</span>
+<span id="cb905-11"><a href="toxicokinetic-modeling.html#cb905-11" tabindex="-1"></a>                     <span class="at">color =</span> <span class="st">&quot;Exposure&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb905-12"><a href="toxicokinetic-modeling.html#cb905-12" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Equiv. dose&quot;</span> <span class="ot">=</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb905-13"><a href="toxicokinetic-modeling.html#cb905-13" tabindex="-1"></a>                                <span class="st">&quot;Exposure&quot;</span> <span class="ot">=</span> <span class="st">&quot;Orange&quot;</span>),</span>
+<span id="cb905-14"><a href="toxicokinetic-modeling.html#cb905-14" tabindex="-1"></a>                     <span class="at">name =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb905-15"><a href="toxicokinetic-modeling.html#cb905-15" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">label =</span> <span class="cf">function</span>(x) <span class="fu">str_trunc</span>(x, <span class="dv">20</span>)</span>
+<span id="cb905-16"><a href="toxicokinetic-modeling.html#cb905-16" tabindex="-1"></a>                   ) <span class="sc">+</span> <span class="co">#truncate chemical names to 20 chars</span></span>
+<span id="cb905-17"><a href="toxicokinetic-modeling.html#cb905-17" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb905-18"><a href="toxicokinetic-modeling.html#cb905-18" tabindex="-1"></a>  <span class="fu">annotation_logticks</span>(<span class="at">sides =</span> <span class="st">&quot;l&quot;</span>) <span class="sc">+</span></span>
+<span id="cb905-19"><a href="toxicokinetic-modeling.html#cb905-19" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Equiv. dose or Exposure, mg/kg/day&quot;</span>) <span class="sc">+</span></span>
+<span id="cb905-20"><a href="toxicokinetic-modeling.html#cb905-20" tabindex="-1"></a> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb905-21"><a href="toxicokinetic-modeling.html#cb905-21" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>,</span>
+<span id="cb905-22"><a href="toxicokinetic-modeling.html#cb905-22" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>,</span>
+<span id="cb905-23"><a href="toxicokinetic-modeling.html#cb905-23" tabindex="-1"></a>                                   <span class="at">size =</span> <span class="dv">6</span>),</span>
+<span id="cb905-24"><a href="toxicokinetic-modeling.html#cb905-24" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb905-25"><a href="toxicokinetic-modeling.html#cb905-25" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-663-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="calculating-bioactivity-exposure-ratios-bers" class="section level3 hasAnchor">
 <h3>Calculating Bioactivity-Exposure Ratios (BERs)<a href="toxicokinetic-modeling.html#calculating-bioactivity-exposure-ratios-bers" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The bioactivity-exposure ratio (BER) is simply the ratio of the lower-end equivalent dose (for the most-sensitive 5% of the population) divided by the upper-end estimated exposure (here, the upper bound on the inferred population median exposure). In the data frame <code>hazard_exposure</code> containing the hazard and exposure data, the lower-end equivalent dose is in column <code>95%</code> (corresponding to the 95th-percentile <span class="math inline">\(C_{ss}\)</span>-dose slope) and the upper-end exposure is in column <code>up95</code>. Calculate the BER, and assign the result to a new column in the <code>hazard_exposure</code> data frame called <code>BER</code>.</p>
-<div class="sourceCode" id="cb916"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb916-1"><a href="toxicokinetic-modeling.html#cb916-1" tabindex="-1"></a>hazard_exposure[[<span class="st">&quot;BER&quot;</span>]] <span class="ot">&lt;-</span> hazard_exposure[[<span class="st">&quot;95%&quot;</span>]]<span class="sc">/</span>hazard_exposure[[<span class="st">&quot;up95&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb906"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb906-1"><a href="toxicokinetic-modeling.html#cb906-1" tabindex="-1"></a>hazard_exposure[[<span class="st">&quot;BER&quot;</span>]] <span class="ot">&lt;-</span> hazard_exposure[[<span class="st">&quot;95%&quot;</span>]]<span class="sc">/</span>hazard_exposure[[<span class="st">&quot;up95&quot;</span>]]</span></code></pre></div>
 </div>
 <div id="prioritizing-chemicals-by-ber" class="section level3 hasAnchor">
 <h3>Prioritizing Chemicals by BER<a href="toxicokinetic-modeling.html#prioritizing-chemicals-by-ber" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To prioritize chemicals according to potential risk, they can be sorted from lowest to highest BER. The lower the BER, the higher the priority.</p>
 <p>Sort the rows of the data.frame from lowest to highest BER.</p>
-<div class="sourceCode" id="cb917"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb917-1"><a href="toxicokinetic-modeling.html#cb917-1" tabindex="-1"></a>hazard_exposure <span class="ot">&lt;-</span> hazard_exposure[<span class="fu">order</span>(hazard_exposure<span class="sc">$</span>BER), ]</span>
-<span id="cb917-2"><a href="toxicokinetic-modeling.html#cb917-2" tabindex="-1"></a><span class="fu">head</span>(hazard_exposure)</span></code></pre></div>
+<div class="sourceCode" id="cb907"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb907-1"><a href="toxicokinetic-modeling.html#cb907-1" tabindex="-1"></a>hazard_exposure <span class="ot">&lt;-</span> hazard_exposure[<span class="fu">order</span>(hazard_exposure<span class="sc">$</span>BER), ]</span>
+<span id="cb907-2"><a href="toxicokinetic-modeling.html#cb907-2" tabindex="-1"></a><span class="fu">head</span>(hazard_exposure)</span></code></pre></div>
 <pre><code>##           DTXSID                    Compound.x    CAS.x        5%       50%
 ## 1  DTXSID0020442                         2,4-d  94-75-7 3.260e-06 8.940e-07
 ## 29 DTXSID5020607 Diethylhexyl phthalate (dehp) 117-81-7 1.674e-03 6.497e-04
@@ -1590,36 +1572,36 @@ Figure 1: Boxplots: Distributions of Css for five daily dose levels of Bisphenol
 ## 27 5.930099e-05 1.212627e+02</code></pre>
 <p>The hazard-exposure plot above showed chemicals in alphabetical order. It can be revised to show chemicals in order of priority, from lowest to highest BER.</p>
 <p>First, create a categorical (factor) variable for the compound names, whose levels are in order of increasing BER. (Since we already sorted the data.frame in order of increasing BER, we can just take the compound names in the order that they appear.)</p>
-<div class="sourceCode" id="cb919"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb919-1"><a href="toxicokinetic-modeling.html#cb919-1" tabindex="-1"></a>hazard_exposure<span class="sc">$</span>Compound_factor <span class="ot">&lt;-</span> <span class="fu">factor</span>(hazard_exposure<span class="sc">$</span>Compound.x,</span>
-<span id="cb919-2"><a href="toxicokinetic-modeling.html#cb919-2" tabindex="-1"></a>                                          <span class="at">levels =</span> hazard_exposure<span class="sc">$</span>Compound.x)</span></code></pre></div>
+<div class="sourceCode" id="cb909"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb909-1"><a href="toxicokinetic-modeling.html#cb909-1" tabindex="-1"></a>hazard_exposure<span class="sc">$</span>Compound_factor <span class="ot">&lt;-</span> <span class="fu">factor</span>(hazard_exposure<span class="sc">$</span>Compound.x,</span>
+<span id="cb909-2"><a href="toxicokinetic-modeling.html#cb909-2" tabindex="-1"></a>                                          <span class="at">levels =</span> hazard_exposure<span class="sc">$</span>Compound.x)</span></code></pre></div>
 <p>Now, make the same plot as before, but use <code>Compound_factor</code> as the x-axis variable instead of <code>Compound</code>.</p>
-<div class="sourceCode" id="cb920"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb920-1"><a href="toxicokinetic-modeling.html#cb920-1" tabindex="-1"></a><span class="fu">ggplot</span>(hazard_exposure) <span class="sc">+</span></span>
-<span id="cb920-2"><a href="toxicokinetic-modeling.html#cb920-2" tabindex="-1"></a>  <span class="fu">geom_crossbar</span>(<span class="fu">aes</span>(<span class="at">x =</span> Compound_factor, <span class="co">#Boxes for equivalent dose</span></span>
-<span id="cb920-3"><a href="toxicokinetic-modeling.html#cb920-3" tabindex="-1"></a>                     <span class="at">y =</span> <span class="st">`</span><span class="at">50%</span><span class="st">`</span>,</span>
-<span id="cb920-4"><a href="toxicokinetic-modeling.html#cb920-4" tabindex="-1"></a>                    <span class="at">ymax =</span> <span class="st">`</span><span class="at">5%</span><span class="st">`</span>,</span>
-<span id="cb920-5"><a href="toxicokinetic-modeling.html#cb920-5" tabindex="-1"></a>                    <span class="at">ymin =</span> <span class="st">`</span><span class="at">95%</span><span class="st">`</span>,</span>
-<span id="cb920-6"><a href="toxicokinetic-modeling.html#cb920-6" tabindex="-1"></a>                    <span class="at">color =</span> <span class="st">&quot;Equiv. dose&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb920-7"><a href="toxicokinetic-modeling.html#cb920-7" tabindex="-1"></a>  <span class="fu">geom_crossbar</span>(<span class="fu">aes</span>( <span class="at">x=</span> Compound_factor, <span class="co">#Boxes for exposure</span></span>
-<span id="cb920-8"><a href="toxicokinetic-modeling.html#cb920-8" tabindex="-1"></a>                     <span class="at">y =</span> Median,</span>
-<span id="cb920-9"><a href="toxicokinetic-modeling.html#cb920-9" tabindex="-1"></a>                     <span class="at">ymax =</span> up95,</span>
-<span id="cb920-10"><a href="toxicokinetic-modeling.html#cb920-10" tabindex="-1"></a>                     <span class="at">ymin =</span> low95,</span>
-<span id="cb920-11"><a href="toxicokinetic-modeling.html#cb920-11" tabindex="-1"></a>                     <span class="at">color =</span> <span class="st">&quot;Exposure&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb920-12"><a href="toxicokinetic-modeling.html#cb920-12" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Equiv. dose&quot;</span> <span class="ot">=</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb920-13"><a href="toxicokinetic-modeling.html#cb920-13" tabindex="-1"></a>                                <span class="st">&quot;Exposure&quot;</span> <span class="ot">=</span> <span class="st">&quot;Orange&quot;</span>),</span>
-<span id="cb920-14"><a href="toxicokinetic-modeling.html#cb920-14" tabindex="-1"></a>                     <span class="at">name =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb920-15"><a href="toxicokinetic-modeling.html#cb920-15" tabindex="-1"></a>    <span class="fu">scale_x_discrete</span>(<span class="at">label =</span> <span class="cf">function</span>(x) <span class="fu">str_trunc</span>(x, <span class="dv">20</span>)</span>
-<span id="cb920-16"><a href="toxicokinetic-modeling.html#cb920-16" tabindex="-1"></a>                   ) <span class="sc">+</span> <span class="co">#truncate chemical names</span></span>
-<span id="cb920-17"><a href="toxicokinetic-modeling.html#cb920-17" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
-<span id="cb920-18"><a href="toxicokinetic-modeling.html#cb920-18" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Equiv. dose or Exposure, mg/kg/day&quot;</span>) <span class="sc">+</span></span>
-<span id="cb920-19"><a href="toxicokinetic-modeling.html#cb920-19" tabindex="-1"></a>  <span class="fu">annotation_logticks</span>(<span class="at">sides =</span> <span class="st">&quot;l&quot;</span>) <span class="sc">+</span></span>
-<span id="cb920-20"><a href="toxicokinetic-modeling.html#cb920-20" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb920-21"><a href="toxicokinetic-modeling.html#cb920-21" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>,</span>
-<span id="cb920-22"><a href="toxicokinetic-modeling.html#cb920-22" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>,</span>
-<span id="cb920-23"><a href="toxicokinetic-modeling.html#cb920-23" tabindex="-1"></a>                                   <span class="at">size =</span> <span class="dv">6</span>),</span>
-<span id="cb920-24"><a href="toxicokinetic-modeling.html#cb920-24" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb920-25"><a href="toxicokinetic-modeling.html#cb920-25" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb910"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb910-1"><a href="toxicokinetic-modeling.html#cb910-1" tabindex="-1"></a><span class="fu">ggplot</span>(hazard_exposure) <span class="sc">+</span></span>
+<span id="cb910-2"><a href="toxicokinetic-modeling.html#cb910-2" tabindex="-1"></a>  <span class="fu">geom_crossbar</span>(<span class="fu">aes</span>(<span class="at">x =</span> Compound_factor, <span class="co">#Boxes for equivalent dose</span></span>
+<span id="cb910-3"><a href="toxicokinetic-modeling.html#cb910-3" tabindex="-1"></a>                     <span class="at">y =</span> <span class="st">`</span><span class="at">50%</span><span class="st">`</span>,</span>
+<span id="cb910-4"><a href="toxicokinetic-modeling.html#cb910-4" tabindex="-1"></a>                    <span class="at">ymax =</span> <span class="st">`</span><span class="at">5%</span><span class="st">`</span>,</span>
+<span id="cb910-5"><a href="toxicokinetic-modeling.html#cb910-5" tabindex="-1"></a>                    <span class="at">ymin =</span> <span class="st">`</span><span class="at">95%</span><span class="st">`</span>,</span>
+<span id="cb910-6"><a href="toxicokinetic-modeling.html#cb910-6" tabindex="-1"></a>                    <span class="at">color =</span> <span class="st">&quot;Equiv. dose&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb910-7"><a href="toxicokinetic-modeling.html#cb910-7" tabindex="-1"></a>  <span class="fu">geom_crossbar</span>(<span class="fu">aes</span>( <span class="at">x=</span> Compound_factor, <span class="co">#Boxes for exposure</span></span>
+<span id="cb910-8"><a href="toxicokinetic-modeling.html#cb910-8" tabindex="-1"></a>                     <span class="at">y =</span> Median,</span>
+<span id="cb910-9"><a href="toxicokinetic-modeling.html#cb910-9" tabindex="-1"></a>                     <span class="at">ymax =</span> up95,</span>
+<span id="cb910-10"><a href="toxicokinetic-modeling.html#cb910-10" tabindex="-1"></a>                     <span class="at">ymin =</span> low95,</span>
+<span id="cb910-11"><a href="toxicokinetic-modeling.html#cb910-11" tabindex="-1"></a>                     <span class="at">color =</span> <span class="st">&quot;Exposure&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb910-12"><a href="toxicokinetic-modeling.html#cb910-12" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Equiv. dose&quot;</span> <span class="ot">=</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb910-13"><a href="toxicokinetic-modeling.html#cb910-13" tabindex="-1"></a>                                <span class="st">&quot;Exposure&quot;</span> <span class="ot">=</span> <span class="st">&quot;Orange&quot;</span>),</span>
+<span id="cb910-14"><a href="toxicokinetic-modeling.html#cb910-14" tabindex="-1"></a>                     <span class="at">name =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb910-15"><a href="toxicokinetic-modeling.html#cb910-15" tabindex="-1"></a>    <span class="fu">scale_x_discrete</span>(<span class="at">label =</span> <span class="cf">function</span>(x) <span class="fu">str_trunc</span>(x, <span class="dv">20</span>)</span>
+<span id="cb910-16"><a href="toxicokinetic-modeling.html#cb910-16" tabindex="-1"></a>                   ) <span class="sc">+</span> <span class="co">#truncate chemical names</span></span>
+<span id="cb910-17"><a href="toxicokinetic-modeling.html#cb910-17" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb910-18"><a href="toxicokinetic-modeling.html#cb910-18" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Equiv. dose or Exposure, mg/kg/day&quot;</span>) <span class="sc">+</span></span>
+<span id="cb910-19"><a href="toxicokinetic-modeling.html#cb910-19" tabindex="-1"></a>  <span class="fu">annotation_logticks</span>(<span class="at">sides =</span> <span class="st">&quot;l&quot;</span>) <span class="sc">+</span></span>
+<span id="cb910-20"><a href="toxicokinetic-modeling.html#cb910-20" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb910-21"><a href="toxicokinetic-modeling.html#cb910-21" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>,</span>
+<span id="cb910-22"><a href="toxicokinetic-modeling.html#cb910-22" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>,</span>
+<span id="cb910-23"><a href="toxicokinetic-modeling.html#cb910-23" tabindex="-1"></a>                                   <span class="at">size =</span> <span class="dv">6</span>),</span>
+<span id="cb910-24"><a href="toxicokinetic-modeling.html#cb910-24" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb910-25"><a href="toxicokinetic-modeling.html#cb910-25" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-667-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>Now, the chemicals are displayed in order of increasing BER. From left to right, you can visually see the distance increase between the lower bound of equivalent doses (the bottom of the black boxes) and the upper bound of exposure estimates (the top of the orange boxes). Since the y-axis is put on a log10 scale, the distance between the boxes corresponds to the BER. We can gather a lot of information from this plot!</p>
+<p>Now, the chemicals are displayed in order of increasing BER. From left to right, you can visually see the distance increase between the lower bound of equivalent doses (the bottom of the black boxes) and the upper bound of exposure estimates (the top of the orange boxes). Since the y-axis is put on a log<sub>10</sub> scale, the distance between the boxes corresponds to the BER. We can gather a lot of information from this plot!</p>
 </div>
 <div id="answer-to-environmental-health-question-7-2" class="section level3 hasAnchor">
 <h3>Answer to Environmental Health Question 7<a href="toxicokinetic-modeling.html#answer-to-environmental-health-question-7-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1650,32 +1632,35 @@ Figure 1: Boxplots: Distributions of Css for five daily dose levels of Bisphenol
 </div>
 <div id="filling-hazard-and-exposure-data-gaps-to-prioritize-more-chemicals" class="section level3 hasAnchor">
 <h3>Filling Hazard and Exposure Data Gaps to Prioritize More Chemicals<a href="toxicokinetic-modeling.html#filling-hazard-and-exposure-data-gaps-to-prioritize-more-chemicals" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>To calculate a BER for a chemical, both bioactivity and exposure data are required, as well as sufficient TK data to perform reverse TK. In this training module, bioactivity data came from ToxCast AC50s; exposure data consisted of exposure inferences made from NHANES urinary biomonitoring data; and TK data consisted of parameter values measured <em>in vitro</em> and built into the <code>httk</code> R package. The intersections are illustrated in an Euler diagram below. BERs can only be calculated for chemicals in the triple intersection.</p>
-<div class="sourceCode" id="cb921"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb921-1"><a href="toxicokinetic-modeling.html#cb921-1" tabindex="-1"></a>fit <span class="ot">&lt;-</span> eulerr<span class="sc">::</span><span class="fu">euler</span>(<span class="fu">list</span>(<span class="st">&#39;ToxCast AC50s&#39;</span> <span class="ot">=</span> <span class="fu">unique</span>(toxcast<span class="sc">$</span>DTXSID),</span>
-<span id="cb921-2"><a href="toxicokinetic-modeling.html#cb921-2" tabindex="-1"></a>                   <span class="st">&#39;HTTK&#39;</span> <span class="ot">=</span> <span class="fu">unique</span>(chems_3compss<span class="sc">$</span>DTXSID),</span>
-<span id="cb921-3"><a href="toxicokinetic-modeling.html#cb921-3" tabindex="-1"></a>                   <span class="st">&#39;NHANES inferred exposure&#39;</span> <span class="ot">=</span> <span class="fu">unique</span>(exposure<span class="sc">$</span>DTXSID)</span>
-<span id="cb921-4"><a href="toxicokinetic-modeling.html#cb921-4" tabindex="-1"></a>                   ),</span>
-<span id="cb921-5"><a href="toxicokinetic-modeling.html#cb921-5" tabindex="-1"></a>                   <span class="at">shape =</span> <span class="st">&quot;ellipse&quot;</span>)</span>
-<span id="cb921-6"><a href="toxicokinetic-modeling.html#cb921-6" tabindex="-1"></a><span class="fu">plot</span>(fit,</span>
-<span id="cb921-7"><a href="toxicokinetic-modeling.html#cb921-7" tabindex="-1"></a>     <span class="at">legend =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb921-8"><a href="toxicokinetic-modeling.html#cb921-8" tabindex="-1"></a>                   <span class="at">quantities =</span> <span class="cn">TRUE</span></span>
-<span id="cb921-9"><a href="toxicokinetic-modeling.html#cb921-9" tabindex="-1"></a>              )</span></code></pre></div>
+<p>To calculate a BER for a chemical, both bioactivity and exposure data are required, as well as sufficient TK data to perform reverse TK. In this training module, bioactivity data came from ToxCast AC50s; exposure data consisted of exposure inferences made from NHANES urinary biomonitoring data; and TK data consisted of parameter values measured <em>in vitro</em> and built into the <em>httk</em> R package. The intersections are illustrated in an Euler diagram below. BERs can only be calculated for chemicals in the triple intersection.</p>
+<div class="sourceCode" id="cb911"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb911-1"><a href="toxicokinetic-modeling.html#cb911-1" tabindex="-1"></a>fit <span class="ot">&lt;-</span> eulerr<span class="sc">::</span><span class="fu">euler</span>(<span class="fu">list</span>(<span class="st">&#39;ToxCast AC50s&#39;</span> <span class="ot">=</span> <span class="fu">unique</span>(toxcast<span class="sc">$</span>DTXSID),</span>
+<span id="cb911-2"><a href="toxicokinetic-modeling.html#cb911-2" tabindex="-1"></a>                   <span class="st">&#39;HTTK&#39;</span> <span class="ot">=</span> <span class="fu">unique</span>(chems_3compss<span class="sc">$</span>DTXSID),</span>
+<span id="cb911-3"><a href="toxicokinetic-modeling.html#cb911-3" tabindex="-1"></a>                   <span class="st">&#39;NHANES inferred exposure&#39;</span> <span class="ot">=</span> <span class="fu">unique</span>(exposure<span class="sc">$</span>DTXSID)</span>
+<span id="cb911-4"><a href="toxicokinetic-modeling.html#cb911-4" tabindex="-1"></a>                   ),</span>
+<span id="cb911-5"><a href="toxicokinetic-modeling.html#cb911-5" tabindex="-1"></a>                   <span class="at">shape =</span> <span class="st">&quot;ellipse&quot;</span>)</span>
+<span id="cb911-6"><a href="toxicokinetic-modeling.html#cb911-6" tabindex="-1"></a><span class="fu">plot</span>(fit,</span>
+<span id="cb911-7"><a href="toxicokinetic-modeling.html#cb911-7" tabindex="-1"></a>     <span class="at">legend =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb911-8"><a href="toxicokinetic-modeling.html#cb911-8" tabindex="-1"></a>                   <span class="at">quantities =</span> <span class="cn">TRUE</span></span>
+<span id="cb911-9"><a href="toxicokinetic-modeling.html#cb911-9" tabindex="-1"></a>              )</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-668-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Clearly, it would be useful to gather more data to allow calculation of BERs for more chemicals.</p>
 </div>
 <div id="answer-to-environmental-health-question-10" class="section level3 hasAnchor">
 <h3>Answer to Environmental Health Question 10<a href="toxicokinetic-modeling.html#answer-to-environmental-health-question-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="question">
-<p><em>With this, we can also answer <strong>Environmental Health Question #10</strong></em>: Of the three data sets used in this training module – bioactivity from ToxCast, TK data from <code>httk</code>, and exposure inferred from NHANES urinary biomonitoring – which one most limits the number of chemicals that can be prioritized using BERs?</p>
-<div class="answer">
-<p><strong>Answer</strong>: The exposure data set includes the fewest chemicals and is therefore the most limiting.</p>
+<p><em>With this, we can also answer <strong>Environmental Health Question #10</strong></em>: Of the three datasets used in this training module – bioactivity from ToxCast, TK data from <em>httk</em>, and exposure inferred from NHANES urinary biomonitoring – which one most limits the number of chemicals that can be prioritized using BERs?</p>
 </div>
-<p>The exposure data set used in this training module is limited to chemicals for which NHANES did urinary biomonitoring for markers of exposure, which is a fairly small set of chemicals that were of interest to NHANES due to existing concerns about health effects of exposure, and/or other reasons. This data set was chosen because it is a convenient set of exposure estimates to use for demonstration purposes, but it could be expanded by including other sources of exposure data and exposure model predictions. Further discussion is beyond the scope of this training module, but as an example of this kind of high-throughput exposure modeling, see <a href="https://pubmed.ncbi.nlm.nih.gov/30516957/">Ring et al., 2019</a>.</p>
+<div class="answer">
+<p><strong>Answer</strong>: The exposure dataset includes the fewest chemicals and is therefore the most limiting.</p>
+</div>
+<p>The exposure dataset used in this training module is limited to chemicals for which NHANES did urinary biomonitoring for markers of exposure, which is a fairly small set of chemicals that were of interest to NHANES due to existing concerns about health effects of exposure, and/or other reasons. This dataset was chosen because it is a convenient set of exposure estimates to use for demonstration purposes, but it could be expanded by including other sources of exposure data and exposure model predictions. Further discussion is beyond the scope of this training module, but as an example of this kind of high-throughput exposure modeling, see <a href="https://pubmed.ncbi.nlm.nih.gov/30516957/">Ring et al., 2019</a>.</p>
 <p>It would additionally be useful to gather TK data for additional chemicals. <em>In vitro</em> measurement efforts are ongoing. Additonally, <em>in silico</em> modeling can produce useful predictions of TK properties to facilitate chemical prioritization. Efforts are ongoing to develop computational models to predict TK parameters from chemical structure and properties.</p>
+</div>
+</div>
 <div id="concluding-remarks-28" class="section level2 hasAnchor">
 <h2>Concluding Remarks<a href="toxicokinetic-modeling.html#concluding-remarks-28" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>This training module provides an overview of toxicokinetic modeling using the <code>httk</code> R package, and its application to <em>in vitro</em>-<em>in vivo</em> extrapolation in the form of placing <em>in vitro</em> data in the context of exposure by calculating equivalent doses for <em>in vitro</em> bioactive concentrations.</p>
-<p>We would like to acknowledge the developers of the httk package, as detailed below via the CRAN website:</p>
+<p>This training module provides an overview of toxicokinetic modeling using the <em>httk</em> R package, and its application to <em>in vitro</em>-<em>in vivo</em> extrapolation in the form of placing <em>in vitro</em> data in the context of exposure by calculating equivalent doses for <em>in vitro</em> bioactive concentrations.</p>
+<p>We would like to acknowledge the developers of the <em>httk</em> package, as detailed below via the CRAN website:</p>
 <p><img src="Module6_6_Input/Module6_6_Image2.png" width="574" style="display: block; margin: auto;" /></p>
 <p>This module also summarizes the use of the Bioactivity-Exposure Ratio (BER) for chemical prioritization, and provides examples of calculating the BER and ranking chemicals accordingly.</p>
 <p>Together, these approaches can be used to more efficiently identify chemicals present in the environment that pose a potential risk to human health.</p>
@@ -1697,9 +1682,10 @@ Test Your Knowledge
 </label></p>
 <div class="tyk">
 <ol style="list-style-type: decimal">
-<li>After exposure to a single daily dose of 1 mg/kg/day methylparaben, what is the maximum concentration of methylparaben estimated to occur in human liver, estimated by the 3-comprtment model implemented in <code>httk</code>?</li>
+<li>After exposure to a single daily dose of 1 mg/kg/day methylparaben, what is the maximum concentration of methylparaben estimated to occur in human liver, estimated by the 3-comprtment model implemented in <em>httk</em>?</li>
 <li>What is the predicted range of methylparaben concentrations in plasma that can occur in a human population, assuming a long-term exposure rate of 1 mg/kg/day and 3-compartment steady-state conditions? Provide estimates at the 5th, 50th, and 95th percentile.</li>
 </ol>
+</div>
 </div>
 </div>
             </section>

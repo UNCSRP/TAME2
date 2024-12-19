@@ -23,7 +23,7 @@
 <meta name="author" content="Rager Lab" />
 
 
-<meta name="date" content="2024-12-06" />
+<meta name="date" content="2024-12-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -462,6 +462,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#capturing-population-variability-in-toxicokinetics-and-uncertainty-in-chemical-specific-parameters"><i class="fa fa-check"></i>Capturing Population Variability in Toxicokinetics, and Uncertainty in Chemical-Specific Parameters</a></li>
 <li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#reverse-tk-calculating-administered-equivalent-doses-for-toxcast-bioactive-concentrations"><i class="fa fa-check"></i>Reverse TK: Calculating Administered Equivalent Doses for ToxCast Bioactive Concentrations</a></li>
 <li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#comparing-equivalent-doses-estimated-to-elicit-toxicity-hazard-to-external-exposure-estimates-exposure-for-chemical-prioritization-by-bioactivity-exposure-ratios-bers"><i class="fa fa-check"></i>Comparing Equivalent Doses Estimated to Elicit Toxicity (Hazard) to External Exposure Estimates (Exposure), for Chemical Prioritization by Bioactivity-Exposure Ratios (BERs)</a></li>
+<li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#concluding-remarks-28"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html"><i class="fa fa-check"></i>Chemical Read-Across for Toxicity Predictions</a>
+<ul>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#introduction-to-training-module-29"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#introduction-to-activity"><i class="fa fa-check"></i>Introduction to Activity</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#read-across-example-analysis"><i class="fa fa-check"></i>Read-Across Example Analysis</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#calculating-chemical-similarities"><i class="fa fa-check"></i>Calculating Chemical Similarities</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#chemical-read-across-to-predict-acute-toxicity"><i class="fa fa-check"></i>Chemical Read-Across to Predict Acute Toxicity</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#concluding-remarks-29"><i class="fa fa-check"></i>Concluding Remarks</a></li>
 </ul></li>
 <li class="part"><span><b>Chapter 7 Environmental<br> Health Database Mining</b></span></li>
 <li class="chapter" data-level="" data-path="comparative-toxicogenomics-database.html"><a href="comparative-toxicogenomics-database.html"><i class="fa fa-check"></i>7.1 Comparative Toxicogenomics Database</a>
@@ -527,19 +537,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>All input files (script, data, and figures) can be downloaded from the <a href="https://github.com/UNCSRP/TAME2">UNC-SRP TAME2 GitHub website</a>.</p>
 <div id="introduction-to-training-module-26" class="section level2 hasAnchor">
 <h2>Introduction to Training Module<a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#introduction-to-training-module-26" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In this training module, we will continue to explore mixtures analysis method, this time with a scripted example of Bayesian Kernel Machine Regression (BKMR). Please refer to <strong>TAME 2.0 Module 6.3, Mixtures Analysis Methods Part 1: Overview and Example with Quantile G-Computation</strong> for an overview of mixtures methodologies and a scripted example using Quantile g-Computation.</p>
+<p>In this training module, we will continue to explore mixtures analysis method, this time with a scripted example of Bayesian Kernel Machine Regression (BKMR). Please refer to <strong>TAME 2.0 Module 6.3 Mixtures Analysis Methods Part 1: Overview and Example with Quantile G-Computation</strong> for an overview of mixtures methodologies and a scripted example using Quantile g-Computation.</p>
 </div>
 <div id="introduction-to-example-data-3" class="section level2 hasAnchor">
 <h2>Introduction to Example Data<a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#introduction-to-example-data-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In this scripted example, we will use a dataset from the <a href="https://elgan.fpg.unc.edu/">Extremely Low Gestational Age Newborn (ELGAN) cohort</a>. Specifically, we will analyze metal mixtures assessed in cord tissue collected at delivery with neonatal inflammation measured over the first two weeks of life.</p>
 <p>For more information on the cord tissue metals data, please see the following two publications:</p>
 <ul>
-<li>Eaves LA, Bulka CM, Rager JE, Galusha AL, Parsons PJ, O’Shea TM and Fry RC. <a href="https://pubmed.ncbi.nlm.nih.gov/36493891/">Metals mixtures modeling identifies birth weight-associated gene networks in the placentas of children born extremely preterm</a>. Chemosphere. 2022;137469. <a href="doi:10.1016/j.chemosphere.2022.137469" class="uri">doi:10.1016/j.chemosphere.2022.137469</a>.</li>
-<li>Bulka CM, Eaves LA, Gardner AJ, Parsons PJ, Kyle RR, Smeester L, O”Shea TM, Fry RC. <a href="https://pubmed.ncbi.nlm.nih.gov/36405975/">Prenatal exposure to multiple metallic and metalloid trace elements and the risk of bacterial sepsis in extremely low gestational age newborns: A prospective cohort study</a>. Front Epidemiol. 2022;2. <a href="doi:10.3389/fepid.2022.958389" class="uri">doi:10.3389/fepid.2022.958389</a></li>
+<li><p>Eaves LA, Bulka CM, Rager JE, Galusha AL, Parsons PJ, O’Shea TM and Fry RC. Metals mixtures modeling identifies birth weight-associated gene networks in the placentas of children born extremely preterm. Chemosphere. 2022;137469. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/36493891/">36493891</a></p></li>
+<li><p>Bulka CM, Eaves LA, Gardner AJ, Parsons PJ, Kyle RR, Smeester L, O”Shea TM, Fry RC. Prenatal exposure to multiple metallic and metalloid trace elements and the risk of bacterial sepsis in extremely low gestational age newborns: A prospective cohort study. Front Epidemiol. 2022;2. <a href="PMID:%5B36405975%5D" class="uri">PMID:[36405975]</a> (<a href="https://pubmed.ncbi.nlm.nih.gov/36405975/" class="uri">https://pubmed.ncbi.nlm.nih.gov/36405975/</a>)</p></li>
 </ul>
 <p>For more information on the neonatal inflammation data, please see the following publication:</p>
 <ul>
-<li>Eaves LA, Enggasser AE, Camerota M, Gogcu S, Gower WA, Hartwell H, Jackson WM, Jensen E, Joseph RM, Marsit CJ, Roell K, Santos HP Jr, Shenberger JS, Smeester L, Yanni D, Kuban KCK, O’Shea TM, Fry RC. <a href="https://pubmed.ncbi.nlm.nih.gov/35764815/">CpG methylation patterns in placenta and neonatal blood are differentially associated with neonatal inflammation</a>. Pediatr Res. June 2022. <a href="doi:10.1038/s41390-022-02150-4" class="uri">doi:10.1038/s41390-022-02150-4</a></li>
+<li>Eaves LA, Enggasser AE, Camerota M, Gogcu S, Gower WA, Hartwell H, Jackson WM, Jensen E, Joseph RM, Marsit CJ, Roell K, Santos HP Jr, Shenberger JS, Smeester L, Yanni D, Kuban KCK, O’Shea TM, Fry RC. CpG methylation patterns in placenta and neonatal blood are differentially associated with neonatal inflammation. Pediatr Res. June 2022. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/35764815/">35764815</a></li>
 </ul>
 <p>Here, we have a dataset of n=254 participants for which we have complete data on neonatal inflammation, cord tissue metals and key demographic variables that will be included as confounders in the analysis.</p>
 <p>Extensive research in the ELGAN study has demonstrated that neonatal inflammation is predictive of cerebral palsy, ASD, ADHD, obesity, cognitive impairment, attention problems,cerebral white matter damage, and decreased total brain volume, among other adverse outcomes. Therefore identifying exposures that lead to neonatal inflammation and could be intervened upon to reduce the risk of neonatal inflammation is critical to improve neonatal health. Environmental exposures during pregnancy such as metals may contribute to neonatal inflammation. As is often the case in environmental health, these chemical exposures are likely co-occurring and therefore mixtures methods are needed.</p>
@@ -565,7 +575,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>While BKMR can do many things other methods cannot, it can require a lot of computational resources and take a long time to run. Before working with your final dataset and analysis, if very large or complex, it is often recommended to start with a smaller sample to make sure everything is working correctly before starting an analysis that make takes days to complete.</p>
 <div id="training-modules-environmental-health-questions-18" class="section level3 hasAnchor">
 <h3>Training Module’s <strong>Environmental Health Questions</strong><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#training-modules-environmental-health-questions-18" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>This training module was specifically developed to answer the following questions, which mirror the questions in <strong>TAME 2.0 Module 6.3</strong>, but are just in a different order:</p>
+<p>This training module was specifically developed to answer the following questions, which mirror the questions in <strong>TAME 2.0 Module 6.3 Mixtures Analysis Methods Part 1</strong>, but are just in a different order:</p>
 <ol style="list-style-type: decimal">
 <li>Which of these chemicals has the strongest effect on neonatal inflammation risk?</li>
 <li>Which of these chemicals increases the risk of neonatal inflammation and which decreases the risk of neonatal inflammation?</li>
@@ -624,46 +634,46 @@ and in addition to the questions addressed in Mixtures Methods 1, we additionall
 <p>The variables in this dataset include sample and demographic information and cort tissue metal exposure in <span class="math inline">\(mu\)</span>g/g or ng/g.</p>
 <p><em>Sample and Demographic Variables</em></p>
 <ul>
-<li>“id”: unique study ID<br />
+<li><code>id</code>: unique study ID<br />
 outcome:</li>
-<li>“inflam_intense”: 1= high inflammation, 0=low inflammation
+<li><code>inflam_intense</code>: 1= high inflammation, 0=low inflammation
 covariates:</li>
-<li>“race1”: maternal race, 1=White, 2=Black, 0=Other<br />
+<li><code>race1</code>: maternal race, 1=White, 2=Black, 0=Other<br />
 </li>
-<li>“sex”: neonatal sex, 0=female, 1=male<br />
+<li><code>sex</code>: neonatal sex, 0=female, 1=male<br />
 </li>
-<li>“gadays”: gestational age at delivery in days<br />
+<li><code>gadays</code>: gestational age at delivery in days<br />
 </li>
-<li>“magecat”: maternal age, 1= &lt;21, 2=21-35, 3= &gt; 35<br />
+<li><code>magecat</code>: maternal age, 1= &lt;21, 2=21-35, 3= &gt; 35<br />
 </li>
-<li>“medu”:maternal education: 1= &lt;12, 2=12, 3=13-15, 4=16, 5= &gt;16<br />
+<li><code>medu</code>:maternal education: 1= &lt;12, 2=12, 3=13-15, 4=16, 5= &gt;16<br />
 </li>
-<li>“smoke”: maternal smoking while pregnant, 0=no, 1=yes</li>
+<li><code>smoke</code>: maternal smoking while pregnant, 0=no, 1=yes</li>
 </ul>
 <p><em>Exposure Variables</em></p>
 <ul>
-<li>“Mn_ugg”<br />
+<li><code>Mn_ugg</code><br />
 </li>
-<li>“Cu_ugg”<br />
+<li><code>Cu_ugg</code><br />
 </li>
-<li>“Zn_ugg”<br />
+<li><code>Zn_ugg</code><br />
 </li>
-<li>“As_ngg”<br />
+<li><code>As_ngg</code><br />
 </li>
-<li>“Se_ugg”<br />
+<li><code>Se_ugg</code><br />
 </li>
-<li>“Cd_ngg”<br />
+<li><code>Cd_ngg</code><br />
 </li>
-<li>“Hg_ngg”<br />
+<li><code>Hg_ngg</code><br />
 </li>
-<li>“Pb_ngg”</li>
+<li><code>Pb_ngg</code></li>
 </ul>
 <p>There are many steps prior to the modeling steps outlined below. These are being skipped for educational purposes. Additional steps include assessment of normality and transformations as needed, generation of a demographics table and assessing for missing data, imputation of missing data if needed, visualizing trends and distributions in the data, assessing correlations between exposures, functional form assessments, and decisions regarding what confounders to include.</p>
-<p>In addition, it is highly recommended to conduct single-contaminant modeling initially to understand individual chemical relationships with the outcomes of focus before conducting mixtures assessment. For an example of this, see <strong>TAME 2.0 Module 6.3, Mixtures Analysis Methods Part 1: Overview and Example with Quantile G-Computation</strong>. BKMR, as a flexible non-parametric modeling approach, does not allow for classical null-hypothesis testing, and 95% CI are interpreted as credible intervals, not confidence intervals. One approach therefore could be to explore non-linearities and interactions within BKMR to then validate generated hypotheses using quantile g-computation.</p>
+<p>In addition, it is highly recommended to conduct single-contaminant modeling initially to understand individual chemical relationships with the outcomes of focus before conducting mixtures assessment. For an example of this, see <strong>TAME 2.0 Module 6.3 Mixtures Analysis Methods Part 1: Overview and Example with Quantile G-Computation</strong>. BKMR, as a flexible non-parametric modeling approach, does not allow for classical null-hypothesis testing, and 95% CI are interpreted as credible intervals, not confidence intervals. One approach therefore could be to explore non-linearities and interactions within BKMR to then validate generated hypotheses using quantile g-computation.</p>
 </div>
 <div id="fit-the-bkmr-model" class="section level3 hasAnchor">
 <h3>Fit the BKMR Model<a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#fit-the-bkmr-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>First, define a matrix/vector of the exposure mixture, outcome, and confounders/covariates. BKMR performs better when the exposures are on a similar scale and when there are not outliers. Thus, we center and scale the exposure variables first. As noted above, in a complete analysis, thorough examination of exposure variable distributions, including outliers and normality, would be conducted before any exposure-outcome modeling. For more information on normality testing, see <strong>TAME 2.0 Module 3.3, Normality Tests and Data Transformations.</strong></p>
+<p>First, define a matrix/vector of the exposure mixture, outcome, and confounders/covariates. BKMR performs better when the exposures are on a similar scale and when there are not outliers. Thus, we center and scale the exposure variables first. As noted above, in a complete analysis, thorough examination of exposure variable distributions, including outliers and normality, would be conducted before any exposure-outcome modeling. For more information on normality testing, see <strong>TAME 2.0 Module 3.3 Normality Tests and Data Transformations.</strong></p>
 <p>First, we’ll assign the matrix variables to their own data frame and scale the data.</p>
 <div class="sourceCode" id="cb754"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb754-1"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#cb754-1" tabindex="-1"></a><span class="co">#exposure mixture variables</span></span>
 <span id="cb754-2"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#cb754-2" tabindex="-1"></a>mixture <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(cohort[,<span class="dv">10</span><span class="sc">:</span><span class="dv">17</span>])</span>
@@ -696,16 +706,16 @@ covariates:</li>
 <div class="sourceCode" id="cb758"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb758-1"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#cb758-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">111</span>)</span>
 <span id="cb758-2"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#cb758-2" tabindex="-1"></a>fitkm <span class="ot">&lt;-</span> <span class="fu">kmbayes</span>(<span class="at">y =</span> y, <span class="at">Z =</span> mixture, <span class="at">X =</span> covariates, <span class="at">iter =</span> <span class="dv">5000</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>, <span class="at">varsel =</span> <span class="cn">TRUE</span>, <span class="at">family=</span><span class="st">&quot;binomial&quot;</span>, <span class="at">est.h =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## Fitting probit regression model</code></pre>
-<pre><code>## Iteration: 500 (10% completed; 22.03943 secs elapsed)</code></pre>
-<pre><code>## Iteration: 1000 (20% completed; 54.10933 secs elapsed)</code></pre>
-<pre><code>## Iteration: 1500 (30% completed; 1.59119 mins elapsed)</code></pre>
-<pre><code>## Iteration: 2000 (40% completed; 2.25341 mins elapsed)</code></pre>
-<pre><code>## Iteration: 2500 (50% completed; 2.93571 mins elapsed)</code></pre>
-<pre><code>## Iteration: 3000 (60% completed; 3.62198 mins elapsed)</code></pre>
-<pre><code>## Iteration: 3500 (70% completed; 4.38828 mins elapsed)</code></pre>
-<pre><code>## Iteration: 4000 (80% completed; 5.02321 mins elapsed)</code></pre>
-<pre><code>## Iteration: 4500 (90% completed; 5.70008 mins elapsed)</code></pre>
-<pre><code>## Iteration: 5000 (100% completed; 6.37678 mins elapsed)</code></pre>
+<pre><code>## Iteration: 500 (10% completed; 17.39164 secs elapsed)</code></pre>
+<pre><code>## Iteration: 1000 (20% completed; 41.04358 secs elapsed)</code></pre>
+<pre><code>## Iteration: 1500 (30% completed; 1.14995 mins elapsed)</code></pre>
+<pre><code>## Iteration: 2000 (40% completed; 1.60895 mins elapsed)</code></pre>
+<pre><code>## Iteration: 2500 (50% completed; 2.07096 mins elapsed)</code></pre>
+<pre><code>## Iteration: 3000 (60% completed; 2.53635 mins elapsed)</code></pre>
+<pre><code>## Iteration: 3500 (70% completed; 2.99947 mins elapsed)</code></pre>
+<pre><code>## Iteration: 4000 (80% completed; 3.44711 mins elapsed)</code></pre>
+<pre><code>## Iteration: 4500 (90% completed; 3.90825 mins elapsed)</code></pre>
+<pre><code>## Iteration: 5000 (100% completed; 4.36699 mins elapsed)</code></pre>
 <p>For full information regarding options for the kmbayes function, refer to the BKMR reference manual: <a href="https://cran.r-project.org/web/packages/bkmr/bkmr.pdf" class="uri">https://cran.r-project.org/web/packages/bkmr/bkmr.pdf</a></p>
 </div>
 <div id="assess-variable-importance" class="section level3 hasAnchor">
@@ -748,7 +758,7 @@ covariates:</li>
 <div id="single-exposure-effects" class="section level4 hasAnchor">
 <h4>Single exposure effects<a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#single-exposure-effects" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>As described above, one way to examine single effects is to calculate the odds ratio of inflammation when a single exposure is at its 75th percentile compared to its 25th percentile, with other exposures are at their 50th percentile and covariates are held constant.</p>
-<p>Here, we use the <code>PredictorResponseUnivar()</code> function to generate a dataset that details, at varying levels of each exposure (“z”), the relationship between that exposure and the outcome, holding other exposures at their 50th percentile and covariates constant. This relationship is given by a beta value, which because we have a binomial outcome and fit a probit model represents the log(odds) (“est”). The standard error for the beta value is also calculated (“se”).</p>
+<p>Here, we use the <code>PredictorResponseUnivar()</code> function to generate a dataset that details, at varying levels of each exposure (<code>z</code>), the relationship between that exposure and the outcome, holding other exposures at their 50th percentile and covariates constant. This relationship is given by a beta value, which because we have a binomial outcome and fit a probit model represents the log(odds) (<code>est</code>). The standard error for the beta value is also calculated (<code>se</code>).</p>
 <div class="sourceCode" id="cb774"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb774-1"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#cb774-1" tabindex="-1"></a>pred.resp.univar <span class="ot">&lt;-</span> <span class="fu">PredictorResponseUnivar</span>(<span class="at">fit=</span>fitkm, <span class="at">sel=</span>sel, </span>
 <span id="cb774-2"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#cb774-2" tabindex="-1"></a>                                            <span class="at">method=</span><span class="st">&quot;approx&quot;</span>, <span class="at">q.fixed =</span> <span class="fl">0.5</span>)</span>
 <span id="cb774-3"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#cb774-3" tabindex="-1"></a></span>
@@ -767,7 +777,7 @@ covariates:</li>
 <span id="cb776-2"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#cb776-2" tabindex="-1"></a>                             <span class="at">ymax =</span> est <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span>se)) <span class="sc">+</span> </span>
 <span id="cb776-3"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#cb776-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;h(z)&quot;</span>) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span> variable) </span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-577-1.png" width="672" /></p>
-<p>Then, we can generate a dataset that contains for each exposure (“variable”), the log(OR) (“est”) (and its standard deviation (“sd”)) corresponding to the odds of neonatal inflammation when an exposure is at its 75th compared to the odds when at the 25th percentile. The log(OR) is estimated at three levels of the other exposures (25th, 50th and 75th percentiles). We can use this dataset to identify odds ratios for neonatal inflammation (comparing the 75th to 25th percentile odds) for each exposure at differing levels of the other exposures. These odds ratios approximate risk, whereby an odds ratio &gt;1 means there is increased risk of neonatal inflammation when that exposure is at its 75th percentile compared to its 25th percentile. We can then plot these data to see the logOR for each metal in relation to neonatal inflammation at varying levels of the rest of the exposures.</p>
+<p>Then, we can generate a dataset that contains for each exposure (<code>variable</code>), the log(OR) (<code>est</code>) (and its standard deviation (<code>sd</code>)) corresponding to the odds of neonatal inflammation when an exposure is at its 75th compared to the odds when at the 25th percentile. The log(OR) is estimated at three levels of the other exposures (25th, 50th and 75th percentiles). We can use this dataset to identify odds ratios for neonatal inflammation (comparing the 75th to 25th percentile odds) for each exposure at differing levels of the other exposures. These odds ratios approximate risk, whereby an odds ratio &gt;1 means there is increased risk of neonatal inflammation when that exposure is at its 75th percentile compared to its 25th percentile. We can then plot these data to see the logOR for each metal in relation to neonatal inflammation at varying levels of the rest of the exposures.</p>
 <div class="sourceCode" id="cb777"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb777-1"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#cb777-1" tabindex="-1"></a>risks.singvar <span class="ot">&lt;-</span> <span class="fu">SingVarRiskSummaries</span>(<span class="at">fit=</span>fitkm, <span class="at">qs.diff =</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.75</span>),</span>
 <span id="cb777-2"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#cb777-2" tabindex="-1"></a>                                      <span class="at">q.fixed =</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.50</span>, <span class="fl">0.75</span>), </span>
 <span id="cb777-3"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#cb777-3" tabindex="-1"></a>                                      <span class="at">method =</span> <span class="st">&quot;approx&quot;</span>)</span>
@@ -800,7 +810,7 @@ covariates:</li>
 </div>
 <div id="calculating-the-overall-mixture-effect" class="section level4 hasAnchor">
 <h4>Calculating the overall mixture effect<a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#calculating-the-overall-mixture-effect" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Next, we can generate a dataset that details the effect (ie. log(OR) (“est”) and corresponding standard deviation (“sd”)) on neonatal inflammation of all exposures when at a particular quantile (“quantile”) compared to all exposures being at the 50th percentile. We can use this dataset to identify odds ratios for neonatal inflammation upon simultaneous exposure to the entire mixture for different quantile threshold comparisons. These odds ratios approximate risk, whereby an odds ratio &gt;1 means there is increased risk of neonatal inflammation when the entire mixture is set at the index quantile, compared to the 50th percentile. We can also plot these results to visualize the overall mixture effect dose-response relationship.</p>
+<p>Next, we can generate a dataset that details the effect (ie. log(OR) (<code>est</code>) and corresponding standard deviation (<code>sd</code>)) on neonatal inflammation of all exposures when at a particular quantile (<code>quantile</code>) compared to all exposures being at the 50th percentile. We can use this dataset to identify odds ratios for neonatal inflammation upon simultaneous exposure to the entire mixture for different quantile threshold comparisons. These odds ratios approximate risk, whereby an odds ratio &gt;1 means there is increased risk of neonatal inflammation when the entire mixture is set at the index quantile, compared to the 50th percentile. We can also plot these results to visualize the overall mixture effect dose-response relationship.</p>
 <div class="sourceCode" id="cb778"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb778-1"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#cb778-1" tabindex="-1"></a>risks.overall <span class="ot">&lt;-</span> <span class="fu">OverallRiskSummaries</span>(<span class="at">fit=</span>fitkm, <span class="at">qs=</span><span class="fu">seq</span>(<span class="fl">0.25</span>, <span class="fl">0.75</span>, <span class="at">by=</span><span class="fl">0.05</span>), </span>
 <span id="cb778-2"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#cb778-2" tabindex="-1"></a>                                      <span class="at">q.fixed =</span> <span class="fl">0.5</span>, <span class="at">method =</span> <span class="st">&quot;approx&quot;</span>,</span>
 <span id="cb778-3"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#cb778-3" tabindex="-1"></a>                                      <span class="at">sel=</span>sel)</span>
@@ -823,7 +833,7 @@ covariates:</li>
 </div>
 <div id="evaluating-interactive-effects" class="section level3 hasAnchor">
 <h3>Evaluating interactive effects<a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#evaluating-interactive-effects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>To understand bivariate interactions, we can generate a dataset that for each pairing of exposures details at varying levels of both exposures, the log(odds) (“est”, and associated standard deviation (“sd”)) of neonatal inflammation when all the other exposures are held constant. These plots can be tricky to interpret, so another way of looking at these results is to take “cross sections” at specific quantiles of the second exposure (see next step).</p>
+<p>To understand bivariate interactions, we can generate a dataset that for each pairing of exposures details at varying levels of both exposures, the log(odds) (<code>est</code>, and associated standard deviation (<code>sd</code>)) of neonatal inflammation when all the other exposures are held constant. These plots can be tricky to interpret, so another way of looking at these results is to take “cross sections” at specific quantiles of the second exposure (see next step).</p>
 <div class="sourceCode" id="cb779"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb779-1"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#cb779-1" tabindex="-1"></a>pred.resp.bivar  <span class="ot">&lt;-</span> <span class="fu">PredictorResponseBivar</span>(<span class="at">fit=</span>fitkm,  <span class="at">min.plot.dist =</span> <span class="dv">1</span>, </span>
 <span id="cb779-2"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#cb779-2" tabindex="-1"></a>                                           <span class="at">sel=</span>sel,  <span class="at">method=</span><span class="st">&quot;approx&quot;</span>)</span>
 <span id="cb779-3"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#cb779-3" tabindex="-1"></a></span>
@@ -835,7 +845,7 @@ covariates:</li>
 <span id="cb779-9"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#cb779-9" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;expos2&quot;</span>) <span class="sc">+</span></span>
 <span id="cb779-10"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#cb779-10" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;h(expos1, expos2)&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-580-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>Next, we generate a dataset that includes for each pairing of exposures, the log(odds) (“est” and associated standard deviation “sd”) of neonatal inflammation at varying concentrations (“z1”) of the first exposure (“variable 1”) when the second exposure (“variable 2” is at its 25th, 50th and 75th percentile (“quantile”).</p>
+<p>Next, we generate a dataset that includes for each pairing of exposures, the log(odds) (<code>est</code> and associated standard deviation <code>sd</code>) of neonatal inflammation at varying concentrations (<code>z1</code>) of the first exposure (<code>variable 1</code>) when the second exposure (<code>variable 2</code> is at its 25th, 50th and 75th percentile (<code>quantile</code>).</p>
 <div class="sourceCode" id="cb780"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb780-1"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#cb780-1" tabindex="-1"></a>pred.resp.bivar.levels <span class="ot">&lt;-</span> <span class="fu">PredictorResponseBivarLevels</span>(<span class="at">pred.resp.df=</span> </span>
 <span id="cb780-2"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#cb780-2" tabindex="-1"></a>                        pred.resp.bivar,   <span class="at">Z =</span> mixture, <span class="at">both_pairs=</span><span class="cn">TRUE</span>, </span>
 <span id="cb780-3"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#cb780-3" tabindex="-1"></a>                        <span class="at">qs =</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>))</span>
@@ -865,7 +875,7 @@ covariates:</li>
 <span id="cb782-7"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#cb782-7" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;h(expos1 | quantiles of expos2)&quot;</span>) <span class="sc">+</span></span>
 <span id="cb782-8"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#cb782-8" tabindex="-1"></a> <span class="fu">xlab</span>(<span class="st">&quot;expos1&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-582-2.png" width="672" style="display: block; margin: auto;" /></p>
-<p>To visualize interactions between one exposure and the rest of the exposure components, we generate a dataset that details the difference in each exposure’s (“variable”) log(OR) comparing 75th to 25th percentile (“est”, and associated standard deviation “sd”) when the other exposure components are at their 75th versus 25th percentile. Perhaps more intuitively, these estimates represent the blue - red points plotted in the second figure under the single exposure effects section.</p>
+<p>To visualize interactions between one exposure and the rest of the exposure components, we generate a dataset that details the difference in each exposure’s (<code>variable</code>) log(OR) comparing 75th to 25th percentile (<code>est</code>, and associated standard deviation <code>sd</code>) when the other exposure components are at their 75th versus 25th percentile. Perhaps more intuitively, these estimates represent the blue - red points plotted in the second figure under the single exposure effects section.</p>
 <div class="sourceCode" id="cb783"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb783-1"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#cb783-1" tabindex="-1"></a>risks.int <span class="ot">&lt;-</span> <span class="fu">SingVarIntSummaries</span>(<span class="at">fit=</span>fitkm, <span class="at">qs.diff =</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.75</span>),</span>
 <span id="cb783-2"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#cb783-2" tabindex="-1"></a>                                 <span class="at">qs.fixed =</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.75</span>))</span>
 <span id="cb783-3"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#cb783-3" tabindex="-1"></a></span>
@@ -888,7 +898,7 @@ covariates:</li>
 </div>
 <div id="concluding-remarks-26" class="section level2 hasAnchor">
 <h2>Concluding Remarks<a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#concluding-remarks-26" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In conclusion, this module extends upon <strong>TAME 2.0 Module 6.3, Mixtures Analysis Methods Part 1: Overview and Example with Quantile G-Computation</strong>. In this scripted example, we used a dataset from a human population study (n=246) of cord tissue metals and examined the outcome of neonatal inflammation. We found that increasing the entire mixture of metals reduced the risk of neonatal inflammation; however, certain metals increased the risk and others decreased the risk. There was also a suggestive interactive effect found between cadmium and mercury.</p>
+<p>In conclusion, this module extends upon <strong>TAME 2.0 Module 6.3 Mixtures Analysis Methods Part 1: Overview and Example with Quantile G-Computation</strong>. In this scripted example, we used a dataset from a human population study (n=246) of cord tissue metals and examined the outcome of neonatal inflammation. We found that increasing the entire mixture of metals reduced the risk of neonatal inflammation; however, certain metals increased the risk and others decreased the risk. There was also a suggestive interactive effect found between cadmium and mercury.</p>
 </div>
 <div id="additional-resources-12" class="section level2 hasAnchor">
 <h2>Additional Resources<a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#additional-resources-12" class="anchor-section" aria-label="Anchor link to header"></a></h2>

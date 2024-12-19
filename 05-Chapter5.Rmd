@@ -204,8 +204,7 @@ knitr::include_graphics("Module5_2_Input/Module5_2_Image1.png")
 knitr::include_graphics("Module5_2_Input/Module5_2_Image2.png")
 ```
 <center> Langs, G., Röhrich, S., Hofmanninger, J., Prayer, F., Pan, J., Herold, C., & Prosch, H. (2018). Machine learning: from radiomics to discovery and routine. Der Radiologe, 58(S1), 1–6. PMID: [34013136](https://doi.org/10.1007/s00117-018-0407-3). Figure regenerated here in alignment with its published [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/). </center>
-
-
+<br>
 Overall, the distinction between supervised and unsupervised learning is an important concept in machine learning, as it can inform the choice of algorithms and techniques used to analyze and make predictions from data. It is worth noting that there are also other types of machine learning, such as [semi-supervised learning](https://www.altexsoft.com/blog/semi-supervised-learning/), [reinforcement learning](https://www.geeksforgeeks.org/what-is-reinforcement-learning/), and [deep learning](https://www.geeksforgeeks.org/introduction-deep-learning/), though we will not further discuss these topics in this module. 
 
 <br>
@@ -371,6 +370,7 @@ library(gtsummary);
 library(flextable);
 library(caret);
 library(randomForest);
+library(cardx);
 ```
 
 #### Set your working directory
@@ -421,16 +421,23 @@ head(arsenic_data)
 It is useful to run summary statistics on the variables that will be used as predictors in the algorithm to see if there are differences in distributions between the outcomes classes (either non-detect or detect in this case). Typically, greater significance often leads to better predictivity for a certain variable, since the model is better able to separate the classes. We'll use the `tbl_summary()` function from the *gtsummary* package. Note, this may only be practical with smaller datasets or for a subset of predictors if there are many.
 
 For more information on the `tbl_summary()` function, check out this helpful [Tutorial](https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html).
-```{r, tbl, echo=TRUE, eval=TRUE}
+```{r, tbl, echo=TRUE, eval=TRUE, warning=F, message = F}
 arsenic_data %>%
     # Displaying the mean and standard deviation in parentheses for all continuous variables
-    tbl_summary(by = Detect_Concentration, statistic = list(all_continuous() ~ "{mean} ({sd})")) %>% 
-    # Adding a column that displays the total number of samples for each variable. This will be 713 for all variables since we have no missing data
-    add_n() %>%     
-    # Adding a column that displays the p-value from an anova test
-    add_p(test = list(all_continuous() ~ "aov")) %>% 
+    tbl_summary(
+        by = Detect_Concentration,
+        statistic = list(all_continuous() ~ "{mean} ({sd})")
+    ) %>%
+    # Adding a column that displays the total number of samples for each variable
+    add_n() %>%
+    # Adding a column that displays the p-value from a one-way ANOVA test
+    add_p(
+        test = list(all_continuous() ~ "oneway.test"),
+        test.args = list(all_continuous() ~ list(var.equal = TRUE))
+    ) %>%
     as_flex_table() %>%
     bold(bold = TRUE, part = "header")
+
 ```
 
 

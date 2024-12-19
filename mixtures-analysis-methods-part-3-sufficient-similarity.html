@@ -23,7 +23,7 @@
 <meta name="author" content="Rager Lab" />
 
 
-<meta name="date" content="2024-12-06" />
+<meta name="date" content="2024-12-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -462,6 +462,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#capturing-population-variability-in-toxicokinetics-and-uncertainty-in-chemical-specific-parameters"><i class="fa fa-check"></i>Capturing Population Variability in Toxicokinetics, and Uncertainty in Chemical-Specific Parameters</a></li>
 <li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#reverse-tk-calculating-administered-equivalent-doses-for-toxcast-bioactive-concentrations"><i class="fa fa-check"></i>Reverse TK: Calculating Administered Equivalent Doses for ToxCast Bioactive Concentrations</a></li>
 <li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#comparing-equivalent-doses-estimated-to-elicit-toxicity-hazard-to-external-exposure-estimates-exposure-for-chemical-prioritization-by-bioactivity-exposure-ratios-bers"><i class="fa fa-check"></i>Comparing Equivalent Doses Estimated to Elicit Toxicity (Hazard) to External Exposure Estimates (Exposure), for Chemical Prioritization by Bioactivity-Exposure Ratios (BERs)</a></li>
+<li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#concluding-remarks-28"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html"><i class="fa fa-check"></i>Chemical Read-Across for Toxicity Predictions</a>
+<ul>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#introduction-to-training-module-29"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#introduction-to-activity"><i class="fa fa-check"></i>Introduction to Activity</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#read-across-example-analysis"><i class="fa fa-check"></i>Read-Across Example Analysis</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#calculating-chemical-similarities"><i class="fa fa-check"></i>Calculating Chemical Similarities</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#chemical-read-across-to-predict-acute-toxicity"><i class="fa fa-check"></i>Chemical Read-Across to Predict Acute Toxicity</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#concluding-remarks-29"><i class="fa fa-check"></i>Concluding Remarks</a></li>
 </ul></li>
 <li class="part"><span><b>Chapter 7 Environmental<br> Health Database Mining</b></span></li>
 <li class="chapter" data-level="" data-path="comparative-toxicogenomics-database.html"><a href="comparative-toxicogenomics-database.html"><i class="fa fa-check"></i>7.1 Comparative Toxicogenomics Database</a>
@@ -567,21 +577,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you</p>
 <div class="sourceCode" id="cb785"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb785-1"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb785-1" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;tidyverse&quot;</span>))</span>
 <span id="cb785-2"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb785-2" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>);</span>
-<span id="cb785-3"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb785-3" tabindex="-1"></a></span>
-<span id="cb785-4"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb785-4" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;readxl&quot;</span>))</span>
-<span id="cb785-5"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb785-5" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;readxl&quot;</span>);</span>
-<span id="cb785-6"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb785-6" tabindex="-1"></a></span>
-<span id="cb785-7"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb785-7" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;factoextra&quot;</span>))</span>
-<span id="cb785-8"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb785-8" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;factoextra&quot;</span>);</span>
-<span id="cb785-9"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb785-9" tabindex="-1"></a></span>
-<span id="cb785-10"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb785-10" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;pheatmap&quot;</span>))</span>
-<span id="cb785-11"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb785-11" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;pheatmap&quot;</span>);</span>
-<span id="cb785-12"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb785-12" tabindex="-1"></a></span>
-<span id="cb785-13"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb785-13" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;gridExtra&quot;</span>))</span>
-<span id="cb785-14"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb785-14" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;gridExtra&quot;</span>);</span>
-<span id="cb785-15"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb785-15" tabindex="-1"></a></span>
-<span id="cb785-16"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb785-16" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;ggplotify&quot;</span>))</span>
-<span id="cb785-17"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb785-17" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;ggplotify&quot;</span>)</span></code></pre></div>
+<span id="cb785-3"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb785-3" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;readxl&quot;</span>))</span>
+<span id="cb785-4"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb785-4" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;readxl&quot;</span>);</span>
+<span id="cb785-5"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb785-5" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;factoextra&quot;</span>))</span>
+<span id="cb785-6"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb785-6" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;factoextra&quot;</span>);</span>
+<span id="cb785-7"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb785-7" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;pheatmap&quot;</span>))</span>
+<span id="cb785-8"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb785-8" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;pheatmap&quot;</span>);</span>
+<span id="cb785-9"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb785-9" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;gridExtra&quot;</span>))</span>
+<span id="cb785-10"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb785-10" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;gridExtra&quot;</span>);</span>
+<span id="cb785-11"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb785-11" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;ggplotify&quot;</span>))</span>
+<span id="cb785-12"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb785-12" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;ggplotify&quot;</span>)</span></code></pre></div>
 </div>
 <div id="loading-required-packages-1" class="section level4 hasAnchor">
 <h4>Loading required packages<a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#loading-required-packages-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -646,7 +651,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="chemistry-based-sufficient-similarity-analysis" class="section level2 hasAnchor">
 <h2>Chemistry-Based Sufficient Similarity Analysis<a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#chemistry-based-sufficient-similarity-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The first method employed in this Sufficient Similarity analysis is Principal Component Analysis (PCA). PCA is a very common dimensionality reduction technique, as detailed in <strong>TAME 2.0 Module 5.4 Unsupervised Machine Learning</strong>.</p>
+<p>The first method employed in this Sufficient Similarity analysis is Principal Component Analysis (PCA). PCA is a very common dimensionality reduction technique, as detailed in <strong>TAME 2.0 Module 5.4 Unsupervised Machine Learning Part 1: K-Means Clustering &amp; PCA</strong>.</p>
 <p>In summary, PCA finds dimensions (eigenvectors) in the higher dimensional original data that capture as much of the variation as possible, which you can then plot. This allows you to project higher dimensional data, in this case 12 dimensions (representing 12 measured chemicals), in fewer dimensions (we’ll use 2). These dimensions, or components, capture the “essence” of the original dataset.</p>
 <p>Before we can run PCA on this chemistry dataset, we first need to scale the data across samples. We do this here for the chemistry dataset, because we specifically want to evaluate and potentially highlight/emphasize chemicals that may be at relatively low abundance. These low-abundance chemicals may actually be contaminants that drive toxicological effects.</p>
 <p>Let’s first re-save the original chemistry dataset to compare off of:</p>
@@ -673,7 +678,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Now, we can run PCA on the scaled data:</p>
 <div class="sourceCode" id="cb807"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb807-1"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb807-1" tabindex="-1"></a>chem_pca <span class="ot">&lt;-</span> <span class="fu">princomp</span>(chem)</span></code></pre></div>
 <p>Looking at the scree plot, we see the first two principal components capture most of the variance in the data (~64%):</p>
-<div class="sourceCode" id="cb808"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb808-1"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb808-1" tabindex="-1"></a><span class="fu">fviz_eig</span>(chem_pca)</span></code></pre></div>
+<div class="sourceCode" id="cb808"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb808-1"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb808-1" tabindex="-1"></a><span class="fu">fviz_eig</span>(chem_pca, <span class="at">addlabels =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-599-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Here are the resulting PCA scores for each sample, for each principal component (shown here as components 1-12):</p>
 <div class="sourceCode" id="cb809"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb809-1"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb809-1" tabindex="-1"></a><span class="fu">head</span>(chem_pca<span class="sc">$</span>scores)</span></code></pre></div>
@@ -842,9 +847,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="answer">
 <p><strong>Answer:</strong> Approximately 4 (though could argue +1/-1): bottom left group; bottom right group; and two completely separate samples of GbE_G and GbE_N</p>
 </div>
-<p>As an alternative way of viewing the chemical profile data, we can make a heat map of the scaled chemistry data. We concurrently run hierarchical clustering that shows us how closely samples are related to each other, based on different algorithms than data reduction-based PCA. Samples that fall on nearby branches are more similar. Samples that don’t share branches with many/any others are often considered outliers.</p>
-<p>By default, pheatmap uses a Euclidean distance to cluster the observations, which is a very common clustering algorithm.
-For more details, see the following description of <a href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidean distance</a>.</p>
+<p>As an alternative way of viewing the chemical profile data, we can make a heatmap of the scaled chemistry data. We concurrently run hierarchical clustering that shows us how closely samples are related to each other, based on different algorithms than data reduction-based PCA. Samples that fall on nearby branches are more similar. Samples that don’t share branches with many/any others are often considered outliers.</p>
+<p>By default, <code>pheatmap()</code> uses a Euclidean distance to cluster the observations, which is a very common clustering algorithm.
+For more details, see the following description of <a href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidean distance</a> and for more information on hierarchical clustering, see <strong>TAME 2.0 Module 5.5 Unsupervised Machine Learning Part 2: Additional Clustering Applications</strong>.</p>
 <div class="sourceCode" id="cb818"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb818-1"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb818-1" tabindex="-1"></a>chem_hm <span class="ot">&lt;-</span> <span class="fu">pheatmap</span>(chem, <span class="at">main=</span><span class="st">&quot;GbE Sample Heatmap by Chemistry Profiles&quot;</span>,</span>
 <span id="cb818-2"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb818-2" tabindex="-1"></a>                    <span class="at">cluster_rows=</span><span class="cn">TRUE</span>, <span class="at">cluster_cols =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb818-3"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb818-3" tabindex="-1"></a>                    <span class="at">angle_col =</span> <span class="dv">45</span>, <span class="at">fontsize_col =</span> <span class="dv">7</span>, <span class="at">treeheight_row =</span> <span class="dv">60</span>)</span></code></pre></div>
@@ -906,17 +911,18 @@ For more details, see the following description of <a href="https://en.wikipedia
 <div class="answer">
 <p><strong>Answer:</strong> Yes! Removal of the potential outliers basically spreads the rest of the remaining data points out, since there is less variance in the overall dataset, and thus, more room to show variance amongst the remaining samples. The general locations of the samples on the PCA plot, however, remain consistent. We now feel confident that our similarity analysis is producing consistent grouping results.</p>
 </div>
+<p><br></p>
 </div>
 </div>
 <div id="toxicity-based-sufficient-similarity-analysis" class="section level2 hasAnchor">
 <h2>Toxicity-Based Sufficient Similarity Analysis<a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#toxicity-based-sufficient-similarity-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Now, we will perform sufficient similarity analysis using the toxicity data.Unlike the chemistry dataset, we can use the toxicity dataset as is without scaling because we want to focus on genes that are showing a large response. Similarly, we want to de-emphasize genes that are showing a strong response to the exposure condition. If we scale these data, we will reduce this needed variability.</p>
+<p>Now, we will perform sufficient similarity analysis using the toxicity data. Unlike the chemistry dataset, we can use the toxicity dataset as is without scaling because we want to focus on genes that are showing a large response. Similarly, we want to de-emphasize genes that are showing a strong response to the exposure condition. If we scale these data, we will reduce this needed variability.</p>
 <p>Here, we first move the sample column to row names:</p>
 <div class="sourceCode" id="cb823"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb823-1"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb823-1" tabindex="-1"></a>tox <span class="ot">&lt;-</span> tox <span class="sc">%&gt;%</span> <span class="fu">column_to_rownames</span>(<span class="st">&quot;Sample&quot;</span>)</span></code></pre></div>
 <p>Then, we can run PCA on this tox dataframe:</p>
 <div class="sourceCode" id="cb824"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb824-1"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb824-1" tabindex="-1"></a>tox_pca <span class="ot">&lt;-</span> <span class="fu">princomp</span>(tox)</span></code></pre></div>
 <p>Looking at the scree plot, we see the first two principal components capture most of the variation (~93%):</p>
-<div class="sourceCode" id="cb825"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb825-1"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb825-1" tabindex="-1"></a><span class="fu">fviz_eig</span>(tox_pca)</span></code></pre></div>
+<div class="sourceCode" id="cb825"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb825-1"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb825-1" tabindex="-1"></a><span class="fu">fviz_eig</span>(tox_pca, <span class="at">addlabels =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-612-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>We can then create a plot of the samples by principal components:</p>
 <div class="sourceCode" id="cb826"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb826-1"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#cb826-1" tabindex="-1"></a><span class="co"># Get the percent variation captured by each component</span></span>
@@ -965,6 +971,7 @@ For more details, see the following description of <a href="https://en.wikipedia
 <div class="answer">
 <p><strong>Answer:</strong> It looks like the CYP enzyme genes, particularly CYP2B6, are highly up-regulated in response to several of these sample exposures, and thus dictate a lot of these groupings.</p>
 </div>
+<p><br></p>
 </div>
 </div>
 <div id="comparing-chemistry-vs.-toxicity-sufficient-similarity-analyses" class="section level2 hasAnchor">
@@ -989,6 +996,7 @@ For more details, see the following description of <a href="https://en.wikipedia
 <div id="additional-methods" class="section level3 hasAnchor">
 <h3>Additional Methods<a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#additional-methods" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Although we focused on sufficient similarity for this module, a number of other approaches exist to evaluate mixutres. For example, <strong>relative potency factors</strong> is another component-based approach that can be used to evalaute mixtures. Component-based approaches use data from individual chemicals (components of the mixture) and additivity models to estimate the effects of the mixture. For other methods, also see <strong>TAME 2.0 Module 6.3 Mixtures I: Overview and Quantile G-Computation Application</strong> and <strong>TAME 2.0 Module 6.4 Mixtures II: BKMR Application</strong>.</p>
+<p><br></p>
 </div>
 </div>
 <div id="concluding-remarks-27" class="section level2 hasAnchor">
