@@ -23,7 +23,7 @@
 <meta name="author" content="Rager Lab" />
 
 
-<meta name="date" content="2024-12-19" />
+<meta name="date" content="2025-03-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -503,14 +503,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="comptox-dashboard-data-through-apis.html"><a href="comptox-dashboard-data-through-apis.html#hazard-resource"><i class="fa fa-check"></i>Hazard Resource</a></li>
 <li class="chapter" data-level="" data-path="comptox-dashboard-data-through-apis.html"><a href="comptox-dashboard-data-through-apis.html#concluding-remarks-32"><i class="fa fa-check"></i>Concluding Remarks</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="database-integration-air-quality-mortality-and-environmental-justice-data.html"><a href="database-integration-air-quality-mortality-and-environmental-justice-data.html"><i class="fa fa-check"></i>7.4 Database Integration: Air Quality, Mortality, and Environmental Justice Data</a>
-<ul>
-<li class="chapter" data-level="" data-path="database-integration-air-quality-mortality-and-environmental-justice-data.html"><a href="database-integration-air-quality-mortality-and-environmental-justice-data.html#introduction-to-training-module-33"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
-<li class="chapter" data-level="" data-path="database-integration-air-quality-mortality-and-environmental-justice-data.html"><a href="database-integration-air-quality-mortality-and-environmental-justice-data.html#introduction-to-exposure-and-health-databases"><i class="fa fa-check"></i>Introduction to Exposure and Health Databases</a></li>
-<li class="chapter" data-level="" data-path="database-integration-air-quality-mortality-and-environmental-justice-data.html"><a href="database-integration-air-quality-mortality-and-environmental-justice-data.html#analyzing-relationships-between-pm2.5-and-mortality"><i class="fa fa-check"></i>Analyzing Relationships between PM<sub>2.5</sub> and Mortality</a></li>
-<li class="chapter" data-level="" data-path="database-integration-air-quality-mortality-and-environmental-justice-data.html"><a href="database-integration-air-quality-mortality-and-environmental-justice-data.html#environmental-justice-considerations"><i class="fa fa-check"></i>Environmental Justice Considerations</a></li>
-<li class="chapter" data-level="" data-path="database-integration-air-quality-mortality-and-environmental-justice-data.html"><a href="database-integration-air-quality-mortality-and-environmental-justice-data.html#concluding-remarks-33"><i class="fa fa-check"></i>Concluding Remarks</a></li>
-</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -562,35 +554,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3>Script Preparations<a href="gene-expression-omnibus.html#script-preparations-11" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="cleaning-the-global-environment-13" class="section level4 hasAnchor">
 <h4>Cleaning the global environment<a href="gene-expression-omnibus.html#cleaning-the-global-environment-13" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb998"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb998-1"><a href="gene-expression-omnibus.html#cb998-1" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb1005"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1005-1"><a href="gene-expression-omnibus.html#cb1005-1" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span></code></pre></div>
 </div>
 <div id="installing-required-r-packages-13" class="section level4 hasAnchor">
 <h4>Installing required R packages<a href="gene-expression-omnibus.html#installing-required-r-packages-13" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you</p>
-<div class="sourceCode" id="cb999"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb999-1"><a href="gene-expression-omnibus.html#cb999-1" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;tidyverse&quot;</span>))</span>
-<span id="cb999-2"><a href="gene-expression-omnibus.html#cb999-2" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span>
-<span id="cb999-3"><a href="gene-expression-omnibus.html#cb999-3" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;reshape2&quot;</span>))</span>
-<span id="cb999-4"><a href="gene-expression-omnibus.html#cb999-4" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">&quot;reshape2&quot;</span>)</span>
-<span id="cb999-5"><a href="gene-expression-omnibus.html#cb999-5" tabindex="-1"></a></span>
-<span id="cb999-6"><a href="gene-expression-omnibus.html#cb999-6" tabindex="-1"></a><span class="co"># GEOquery, this will install BiocManager if you don&#39;t have it installed</span></span>
-<span id="cb999-7"><a href="gene-expression-omnibus.html#cb999-7" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>))</span>
-<span id="cb999-8"><a href="gene-expression-omnibus.html#cb999-8" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
-<span id="cb999-9"><a href="gene-expression-omnibus.html#cb999-9" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;GEOquery&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1006"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1006-1"><a href="gene-expression-omnibus.html#cb1006-1" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;tidyverse&quot;</span>))</span>
+<span id="cb1006-2"><a href="gene-expression-omnibus.html#cb1006-2" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span>
+<span id="cb1006-3"><a href="gene-expression-omnibus.html#cb1006-3" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;reshape2&quot;</span>))</span>
+<span id="cb1006-4"><a href="gene-expression-omnibus.html#cb1006-4" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">&quot;reshape2&quot;</span>)</span>
+<span id="cb1006-5"><a href="gene-expression-omnibus.html#cb1006-5" tabindex="-1"></a></span>
+<span id="cb1006-6"><a href="gene-expression-omnibus.html#cb1006-6" tabindex="-1"></a><span class="co"># GEOquery, this will install BiocManager if you don&#39;t have it installed</span></span>
+<span id="cb1006-7"><a href="gene-expression-omnibus.html#cb1006-7" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>))</span>
+<span id="cb1006-8"><a href="gene-expression-omnibus.html#cb1006-8" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
+<span id="cb1006-9"><a href="gene-expression-omnibus.html#cb1006-9" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;GEOquery&quot;</span>)</span></code></pre></div>
 <pre><code>## Warning: package(s) not installed when version(s) same as or greater than current; use
 ##   `force = TRUE` to re-install: &#39;GEOquery&#39;</code></pre>
 </div>
 <div id="loading-r-packages-required-for-this-session-11" class="section level4 hasAnchor">
 <h4>Loading R packages required for this session<a href="gene-expression-omnibus.html#loading-r-packages-required-for-this-session-11" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb1001"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1001-1"><a href="gene-expression-omnibus.html#cb1001-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1001-2"><a href="gene-expression-omnibus.html#cb1001-2" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
-<span id="cb1001-3"><a href="gene-expression-omnibus.html#cb1001-3" tabindex="-1"></a><span class="fu">library</span>(GEOquery)</span></code></pre></div>
+<div class="sourceCode" id="cb1008"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1008-1"><a href="gene-expression-omnibus.html#cb1008-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1008-2"><a href="gene-expression-omnibus.html#cb1008-2" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb1008-3"><a href="gene-expression-omnibus.html#cb1008-3" tabindex="-1"></a><span class="fu">library</span>(GEOquery)</span></code></pre></div>
 <p>For more information on the <strong>tidyverse package</strong>, see its associated <a href="https://cran.r-project.org/web/packages/tidyverse/index.html">CRAN webpage</a>, primary <a href="https://www.tidyverse.org/packages/">webpage</a>, and peer-reviewed <a href="https://onlinelibrary.wiley.com/doi/10.1002/sdr.1600">article released in 2018</a>.</p>
 <p>For more information on the <strong>reshape2 package</strong>, see its associated <a href="https://cran.r-project.org/web/packages/reshape2/index.html">CRAN webpage</a>, <a href="https://www.rdocumentation.org/packages/reshape2/versions/1.4.4">R Documentation</a>, and <a href="https://seananderson.ca/2013/10/19/reshape/">helpful website</a> providing an introduction to the reshape2 package.</p>
 <p>For more information on the <strong>GEOquery package</strong>, see its associated <a href="https://www.bioconductor.org/packages/release/bioc/html/GEOquery.html">Bioconductor website</a> and <a href="https://www.rdocumentation.org/packages/GEOquery/versions/2.38.4">R Documentation file</a>.</p>
 </div>
 <div id="set-your-working-directory-16" class="section level4 hasAnchor">
 <h4>Set your working directory<a href="gene-expression-omnibus.html#set-your-working-directory-16" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb1002"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1002-1"><a href="gene-expression-omnibus.html#cb1002-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;/filepath to where your input files are&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1009"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1009-1"><a href="gene-expression-omnibus.html#cb1009-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;/filepath to where your input files are&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -604,22 +596,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="Module7_2_Input/Module7_2_Image1.png" width="506" style="display: block; margin: auto;" /></p>
 <p>For simplicity, we also have already pre-filtered this file for the samples we are interested in, focusing on the rat nasal gene expression data after 7 days of exposure to gaseous formaldehyde. This filtered file was saved as “GSE42394_series_matrix_filtered.txt”, then renamed “Module7_2_InputData1.txt” for use in this module.</p>
 <p>At this point, we can simply read in this pre-filtered text file for the purposes of this training module</p>
-<div class="sourceCode" id="cb1003"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1003-1"><a href="gene-expression-omnibus.html#cb1003-1" tabindex="-1"></a>geodata_manual <span class="ot">=</span> <span class="fu">read.table</span>(<span class="at">file=</span><span class="st">&quot;Module7_2_Input/Module7_2_InputData1.txt&quot;</span>,</span>
-<span id="cb1003-2"><a href="gene-expression-omnibus.html#cb1003-2" tabindex="-1"></a>                             <span class="at">header=</span>T)</span></code></pre></div>
+<div class="sourceCode" id="cb1010"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1010-1"><a href="gene-expression-omnibus.html#cb1010-1" tabindex="-1"></a>geodata_manual <span class="ot">=</span> <span class="fu">read.table</span>(<span class="at">file=</span><span class="st">&quot;Module7_2_Input/Module7_2_InputData1.txt&quot;</span>,</span>
+<span id="cb1010-2"><a href="gene-expression-omnibus.html#cb1010-2" tabindex="-1"></a>                             <span class="at">header=</span>T)</span></code></pre></div>
 <p>Because this is a manual approach, we have to also manually define the treated and untreated samples (based on manually opening the surrounding metadata from the GEO webpage)</p>
 <p>Manually defining treated and untreated for these samples of interest:</p>
-<div class="sourceCode" id="cb1004"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1004-1"><a href="gene-expression-omnibus.html#cb1004-1" tabindex="-1"></a>exposed_manual <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;GSM1150940&quot;</span>, <span class="st">&quot;GSM1150941&quot;</span>, <span class="st">&quot;GSM1150942&quot;</span>)</span>
-<span id="cb1004-2"><a href="gene-expression-omnibus.html#cb1004-2" tabindex="-1"></a>unexposed_manual <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;GSM1150937&quot;</span>, <span class="st">&quot;GSM1150938&quot;</span>, <span class="st">&quot;GSM1150939&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1011"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1011-1"><a href="gene-expression-omnibus.html#cb1011-1" tabindex="-1"></a>exposed_manual <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;GSM1150940&quot;</span>, <span class="st">&quot;GSM1150941&quot;</span>, <span class="st">&quot;GSM1150942&quot;</span>)</span>
+<span id="cb1011-2"><a href="gene-expression-omnibus.html#cb1011-2" tabindex="-1"></a>unexposed_manual <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;GSM1150937&quot;</span>, <span class="st">&quot;GSM1150938&quot;</span>, <span class="st">&quot;GSM1150939&quot;</span>)</span></code></pre></div>
 </div>
 <div id="loading-and-organizing-geo-files-through-the-geoquery-package" class="section level3 hasAnchor">
 <h3>2. Loading and Organizing GEO Files through the GEOquery Package<a href="gene-expression-omnibus.html#loading-and-organizing-geo-files-through-the-geoquery-package" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In this second method, we will leverage the GEOquery package, which allows for easier downloading and reading in of data from GEO without having to manually download raw text files, and manually assign sample attributes (e.g., exposed vs unexposed). This package is set-up to automatically merge sample information from GEO metadata files with raw genome-wide datasets.</p>
 <p>Let’s first use the getGEO function (from the GEOquery package) to load data from our series matrix (“GSE42394_series_matrix.txt”, renamed “Module7_2_InputData2.txt” for use in this module). <em>Note that this line of code may take a couple of minutes to run.</em></p>
-<div class="sourceCode" id="cb1005"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1005-1"><a href="gene-expression-omnibus.html#cb1005-1" tabindex="-1"></a>geo.getGEO.data <span class="ot">=</span> <span class="fu">getGEO</span>(<span class="at">filename=</span><span class="st">&#39;Module7_2_Input/Module7_2_InputData2.txt&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1012"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1012-1"><a href="gene-expression-omnibus.html#cb1012-1" tabindex="-1"></a>geo.getGEO.data <span class="ot">=</span> <span class="fu">getGEO</span>(<span class="at">filename=</span><span class="st">&#39;Module7_2_Input/Module7_2_InputData2.txt&#39;</span>)</span></code></pre></div>
 <p>One of the reasons the getGEO package is so helpful is that we can automatically link a dataset with nicely organized sample information using the <code>pData()</code> function.</p>
-<div class="sourceCode" id="cb1006"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1006-1"><a href="gene-expression-omnibus.html#cb1006-1" tabindex="-1"></a>sampleInfo <span class="ot">=</span> <span class="fu">pData</span>(geo.getGEO.data)</span></code></pre></div>
+<div class="sourceCode" id="cb1013"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1013-1"><a href="gene-expression-omnibus.html#cb1013-1" tabindex="-1"></a>sampleInfo <span class="ot">=</span> <span class="fu">pData</span>(geo.getGEO.data)</span></code></pre></div>
 <p>Let’s view this sample information / metadata file, first by viewing what the column headers are.</p>
-<div class="sourceCode" id="cb1007"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1007-1"><a href="gene-expression-omnibus.html#cb1007-1" tabindex="-1"></a><span class="fu">colnames</span>(sampleInfo)</span></code></pre></div>
+<div class="sourceCode" id="cb1014"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1014-1"><a href="gene-expression-omnibus.html#cb1014-1" tabindex="-1"></a><span class="fu">colnames</span>(sampleInfo)</span></code></pre></div>
 <pre><code>##  [1] &quot;title&quot;                   &quot;geo_accession&quot;          
 ##  [3] &quot;status&quot;                  &quot;submission_date&quot;        
 ##  [5] &quot;last_update_date&quot;        &quot;type&quot;                   
@@ -643,7 +635,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [41] &quot;strain:ch1&quot;              &quot;time:ch1&quot;               
 ## [43] &quot;treatment:ch1&quot;</code></pre>
 <p>Then viewing the first five columns.</p>
-<div class="sourceCode" id="cb1009"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1009-1"><a href="gene-expression-omnibus.html#cb1009-1" tabindex="-1"></a>sampleInfo[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb1016"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1016-1"><a href="gene-expression-omnibus.html#cb1016-1" tabindex="-1"></a>sampleInfo[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
 <pre><code>##                                                    title geo_accession
 ## GSM1150937            Nose_7DayControl_Rep1 [Affymetrix]    GSM1150937
 ## GSM1150938            Nose_7DayControl_Rep2 [Affymetrix]    GSM1150938
@@ -668,7 +660,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## GSM1150946 Public on Jan 07 2014     May 29 2013      Jan 07 2014</code></pre>
 <p>This shows that each sample is provided with a unique number starting with “GSM”, and these are described by information summarized in the “title” column. We can also see that these data were made public on Jan 7, 2014.</p>
 <p>Let’s view the next five columns.</p>
-<div class="sourceCode" id="cb1011"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1011-1"><a href="gene-expression-omnibus.html#cb1011-1" tabindex="-1"></a>sampleInfo[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="dv">6</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb1018"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1018-1"><a href="gene-expression-omnibus.html#cb1018-1" tabindex="-1"></a>sampleInfo[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="dv">6</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
 <pre><code>##            type channel_count                                 source_name_ch1
 ## GSM1150937  RNA             1        Nasal epithelial cells, 7 day, unexposed
 ## GSM1150938  RNA             1        Nasal epithelial cells, 7 day, unexposed
@@ -698,30 +690,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Now, we can use this information to define the samples we want to analyze. Note that this is the same step we did manually above.</p>
 <p>In this training exercise, we are focusing on responses in the nose, so we can easily filter for cell type = Nasal epithelial cells (specifically in the <code>cell type:ch1</code> variable). We are also focusing on responses collected after 7 days of exposure, which we can filter for using time = 7 day (specifically in the <code>time:ch1</code> variable). We will also define exposed and unexposed samples using the variable <code>treatment:ch1</code>.</p>
 <p>First, let’s subset the sampleInfo dataframe to just keep the samples we’re interested in</p>
-<div class="sourceCode" id="cb1013"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1013-1"><a href="gene-expression-omnibus.html#cb1013-1" tabindex="-1"></a><span class="co"># Define a vector variable (here we call it &#39;keep&#39;) that will store rows we want to keep</span></span>
-<span id="cb1013-2"><a href="gene-expression-omnibus.html#cb1013-2" tabindex="-1"></a>keep <span class="ot">=</span> <span class="fu">rownames</span>(sampleInfo[<span class="fu">which</span>(sampleInfo<span class="sc">$</span><span class="st">`</span><span class="at">cell type:ch1</span><span class="st">`</span><span class="sc">==</span><span class="st">&quot;Nasal epithelial cells&quot;</span> </span>
-<span id="cb1013-3"><a href="gene-expression-omnibus.html#cb1013-3" tabindex="-1"></a>                                  <span class="sc">&amp;</span> sampleInfo<span class="sc">$</span><span class="st">`</span><span class="at">time:ch1</span><span class="st">`</span><span class="sc">==</span><span class="st">&quot;7 day&quot;</span>),])</span>
-<span id="cb1013-4"><a href="gene-expression-omnibus.html#cb1013-4" tabindex="-1"></a></span>
-<span id="cb1013-5"><a href="gene-expression-omnibus.html#cb1013-5" tabindex="-1"></a><span class="co"># Then subset the sample info for just those samples we defined in keep variable</span></span>
-<span id="cb1013-6"><a href="gene-expression-omnibus.html#cb1013-6" tabindex="-1"></a>sampleInfo <span class="ot">=</span> sampleInfo[keep,]</span></code></pre></div>
+<div class="sourceCode" id="cb1020"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1020-1"><a href="gene-expression-omnibus.html#cb1020-1" tabindex="-1"></a><span class="co"># Define a vector variable (here we call it &#39;keep&#39;) that will store rows we want to keep</span></span>
+<span id="cb1020-2"><a href="gene-expression-omnibus.html#cb1020-2" tabindex="-1"></a>keep <span class="ot">=</span> <span class="fu">rownames</span>(sampleInfo[<span class="fu">which</span>(sampleInfo<span class="sc">$</span><span class="st">`</span><span class="at">cell type:ch1</span><span class="st">`</span><span class="sc">==</span><span class="st">&quot;Nasal epithelial cells&quot;</span> </span>
+<span id="cb1020-3"><a href="gene-expression-omnibus.html#cb1020-3" tabindex="-1"></a>                                  <span class="sc">&amp;</span> sampleInfo<span class="sc">$</span><span class="st">`</span><span class="at">time:ch1</span><span class="st">`</span><span class="sc">==</span><span class="st">&quot;7 day&quot;</span>),])</span>
+<span id="cb1020-4"><a href="gene-expression-omnibus.html#cb1020-4" tabindex="-1"></a></span>
+<span id="cb1020-5"><a href="gene-expression-omnibus.html#cb1020-5" tabindex="-1"></a><span class="co"># Then subset the sample info for just those samples we defined in keep variable</span></span>
+<span id="cb1020-6"><a href="gene-expression-omnibus.html#cb1020-6" tabindex="-1"></a>sampleInfo <span class="ot">=</span> sampleInfo[keep,]</span></code></pre></div>
 <p>Next, we can pull the exposed and unexposed animal IDs. Let’s first see how these are labeled within the <code>treatment:ch1</code> variable.</p>
-<div class="sourceCode" id="cb1014"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1014-1"><a href="gene-expression-omnibus.html#cb1014-1" tabindex="-1"></a><span class="fu">unique</span>(sampleInfo<span class="sc">$</span><span class="st">`</span><span class="at">treatment:ch1</span><span class="st">`</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1021"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1021-1"><a href="gene-expression-omnibus.html#cb1021-1" tabindex="-1"></a><span class="fu">unique</span>(sampleInfo<span class="sc">$</span><span class="st">`</span><span class="at">treatment:ch1</span><span class="st">`</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;unexposed&quot;          &quot;2 ppm formaldehyde&quot;</code></pre>
 <p>And then search for the rows of data, pulling the sample animal IDs (which are in the variable <code>geo_accession</code>).</p>
-<div class="sourceCode" id="cb1016"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1016-1"><a href="gene-expression-omnibus.html#cb1016-1" tabindex="-1"></a>exposedIDs <span class="ot">=</span> sampleInfo[<span class="fu">which</span>(sampleInfo<span class="sc">$</span><span class="st">`</span><span class="at">treatment:ch1</span><span class="st">`</span><span class="sc">==</span><span class="st">&quot;2 ppm formaldehyde&quot;</span>), </span>
-<span id="cb1016-2"><a href="gene-expression-omnibus.html#cb1016-2" tabindex="-1"></a>                          <span class="st">&quot;geo_accession&quot;</span>]</span>
-<span id="cb1016-3"><a href="gene-expression-omnibus.html#cb1016-3" tabindex="-1"></a>unexposedIDs <span class="ot">=</span> sampleInfo[<span class="fu">which</span>(sampleInfo<span class="sc">$</span><span class="st">`</span><span class="at">treatment:ch1</span><span class="st">`</span><span class="sc">==</span><span class="st">&quot;unexposed&quot;</span>), </span>
-<span id="cb1016-4"><a href="gene-expression-omnibus.html#cb1016-4" tabindex="-1"></a>                            <span class="st">&quot;geo_accession&quot;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb1023"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1023-1"><a href="gene-expression-omnibus.html#cb1023-1" tabindex="-1"></a>exposedIDs <span class="ot">=</span> sampleInfo[<span class="fu">which</span>(sampleInfo<span class="sc">$</span><span class="st">`</span><span class="at">treatment:ch1</span><span class="st">`</span><span class="sc">==</span><span class="st">&quot;2 ppm formaldehyde&quot;</span>), </span>
+<span id="cb1023-2"><a href="gene-expression-omnibus.html#cb1023-2" tabindex="-1"></a>                          <span class="st">&quot;geo_accession&quot;</span>]</span>
+<span id="cb1023-3"><a href="gene-expression-omnibus.html#cb1023-3" tabindex="-1"></a>unexposedIDs <span class="ot">=</span> sampleInfo[<span class="fu">which</span>(sampleInfo<span class="sc">$</span><span class="st">`</span><span class="at">treatment:ch1</span><span class="st">`</span><span class="sc">==</span><span class="st">&quot;unexposed&quot;</span>), </span>
+<span id="cb1023-4"><a href="gene-expression-omnibus.html#cb1023-4" tabindex="-1"></a>                            <span class="st">&quot;geo_accession&quot;</span>]</span></code></pre></div>
 <p>The next step is to pull the expression data we want to use in our analyses. The GEOquery function, <code>exprs()</code>, allows us to easily pull these data. Here, we can pull the data we’re interested in using the <code>exprs()</code> function, while defining the data we want to pull based off our previously generated ‘keep’ vector.</p>
-<div class="sourceCode" id="cb1017"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1017-1"><a href="gene-expression-omnibus.html#cb1017-1" tabindex="-1"></a><span class="co"># As a reminder, this is what the &#39;keep&#39; vector includes </span></span>
-<span id="cb1017-2"><a href="gene-expression-omnibus.html#cb1017-2" tabindex="-1"></a><span class="co"># (i.e., animal IDs that we&#39;re interested in)</span></span>
-<span id="cb1017-3"><a href="gene-expression-omnibus.html#cb1017-3" tabindex="-1"></a>keep</span></code></pre></div>
+<div class="sourceCode" id="cb1024"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1024-1"><a href="gene-expression-omnibus.html#cb1024-1" tabindex="-1"></a><span class="co"># As a reminder, this is what the &#39;keep&#39; vector includes </span></span>
+<span id="cb1024-2"><a href="gene-expression-omnibus.html#cb1024-2" tabindex="-1"></a><span class="co"># (i.e., animal IDs that we&#39;re interested in)</span></span>
+<span id="cb1024-3"><a href="gene-expression-omnibus.html#cb1024-3" tabindex="-1"></a>keep</span></code></pre></div>
 <pre><code>## [1] &quot;GSM1150937&quot; &quot;GSM1150938&quot; &quot;GSM1150939&quot; &quot;GSM1150940&quot; &quot;GSM1150941&quot;
 ## [6] &quot;GSM1150942&quot;</code></pre>
-<div class="sourceCode" id="cb1019"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1019-1"><a href="gene-expression-omnibus.html#cb1019-1" tabindex="-1"></a><span class="co"># Using the exprs() function</span></span>
-<span id="cb1019-2"><a href="gene-expression-omnibus.html#cb1019-2" tabindex="-1"></a>geodata <span class="ot">=</span> <span class="fu">exprs</span>(geo.getGEO.data[,keep])</span></code></pre></div>
+<div class="sourceCode" id="cb1026"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1026-1"><a href="gene-expression-omnibus.html#cb1026-1" tabindex="-1"></a><span class="co"># Using the exprs() function</span></span>
+<span id="cb1026-2"><a href="gene-expression-omnibus.html#cb1026-2" tabindex="-1"></a>geodata <span class="ot">=</span> <span class="fu">exprs</span>(geo.getGEO.data[,keep])</span></code></pre></div>
 <p>Let’s view the full dataset as is now:</p>
-<div class="sourceCode" id="cb1020"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1020-1"><a href="gene-expression-omnibus.html#cb1020-1" tabindex="-1"></a><span class="fu">head</span>(geodata)</span></code></pre></div>
+<div class="sourceCode" id="cb1027"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1027-1"><a href="gene-expression-omnibus.html#cb1027-1" tabindex="-1"></a><span class="fu">head</span>(geodata)</span></code></pre></div>
 <pre><code>##          GSM1150937 GSM1150938 GSM1150939 GSM1150940 GSM1150941 GSM1150942
 ## 10700001    5786.60    5830.08    5637.34    5313.33    5557.04    5469.90
 ## 10700002     192.92     206.86     220.83     183.12     177.16     198.64
@@ -735,25 +727,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4>Simplifying column names<a href="gene-expression-omnibus.html#simplifying-column-names" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>These column names are not the easiest to interpret, so let’s rename these columns to indicate which animals were from the exposed vs. unexposed groups.</p>
 <p>We need to first convert our expression dataset to a dataframe so we can edit columns names, and continue with downstream data manipulations that require dataframe formats.</p>
-<div class="sourceCode" id="cb1022"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1022-1"><a href="gene-expression-omnibus.html#cb1022-1" tabindex="-1"></a>geodata <span class="ot">=</span> <span class="fu">data.frame</span>(geodata)</span></code></pre></div>
+<div class="sourceCode" id="cb1029"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1029-1"><a href="gene-expression-omnibus.html#cb1029-1" tabindex="-1"></a>geodata <span class="ot">=</span> <span class="fu">data.frame</span>(geodata)</span></code></pre></div>
 <p>Let’s remind ourselves what the column names are:</p>
-<div class="sourceCode" id="cb1023"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1023-1"><a href="gene-expression-omnibus.html#cb1023-1" tabindex="-1"></a><span class="fu">colnames</span>(geodata)</span></code></pre></div>
+<div class="sourceCode" id="cb1030"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1030-1"><a href="gene-expression-omnibus.html#cb1030-1" tabindex="-1"></a><span class="fu">colnames</span>(geodata)</span></code></pre></div>
 <pre><code>## [1] &quot;GSM1150937&quot; &quot;GSM1150938&quot; &quot;GSM1150939&quot; &quot;GSM1150940&quot; &quot;GSM1150941&quot;
 ## [6] &quot;GSM1150942&quot;</code></pre>
 <p>Which ones of these are exposed vs unexposed animals can be determined by viewing our previously defined vectors.</p>
-<div class="sourceCode" id="cb1025"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1025-1"><a href="gene-expression-omnibus.html#cb1025-1" tabindex="-1"></a>exposedIDs</span></code></pre></div>
+<div class="sourceCode" id="cb1032"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1032-1"><a href="gene-expression-omnibus.html#cb1032-1" tabindex="-1"></a>exposedIDs</span></code></pre></div>
 <pre><code>## [1] &quot;GSM1150940&quot; &quot;GSM1150941&quot; &quot;GSM1150942&quot;</code></pre>
-<div class="sourceCode" id="cb1027"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1027-1"><a href="gene-expression-omnibus.html#cb1027-1" tabindex="-1"></a>unexposedIDs</span></code></pre></div>
+<div class="sourceCode" id="cb1034"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1034-1"><a href="gene-expression-omnibus.html#cb1034-1" tabindex="-1"></a>unexposedIDs</span></code></pre></div>
 <pre><code>## [1] &quot;GSM1150937&quot; &quot;GSM1150938&quot; &quot;GSM1150939&quot;</code></pre>
 <p>With this we can tell that the first three listed IDs are from unexposed animals, and the last three IDs are from exposed animals.</p>
 <p>Let’s simplify the names of these columns to indicate exposure status and replicate number.</p>
-<div class="sourceCode" id="cb1029"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1029-1"><a href="gene-expression-omnibus.html#cb1029-1" tabindex="-1"></a><span class="fu">colnames</span>(geodata) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Control_1&quot;</span>, <span class="st">&quot;Control_2&quot;</span>, <span class="st">&quot;Control_3&quot;</span>, <span class="st">&quot;Exposed_1&quot;</span>, </span>
-<span id="cb1029-2"><a href="gene-expression-omnibus.html#cb1029-2" tabindex="-1"></a>                       <span class="st">&quot;Exposed_2&quot;</span>, <span class="st">&quot;Exposed_3&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1036"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1036-1"><a href="gene-expression-omnibus.html#cb1036-1" tabindex="-1"></a><span class="fu">colnames</span>(geodata) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Control_1&quot;</span>, <span class="st">&quot;Control_2&quot;</span>, <span class="st">&quot;Control_3&quot;</span>, <span class="st">&quot;Exposed_1&quot;</span>, </span>
+<span id="cb1036-2"><a href="gene-expression-omnibus.html#cb1036-2" tabindex="-1"></a>                       <span class="st">&quot;Exposed_2&quot;</span>, <span class="st">&quot;Exposed_3&quot;</span>)</span></code></pre></div>
 <p>And we’ll now need to re-define our ‘exposed’ vs ‘unexposed’ vectors for downstream script.</p>
-<div class="sourceCode" id="cb1030"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1030-1"><a href="gene-expression-omnibus.html#cb1030-1" tabindex="-1"></a>exposedIDs <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Exposed_1&quot;</span>, <span class="st">&quot;Exposed_2&quot;</span>, <span class="st">&quot;Exposed_3&quot;</span>)</span>
-<span id="cb1030-2"><a href="gene-expression-omnibus.html#cb1030-2" tabindex="-1"></a>unexposedIDs <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Control_1&quot;</span>, <span class="st">&quot;Control_2&quot;</span>, <span class="st">&quot;Control_3&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1037"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1037-1"><a href="gene-expression-omnibus.html#cb1037-1" tabindex="-1"></a>exposedIDs <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Exposed_1&quot;</span>, <span class="st">&quot;Exposed_2&quot;</span>, <span class="st">&quot;Exposed_3&quot;</span>)</span>
+<span id="cb1037-2"><a href="gene-expression-omnibus.html#cb1037-2" tabindex="-1"></a>unexposedIDs <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Control_1&quot;</span>, <span class="st">&quot;Control_2&quot;</span>, <span class="st">&quot;Control_3&quot;</span>)</span></code></pre></div>
 <p>Viewing the data again:</p>
-<div class="sourceCode" id="cb1031"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1031-1"><a href="gene-expression-omnibus.html#cb1031-1" tabindex="-1"></a><span class="fu">head</span>(geodata)</span></code></pre></div>
+<div class="sourceCode" id="cb1038"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1038-1"><a href="gene-expression-omnibus.html#cb1038-1" tabindex="-1"></a><span class="fu">head</span>(geodata)</span></code></pre></div>
 <pre><code>##          Control_1 Control_2 Control_3 Exposed_1 Exposed_2 Exposed_3
 ## 10700001   5786.60   5830.08   5637.34   5313.33   5557.04   5469.90
 ## 10700002    192.92    206.86    220.83    183.12    177.16    198.64
@@ -773,10 +765,10 @@ In instances where we want more information surrounding the molecular identifier
 <p>Click on this, and you will be navigated to a different GEO website describing the Affymetrix rat array platform that was used in this analysis. Note that this website also includes information on when this array became available, links to other experiments that have used this platform within GEO, and much more.</p>
 <p>Here, we’re interested in pulling the corresponding gene symbol information for the probeset IDs. To do so, scroll to the bottom, and click “Annotation SOFT table…” and download the corresponding .gz file within your working directory. Unzip this, and you will find the master annotation file: “GPL6247.annot”.</p>
 <p>In this exercise, we’ve already done these steps and unzipped the file in our working directory. So at this point, we can simply read in this annotation dataset, renamed “Module7_2_InputData2.annot”, still using the <code>GEOquery()</code> function to help automate.</p>
-<div class="sourceCode" id="cb1033"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1033-1"><a href="gene-expression-omnibus.html#cb1033-1" tabindex="-1"></a>geo.annot <span class="ot">=</span> GEOquery<span class="sc">::</span><span class="fu">getGEO</span>(<span class="at">filename=</span><span class="st">&quot;Module7_2_Input/Module7_2_InputData3.annot&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1040"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1040-1"><a href="gene-expression-omnibus.html#cb1040-1" tabindex="-1"></a>geo.annot <span class="ot">=</span> GEOquery<span class="sc">::</span><span class="fu">getGEO</span>(<span class="at">filename=</span><span class="st">&quot;Module7_2_Input/Module7_2_InputData3.annot&quot;</span>)</span></code></pre></div>
 <p>Now we can use the <code>Table()</code> function from GEOquery to pull data from the annotation dataset.</p>
-<div class="sourceCode" id="cb1034"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1034-1"><a href="gene-expression-omnibus.html#cb1034-1" tabindex="-1"></a>id.gene.table <span class="ot">=</span> GEOquery<span class="sc">::</span><span class="fu">Table</span>(geo.annot)[,<span class="fu">c</span>(<span class="st">&quot;ID&quot;</span>, <span class="st">&quot;Gene symbol&quot;</span>)]</span>
-<span id="cb1034-2"><a href="gene-expression-omnibus.html#cb1034-2" tabindex="-1"></a>id.gene.table[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb1041"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1041-1"><a href="gene-expression-omnibus.html#cb1041-1" tabindex="-1"></a>id.gene.table <span class="ot">=</span> GEOquery<span class="sc">::</span><span class="fu">Table</span>(geo.annot)[,<span class="fu">c</span>(<span class="st">&quot;ID&quot;</span>, <span class="st">&quot;Gene symbol&quot;</span>)]</span>
+<span id="cb1041-2"><a href="gene-expression-omnibus.html#cb1041-2" tabindex="-1"></a>id.gene.table[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span></code></pre></div>
 <pre><code>##          ID                        Gene symbol
 ## 1  10701620 Vom2r67///Vom2r5///Vom2r6///Vom2r4
 ## 2  10701630                                   
@@ -790,10 +782,10 @@ In instances where we want more information surrounding the molecular identifier
 ## 10 10701668                   Vom2r65///Vom2r1</code></pre>
 <p>With these two columns of data, we now have the needed IDs and gene symbols to match with our dataset.</p>
 <p>Within the full dataset, we need to add a new column for the probeset ID, taken from the rownames, in preparation for the merging step.</p>
-<div class="sourceCode" id="cb1036"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1036-1"><a href="gene-expression-omnibus.html#cb1036-1" tabindex="-1"></a>geodata<span class="sc">$</span>ID <span class="ot">=</span> <span class="fu">rownames</span>(geodata)</span></code></pre></div>
+<div class="sourceCode" id="cb1043"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1043-1"><a href="gene-expression-omnibus.html#cb1043-1" tabindex="-1"></a>geodata<span class="sc">$</span>ID <span class="ot">=</span> <span class="fu">rownames</span>(geodata)</span></code></pre></div>
 <p>We can now merge the gene symbol information by ID with our expression data.</p>
-<div class="sourceCode" id="cb1037"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1037-1"><a href="gene-expression-omnibus.html#cb1037-1" tabindex="-1"></a>geodata_genes <span class="ot">=</span> <span class="fu">merge</span>(geodata, id.gene.table, <span class="at">by=</span><span class="st">&quot;ID&quot;</span>)</span>
-<span id="cb1037-2"><a href="gene-expression-omnibus.html#cb1037-2" tabindex="-1"></a><span class="fu">head</span>(geodata_genes)</span></code></pre></div>
+<div class="sourceCode" id="cb1044"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1044-1"><a href="gene-expression-omnibus.html#cb1044-1" tabindex="-1"></a>geodata_genes <span class="ot">=</span> <span class="fu">merge</span>(geodata, id.gene.table, <span class="at">by=</span><span class="st">&quot;ID&quot;</span>)</span>
+<span id="cb1044-2"><a href="gene-expression-omnibus.html#cb1044-2" tabindex="-1"></a><span class="fu">head</span>(geodata_genes)</span></code></pre></div>
 <pre><code>##         ID Control_1 Control_2 Control_3 Exposed_1 Exposed_2 Exposed_3
 ## 1 10700001   5786.60   5830.08   5637.34   5313.33   5557.04   5469.90
 ## 2 10700002    192.92    206.86    220.83    183.12    177.16    198.64
@@ -810,8 +802,8 @@ In instances where we want more information surrounding the molecular identifier
 ## 6</code></pre>
 <p>Note that many of the probeset IDs do not map to full gene symbols, which is shown here by viewing the top few rows - this is expected in genome-wide analyses based on microarray platforms.</p>
 <p>Let’s look at the first 25 unique genes in these data:</p>
-<div class="sourceCode" id="cb1039"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1039-1"><a href="gene-expression-omnibus.html#cb1039-1" tabindex="-1"></a>UniqueGenes <span class="ot">=</span> <span class="fu">unique</span>(geodata_genes<span class="sc">$</span><span class="st">`</span><span class="at">Gene symbol</span><span class="st">`</span>)</span>
-<span id="cb1039-2"><a href="gene-expression-omnibus.html#cb1039-2" tabindex="-1"></a>UniqueGenes[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb1046"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1046-1"><a href="gene-expression-omnibus.html#cb1046-1" tabindex="-1"></a>UniqueGenes <span class="ot">=</span> <span class="fu">unique</span>(geodata_genes<span class="sc">$</span><span class="st">`</span><span class="at">Gene symbol</span><span class="st">`</span>)</span>
+<span id="cb1046-2"><a href="gene-expression-omnibus.html#cb1046-2" tabindex="-1"></a>UniqueGenes[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>]</span></code></pre></div>
 <pre><code>##  [1] &quot;&quot;                                           
 ##  [2] &quot;Vom2r67///Vom2r5///Vom2r6///Vom2r4&quot;         
 ##  [3] &quot;Vom2r5&quot;                                     
@@ -840,11 +832,11 @@ In instances where we want more information surrounding the molecular identifier
 <p>Again, you can see that the first value listed is blank, representing probesetIDs that do not match to fully annotated gene symbols. Though the rest pertain for gene symbols annotated to the rat genome.</p>
 <p>You can also see that some gene symbols have multiple entries, separated by “///”</p>
 <p>To simplify identifiers, we can pull just the first gene symbol, and remove the rest by using gsub().</p>
-<div class="sourceCode" id="cb1041"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1041-1"><a href="gene-expression-omnibus.html#cb1041-1" tabindex="-1"></a>geodata_genes<span class="sc">$</span><span class="st">`</span><span class="at">Gene symbol</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">&quot;///.*&quot;</span>, <span class="st">&quot;&quot;</span>, geodata_genes<span class="sc">$</span><span class="st">`</span><span class="at">Gene symbol</span><span class="st">`</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1048"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1048-1"><a href="gene-expression-omnibus.html#cb1048-1" tabindex="-1"></a>geodata_genes<span class="sc">$</span><span class="st">`</span><span class="at">Gene symbol</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">&quot;///.*&quot;</span>, <span class="st">&quot;&quot;</span>, geodata_genes<span class="sc">$</span><span class="st">`</span><span class="at">Gene symbol</span><span class="st">`</span>)</span></code></pre></div>
 <p>Let’s alphabetize by main expression dataframe by gene symbol.</p>
-<div class="sourceCode" id="cb1042"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1042-1"><a href="gene-expression-omnibus.html#cb1042-1" tabindex="-1"></a>geodata_genes <span class="ot">=</span> geodata_genes[<span class="fu">order</span>(geodata_genes<span class="sc">$</span><span class="st">`</span><span class="at">Gene symbol</span><span class="st">`</span>),]</span></code></pre></div>
+<div class="sourceCode" id="cb1049"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1049-1"><a href="gene-expression-omnibus.html#cb1049-1" tabindex="-1"></a>geodata_genes <span class="ot">=</span> geodata_genes[<span class="fu">order</span>(geodata_genes<span class="sc">$</span><span class="st">`</span><span class="at">Gene symbol</span><span class="st">`</span>),]</span></code></pre></div>
 <p>And then re-view these data:</p>
-<div class="sourceCode" id="cb1043"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1043-1"><a href="gene-expression-omnibus.html#cb1043-1" tabindex="-1"></a>geodata_genes[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb1050"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1050-1"><a href="gene-expression-omnibus.html#cb1050-1" tabindex="-1"></a>geodata_genes[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,]</span></code></pre></div>
 <pre><code>##         ID Control_1 Control_2 Control_3 Exposed_1 Exposed_2 Exposed_3
 ## 1 10700001   5786.60   5830.08   5637.34   5313.33   5557.04   5469.90
 ## 2 10700002    192.92    206.86    220.83    183.12    177.16    198.64
@@ -858,13 +850,13 @@ In instances where we want more information surrounding the molecular identifier
 ## 4            
 ## 5</code></pre>
 <p>In preparation for the visualization steps below, let’s reset the probeset IDs to rownames.</p>
-<div class="sourceCode" id="cb1045"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1045-1"><a href="gene-expression-omnibus.html#cb1045-1" tabindex="-1"></a><span class="fu">rownames</span>(geodata_genes) <span class="ot">=</span> geodata_genes<span class="sc">$</span>ID</span>
-<span id="cb1045-2"><a href="gene-expression-omnibus.html#cb1045-2" tabindex="-1"></a></span>
-<span id="cb1045-3"><a href="gene-expression-omnibus.html#cb1045-3" tabindex="-1"></a><span class="co"># Can then remove this column within the dataframe</span></span>
-<span id="cb1045-4"><a href="gene-expression-omnibus.html#cb1045-4" tabindex="-1"></a>geodata_genes<span class="sc">$</span>ID <span class="ot">=</span> <span class="cn">NULL</span></span></code></pre></div>
+<div class="sourceCode" id="cb1052"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1052-1"><a href="gene-expression-omnibus.html#cb1052-1" tabindex="-1"></a><span class="fu">rownames</span>(geodata_genes) <span class="ot">=</span> geodata_genes<span class="sc">$</span>ID</span>
+<span id="cb1052-2"><a href="gene-expression-omnibus.html#cb1052-2" tabindex="-1"></a></span>
+<span id="cb1052-3"><a href="gene-expression-omnibus.html#cb1052-3" tabindex="-1"></a><span class="co"># Can then remove this column within the dataframe</span></span>
+<span id="cb1052-4"><a href="gene-expression-omnibus.html#cb1052-4" tabindex="-1"></a>geodata_genes<span class="sc">$</span>ID <span class="ot">=</span> <span class="cn">NULL</span></span></code></pre></div>
 <p>Finally let’s rearrange this dataset to include gene symbols as the first column, right after rownames (probeset IDs).</p>
-<div class="sourceCode" id="cb1046"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1046-1"><a href="gene-expression-omnibus.html#cb1046-1" tabindex="-1"></a>geodata_genes <span class="ot">=</span> geodata_genes[,<span class="fu">c</span>(<span class="fu">ncol</span>(geodata_genes),<span class="dv">1</span><span class="sc">:</span>(<span class="fu">ncol</span>(geodata_genes)<span class="sc">-</span><span class="dv">1</span>))]</span>
-<span id="cb1046-2"><a href="gene-expression-omnibus.html#cb1046-2" tabindex="-1"></a>geodata_genes[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb1053"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1053-1"><a href="gene-expression-omnibus.html#cb1053-1" tabindex="-1"></a>geodata_genes <span class="ot">=</span> geodata_genes[,<span class="fu">c</span>(<span class="fu">ncol</span>(geodata_genes),<span class="dv">1</span><span class="sc">:</span>(<span class="fu">ncol</span>(geodata_genes)<span class="sc">-</span><span class="dv">1</span>))]</span>
+<span id="cb1053-2"><a href="gene-expression-omnibus.html#cb1053-2" tabindex="-1"></a>geodata_genes[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,]</span></code></pre></div>
 <pre><code>##          Gene symbol Control_1 Control_2 Control_3 Exposed_1 Exposed_2
 ## 10700001               5786.60   5830.08   5637.34   5313.33   5557.04
 ## 10700002                192.92    206.86    220.83    183.12    177.16
@@ -877,12 +869,12 @@ In instances where we want more information surrounding the molecular identifier
 ## 10700003   1632.20
 ## 10700004     60.67
 ## 10700005    667.66</code></pre>
-<div class="sourceCode" id="cb1048"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1048-1"><a href="gene-expression-omnibus.html#cb1048-1" tabindex="-1"></a><span class="fu">dim</span>(geodata_genes)</span></code></pre></div>
+<div class="sourceCode" id="cb1055"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1055-1"><a href="gene-expression-omnibus.html#cb1055-1" tabindex="-1"></a><span class="fu">dim</span>(geodata_genes)</span></code></pre></div>
 <pre><code>## [1] 29214     7</code></pre>
 <p>Note that this dataset includes expression measures across <strong>29,214 probes, representing 14,019 unique genes</strong>.
 For simplicity in the final exercises, let’s just filter for rows representing mapped genes.</p>
-<div class="sourceCode" id="cb1050"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1050-1"><a href="gene-expression-omnibus.html#cb1050-1" tabindex="-1"></a>geodata_genes <span class="ot">=</span> geodata_genes[<span class="sc">!</span>(geodata_genes<span class="sc">$</span><span class="st">`</span><span class="at">Gene symbol</span><span class="st">`</span> <span class="sc">==</span> <span class="st">&quot;&quot;</span>), ]</span>
-<span id="cb1050-2"><a href="gene-expression-omnibus.html#cb1050-2" tabindex="-1"></a><span class="fu">dim</span>(geodata_genes)</span></code></pre></div>
+<div class="sourceCode" id="cb1057"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1057-1"><a href="gene-expression-omnibus.html#cb1057-1" tabindex="-1"></a>geodata_genes <span class="ot">=</span> geodata_genes[<span class="sc">!</span>(geodata_genes<span class="sc">$</span><span class="st">`</span><span class="at">Gene symbol</span><span class="st">`</span> <span class="sc">==</span> <span class="st">&quot;&quot;</span>), ]</span>
+<span id="cb1057-2"><a href="gene-expression-omnibus.html#cb1057-2" tabindex="-1"></a><span class="fu">dim</span>(geodata_genes)</span></code></pre></div>
 <pre><code>## [1] 16024     7</code></pre>
 <p>Note that this dataset now includes 16,024 rows with mapped gene symbol identifiers.</p>
 </div>
@@ -918,11 +910,11 @@ How can we convert platform-specific molecular identifiers used in -omics study 
 <h4>Boxplot visualizations<a href="gene-expression-omnibus.html#boxplot-visualizations" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>For this example, let’s simply use R’s built in boxplot() function.</p>
 <p>We only want to use columns with our expression data (2 to 7), so let’s pull those columns when running the boxplot function.</p>
-<div class="sourceCode" id="cb1052"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1052-1"><a href="gene-expression-omnibus.html#cb1052-1" tabindex="-1"></a><span class="fu">boxplot</span>(geodata_genes[,<span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb1059"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1059-1"><a href="gene-expression-omnibus.html#cb1059-1" tabindex="-1"></a><span class="fu">boxplot</span>(geodata_genes[,<span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>])</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-770-1.png" width="480" style="display: block; margin: auto;" /></p>
 <p>There seem to be a lot of variability within each sample’s range of expression levels, with many outliers. This makes sense given that we are analyzing the expression levels across the rat’s entire genome, where some genes won’t be expressed at all while others will be highly expressed due to biological and/or potential technical variability.</p>
 <p>To show plots without outliers, we can simply use outline=F.</p>
-<div class="sourceCode" id="cb1053"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1053-1"><a href="gene-expression-omnibus.html#cb1053-1" tabindex="-1"></a><span class="fu">boxplot</span>(geodata_genes[,<span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>], <span class="at">outline=</span>F)</span></code></pre></div>
+<div class="sourceCode" id="cb1060"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1060-1"><a href="gene-expression-omnibus.html#cb1060-1" tabindex="-1"></a><span class="fu">boxplot</span>(geodata_genes[,<span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>], <span class="at">outline=</span>F)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-771-1.png" width="480" style="display: block; margin: auto;" /></p>
 </div>
 <div id="heat-map-visualizations" class="section level4 hasAnchor">
@@ -930,18 +922,18 @@ How can we convert platform-specific molecular identifiers used in -omics study 
 <p>Heat maps are also useful when evaluating large datasets.</p>
 <p>There are many different packages you can use to generate heat maps. Here, we use the <em>superheat</em> package.</p>
 <p>It also takes awhile to plot all genes across the genome, so to save time for this training module, let’s randomly select 100 rows to plot.</p>
-<div class="sourceCode" id="cb1054"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1054-1"><a href="gene-expression-omnibus.html#cb1054-1" tabindex="-1"></a><span class="co"># To ensure that the same subset of genes are selected each time</span></span>
-<span id="cb1054-2"><a href="gene-expression-omnibus.html#cb1054-2" tabindex="-1"></a>set.seed <span class="ot">=</span> <span class="dv">101</span>                                     </span>
-<span id="cb1054-3"><a href="gene-expression-omnibus.html#cb1054-3" tabindex="-1"></a></span>
-<span id="cb1054-4"><a href="gene-expression-omnibus.html#cb1054-4" tabindex="-1"></a><span class="co"># Random selection of 100 rows</span></span>
-<span id="cb1054-5"><a href="gene-expression-omnibus.html#cb1054-5" tabindex="-1"></a>row.sample <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(geodata_genes),<span class="dv">100</span>) </span>
-<span id="cb1054-6"><a href="gene-expression-omnibus.html#cb1054-6" tabindex="-1"></a></span>
-<span id="cb1054-7"><a href="gene-expression-omnibus.html#cb1054-7" tabindex="-1"></a><span class="co"># Heat map code</span></span>
-<span id="cb1054-8"><a href="gene-expression-omnibus.html#cb1054-8" tabindex="-1"></a>superheat<span class="sc">::</span><span class="fu">superheat</span>(geodata_genes[row.sample,<span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>], <span class="co"># Only want to plot non-id/gene symbol columns (2 to 7)</span></span>
-<span id="cb1054-9"><a href="gene-expression-omnibus.html#cb1054-9" tabindex="-1"></a>                     <span class="at">pretty.order.rows =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb1054-10"><a href="gene-expression-omnibus.html#cb1054-10" tabindex="-1"></a>                     <span class="at">pretty.order.cols =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb1054-11"><a href="gene-expression-omnibus.html#cb1054-11" tabindex="-1"></a>                     <span class="at">col.dendrogram =</span> T,</span>
-<span id="cb1054-12"><a href="gene-expression-omnibus.html#cb1054-12" tabindex="-1"></a>                     <span class="at">row.dendrogram =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb1061"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1061-1"><a href="gene-expression-omnibus.html#cb1061-1" tabindex="-1"></a><span class="co"># To ensure that the same subset of genes are selected each time</span></span>
+<span id="cb1061-2"><a href="gene-expression-omnibus.html#cb1061-2" tabindex="-1"></a>set.seed <span class="ot">=</span> <span class="dv">101</span>                                     </span>
+<span id="cb1061-3"><a href="gene-expression-omnibus.html#cb1061-3" tabindex="-1"></a></span>
+<span id="cb1061-4"><a href="gene-expression-omnibus.html#cb1061-4" tabindex="-1"></a><span class="co"># Random selection of 100 rows</span></span>
+<span id="cb1061-5"><a href="gene-expression-omnibus.html#cb1061-5" tabindex="-1"></a>row.sample <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(geodata_genes),<span class="dv">100</span>) </span>
+<span id="cb1061-6"><a href="gene-expression-omnibus.html#cb1061-6" tabindex="-1"></a></span>
+<span id="cb1061-7"><a href="gene-expression-omnibus.html#cb1061-7" tabindex="-1"></a><span class="co"># Heat map code</span></span>
+<span id="cb1061-8"><a href="gene-expression-omnibus.html#cb1061-8" tabindex="-1"></a>superheat<span class="sc">::</span><span class="fu">superheat</span>(geodata_genes[row.sample,<span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>], <span class="co"># Only want to plot non-id/gene symbol columns (2 to 7)</span></span>
+<span id="cb1061-9"><a href="gene-expression-omnibus.html#cb1061-9" tabindex="-1"></a>                     <span class="at">pretty.order.rows =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1061-10"><a href="gene-expression-omnibus.html#cb1061-10" tabindex="-1"></a>                     <span class="at">pretty.order.cols =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1061-11"><a href="gene-expression-omnibus.html#cb1061-11" tabindex="-1"></a>                     <span class="at">col.dendrogram =</span> T,</span>
+<span id="cb1061-12"><a href="gene-expression-omnibus.html#cb1061-12" tabindex="-1"></a>                     <span class="at">row.dendrogram =</span> T)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-772-1.png" width="864" style="display: block; margin: auto;" /></p>
 <p>This produces a heat map with sample IDs along the x-axis and probeset IDs along the y-axis. Here, the values being displayed represent normalized expression values.</p>
 <p>One way to improve our ability to distinguish differences between samples is to <strong>scale expression values</strong> across probes.</p>
@@ -949,9 +941,9 @@ How can we convert platform-specific molecular identifiers used in -omics study 
 <p>Z-score is a very common method of scaling that transforms data points to reflect the number of standard deviations they are from the overall mean. Z-score scaling data results in the overall transformation of a dataset to have an overall mean = 0 and standard deviation = 1.</p>
 <p>Let’s see what happens when we scale this gene expression dataset by z-score across each probe. This can be easily done using the <code>scale()</code> function.</p>
 <p>This specific <code>scale()</code> function works by centering and scaling across columns, but since we want to use it across probesets (organized as rows), we need to first transpose our dataset, then run the scale function.</p>
-<div class="sourceCode" id="cb1055"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1055-1"><a href="gene-expression-omnibus.html#cb1055-1" tabindex="-1"></a>geodata_genes_scaled <span class="ot">=</span> <span class="fu">scale</span>(<span class="fu">t</span>(geodata_genes[,<span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>]), <span class="at">center=</span>T, <span class="at">scale=</span>T)</span></code></pre></div>
+<div class="sourceCode" id="cb1062"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1062-1"><a href="gene-expression-omnibus.html#cb1062-1" tabindex="-1"></a>geodata_genes_scaled <span class="ot">=</span> <span class="fu">scale</span>(<span class="fu">t</span>(geodata_genes[,<span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>]), <span class="at">center=</span>T, <span class="at">scale=</span>T)</span></code></pre></div>
 <p>Now we can transpose it back to the original format (i.e., before it was transposed).</p>
-<div class="sourceCode" id="cb1056"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1056-1"><a href="gene-expression-omnibus.html#cb1056-1" tabindex="-1"></a>geodata_genes_scaled <span class="ot">=</span> <span class="fu">t</span>(geodata_genes_scaled)</span></code></pre></div>
+<div class="sourceCode" id="cb1063"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1063-1"><a href="gene-expression-omnibus.html#cb1063-1" tabindex="-1"></a>geodata_genes_scaled <span class="ot">=</span> <span class="fu">t</span>(geodata_genes_scaled)</span></code></pre></div>
 <p>And then view what the normalized and now scaled expression data look like for now a random subset of 100 probesets (representing genes).
 <img src="_main_files/figure-html/unnamed-chunk-775-1.png" width="864" style="display: block; margin: auto;" /></p>
 <p>With these data now scaled, we can more easily visualize patterns between samples.</p>
@@ -983,11 +975,11 @@ Now, with these data nicely organized, we can next explore how statistics can he
 <div id="method-1-m1-for-loop" class="section level4 hasAnchor">
 <h4>Method 1 (m1): ‘For Loop’<a href="gene-expression-omnibus.html#method-1-m1-for-loop" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Let’s first re-save the molecular probe IDs to a column within the dataframe, since we need those values in the loop function.</p>
-<div class="sourceCode" id="cb1057"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1057-1"><a href="gene-expression-omnibus.html#cb1057-1" tabindex="-1"></a>geodata_genes<span class="sc">$</span>ID <span class="ot">=</span> <span class="fu">rownames</span>(geodata_genes)</span></code></pre></div>
+<div class="sourceCode" id="cb1064"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1064-1"><a href="gene-expression-omnibus.html#cb1064-1" tabindex="-1"></a>geodata_genes<span class="sc">$</span>ID <span class="ot">=</span> <span class="fu">rownames</span>(geodata_genes)</span></code></pre></div>
 <p>We also need to initially create an empty dataframe to eventually store p-values.</p>
-<div class="sourceCode" id="cb1058"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1058-1"><a href="gene-expression-omnibus.html#cb1058-1" tabindex="-1"></a>pValue_m1 <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow=</span><span class="fu">nrow</span>(geodata_genes), <span class="at">ncol=</span><span class="dv">3</span>)</span>
-<span id="cb1058-2"><a href="gene-expression-omnibus.html#cb1058-2" tabindex="-1"></a><span class="fu">colnames</span>(pValue_m1) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;ID&quot;</span>, <span class="st">&quot;pval&quot;</span>, <span class="st">&quot;padj&quot;</span>)</span>
-<span id="cb1058-3"><a href="gene-expression-omnibus.html#cb1058-3" tabindex="-1"></a><span class="fu">head</span>(pValue_m1)</span></code></pre></div>
+<div class="sourceCode" id="cb1065"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1065-1"><a href="gene-expression-omnibus.html#cb1065-1" tabindex="-1"></a>pValue_m1 <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow=</span><span class="fu">nrow</span>(geodata_genes), <span class="at">ncol=</span><span class="dv">3</span>)</span>
+<span id="cb1065-2"><a href="gene-expression-omnibus.html#cb1065-2" tabindex="-1"></a><span class="fu">colnames</span>(pValue_m1) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;ID&quot;</span>, <span class="st">&quot;pval&quot;</span>, <span class="st">&quot;padj&quot;</span>)</span>
+<span id="cb1065-3"><a href="gene-expression-omnibus.html#cb1065-3" tabindex="-1"></a><span class="fu">head</span>(pValue_m1)</span></code></pre></div>
 <pre><code>##      ID pval padj
 ## [1,]  0    0    0
 ## [2,]  0    0    0
@@ -997,22 +989,22 @@ Now, with these data nicely organized, we can next explore how statistics can he
 ## [6,]  0    0    0</code></pre>
 <p>You can see the empty dataframe that was generated through this code.</p>
 <p>Then we can loop through the entire dataset to acquire p-values from t-test statistics, comparing n=3 exposed vs n=3 unexposed samples.</p>
-<div class="sourceCode" id="cb1060"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1060-1"><a href="gene-expression-omnibus.html#cb1060-1" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(geodata_genes)) {</span>
-<span id="cb1060-2"><a href="gene-expression-omnibus.html#cb1060-2" tabindex="-1"></a>  </span>
-<span id="cb1060-3"><a href="gene-expression-omnibus.html#cb1060-3" tabindex="-1"></a>  <span class="co">#Get the ID</span></span>
-<span id="cb1060-4"><a href="gene-expression-omnibus.html#cb1060-4" tabindex="-1"></a>  ID.i <span class="ot">=</span> geodata_genes[i, <span class="st">&quot;ID&quot;</span>];</span>
-<span id="cb1060-5"><a href="gene-expression-omnibus.html#cb1060-5" tabindex="-1"></a>  </span>
-<span id="cb1060-6"><a href="gene-expression-omnibus.html#cb1060-6" tabindex="-1"></a>  <span class="co">#Run the t-test and get the p-value</span></span>
-<span id="cb1060-7"><a href="gene-expression-omnibus.html#cb1060-7" tabindex="-1"></a>  pval.i <span class="ot">=</span> <span class="fu">t.test</span>(geodata_genes[i,exposedIDs], geodata_genes[i,unexposedIDs])<span class="sc">$</span>p.value;</span>
-<span id="cb1060-8"><a href="gene-expression-omnibus.html#cb1060-8" tabindex="-1"></a>  </span>
-<span id="cb1060-9"><a href="gene-expression-omnibus.html#cb1060-9" tabindex="-1"></a>  <span class="co">#Store the data in the empty dataframe</span></span>
-<span id="cb1060-10"><a href="gene-expression-omnibus.html#cb1060-10" tabindex="-1"></a>  pValue_m1[i,<span class="st">&quot;ID&quot;</span>] <span class="ot">=</span> ID.i;</span>
-<span id="cb1060-11"><a href="gene-expression-omnibus.html#cb1060-11" tabindex="-1"></a>  pValue_m1[i,<span class="st">&quot;pval&quot;</span>] <span class="ot">=</span> pval.i</span>
-<span id="cb1060-12"><a href="gene-expression-omnibus.html#cb1060-12" tabindex="-1"></a>  </span>
-<span id="cb1060-13"><a href="gene-expression-omnibus.html#cb1060-13" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb1067"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1067-1"><a href="gene-expression-omnibus.html#cb1067-1" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(geodata_genes)) {</span>
+<span id="cb1067-2"><a href="gene-expression-omnibus.html#cb1067-2" tabindex="-1"></a>  </span>
+<span id="cb1067-3"><a href="gene-expression-omnibus.html#cb1067-3" tabindex="-1"></a>  <span class="co">#Get the ID</span></span>
+<span id="cb1067-4"><a href="gene-expression-omnibus.html#cb1067-4" tabindex="-1"></a>  ID.i <span class="ot">=</span> geodata_genes[i, <span class="st">&quot;ID&quot;</span>];</span>
+<span id="cb1067-5"><a href="gene-expression-omnibus.html#cb1067-5" tabindex="-1"></a>  </span>
+<span id="cb1067-6"><a href="gene-expression-omnibus.html#cb1067-6" tabindex="-1"></a>  <span class="co">#Run the t-test and get the p-value</span></span>
+<span id="cb1067-7"><a href="gene-expression-omnibus.html#cb1067-7" tabindex="-1"></a>  pval.i <span class="ot">=</span> <span class="fu">t.test</span>(geodata_genes[i,exposedIDs], geodata_genes[i,unexposedIDs])<span class="sc">$</span>p.value;</span>
+<span id="cb1067-8"><a href="gene-expression-omnibus.html#cb1067-8" tabindex="-1"></a>  </span>
+<span id="cb1067-9"><a href="gene-expression-omnibus.html#cb1067-9" tabindex="-1"></a>  <span class="co">#Store the data in the empty dataframe</span></span>
+<span id="cb1067-10"><a href="gene-expression-omnibus.html#cb1067-10" tabindex="-1"></a>  pValue_m1[i,<span class="st">&quot;ID&quot;</span>] <span class="ot">=</span> ID.i;</span>
+<span id="cb1067-11"><a href="gene-expression-omnibus.html#cb1067-11" tabindex="-1"></a>  pValue_m1[i,<span class="st">&quot;pval&quot;</span>] <span class="ot">=</span> pval.i</span>
+<span id="cb1067-12"><a href="gene-expression-omnibus.html#cb1067-12" tabindex="-1"></a>  </span>
+<span id="cb1067-13"><a href="gene-expression-omnibus.html#cb1067-13" tabindex="-1"></a>}</span></code></pre></div>
 <p>View the results:</p>
-<div class="sourceCode" id="cb1061"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1061-1"><a href="gene-expression-omnibus.html#cb1061-1" tabindex="-1"></a><span class="co"># Note that we&#39;re not pulling the last column (padj) since we haven&#39;t calculated these yet</span></span>
-<span id="cb1061-2"><a href="gene-expression-omnibus.html#cb1061-2" tabindex="-1"></a>pValue_m1[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] </span></code></pre></div>
+<div class="sourceCode" id="cb1068"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1068-1"><a href="gene-expression-omnibus.html#cb1068-1" tabindex="-1"></a><span class="co"># Note that we&#39;re not pulling the last column (padj) since we haven&#39;t calculated these yet</span></span>
+<span id="cb1068-2"><a href="gene-expression-omnibus.html#cb1068-2" tabindex="-1"></a>pValue_m1[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] </span></code></pre></div>
 <pre><code>##      ID         pval                
 ## [1,] &quot;10903987&quot; &quot;0.0812802229304083&quot;
 ## [2,] &quot;10714794&quot; &quot;0.757311314118124&quot; 
@@ -1023,16 +1015,16 @@ Now, with these data nicely organized, we can next explore how statistics can he
 <div id="method-2-m2-apply-function" class="section level4 hasAnchor">
 <h4>Method 2 (m2): Apply Function<a href="gene-expression-omnibus.html#method-2-m2-apply-function" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>For the second method, we can use the <em>apply()</em> function to calculate resulting t-test p-values more efficiently labeled.</p>
-<div class="sourceCode" id="cb1063"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1063-1"><a href="gene-expression-omnibus.html#cb1063-1" tabindex="-1"></a>pValue_m2 <span class="ot">=</span> <span class="fu">apply</span>(geodata_genes[,<span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>], <span class="dv">1</span>, <span class="cf">function</span>(x) <span class="fu">t.test</span>(x[unexposedIDs],</span>
-<span id="cb1063-2"><a href="gene-expression-omnibus.html#cb1063-2" tabindex="-1"></a>                                                              x[exposedIDs])<span class="sc">$</span>p.value)</span>
-<span id="cb1063-3"><a href="gene-expression-omnibus.html#cb1063-3" tabindex="-1"></a><span class="fu">names</span>(pValue_m2) <span class="ot">=</span> geodata_genes[,<span class="st">&quot;ID&quot;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb1070"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1070-1"><a href="gene-expression-omnibus.html#cb1070-1" tabindex="-1"></a>pValue_m2 <span class="ot">=</span> <span class="fu">apply</span>(geodata_genes[,<span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>], <span class="dv">1</span>, <span class="cf">function</span>(x) <span class="fu">t.test</span>(x[unexposedIDs],</span>
+<span id="cb1070-2"><a href="gene-expression-omnibus.html#cb1070-2" tabindex="-1"></a>                                                              x[exposedIDs])<span class="sc">$</span>p.value)</span>
+<span id="cb1070-3"><a href="gene-expression-omnibus.html#cb1070-3" tabindex="-1"></a><span class="fu">names</span>(pValue_m2) <span class="ot">=</span> geodata_genes[,<span class="st">&quot;ID&quot;</span>]</span></code></pre></div>
 <p>We can convert the results into a dataframe to make it similar to m1 matrix we created above.</p>
-<div class="sourceCode" id="cb1064"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1064-1"><a href="gene-expression-omnibus.html#cb1064-1" tabindex="-1"></a>pValue_m2  <span class="ot">=</span> <span class="fu">data.frame</span>(pValue_m2)</span>
-<span id="cb1064-2"><a href="gene-expression-omnibus.html#cb1064-2" tabindex="-1"></a></span>
-<span id="cb1064-3"><a href="gene-expression-omnibus.html#cb1064-3" tabindex="-1"></a><span class="co"># Now create an ID column</span></span>
-<span id="cb1064-4"><a href="gene-expression-omnibus.html#cb1064-4" tabindex="-1"></a>pValue_m2<span class="sc">$</span>ID <span class="ot">=</span> <span class="fu">rownames</span>(pValue_m2)</span></code></pre></div>
+<div class="sourceCode" id="cb1071"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1071-1"><a href="gene-expression-omnibus.html#cb1071-1" tabindex="-1"></a>pValue_m2  <span class="ot">=</span> <span class="fu">data.frame</span>(pValue_m2)</span>
+<span id="cb1071-2"><a href="gene-expression-omnibus.html#cb1071-2" tabindex="-1"></a></span>
+<span id="cb1071-3"><a href="gene-expression-omnibus.html#cb1071-3" tabindex="-1"></a><span class="co"># Now create an ID column</span></span>
+<span id="cb1071-4"><a href="gene-expression-omnibus.html#cb1071-4" tabindex="-1"></a>pValue_m2<span class="sc">$</span>ID <span class="ot">=</span> <span class="fu">rownames</span>(pValue_m2)</span></code></pre></div>
 <p>Then we can view at the two datasets to see they result in the same pvalues.</p>
-<div class="sourceCode" id="cb1065"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1065-1"><a href="gene-expression-omnibus.html#cb1065-1" tabindex="-1"></a><span class="fu">head</span>(pValue_m1)</span></code></pre></div>
+<div class="sourceCode" id="cb1072"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1072-1"><a href="gene-expression-omnibus.html#cb1072-1" tabindex="-1"></a><span class="fu">head</span>(pValue_m1)</span></code></pre></div>
 <pre><code>##      ID         pval                 padj
 ## [1,] &quot;10903987&quot; &quot;0.0812802229304083&quot; &quot;0&quot; 
 ## [2,] &quot;10714794&quot; &quot;0.757311314118124&quot;  &quot;0&quot; 
@@ -1040,7 +1032,7 @@ Now, with these data nicely organized, we can next explore how statistics can he
 ## [4,] &quot;10872252&quot; &quot;0.0548937136005506&quot; &quot;0&quot; 
 ## [5,] &quot;10905819&quot; &quot;0.173539535577791&quot;  &quot;0&quot; 
 ## [6,] &quot;10907585&quot; &quot;0.215200167867295&quot;  &quot;0&quot;</code></pre>
-<div class="sourceCode" id="cb1067"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1067-1"><a href="gene-expression-omnibus.html#cb1067-1" tabindex="-1"></a><span class="fu">head</span>(pValue_m2)</span></code></pre></div>
+<div class="sourceCode" id="cb1074"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1074-1"><a href="gene-expression-omnibus.html#cb1074-1" tabindex="-1"></a><span class="fu">head</span>(pValue_m2)</span></code></pre></div>
 <pre><code>##           pValue_m2       ID
 ## 10903987 0.08128022 10903987
 ## 10714794 0.75731131 10714794
@@ -1054,14 +1046,14 @@ Now, with these data nicely organized, we can next explore how statistics can he
 <h4>Interpreting Results<a href="gene-expression-omnibus.html#interpreting-results" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Let’s again merge these data with the gene symbols to tell which genes are significant.</p>
 <p>First, let’s convert to a dataframe and then merge as before, for one of the above methods as an example (m1).</p>
-<div class="sourceCode" id="cb1069"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1069-1"><a href="gene-expression-omnibus.html#cb1069-1" tabindex="-1"></a>pValue_m1 <span class="ot">=</span> <span class="fu">data.frame</span>(pValue_m1)</span>
-<span id="cb1069-2"><a href="gene-expression-omnibus.html#cb1069-2" tabindex="-1"></a>pValue_m1 <span class="ot">=</span> <span class="fu">merge</span>(pValue_m1, id.gene.table, <span class="at">by=</span><span class="st">&quot;ID&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1076"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1076-1"><a href="gene-expression-omnibus.html#cb1076-1" tabindex="-1"></a>pValue_m1 <span class="ot">=</span> <span class="fu">data.frame</span>(pValue_m1)</span>
+<span id="cb1076-2"><a href="gene-expression-omnibus.html#cb1076-2" tabindex="-1"></a>pValue_m1 <span class="ot">=</span> <span class="fu">merge</span>(pValue_m1, id.gene.table, <span class="at">by=</span><span class="st">&quot;ID&quot;</span>)</span></code></pre></div>
 <p>We can also add a multiple test correction by applying a false discovery rate-adjusted p-value; here, using the Benjamini Hochberg (BH) method.</p>
-<div class="sourceCode" id="cb1070"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1070-1"><a href="gene-expression-omnibus.html#cb1070-1" tabindex="-1"></a><span class="co"># Here fdr is an alias for B-H method</span></span>
-<span id="cb1070-2"><a href="gene-expression-omnibus.html#cb1070-2" tabindex="-1"></a>pValue_m1[,<span class="st">&quot;padj&quot;</span>] <span class="ot">=</span> <span class="fu">p.adjust</span>(pValue_m1[,<span class="st">&quot;pval&quot;</span>], <span class="at">method=</span><span class="fu">c</span>(<span class="st">&quot;fdr&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb1077"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1077-1"><a href="gene-expression-omnibus.html#cb1077-1" tabindex="-1"></a><span class="co"># Here fdr is an alias for B-H method</span></span>
+<span id="cb1077-2"><a href="gene-expression-omnibus.html#cb1077-2" tabindex="-1"></a>pValue_m1[,<span class="st">&quot;padj&quot;</span>] <span class="ot">=</span> <span class="fu">p.adjust</span>(pValue_m1[,<span class="st">&quot;pval&quot;</span>], <span class="at">method=</span><span class="fu">c</span>(<span class="st">&quot;fdr&quot;</span>))</span></code></pre></div>
 <p>Now, we can sort these statistical results by adjusted p-values.</p>
-<div class="sourceCode" id="cb1071"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1071-1"><a href="gene-expression-omnibus.html#cb1071-1" tabindex="-1"></a>pValue_m1.sorted <span class="ot">=</span> pValue_m1[<span class="fu">order</span>(pValue_m1[,<span class="st">&#39;padj&#39;</span>]),]</span>
-<span id="cb1071-2"><a href="gene-expression-omnibus.html#cb1071-2" tabindex="-1"></a><span class="fu">head</span>(pValue_m1.sorted)</span></code></pre></div>
+<div class="sourceCode" id="cb1078"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1078-1"><a href="gene-expression-omnibus.html#cb1078-1" tabindex="-1"></a>pValue_m1.sorted <span class="ot">=</span> pValue_m1[<span class="fu">order</span>(pValue_m1[,<span class="st">&#39;padj&#39;</span>]),]</span>
+<span id="cb1078-2"><a href="gene-expression-omnibus.html#cb1078-2" tabindex="-1"></a><span class="fu">head</span>(pValue_m1.sorted)</span></code></pre></div>
 <pre><code>##            ID                 pval       padj Gene symbol
 ## 9143 10837582 4.57288413593085e-07 0.00732759      Olr633
 ## 5640 10783648 1.93688668590855e-06 0.01551834      Slc7a8
@@ -1070,10 +1062,10 @@ Now, with these data nicely organized, we can next explore how statistics can he
 ## 19   10701830  0.00586885826460337 0.13089115      Hivep2
 ## 23   10701880  0.00749149990409956 0.13089115       Reps1</code></pre>
 <p>Pulling just the significant genes using an adjusted p-value threshold of 0.05.</p>
-<div class="sourceCode" id="cb1073"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1073-1"><a href="gene-expression-omnibus.html#cb1073-1" tabindex="-1"></a>adj.pval.sig <span class="ot">=</span> pValue_m1[<span class="fu">which</span>(pValue_m1[,<span class="st">&#39;padj&#39;</span>] <span class="sc">&lt;</span> .<span class="dv">05</span>),]</span>
-<span id="cb1073-2"><a href="gene-expression-omnibus.html#cb1073-2" tabindex="-1"></a></span>
-<span id="cb1073-3"><a href="gene-expression-omnibus.html#cb1073-3" tabindex="-1"></a><span class="co"># Viewing these genes</span></span>
-<span id="cb1073-4"><a href="gene-expression-omnibus.html#cb1073-4" tabindex="-1"></a>adj.pval.sig       </span></code></pre></div>
+<div class="sourceCode" id="cb1080"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1080-1"><a href="gene-expression-omnibus.html#cb1080-1" tabindex="-1"></a>adj.pval.sig <span class="ot">=</span> pValue_m1[<span class="fu">which</span>(pValue_m1[,<span class="st">&#39;padj&#39;</span>] <span class="sc">&lt;</span> .<span class="dv">05</span>),]</span>
+<span id="cb1080-2"><a href="gene-expression-omnibus.html#cb1080-2" tabindex="-1"></a></span>
+<span id="cb1080-3"><a href="gene-expression-omnibus.html#cb1080-3" tabindex="-1"></a><span class="co"># Viewing these genes</span></span>
+<span id="cb1080-4"><a href="gene-expression-omnibus.html#cb1080-4" tabindex="-1"></a>adj.pval.sig       </span></code></pre></div>
 <pre><code>##            ID                 pval       padj Gene symbol
 ## 5640 10783648 1.93688668590855e-06 0.01551834      Slc7a8
 ## 9143 10837582 4.57288413593085e-07 0.00732759      Olr633</code></pre>
@@ -1092,8 +1084,8 @@ What genes are altered in expression by formaldehyde inhalation exposure?</p>
 Note that we can use probesetIDs, then gene symbols, in rownames to have them show in heat map labels.
 <img src="_main_files/figure-html/unnamed-chunk-787-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>Note that this statistical filter is pretty strict when comparing only n=3 vs n=3 biological replicates. If we loosen the statistical criteria to p-value &lt; 0.05, this is what we can find:</p>
-<div class="sourceCode" id="cb1075"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1075-1"><a href="gene-expression-omnibus.html#cb1075-1" tabindex="-1"></a>pval.sig <span class="ot">=</span> pValue_m1[<span class="fu">which</span>(pValue_m1[,<span class="st">&#39;pval&#39;</span>] <span class="sc">&lt;</span> .<span class="dv">05</span>),]</span>
-<span id="cb1075-2"><a href="gene-expression-omnibus.html#cb1075-2" tabindex="-1"></a><span class="fu">nrow</span>(pval.sig)</span></code></pre></div>
+<div class="sourceCode" id="cb1082"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1082-1"><a href="gene-expression-omnibus.html#cb1082-1" tabindex="-1"></a>pval.sig <span class="ot">=</span> pValue_m1[<span class="fu">which</span>(pValue_m1[,<span class="st">&#39;pval&#39;</span>] <span class="sc">&lt;</span> .<span class="dv">05</span>),]</span>
+<span id="cb1082-2"><a href="gene-expression-omnibus.html#cb1082-2" tabindex="-1"></a><span class="fu">nrow</span>(pval.sig)</span></code></pre></div>
 <pre><code>## [1] 5327</code></pre>
 <p>5327 genes with significantly altered expression!</p>
 <p>Note that other filters are commonly applied to further focus these lists (e.g., background and fold change filters) prior to statistical evaluation, which can impact the final results. See <a href="https://pubmed.ncbi.nlm.nih.gov/24304932/">Rager et al. 2013</a> for further statistical approaches and visualizations.</p>

@@ -23,7 +23,7 @@
 <meta name="author" content="Rager Lab" />
 
 
-<meta name="date" content="2024-12-19" />
+<meta name="date" content="2025-03-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -503,14 +503,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="comptox-dashboard-data-through-apis.html"><a href="comptox-dashboard-data-through-apis.html#hazard-resource"><i class="fa fa-check"></i>Hazard Resource</a></li>
 <li class="chapter" data-level="" data-path="comptox-dashboard-data-through-apis.html"><a href="comptox-dashboard-data-through-apis.html#concluding-remarks-32"><i class="fa fa-check"></i>Concluding Remarks</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="database-integration-air-quality-mortality-and-environmental-justice-data.html"><a href="database-integration-air-quality-mortality-and-environmental-justice-data.html"><i class="fa fa-check"></i>7.4 Database Integration: Air Quality, Mortality, and Environmental Justice Data</a>
-<ul>
-<li class="chapter" data-level="" data-path="database-integration-air-quality-mortality-and-environmental-justice-data.html"><a href="database-integration-air-quality-mortality-and-environmental-justice-data.html#introduction-to-training-module-33"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
-<li class="chapter" data-level="" data-path="database-integration-air-quality-mortality-and-environmental-justice-data.html"><a href="database-integration-air-quality-mortality-and-environmental-justice-data.html#introduction-to-exposure-and-health-databases"><i class="fa fa-check"></i>Introduction to Exposure and Health Databases</a></li>
-<li class="chapter" data-level="" data-path="database-integration-air-quality-mortality-and-environmental-justice-data.html"><a href="database-integration-air-quality-mortality-and-environmental-justice-data.html#analyzing-relationships-between-pm2.5-and-mortality"><i class="fa fa-check"></i>Analyzing Relationships between PM<sub>2.5</sub> and Mortality</a></li>
-<li class="chapter" data-level="" data-path="database-integration-air-quality-mortality-and-environmental-justice-data.html"><a href="database-integration-air-quality-mortality-and-environmental-justice-data.html#environmental-justice-considerations"><i class="fa fa-check"></i>Environmental Justice Considerations</a></li>
-<li class="chapter" data-level="" data-path="database-integration-air-quality-mortality-and-environmental-justice-data.html"><a href="database-integration-air-quality-mortality-and-environmental-justice-data.html#concluding-remarks-33"><i class="fa fa-check"></i>Concluding Remarks</a></li>
-</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -553,27 +545,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3>Script Preparations<a href="comparative-toxicogenomics-database.html#script-preparations-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="cleaning-the-global-environment-12" class="section level4 hasAnchor">
 <h4>Cleaning the global environment<a href="comparative-toxicogenomics-database.html#cleaning-the-global-environment-12" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb963"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb963-1"><a href="comparative-toxicogenomics-database.html#cb963-1" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb970"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb970-1"><a href="comparative-toxicogenomics-database.html#cb970-1" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span></code></pre></div>
 </div>
 <div id="installing-required-r-packages-12" class="section level4 hasAnchor">
 <h4>Installing required R packages<a href="comparative-toxicogenomics-database.html#installing-required-r-packages-12" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you.</p>
-<div class="sourceCode" id="cb964"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb964-1"><a href="comparative-toxicogenomics-database.html#cb964-1" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;tidyverse&quot;</span>))</span>
-<span id="cb964-2"><a href="comparative-toxicogenomics-database.html#cb964-2" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span>
-<span id="cb964-3"><a href="comparative-toxicogenomics-database.html#cb964-3" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;VennDiagram&quot;</span>))</span>
-<span id="cb964-4"><a href="comparative-toxicogenomics-database.html#cb964-4" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;VennDiagram&quot;</span>)</span>
-<span id="cb964-5"><a href="comparative-toxicogenomics-database.html#cb964-5" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;grid&quot;</span>))</span>
-<span id="cb964-6"><a href="comparative-toxicogenomics-database.html#cb964-6" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;grid&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb971"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb971-1"><a href="comparative-toxicogenomics-database.html#cb971-1" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;tidyverse&quot;</span>))</span>
+<span id="cb971-2"><a href="comparative-toxicogenomics-database.html#cb971-2" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span>
+<span id="cb971-3"><a href="comparative-toxicogenomics-database.html#cb971-3" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;VennDiagram&quot;</span>))</span>
+<span id="cb971-4"><a href="comparative-toxicogenomics-database.html#cb971-4" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;VennDiagram&quot;</span>)</span>
+<span id="cb971-5"><a href="comparative-toxicogenomics-database.html#cb971-5" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;grid&quot;</span>))</span>
+<span id="cb971-6"><a href="comparative-toxicogenomics-database.html#cb971-6" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;grid&quot;</span>)</span></code></pre></div>
 </div>
 <div id="loading-r-packages-required-for-this-session-10" class="section level4 hasAnchor">
 <h4>Loading R packages required for this session<a href="comparative-toxicogenomics-database.html#loading-r-packages-required-for-this-session-10" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb965"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb965-1"><a href="comparative-toxicogenomics-database.html#cb965-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb965-2"><a href="comparative-toxicogenomics-database.html#cb965-2" tabindex="-1"></a><span class="fu">library</span>(VennDiagram)</span>
-<span id="cb965-3"><a href="comparative-toxicogenomics-database.html#cb965-3" tabindex="-1"></a><span class="fu">library</span>(grid)</span></code></pre></div>
+<div class="sourceCode" id="cb972"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb972-1"><a href="comparative-toxicogenomics-database.html#cb972-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb972-2"><a href="comparative-toxicogenomics-database.html#cb972-2" tabindex="-1"></a><span class="fu">library</span>(VennDiagram)</span>
+<span id="cb972-3"><a href="comparative-toxicogenomics-database.html#cb972-3" tabindex="-1"></a><span class="fu">library</span>(grid)</span></code></pre></div>
 </div>
 <div id="set-your-working-directory-15" class="section level4 hasAnchor">
 <h4>Set your working directory<a href="comparative-toxicogenomics-database.html#set-your-working-directory-15" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb966"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb966-1"><a href="comparative-toxicogenomics-database.html#cb966-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;/filepath to where your input files are&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb973"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb973-1"><a href="comparative-toxicogenomics-database.html#cb973-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;/filepath to where your input files are&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -601,19 +593,19 @@ Note that the data pulled here represent data available on August 1, 2021</p>
 <div id="loading-the-example-ctd-dataset-into-r" class="section level3 hasAnchor">
 <h3>Loading the Example CTD Dataset into R<a href="comparative-toxicogenomics-database.html#loading-the-example-ctd-dataset-into-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Read in the csv file of the results from CTD query:</p>
-<div class="sourceCode" id="cb967"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb967-1"><a href="comparative-toxicogenomics-database.html#cb967-1" tabindex="-1"></a>ctd <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">&quot;Module7_1_Input/Module7_1_InputData1.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb974"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb974-1"><a href="comparative-toxicogenomics-database.html#cb974-1" tabindex="-1"></a>ctd <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">&quot;Module7_1_Input/Module7_1_InputData1.csv&quot;</span>)</span></code></pre></div>
 <p>Let’s first see how many rows and columns of data this file contains:</p>
-<div class="sourceCode" id="cb968"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb968-1"><a href="comparative-toxicogenomics-database.html#cb968-1" tabindex="-1"></a><span class="fu">dim</span>(ctd)</span></code></pre></div>
+<div class="sourceCode" id="cb975"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb975-1"><a href="comparative-toxicogenomics-database.html#cb975-1" tabindex="-1"></a><span class="fu">dim</span>(ctd)</span></code></pre></div>
 <pre><code>## [1] 6280    9</code></pre>
 <p>This dataset includes 6280 observations (represented by rows) linking arsenic exposure to gene-level alterations
 With information spanning across 9 columns</p>
 <p>Let’s also see what kind of data are organized within the columns:</p>
-<div class="sourceCode" id="cb970"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb970-1"><a href="comparative-toxicogenomics-database.html#cb970-1" tabindex="-1"></a><span class="fu">colnames</span>(ctd)</span></code></pre></div>
+<div class="sourceCode" id="cb977"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb977-1"><a href="comparative-toxicogenomics-database.html#cb977-1" tabindex="-1"></a><span class="fu">colnames</span>(ctd)</span></code></pre></div>
 <pre><code>## [1] &quot;Chemical Name&quot;       &quot;Chemical ID&quot;         &quot;CAS RN&quot;             
 ## [4] &quot;Gene Symbol&quot;         &quot;Gene ID&quot;             &quot;Interaction&quot;        
 ## [7] &quot;Interaction Actions&quot; &quot;Reference Count&quot;     &quot;Organism Count&quot;</code></pre>
-<div class="sourceCode" id="cb972"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb972-1"><a href="comparative-toxicogenomics-database.html#cb972-1" tabindex="-1"></a><span class="co"># Viewing the first five rows of data, across all 9 columns</span></span>
-<span id="cb972-2"><a href="comparative-toxicogenomics-database.html#cb972-2" tabindex="-1"></a>ctd[<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>] </span></code></pre></div>
+<div class="sourceCode" id="cb979"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb979-1"><a href="comparative-toxicogenomics-database.html#cb979-1" tabindex="-1"></a><span class="co"># Viewing the first five rows of data, across all 9 columns</span></span>
+<span id="cb979-2"><a href="comparative-toxicogenomics-database.html#cb979-2" tabindex="-1"></a>ctd[<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>] </span></code></pre></div>
 <pre><code>## # A tibble: 9 × 5
 ##   `Chemical Name` `Chemical ID` `CAS RN`  `Gene Symbol` `Gene ID`
 ##   &lt;chr&gt;           &lt;chr&gt;         &lt;chr&gt;     &lt;chr&gt;             &lt;dbl&gt;
@@ -629,22 +621,22 @@ With information spanning across 9 columns</p>
 <div id="filtering-data-for-genes-with-altered-expression" class="section level4 hasAnchor">
 <h4>Filtering data for genes with altered expression<a href="comparative-toxicogenomics-database.html#filtering-data-for-genes-with-altered-expression" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>To identify genes with altered expression in association with arsenic, we can leverage the results of our CTD query and filter this dataset to include only the rows that contain the term “expression” in the “Interaction Actions” column.</p>
-<div class="sourceCode" id="cb974"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb974-1"><a href="comparative-toxicogenomics-database.html#cb974-1" tabindex="-1"></a>exp_filt <span class="ot">=</span> ctd <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">&quot;expression&quot;</span>, <span class="st">`</span><span class="at">Interaction Actions</span><span class="st">`</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb981"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb981-1"><a href="comparative-toxicogenomics-database.html#cb981-1" tabindex="-1"></a>exp_filt <span class="ot">=</span> ctd <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">&quot;expression&quot;</span>, <span class="st">`</span><span class="at">Interaction Actions</span><span class="st">`</span>))</span></code></pre></div>
 <p>We now have 2586 observations, representing instances of arsenic exposure causing a changes in a target gene’s expression levels.</p>
-<div class="sourceCode" id="cb975"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb975-1"><a href="comparative-toxicogenomics-database.html#cb975-1" tabindex="-1"></a><span class="fu">dim</span>(exp_filt)</span></code></pre></div>
+<div class="sourceCode" id="cb982"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb982-1"><a href="comparative-toxicogenomics-database.html#cb982-1" tabindex="-1"></a><span class="fu">dim</span>(exp_filt)</span></code></pre></div>
 <pre><code>## [1] 2586    9</code></pre>
 <p>Let’s see how many unique genes this represents:</p>
-<div class="sourceCode" id="cb977"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb977-1"><a href="comparative-toxicogenomics-database.html#cb977-1" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(exp_filt<span class="sc">$</span><span class="st">`</span><span class="at">Gene Symbol</span><span class="st">`</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb984"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb984-1"><a href="comparative-toxicogenomics-database.html#cb984-1" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(exp_filt<span class="sc">$</span><span class="st">`</span><span class="at">Gene Symbol</span><span class="st">`</span>))</span></code></pre></div>
 <pre><code>## [1] 1878</code></pre>
 <p>This reflects 1878 unique genes that show altered expression in association with arsenic.</p>
 <p>Let’s make a separate dataframe that includes only the unique genes, based on the “Gene Symbol” column.</p>
-<div class="sourceCode" id="cb979"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb979-1"><a href="comparative-toxicogenomics-database.html#cb979-1" tabindex="-1"></a>exp_genes <span class="ot">=</span> exp_filt <span class="sc">%&gt;%</span> <span class="fu">distinct</span>(<span class="st">`</span><span class="at">Gene Symbol</span><span class="st">`</span>, <span class="at">.keep_all=</span><span class="cn">TRUE</span>)</span>
-<span id="cb979-2"><a href="comparative-toxicogenomics-database.html#cb979-2" tabindex="-1"></a></span>
-<span id="cb979-3"><a href="comparative-toxicogenomics-database.html#cb979-3" tabindex="-1"></a><span class="co"># Removing columns besides gene identifier</span></span>
-<span id="cb979-4"><a href="comparative-toxicogenomics-database.html#cb979-4" tabindex="-1"></a>exp_genes <span class="ot">=</span> exp_genes[,<span class="dv">4</span>] </span>
-<span id="cb979-5"><a href="comparative-toxicogenomics-database.html#cb979-5" tabindex="-1"></a></span>
-<span id="cb979-6"><a href="comparative-toxicogenomics-database.html#cb979-6" tabindex="-1"></a><span class="co"># Viewing the first 10 genes listed</span></span>
-<span id="cb979-7"><a href="comparative-toxicogenomics-database.html#cb979-7" tabindex="-1"></a>exp_genes[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,] </span></code></pre></div>
+<div class="sourceCode" id="cb986"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb986-1"><a href="comparative-toxicogenomics-database.html#cb986-1" tabindex="-1"></a>exp_genes <span class="ot">=</span> exp_filt <span class="sc">%&gt;%</span> <span class="fu">distinct</span>(<span class="st">`</span><span class="at">Gene Symbol</span><span class="st">`</span>, <span class="at">.keep_all=</span><span class="cn">TRUE</span>)</span>
+<span id="cb986-2"><a href="comparative-toxicogenomics-database.html#cb986-2" tabindex="-1"></a></span>
+<span id="cb986-3"><a href="comparative-toxicogenomics-database.html#cb986-3" tabindex="-1"></a><span class="co"># Removing columns besides gene identifier</span></span>
+<span id="cb986-4"><a href="comparative-toxicogenomics-database.html#cb986-4" tabindex="-1"></a>exp_genes <span class="ot">=</span> exp_genes[,<span class="dv">4</span>] </span>
+<span id="cb986-5"><a href="comparative-toxicogenomics-database.html#cb986-5" tabindex="-1"></a></span>
+<span id="cb986-6"><a href="comparative-toxicogenomics-database.html#cb986-6" tabindex="-1"></a><span class="co"># Viewing the first 10 genes listed</span></span>
+<span id="cb986-7"><a href="comparative-toxicogenomics-database.html#cb986-7" tabindex="-1"></a>exp_genes[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,] </span></code></pre></div>
 <pre><code>## # A tibble: 10 × 1
 ##    `Gene Symbol`
 ##    &lt;chr&gt;        
@@ -681,28 +673,28 @@ Which genes show altered expression in response to arsenic exposure?</p>
 <div id="identifying-genes-under-epigenetic-control" class="section level2 hasAnchor">
 <h2>Identifying Genes Under Epigenetic Control<a href="comparative-toxicogenomics-database.html#identifying-genes-under-epigenetic-control" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>For this dataset, let’s focus on gene-level methylation as a marker of epigenetic regulation. Let’s return to our main dataframe, representing the results of the CTD query, and filter these results for only the rows that contain the term “methylation” in the “Interaction Actions” column.</p>
-<div class="sourceCode" id="cb981"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb981-1"><a href="comparative-toxicogenomics-database.html#cb981-1" tabindex="-1"></a>met_filt <span class="ot">=</span> ctd <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">&quot;methylation&quot;</span>,<span class="st">`</span><span class="at">Interaction Actions</span><span class="st">`</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb988"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb988-1"><a href="comparative-toxicogenomics-database.html#cb988-1" tabindex="-1"></a>met_filt <span class="ot">=</span> ctd <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">&quot;methylation&quot;</span>,<span class="st">`</span><span class="at">Interaction Actions</span><span class="st">`</span>))</span></code></pre></div>
 <p>We now have 3211 observations, representing instances of arsenic exposure causing a changes in a target gene’s methylation levels.</p>
-<div class="sourceCode" id="cb982"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb982-1"><a href="comparative-toxicogenomics-database.html#cb982-1" tabindex="-1"></a><span class="fu">dim</span>(met_filt)</span></code></pre></div>
+<div class="sourceCode" id="cb989"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb989-1"><a href="comparative-toxicogenomics-database.html#cb989-1" tabindex="-1"></a><span class="fu">dim</span>(met_filt)</span></code></pre></div>
 <pre><code>## [1] 3211    9</code></pre>
 <p>Let’s see how many unique genes this represents.</p>
-<div class="sourceCode" id="cb984"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb984-1"><a href="comparative-toxicogenomics-database.html#cb984-1" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(met_filt<span class="sc">$</span><span class="st">`</span><span class="at">Gene Symbol</span><span class="st">`</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb991"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb991-1"><a href="comparative-toxicogenomics-database.html#cb991-1" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(met_filt<span class="sc">$</span><span class="st">`</span><span class="at">Gene Symbol</span><span class="st">`</span>))</span></code></pre></div>
 <pre><code>## [1] 3142</code></pre>
 <p>This reflects 3142 unique genes that show altered methylation in association with arsenic</p>
 <p>Let’s make a separate dataframe that includes only the unique genes, based on the “Gene Symbol” column.</p>
-<div class="sourceCode" id="cb986"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb986-1"><a href="comparative-toxicogenomics-database.html#cb986-1" tabindex="-1"></a>met_genes <span class="ot">=</span> met_filt <span class="sc">%&gt;%</span> <span class="fu">distinct</span>(<span class="st">`</span><span class="at">Gene Symbol</span><span class="st">`</span>, <span class="at">.keep_all=</span><span class="cn">TRUE</span>)</span>
-<span id="cb986-2"><a href="comparative-toxicogenomics-database.html#cb986-2" tabindex="-1"></a></span>
-<span id="cb986-3"><a href="comparative-toxicogenomics-database.html#cb986-3" tabindex="-1"></a><span class="co"># Removing columns besides gene identifier</span></span>
-<span id="cb986-4"><a href="comparative-toxicogenomics-database.html#cb986-4" tabindex="-1"></a>met_genes <span class="ot">=</span> met_genes[,<span class="dv">4</span>] </span></code></pre></div>
+<div class="sourceCode" id="cb993"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb993-1"><a href="comparative-toxicogenomics-database.html#cb993-1" tabindex="-1"></a>met_genes <span class="ot">=</span> met_filt <span class="sc">%&gt;%</span> <span class="fu">distinct</span>(<span class="st">`</span><span class="at">Gene Symbol</span><span class="st">`</span>, <span class="at">.keep_all=</span><span class="cn">TRUE</span>)</span>
+<span id="cb993-2"><a href="comparative-toxicogenomics-database.html#cb993-2" tabindex="-1"></a></span>
+<span id="cb993-3"><a href="comparative-toxicogenomics-database.html#cb993-3" tabindex="-1"></a><span class="co"># Removing columns besides gene identifier</span></span>
+<span id="cb993-4"><a href="comparative-toxicogenomics-database.html#cb993-4" tabindex="-1"></a>met_genes <span class="ot">=</span> met_genes[,<span class="dv">4</span>] </span></code></pre></div>
 <p>This now provides us a list of 3142 genes showing altered methylation in association with arsenic.</p>
 <p>With this list of genes with altered methylation, we can now compare it to previous list of genes with altered expression to yeild our final list of genes of interest. To achieve this last step, we present two different methods to carry out list comparisons below.</p>
 <div id="method-1-for-list-comparisons-merging" class="section level4 hasAnchor">
 <h4>Method 1 for list comparisons: Merging<a href="comparative-toxicogenomics-database.html#method-1-for-list-comparisons-merging" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Merge the expression results with the methylation resuts on the Gene Symbol column found in both datasets.</p>
-<div class="sourceCode" id="cb987"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb987-1"><a href="comparative-toxicogenomics-database.html#cb987-1" tabindex="-1"></a>merge_df <span class="ot">=</span> <span class="fu">merge</span>(exp_genes, met_genes, <span class="at">by =</span> <span class="st">&quot;Gene Symbol&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb994"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb994-1"><a href="comparative-toxicogenomics-database.html#cb994-1" tabindex="-1"></a>merge_df <span class="ot">=</span> <span class="fu">merge</span>(exp_genes, met_genes, <span class="at">by =</span> <span class="st">&quot;Gene Symbol&quot;</span>)</span></code></pre></div>
 <p>We end up with 315 rows reflecting the 315 genes that show altered expression and altered methylation</p>
 <p>Let’s view these genes:</p>
-<div class="sourceCode" id="cb988"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb988-1"><a href="comparative-toxicogenomics-database.html#cb988-1" tabindex="-1"></a>merge_df[<span class="dv">1</span><span class="sc">:</span><span class="dv">315</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb995"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb995-1"><a href="comparative-toxicogenomics-database.html#cb995-1" tabindex="-1"></a>merge_df[<span class="dv">1</span><span class="sc">:</span><span class="dv">315</span>,]</span></code></pre></div>
 <pre><code>##   [1] &quot;ABCC4&quot;     &quot;ABHD17A&quot;   &quot;ABLIM2&quot;    &quot;ACAD9&quot;     &quot;ACKR2&quot;     &quot;ACP3&quot;     
 ##   [7] &quot;ADAMTS1&quot;   &quot;AFF1&quot;      &quot;AGO2&quot;      &quot;ALDH3B2&quot;   &quot;ANPEP&quot;     &quot;AOPEP&quot;    
 ##  [13] &quot;AP3D1&quot;     &quot;APBB3&quot;     &quot;APP&quot;       &quot;AQP1&quot;      &quot;ARF1&quot;      &quot;ARID5B&quot;   
@@ -770,36 +762,36 @@ Of the genes showing altered expression, which may be under epigenetic control?<
 <h4>Method 2 for list comparisons: Intersection<a href="comparative-toxicogenomics-database.html#method-2-for-list-comparisons-intersection" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>For further training, shown here is another method for pulling this list of interest, through the use of the ‘intersection’ function.</p>
 <p>Obtain a list of the overlapping genes in the overall expression results and the methylation results.</p>
-<div class="sourceCode" id="cb990"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb990-1"><a href="comparative-toxicogenomics-database.html#cb990-1" tabindex="-1"></a>inxn <span class="ot">=</span> <span class="fu">intersect</span>(exp_filt<span class="sc">$</span><span class="st">`</span><span class="at">Gene Symbol</span><span class="st">`</span>,met_filt<span class="sc">$</span><span class="st">`</span><span class="at">Gene Symbol</span><span class="st">`</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb997"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb997-1"><a href="comparative-toxicogenomics-database.html#cb997-1" tabindex="-1"></a>inxn <span class="ot">=</span> <span class="fu">intersect</span>(exp_filt<span class="sc">$</span><span class="st">`</span><span class="at">Gene Symbol</span><span class="st">`</span>,met_filt<span class="sc">$</span><span class="st">`</span><span class="at">Gene Symbol</span><span class="st">`</span>)</span></code></pre></div>
 <p>Again, we end up with a list of 315 unique genes that show altered expression and altered methylation.</p>
 <p>This list can be viewed on its own or converted to a dataframe (df).</p>
-<div class="sourceCode" id="cb991"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb991-1"><a href="comparative-toxicogenomics-database.html#cb991-1" tabindex="-1"></a>inxn_df <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">genes=</span>inxn)</span></code></pre></div>
+<div class="sourceCode" id="cb998"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb998-1"><a href="comparative-toxicogenomics-database.html#cb998-1" tabindex="-1"></a>inxn_df <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">genes=</span>inxn)</span></code></pre></div>
 <p>This list can also be conveniently used to filter the original query results.</p>
-<div class="sourceCode" id="cb992"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb992-1"><a href="comparative-toxicogenomics-database.html#cb992-1" tabindex="-1"></a>inxn_df_all_data <span class="ot">=</span> ctd <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="st">`</span><span class="at">Gene Symbol</span><span class="st">`</span> <span class="sc">%in%</span> inxn)</span></code></pre></div>
+<div class="sourceCode" id="cb999"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb999-1"><a href="comparative-toxicogenomics-database.html#cb999-1" tabindex="-1"></a>inxn_df_all_data <span class="ot">=</span> ctd <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="st">`</span><span class="at">Gene Symbol</span><span class="st">`</span> <span class="sc">%in%</span> inxn)</span></code></pre></div>
 <p>Note that in this last case, the same 315 genes are present, but this time the results contain all records from the original query results, hence the 875 rows (875 records observations reflecting the 315 genes).</p>
-<div class="sourceCode" id="cb993"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb993-1"><a href="comparative-toxicogenomics-database.html#cb993-1" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">unique</span>(<span class="fu">sort</span>(inxn_df_all_data<span class="sc">$</span><span class="st">`</span><span class="at">Gene Symbol</span><span class="st">`</span>))<span class="sc">==</span><span class="fu">sort</span>(merge_df<span class="sc">$</span><span class="st">`</span><span class="at">Gene Symbol</span><span class="st">`</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb1000"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1000-1"><a href="comparative-toxicogenomics-database.html#cb1000-1" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">unique</span>(<span class="fu">sort</span>(inxn_df_all_data<span class="sc">$</span><span class="st">`</span><span class="at">Gene Symbol</span><span class="st">`</span>))<span class="sc">==</span><span class="fu">sort</span>(merge_df<span class="sc">$</span><span class="st">`</span><span class="at">Gene Symbol</span><span class="st">`</span>))</span></code></pre></div>
 <pre><code>##    Mode    TRUE 
 ## logical     315</code></pre>
-<div class="sourceCode" id="cb995"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb995-1"><a href="comparative-toxicogenomics-database.html#cb995-1" tabindex="-1"></a><span class="fu">dim</span>(inxn_df_all_data)</span></code></pre></div>
+<div class="sourceCode" id="cb1002"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1002-1"><a href="comparative-toxicogenomics-database.html#cb1002-1" tabindex="-1"></a><span class="fu">dim</span>(inxn_df_all_data)</span></code></pre></div>
 <pre><code>## [1] 875   9</code></pre>
 <p>Visually we can represent this as a Venn diagram. Here, we use the <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-12-35">“VennDiagram”</a> R package.</p>
-<div class="sourceCode" id="cb997"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb997-1"><a href="comparative-toxicogenomics-database.html#cb997-1" tabindex="-1"></a><span class="co"># Use the data we previously used for intersection in the venn diagram function</span></span>
-<span id="cb997-2"><a href="comparative-toxicogenomics-database.html#cb997-2" tabindex="-1"></a>venn.plt <span class="ot">=</span> <span class="fu">venn.diagram</span>(</span>
-<span id="cb997-3"><a href="comparative-toxicogenomics-database.html#cb997-3" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">list</span>(exp_filt<span class="sc">$</span><span class="st">`</span><span class="at">Gene Symbol</span><span class="st">`</span>, met_filt<span class="sc">$</span><span class="st">`</span><span class="at">Gene Symbol</span><span class="st">`</span>),</span>
-<span id="cb997-4"><a href="comparative-toxicogenomics-database.html#cb997-4" tabindex="-1"></a>  <span class="at">category.names =</span> <span class="fu">c</span>(<span class="st">&quot;Altered Expression&quot;</span> , <span class="st">&quot;Altered Methylation&quot;</span>),</span>
-<span id="cb997-5"><a href="comparative-toxicogenomics-database.html#cb997-5" tabindex="-1"></a>  <span class="at">filename =</span> <span class="cn">NULL</span>,</span>
-<span id="cb997-6"><a href="comparative-toxicogenomics-database.html#cb997-6" tabindex="-1"></a>  </span>
-<span id="cb997-7"><a href="comparative-toxicogenomics-database.html#cb997-7" tabindex="-1"></a>  <span class="co"># Change font size, type, and position</span></span>
-<span id="cb997-8"><a href="comparative-toxicogenomics-database.html#cb997-8" tabindex="-1"></a>  <span class="at">cat.cex =</span> <span class="fl">1.15</span>,</span>
-<span id="cb997-9"><a href="comparative-toxicogenomics-database.html#cb997-9" tabindex="-1"></a>  <span class="at">cat.fontface =</span> <span class="st">&quot;bold&quot;</span>,</span>
-<span id="cb997-10"><a href="comparative-toxicogenomics-database.html#cb997-10" tabindex="-1"></a>  <span class="at">cat.default.pos =</span> <span class="st">&quot;outer&quot;</span>,</span>
-<span id="cb997-11"><a href="comparative-toxicogenomics-database.html#cb997-11" tabindex="-1"></a>  <span class="at">cat.pos =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">27</span>, <span class="dv">27</span>),</span>
-<span id="cb997-12"><a href="comparative-toxicogenomics-database.html#cb997-12" tabindex="-1"></a>    <span class="at">cat.dist =</span> <span class="fu">c</span>(<span class="fl">0.055</span>, <span class="fl">0.055</span>),</span>
-<span id="cb997-13"><a href="comparative-toxicogenomics-database.html#cb997-13" tabindex="-1"></a>  </span>
-<span id="cb997-14"><a href="comparative-toxicogenomics-database.html#cb997-14" tabindex="-1"></a>  <span class="co"># Change color of ovals</span></span>
-<span id="cb997-15"><a href="comparative-toxicogenomics-database.html#cb997-15" tabindex="-1"></a>  <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;#440154ff&quot;</span>, <span class="st">&#39;#21908dff&#39;</span>),</span>
-<span id="cb997-16"><a href="comparative-toxicogenomics-database.html#cb997-16" tabindex="-1"></a>  <span class="at">fill =</span> <span class="fu">c</span>(<span class="fu">alpha</span>(<span class="st">&quot;#440154ff&quot;</span>,<span class="fl">0.3</span>), <span class="fu">alpha</span>(<span class="st">&#39;#21908dff&#39;</span>,<span class="fl">0.3</span>)),</span>
-<span id="cb997-17"><a href="comparative-toxicogenomics-database.html#cb997-17" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb1004"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1004-1"><a href="comparative-toxicogenomics-database.html#cb1004-1" tabindex="-1"></a><span class="co"># Use the data we previously used for intersection in the venn diagram function</span></span>
+<span id="cb1004-2"><a href="comparative-toxicogenomics-database.html#cb1004-2" tabindex="-1"></a>venn.plt <span class="ot">=</span> <span class="fu">venn.diagram</span>(</span>
+<span id="cb1004-3"><a href="comparative-toxicogenomics-database.html#cb1004-3" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">list</span>(exp_filt<span class="sc">$</span><span class="st">`</span><span class="at">Gene Symbol</span><span class="st">`</span>, met_filt<span class="sc">$</span><span class="st">`</span><span class="at">Gene Symbol</span><span class="st">`</span>),</span>
+<span id="cb1004-4"><a href="comparative-toxicogenomics-database.html#cb1004-4" tabindex="-1"></a>  <span class="at">category.names =</span> <span class="fu">c</span>(<span class="st">&quot;Altered Expression&quot;</span> , <span class="st">&quot;Altered Methylation&quot;</span>),</span>
+<span id="cb1004-5"><a href="comparative-toxicogenomics-database.html#cb1004-5" tabindex="-1"></a>  <span class="at">filename =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1004-6"><a href="comparative-toxicogenomics-database.html#cb1004-6" tabindex="-1"></a>  </span>
+<span id="cb1004-7"><a href="comparative-toxicogenomics-database.html#cb1004-7" tabindex="-1"></a>  <span class="co"># Change font size, type, and position</span></span>
+<span id="cb1004-8"><a href="comparative-toxicogenomics-database.html#cb1004-8" tabindex="-1"></a>  <span class="at">cat.cex =</span> <span class="fl">1.15</span>,</span>
+<span id="cb1004-9"><a href="comparative-toxicogenomics-database.html#cb1004-9" tabindex="-1"></a>  <span class="at">cat.fontface =</span> <span class="st">&quot;bold&quot;</span>,</span>
+<span id="cb1004-10"><a href="comparative-toxicogenomics-database.html#cb1004-10" tabindex="-1"></a>  <span class="at">cat.default.pos =</span> <span class="st">&quot;outer&quot;</span>,</span>
+<span id="cb1004-11"><a href="comparative-toxicogenomics-database.html#cb1004-11" tabindex="-1"></a>  <span class="at">cat.pos =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">27</span>, <span class="dv">27</span>),</span>
+<span id="cb1004-12"><a href="comparative-toxicogenomics-database.html#cb1004-12" tabindex="-1"></a>    <span class="at">cat.dist =</span> <span class="fu">c</span>(<span class="fl">0.055</span>, <span class="fl">0.055</span>),</span>
+<span id="cb1004-13"><a href="comparative-toxicogenomics-database.html#cb1004-13" tabindex="-1"></a>  </span>
+<span id="cb1004-14"><a href="comparative-toxicogenomics-database.html#cb1004-14" tabindex="-1"></a>  <span class="co"># Change color of ovals</span></span>
+<span id="cb1004-15"><a href="comparative-toxicogenomics-database.html#cb1004-15" tabindex="-1"></a>  <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;#440154ff&quot;</span>, <span class="st">&#39;#21908dff&#39;</span>),</span>
+<span id="cb1004-16"><a href="comparative-toxicogenomics-database.html#cb1004-16" tabindex="-1"></a>  <span class="at">fill =</span> <span class="fu">c</span>(<span class="fu">alpha</span>(<span class="st">&quot;#440154ff&quot;</span>,<span class="fl">0.3</span>), <span class="fu">alpha</span>(<span class="st">&#39;#21908dff&#39;</span>,<span class="fl">0.3</span>)),</span>
+<span id="cb1004-17"><a href="comparative-toxicogenomics-database.html#cb1004-17" tabindex="-1"></a>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/print-venn-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
