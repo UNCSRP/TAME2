@@ -41,7 +41,7 @@ jobs:
           Rscript -e "bookdown::render_book('index.Rmd', output_format = 'bookdown::gitbook')"
 
       - name: Upload book artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: bookdown-book
           path: book/
