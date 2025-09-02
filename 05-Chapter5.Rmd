@@ -1294,7 +1294,7 @@ library(cowplot)
 ```
 
 Getting help with packages and functions
-```{r}
+```{r, eval = FALSE}
 ?tidyverse # Package documentation for tidyverse
 ?kmeans # Package documentation for kmeans (a part of the standard stats R package, automatically uploaded)
 ?prcomp # Package documentation for deriving principal components within a PCA (a part of the standard stats R package, automatically uploaded)

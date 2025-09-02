@@ -152,7 +152,7 @@ setwd("/filepath to where your input files are")
 
 #### Installing required R packages
 If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you
-```{r, install__libs, echo=TRUE, eval=TRUE, warning=FALSE, results='hide', message=FALSE}
+```{r, install__libs, echo=TRUE, eval=FALSE, warning=FALSE, results='hide', message=FALSE}
 if (!requireNamespace("table1"))
   install.packages("table1");
 if (!requireNamespace("vtable"))
@@ -933,7 +933,7 @@ if (!requireNamespace("rJava"))
   install.packages("rJava")
 ```
 
-```{r message = FALSE}
+```{r message = FALSE, eval = FALSE}
 # To install tabulapdf
 if (!require("remotes")) {
     install.packages("remotes")
@@ -945,7 +945,7 @@ remotes::install_github(c("ropensci/tabulizerjars", "ropensci/tabulapdf"), force
 ```
 
 Load packages:
-```{r message = FALSE}
+```{r message = FALSE, eval = FALSE}
 library(tabulapdf) 
 library(tidyverse) 
 library(janitor) 
@@ -957,7 +957,7 @@ library(stringr)
 
 The `extract_tables()` function automatically extracts tables from PDFs and stores them as tibbles (a specific tidyverse data structure similar to a dataframe) within a list. One table is extracted per page, even if the table spans multiple pages. This line of code can take a few seconds to run depending on the length of your PDF.
 ```{r}
-tables <- extract_tables("Module4_3_Input/Module4_3_InputData4.pdf", output = "tibble")
+tables <-tabulapdf::extract_tables("Module4_3_Input/Module4_3_InputData4.pdf", output = "tibble")
 ```
 
 Glimpsing the first three elements in the tables list, we can see that each list element is a dataframe containing the columns from the PDF tables. 
@@ -2090,7 +2090,7 @@ This training module was specifically developed to answer the following environm
 Here, we will import the processed data that we generated at the end of TAME 2.0 Module 4.2, introduced in **TAME 2.0 Module 4.1 Overview of Experimental Design and Example Data** and associated demographic data. These data represent log~2~ concentrations of inflammatory biomarkers secreted by airway epithelial cells after exposure to four different concentrations of acrolein (plus filtered air as a control). We will also load packages that will be needed for the analysis, including previously introduced packages such as *openxlsx*, *tidyverse*, *DT*, *ggpubr*, and *rstatix*.
 
 #### Cleaning the global environment
-```{r, clear__env, echo=TRUE, eval=TRUE}
+```{r, clear__env, echo=TRUE, eval=FALSE}
 rm(list=ls())
 ```
 

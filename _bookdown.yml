@@ -2,6 +2,7 @@ delete_merged_file: true
 language:
   ui:
     chapter_name: "Chapter "
-    
+
+# rmd_files: ["07-Chapter7.Rmd"]
 # Specify the output directory for the Bookdown build (output directly to main directory)
-output_dir: "."
+output_dir: "book"

@@ -108,7 +108,7 @@ Many packages also exist as part of the baseline configuration of an R working e
 
 You can learn more about a function by typing one question mark before the name of the function, which will bring up documentation in the Help tab of the Viewer window. Importantly, this documentation includes a description of the different arguments that can be passed to the function and examples for how to use the function. 
 
-```{r}
+```{r, eval=FALSE}
 ?install.packages
 ```
 
@@ -118,7 +118,7 @@ knitr::include_graphics("Module2_1_Input/Image3.png")
 
 You can learn more about a package by typing two question marks before the name of the package. This will bring up vingettes and help pages associated with that package. 
 
-```{r}
+```{r, eval=FALSE}
 ??tidyverse
 ```
 
