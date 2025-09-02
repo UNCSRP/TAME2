@@ -26,4 +26,6 @@ jobs:
 
       - name: Build bookdown
         run: |
+          Rscript -e 'install.packages("remotes")'
+          Rscript -e 'remotes::install_deps(dependencies = TRUE)'
           Rscript -e "bookdown::render_book('index.Rmd', output_format = 'bookdown::gitbook')"
