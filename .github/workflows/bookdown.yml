@@ -37,7 +37,7 @@ jobs:
           Rscript -e 'if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")'
 
           # Install Bioconductor packages
-          Rscript -e 'BiocManager::install(c("EnhancedVolcano","DESeq2","edgeR","RUVSeq","piano","pcaMethods"), ask = FALSE)'
+          Rscript -e 'BiocManager::install(c("EnhancedVolcano","DESeq2","edgeR","RUVSeq","piano","pcaMethods","impute", "imputeLCMD"), ask = FALSE)'
 
       - name: Build bookdown
         run: |
