@@ -20,6 +20,7 @@ jobs:
       - name: Install system dependencies
         run: |
           brew update
+          brew install pandoc
           brew install openjdk        # Install Java
           export JAVA_HOME=$(/usr/libexec/java_home)
           java -version
