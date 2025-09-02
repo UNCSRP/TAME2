@@ -25,8 +25,20 @@ jobs:
           export JAVA_HOME=$(/usr/libexec/java_home)
           java -version
 
+      - name: Install CRAN & Bioconductor packages
+        run: |
+          # Install remotes if missing
+          Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")'
+
+          # Install CRAN dependencies from DESCRIPTION
+          Rscript -e 'remotes::install_deps(dependencies = TRUE, upgrade = "never")'
+
+          # Install BiocManager if missing
+          Rscript -e 'if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")'
+
+          # Install Bioconductor packages
+          Rscript -e 'BiocManager::install(c("EnhancedVolcano","DESeq2","edgeR","RUVSeq","piano"), ask = FALSE)'
+
       - name: Build bookdown
         run: |
-          Rscript -e 'install.packages("remotes")'
-          Rscript -e 'remotes::install_deps(dependencies = TRUE)'
           Rscript -e "bookdown::render_book('index.Rmd', output_format = 'bookdown::gitbook')"
