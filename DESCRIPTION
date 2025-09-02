@@ -77,6 +77,4 @@ Imports:
     ctxR,
     devtools,
     vtable,
-    pcaMethods,
-    impute,
     imputeLCMD
