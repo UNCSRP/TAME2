@@ -14,24 +14,6 @@ github-repo: rstudio/bookdown-demo
 favicon: Icons_Used_Throughout/Favicon.png
 ---
 
-```{r setup_package, include=FALSE}
-# Install remotes if missing
-if (!requireNamespace("remotes", quietly = FALSE)) {
-  install.packages("remotes")
-}
-
-# Install CRAN dependencies from DESCRIPTION
-remotes::install_deps(dependencies = TRUE, upgrade = "never")
-
-# Install BiocManager if missing
-if (!requireNamespace("BiocManager", quietly = FALSE)) {
-  install.packages("BiocManager")
-}
-
-# Install Bioconductor packages
-BiocManager::install(c("EnhancedVolcano", "DESeq2", "edgeR", "RUVSeq", "piano"), ask = FALSE)
-```
-
 # Preface {-}
 
 
