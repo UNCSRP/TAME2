@@ -792,7 +792,7 @@ Open Microsoft Excel and prior to **ANY** edits, click “File” --> “Save As
 Let's first view what the dataset currently looks like:
 
 ```{r, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Module1_4_Images/Module1_4_Image1.png")
+knitr::include_graphics("Module1_4_Input/Module1_4_Image1.png")
 ```
 
 <br>
@@ -825,7 +825,7 @@ Before we can begin organizing the data, we need to remove the entirely blank ro
 
 After removing the blank rows, the file should look like the screenshot below. 
 ```{r, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Module1_4_Images/Module1_4_Image2.png")
+knitr::include_graphics("Module1_4_Input/Module1_4_Image2.png")
 ```
 
 <br>
@@ -850,7 +850,7 @@ Metadata explains what each column represents in the dataset. Metadata is now a 
 + Within the metadata tab, create three columns: the first, "Column Identifier", contains each of the column names found in the data tab; the second, "Code", contains the individual variable/ abbreviation for each column identifier; the third, "Description" contains additional information and definitions for abbreviations.
 
 ```{r, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Module1_4_Images/Module1_4_Image3.png")
+knitr::include_graphics("Module1_4_Input/Module1_4_Image3.png")
 ```
 
 <br>
@@ -874,7 +874,7 @@ For this dataset, the following variables were edited:
 
 Once the categorical data have been abbreviated, add those abbreviations to the metadata and describe what they symbolize. 
 ```{r, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Module1_4_Images/Module1_4_Image4.png")
+knitr::include_graphics("Module1_4_Input/Module1_4_Image4.png")
 ```
 
 <br>
@@ -894,7 +894,7 @@ Analysis-specific subjects are created to give an ordinal subject number to each
 
 R reads in spaces between words as periods, therefore it’s common practice to replace spaces with underscores when doing data analysis in R. Avoid using dashes in column names or anywhere else in the dataset. 
 ```{r, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Module1_4_Images/Module1_4_Image5.png")
+knitr::include_graphics("Module1_4_Input/Module1_4_Image5.png")
 ```
 
 <br>
@@ -911,7 +911,7 @@ These data will likely be shared with collaborators, uploaded onto data depositi
 
 For example, here, it is nice to bold column identifiers and center the data, as shown below:
 ```{r, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Module1_4_Images/Module1_4_Image6.png")
+knitr::include_graphics("Module1_4_Input/Module1_4_Image6.png")
 ```
 
 <br>
@@ -926,7 +926,7 @@ The subject identifier column labeled, “Group_Subject_No”, combines the subj
 + Label the second column "Group_Subject_No" and delete the first column.
 
 ```{r, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Module1_4_Images/Module1_4_Image7.png")
+knitr::include_graphics("Module1_4_Input/Module1_4_Image7.png")
 ```
 
 ## Separate Subject Demographic Data from Experimental Measurements
@@ -941,14 +941,14 @@ A wide format contains values that **DO NOT** repeat the subject identifier colu
 
 **Wide Format**
 ```{r, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Module1_4_Images/Module1_4_Image8.png")
+knitr::include_graphics("Module1_4_Input/Module1_4_Image8.png")
 ```
 
 A long format contains values that **DO** repeat the subject identifier column. For this dataset, that means a new column was created entitled "Variable" containing all the mediator names and a column entitled "Value" containing all their corresponding values. In the screenshot, an additional column, "Category", was added to help with the categorization of mediators in R analyses. 
 
 **Long Format**
 ```{r, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Module1_4_Images/Module1_4_Image9.png")
+knitr::include_graphics("Module1_4_Input/Module1_4_Image9.png")
 ```
 
 The reason a long format is preferred is because it makes visualizations and statistical analyses more efficient in R. In the long format, we were able to add a column entitled "Category" to categorize the mediators into "AL Biomarker" or "Cytokine" allowing us to more easily subset the mediators in R. Read more about wide and long formats [here](https://towardsdatascience.com/long-and-wide-formats-in-data-explained-e48d7c9a06cb).
@@ -963,23 +963,23 @@ To do this, a power query in Excel will be used. Note: If you are working on a M
 3. It will ask you to choose a data source. Click "Blank table" in the bottom row. 
 4. Paste the data into the table. (Hint: Use the shortcut Ctrl + "v"). At this point, your screen should look like the screenshot below. 
 ```{r, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Module1_4_Images/Module1_4_Image10.png")
+knitr::include_graphics("Module1_4_Input/Module1_4_Image10.png")
 ```
 
 5. Click "Use first row as headers" and then click "Next" in the bottom right hand corner.
 6. Select all the columns with biomarker names. That should be the column "Cortisol" through the end.
 ```{r, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Module1_4_Images/Module1_4_Image11.png")
+knitr::include_graphics("Module1_4_Input/Module1_4_Image11.png")
 ```
 
 7. Click the "Transform" button in the upper left hand corner. Then click "Unpivot columns" in the middle of the pane. The final result should look like the sceenshot below with all the biomarkers now in one column entitled "Attribute" and their corresponding values in another column entitled "Value". 
 ```{r, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Module1_4_Images/Module1_4_Image12.png")
+knitr::include_graphics("Module1_4_Input/Module1_4_Image12.png")
 ```
 
 8. To save this, go back to the "Home" tab and click "Close & load". You should see something similar to the screenshot below. 
 ```{r, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Module1_4_Images/Module1_4_Image13.png")
+knitr::include_graphics("Module1_4_Input/Module1_4_Image13.png")
 ```
 
 9. In the upper right with all the shaded tables (within the "Table" tab), click the arrow to the left of the green table until you see one with no shading. Then click the table with no colors. 
@@ -988,7 +988,7 @@ knitr::include_graphics("Module1_4_Images/Module1_4_Image13.png")
 
 We have successfully wrangled our data and the final dataset now looks like this:
 ```{r, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Module1_4_Images/Module1_4_Image14.png")
+knitr::include_graphics("Module1_4_Input/Module1_4_Image14.png")
 ```
 
 <br>
@@ -998,17 +998,17 @@ A PivotTable is a tool in Excel used to summarize numerical data. It’s called 
 
 To create a PivotTable, start by selecting all of the data. (Hint: Try using the keyboard shortcut mentioned above.) Click "Insert" tab on the upper left-hand side, click "PivotTable", and click "OK". The new PivotTable should be available in a new sheet as seen in the screenshot below. 
 ```{r, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Module1_4_Images/Module1_4_Image15.png")
+knitr::include_graphics("Module1_4_Input/Module1_4_Image15.png")
 ```
 
 A PivotTable will be constructed based on the column headers that can be dragged into the PivotTable fields located on the right-hand side. For example, what if we were interested in determining if there were differences in average expression between non-smokers and cigarette smokers in each category of biomarkers? As seen below, drag the "Group" variable under the "Rows" field and drag the "Value" variable under the "Values" field. 
 ```{r, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Module1_4_Images/Module1_4_Image16.png")
+knitr::include_graphics("Module1_4_Input/Module1_4_Image16.png")
 ```
 
 Notice that it automatically calculates the sum of the expression values for each group. To change the function to average, click the "i" icon and select "Average". The output should mirror what's below with non-smokers having an average expression that's more than double that of cigarette smokers. 
 ```{r, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Module1_4_Images/Module1_4_Image17.png")
+knitr::include_graphics("Module1_4_Input/Module1_4_Image17.png")
 ```
 
 <br>
