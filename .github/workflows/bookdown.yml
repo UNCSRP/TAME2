@@ -1,7 +1,9 @@
 name: Build Bookdown
 
 on:
-  push: main
+  push:
+    branches:
+      - main
   pull_request:
 
 jobs:
