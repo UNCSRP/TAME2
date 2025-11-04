@@ -73,7 +73,7 @@ Imports:
     VennDiagram,
     GEOquery,
     superheat,
-    ctxR (>=1.1.3),
+    ctxR,
     devtools,
     vtable,
     imputeLCMD
