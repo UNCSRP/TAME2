@@ -1055,7 +1055,7 @@ if (!library(ctxR, logical.return = TRUE)){
 }
 ```
 
-This training module was developed by Paul Kruse and Caroline Ring, with contributions from Julia E. Rager.
+This training module was developed by Paul Kruse and Caroline Ring, with contributions from Julia E. Rager. It was updated and edited November 2025.
 
 All input files (script, data, and figures) can be downloaded from the [UNC-SRP TAME2 GitHub website](https://github.com/UNCSRP/TAME2).
 
@@ -1367,19 +1367,19 @@ Next, we display the unique values for the columns `propertyID` and `propType`.
 
 
 ```{r}
-ccl4_phys_chem[, unique(propertyId)]
+ccl4_phys_chem[, unique(propName)]
 ccl4_phys_chem[, unique(propType)]
 ```
 
 Let's explore this further by examining the mean of the "boiling-point" and "melting-point" data.
 
 ```{r}
-ccl4_phys_chem[propertyId == 'boiling-point', .(Mean = mean(value))]
-ccl4_phys_chem[propertyId == 'boiling-point', .(Mean = mean(value)),
+ccl4_phys_chem[propName == 'Boiling Point', .(Mean = mean(propValue, na.rm = TRUE))]
+ccl4_phys_chem[propName == 'Boiling Point', .(Mean = mean(propValue, na.rm = TRUE)),
                by = .(propType)]
 
-ccl4_phys_chem[propertyId == 'melting-point', .(Mean = mean(value))]
-ccl4_phys_chem[propertyId == 'melting-point', .(Mean = mean(value)),
+ccl4_phys_chem[propName == 'Melting Point', .(Mean = mean(propValue, na.rm = TRUE))]
+ccl4_phys_chem[propName == 'Melting Point', .(Mean = mean(propValue, na.rm = TRUE)),
                by = .(propType)]
 ```
 
@@ -1392,28 +1392,28 @@ These results tell us about some of the reported physico-chemical properties of 
 :::
 
 :::answer
-**Answer:** The mean "boiling-point" is 253.7974 degrees Celsius for CCL4, with mean values of 250.5943 and 255.5472 for experimental and predicted, respectively. The mean "melting-point" is 36.14033 degrees Celsius for CCL4, with mean values of 23.64972 and 51.93584 for experimental and predicted, respectively.
+**Answer:** The mean "Boiling Point" is 237.9223 degrees Celsius for CCL4, with mean values of 249.5600 and 232.7907 for experimental and predicted, respectively. The mean "Melting Point" is 50.29227 degrees Celsius for CCL4, with mean values of 47.95455 and 50.48745 for experimental and predicted, respectively.
 :::
 
-To explore **all** the values of the physico-chemical properties and calculate their means, we can do the following procedure. First we look at all the physico-chemical properties individually, then group them by each property ("boiling-point", "melting-point", etc...), and then additionally group those by property type ("experimental" vs "predicted"). In the grouping, we look at the columns `value`, `unit`, `propertyID` and `propType`. We also demonstrate how take the mean of the values for each grouping. We examine the chemical with `DTXSID` "DTXSID0020153" from CCL4.
+To explore **all** the values of the physico-chemical properties and calculate their means, we can do the following procedure. First we look at all the physico-chemical properties individually, then group them by each property ("Boiling Point", "Melting Point", etc...), and then additionally group those by property type ("experimental" vs "predicted"). In the grouping, we look at the columns `propValue`, `unit`, `propName` and `propType`. We also demonstrate how take the mean of the values for each grouping. We examine the chemical with `DTXSID` "DTXSID0020153" from CCL4.
 
 ```{r}
 head(ccl4_phys_chem[dtxsid == 'DTXSID0020153', ])
-ccl4_phys_chem[dtxsid == 'DTXSID0020153', .(propType, value, unit),
-               by = .(propertyId)]
-ccl4_phys_chem[dtxsid == 'DTXSID0020153', .(value, unit), 
-               by = .(propertyId, propType)]
+ccl4_phys_chem[dtxsid == 'DTXSID0020153', .(propType, propValue, propUnit),
+               by = .(propName)]
+ccl4_phys_chem[dtxsid == 'DTXSID0020153', .(propValue, propUnit), 
+               by = .(propName, propType)]
 
-ccl4_phys_chem[dtxsid == 'DTXSID0020153', .(Mean_value = sapply(.SD, mean)),
-               by = .(propertyId, unit), .SDcols = c("value")]
-ccl4_phys_chem[dtxsid == 'DTXSID0020153', .(Mean_value = sapply(.SD, mean)), 
-               by = .(propertyId, unit, propType), 
-               .SDcols = c("value")][order(propertyId)]
+ccl4_phys_chem[dtxsid == 'DTXSID0020153', .(Mean_value = sapply(.SD, function(t){mean(t, na.rm = TRUE)})),
+               by = .(propName, propUnit), .SDcols = c("propValue")]
+ccl4_phys_chem[dtxsid == 'DTXSID0020153', .(Mean_value = sapply(.SD, function(t){mean(t, na.rm = TRUE)})), 
+               by = .(propName, propUnit, propType), 
+               .SDcols = c("propValue")][order(propName)]
 ```
 
 ### Analyzing and Visualizing Physico-chemical Properties from Two Environmental Contaminant Lists
 
-We consider exploring the differences in mean predicted and experimental values for a variety of physico-chemical properties in an effort to understand better the CCL4 and NATADB lists. In particular, we examine "vapor-pressure", "henrys-law", and "boiling-point" and plot the means by chemical for these using boxplots. We then compare the values by grouping by both data set and `propType` value.
+We consider exploring the differences in mean predicted and experimental values for a variety of physico-chemical properties in an effort to understand better the CCL4 and NATADB lists. In particular, we examine "Vapor Pressure", "Henry's Law Constant", and "Boiling Point" and plot the means by chemical for these using boxplots. We then compare the values by grouping by both data set and `propType` value.
 
 
 
@@ -1423,25 +1423,25 @@ We first examine the vapor pressures for all the chemicals in each list. We then
 Group first by DTXSID.
 
 ```{r}
-ccl4_vapor_all <- ccl4_phys_chem[propertyId %in% 'vapor-pressure', 
-                                 .(mean_vapor_pressure = sapply(.SD, mean)), 
-                                 .SDcols = c('value'), by = .(dtxsid)]
-natadb_vapor_all <- natadb_phys_chem[propertyId %in% 'vapor-pressure', 
-                                     .(mean_vapor_pressure = sapply(.SD, mean)),
-                                     .SDcols = c('value'), by = .(dtxsid)]
+ccl4_vapor_all <- ccl4_phys_chem[propName %in% 'Vapor Pressure', 
+                                 .(mean_vapor_pressure = sapply(.SD, function(t) {mean(t, na.rm = TRUE)})), 
+                                 .SDcols = c('propValue'), by = .(dtxsid)]
+natadb_vapor_all <- natadb_phys_chem[propName %in% 'Vapor Pressure', 
+                                     .(mean_vapor_pressure = sapply(.SD, function(t) {mean(t, na.rm = TRUE)})),
+                                     .SDcols = c('propValue'), by = .(dtxsid)]
 ```
 
 Then group by DTXSID and then by property type.
 
 ```{r}
-ccl4_vapor_grouped <- ccl4_phys_chem[propertyId %in% 'vapor-pressure', 
-                                     .(mean_vapor_pressure = sapply(.SD, mean)),
-                                     .SDcols = c('value'), 
+ccl4_vapor_grouped <- ccl4_phys_chem[propName %in% 'Vapor Pressure', 
+                                     .(mean_vapor_pressure = sapply(.SD, function(t) {mean(t, na.rm = TRUE)})),
+                                     .SDcols = c('propValue'), 
                                      by = .(dtxsid, propType)]
-natadb_vapor_grouped <- natadb_phys_chem[propertyId %in% 'vapor-pressure', 
+natadb_vapor_grouped <- natadb_phys_chem[propName %in% 'Vapor Pressure', 
                                          .(mean_vapor_pressure = 
-                                             sapply(.SD, mean)), 
-                                         .SDcols = c('value'), 
+                                             sapply(.SD, function(t) {mean(t, na.rm = TRUE)})), 
+                                         .SDcols = c('propValue'), 
                                          by = .(dtxsid, propType)]
 ```
 
@@ -1454,7 +1454,7 @@ summary(natadb_vapor_all)
 summary(natadb_vapor_grouped)
 ```
 
-With such a large range of values covering several orders of magnitude, we log transform the data. Since these value are positive, we do not have to worry about illegal transformations.
+With such a large range of values covering several orders of magnitude, we log transform the data. Since some of these value are non-positive, some transformations may result in non-numeric values. These will be removed when plotting. We expect these values to be positive in general so we go ahead with these transformations.
 
 ```{r}
 ccl4_vapor_all[, log_transform_mean_vapor_pressure := log(mean_vapor_pressure)]
@@ -1521,24 +1521,24 @@ We also explore Henry's Law constant and boiling point in a similar fashion.
 Group by DTXSID.
 
 ```{r}
-ccl4_hlc_all <- ccl4_phys_chem[propertyId %in% 'henrys-law', 
-                               .(mean_hlc = sapply(.SD, mean)), 
-                               .SDcols = c('value'), by = .(dtxsid)]
-natadb_hlc_all <- natadb_phys_chem[propertyId %in% 'henrys-law', 
-                                   .(mean_hlc = sapply(.SD, mean)), 
-                                   .SDcols = c('value'), by = .(dtxsid)]
+ccl4_hlc_all <- ccl4_phys_chem[propName %in% "Henry's Law Constant", 
+                               .(mean_hlc = sapply(.SD, function(t) {mean(t, na.rm = TRUE)})), 
+                               .SDcols = c('propValue'), by = .(dtxsid)]
+natadb_hlc_all <- natadb_phys_chem[propName %in% "Henry's Law Constant", 
+                                   .(mean_hlc = sapply(.SD, function(t) {mean(t, na.rm = TRUE)})), 
+                                   .SDcols = c('propValue'), by = .(dtxsid)]
 ```
 
 Group by DTXSID and property type.
 
 ```{r}
-ccl4_hlc_grouped <- ccl4_phys_chem[propertyId %in% 'henrys-law', 
-                                   .(mean_hlc = sapply(.SD, mean)), 
-                                   .SDcols = c('value'), 
+ccl4_hlc_grouped <- ccl4_phys_chem[propName %in% "Henry's Law Constant", 
+                                   .(mean_hlc = sapply(.SD, function(t) {mean(t, na.rm = TRUE)})), 
+                                   .SDcols = c('propValue'), 
                                    by = .(dtxsid, propType)]
-natadb_hlc_grouped <- natadb_phys_chem[propertyId %in% 'henrys-law', 
-                                       .(mean_hlc = sapply(.SD, mean)), 
-                                       .SDcols = c('value'), 
+natadb_hlc_grouped <- natadb_phys_chem[propName %in% "Henry's Law Constant", 
+                                       .(mean_hlc = sapply(.SD, function(t) {mean(t, na.rm = TRUE)})), 
+                                       .SDcols = c('propValue'), 
                                        by = .(dtxsid, propType)]
 ```
 
@@ -1551,7 +1551,7 @@ summary(natadb_hlc_all)
 summary(natadb_hlc_grouped)
 ```
 
-Again, we log transform the data as it is positive and covers several orders of magnitude.
+Again, we log transform the data as it covers several orders of magnitude. We expect these values to be positive in general so we go ahead with these transformations.
 
 ```{r}
 ccl4_hlc_all[, log_transform_mean_hlc := log(mean_hlc)]
@@ -1573,7 +1573,7 @@ natadb_hlc_grouped[, set := 'NATADB']
 all_hlc_grouped <- rbind(ccl4_hlc_grouped, natadb_hlc_grouped)
 ```
 
-Plot data.
+Plot data. Some rows are removed due to transformations above that result in non-valid values.
 
 ```{r, , fig.align='center'}
 hlc_box <- ggplot(all_hlc_grouped, aes(set, log_transform_mean_hlc)) + 
@@ -1593,27 +1593,27 @@ Finally, we consider boiling point.
 Group by DTXSID.
 
 ```{r}
-ccl4_boiling_all <- ccl4_phys_chem[propertyId %in% 'boiling-point', 
-                                   .(mean_boiling_point = sapply(.SD, mean)), 
-                                   .SDcols = c('value'), by = .(dtxsid)]
-natadb_boiling_all <- natadb_phys_chem[propertyId %in% 'boiling-point', 
+ccl4_boiling_all <- ccl4_phys_chem[propName %in% 'Boiling Point', 
+                                   .(mean_boiling_point = sapply(.SD, function(t) {mean(t, na.rm = TRUE)})), 
+                                   .SDcols = c('propValue'), by = .(dtxsid)]
+natadb_boiling_all <- natadb_phys_chem[propName %in% 'Boiling Point', 
                                        .(mean_boiling_point = 
-                                           sapply(.SD, mean)), 
-                                       .SDcols = c('value'), by = .(dtxsid)]
+                                           sapply(.SD, function(t) {mean(t, na.rm = TRUE)})), 
+                                       .SDcols = c('propValue'), by = .(dtxsid)]
 ```
 
 Group by DTXSID and property type.
 
 ```{r}
-ccl4_boiling_grouped <- ccl4_phys_chem[propertyId %in% 'boiling-point', 
+ccl4_boiling_grouped <- ccl4_phys_chem[propName %in% 'Boiling Point', 
                                        .(mean_boiling_point = 
-                                           sapply(.SD, mean)), 
-                                       .SDcols = c('value'), 
+                                           sapply(.SD, function(t) {mean(t, na.rm = TRUE)})), 
+                                       .SDcols = c('propValue'), 
                                        by = .(dtxsid, propType)]
-natadb_boiling_grouped <- natadb_phys_chem[propertyId %in% 'boiling-point', 
+natadb_boiling_grouped <- natadb_phys_chem[propName %in% 'Boiling Point', 
                                            .(mean_boiling_point = 
-                                               sapply(.SD, mean)), 
-                                           .SDcols = c('value'), 
+                                               sapply(.SD, function(t) {mean(t, na.rm = TRUE)})), 
+                                           .SDcols = c('propValue'), 
                                            by = .(dtxsid, propType)]
 ```
 
@@ -1660,7 +1660,7 @@ boiling <- ggplot(all_boiling_grouped, aes(mean_boiling_point)) +
 boiling
 ```
 
-A visual inspection of this set of graphs is not as clear as in the previous cases. Note that the predicted values for each data set tend to be higher than the experimental. The mean of CCL4, by predicted and experimental appears to be greater than the corresponding means for NATADB, as does the overall mean, but the interquartile ranges of these different groupings yield slightly different results. This gives us a sense that the picture for boiling point is not as clear cut between experimental and predicted for these two data sets as it was in the previous cases of physico-chemical properties we investigated.
+A visual inspection of this set of graphs is not as clear as in the previous cases. Note that the experimental values for each data set tend to be higher than the predicted. The mean of CCL4, by predicted and experimental appears to be greater than the corresponding means for NATADB, as does the overall mean, but the interquartile ranges of these different groupings yield slightly different results. This gives us a sense that the picture for boiling point is not as clear cut between experimental and predicted for these two data sets as it was in the previous cases of physico-chemical properties we investigated.
 
 ### Answer to Environmental Health Question 2
 
@@ -1669,7 +1669,7 @@ A visual inspection of this set of graphs is not as clear as in the previous cas
 :::
 
 :::answer
-**Answer**: There are indeed differences between the mean values of various physico-chemical properties when grouped by predicted or experimental. In the case of "vapor-pressure", the means of predicted values tend to be a little lower than experimental, though they are much closer in the case of NATADB than CCL4. The trend of lower predicted means compared to experimental means is more clearly demonstrated for "henrys-law" values in both data sets. In the case of "boiling-point", the predicted values are greater than the experimental values, though this is much more pronounced in CCL4 while the set of means for NATADB are again fairly close. 
+**Answer**: There are indeed differences between the mean values of various physico-chemical properties when grouped by predicted or experimental. In the case of "Vapor Pressure", the means of experimental values tend to be a little lower than predicted, though they are much closer in the case of NATADB than CCL4. The trend of lower predicted means compared to experimental means is more clearly demonstrated for "Henry's Law Constant" values in both data sets. In the case of "Boiling Point", the experimental values are greater than the predicted values, though this is much more pronounced in CCL4 while the set of means for NATADB are again fairly close. 
 :::
 
 
@@ -1774,11 +1774,6 @@ head(ccl4_genetox_details[dtxsid %in% 'DTXSID0020153', ])
 
 Observe that the data is the same for each data set when restricting to the same chemical. This is because the information we are retrieving is specific to the chemical and not dependent on the chemical lists to which the chemical may belong.
 
-```{r}
-identical(ccl4_genetox_details[dtxsid %in% 'DTXSID0020153', ], 
-          natadb_genetox_details[dtxsid %in% 'DTXSID0020153', ])
-```
-
 
 We now explore the assays present for chemicals in each data set. We first determine the unique values of the `assayCategory` column and then group by these values and determine the number of unique assays for each `assayCategory` value.
 
@@ -1848,7 +1843,7 @@ natadb_genetox_details[assayCategory == 'in vivo', .N, by = .(assayType)]
 :::
 
 :::answer
-**Answer**: There are 90 unique assays for CCl4 and 114 unique assays for NATADB. The different assay categories are "in vitro", "ND", and "in vivo", with 65 unique "in vitro" assays for CCl4 and 83 for NATADB, 3 unique "ND" assays for CCL4 and 3 for NATADB, and 22 unique "in vivo" assays for CCL4 and 28 for NATADB.
+**Answer**: There are 87 unique assays for CCl4 and 113 unique assays for NATADB. The different assay categories are "in vitro", "ND", and "in vivo", with 62 unique "in vitro" assays for CCl4 and 82 for NATADB, 2 unique "ND" assays for CCL4 and 2 for NATADB, and 23 unique "in vivo" assays for CCL4 and 29 for NATADB.
 :::
 
 Next, we dig into the results of the assays. One may be interested in looking at the number of chemicals for which an assay resulted in a positive or negative result for instance. We group by `assayResult` and determine the number of unique `dtxsid` values associated with each `assayResult` value.
@@ -1866,7 +1861,7 @@ natadb_genetox_details[, .(DTXSIDs = length(unique(dtxsid))),
 :::
 
 :::answer
-**Answer**: For CCL4, there are 64 unique chemicals that have a negative assay result, 53 that have a positive result, and 15 that have an equivocal result. For NATADB, there are 141 unique chemicals that have a negative assay result, 130 that have a positive result, and 48 that have an equivocal result. Observe that since there are 72 unique `dtxsid` values with assay results in CCL4 and 153 in NATADB, there are several chemicals that have multiple assay results.
+**Answer**: For CCL4, there are 63 unique chemicals that have a negative assay result, 53 that have a positive result, and 14 that have an equivocal result. For NATADB, there are 139 unique chemicals that have a negative assay result, 129 that have a positive result, and 47 that have an equivocal result. Observe that since there are 71 unique `dtxsid` values with assay results in CCL4 and 153 in NATADB, there are several chemicals that have multiple assay results.
 :::
 
 We now determine the chemicals from each data set that are known to have genotoxic effects. For this, we look to see which chemicals produce at least one positive response in the `assayResult` column.
@@ -1894,7 +1889,7 @@ ccl4_genetox_details[dtxsid == 'DTXSID0020153' & assayResult == 'positive',
 :::
 
 :::answer
-**Answer**: There were five assays that produced a negative result, 22 that produced a positive result, and one that produced an equivocal result. Of the 22 positive assays, "bacterial reverse mutation assay" and "Ames" were the most numerous, with three each.
+**Answer**: There were five assays that produced a negative result, 20 that produced a positive result, and one that produced an equivocal result. Of the 20 positive assays, "InVitroCA", "InVitroMLA", "Ames", "Sister-chromatid exchange (SCE) in vitro", bacterial reverse mutation assay" and "Rec-assay, DNA effects (bacterial DNA repair)" were the most numerous, with two each.
 :::
 
 
@@ -1921,7 +1916,7 @@ colnames(ccl4_hazard)
 head(ccl4_hazard)
 ```
 
-We determine the number of unique values in the `criticalEffect`, `supercategory`, and `toxvalType` columns for each data set.
+We determine the number of unique values in the `criticalEffect`, `toxvalTypeSuperCategory`, and `toxvalType` columns for each data set.
 
 The number of unique values for `criticalEffect`.
 
@@ -1929,11 +1924,11 @@ The number of unique values for `criticalEffect`.
 length(ccl4_hazard[, unique(criticalEffect)])
 length(natadb_hazard[, unique(criticalEffect)])
 ```
-The number of unique values of `supercategory`.
+The number of unique values of `toxvalTypeSuperCategory`.
 
 ```{r}
-length(ccl4_hazard[, unique(supercategory)])
-length(natadb_hazard[, unique(supercategory)])
+length(ccl4_hazard[, unique(toxvalTypeSuperCategory)])
+length(natadb_hazard[, unique(toxvalTypeSuperCategory)])
 ```
 The number of unique values for `toxvalType`.
 
@@ -1942,46 +1937,46 @@ length(ccl4_hazard[, unique(toxvalType)])
 length(natadb_hazard[, unique(toxvalType)])
 ```
 
-Now we look at the number of entries per `supercategory`.
+Now we look at the number of entries per `toxvalTypeSuperCategory`.
 
 ```{r}
-ccl4_hazard[, .N, by = .(supercategory)]
-natadb_hazard[, .N, by = .(supercategory)]
+ccl4_hazard[, .N, by = .(toxvalTypeSuperCategory)]
+natadb_hazard[, .N, by = .(toxvalTypeSuperCategory)]
 
 ```
-With over 22,000 results for the `supercategory` value "Point of Departure" for each data set, we dig into this further.
+With over 7,000 results for the `toxvalTypeSuperCategory` value "Dose Response Summary Value" for each data set, we dig into this further.
 
-We determine the number of rows grouped by `toxvalType` that have the "Point of Departure" `supercategory` value, and display this descending.
+We determine the number of rows grouped by `toxvalType` that have the "Dose Response Summary Value" `toxvalTypeSuperCategory` value, and display this descending.
 ```{r}
-ccl4_hazard[ supercategory %in% 'Point of Departure', .N, 
+ccl4_hazard[toxvalTypeSuperCategory %in% 'Dose Response Summary Value', .N, 
              by = .(toxvalType)][order(-N),]
-natadb_hazard[ supercategory %in% 'Point of Departure', .N, 
+natadb_hazard[toxvalTypeSuperCategory %in% 'Dose Response Summary Value', .N, 
                by = .(toxvalType)][order(-N),]
 ```
 
-We explore "NOEC" and "LOEC" further. Let us look at the the case when `media` value is either "salt water" or "fresh water". For this, we will recover the minimum value of "NOEC" and "LOEC" for each chemical in each data set.
+We explore "NOAEL", "LOAEL", and "NOEL" further. Let us look at the the case when `media` value is either "food" or "culture". For this, we will recover the minimum value of "NOAEL", "LOAEL", and "NOEL" for each chemical in each data set.
 
-First, we look at soil. We order by `toxvalType` and by the minimum `toxvalNumeric` value in each group, descending.
+First, we look at "food". We order by `toxvalType` and by the minimum `toxvalNumeric` value in each group, descending.
 
 ```{r}
-ccl4_hazard[media %in% 'salt water' & toxvalType %in% c('LOEC', 'NOEC'), 
+ccl4_hazard[media %in% 'food' & toxvalType %in% c('LOAEL', 'NOAEL', 'NOEL'), 
             .(toxvalNumeric = min(toxvalNumeric)), 
             by = .(toxvalType, toxvalUnits, dtxsid)][order(toxvalType,
                                                            -toxvalNumeric)]
-natadb_hazard[media %in% 'salt water' & toxvalType %in% c('LOEC', 'NOEC'), 
+natadb_hazard[media %in% 'food' & toxvalType %in% c('LOAEL', 'NOAEL', 'NOEL'), 
               .(toxvalNumeric = min(toxvalNumeric)), 
               by = .(toxvalType, toxvalUnits, dtxsid)][order(toxvalType,
                                                              -toxvalNumeric)]
 ```
 
-Next we look at fresh water, repeating the same grouping and ordering as in the previous case.
+Next we look at "culture", repeating the same grouping and ordering as in the previous case.
 
 ```{r}
-ccl4_hazard[media %in% 'fresh water' & toxvalType %in% c('LOEC', 'NOEC'), 
+ccl4_hazard[media %in% 'culture' & toxvalType %in% c('LOAEL', 'NOAEL', 'NOEL'), 
             .(toxvalNumeric = min(toxvalNumeric)), 
             by = .(toxvalType, toxvalUnits, dtxsid)][order(toxvalType,
                                                            -toxvalNumeric)]
-natadb_hazard[media %in% 'fresh water' & toxvalType %in% c('LOEC', 'NOEC'), 
+natadb_hazard[media %in% 'culture' & toxvalType %in% c('LOAEL', 'NOAEL', 'NOEL'), 
               .(toxvalNumeric = min(toxvalNumeric)), 
               by = .(toxvalType, toxvalUnits, dtxsid)][order(toxvalType,
                                                              -toxvalNumeric)]
@@ -1992,8 +1987,8 @@ Now, let us restrict our attention to human hazard and focus on the exposure rou
 First, let us determine the exposure routes in general.
 
 ```{r}
-ccl4_hazard[humanEcoNt %in% 'human health', unique(exposureRoute)]
-natadb_hazard[humanEcoNt %in% 'human health', unique(exposureRoute)]
+ccl4_hazard[humanEco %in% 'human health', unique(exposureRoute)]
+natadb_hazard[humanEco %in% 'human health', unique(exposureRoute)]
 ```
 
 Then, let's focus on the inhalation and oral exposure routes for human hazard.
@@ -2003,11 +1998,11 @@ Then, let's focus on the inhalation and oral exposure routes for human hazard.
 To answer this, filter the data into the corresponding exposure routes, then group by `exposureRoute` and `riskAssessmentClass`, and finally count the number of instances for each grouping. To determine the most represented class, one can order the results descending.
 
 ```{r}
-ccl4_hazard[humanEcoNt %in% 'human health' & 
+ccl4_hazard[humanEco %in% 'human health' & 
               exposureRoute %in% c('inhalation', 'oral'), .(Hits = .N), 
             by = .(exposureRoute, riskAssessmentClass)][order(exposureRoute, 
                                                               -Hits)]
-natadb_hazard[humanEcoNt %in% 'human health' & 
+natadb_hazard[humanEco %in% 'human health' & 
                 exposureRoute %in% c('inhalation', 'oral'), .(Hits = .N), 
               by = .(exposureRoute, riskAssessmentClass)][order(exposureRoute,
                                                                 -Hits)]
@@ -2020,7 +2015,7 @@ natadb_hazard[humanEcoNt %in% 'human health' &
 :::
 
 :::answer
-**Answer**: We listed the general exposure routes above for the hazard data associated with the chemicals in each data set. Restricting our attention to human hazard data, the "acute" `riskAssessmentClass` is most represented by the inhalation exposure route and "chronic" for the oral exposure route for both the CCL4 and NATADB data sets. 
+**Answer**: We listed the general exposure routes above for the hazard data associated with the chemicals in each data set. Restricting our attention to human hazard data, the "air" `riskAssessmentClass` is most represented by the inhalation exposure route and "water" for the oral exposure route for both the CCL4 and NATADB data sets. 
 :::
 
 
@@ -2028,26 +2023,26 @@ We now drill down a little further before moving into a different path for data 
 
 
 
-To answer this, we filter the rows to the "human health" `humanEcoNT` value and "inhalation" or "oral" `exposureRoute` value. Then we return the unique values that `toxvalType` takes.
+To answer this, we filter the rows to the "human health" `humanEco` value and "inhalation" or "oral" `exposureRoute` value. Then we return the unique values that `toxvalType` takes.
 
 First we look at CCL4.
 
 ```{r}
-ccl4_hazard[humanEcoNt %in% 'human health' &
+ccl4_hazard[humanEco %in% 'human health' &
               exposureRoute %in% c('inhalation'), unique(toxvalType)]
-ccl4_hazard[humanEcoNt %in% 'human health' &
+ccl4_hazard[humanEco %in% 'human health' &
               exposureRoute %in% c('oral'), unique(toxvalType)]
-intersect(ccl4_hazard[humanEcoNt %in% 'human health' & exposureRoute %in% 'inhalation', unique(toxvalType)], ccl4_hazard[humanEcoNt %in% 'human health' & exposureRoute %in% 'oral', unique(toxvalType)])
+intersect(ccl4_hazard[humanEco %in% 'human health' & exposureRoute %in% 'inhalation', unique(toxvalType)], ccl4_hazard[humanEco %in% 'human health' & exposureRoute %in% 'oral', unique(toxvalType)])
 ```
 
 Then we look at NATADB.
 
 ```{r}
-natadb_hazard[humanEcoNt %in% 'human health' & 
+natadb_hazard[humanEco %in% 'human health' & 
                 exposureRoute %in% c('inhalation'), unique(toxvalType)]
-natadb_hazard[humanEcoNt %in% 'human health' & 
+natadb_hazard[humanEco %in% 'human health' & 
                 exposureRoute %in% c('oral'), unique(toxvalType)]
-intersect(natadb_hazard[humanEcoNt %in% 'human health' & exposureRoute %in% 'inhalation', unique(toxvalType)], natadb_hazard[humanEcoNt %in% 'human health' & exposureRoute %in% 'oral', unique(toxvalType)])
+intersect(natadb_hazard[humanEco %in% 'human health' & exposureRoute %in% 'inhalation', unique(toxvalType)], natadb_hazard[humanEco %in% 'human health' & exposureRoute %in% 'oral', unique(toxvalType)])
 ```
 
 ### Answer to Environmental Health Question 7
@@ -2057,39 +2052,33 @@ intersect(natadb_hazard[humanEcoNt %in% 'human health' & exposureRoute %in% 'inh
 :::
 
 :::answer
-**Answer**: There are 21 toxicity value types shared between the oral and inhalation exposure routes for CCL4 and 36 for NATADB. The lists above indicate the variety of toxicity values present in the hazard data for the two different exposure routes we have considered.
+**Answer**: There are 18 toxicity value types shared between the oral and inhalation exposure routes for CCL4 and 29 for NATADB. The lists above indicate the variety of toxicity values present in the hazard data for the two different exposure routes we have considered.
 :::
 
 
-For the next data exploration, We will turn to the `riskAssessmentClass` value of "developmental". We will examine the "NOAEL" and "LOAEL" values for chemicals with oral exposure, human hazard, and a `riskAssessmentClass` value of "developmental". We also examine the units to determine whether any unit conversions are necessary to compare numeric values.
+For the next data exploration, we will examine the "NOAEL" and "LOAEL" values for chemicals with oral exposure  and human hazard. We also examine the units to determine whether any unit conversions are necessary to compare numeric values.
 
 ```{r}
-ccl4_hazard[humanEcoNt %in% 'human health' & exposureRoute %in% 'oral' &
-              riskAssessmentClass %in% 'developmental' & 
+ccl4_hazard[humanEco %in% 'human health' & exposureRoute %in% 'oral' & 
               toxvalType %in% c('NOAEL', 'LOAEL'), ]
-ccl4_hazard[humanEcoNt %in% 'human health' & exposureRoute %in% 'oral' &
-              riskAssessmentClass %in% 'developmental' &
+ccl4_hazard[humanEco %in% 'human health' & exposureRoute %in% 'oral' &
               toxvalType %in% c('NOAEL', 'LOAEL'), unique(toxvalUnits)]
-natadb_hazard[humanEcoNt %in% 'human health' & exposureRoute %in% 'oral' &
-                riskAssessmentClass %in% 'developmental' &
+natadb_hazard[humanEco %in% 'human health' & exposureRoute %in% 'oral' &
                 toxvalType %in% c('NOAEL', 'LOAEL'), ]
-natadb_hazard[humanEcoNt %in% 'human health' & exposureRoute %in% 'oral' &
-                riskAssessmentClass %in% 'developmental' & 
+natadb_hazard[humanEco %in% 'human health' & exposureRoute %in% 'oral' & 
                 toxvalType %in% c('NOAEL', 'LOAEL'), unique(toxvalUnits)]
 ```
 
-Observe that for both CCL4 and NATADB, the units are given by "mg/kg-day", "mg/kg" and "-". In this case, we treat "mg/kg-day" and "mg/kg" the same and exclude "-". We group by DTXSID to find the lowest or highest value.
+Observe that for both CCL4 and NATADB, the units are given by "mg/kg-day", "ppm", "mg/L" and additionally "-" for NATADB. In this case, we treat "mg/kg-day" and "ppm" the same and exclude "-" and "mg/L". We group by DTXSID to find the lowest or highest value.
 
 ```{r}
-ccl4_hazard[humanEcoNt %in% 'human health' & exposureRoute %in% 'oral' &
-            riskAssessmentClass %in% 'developmental' & 
-            toxvalType %in% c('NOAEL', 'LOAEL') & (toxvalUnits != '-'),
+ccl4_hazard[humanEco %in% 'human health' & exposureRoute %in% 'oral' & 
+            toxvalType %in% c('NOAEL', 'LOAEL') & !(toxvalUnits %in% c('-', 'mg/L')),
             .(numeric_value = min(toxvalNumeric), 
             units = toxvalUnits[[which.min(toxvalNumeric)]]), 
             by = .(dtxsid, toxvalType)]
-natadb_hazard[humanEcoNt %in% 'human health' & exposureRoute %in% 'oral' &
-              riskAssessmentClass %in% 'developmental' & 
-              toxvalType %in% c('NOAEL', 'LOAEL') & (toxvalUnits != '-'), 
+natadb_hazard[humanEco %in% 'human health' & exposureRoute %in% 'oral' & 
+              toxvalType %in% c('NOAEL', 'LOAEL') & !(toxvalUnits %in% c('-', 'mg/L')), 
               .(numeric_value = min(toxvalNumeric), 
               units = toxvalUnits[[which.min(toxvalNumeric)]]), 
               by = .(dtxsid, toxvalType)]
@@ -2098,30 +2087,28 @@ natadb_hazard[humanEcoNt %in% 'human health' & exposureRoute %in% 'oral' &
 Now, we also explore the values of "RfD", "RfC", and "cancer slope factor" of the `toxvalType` rows. We first determine the set of units for each, make appropriate conversions if necessary, and then make comparisons.
 
 ```{r}
-ccl4_hazard[humanEcoNt %in% 'human health' & toxvalType %in% 
+ccl4_hazard[humanEco %in% 'human health' & toxvalType %in% 
             c('cancer slope factor', 'RfD', 'RfC'), .N, 
             by = .(toxvalType, toxvalUnits)][order(toxvalType, -N)]
-natadb_hazard[humanEcoNt %in% 'human health' & toxvalType %in%
+natadb_hazard[humanEco %in% 'human health' & toxvalType %in%
               c('cancer slope factor', 'RfD', 'RfC'), .N, 
               by = .(toxvalType, toxvalUnits)][order(toxvalType, -N)]
 ```
-For CCL4, there are three inequivalent sets of units that need conversions. We convert to "mg/m3", which means scaling values given in "g/m3" by 1E3 and values given in "ug/m3" by 1E-3. The Rfd units and cancer slope factor units require no conversions although we do remove the cancer slope factor unit of "mg/kg-day".
-
-For NATADB, we need to convert RfC values from ppm to mg/m3, with a conversion factor that relies on the molecular weight of the chemical in question. We will remove these from consideration for now. The units for RfD and cancer slope factor require no conversions although we do remove the cancer slope factor unit of "mg/kg-day".
+For CCL4 and NATADB, there is a single unit type for each `toxvalType` value, so no unit conversions are necessary. 
 
 First, we filter and separate out the relevant data subsets.
 
 ```{r}
 # Separate out into relevant data subsets
-ccl4_csf <- ccl4_hazard[humanEcoNt %in% 'human health' & 
+ccl4_csf <- ccl4_hazard[humanEco %in% 'human health' & 
                           toxvalType %in% c('cancer slope factor') & (toxvalUnits != 'mg/kg-day'), ]
-ccl4_rfc <- ccl4_hazard[humanEcoNt %in% 'human health' & 
+ccl4_rfc <- ccl4_hazard[humanEco %in% 'human health' & 
                           toxvalType %in% c('RfC'), ]
-ccl4_rfd <- ccl4_hazard[humanEcoNt %in% 'human health' & 
+ccl4_rfd <- ccl4_hazard[humanEco %in% 'human health' & 
                           toxvalType %in% c('RfD'), ]
 ```
 
-Then we start to handle the unit conversions.
+While there are no unit conversions needed, we demonstrate how we would convert units if they were required. 
 
 ```{r}
 # Set mass by volume units to mg/m3, so scale g/m3 by 1E3 and ug/m3 by 1E-3
@@ -2154,11 +2141,11 @@ Repeat the process for NATADB, first separating out the relevant subsets of the 
 
 ```{r}
 # Separate out into relevant data subsets
-natadb_csf <- natadb_hazard[humanEcoNt %in% 'human health' & 
+natadb_csf <- natadb_hazard[humanEco %in% 'human health' & 
                               toxvalType %in% c('cancer slope factor') & (toxvalUnits != 'mg/kg-day'), ]
-natadb_rfc <- natadb_hazard[humanEcoNt %in% 'human health' &
+natadb_rfc <- natadb_hazard[humanEco %in% 'human health' &
                               toxvalType %in% c('RfC'), ]
-natadb_rfd <- natadb_hazard[humanEcoNt %in% 'human health' & 
+natadb_rfd <- natadb_hazard[humanEco %in% 'human health' & 
                               toxvalType %in% c('RfD'), ]
 ```
 
@@ -2193,7 +2180,7 @@ natadb_rfd[, .(numeric_value = min(toxvalNumeric),
 :::
 
 :::answer
-**Answer**: The units for these three toxicity value types for CCL4 are given by "mg/m3", "g/m3", "ug/m3" for RfC, "mg/kg-day", "mg/kg" for RfD, and "(mg/kg-day)-1" for Cancer Slope Factor. For NATADB, the units for RfC are given by "mg/m3" and "ppm", for RfD by "mg/kg-day", "mg/kg", and for Cancer Slope Factor by "(mg/kg-day)-1".  For CCL4, the chemical DTXSID2021028 has the highest CsF at 150 (mg/kg-day)-1, the chemical DTXSID1031040 has the lowest RfC value at 6.0e-12 mg/m3, and the chemical DTXSID7021029 has the lowest RfD value at 4e-6 mg/kg. For NATADB, the chemical DTXSID2020137 has the highest CsF at 500 (mg/kg-day)-1, the chemical DTXSID1020516 has the lowest RfC value at 2.0e-6 mg/m3, and the chemical DTXSID7021029 had the lowest RfD at 4e-6 mg/kg-day.
+**Answer**: The units for these three toxicity value types for CCL4 are given by "mg/m3" for RfC, "mg/kg-day"for RfD, and "(mg/kg-day)-1" for Cancer Slope Factor. For NATADB, the units for RfC are given by "mg/m3", for RfD by "mg/kg-day", and for Cancer Slope Factor by "(mg/kg-day)-1".  For CCL4, the chemical DTXSID2021028 has the highest CsF at 150 (mg/kg-day)-1, the chemical DTXSID5020023 has the lowest RfC value at 2.0e-5 mg/m3, and the chemical DTXSID8031865 has the lowest RfD value at 3e-8 mg/kg. For NATADB, the chemical DTXSID2020137 has the highest CsF at 500 (mg/kg-day)-1, the chemical DTXSID1020516 has the lowest RfC value at 2.0e-6 mg/m3, and the chemical DTXSID7021029 had the lowest RfD at 4e-6 mg/kg-day.
 :::
 
 ## Concluding Remarks
