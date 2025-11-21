@@ -1,13 +1,9 @@
-Welcome! 
+# The TAME 2.0 Toolkit for Introductory Data Science, Chemical-Biological Analyses, Predictive Modeling, and Database Mining for Environmental Health Research
 
-This is a minimal example of a book based on R Markdown and **bookdown** (https://github.com/rstudio/bookdown). 
+These files represent the underlying script and input files associated with the inTelligence And Machine lEarning (TAME) Toolkit version 2.0, which is located at the following associated bookdown site: https://uncsrp.github.io/TAME2/.
 
-This template provides a skeleton file structure that you can edit to create your book. 
+For input files for Test Your Knowledge activities, see the "TestYourKnowledge_Input" folder. For Test Your Knowledge solutions, see the TAME2_TYK_Solutions repository: https://github.com/UNCSRP/TAME2_TYK_Solutions. The solutions repository may be intermittently set to private if a course is using these materials for assignments.
 
-The contents inside the .Rmd files provide some pointers to help you get started, but feel free to also delete the content in each file and start fresh.
+![TAME Module Build Process](https://github.com/UNCSRP/TAME2/actions/workflows/bookdown.yml/badge.svg)
 
-Additional resources:
-
-The **bookdown** book: https://bookdown.org/yihui/bookdown/
-
-The **bookdown** package reference site: https://pkgs.rstudio.com/bookdown
+![TAME 2 0 Logo](https://github.com/UNCSRP/TAME2/assets/72747901/67b0ea7c-1f93-4cc8-b336-3cb39ada1463)
