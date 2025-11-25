@@ -6,11 +6,6 @@ This training module was developed by Rebecca Boyles, with contributions from Ju
 
 All input files (script, data, and figures) can be downloaded from the [UNC-SRP TAME2 GitHub website](https://github.com/UNCSRP/TAME2).
 
-```{r , include=FALSE}
-#set default values for R Markdown "knitting" to HTML, Word, or PDF
-knitr::opts_chunk$set(echo = TRUE) #print code chunks
-```
-
 ## Introduction to Training Module
 This training module provides a description of FAIR data management practices, and points participants to important resources to help ensure generated data meet current FAIR guidelines. This training module is descriptive content-based (as opposed to coding-based), in order to present information clearly and serve as an important resource alongside the other scripted training activities.
 

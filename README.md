@@ -1,4 +1,4 @@
-![TAME Module Build Process](https://github.com/UNCSRP/TAME2/actions/workflows/bookdown.yml/badge.svg)
+![TAME Module Build Process](https://github.com/UNCSRP/TAME2/actions/workflows/test_bookdown.yml/badge.svg)
 
 # The TAME 2.0 Toolkit for Introductory Data Science, Chemical-Biological Analyses, Predictive Modeling, and Database Mining for Environmental Health Research
 

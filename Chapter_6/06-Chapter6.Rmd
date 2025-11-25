@@ -1447,12 +1447,6 @@ This training module was developed by Dr. Lauren Eaves, Dr. Kyle Roell, and Dr. 
 All input files (script, data, and figures) can be downloaded from the [UNC-SRP TAME2 GitHub website](https://github.com/UNCSRP/TAME2).
 
 
-```{r , include=FALSE}
-#set default values for R Markdown "knitting" to HTML, Word, or PDF
-knitr::opts_chunk$set(echo = TRUE) #print code chunks
-```
-
-
 ## Introduction to Training Module 
 
 Historically, toxicology and epidemiology studies have largely focused on analyzing relationships between one chemical and one outcome at a time. This is still important in identifying the degree to which a single chemical exposure is associated with a disease outcome (e.g., [UNC Superfund Research Program's](https://sph.unc.edu/superfund-pages/srp/) focus on inorganic arsenic exposure and its influence on metabolic disease). However, we are exposed, everyday, to many different stressors in our environment. It is therefore critical to deconvolute what co-occurring stressors (i.e., mixtures) in our environment impact human health! The field of mixtures research continues to grow to address this need, with the goals of developing methods to study environmental exposures using approaches to that better capture the mixture of exposures humans experience in real life. In this module, we will provide an overview of mixtures analysis methods and demonstrate how to use one of these methods, quantile g-computation, to analyzing chemical mixtures in a large geospatial epidemiologic study. 
@@ -1954,12 +1948,6 @@ This training module was developed by Dr. Lauren Eaves, Dr. Kyle Roell, and Dr. 
 All input files (script, data, and figures) can be downloaded from the [UNC-SRP TAME2 GitHub website](https://github.com/UNCSRP/TAME2).
 
 
-```{r , include=FALSE}
-#set default values for R Markdown "knitting" to HTML, Word, or PDF
-knitr::opts_chunk$set(echo = TRUE) #print code chunks
-```
-
-
 ## Introduction to Training Module 
 
 In this training module, we will continue to explore mixtures analysis method, this time with a scripted example of Bayesian Kernel Machine Regression (BKMR). Please refer to **TAME 2.0 Module 6.3 Mixtures Analysis Methods Part 1: Overview and Example with Quantile G-Computation** for an overview of mixtures methodologies and a scripted example using Quantile g-Computation. 
@@ -2362,11 +2350,6 @@ X <- data$X
 This training module was developed by Cynthia Rider, with contributions from Lauren E. Koval and Julia E. Rager.
 
 All input files (script, data, and figures) can be downloaded from the [UNC-SRP TAME2 GitHub website](https://github.com/UNCSRP/TAME2).
-
-```{r set_up, include=FALSE}
-#set default values for R Markdown "knitting" to HTML, Word, or PDF
-knitr::opts_chunk$set(echo = TRUE) #print code chunks
-```
 
 ## Introduction to Training Module
 

@@ -6,11 +6,6 @@ This training module was developed by Lauren E. Koval, Kyle R. Roell, and Julia 
 
 All input files (script, data, and figures) can be downloaded from the [UNC-SRP TAME2 GitHub website](https://github.com/UNCSRP/TAME2).
 
-```{r , include=FALSE}
-#set default values for R Markdown "knitting" to HTML, Word, or PDF
-knitr::opts_chunk$set(echo = TRUE) #print code chunks
-```
-
 
 ## Introduction to Training Module
 
@@ -377,12 +372,6 @@ Using the same dataset from this module (available at the GitHub site and as Mod
 This training module was developed by Kyle R. Roell and Julia E. Rager.
 
 All input files (script, data, and figures) can be downloaded from the [UNC-SRP TAME2 GitHub website](https://github.com/UNCSRP/TAME2).
-
-
-```{r , include=FALSE}
-# Set default values for R Markdown "knitting" to HTML, Word, or PDF
-knitr::opts_chunk$set(echo = TRUE) #print code chunks
-```
 
 ## Introduction to Training Module
 
@@ -1020,10 +1009,18 @@ Using the same dataset that was used in this module, available from the [UNC-SRP
 
 
 ```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+tpl <- knitr::opts_template$get("TAME_options")
+merged <- c(
+  list(collapse = TRUE, comment = "#>"),
+  tpl
 )
+
+do.call(knitr::opts_chunk$set, merged)
+# knitr::opts_chunk$set(
+#   collapse = TRUE,
+#   comment = "#>",
+#   !!!tpl
+# )
 ```
 
 ```{r setup, echo = FALSE}
@@ -1048,12 +1045,6 @@ registerS3method(
 )
 ```
 
-
-```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
-if (!library(ctxR, logical.return = TRUE)){
-  devtools::load_all('C:/Users/pkruse/ctxR')
-}
-```
 
 This training module was developed by Paul Kruse and Caroline Ring, with contributions from Julia E. Rager. It was updated and edited November 2025.
 
@@ -1272,7 +1263,7 @@ register_ctx_api_key(key = '<YOUR API KEY>')
 register_ctx_api_key(key = '<YOUR API KEY>', write = TRUE)
 ```
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, warning = FALSE}
 # This stores the key in the current session
 register_ctx_api_key(key = '706401cd-8bda-469d-9cdb-ac27f489c93a')
 
