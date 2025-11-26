@@ -1,0 +1,64 @@
+name: Build Bookdown
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "4.4.0"
+
+      - name: Install system dependencies
+        run: |
+          brew update
+          brew install pandoc
+
+      - name: Install CRAN & Bioconductor packages
+        run: |
+          # Install remotes if missing
+          Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")'
+
+          # Install CRAN dependencies from DESCRIPTION
+          Rscript -e 'remotes::install_deps(dependencies = TRUE, upgrade = "never")'
+
+          # Install BiocManager if missing
+          Rscript -e 'if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")'
+
+          # Install Bioconductor packages
+          Rscript -e 'BiocManager::install(c("EnhancedVolcano","DESeq2","edgeR","RUVSeq","piano","pcaMethods","impute", "imputeLCMD"), ask = FALSE)'
+
+      - name: Build bookdown
+        run: |
+          Rscript -e "bookdown::render_book('index.Rmd', output_format = 'bookdown::gitbook')"
+
+      - name: Upload book artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: bookdown-book
+          path: |
+            book/
+            book/error.log
+
+      - name: Deploy to GitHub Pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./book
+          force_orphan: true

@@ -1,0 +1,74 @@
+name: Test Bookdown
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  schedule:
+    - cron: "0 14 * * 1" # Every Monday 14:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    env:
+      BOOKDOWN_STRICT: "true"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "4.4.0"
+
+      - name: Install system dependencies
+        run: |
+          brew update
+          brew install pandoc
+
+      - name: Install CRAN & Bioconductor packages
+        run: |
+          # Install remotes if missing
+          Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")'
+
+          # Install CRAN dependencies from DESCRIPTION
+          Rscript -e 'remotes::install_deps(dependencies = TRUE, upgrade = "never")'
+
+          # Install BiocManager if missing
+          Rscript -e 'if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")'
+
+          # Install Bioconductor packages
+          Rscript -e 'BiocManager::install(c("EnhancedVolcano","DESeq2","edgeR","RUVSeq","piano","pcaMethods","impute", "imputeLCMD"), ask = FALSE)'
+
+      - name: Build bookdown
+        run: |
+          Rscript -e "bookdown::render_book('index.Rmd', output_format = 'bookdown::gitbook')"
+
+      - name: Upload book artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: bookdown-book
+          path: |
+            book/
+            book/error.log
+
+      - name: Create issue on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const date = new Date().toISOString().split('T')[0];
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Weekly test build failed (${date})`,
+              body: `The strict bookdown build failed due to code errors.\n\n**Workflow run:** ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}\n\n**Triggered by:** ${context.eventName}`,
+              labels: ['code-error', 'automated', 'weekly-test']
+            })

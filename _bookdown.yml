@@ -1,0 +1,19 @@
+delete_merged_file: true
+
+rmd_files:
+  - "index.Rmd"
+  - "Chapter_1/01-Chapter1.Rmd"
+  - "Chapter_2/02-Chapter2.Rmd"
+  - "Chapter_3/03-Chapter3.Rmd"
+  - "Chapter_4/04-Chapter4.Rmd"
+  - "Chapter_5/05-Chapter5.Rmd"
+  - "Chapter_6/06-Chapter6.Rmd"
+  - "Chapter_7/07-Chapter7.Rmd"
+
+#prefix name for each chapter
+language:
+  ui:
+    chapter_name: "Chapter "
+
+# Specify the output directory for the Bookdown build (output directly to main directory)
+output_dir: "book"
