@@ -83,7 +83,7 @@ knitr::include_graphics("Chapter_7/Module7_1_Input/Module7_1_Image2.jpg")
 Select to query all chemical-gene interaction data for arsenic.
 <br>
 ```{r, echo=FALSE, fig.align='center'} 
-knitr::include_graphics("Chapter_7/Module7_1_Input//Module7_1_Image3.jpg")
+knitr::include_graphics("Chapter_7/Module7_1_Input/Module7_1_Image3.jpg")
 ```
 <br>
 
@@ -91,7 +91,7 @@ knitr::include_graphics("Chapter_7/Module7_1_Input//Module7_1_Image3.jpg")
 Note that there are lots of results, represented by many many rows of data! Scroll to the bottom of the webpage and select to download as 'CSV'.
 <br>
 ```{r, echo=FALSE, fig.align='center'} 
-knitr::include_graphics("Chapter_7/Module7_1_Input//Module7_1_Image4.jpg")
+knitr::include_graphics("Chapter_7/Module7_1_Input/Module7_1_Image4.jpg")
 ```
   
 <br>

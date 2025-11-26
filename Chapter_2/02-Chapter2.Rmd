@@ -1457,7 +1457,7 @@ circle_circumference(3)
 
 So, if a circle had a radius of 3 inches, its circumference would be ~19 inches. What if we were interested in seeing the diameter to double check our code?
 
-```{r error = TRUE}
+```{r error = TRUE, suppress_error_alert = TRUE}
 diameter
 ```
 

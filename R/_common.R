@@ -41,8 +41,15 @@ log_chunk_error <- function(msg, options) {
   )
 }
 
+default_error <- knitr::knit_hooks$get("error")
+
 # Inline alert + log on any chunk error
 knitr::knit_hooks$set(error = function(x, options) {
+
+  if (isTRUE(options$suppress_error_alert)) {
+    return (default_error(x, options))
+  }
+
   log_chunk_error(x, options)
   title <- "**Error**"
   knitr::asis_output(paste(

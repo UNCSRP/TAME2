@@ -11,7 +11,7 @@ description: |
   This is an example of how the TAME 2.0 website will look, I hope!
 link-citations: yes
 github-repo: rstudio/bookdown-demo
-favicon: Icons_Used_Throughout/Favicon.png
+favicon: images/icons/Favicon.png
 ---
 
 ```{r , include=FALSE}
@@ -56,7 +56,7 @@ Training modules were developed to provide applications-driven examples of data 
 
 The overall organization of this TAME toolkit is summarized below. Modules are organized into seven chapters that are listed on the left side of this website.
 ```{r ModuleOverview, out.width="70%", echo=FALSE, fig.align='center'}
-knitr::include_graphics("Module0_Images/Module0_Image1.png")
+knitr::include_graphics("images/index_images/Module0_Image1.png")
 ```
 <br>
   
@@ -84,7 +84,7 @@ This study was supported by the National Institutes of Health (NIH) from the Nat
 **P42ES031007**: The [University of North Carolina (UNC)-Superfund Research Program](https://sph.unc.edu/superfund-pages/srp/) (SRP) seeks to develop new solutions for reducing exposure to inorganic arsenic and prevent arsenic-induced diabetes through mechanistic and translational research. The [UNC-SRP Data Analysis and Management Core (UNC-SRP-DMAC)](https://sph.unc.edu/superfund-pages/dmac/) provides the UNC-SRP with critical expertise in bioinformatics, statistics, data management, and data integration.
 
 ```{r, echo=FALSE, out.width="40%", fig.align='center'}
-knitr::include_graphics("Module0_Images/Module0_Image2.png")
+knitr::include_graphics("images/index_images/Module0_Image2.png")
 ```
 <br>
 <br>
@@ -92,7 +92,7 @@ knitr::include_graphics("Module0_Images/Module0_Image2.png")
 **T32ES007126**: The [UNC Curriculum in Toxicology and Environmental Medicine (CiTEM)](https://www.med.unc.edu/toxicology/) seeks to provide a cutting edge research and mentoring environment to train students and postdoctoral fellows in environmental health and toxicology. Towards this goal, the CiTEM has a T32 Training Program for Pre- and Postdoctoral Training in Toxicology to support the development of future investigators in environmental health and toxicology.
 
 ```{r, echo=FALSE, out.width="15%",fig.align='center'}
-knitr::include_graphics("Module0_Images/Module0_Image3.png")
+knitr::include_graphics("images/index_images/Module0_Image3.png")
 ```
 <br>
 <br>
@@ -100,6 +100,6 @@ knitr::include_graphics("Module0_Images/Module0_Image3.png")
 Support was additionally provided through the [Institute for Environmental Health Solutions (IEHS)](https://sph.unc.edu/iehs/institute-for-environmental-health-solutions/) at the University of North Carolina (UNC) Gillings School of Global Public Health. The IEHS is aimed at protecting those who are particularly vulnerable to diseases caused by environmental factors, putting solutions directly into the hands of individuals and communities of North Carolina and beyond.
   
 ```{r, echo=FALSE, out.width="60%", fig.align='center'}
-knitr::include_graphics("Module0_Images/Module0_Image4.png")
+knitr::include_graphics("images/index_images/Module0_Image4.png")
 ```
 <br>
