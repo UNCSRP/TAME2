@@ -3519,7 +3519,7 @@ css_3compss$CAS_factor <- factor(css_3compss$CAS, levels = css_3compss$CAS[chemi
 
 For plotting ease, reshape the data.frame into "long" format -- rather than having one column for each quantile of the $C_{ss}$ distribution, have a row for each chemical/quantile combination. We use the `melt()` function from the *reshape2* package.
 ```{r, warning = FALSE}
-css_3compss_melt <- melt(css_3compss,
+css_3compss_melt <- reshape2::melt(css_3compss,
                                    id.vars = "CAS_factor",
                                    measure.vars = c("5%", "50%", "95%"),
                                    variable.name = "Percentile",
