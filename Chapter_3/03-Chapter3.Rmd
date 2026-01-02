@@ -1125,7 +1125,7 @@ Use the input file provided ("Module3_3_TYKInput.xlsx"), which represents a simi
 3. What are the average Shapiro-Wilk p-values for the raw and psuedo log~2~ transformed data?
 :::
 
-# 3.4 Intoduction to Statistical Tests
+# 3.4 Introduction to Statistical Tests
 
 This training module was developed by Alexis Payton, Kyle Roell, Elise Hickman, and Julia E. Rager.
 
