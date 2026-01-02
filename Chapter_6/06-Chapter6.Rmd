@@ -3984,7 +3984,7 @@ Test Your Knowledge
 2. What is the predicted range of methylparaben concentrations in plasma that can occur in a human population, assuming a long-term exposure rate of 1 mg/kg/day and 3-compartment steady-state conditions? Provide estimates at the 5th, 50th, and 95th percentile.
 :::
 
-# Chemical Read-Across for Toxicity Predictions
+# 6.7 Chemical Read-Across for Toxicity Predictions
 
 This training module was developed by Grace Patlewicz, Lauren E. Koval, Alexis Payton, and Julia E. Rager.
 
