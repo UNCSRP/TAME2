@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5.1 Introduction to Artificial Intelligence, Machine Learning, and Predictive Modeling for Environmental Health | TAME 2.0: An Update to the TAME Toolkit for Introductory Data Science, Chemical-Biological Analyses, Machine Learning and Predictive Modeling, and Database Mining for Environmental Health Research</title>
+  <meta name="description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5.1 Introduction to Artificial Intelligence, Machine Learning, and Predictive Modeling for Environmental Health | TAME 2.0: An Update to the TAME Toolkit for Introductory Data Science, Chemical-Biological Analyses, Machine Learning and Predictive Modeling, and Database Mining for Environmental Health Research" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5.1 Introduction to Artificial Intelligence, Machine Learning, and Predictive Modeling for Environmental Health | TAME 2.0: An Update to the TAME Toolkit for Introductory Data Science, Chemical-Biological Analyses, Machine Learning and Predictive Modeling, and Database Mining for Environmental Health Research" />
+  
+  <meta name="twitter:description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
+  
+
+<meta name="author" content="Rager Lab" />
+
+
+<meta name="date" content="2026-02-09" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/icons/Favicon.png" type="image/x-icon" />
+<link rel="prev" href="advanced-multi-group-comparisons.html"/>
+<link rel="next" href="supervised-machine-learning.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.34.0/datatables.js"></script>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/tabwid-1.1.3/tabwid.css" rel="stylesheet" />
+<script src="libs/tabwid-1.1.3/tabwid.js"></script>
+<link href="libs/table1-1.0/table1_defaults.css" rel="stylesheet" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FGFKVX2X3G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FGFKVX2X3G');
+</script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="images/icons/TAME 2.0 Logo.png"><br></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="part"><span><b>Chapter 1 Introductory <br>Data Science</b></span></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html"><i class="fa fa-check"></i>1.1 FAIR Data Management Practices</a>
+<ul>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#introduction-to-training-module"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#introduction-to-fair"><i class="fa fa-check"></i>Introduction to FAIR</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#breaking-down-fair-letter-by-letter"><i class="fa fa-check"></i>Breaking Down FAIR, Letter-by-Letter</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#what-does-this-mean-for-you"><i class="fa fa-check"></i>What Does This Mean for You?</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#data-repositories-for-sharing-of-data"><i class="fa fa-check"></i>Data Repositories for Sharing of Data</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#recent-shifts-in-regulatory-policies-for-data-sharing"><i class="fa fa-check"></i>Recent Shifts in Regulatory Policies for Data Sharing</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#additional-training-resources-on-fair"><i class="fa fa-check"></i>Additional Training Resources on FAIR</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html"><i class="fa fa-check"></i>1.2 Data Sharing through Online Repositories</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#an-overview-and-example-with-the-dataverse-repository"><i class="fa fa-check"></i>An Overview and Example with the Dataverse Repository</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#introduction-to-training-module-1"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#data-repositories"><i class="fa fa-check"></i>Data Repositories</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#the-dataverse-project"><i class="fa fa-check"></i>The Dataverse Project</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#what-is-a-dataverse"><i class="fa fa-check"></i>What is a Dataverse?</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#metadata"><i class="fa fa-check"></i>Metadata</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#creating-a-dataverse"><i class="fa fa-check"></i>Creating a Dataverse</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#creating-a-dataset"><i class="fa fa-check"></i>Creating a Dataset</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#concluding-remarks-1"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html"><i class="fa fa-check"></i>1.3 File Management using Github</a>
+<ul>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#introduction-to-training-module-2"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#creating-an-account"><i class="fa fa-check"></i>Creating an Account</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#creating-a-repository"><i class="fa fa-check"></i>Creating a Repository</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#uploading-code"><i class="fa fa-check"></i>Uploading Code</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#adding-subfolders-in-a-repository"><i class="fa fa-check"></i>Adding Subfolders in a Repository</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#updating-code"><i class="fa fa-check"></i>Updating Code</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#updating-repository-titles-and-structure-to-support-a-manuscript"><i class="fa fa-check"></i>Updating Repository Titles and Structure to Support a Manuscript</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#tracking-code-changes-using-github-branches"><i class="fa fa-check"></i>Tracking Code Changes using Github Branches</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#concluding-remarks-2"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html"><i class="fa fa-check"></i>1.4 Data Wrangling in Excel</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#introduction-to-training-module-3"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#save-a-copy-of-the-soon-to-be-organized-and-cleaned-dataset-as-a-new-file"><i class="fa fa-check"></i>Save a Copy of the Soon-To-Be Organized and Cleaned Dataset as a New File</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#remove-extraneous-white-space"><i class="fa fa-check"></i>Remove Extraneous White Space</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#replace-missing-data-with-na"><i class="fa fa-check"></i>Replace Missing Data with “NA”</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#create-a-metadata-tab"><i class="fa fa-check"></i>Create a Metadata Tab</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#abbreviate-and-capitalize-categorical-data"><i class="fa fa-check"></i>Abbreviate and Capitalize Categorical Data</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#alphabetize-sort-the-data-by-the-categorical-variable-of-interest"><i class="fa fa-check"></i>Alphabetize (Sort) the Data by the Categorical Variable of Interest</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#create-a-new-subject-number-column"><i class="fa fa-check"></i>Create a New Subject Number Column</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#remove-special-symbols-and-dashes"><i class="fa fa-check"></i>Remove Special Symbols and Dashes</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#bold-all-column-names-and-center-all-data"><i class="fa fa-check"></i>Bold all Column Names and Center all Data</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#create-a-subject-identifier-column"><i class="fa fa-check"></i>Create a Subject Identifier Column</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#separate-subject-demographic-data-from-experimental-measurements"><i class="fa fa-check"></i>Separate Subject Demographic Data from Experimental Measurements</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#convert-data-from-wide-to-long-format"><i class="fa fa-check"></i>Convert Data from Wide to Long Format</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#pivoting-data-from-a-wide-to-long-format"><i class="fa fa-check"></i>Pivoting Data from a Wide to Long Format</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#generating-summary-level-statistics-with-pivot-tables"><i class="fa fa-check"></i>Generating Summary-Level Statistics with Pivot Tables</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#excel-vs.-r-which-should-you-use"><i class="fa fa-check"></i>Excel vs. R: Which Should You Use?</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#concluding-remarks-3"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 2 Coding in R</b></span></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html"><i class="fa fa-check"></i>2.1 Downloading and Programming in R</a>
+<ul>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#introduction-to-training-module-4"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#general-introduction-and-installation-of-r-and-rstudio"><i class="fa fa-check"></i>General Introduction and Installation of R and RStudio</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#introduction-to-r-packages"><i class="fa fa-check"></i>Introduction to R Packages</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#scripting-basics"><i class="fa fa-check"></i>Scripting Basics</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#code-troubleshooting"><i class="fa fa-check"></i>Code Troubleshooting</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#concluding-remarks-4"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html"><i class="fa fa-check"></i>2.2 Coding “Best” Practices</a>
+<ul>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#introduction-to-training-module-5"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#scripting-file-types"><i class="fa fa-check"></i>Scripting File Types</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#script-headers-and-annotation"><i class="fa fa-check"></i>Script Headers and Annotation</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#coding-style"><i class="fa fa-check"></i>Coding Style</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#script-organization"><i class="fa fa-check"></i>Script Organization</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#concluding-remarks-5"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html"><i class="fa fa-check"></i>2.3 Data Manipulation and Reshaping</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#introduction-to-training-module-6"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#data-manipulation-using-base-r"><i class="fa fa-check"></i>Data Manipulation Using Base R</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#introduction-to-tidyverse"><i class="fa fa-check"></i>Introduction to Tidyverse</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#concluding-remarks-6"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html"><i class="fa fa-check"></i>2.4 Improving Coding Efficiencies</a>
+<ul>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#introduction-to-training-module-7"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#loops"><i class="fa fa-check"></i>Loops</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#functions"><i class="fa fa-check"></i>Functions</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#list-operations"><i class="fa fa-check"></i>List operations</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#concluding-remarks-7"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#additional-resources-2"><i class="fa fa-check"></i>Additional Resources</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 3 Basics of Data <br>Analysis and Visualizations</b></span></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html"><i class="fa fa-check"></i>3.1 Data Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#introduction-to-data-visualizations"><i class="fa fa-check"></i>Introduction to Data Visualizations</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#introduction-to-training-module-8"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#density-plot-visualization"><i class="fa fa-check"></i>Density Plot Visualization</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#boxplot-visualization"><i class="fa fa-check"></i>Boxplot Visualization</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#correlation-visualizations"><i class="fa fa-check"></i>Correlation Visualizations</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#heatmap-visualization"><i class="fa fa-check"></i>Heatmap Visualization</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#concluding-remarks-8"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html"><i class="fa fa-check"></i>3.2 Improving Data Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#introduction-to-data-visulization-conventions"><i class="fa fa-check"></i>Introduction to Data Visulization Conventions</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#introduction-to-training-module-9"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#creating-an-improved-boxplot-visualization"><i class="fa fa-check"></i>Creating an Improved Boxplot Visualization</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#creating-an-improved-heatmap-visualization"><i class="fa fa-check"></i>Creating an Improved Heatmap Visualization</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#creating-multi-plot-figures"><i class="fa fa-check"></i>Creating Multi-Plot Figures</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#concluding-remarks-9"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html"><i class="fa fa-check"></i>3.3 Normality Tests and Data Transformations</a>
+<ul>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#introduction-to-training-module-10"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#what-is-a-normal-distribution"><i class="fa fa-check"></i>What is a Normal Distribution?</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#qualitative-assessment-of-normality"><i class="fa fa-check"></i>Qualitative Assessment of Normality</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#quantitative-normality-assessment"><i class="fa fa-check"></i>Quantitative Normality Assessment</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#data-transformation"><i class="fa fa-check"></i>Data Transformation</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#additional-considerations-regarding-normality"><i class="fa fa-check"></i>Additional Considerations Regarding Normality</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#concluding-remarks-10"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introduction-to-statistical-tests.html"><a href="introduction-to-statistical-tests.html"><i class="fa fa-check"></i>3.4 Introduction to Statistical Tests</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction-to-statistical-tests.html"><a href="introduction-to-statistical-tests.html#introduction-to-training-module-11"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-statistical-tests.html"><a href="introduction-to-statistical-tests.html#assessing-normality-homogeneity-of-variance"><i class="fa fa-check"></i>Assessing Normality &amp; Homogeneity of Variance</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-statistical-tests.html"><a href="introduction-to-statistical-tests.html#two-group-visualizations-and-statistical-comparisons-using-the-t-test"><i class="fa fa-check"></i>Two-Group Visualizations and Statistical Comparisons using the T-Test</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-statistical-tests.html"><a href="introduction-to-statistical-tests.html#three-group-visualizations-and-statistical-comparisons-using-an-anova"><i class="fa fa-check"></i>Three-Group Visualizations and Statistical Comparisons using an ANOVA</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-statistical-tests.html"><a href="introduction-to-statistical-tests.html#regression-modeling-and-visualization-linear-and-logistic-regressions"><i class="fa fa-check"></i>Regression Modeling and Visualization: Linear and Logistic Regressions</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-statistical-tests.html"><a href="introduction-to-statistical-tests.html#statistical-evaluations-of-categorical-data-using-the-chi-squared-test-and-fishers-exact-test"><i class="fa fa-check"></i>Statistical Evaluations of Categorical Data using the Chi-Squared Test and Fisher’s Exact Test</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-statistical-tests.html"><a href="introduction-to-statistical-tests.html#concluding-remarks-11"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 4 Converting Wet <br>Lab Data into Dry Lab <br>Analyses</b></span></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html"><i class="fa fa-check"></i>4.1 Overview of Experimental Design and Example Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#introduction-to-training-module-12"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#replicates"><i class="fa fa-check"></i>Replicates</a></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#orientation-to-example-data-for-chapter-4"><i class="fa fa-check"></i>Orientation to Example Data for Chapter 4</a></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#concluding-remarks-12"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html"><i class="fa fa-check"></i>4.2 Data Import, Processing, and Summary Statistics</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#introduction-to-training-module-13"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#data-import"><i class="fa fa-check"></i>Data Import</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#handling-missing-values"><i class="fa fa-check"></i>Handling Missing Values</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#averaging-replicates"><i class="fa fa-check"></i>Averaging Replicates</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#descriptive-statistics"><i class="fa fa-check"></i>Descriptive Statistics</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#normality-assessment-and-data-transformation"><i class="fa fa-check"></i>Normality Assessment and Data Transformation</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#concluding-remarks-13"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html"><i class="fa fa-check"></i>4.3 Data Import from PDF Sources</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#introduction-to-training-module-14"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#importing-data-from-many-single-pdfs-with-the-same-formatting"><i class="fa fa-check"></i>Importing Data from Many Single PDFs with the Same Formatting</a></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#importing-data-stored-in-pdf-tables"><i class="fa fa-check"></i>Importing Data Stored in PDF Tables</a></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#concluding-remarks-14"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html"><i class="fa fa-check"></i>4.4 Two Group Comparisons and Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#introduction-to-training-module-15"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#overview-of-two-group-statistical-tests"><i class="fa fa-check"></i>Overview of Two Group Statistical Tests</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#statistical-vs.-biological-significance"><i class="fa fa-check"></i>Statistical vs. Biological Significance</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#unpaired-test-example"><i class="fa fa-check"></i>Unpaired Test Example</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#paired-test-example"><i class="fa fa-check"></i>Paired Test Example</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#visualizing-results"><i class="fa fa-check"></i>Visualizing Results</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#concluding-remarks-15"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html"><i class="fa fa-check"></i>4.5 Multi-Group and Multi-Variable Comparisons and Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#introduction-to-training-module-16"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#overview-of-multi-group-statistical-tests"><i class="fa fa-check"></i>Overview of Multi-Group Statistical Tests</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#multi-group-analysis-example"><i class="fa fa-check"></i>Multi-Group Analysis Example</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#visualization-of-multi-group-statistical-results"><i class="fa fa-check"></i>Visualization of Multi-Group Statistical Results</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#concluding-remarks-16"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="advanced-multi-group-comparisons.html"><a href="advanced-multi-group-comparisons.html"><i class="fa fa-check"></i>4.6 Advanced Multi-Group Comparisons</a>
+<ul>
+<li class="chapter" data-level="" data-path="advanced-multi-group-comparisons.html"><a href="advanced-multi-group-comparisons.html#introduction-to-training-module-17"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="advanced-multi-group-comparisons.html"><a href="advanced-multi-group-comparisons.html#advanced-multi-group-comparisons-1"><i class="fa fa-check"></i>Advanced Multi-Group Comparisons</a></li>
+<li class="chapter" data-level="" data-path="advanced-multi-group-comparisons.html"><a href="advanced-multi-group-comparisons.html#two-way-anova-example"><i class="fa fa-check"></i>Two-way ANOVA Example</a></li>
+<li class="chapter" data-level="" data-path="advanced-multi-group-comparisons.html"><a href="advanced-multi-group-comparisons.html#ancova-example"><i class="fa fa-check"></i>ANCOVA Example</a></li>
+<li class="chapter" data-level="" data-path="advanced-multi-group-comparisons.html"><a href="advanced-multi-group-comparisons.html#concluding-remarks-17"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 5 Machine Learning <br>&amp; Artificial Intelligence</b></span></li>
+<li class="chapter" data-level="" data-path="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html"><a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html"><i class="fa fa-check"></i>5.1 Introduction to Artificial Intelligence, Machine Learning, and Predictive Modeling for Environmental Health</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html"><a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html#introduction-to-training-module-18"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html"><a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html#general-historical-context-and-taxonomy-of-modern-aiml"><i class="fa fa-check"></i>General Historical Context and Taxonomy of Modern AI/ML</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html"><a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html#application-of-machine-learning-in-environmental-health-science"><i class="fa fa-check"></i>Application of Machine Learning in Environmental Health Science</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html"><a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html#concluding-remarks-18"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html"><i class="fa fa-check"></i>5.2 Supervised Machine Learning</a>
+<ul>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#introduction-to-training-module-19"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#types-of-machine-learning"><i class="fa fa-check"></i>Types of Machine Learning</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#types-of-supervised-machine-learning-algorithms"><i class="fa fa-check"></i>Types of Supervised Machine Learning Algorithms</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#training-supervised-machine-learning-models"><i class="fa fa-check"></i>Training Supervised Machine Learning Models</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#assessing-classification-based-model-performance"><i class="fa fa-check"></i>Assessing Classification-Based Model Performance</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#introduction-to-activity-and-example-dataset"><i class="fa fa-check"></i>Introduction to Activity and Example Dataset</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#testing-for-differences-in-predictor-variables-across-the-outcome-classes"><i class="fa fa-check"></i>Testing for Differences in Predictor Variables across the Outcome Classes</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#predicting-ias-detection-with-a-random-forest-rf-model"><i class="fa fa-check"></i>Predicting iAs Detection with a Random Forest (RF) Model</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#class-imbalance"><i class="fa fa-check"></i>Class Imbalance</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#concluding-remarks-19"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html"><i class="fa fa-check"></i>5.3 Supervised Machine Learning Model Interpretation</a>
+<ul>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#introduction-to-training-module-20"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#variable-importance"><i class="fa fa-check"></i>Variable Importance</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#decision-boundary"><i class="fa fa-check"></i>Decision Boundary</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#introduction-to-example-dataset-and-activity"><i class="fa fa-check"></i>Introduction to Example Dataset and Activity</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#predicting-ias-detection-with-a-random-forest-rf-model-1"><i class="fa fa-check"></i>Predicting iAs Detection with a Random Forest (RF) Model</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#variable-importance-plot"><i class="fa fa-check"></i>Variable Importance Plot</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#decision-boundary-plot"><i class="fa fa-check"></i>Decision Boundary Plot</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#decision-boundary-plot-incorporating-smote"><i class="fa fa-check"></i>Decision Boundary Plot Incorporating SMOTE</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#concluding-remarks-20"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><i class="fa fa-check"></i>5.4 Unsupervised Machine Learning Part 1: K-Means Clustering &amp; PCA</a>
+<ul>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html#introduction-to-training-module-21"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html#introduction-to-unsupervised-machine-learning"><i class="fa fa-check"></i>Introduction to Unsupervised Machine Learning</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html#introduction-to-example-data"><i class="fa fa-check"></i>Introduction to Example Data</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html#identifying-clusters-of-chemicals-through-k-means"><i class="fa fa-check"></i>Identifying Clusters of Chemicals through <em>K</em>-Means</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html#principal-component-analysis-pca-1"><i class="fa fa-check"></i>Principal Component Analysis (PCA)</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html#incorporating-k-means-into-pca-for-predictive-modeling"><i class="fa fa-check"></i>Incorporating <em>K</em>-Means into PCA for Predictive Modeling</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html#concluding-remarks-21"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><i class="fa fa-check"></i>5.5 Unsupervised Machine Learning Part 2: Additional Clustering Applications</a>
+<ul>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#introduction-to-training-module-22"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#k-means-clustering-1"><i class="fa fa-check"></i><em>K</em>-Means Clustering</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#hierarchical-clustering"><i class="fa fa-check"></i>Hierarchical Clustering</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#introduction-to-example-data-1"><i class="fa fa-check"></i>Introduction to Example Data</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#hierarchical-clustering-1"><i class="fa fa-check"></i>Hierarchical Clustering</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#clustering-plot"><i class="fa fa-check"></i>Clustering Plot</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#hierarchical-clustering-visualization"><i class="fa fa-check"></i>Hierarchical Clustering Visualization</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#variable-contributions"><i class="fa fa-check"></i>Variable Contributions</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#concluding-remarks-22"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 6 Applications in <br>Toxicology &amp; Exposure <br>Science</b></span></li>
+<li class="chapter" data-level="" data-path="descriptive-cohort-analyses.html"><a href="descriptive-cohort-analyses.html"><i class="fa fa-check"></i>6.1 Descriptive Cohort Analyses</a>
+<ul>
+<li class="chapter" data-level="" data-path="descriptive-cohort-analyses.html"><a href="descriptive-cohort-analyses.html#introduction-to-training-module-23"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="descriptive-cohort-analyses.html"><a href="descriptive-cohort-analyses.html#participant-exploration"><i class="fa fa-check"></i>Participant Exploration</a></li>
+<li class="chapter" data-level="" data-path="descriptive-cohort-analyses.html"><a href="descriptive-cohort-analyses.html#chemical-detection-filtering"><i class="fa fa-check"></i>Chemical Detection Filtering</a></li>
+<li class="chapter" data-level="" data-path="descriptive-cohort-analyses.html"><a href="descriptive-cohort-analyses.html#outlier-identification"><i class="fa fa-check"></i>Outlier Identification</a></li>
+<li class="chapter" data-level="" data-path="descriptive-cohort-analyses.html"><a href="descriptive-cohort-analyses.html#summary-statistics-tables"><i class="fa fa-check"></i>Summary Statistics Tables</a></li>
+<li class="chapter" data-level="" data-path="descriptive-cohort-analyses.html"><a href="descriptive-cohort-analyses.html#demographics-table"><i class="fa fa-check"></i>Demographics Table</a></li>
+<li class="chapter" data-level="" data-path="descriptive-cohort-analyses.html"><a href="descriptive-cohort-analyses.html#concluding-remarks-23"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="omics-and-system-biology-transcriptomic-applications.html"><a href="omics-and-system-biology-transcriptomic-applications.html"><i class="fa fa-check"></i>6.2 -Omics and System Biology: Transcriptomic Applications</a>
+<ul>
+<li class="chapter" data-level="" data-path="omics-and-system-biology-transcriptomic-applications.html"><a href="omics-and-system-biology-transcriptomic-applications.html#introduction-to-training-module-24"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="omics-and-system-biology-transcriptomic-applications.html"><a href="omics-and-system-biology-transcriptomic-applications.html#introduction-to-the-field-of--omics"><i class="fa fa-check"></i>Introduction to the Field of “-Omics”</a></li>
+<li class="chapter" data-level="" data-path="omics-and-system-biology-transcriptomic-applications.html"><a href="omics-and-system-biology-transcriptomic-applications.html#introduction-to-transcriptomics"><i class="fa fa-check"></i>Introduction to Transcriptomics</a></li>
+<li class="chapter" data-level="" data-path="omics-and-system-biology-transcriptomic-applications.html"><a href="omics-and-system-biology-transcriptomic-applications.html#formatting-data-for-downstream-statistics"><i class="fa fa-check"></i>Formatting Data for Downstream Statistics</a></li>
+<li class="chapter" data-level="" data-path="omics-and-system-biology-transcriptomic-applications.html"><a href="omics-and-system-biology-transcriptomic-applications.html#transcriptomics-data-qaqc"><i class="fa fa-check"></i>Transcriptomics Data QA/QC</a></li>
+<li class="chapter" data-level="" data-path="omics-and-system-biology-transcriptomic-applications.html"><a href="omics-and-system-biology-transcriptomic-applications.html#controlling-for-sources-of-sample-heterogeneity"><i class="fa fa-check"></i>Controlling for Sources of Sample Heterogeneity</a></li>
+<li class="chapter" data-level="" data-path="omics-and-system-biology-transcriptomic-applications.html"><a href="omics-and-system-biology-transcriptomic-applications.html#identifying-genes-that-are-significantly-differentially-expressed-by-environmental-exposure-conditions-e.g.-biomass-smoke-exposure"><i class="fa fa-check"></i>Identifying Genes that are Significantly Differentially Expressed by Environmental Exposure Conditions (e.g., Biomass Smoke Exposure)</a></li>
+<li class="chapter" data-level="" data-path="omics-and-system-biology-transcriptomic-applications.html"><a href="omics-and-system-biology-transcriptomic-applications.html#visualizing-statistical-results-using-ma-plots"><i class="fa fa-check"></i>Visualizing Statistical Results using MA Plots</a></li>
+<li class="chapter" data-level="" data-path="omics-and-system-biology-transcriptomic-applications.html"><a href="omics-and-system-biology-transcriptomic-applications.html#visualizing-statistical-results-using-volcano-plots"><i class="fa fa-check"></i>Visualizing Statistical Results using Volcano Plots</a></li>
+<li class="chapter" data-level="" data-path="omics-and-system-biology-transcriptomic-applications.html"><a href="omics-and-system-biology-transcriptomic-applications.html#interpretting-findings-at-the-systems-level-through-pathway-enrichment-analysis"><i class="fa fa-check"></i>Interpretting Findings at the Systems Level through Pathway Enrichment Analysis</a></li>
+<li class="chapter" data-level="" data-path="omics-and-system-biology-transcriptomic-applications.html"><a href="omics-and-system-biology-transcriptomic-applications.html#concluding-remarks-24"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html"><a href="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html"><i class="fa fa-check"></i>6.3 Mixtures Analysis Methods Part 1: Overview and Example with Quantile G-Computation</a>
+<ul>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html"><a href="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html#introduction-to-training-module-25"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html"><a href="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html#overview-of-mixtures-analysis"><i class="fa fa-check"></i>Overview of Mixtures Analysis</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html"><a href="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html#introduction-to-example-data-2"><i class="fa fa-check"></i>Introduction to Example Data</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html"><a href="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html#mixtures-model-with-standard-qqcomp"><i class="fa fa-check"></i>Mixtures Model with Standard qqcomp</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html"><a href="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html#concluding-remarks-25"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html"><a href="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html#additional-resources-11"><i class="fa fa-check"></i>Additional Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html"><i class="fa fa-check"></i>6.4 Mixtures Analysis Methods Part 2: Bayesian Kernel Machine Regression</a>
+<ul>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#introduction-to-training-module-26"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#introduction-to-example-data-3"><i class="fa fa-check"></i>Introduction to Example Data</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#introduction-to-bkmr"><i class="fa fa-check"></i>Introduction to BKMR</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#run-bkmr"><i class="fa fa-check"></i>Run BKMR</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#concluding-remarks-26"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#additional-resources-12"><i class="fa fa-check"></i>Additional Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-3-sufficient-similarity.html"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html"><i class="fa fa-check"></i>6.5 Mixtures Analysis Methods Part 3: Sufficient Similarity</a>
+<ul>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-3-sufficient-similarity.html"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#introduction-to-training-module-27"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-3-sufficient-similarity.html"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#introduction-to-toxicant-and-dataset"><i class="fa fa-check"></i>Introduction to Toxicant and Dataset</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-3-sufficient-similarity.html"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#workspace-preparation-and-data-import-9"><i class="fa fa-check"></i>Workspace Preparation and Data Import</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-3-sufficient-similarity.html"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#chemistry-based-sufficient-similarity-analysis"><i class="fa fa-check"></i>Chemistry-Based Sufficient Similarity Analysis</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-3-sufficient-similarity.html"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#toxicity-based-sufficient-similarity-analysis"><i class="fa fa-check"></i>Toxicity-Based Sufficient Similarity Analysis</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-3-sufficient-similarity.html"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#comparing-chemistry-vs.-toxicity-sufficient-similarity-analyses"><i class="fa fa-check"></i>Comparing Chemistry vs. Toxicity Sufficient Similarity Analyses</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-3-sufficient-similarity.html"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#concluding-remarks-27"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html"><i class="fa fa-check"></i>6.6 Toxicokinetic Modeling</a>
+<ul>
+<li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#introduction-to-training-module-28"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#introduction-to-toxicokinetic-modeling"><i class="fa fa-check"></i>Introduction to Toxicokinetic Modeling</a></li>
+<li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#data-and-models-used-in-toxicokinetic-modeling-tk"><i class="fa fa-check"></i>Data and Models used in Toxicokinetic Modeling (TK)</a></li>
+<li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#reverse-toxicokinetics"><i class="fa fa-check"></i>Reverse Toxicokinetics</a></li>
+<li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#capturing-population-variability-in-toxicokinetics-and-uncertainty-in-chemical-specific-parameters"><i class="fa fa-check"></i>Capturing Population Variability in Toxicokinetics, and Uncertainty in Chemical-Specific Parameters</a></li>
+<li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#reverse-tk-calculating-administered-equivalent-doses-for-toxcast-bioactive-concentrations"><i class="fa fa-check"></i>Reverse TK: Calculating Administered Equivalent Doses for ToxCast Bioactive Concentrations</a></li>
+<li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#comparing-equivalent-doses-estimated-to-elicit-toxicity-hazard-to-external-exposure-estimates-exposure-for-chemical-prioritization-by-bioactivity-exposure-ratios-bers"><i class="fa fa-check"></i>Comparing Equivalent Doses Estimated to Elicit Toxicity (Hazard) to External Exposure Estimates (Exposure), for Chemical Prioritization by Bioactivity-Exposure Ratios (BERs)</a></li>
+<li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#concluding-remarks-28"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html"><i class="fa fa-check"></i>6.7 Chemical Read-Across for Toxicity Predictions</a>
+<ul>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#introduction-to-training-module-29"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#introduction-to-activity"><i class="fa fa-check"></i>Introduction to Activity</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#read-across-example-analysis"><i class="fa fa-check"></i>Read-Across Example Analysis</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#calculating-chemical-similarities"><i class="fa fa-check"></i>Calculating Chemical Similarities</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#chemical-read-across-to-predict-acute-toxicity"><i class="fa fa-check"></i>Chemical Read-Across to Predict Acute Toxicity</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#concluding-remarks-29"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 7 Environmental<br> Health Database Mining</b></span></li>
+<li class="chapter" data-level="" data-path="comparative-toxicogenomics-database.html"><a href="comparative-toxicogenomics-database.html"><i class="fa fa-check"></i>7.1 Comparative Toxicogenomics Database</a>
+<ul>
+<li class="chapter" data-level="" data-path="comparative-toxicogenomics-database.html"><a href="comparative-toxicogenomics-database.html#introduction-to-training-module-30"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="comparative-toxicogenomics-database.html"><a href="comparative-toxicogenomics-database.html#ctd-data-in-r"><i class="fa fa-check"></i>CTD Data in R</a></li>
+<li class="chapter" data-level="" data-path="comparative-toxicogenomics-database.html"><a href="comparative-toxicogenomics-database.html#identifying-genes-under-epigenetic-control"><i class="fa fa-check"></i>Identifying Genes Under Epigenetic Control</a></li>
+<li class="chapter" data-level="" data-path="comparative-toxicogenomics-database.html"><a href="comparative-toxicogenomics-database.html#concluding-remarks-30"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gene-expression-omnibus.html"><a href="gene-expression-omnibus.html"><i class="fa fa-check"></i>7.2 Gene Expression Omnibus</a>
+<ul>
+<li class="chapter" data-level="" data-path="gene-expression-omnibus.html"><a href="gene-expression-omnibus.html#introduction-to-training-module-31"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="gene-expression-omnibus.html"><a href="gene-expression-omnibus.html#introduction-to-geo"><i class="fa fa-check"></i>Introduction to GEO</a></li>
+<li class="chapter" data-level="" data-path="gene-expression-omnibus.html"><a href="gene-expression-omnibus.html#introduction-to-example-data-4"><i class="fa fa-check"></i>Introduction to Example Data</a></li>
+<li class="chapter" data-level="" data-path="gene-expression-omnibus.html"><a href="gene-expression-omnibus.html#geo-data-in-r"><i class="fa fa-check"></i>GEO Data in R</a></li>
+<li class="chapter" data-level="" data-path="gene-expression-omnibus.html"><a href="gene-expression-omnibus.html#visualizing-data"><i class="fa fa-check"></i>Visualizing Data</a></li>
+<li class="chapter" data-level="" data-path="gene-expression-omnibus.html"><a href="gene-expression-omnibus.html#statistical-analyses"><i class="fa fa-check"></i>Statistical Analyses</a></li>
+<li class="chapter" data-level="" data-path="gene-expression-omnibus.html"><a href="gene-expression-omnibus.html#concluding-remarks-31"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="comptox-dashboard-data-through-apis.html"><a href="comptox-dashboard-data-through-apis.html"><i class="fa fa-check"></i>7.3 CompTox Dashboard Data through APIs</a>
+<ul>
+<li class="chapter" data-level="" data-path="comptox-dashboard-data-through-apis.html"><a href="comptox-dashboard-data-through-apis.html#introduction-to-training-module-32"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="comptox-dashboard-data-through-apis.html"><a href="comptox-dashboard-data-through-apis.html#training-modules-environmental-health-questions-24"><i class="fa fa-check"></i>Training Module’s Environmental Health Questions</a></li>
+<li class="chapter" data-level="" data-path="comptox-dashboard-data-through-apis.html"><a href="comptox-dashboard-data-through-apis.html#script-preparations-12"><i class="fa fa-check"></i>Script Preparations</a></li>
+<li class="chapter" data-level="" data-path="comptox-dashboard-data-through-apis.html"><a href="comptox-dashboard-data-through-apis.html#introduction-to-comptox-chemicals-dashboard"><i class="fa fa-check"></i>Introduction to CompTox Chemicals Dashboard</a></li>
+<li class="chapter" data-level="" data-path="comptox-dashboard-data-through-apis.html"><a href="comptox-dashboard-data-through-apis.html#cctes-ctx-application-programming-interfaces-apis-for-automated-batch-search-of-the-ccd"><i class="fa fa-check"></i>CCTE’s CTX Application Programming Interfaces (APIs) for Automated Batch Search of the CCD</a></li>
+<li class="chapter" data-level="" data-path="comptox-dashboard-data-through-apis.html"><a href="comptox-dashboard-data-through-apis.html#comparing-physico-chemical-properties-between-two-important-environmental-contaminant-lists"><i class="fa fa-check"></i>Comparing Physico-chemical Properties between Two Important Environmental Contaminant Lists</a></li>
+<li class="chapter" data-level="" data-path="comptox-dashboard-data-through-apis.html"><a href="comptox-dashboard-data-through-apis.html#hazard-data-genotoxicity"><i class="fa fa-check"></i>Hazard Data: Genotoxicity</a></li>
+<li class="chapter" data-level="" data-path="comptox-dashboard-data-through-apis.html"><a href="comptox-dashboard-data-through-apis.html#hazard-resource"><i class="fa fa-check"></i>Hazard Resource</a></li>
+<li class="chapter" data-level="" data-path="comptox-dashboard-data-through-apis.html"><a href="comptox-dashboard-data-through-apis.html#concluding-remarks-32"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">TAME 2.0: An Update to the TAME Toolkit for Introductory Data Science, Chemical-Biological Analyses, Machine Learning and Predictive Modeling, and Database Mining for Environmental Health Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health" class="section level1 hasAnchor">
+<h1>5.1 Introduction to Artificial Intelligence, Machine Learning, and Predictive Modeling for Environmental Health<a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html#introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This training module was developed by David M. Reif, with contributions from Elise Hickman, Alexis Payton, and Julia E. Rager</p>
+<p>All input files (script, data, and figures) can be downloaded from the <a href="https://github.com/UNCSRP/TAME2">UNC-SRP TAME2 GitHub website</a>.</p>
+<div id="introduction-to-training-module-18" class="section level2 hasAnchor">
+<h2>Introduction to Training Module<a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html#introduction-to-training-module-18" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Artificial intelligence (AI), machine learning (ML), and predictive modeling are becoming increasingly popular buzzwords both in the public domain and within research fields, including environmental health. Within environmental health, these computational techniques are implemented to integrate large, high dimensional datasets (e.g., chemical, biological, clinical/medical, model estimates, etc) to better understand links between environmental exposures and biological responses.</p>
+<p>In this training module, we will:</p>
+<ul>
+<li>Provide general historical context and taxonomy of modern AI/ML</li>
+<li>Provide an overview of the intersection between environmental health science ML through discussing…
+<ul>
+<li>Why there is a need for ML in environmental health science</li>
+<li>The differences between ML and traditional statistical methods</li>
+<li>Predictive modeling in the context of environmental health science</li>
+<li>Additional applications of ML in environmental health science</li>
+</ul></li>
+</ul>
+<p><br></p>
+<div id="training-modules-environmental-health-question-1" class="section level3 hasAnchor">
+<h3>Training Module’s Environmental Health Question<a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html#training-modules-environmental-health-question-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This training module was specifically developed to answer the following environmental health question:</p>
+<ul>
+<li>How and why are artificial intelligence, machine learning, and predictive modeling used in environmental health research?</li>
+</ul>
+</div>
+</div>
+<div id="general-historical-context-and-taxonomy-of-modern-aiml" class="section level2 hasAnchor">
+<h2>General Historical Context and Taxonomy of Modern AI/ML<a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html#general-historical-context-and-taxonomy-of-modern-aiml" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Before diving in to the applications of AI and ML in environmental health, let’s first establish what these term mean and how they are related. Note that the definitions surrounding AI and ML can be subjective, however the purpose of this module is not to get caught up in semantics, but to broadly understand how AI and ML can be applied to environmental health research.</p>
+<p><strong>Artificial Intelligence (AI)</strong> encompasses computer systems that perform tasks typically associated with human cognition and intelligence. AI is found in our everyday lives, for instance, within face recognition, internet search queries, email spam detection, smart home devices, auto-navigation, and digital assistants.</p>
+<p><strong>Machine Learning (ML)</strong> can be thought of as a subset of AI and describes a computer system that iteratively learns and improves from that experience autonomously.</p>
+<p>Below is a high level taxonomy of AI. It’s not meant to be an exhaustive depiction of all AI techniques but a simple visualization of how some of these methodologies are nested within each other. <strong>Note</strong>: AI can be categorized in different ways and may deviate from what is illustrated below.
+<img src="Chapter_5/Module5_1_Input/Module5_1_Image1.png" alt="" width="75%" style="display: block; margin: auto;" /></p>
+<p>Advantages of AI and ML include the automation of repetitive tasks, complex problem solving, and reducing human error. However, disadvantages include learning from biased datasets or patterns that are reflected in the decisions of AI/ML and the potential limited interpretability of algorithms created by AI/ML. Check out the following resources for…</p>
+<ul>
+<li>Further explanation on differences in <a href="https://cloud.google.com/learn/artificial-intelligence-vs-machine-learning">Artificial Intelligence vs. Machine Learning</a></li>
+<li>Other subsets of AI that fall outside of the scope of these modules in <a href="https://builtin.com/artificial-intelligence">Types of Artificial Intelligence</a></li>
+<li>Additional discussion on the utility of ML approaches for high-dimensional data common in environmental health research in <a href="https://www.frontiersin.org/articles/10.3389/ftox.2023.1171175/full">Payton et. al</a></li>
+</ul>
+<p>It is important to understand the methodological “roots” of current methods. Otherwise, it seems like every approach is novel! AI and ML methods have been around since the mid- to late- 1900s and continue to evolve in the present day. The earliest conceptual roots for these approaches can be traced from antiquity; however, it is generally thought that the field was named “artificial intelligence” at the <a href="https://home.dartmouth.edu/about/artificial-intelligence-ai-coined-dartmouth">“Dartmouth Workshop”</a> in 1956, led by John McCarthy and others. The following schematic demonstrates the general taxonomy (categories, sub-fields, and specific methods) of modern AI and ML:</p>
+<p><img src="Chapter_5/Module5_1_Input/Module5_1_Image2.png" alt="" width="800px" style="display: block; margin: auto;" /></p>
+<div id="a-brief-detour-to-discuss-chatgpt" class="section level3 hasAnchor">
+<h3>A Brief Detour to Discuss ChatGPT<a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html#a-brief-detour-to-discuss-chatgpt" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>ChatGPT (Chat Generative Pre-trained Transformer)</strong> is a publicly available chatbot developed by OpenAI. It was released in November of 2022 and quickly gained popularity due to its accessibility and ability to have human-like conversations with the user across almost any imaginable topic.</p>
+<p>Language Models (LLMs), including large language models like GPT-3 (a predecessor to ChatGPT), generally fall under the “Connectionist AI” category, which use deep learning techniques and are considered a subset of artificial neural networks. They fall under the deep learning subset due to their use of deep neural networks with many layers, allowing them to learn from large amounts of data and find intricate patterns.</p>
+<p>LLMs are trained to predict the probability of a word given its context in a dataset (a form of next-word prediction), which is a machine learning methodology. It’s notable that they use architectures like <a href="https://en.wikipedia.org/wiki/Transformer_(machine_learning_model)">Transformer Networks</a>, which are known for their efficiency in handling sequential data, making them a go-to choice for natural language processing (NLP) tasks. The use of attention mechanisms in these architectures allows the model to focus on different parts of the input sequence when producing an output sequence, offering a substantial improvement in performance for many natural language processing tasks.</p>
+<p>The role of ChatGPT and similar tools in the environmental health research space is still being explored. Although ChatGPT has the potential to streamline certain parts of the research process, such as text and language polishing, synthesizing existing information, and suggesting custom coding solutions, it is not an intellectual replacement for the expertise and diverse viewpoints of scientists and must be used transparently and with caution.</p>
+<p><br></p>
+</div>
+</div>
+<div id="application-of-machine-learning-in-environmental-health-science" class="section level2 hasAnchor">
+<h2>Application of Machine Learning in Environmental Health Science<a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html#application-of-machine-learning-in-environmental-health-science" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For the rest of this module and chapter, we will focus on machine learning (ML). Generally speaking, ML is considered to encompass the study of computer algorithms that can improve automatically through experience and by the use of data. It is seen as a part of artificial intelligence (AI), discussed broadly above.</p>
+<div id="why-do-we-need-machine-learning-in-environmental-health-science" class="section level3 hasAnchor">
+<h3>Why do we need machine learning in environmental health science?<a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html#why-do-we-need-machine-learning-in-environmental-health-science" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>There are many avenues to incorporate ML into environmental health research, all aimed at better identifying patterns amongst large datasets spanning medical health records, clinical data, exposure monitoring data, chemistry profiles, and the rapidly expanding realm of biological response data including multiple -omics endpoints.</p>
+<p>One well-known problem that can be better addressed by incorporating ML is the ‘too many chemicals, too little data’ problem. To detail, there are thousands of chemicals in commerce today. Testing these chemicals one by one for toxicity using comprehensive animal screening experiments would take decades and is not feasible financially. Current efforts to address this problem include using cell-based high throughput screening to efficiently determine biological responses to a variety of chemical exposures and treatment conditions.</p>
+<p><img src="Chapter_5/Module5_1_Input/Module5_1_Image3.png" alt="" width="700px" style="display: block; margin: auto;" /></p>
+<p>These screening efforts result in increasing amounts of data, which can be gathered to start building big databases.
+<img src="Chapter_5/Module5_1_Input/Module5_1_Image4.png" alt="" width="700px" style="display: block; margin: auto;" /></p>
+<p>When many of these datasets and databases are combined, including diversity across different types of screening platforms, technologies, cell types, species, and other experimental variables, the associated dimensionality of the data gets “big.”
+<img src="Chapter_5/Module5_1_Input/Module5_1_Image5.png" alt="" width="500px" style="display: block; margin: auto;" /></p>
+<p>This presents a problem because these data are diverse and high dimensional (the number of features or endpoints exceeds the number of observations/chemicals). To appropriately analyze and model these data, new approaches beyond traditional statistical methods are needed.</p>
+</div>
+<div id="machine-learning-vs.-traditional-statistical-methods" class="section level3 hasAnchor">
+<h3>Machine Learning vs. Traditional Statistical Methods<a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html#machine-learning-vs.-traditional-statistical-methods" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>There is <em>plenty</em> of debate as to where the line(s) between ML and traditional statistics should be drawn. In our opinion, a perfect delineation is not necessary for our purposes. Rather, we will focus on the usual goals/intent of each to help us understand the distinction for environmental health research.</p>
+<p>Traditional statistics may be able to handle 1:1 or 1:many comparisons of singular quantities (e.g., activity concentrations for two chemicals). However, once the modeling becomes more complex or exploratory, assumptions of most traditional methods will be violated. Furthermore, statistics draws population inferences from a sample, while AI/ML finds generalizable predictive patterns (<a href="https://www.nature.com/articles/nmeth.4642">Bzdok et al 2018</a>). This is particularly helpful in <strong>predictive toxicology</strong>, in which we leverage high dimensional data to obtain generalizable forecasts for the effects of chemicals on biological systems.</p>
+<p>This image shows graphical abstractions of how a “problem” is solved using:</p>
+<ul>
+<li>Traditional statistics ((A) logistic regression and (B) linear regression), OR</li>
+<li>Machine learning ((C) support vector machines, (D) artificial neural networks, and (E) decision trees)</li>
+</ul>
+<p><img src="Chapter_5/Module5_1_Input/Module5_1_Image6.png" alt="" width="700px" style="display: block; margin: auto;" /></p>
+</div>
+<div id="predictive-modeling-in-the-context-of-environmental-health-science" class="section level3 hasAnchor">
+<h3>Predictive Modeling in the Context of Environmental Health Science<a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html#predictive-modeling-in-the-context-of-environmental-health-science" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In the previous section, we briefly mentioned <strong>predictive toxicology.</strong> We often think of predictions as having a forward-time component (<em>i.e. What will happen next?</em>) … what about “prediction” in a different sense as applied to toxicology?</p>
+<p>Our <em>working definition</em> is that <strong>predictive toxicology</strong> describes a multidisciplinary approach to chemical toxicity evaluation that more efficiently uses animal test results, when needed, and leverages expanding non-animal test methods to forecast the effects of a chemical on biological systems. Examples of the questions we can answer using predictive toxicology include:</p>
+<ul>
+<li>Can we more efficiently design animal studies and analyze data from shorter assays using fewer animals to predict long-term health outcomes?</li>
+<li>Can this suite of <em>in vitro</em> assays <strong>predict</strong> what would happen in an organism?</li>
+<li>Can we use diverse, high dimensional data to cluster chemicals into <strong>predicted</strong> activity classes?</li>
+</ul>
+<p><img src="Chapter_5/Module5_1_Input/Module5_1_Image7.png" alt="" width="600px" style="display: block; margin: auto;" /></p>
+<p>Similar logic applies to the field of exposure science. What about “prediction” applied to exposure science?</p>
+<p>Our <em>working definition</em> is that <strong>predictive exposure science</strong> describes a multidisciplinary approach to chemical exposure evaluations that more efficiently uses biomonitoring, chemical inventory, and other exposure science-relevant databases to forecast exposure rates in target populations. For example:</p>
+<ul>
+<li>Can we use existing biomonitoring data from NHANES to predict exposure rates for chemicals that have yet to be measured in target populations? (see ExpoCast program, e.g., <a href="https://pubmed.ncbi.nlm.nih.gov/25343693/">Wambagh et al 2014</a>)</li>
+<li>Can I use chemical product use inventory data to predict the likelihood of a chemical being present in a certain consumer product? (e.g., <a href="https://pubmed.ncbi.nlm.nih.gov/29405058/">Phillips et al 2018</a>)</li>
+</ul>
+<p>There are many different types of ML methods that we can employ in predictive toxicology and exposure science, depending on the data type / purpose of data analysis. A recent <a href="https://pubmed.ncbi.nlm.nih.gov/34029068/">review</a> written together with <a href="https://bakerlab.wordpress.ncsu.edu/">Erin Baker’s lab</a> provides a high-level overview on some of the types of ML methods and challenges to address when analyzing multi-omic data (including chemical signature data).</p>
+</div>
+<div id="answer-to-environmental-health-question" class="section level3 hasAnchor">
+<h3>Answer to Environmental Health Question<a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html#answer-to-environmental-health-question" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="question">
+<p><em>With this, we can now answer our <strong>Environmental Health Question</strong></em>: How and why are machine learning, predictive modeling, and artificial intelligence used in environmental health research?</p>
+</div>
+<div class="answer">
+<p><strong>Answer:</strong> Machine learning, a subcategory of artificial intelligence, can be used in environmental health science to better understand patterns between chemical exposure and biological response in complex, high dimensional datasets. These datasets are often generated as part of efforts to screen many chemicals efficiently. Predictive modeling, which can include machine learning approaches, leverages these data to forecast the effects of a chemical on biological systems.</p>
+</div>
+</div>
+<div id="additional-applications-of-machine-learning-in-environmental-health-science" class="section level3 hasAnchor">
+<h3>Additional Applications of Machine Learning in Environmental Health Science<a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html#additional-applications-of-machine-learning-in-environmental-health-science" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In addition to the predictive toxicology questions above, ML can also be applied in the analysis of complex, high dimensional data in observational clinical (human subjects) studies in environmental health, such as:</p>
+<ul>
+<li>Do subjects cluster by chemical exposure? Are there similarities between subjects that cluster together for chemical exposure, suggesting underlying factors relevant to chemical exposure?</li>
+<li>Are biological signatures in different exposure groups different enough overall that ML can predict which group a subject belongs to based on their signature?</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="concluding-remarks-18" class="section level2 hasAnchor">
+<h2>Concluding Remarks<a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html#concluding-remarks-18" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In conclusion, this training module provides an overview of the field of AI and ML and discusses applications of these tools in environmental health science through predictive modeling. These methods represent common tools that are used in high dimensional data analyses within the field of environmental health sciences.</p>
+<p>In the following modules, we will provide specific examples detailing how to apply both supervised and unsupervised machine learning methods to environmental health questions and how to interpret the results of these analyses.</p>
+<p>For a review article on ML, see:</p>
+<ul>
+<li>Odenkirk MT, Reif DM, Baker ES. Multiomic Big Data Analysis Challenges: Increasing Confidence in the Interpretation of Artificial Intelligence Assessments. Anal Chem. 2021 Jun 8;93(22):7763-7773. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/34029068/">34029068</a></li>
+</ul>
+<p>For additional case studies that leverage more advanced ML techniques, see the following recent publications that also address environmental health questions from our research groups, with bracketed tags at the end of each citation denoting ML methods used in that study:</p>
+<ul>
+<li><p>Clark J, Avula V, Ring C, Eaves LA, Howard T, Santos HP, Smeester L, Bangma JT, O’Shea TM, Fry RC, Rager JE. Comparing the Predictivity of Human Placental Gene, microRNA, and CpG Methylation Signatures in Relation to Perinatal Outcomes. Toxicol Sci. 2021 Sep 28;183(2):269-284. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/34255065/">34255065</a> <em>[hierarchical clustering, principal component analysis, random forest]</em></p></li>
+<li><p>Green AJ, Mohlenkamp MJ, Das J, Chaudhari M, Truong L, Tanguay RL, Reif DM. Leveraging high-throughput screening data, deep neural networks, and conditional generative adversarial networks to advance predictive toxicology. PLoS Comput Biol. 2021 Jul 2;17(7):e1009135. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/34214078/">3421407</a> <em>[conditional generative adversarial network, deep neural network, support vector machine, random forest, multilayer perceptron]</em></p></li>
+<li><p>To KT, Truong L, Edwards S, Tanguay RL, Reif DM. Multivariate modeling of engineered nanomaterial features associated with developmental toxicity. NanoImpact. 2019 Apr;16:10.1016. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/32133425/">32133425</a> <em>[random forest]</em></p></li>
+<li><p>Ring C, Sipes NS, Hsieh JH, Carberry C, Koval LE, Klaren WD, Harris MA, Auerbach SS, Rager JE. Predictive modeling of biological responses in the rat liver using in vitro Tox21 bioactivity: Benefits from high-throughput toxicokinetics. Comput Toxicol. 2021 May;18:100166. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/34013136/">34013136</a> <em>[random forest]</em></p></li>
+<li><p>Hickman E, Payton A, Duffney P, Wells H, Ceppe AS, Brocke S, Bailey A, Rebuli ME, Robinette C, Ring B, Rager JE, Alexis NE, Jaspers I. Biomarkers of Airway Immune Homeostasis Differ Significantly with Generation of E-Cigarettes. Am J Respir Crit Care Med. 2022 Nov 15; 206(10):1248-1258. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/35731626/">35731626</a> <em>[hierarchical clustering, quadratic discriminant analysis, multinomial logistic regression]</em></p></li>
+<li><p>Perryman AN, Kim H-YH, Payton A, Rager JE, McNell EE, Rebuli ME, et al. (2023) Plasma sterols and vitamin D are correlates and predictors of ozone-induced inflammation in the lung: A pilot study. PLoS ONE 18(5): e0285721. PMID: <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0285721">37186612</a> <em>[random forest, support vector machine, k nearest neighbor]</em></p></li>
+<li><p>Payton AD, Perryman AN, Hoffman JR, Avula V, Wells H, Robinette C, Alexis NE, Jaspers I, Rager JE, Rebuli ME. Cytokine signature clusters as a tool to compare changes associated with tobacco product use in upper and lower airway samples. American Journal of Physiology-Lung Cellular and Molecular Physiology 2022 322:5, L722-L736. PMID: <a href="https://journals.physiology.org/doi/abs/10.1152/ajplung.00299.2021">35318855</a> <em>[k-means clustering, principal component analysis]</em></p></li>
+</ul>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="advanced-multi-group-comparisons.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="supervised-machine-learning.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["_main.pdf", "_main.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5.3 Supervised Machine Learning Model Interpretation | TAME 2.0: An Update to the TAME Toolkit for Introductory Data Science, Chemical-Biological Analyses, Machine Learning and Predictive Modeling, and Database Mining for Environmental Health Research</title>
+  <meta name="description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5.3 Supervised Machine Learning Model Interpretation | TAME 2.0: An Update to the TAME Toolkit for Introductory Data Science, Chemical-Biological Analyses, Machine Learning and Predictive Modeling, and Database Mining for Environmental Health Research" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5.3 Supervised Machine Learning Model Interpretation | TAME 2.0: An Update to the TAME Toolkit for Introductory Data Science, Chemical-Biological Analyses, Machine Learning and Predictive Modeling, and Database Mining for Environmental Health Research" />
+  
+  <meta name="twitter:description" content="This is an example of how the TAME 2.0 website will look, I hope!" />
+  
+
+<meta name="author" content="Rager Lab" />
+
+
+<meta name="date" content="2026-02-09" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/icons/Favicon.png" type="image/x-icon" />
+<link rel="prev" href="supervised-machine-learning.html"/>
+<link rel="next" href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.34.0/datatables.js"></script>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/tabwid-1.1.3/tabwid.css" rel="stylesheet" />
+<script src="libs/tabwid-1.1.3/tabwid.js"></script>
+<link href="libs/table1-1.0/table1_defaults.css" rel="stylesheet" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FGFKVX2X3G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FGFKVX2X3G');
+</script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="images/icons/TAME 2.0 Logo.png"><br></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="part"><span><b>Chapter 1 Introductory <br>Data Science</b></span></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html"><i class="fa fa-check"></i>1.1 FAIR Data Management Practices</a>
+<ul>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#introduction-to-training-module"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#introduction-to-fair"><i class="fa fa-check"></i>Introduction to FAIR</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#breaking-down-fair-letter-by-letter"><i class="fa fa-check"></i>Breaking Down FAIR, Letter-by-Letter</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#what-does-this-mean-for-you"><i class="fa fa-check"></i>What Does This Mean for You?</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#data-repositories-for-sharing-of-data"><i class="fa fa-check"></i>Data Repositories for Sharing of Data</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#recent-shifts-in-regulatory-policies-for-data-sharing"><i class="fa fa-check"></i>Recent Shifts in Regulatory Policies for Data Sharing</a></li>
+<li class="chapter" data-level="" data-path="fair-data-management-practices.html"><a href="fair-data-management-practices.html#additional-training-resources-on-fair"><i class="fa fa-check"></i>Additional Training Resources on FAIR</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html"><i class="fa fa-check"></i>1.2 Data Sharing through Online Repositories</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#an-overview-and-example-with-the-dataverse-repository"><i class="fa fa-check"></i>An Overview and Example with the Dataverse Repository</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#introduction-to-training-module-1"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#data-repositories"><i class="fa fa-check"></i>Data Repositories</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#the-dataverse-project"><i class="fa fa-check"></i>The Dataverse Project</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#what-is-a-dataverse"><i class="fa fa-check"></i>What is a Dataverse?</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#metadata"><i class="fa fa-check"></i>Metadata</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#creating-a-dataverse"><i class="fa fa-check"></i>Creating a Dataverse</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#creating-a-dataset"><i class="fa fa-check"></i>Creating a Dataset</a></li>
+<li class="chapter" data-level="" data-path="data-sharing-through-online-repositories.html"><a href="data-sharing-through-online-repositories.html#concluding-remarks-1"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html"><i class="fa fa-check"></i>1.3 File Management using Github</a>
+<ul>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#introduction-to-training-module-2"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#creating-an-account"><i class="fa fa-check"></i>Creating an Account</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#creating-a-repository"><i class="fa fa-check"></i>Creating a Repository</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#uploading-code"><i class="fa fa-check"></i>Uploading Code</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#adding-subfolders-in-a-repository"><i class="fa fa-check"></i>Adding Subfolders in a Repository</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#updating-code"><i class="fa fa-check"></i>Updating Code</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#updating-repository-titles-and-structure-to-support-a-manuscript"><i class="fa fa-check"></i>Updating Repository Titles and Structure to Support a Manuscript</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#tracking-code-changes-using-github-branches"><i class="fa fa-check"></i>Tracking Code Changes using Github Branches</a></li>
+<li class="chapter" data-level="" data-path="file-management-using-github.html"><a href="file-management-using-github.html#concluding-remarks-2"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html"><i class="fa fa-check"></i>1.4 Data Wrangling in Excel</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#introduction-to-training-module-3"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#save-a-copy-of-the-soon-to-be-organized-and-cleaned-dataset-as-a-new-file"><i class="fa fa-check"></i>Save a Copy of the Soon-To-Be Organized and Cleaned Dataset as a New File</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#remove-extraneous-white-space"><i class="fa fa-check"></i>Remove Extraneous White Space</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#replace-missing-data-with-na"><i class="fa fa-check"></i>Replace Missing Data with “NA”</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#create-a-metadata-tab"><i class="fa fa-check"></i>Create a Metadata Tab</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#abbreviate-and-capitalize-categorical-data"><i class="fa fa-check"></i>Abbreviate and Capitalize Categorical Data</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#alphabetize-sort-the-data-by-the-categorical-variable-of-interest"><i class="fa fa-check"></i>Alphabetize (Sort) the Data by the Categorical Variable of Interest</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#create-a-new-subject-number-column"><i class="fa fa-check"></i>Create a New Subject Number Column</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#remove-special-symbols-and-dashes"><i class="fa fa-check"></i>Remove Special Symbols and Dashes</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#bold-all-column-names-and-center-all-data"><i class="fa fa-check"></i>Bold all Column Names and Center all Data</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#create-a-subject-identifier-column"><i class="fa fa-check"></i>Create a Subject Identifier Column</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#separate-subject-demographic-data-from-experimental-measurements"><i class="fa fa-check"></i>Separate Subject Demographic Data from Experimental Measurements</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#convert-data-from-wide-to-long-format"><i class="fa fa-check"></i>Convert Data from Wide to Long Format</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#pivoting-data-from-a-wide-to-long-format"><i class="fa fa-check"></i>Pivoting Data from a Wide to Long Format</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#generating-summary-level-statistics-with-pivot-tables"><i class="fa fa-check"></i>Generating Summary-Level Statistics with Pivot Tables</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#excel-vs.-r-which-should-you-use"><i class="fa fa-check"></i>Excel vs. R: Which Should You Use?</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling-in-excel.html"><a href="data-wrangling-in-excel.html#concluding-remarks-3"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 2 Coding in R</b></span></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html"><i class="fa fa-check"></i>2.1 Downloading and Programming in R</a>
+<ul>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#introduction-to-training-module-4"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#general-introduction-and-installation-of-r-and-rstudio"><i class="fa fa-check"></i>General Introduction and Installation of R and RStudio</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#introduction-to-r-packages"><i class="fa fa-check"></i>Introduction to R Packages</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#scripting-basics"><i class="fa fa-check"></i>Scripting Basics</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#code-troubleshooting"><i class="fa fa-check"></i>Code Troubleshooting</a></li>
+<li class="chapter" data-level="" data-path="downloading-and-programming-in-r.html"><a href="downloading-and-programming-in-r.html#concluding-remarks-4"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html"><i class="fa fa-check"></i>2.2 Coding “Best” Practices</a>
+<ul>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#introduction-to-training-module-5"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#scripting-file-types"><i class="fa fa-check"></i>Scripting File Types</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#script-headers-and-annotation"><i class="fa fa-check"></i>Script Headers and Annotation</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#coding-style"><i class="fa fa-check"></i>Coding Style</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#script-organization"><i class="fa fa-check"></i>Script Organization</a></li>
+<li class="chapter" data-level="" data-path="coding-best-practices.html"><a href="coding-best-practices.html#concluding-remarks-5"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html"><i class="fa fa-check"></i>2.3 Data Manipulation and Reshaping</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#introduction-to-training-module-6"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#data-manipulation-using-base-r"><i class="fa fa-check"></i>Data Manipulation Using Base R</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#introduction-to-tidyverse"><i class="fa fa-check"></i>Introduction to Tidyverse</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation-and-reshaping.html"><a href="data-manipulation-and-reshaping.html#concluding-remarks-6"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html"><i class="fa fa-check"></i>2.4 Improving Coding Efficiencies</a>
+<ul>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#introduction-to-training-module-7"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#loops"><i class="fa fa-check"></i>Loops</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#functions"><i class="fa fa-check"></i>Functions</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#list-operations"><i class="fa fa-check"></i>List operations</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#concluding-remarks-7"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+<li class="chapter" data-level="" data-path="improving-coding-efficiencies.html"><a href="improving-coding-efficiencies.html#additional-resources-2"><i class="fa fa-check"></i>Additional Resources</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 3 Basics of Data <br>Analysis and Visualizations</b></span></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html"><i class="fa fa-check"></i>3.1 Data Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#introduction-to-data-visualizations"><i class="fa fa-check"></i>Introduction to Data Visualizations</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#introduction-to-training-module-8"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#density-plot-visualization"><i class="fa fa-check"></i>Density Plot Visualization</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#boxplot-visualization"><i class="fa fa-check"></i>Boxplot Visualization</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#correlation-visualizations"><i class="fa fa-check"></i>Correlation Visualizations</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#heatmap-visualization"><i class="fa fa-check"></i>Heatmap Visualization</a></li>
+<li class="chapter" data-level="" data-path="data-visualizations.html"><a href="data-visualizations.html#concluding-remarks-8"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html"><i class="fa fa-check"></i>3.2 Improving Data Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#introduction-to-data-visulization-conventions"><i class="fa fa-check"></i>Introduction to Data Visulization Conventions</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#introduction-to-training-module-9"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#creating-an-improved-boxplot-visualization"><i class="fa fa-check"></i>Creating an Improved Boxplot Visualization</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#creating-an-improved-heatmap-visualization"><i class="fa fa-check"></i>Creating an Improved Heatmap Visualization</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#creating-multi-plot-figures"><i class="fa fa-check"></i>Creating Multi-Plot Figures</a></li>
+<li class="chapter" data-level="" data-path="improving-data-visualizations.html"><a href="improving-data-visualizations.html#concluding-remarks-9"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html"><i class="fa fa-check"></i>3.3 Normality Tests and Data Transformations</a>
+<ul>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#introduction-to-training-module-10"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#what-is-a-normal-distribution"><i class="fa fa-check"></i>What is a Normal Distribution?</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#qualitative-assessment-of-normality"><i class="fa fa-check"></i>Qualitative Assessment of Normality</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#quantitative-normality-assessment"><i class="fa fa-check"></i>Quantitative Normality Assessment</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#data-transformation"><i class="fa fa-check"></i>Data Transformation</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#additional-considerations-regarding-normality"><i class="fa fa-check"></i>Additional Considerations Regarding Normality</a></li>
+<li class="chapter" data-level="" data-path="normality-tests-and-data-transformations.html"><a href="normality-tests-and-data-transformations.html#concluding-remarks-10"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introduction-to-statistical-tests.html"><a href="introduction-to-statistical-tests.html"><i class="fa fa-check"></i>3.4 Introduction to Statistical Tests</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction-to-statistical-tests.html"><a href="introduction-to-statistical-tests.html#introduction-to-training-module-11"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-statistical-tests.html"><a href="introduction-to-statistical-tests.html#assessing-normality-homogeneity-of-variance"><i class="fa fa-check"></i>Assessing Normality &amp; Homogeneity of Variance</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-statistical-tests.html"><a href="introduction-to-statistical-tests.html#two-group-visualizations-and-statistical-comparisons-using-the-t-test"><i class="fa fa-check"></i>Two-Group Visualizations and Statistical Comparisons using the T-Test</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-statistical-tests.html"><a href="introduction-to-statistical-tests.html#three-group-visualizations-and-statistical-comparisons-using-an-anova"><i class="fa fa-check"></i>Three-Group Visualizations and Statistical Comparisons using an ANOVA</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-statistical-tests.html"><a href="introduction-to-statistical-tests.html#regression-modeling-and-visualization-linear-and-logistic-regressions"><i class="fa fa-check"></i>Regression Modeling and Visualization: Linear and Logistic Regressions</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-statistical-tests.html"><a href="introduction-to-statistical-tests.html#statistical-evaluations-of-categorical-data-using-the-chi-squared-test-and-fishers-exact-test"><i class="fa fa-check"></i>Statistical Evaluations of Categorical Data using the Chi-Squared Test and Fisher’s Exact Test</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-statistical-tests.html"><a href="introduction-to-statistical-tests.html#concluding-remarks-11"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 4 Converting Wet <br>Lab Data into Dry Lab <br>Analyses</b></span></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html"><i class="fa fa-check"></i>4.1 Overview of Experimental Design and Example Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#introduction-to-training-module-12"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#replicates"><i class="fa fa-check"></i>Replicates</a></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#orientation-to-example-data-for-chapter-4"><i class="fa fa-check"></i>Orientation to Example Data for Chapter 4</a></li>
+<li class="chapter" data-level="" data-path="overview-of-experimental-design-and-example-data.html"><a href="overview-of-experimental-design-and-example-data.html#concluding-remarks-12"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html"><i class="fa fa-check"></i>4.2 Data Import, Processing, and Summary Statistics</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#introduction-to-training-module-13"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#data-import"><i class="fa fa-check"></i>Data Import</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#handling-missing-values"><i class="fa fa-check"></i>Handling Missing Values</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#averaging-replicates"><i class="fa fa-check"></i>Averaging Replicates</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#descriptive-statistics"><i class="fa fa-check"></i>Descriptive Statistics</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#normality-assessment-and-data-transformation"><i class="fa fa-check"></i>Normality Assessment and Data Transformation</a></li>
+<li class="chapter" data-level="" data-path="data-import-processing-and-summary-statistics.html"><a href="data-import-processing-and-summary-statistics.html#concluding-remarks-13"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html"><i class="fa fa-check"></i>4.3 Data Import from PDF Sources</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#introduction-to-training-module-14"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#importing-data-from-many-single-pdfs-with-the-same-formatting"><i class="fa fa-check"></i>Importing Data from Many Single PDFs with the Same Formatting</a></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#importing-data-stored-in-pdf-tables"><i class="fa fa-check"></i>Importing Data Stored in PDF Tables</a></li>
+<li class="chapter" data-level="" data-path="data-import-from-pdf-sources.html"><a href="data-import-from-pdf-sources.html#concluding-remarks-14"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html"><i class="fa fa-check"></i>4.4 Two Group Comparisons and Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#introduction-to-training-module-15"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#overview-of-two-group-statistical-tests"><i class="fa fa-check"></i>Overview of Two Group Statistical Tests</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#statistical-vs.-biological-significance"><i class="fa fa-check"></i>Statistical vs. Biological Significance</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#unpaired-test-example"><i class="fa fa-check"></i>Unpaired Test Example</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#paired-test-example"><i class="fa fa-check"></i>Paired Test Example</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#visualizing-results"><i class="fa fa-check"></i>Visualizing Results</a></li>
+<li class="chapter" data-level="" data-path="two-group-comparisons-and-visualizations.html"><a href="two-group-comparisons-and-visualizations.html#concluding-remarks-15"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html"><i class="fa fa-check"></i>4.5 Multi-Group and Multi-Variable Comparisons and Visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#introduction-to-training-module-16"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#overview-of-multi-group-statistical-tests"><i class="fa fa-check"></i>Overview of Multi-Group Statistical Tests</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#multi-group-analysis-example"><i class="fa fa-check"></i>Multi-Group Analysis Example</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#visualization-of-multi-group-statistical-results"><i class="fa fa-check"></i>Visualization of Multi-Group Statistical Results</a></li>
+<li class="chapter" data-level="" data-path="multi-group-and-multi-variable-comparisons-and-visualizations.html"><a href="multi-group-and-multi-variable-comparisons-and-visualizations.html#concluding-remarks-16"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="advanced-multi-group-comparisons.html"><a href="advanced-multi-group-comparisons.html"><i class="fa fa-check"></i>4.6 Advanced Multi-Group Comparisons</a>
+<ul>
+<li class="chapter" data-level="" data-path="advanced-multi-group-comparisons.html"><a href="advanced-multi-group-comparisons.html#introduction-to-training-module-17"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="advanced-multi-group-comparisons.html"><a href="advanced-multi-group-comparisons.html#advanced-multi-group-comparisons-1"><i class="fa fa-check"></i>Advanced Multi-Group Comparisons</a></li>
+<li class="chapter" data-level="" data-path="advanced-multi-group-comparisons.html"><a href="advanced-multi-group-comparisons.html#two-way-anova-example"><i class="fa fa-check"></i>Two-way ANOVA Example</a></li>
+<li class="chapter" data-level="" data-path="advanced-multi-group-comparisons.html"><a href="advanced-multi-group-comparisons.html#ancova-example"><i class="fa fa-check"></i>ANCOVA Example</a></li>
+<li class="chapter" data-level="" data-path="advanced-multi-group-comparisons.html"><a href="advanced-multi-group-comparisons.html#concluding-remarks-17"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 5 Machine Learning <br>&amp; Artificial Intelligence</b></span></li>
+<li class="chapter" data-level="" data-path="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html"><a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html"><i class="fa fa-check"></i>5.1 Introduction to Artificial Intelligence, Machine Learning, and Predictive Modeling for Environmental Health</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html"><a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html#introduction-to-training-module-18"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html"><a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html#general-historical-context-and-taxonomy-of-modern-aiml"><i class="fa fa-check"></i>General Historical Context and Taxonomy of Modern AI/ML</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html"><a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html#application-of-machine-learning-in-environmental-health-science"><i class="fa fa-check"></i>Application of Machine Learning in Environmental Health Science</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html"><a href="introduction-to-artificial-intelligence-machine-learning-and-predictive-modeling-for-environmental-health.html#concluding-remarks-18"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html"><i class="fa fa-check"></i>5.2 Supervised Machine Learning</a>
+<ul>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#introduction-to-training-module-19"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#types-of-machine-learning"><i class="fa fa-check"></i>Types of Machine Learning</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#types-of-supervised-machine-learning-algorithms"><i class="fa fa-check"></i>Types of Supervised Machine Learning Algorithms</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#training-supervised-machine-learning-models"><i class="fa fa-check"></i>Training Supervised Machine Learning Models</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#assessing-classification-based-model-performance"><i class="fa fa-check"></i>Assessing Classification-Based Model Performance</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#introduction-to-activity-and-example-dataset"><i class="fa fa-check"></i>Introduction to Activity and Example Dataset</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#testing-for-differences-in-predictor-variables-across-the-outcome-classes"><i class="fa fa-check"></i>Testing for Differences in Predictor Variables across the Outcome Classes</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#predicting-ias-detection-with-a-random-forest-rf-model"><i class="fa fa-check"></i>Predicting iAs Detection with a Random Forest (RF) Model</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#class-imbalance"><i class="fa fa-check"></i>Class Imbalance</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#concluding-remarks-19"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html"><i class="fa fa-check"></i>5.3 Supervised Machine Learning Model Interpretation</a>
+<ul>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#introduction-to-training-module-20"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#variable-importance"><i class="fa fa-check"></i>Variable Importance</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#decision-boundary"><i class="fa fa-check"></i>Decision Boundary</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#introduction-to-example-dataset-and-activity"><i class="fa fa-check"></i>Introduction to Example Dataset and Activity</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#predicting-ias-detection-with-a-random-forest-rf-model-1"><i class="fa fa-check"></i>Predicting iAs Detection with a Random Forest (RF) Model</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#variable-importance-plot"><i class="fa fa-check"></i>Variable Importance Plot</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#decision-boundary-plot"><i class="fa fa-check"></i>Decision Boundary Plot</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#decision-boundary-plot-incorporating-smote"><i class="fa fa-check"></i>Decision Boundary Plot Incorporating SMOTE</a></li>
+<li class="chapter" data-level="" data-path="supervised-machine-learning-model-interpretation.html"><a href="supervised-machine-learning-model-interpretation.html#concluding-remarks-20"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><i class="fa fa-check"></i>5.4 Unsupervised Machine Learning Part 1: K-Means Clustering &amp; PCA</a>
+<ul>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html#introduction-to-training-module-21"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html#introduction-to-unsupervised-machine-learning"><i class="fa fa-check"></i>Introduction to Unsupervised Machine Learning</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html#introduction-to-example-data"><i class="fa fa-check"></i>Introduction to Example Data</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html#identifying-clusters-of-chemicals-through-k-means"><i class="fa fa-check"></i>Identifying Clusters of Chemicals through <em>K</em>-Means</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html#principal-component-analysis-pca-1"><i class="fa fa-check"></i>Principal Component Analysis (PCA)</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html#incorporating-k-means-into-pca-for-predictive-modeling"><i class="fa fa-check"></i>Incorporating <em>K</em>-Means into PCA for Predictive Modeling</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-1-k-means-clustering-pca.html"><a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html#concluding-remarks-21"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><i class="fa fa-check"></i>5.5 Unsupervised Machine Learning Part 2: Additional Clustering Applications</a>
+<ul>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#introduction-to-training-module-22"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#k-means-clustering-1"><i class="fa fa-check"></i><em>K</em>-Means Clustering</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#hierarchical-clustering"><i class="fa fa-check"></i>Hierarchical Clustering</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#introduction-to-example-data-1"><i class="fa fa-check"></i>Introduction to Example Data</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#hierarchical-clustering-1"><i class="fa fa-check"></i>Hierarchical Clustering</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#clustering-plot"><i class="fa fa-check"></i>Clustering Plot</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#hierarchical-clustering-visualization"><i class="fa fa-check"></i>Hierarchical Clustering Visualization</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#variable-contributions"><i class="fa fa-check"></i>Variable Contributions</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning-part-2-additional-clustering-applications.html"><a href="unsupervised-machine-learning-part-2-additional-clustering-applications.html#concluding-remarks-22"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 6 Applications in <br>Toxicology &amp; Exposure <br>Science</b></span></li>
+<li class="chapter" data-level="" data-path="descriptive-cohort-analyses.html"><a href="descriptive-cohort-analyses.html"><i class="fa fa-check"></i>6.1 Descriptive Cohort Analyses</a>
+<ul>
+<li class="chapter" data-level="" data-path="descriptive-cohort-analyses.html"><a href="descriptive-cohort-analyses.html#introduction-to-training-module-23"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="descriptive-cohort-analyses.html"><a href="descriptive-cohort-analyses.html#participant-exploration"><i class="fa fa-check"></i>Participant Exploration</a></li>
+<li class="chapter" data-level="" data-path="descriptive-cohort-analyses.html"><a href="descriptive-cohort-analyses.html#chemical-detection-filtering"><i class="fa fa-check"></i>Chemical Detection Filtering</a></li>
+<li class="chapter" data-level="" data-path="descriptive-cohort-analyses.html"><a href="descriptive-cohort-analyses.html#outlier-identification"><i class="fa fa-check"></i>Outlier Identification</a></li>
+<li class="chapter" data-level="" data-path="descriptive-cohort-analyses.html"><a href="descriptive-cohort-analyses.html#summary-statistics-tables"><i class="fa fa-check"></i>Summary Statistics Tables</a></li>
+<li class="chapter" data-level="" data-path="descriptive-cohort-analyses.html"><a href="descriptive-cohort-analyses.html#demographics-table"><i class="fa fa-check"></i>Demographics Table</a></li>
+<li class="chapter" data-level="" data-path="descriptive-cohort-analyses.html"><a href="descriptive-cohort-analyses.html#concluding-remarks-23"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="omics-and-system-biology-transcriptomic-applications.html"><a href="omics-and-system-biology-transcriptomic-applications.html"><i class="fa fa-check"></i>6.2 -Omics and System Biology: Transcriptomic Applications</a>
+<ul>
+<li class="chapter" data-level="" data-path="omics-and-system-biology-transcriptomic-applications.html"><a href="omics-and-system-biology-transcriptomic-applications.html#introduction-to-training-module-24"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="omics-and-system-biology-transcriptomic-applications.html"><a href="omics-and-system-biology-transcriptomic-applications.html#introduction-to-the-field-of--omics"><i class="fa fa-check"></i>Introduction to the Field of “-Omics”</a></li>
+<li class="chapter" data-level="" data-path="omics-and-system-biology-transcriptomic-applications.html"><a href="omics-and-system-biology-transcriptomic-applications.html#introduction-to-transcriptomics"><i class="fa fa-check"></i>Introduction to Transcriptomics</a></li>
+<li class="chapter" data-level="" data-path="omics-and-system-biology-transcriptomic-applications.html"><a href="omics-and-system-biology-transcriptomic-applications.html#formatting-data-for-downstream-statistics"><i class="fa fa-check"></i>Formatting Data for Downstream Statistics</a></li>
+<li class="chapter" data-level="" data-path="omics-and-system-biology-transcriptomic-applications.html"><a href="omics-and-system-biology-transcriptomic-applications.html#transcriptomics-data-qaqc"><i class="fa fa-check"></i>Transcriptomics Data QA/QC</a></li>
+<li class="chapter" data-level="" data-path="omics-and-system-biology-transcriptomic-applications.html"><a href="omics-and-system-biology-transcriptomic-applications.html#controlling-for-sources-of-sample-heterogeneity"><i class="fa fa-check"></i>Controlling for Sources of Sample Heterogeneity</a></li>
+<li class="chapter" data-level="" data-path="omics-and-system-biology-transcriptomic-applications.html"><a href="omics-and-system-biology-transcriptomic-applications.html#identifying-genes-that-are-significantly-differentially-expressed-by-environmental-exposure-conditions-e.g.-biomass-smoke-exposure"><i class="fa fa-check"></i>Identifying Genes that are Significantly Differentially Expressed by Environmental Exposure Conditions (e.g., Biomass Smoke Exposure)</a></li>
+<li class="chapter" data-level="" data-path="omics-and-system-biology-transcriptomic-applications.html"><a href="omics-and-system-biology-transcriptomic-applications.html#visualizing-statistical-results-using-ma-plots"><i class="fa fa-check"></i>Visualizing Statistical Results using MA Plots</a></li>
+<li class="chapter" data-level="" data-path="omics-and-system-biology-transcriptomic-applications.html"><a href="omics-and-system-biology-transcriptomic-applications.html#visualizing-statistical-results-using-volcano-plots"><i class="fa fa-check"></i>Visualizing Statistical Results using Volcano Plots</a></li>
+<li class="chapter" data-level="" data-path="omics-and-system-biology-transcriptomic-applications.html"><a href="omics-and-system-biology-transcriptomic-applications.html#interpretting-findings-at-the-systems-level-through-pathway-enrichment-analysis"><i class="fa fa-check"></i>Interpretting Findings at the Systems Level through Pathway Enrichment Analysis</a></li>
+<li class="chapter" data-level="" data-path="omics-and-system-biology-transcriptomic-applications.html"><a href="omics-and-system-biology-transcriptomic-applications.html#concluding-remarks-24"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html"><a href="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html"><i class="fa fa-check"></i>6.3 Mixtures Analysis Methods Part 1: Overview and Example with Quantile G-Computation</a>
+<ul>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html"><a href="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html#introduction-to-training-module-25"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html"><a href="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html#overview-of-mixtures-analysis"><i class="fa fa-check"></i>Overview of Mixtures Analysis</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html"><a href="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html#introduction-to-example-data-2"><i class="fa fa-check"></i>Introduction to Example Data</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html"><a href="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html#mixtures-model-with-standard-qqcomp"><i class="fa fa-check"></i>Mixtures Model with Standard qqcomp</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html"><a href="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html#concluding-remarks-25"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html"><a href="mixtures-analysis-methods-part-1-overview-and-example-with-quantile-g-computation.html#additional-resources-11"><i class="fa fa-check"></i>Additional Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html"><i class="fa fa-check"></i>6.4 Mixtures Analysis Methods Part 2: Bayesian Kernel Machine Regression</a>
+<ul>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#introduction-to-training-module-26"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#introduction-to-example-data-3"><i class="fa fa-check"></i>Introduction to Example Data</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#introduction-to-bkmr"><i class="fa fa-check"></i>Introduction to BKMR</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#run-bkmr"><i class="fa fa-check"></i>Run BKMR</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#concluding-remarks-26"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html"><a href="mixtures-analysis-methods-part-2-bayesian-kernel-machine-regression.html#additional-resources-12"><i class="fa fa-check"></i>Additional Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-3-sufficient-similarity.html"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html"><i class="fa fa-check"></i>6.5 Mixtures Analysis Methods Part 3: Sufficient Similarity</a>
+<ul>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-3-sufficient-similarity.html"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#introduction-to-training-module-27"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-3-sufficient-similarity.html"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#introduction-to-toxicant-and-dataset"><i class="fa fa-check"></i>Introduction to Toxicant and Dataset</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-3-sufficient-similarity.html"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#workspace-preparation-and-data-import-9"><i class="fa fa-check"></i>Workspace Preparation and Data Import</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-3-sufficient-similarity.html"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#chemistry-based-sufficient-similarity-analysis"><i class="fa fa-check"></i>Chemistry-Based Sufficient Similarity Analysis</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-3-sufficient-similarity.html"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#toxicity-based-sufficient-similarity-analysis"><i class="fa fa-check"></i>Toxicity-Based Sufficient Similarity Analysis</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-3-sufficient-similarity.html"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#comparing-chemistry-vs.-toxicity-sufficient-similarity-analyses"><i class="fa fa-check"></i>Comparing Chemistry vs. Toxicity Sufficient Similarity Analyses</a></li>
+<li class="chapter" data-level="" data-path="mixtures-analysis-methods-part-3-sufficient-similarity.html"><a href="mixtures-analysis-methods-part-3-sufficient-similarity.html#concluding-remarks-27"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html"><i class="fa fa-check"></i>6.6 Toxicokinetic Modeling</a>
+<ul>
+<li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#introduction-to-training-module-28"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#introduction-to-toxicokinetic-modeling"><i class="fa fa-check"></i>Introduction to Toxicokinetic Modeling</a></li>
+<li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#data-and-models-used-in-toxicokinetic-modeling-tk"><i class="fa fa-check"></i>Data and Models used in Toxicokinetic Modeling (TK)</a></li>
+<li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#reverse-toxicokinetics"><i class="fa fa-check"></i>Reverse Toxicokinetics</a></li>
+<li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#capturing-population-variability-in-toxicokinetics-and-uncertainty-in-chemical-specific-parameters"><i class="fa fa-check"></i>Capturing Population Variability in Toxicokinetics, and Uncertainty in Chemical-Specific Parameters</a></li>
+<li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#reverse-tk-calculating-administered-equivalent-doses-for-toxcast-bioactive-concentrations"><i class="fa fa-check"></i>Reverse TK: Calculating Administered Equivalent Doses for ToxCast Bioactive Concentrations</a></li>
+<li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#comparing-equivalent-doses-estimated-to-elicit-toxicity-hazard-to-external-exposure-estimates-exposure-for-chemical-prioritization-by-bioactivity-exposure-ratios-bers"><i class="fa fa-check"></i>Comparing Equivalent Doses Estimated to Elicit Toxicity (Hazard) to External Exposure Estimates (Exposure), for Chemical Prioritization by Bioactivity-Exposure Ratios (BERs)</a></li>
+<li class="chapter" data-level="" data-path="toxicokinetic-modeling.html"><a href="toxicokinetic-modeling.html#concluding-remarks-28"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html"><i class="fa fa-check"></i>6.7 Chemical Read-Across for Toxicity Predictions</a>
+<ul>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#introduction-to-training-module-29"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#introduction-to-activity"><i class="fa fa-check"></i>Introduction to Activity</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#read-across-example-analysis"><i class="fa fa-check"></i>Read-Across Example Analysis</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#calculating-chemical-similarities"><i class="fa fa-check"></i>Calculating Chemical Similarities</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#chemical-read-across-to-predict-acute-toxicity"><i class="fa fa-check"></i>Chemical Read-Across to Predict Acute Toxicity</a></li>
+<li class="chapter" data-level="" data-path="chemical-read-across-for-toxicity-predictions.html"><a href="chemical-read-across-for-toxicity-predictions.html#concluding-remarks-29"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="part"><span><b>Chapter 7 Environmental<br> Health Database Mining</b></span></li>
+<li class="chapter" data-level="" data-path="comparative-toxicogenomics-database.html"><a href="comparative-toxicogenomics-database.html"><i class="fa fa-check"></i>7.1 Comparative Toxicogenomics Database</a>
+<ul>
+<li class="chapter" data-level="" data-path="comparative-toxicogenomics-database.html"><a href="comparative-toxicogenomics-database.html#introduction-to-training-module-30"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="comparative-toxicogenomics-database.html"><a href="comparative-toxicogenomics-database.html#ctd-data-in-r"><i class="fa fa-check"></i>CTD Data in R</a></li>
+<li class="chapter" data-level="" data-path="comparative-toxicogenomics-database.html"><a href="comparative-toxicogenomics-database.html#identifying-genes-under-epigenetic-control"><i class="fa fa-check"></i>Identifying Genes Under Epigenetic Control</a></li>
+<li class="chapter" data-level="" data-path="comparative-toxicogenomics-database.html"><a href="comparative-toxicogenomics-database.html#concluding-remarks-30"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gene-expression-omnibus.html"><a href="gene-expression-omnibus.html"><i class="fa fa-check"></i>7.2 Gene Expression Omnibus</a>
+<ul>
+<li class="chapter" data-level="" data-path="gene-expression-omnibus.html"><a href="gene-expression-omnibus.html#introduction-to-training-module-31"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="gene-expression-omnibus.html"><a href="gene-expression-omnibus.html#introduction-to-geo"><i class="fa fa-check"></i>Introduction to GEO</a></li>
+<li class="chapter" data-level="" data-path="gene-expression-omnibus.html"><a href="gene-expression-omnibus.html#introduction-to-example-data-4"><i class="fa fa-check"></i>Introduction to Example Data</a></li>
+<li class="chapter" data-level="" data-path="gene-expression-omnibus.html"><a href="gene-expression-omnibus.html#geo-data-in-r"><i class="fa fa-check"></i>GEO Data in R</a></li>
+<li class="chapter" data-level="" data-path="gene-expression-omnibus.html"><a href="gene-expression-omnibus.html#visualizing-data"><i class="fa fa-check"></i>Visualizing Data</a></li>
+<li class="chapter" data-level="" data-path="gene-expression-omnibus.html"><a href="gene-expression-omnibus.html#statistical-analyses"><i class="fa fa-check"></i>Statistical Analyses</a></li>
+<li class="chapter" data-level="" data-path="gene-expression-omnibus.html"><a href="gene-expression-omnibus.html#concluding-remarks-31"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="comptox-dashboard-data-through-apis.html"><a href="comptox-dashboard-data-through-apis.html"><i class="fa fa-check"></i>7.3 CompTox Dashboard Data through APIs</a>
+<ul>
+<li class="chapter" data-level="" data-path="comptox-dashboard-data-through-apis.html"><a href="comptox-dashboard-data-through-apis.html#introduction-to-training-module-32"><i class="fa fa-check"></i>Introduction to Training Module</a></li>
+<li class="chapter" data-level="" data-path="comptox-dashboard-data-through-apis.html"><a href="comptox-dashboard-data-through-apis.html#training-modules-environmental-health-questions-24"><i class="fa fa-check"></i>Training Module’s Environmental Health Questions</a></li>
+<li class="chapter" data-level="" data-path="comptox-dashboard-data-through-apis.html"><a href="comptox-dashboard-data-through-apis.html#script-preparations-12"><i class="fa fa-check"></i>Script Preparations</a></li>
+<li class="chapter" data-level="" data-path="comptox-dashboard-data-through-apis.html"><a href="comptox-dashboard-data-through-apis.html#introduction-to-comptox-chemicals-dashboard"><i class="fa fa-check"></i>Introduction to CompTox Chemicals Dashboard</a></li>
+<li class="chapter" data-level="" data-path="comptox-dashboard-data-through-apis.html"><a href="comptox-dashboard-data-through-apis.html#cctes-ctx-application-programming-interfaces-apis-for-automated-batch-search-of-the-ccd"><i class="fa fa-check"></i>CCTE’s CTX Application Programming Interfaces (APIs) for Automated Batch Search of the CCD</a></li>
+<li class="chapter" data-level="" data-path="comptox-dashboard-data-through-apis.html"><a href="comptox-dashboard-data-through-apis.html#comparing-physico-chemical-properties-between-two-important-environmental-contaminant-lists"><i class="fa fa-check"></i>Comparing Physico-chemical Properties between Two Important Environmental Contaminant Lists</a></li>
+<li class="chapter" data-level="" data-path="comptox-dashboard-data-through-apis.html"><a href="comptox-dashboard-data-through-apis.html#hazard-data-genotoxicity"><i class="fa fa-check"></i>Hazard Data: Genotoxicity</a></li>
+<li class="chapter" data-level="" data-path="comptox-dashboard-data-through-apis.html"><a href="comptox-dashboard-data-through-apis.html#hazard-resource"><i class="fa fa-check"></i>Hazard Resource</a></li>
+<li class="chapter" data-level="" data-path="comptox-dashboard-data-through-apis.html"><a href="comptox-dashboard-data-through-apis.html#concluding-remarks-32"><i class="fa fa-check"></i>Concluding Remarks</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">TAME 2.0: An Update to the TAME Toolkit for Introductory Data Science, Chemical-Biological Analyses, Machine Learning and Predictive Modeling, and Database Mining for Environmental Health Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="supervised-machine-learning-model-interpretation" class="section level1 hasAnchor">
+<h1>5.3 Supervised Machine Learning Model Interpretation<a href="supervised-machine-learning-model-interpretation.html#supervised-machine-learning-model-interpretation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This training module was developed by Alexis Payton, Lauren E. Koval, and Julia E. Rager.</p>
+<p>All input files (script, data, and figures) can be downloaded from the <a href="https://github.com/UNCSRP/TAME2">UNC-SRP TAME2 GitHub website</a>.</p>
+<div id="introduction-to-training-module-20" class="section level2 hasAnchor">
+<h2>Introduction to Training Module<a href="supervised-machine-learning-model-interpretation.html#introduction-to-training-module-20" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Supervised machine learning (ML) represents a subset of ML methods wherein the outcome variable is known or assigned prior to training a model to be able to predict said outcome. As we discussed in previous modules, ML methods are advantageous in that they easily incorporate a multitude of potential predictor variables, which allows these models to more closely consider real-world, complex environmental health scenarios and offer new insights through a more holistic consideration of available data inputs. However, one disadvantage of ML is that it is often not as easily interpretable as traditional statistics (e.g., regression based methods with defined beta coefficients for each input predictor variable). With this limitation in mind, there are methods and concepts that can be applied to supervised ML algorithms to aid in the understanding of their predictions including variable (feature) importance and decision boundaries, which we will cover in this module. We will also include example visualization techniques of these methods, representing important aspects contributing to model interpretability, since visualizing helps convey concepts faster and across a broader target audience. In addition, this module addresses methods to communicate these findings in a paper so that a wider span of readers can understand overall take-home points. As with other data analyses, we advise to focus just as much on the <strong>why</strong> components of a study’s research question(s) as opposed to only focusing on the <strong>what</strong> or <strong>how</strong>. To elaborate, we explain through this module that it is not as important to explain all the intricacies of how a model works and how its parameters were tuned; rather, it is more important to focus on why a particular model was selected and how it will be leveraged to answer your research questions. This can all be a bit subjective and requires expertise within your research field. As a first step, let’s first learn about some model interpretation methodologies highlighting <strong>Variable Importance</strong> and <strong>Decision Boundaries</strong> as important examples relevant to environmental health research. Then, this training module will further describe approaches to summarize these methods and communicate supervised ML findings to a broader audience.</p>
+<p><br></p>
+</div>
+<div id="variable-importance" class="section level2 hasAnchor">
+<h2>Variable Importance<a href="supervised-machine-learning-model-interpretation.html#variable-importance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>When a supervised ML algorithm makes predictions, it relies more heavily on some variables than others. How much a variable contributes to classifying data is known as <strong>variable (feature) importance</strong>. Often times, this is thought of as the impact on overall model performance if a variable were to be removed from the model. There are many methods that are used to measure feature importance, including…</p>
+<ul>
+<li><p><strong>SHapley Additive exPlanations (SHAP)</strong>: based on game theory where each variable is considered a “player” where we’re seeking to determine each player’s contribution to the outcome of a “game” or overall model performance. It divides the model performance metric amongst all the variables, so that the sum of the shapley values for all the predictors is equal to the overall model performance. For more information on SHAP, see <a href="https://towardsdatascience.com/a-novel-approach-to-feature-importance-shapley-additive-explanations-d18af30fc21b">A Novel Approach to Feature Importance</a>.</p></li>
+<li><p><strong>Mean decrease gini (gini impurity)</strong>: quantifies the improvement of predictivity with the addition of each predictor in a decision tree, which is then averaged over all the decision trees tested. The higher the value the greater the importance on the algorithm. This metric can easily be extracted from classification-based models, including random forest (RF) classifications, which is what we will focus on in this module.</p></li>
+</ul>
+<p>Note for RF regression-based models, node purity can be extracted as a measure of feature importance. For more information, please see the following resources regarding <a href="https://www.baeldung.com/cs/ml-feature-importance">Feature Importance</a> and <a href="https://cran.r-project.org/web/packages/rfVarImpOOB/vignettes/rfVarImpOOB-vignette.html">Mean Decrease Gini</a>.</p>
+<p><br></p>
+</div>
+<div id="decision-boundary" class="section level2 hasAnchor">
+<h2>Decision Boundary<a href="supervised-machine-learning-model-interpretation.html#decision-boundary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Another concept that is pertinent to a model’s interpretability is understanding a decision boundary and how visualizing it can further aid in understanding how the model classifies new data points. A <strong>decision boundary</strong> is a line (or a hyperplane) that seeks to separate the training data by class. This line can be linear or non-linear and is formed in n-dimensional space. To clarify, although support vector machine (SVM) specifically uses decision boundaries to classify training data and make predictions on test data, decision boundaries can still be drawn for other algorithms.</p>
+<p>A decision boundary can be visualized to convey how well an algorithm is able to classify an outcome based on the data given. It is important to note that most ML models make use of datasets that contain three or more predictors, and it is difficult to visualize a plot in more than three dimensions. Therefore, the number of features and which features to plot need to be narrowed down to two variables. For this reason, the resulting visualization is not a true representation of the decision boundary from the initial model using all predictors, since the visualization only relies on prediction results from two variables. Nevertheless, decision boundary plots can be powerful visualizations to determine thresholds between the outcome classes.</p>
+<p>When choosing variables for decision boundary plots, features that have the most influence on the model are often selected, but that is not always the case. Sometimes predictors are selected based upon the environmental health implications relevant to the research question. For example in <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0285721">Perryman et. al</a>, lung response following ozone exposure was investigated by sampling derivatives of cholesterol biosynthesis in human subjects. In this paper, these sterol metabolites were used to predict whether a subject would be classified as having a lung response that was considered non-responsive or responsive. A decision boundary plot was made using two predictors:</p>
+<ul>
+<li>Cholesterol, given that it had the highest variable importance and</li>
+<li>Vitamin D, given its synthesis can be affected by ozone despite it having a lower variable importance in the paper’s models.
+<img src="Chapter_5/Module5_3_Input/Module5_3_Image1.png" alt="" width="80%" style="display: block; margin: auto;" />
+<center>
+<strong>Figure 5. Decision boundary plot for SVM model predicting lung response class.</strong> Cholesterol and 25-hydroxyvitamin D were used as predictors visualizing responder status [non-responders(green) and responders (yellow)] and disease status [non-asthmatics (triangles) and asthmatics (circles)]. The shaded regions are the model’s prediction of a subject’s lung response class at a given cholesterol and 25-hydroxyvitamin D concentration.
+</center></li>
+</ul>
+<p>Takeaways from this decision boundary plot:</p>
+<ul>
+<li>Subjects with more lung inflammation (“responders”) after ozone exposure tended to have higher Vitamin D levels (&gt; 35pmol/mL) and lower Cholesterol levels (&lt; 675nmol/mL).</li>
+<li>These “responder” subjects were more likely to be non-asthmatics.</li>
+</ul>
+<p><br></p>
+</div>
+<div id="introduction-to-example-dataset-and-activity" class="section level2 hasAnchor">
+<h2>Introduction to Example Dataset and Activity<a href="supervised-machine-learning-model-interpretation.html#introduction-to-example-dataset-and-activity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the previous module, we investigated whether a classification-based RF model using well water variables would be accurate predictors of inorganic arsenic (iAs) contamination. While it is helpful to know if certain variables are able to be used to construct a model that accurately predict detectability, from a public health standpoint, it is also helpful to know which of those features contribute the most to a model’s accuracy. Therefore, if we can identify the features that are associated with having lower arsenic detection, we can use that information to inform policies when new wells are constructed. In addition to identifying variables with the greatest importance to the algorithm, it is also pertinent to understand the ranges of when a well is more or less likely to have arsenic detected. For example, are wells with a lower flow rate more likely to have arsenic detected? In this module, this will be addressed by extracting variable importance from the same algorithm and plotting it. The two features with the highest variable importance will be identified and used to construct a decision boundary plot to determine how features are associated with iAs detection.</p>
+<p>The data to be used in this module was described and referenced previously in <strong>TAME 2.0 Module 5.2 Supervised Machine Learning</strong>.</p>
+<div id="training-modules-environmental-health-questions-12" class="section level3 hasAnchor">
+<h3>Training Module’s Environmental Health Questions<a href="supervised-machine-learning-model-interpretation.html#training-modules-environmental-health-questions-12" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This training module was specifically developed to answer the following environmental health questions:</p>
+<ol style="list-style-type: decimal">
+<li>After plotting variable importance from highest to lowest, which two predictors have the highest variable importance on the predictive accuracy of iAs detection from a RF algorithm?</li>
+<li>Using the two features with the highest variable importance, under what conditions are we more likely to predict detectable iAs in wells based on a decision boundary plot?</li>
+<li>How do the decision boundaries shift after incorporating SMOTE to address class imbalance?</li>
+</ol>
+</div>
+<div id="script-preparations-5" class="section level3 hasAnchor">
+<h3>Script Preparations<a href="supervised-machine-learning-model-interpretation.html#script-preparations-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="cleaning-the-global-environment-7" class="section level4 hasAnchor">
+<h4>Cleaning the global environment<a href="supervised-machine-learning-model-interpretation.html#cleaning-the-global-environment-7" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb536"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb536-1"><a href="supervised-machine-learning-model-interpretation.html#cb536-1" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span></code></pre></div>
+</div>
+<div id="installing-required-r-packages-6" class="section level4 hasAnchor">
+<h4>Installing required R packages<a href="supervised-machine-learning-model-interpretation.html#installing-required-r-packages-6" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you</p>
+<div class="sourceCode" id="cb537"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb537-1"><a href="supervised-machine-learning-model-interpretation.html#cb537-1" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;readxl&quot;</span>))</span>
+<span id="cb537-2"><a href="supervised-machine-learning-model-interpretation.html#cb537-2" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;readxl&quot;</span>);</span>
+<span id="cb537-3"><a href="supervised-machine-learning-model-interpretation.html#cb537-3" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;lubridate&quot;</span>))</span>
+<span id="cb537-4"><a href="supervised-machine-learning-model-interpretation.html#cb537-4" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;lubridate&quot;</span>);</span>
+<span id="cb537-5"><a href="supervised-machine-learning-model-interpretation.html#cb537-5" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;tidyverse&quot;</span>))</span>
+<span id="cb537-6"><a href="supervised-machine-learning-model-interpretation.html#cb537-6" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>);</span>
+<span id="cb537-7"><a href="supervised-machine-learning-model-interpretation.html#cb537-7" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;caret&quot;</span>))</span>
+<span id="cb537-8"><a href="supervised-machine-learning-model-interpretation.html#cb537-8" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;caret&quot;</span>);</span>
+<span id="cb537-9"><a href="supervised-machine-learning-model-interpretation.html#cb537-9" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;randomForest&quot;</span>))</span>
+<span id="cb537-10"><a href="supervised-machine-learning-model-interpretation.html#cb537-10" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;randomForest&quot;</span>);</span>
+<span id="cb537-11"><a href="supervised-machine-learning-model-interpretation.html#cb537-11" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;themis&quot;</span>))</span>
+<span id="cb537-12"><a href="supervised-machine-learning-model-interpretation.html#cb537-12" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;themis&quot;</span>);</span></code></pre></div>
+</div>
+<div id="loading-r-packages-required-for-this-session-6" class="section level4 hasAnchor">
+<h4>Loading R packages required for this session<a href="supervised-machine-learning-model-interpretation.html#loading-r-packages-required-for-this-session-6" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb538"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb538-1"><a href="supervised-machine-learning-model-interpretation.html#cb538-1" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb538-2"><a href="supervised-machine-learning-model-interpretation.html#cb538-2" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb538-3"><a href="supervised-machine-learning-model-interpretation.html#cb538-3" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb538-4"><a href="supervised-machine-learning-model-interpretation.html#cb538-4" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb538-5"><a href="supervised-machine-learning-model-interpretation.html#cb538-5" tabindex="-1"></a><span class="fu">library</span>(randomForest)</span>
+<span id="cb538-6"><a href="supervised-machine-learning-model-interpretation.html#cb538-6" tabindex="-1"></a><span class="fu">library</span>(e1071)</span></code></pre></div>
+<pre><code>## Warning: package &#39;e1071&#39; was built under R version 4.4.3</code></pre>
+<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb540-1"><a href="supervised-machine-learning-model-interpretation.html#cb540-1" tabindex="-1"></a><span class="fu">library</span>(ggsci)</span></code></pre></div>
+<pre><code>## Warning: package &#39;ggsci&#39; was built under R version 4.4.3</code></pre>
+<div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb542-1"><a href="supervised-machine-learning-model-interpretation.html#cb542-1" tabindex="-1"></a><span class="fu">library</span>(themis)</span></code></pre></div>
+<pre><code>## Warning: package &#39;themis&#39; was built under R version 4.4.1</code></pre>
+<pre><code>## Warning: package &#39;recipes&#39; was built under R version 4.4.1</code></pre>
+</div>
+<div id="set-your-working-directory-8" class="section level4 hasAnchor">
+<h4>Set your working directory<a href="supervised-machine-learning-model-interpretation.html#set-your-working-directory-8" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb545-1"><a href="supervised-machine-learning-model-interpretation.html#cb545-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;/filepath to where your input files are&quot;</span>)</span></code></pre></div>
+</div>
+<div id="importing-example-dataset-7" class="section level4 hasAnchor">
+<h4>Importing example dataset<a href="supervised-machine-learning-model-interpretation.html#importing-example-dataset-7" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb546"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb546-1"><a href="supervised-machine-learning-model-interpretation.html#cb546-1" tabindex="-1"></a><span class="co"># Load the data</span></span>
+<span id="cb546-2"><a href="supervised-machine-learning-model-interpretation.html#cb546-2" tabindex="-1"></a>arsenic_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">read_excel</span>(<span class="st">&quot;Chapter_5/Module5_3_Input/Module5_3_InputData.xlsx&quot;</span>))</span>
+<span id="cb546-3"><a href="supervised-machine-learning-model-interpretation.html#cb546-3" tabindex="-1"></a></span>
+<span id="cb546-4"><a href="supervised-machine-learning-model-interpretation.html#cb546-4" tabindex="-1"></a><span class="co"># View the top of the dataset</span></span>
+<span id="cb546-5"><a href="supervised-machine-learning-model-interpretation.html#cb546-5" tabindex="-1"></a><span class="fu">head</span>(arsenic_data) </span></code></pre></div>
+<pre><code>##   Well_ID Water_Sample_Date Casing_Depth Well_Depth Static_Water_Depth
+## 1     W_1           9/24/12           52        165                 41
+## 2     W_2          12/17/15           40        445                 42
+## 3     W_3            2/2/15           45        160                 40
+## 4     W_4          10/22/12           42        440                 57
+## 5     W_5            1/3/11           48        120                 42
+## 6     W_6          12/15/15           60        280                 32
+##   Flow_Rate  pH Detect_Concentration
+## 1      60.0 7.7                   ND
+## 2       2.0 7.3                   ND
+## 3      40.0 7.4                   ND
+## 4       1.5 8.0                    D
+## 5      25.0 7.1                   ND
+## 6      10.0 8.2                    D</code></pre>
+</div>
+</div>
+<div id="changing-data-types-1" class="section level3 hasAnchor">
+<h3>Changing Data Types<a href="supervised-machine-learning-model-interpretation.html#changing-data-types-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>First, <code>Detect_Concentration</code> needs to be converted from a character to a factor so that Random Forest knows that the non-detect class is the baseline or “negative” class, while the detect class will be the “positive” class. <code>Water_Sample_Date</code> will be converted from a character to a date type using the <code>mdy()</code> function from the <em>lubridate</em> package. This is done so that the model understands this column contains dates.</p>
+<div class="sourceCode" id="cb548"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb548-1"><a href="supervised-machine-learning-model-interpretation.html#cb548-1" tabindex="-1"></a>arsenic_data <span class="ot">&lt;-</span> arsenic_data <span class="sc">%&gt;%</span></span>
+<span id="cb548-2"><a href="supervised-machine-learning-model-interpretation.html#cb548-2" tabindex="-1"></a>    <span class="co"># Converting `Detect_Concentration` from a character to a factor</span></span>
+<span id="cb548-3"><a href="supervised-machine-learning-model-interpretation.html#cb548-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Detect_Concentration =</span> <span class="fu">relevel</span>(<span class="fu">factor</span>(Detect_Concentration), <span class="at">ref =</span> <span class="st">&quot;ND&quot;</span>), </span>
+<span id="cb548-4"><a href="supervised-machine-learning-model-interpretation.html#cb548-4" tabindex="-1"></a>    <span class="co"># Converting water sample date from a character to a date type </span></span>
+<span id="cb548-5"><a href="supervised-machine-learning-model-interpretation.html#cb548-5" tabindex="-1"></a>    <span class="at">Water_Sample_Date =</span> <span class="fu">mdy</span>(Water_Sample_Date)) <span class="sc">%&gt;%</span> </span>
+<span id="cb548-6"><a href="supervised-machine-learning-model-interpretation.html#cb548-6" tabindex="-1"></a>    <span class="co"># Removing well id and only keeping the predictor and outcome variables in the dataset</span></span>
+<span id="cb548-7"><a href="supervised-machine-learning-model-interpretation.html#cb548-7" tabindex="-1"></a>    <span class="co"># This allows us to put the entire dataframe as is into RF</span></span>
+<span id="cb548-8"><a href="supervised-machine-learning-model-interpretation.html#cb548-8" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span>Well_ID) </span>
+<span id="cb548-9"><a href="supervised-machine-learning-model-interpretation.html#cb548-9" tabindex="-1"></a></span>
+<span id="cb548-10"><a href="supervised-machine-learning-model-interpretation.html#cb548-10" tabindex="-1"></a><span class="co"># View the top of the current dataset</span></span>
+<span id="cb548-11"><a href="supervised-machine-learning-model-interpretation.html#cb548-11" tabindex="-1"></a><span class="fu">head</span>(arsenic_data)</span></code></pre></div>
+<pre><code>##   Water_Sample_Date Casing_Depth Well_Depth Static_Water_Depth Flow_Rate  pH
+## 1        2012-09-24           52        165                 41      60.0 7.7
+## 2        2015-12-17           40        445                 42       2.0 7.3
+## 3        2015-02-02           45        160                 40      40.0 7.4
+## 4        2012-10-22           42        440                 57       1.5 8.0
+## 5        2011-01-03           48        120                 42      25.0 7.1
+## 6        2015-12-15           60        280                 32      10.0 8.2
+##   Detect_Concentration
+## 1                   ND
+## 2                   ND
+## 3                   ND
+## 4                    D
+## 5                   ND
+## 6                    D</code></pre>
+<p><br></p>
+</div>
+<div id="setting-up-cross-validation-1" class="section level3 hasAnchor">
+<h3>Setting up Cross Validation<a href="supervised-machine-learning-model-interpretation.html#setting-up-cross-validation-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Note that the code below is different than the code presented in the previous module, <strong>TAME 2.0 Module 5.2 Supervised Machine Learning</strong>. Both coding methods are valid and produce comparable results, however we wanted to present another way to run <em>k</em>-fold cross validation and random forest. In 5-fold cross validation (CV), there are 5 equally-sized folds (ideally!). This means that 80% of the original dataset is split into the 4 folds that comprise the training set and the remaining 20% in the last fold is reserved for the test set.</p>
+<p>Previously, the <code>trainControl()</code> function was used for CV. This time we’ll use the <code>createFolds()</code> function also from the <em>caret</em> package.</p>
+<div class="sourceCode" id="cb550"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb550-1"><a href="supervised-machine-learning-model-interpretation.html#cb550-1" tabindex="-1"></a><span class="co"># Setting seed for reproducibility</span></span>
+<span id="cb550-2"><a href="supervised-machine-learning-model-interpretation.html#cb550-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12</span>)</span>
+<span id="cb550-3"><a href="supervised-machine-learning-model-interpretation.html#cb550-3" tabindex="-1"></a></span>
+<span id="cb550-4"><a href="supervised-machine-learning-model-interpretation.html#cb550-4" tabindex="-1"></a><span class="co"># 5-fold cross validation</span></span>
+<span id="cb550-5"><a href="supervised-machine-learning-model-interpretation.html#cb550-5" tabindex="-1"></a>arsenic_index <span class="ot">=</span> <span class="fu">createFolds</span>(arsenic_data<span class="sc">$</span>Detect_Concentration, <span class="at">k =</span> <span class="dv">5</span>) </span>
+<span id="cb550-6"><a href="supervised-machine-learning-model-interpretation.html#cb550-6" tabindex="-1"></a></span>
+<span id="cb550-7"><a href="supervised-machine-learning-model-interpretation.html#cb550-7" tabindex="-1"></a><span class="co"># Seeing if about 20% of the records are in the testing set</span></span>
+<span id="cb550-8"><a href="supervised-machine-learning-model-interpretation.html#cb550-8" tabindex="-1"></a>kfold1 <span class="ot">=</span> arsenic_index[[<span class="dv">1</span>]]</span>
+<span id="cb550-9"><a href="supervised-machine-learning-model-interpretation.html#cb550-9" tabindex="-1"></a><span class="fu">length</span>(kfold1)<span class="sc">/</span><span class="fu">nrow</span>(arsenic_data)</span></code></pre></div>
+<pre><code>## [1] 0.1991585</code></pre>
+<div class="sourceCode" id="cb552"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb552-1"><a href="supervised-machine-learning-model-interpretation.html#cb552-1" tabindex="-1"></a><span class="co"># Creating vectors for parameters to be tuned</span></span>
+<span id="cb552-2"><a href="supervised-machine-learning-model-interpretation.html#cb552-2" tabindex="-1"></a>ntree_values <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">250</span>, <span class="dv">500</span>) <span class="co"># number of decision trees </span></span>
+<span id="cb552-3"><a href="supervised-machine-learning-model-interpretation.html#cb552-3" tabindex="-1"></a>p <span class="ot">=</span> <span class="fu">dim</span>(arsenic_data)[<span class="dv">2</span>] <span class="sc">-</span> <span class="dv">1</span> <span class="co"># number of predictor variables in the dataset</span></span>
+<span id="cb552-4"><a href="supervised-machine-learning-model-interpretation.html#cb552-4" tabindex="-1"></a>mtry_values <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">sqrt</span>(p), p<span class="sc">/</span><span class="dv">2</span>, p) <span class="co"># number of predictors to be used in the model</span></span></code></pre></div>
+<p><br></p>
+</div>
+</div>
+<div id="predicting-ias-detection-with-a-random-forest-rf-model-1" class="section level2 hasAnchor">
+<h2>Predicting iAs Detection with a Random Forest (RF) Model<a href="supervised-machine-learning-model-interpretation.html#predicting-ias-detection-with-a-random-forest-rf-model-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Notice that in the code below we are choosing the final RF model to be the one with the lowest out of bag (OOB) error. In the previous module, the final model was chosen based on the highest accuracy, however this is a similar approach here given that OOB error = 1 - Accuracy.</p>
+<div class="sourceCode" id="cb553"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb553-1"><a href="supervised-machine-learning-model-interpretation.html#cb553-1" tabindex="-1"></a><span class="co"># Setting the seed again so the predictions are consistent</span></span>
+<span id="cb553-2"><a href="supervised-machine-learning-model-interpretation.html#cb553-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12</span>)</span>
+<span id="cb553-3"><a href="supervised-machine-learning-model-interpretation.html#cb553-3" tabindex="-1"></a></span>
+<span id="cb553-4"><a href="supervised-machine-learning-model-interpretation.html#cb553-4" tabindex="-1"></a><span class="co"># Creating an empty dataframe to save the confusion matrix metrics and variable importance</span></span>
+<span id="cb553-5"><a href="supervised-machine-learning-model-interpretation.html#cb553-5" tabindex="-1"></a>metrics <span class="ot">=</span> <span class="fu">data.frame</span>()</span>
+<span id="cb553-6"><a href="supervised-machine-learning-model-interpretation.html#cb553-6" tabindex="-1"></a>variable_importance_df <span class="ot">=</span> <span class="fu">data.frame</span>()</span>
+<span id="cb553-7"><a href="supervised-machine-learning-model-interpretation.html#cb553-7" tabindex="-1"></a></span>
+<span id="cb553-8"><a href="supervised-machine-learning-model-interpretation.html#cb553-8" tabindex="-1"></a><span class="co"># Iterating through the cross validation folds</span></span>
+<span id="cb553-9"><a href="supervised-machine-learning-model-interpretation.html#cb553-9" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(arsenic_index)){</span>
+<span id="cb553-10"><a href="supervised-machine-learning-model-interpretation.html#cb553-10" tabindex="-1"></a>    <span class="co"># Training data</span></span>
+<span id="cb553-11"><a href="supervised-machine-learning-model-interpretation.html#cb553-11" tabindex="-1"></a>    data_train <span class="ot">=</span> arsenic_data[<span class="sc">-</span>arsenic_index[[i]],]</span>
+<span id="cb553-12"><a href="supervised-machine-learning-model-interpretation.html#cb553-12" tabindex="-1"></a>    </span>
+<span id="cb553-13"><a href="supervised-machine-learning-model-interpretation.html#cb553-13" tabindex="-1"></a>    <span class="co"># Test data</span></span>
+<span id="cb553-14"><a href="supervised-machine-learning-model-interpretation.html#cb553-14" tabindex="-1"></a>    data_test <span class="ot">=</span> arsenic_data[arsenic_index[[i]],]</span>
+<span id="cb553-15"><a href="supervised-machine-learning-model-interpretation.html#cb553-15" tabindex="-1"></a>    </span>
+<span id="cb553-16"><a href="supervised-machine-learning-model-interpretation.html#cb553-16" tabindex="-1"></a>    <span class="co"># Creating empty lists and dataframes to store errors </span></span>
+<span id="cb553-17"><a href="supervised-machine-learning-model-interpretation.html#cb553-17" tabindex="-1"></a>    reg_rf_pred_tune <span class="ot">=</span> <span class="fu">list</span>()</span>
+<span id="cb553-18"><a href="supervised-machine-learning-model-interpretation.html#cb553-18" tabindex="-1"></a>    rf_OOB_errors <span class="ot">=</span> <span class="fu">list</span>()</span>
+<span id="cb553-19"><a href="supervised-machine-learning-model-interpretation.html#cb553-19" tabindex="-1"></a>    rf_error_df <span class="ot">=</span> <span class="fu">data.frame</span>()</span>
+<span id="cb553-20"><a href="supervised-machine-learning-model-interpretation.html#cb553-20" tabindex="-1"></a>    </span>
+<span id="cb553-21"><a href="supervised-machine-learning-model-interpretation.html#cb553-21" tabindex="-1"></a>    <span class="co"># Tuning parameters: using ntree and mtry values to determine which combination yields the smallest OOB error </span></span>
+<span id="cb553-22"><a href="supervised-machine-learning-model-interpretation.html#cb553-22" tabindex="-1"></a>    <span class="co"># from the validation datasets</span></span>
+<span id="cb553-23"><a href="supervised-machine-learning-model-interpretation.html#cb553-23" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(ntree_values)){</span>
+<span id="cb553-24"><a href="supervised-machine-learning-model-interpretation.html#cb553-24" tabindex="-1"></a>        <span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(mtry_values)){</span>
+<span id="cb553-25"><a href="supervised-machine-learning-model-interpretation.html#cb553-25" tabindex="-1"></a>            </span>
+<span id="cb553-26"><a href="supervised-machine-learning-model-interpretation.html#cb553-26" tabindex="-1"></a>            <span class="co"># Running RF to tune parameters</span></span>
+<span id="cb553-27"><a href="supervised-machine-learning-model-interpretation.html#cb553-27" tabindex="-1"></a>            reg_rf_pred_tune[[k]] <span class="ot">=</span> <span class="fu">randomForest</span>(Detect_Concentration <span class="sc">~</span> ., <span class="at">data =</span> data_train, </span>
+<span id="cb553-28"><a href="supervised-machine-learning-model-interpretation.html#cb553-28" tabindex="-1"></a>                                                 <span class="at">ntree =</span> ntree_values[j], <span class="at">mtry =</span> mtry_values[k])</span>
+<span id="cb553-29"><a href="supervised-machine-learning-model-interpretation.html#cb553-29" tabindex="-1"></a>            <span class="co"># Obtaining the OOB error</span></span>
+<span id="cb553-30"><a href="supervised-machine-learning-model-interpretation.html#cb553-30" tabindex="-1"></a>            rf_OOB_errors[[k]] <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="st">&quot;Tree Number&quot;</span> <span class="ot">=</span> ntree_values[j], <span class="st">&quot;Variable Number&quot;</span> <span class="ot">=</span> mtry_values[k], </span>
+<span id="cb553-31"><a href="supervised-machine-learning-model-interpretation.html#cb553-31" tabindex="-1"></a>                                   <span class="st">&quot;OOB_errors&quot;</span> <span class="ot">=</span> reg_rf_pred_tune[[k]]<span class="sc">$</span>err.rate[ntree_values[j],<span class="dv">1</span>])</span>
+<span id="cb553-32"><a href="supervised-machine-learning-model-interpretation.html#cb553-32" tabindex="-1"></a>            </span>
+<span id="cb553-33"><a href="supervised-machine-learning-model-interpretation.html#cb553-33" tabindex="-1"></a>            <span class="co"># Storing the values in a dataframe</span></span>
+<span id="cb553-34"><a href="supervised-machine-learning-model-interpretation.html#cb553-34" tabindex="-1"></a>            rf_error_df <span class="ot">=</span> <span class="fu">rbind</span>(rf_error_df, rf_OOB_errors[[k]])</span>
+<span id="cb553-35"><a href="supervised-machine-learning-model-interpretation.html#cb553-35" tabindex="-1"></a>        }</span>
+<span id="cb553-36"><a href="supervised-machine-learning-model-interpretation.html#cb553-36" tabindex="-1"></a>    }</span>
+<span id="cb553-37"><a href="supervised-machine-learning-model-interpretation.html#cb553-37" tabindex="-1"></a>    </span>
+<span id="cb553-38"><a href="supervised-machine-learning-model-interpretation.html#cb553-38" tabindex="-1"></a>    <span class="co"># Finding the lowest OOB error from the 5 folds using best number of predictors at split</span></span>
+<span id="cb553-39"><a href="supervised-machine-learning-model-interpretation.html#cb553-39" tabindex="-1"></a>    best_oob_errors <span class="ot">&lt;-</span> <span class="fu">which</span>(rf_error_df<span class="sc">$</span>OOB_errors <span class="sc">==</span> <span class="fu">min</span>(rf_error_df<span class="sc">$</span>OOB_errors))</span>
+<span id="cb553-40"><a href="supervised-machine-learning-model-interpretation.html#cb553-40" tabindex="-1"></a></span>
+<span id="cb553-41"><a href="supervised-machine-learning-model-interpretation.html#cb553-41" tabindex="-1"></a>    <span class="co"># Now running RF on the entire training set with the tuned parameters</span></span>
+<span id="cb553-42"><a href="supervised-machine-learning-model-interpretation.html#cb553-42" tabindex="-1"></a>    <span class="co"># This will be done 5 times for each fold</span></span>
+<span id="cb553-43"><a href="supervised-machine-learning-model-interpretation.html#cb553-43" tabindex="-1"></a>    reg_rf <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(Detect_Concentration <span class="sc">~</span> ., <span class="at">data =</span> data_train,</span>
+<span id="cb553-44"><a href="supervised-machine-learning-model-interpretation.html#cb553-44" tabindex="-1"></a>                               <span class="at">ntree =</span> rf_error_df<span class="sc">$</span>Tree.Number[<span class="fu">min</span>(best_oob_errors)],</span>
+<span id="cb553-45"><a href="supervised-machine-learning-model-interpretation.html#cb553-45" tabindex="-1"></a>                               <span class="at">mtry =</span> rf_error_df<span class="sc">$</span>Variable.Number[<span class="fu">min</span>(best_oob_errors)])</span>
+<span id="cb553-46"><a href="supervised-machine-learning-model-interpretation.html#cb553-46" tabindex="-1"></a></span>
+<span id="cb553-47"><a href="supervised-machine-learning-model-interpretation.html#cb553-47" tabindex="-1"></a>    <span class="co"># Predicting on test set and adding the predicted values as an additional column to the test data</span></span>
+<span id="cb553-48"><a href="supervised-machine-learning-model-interpretation.html#cb553-48" tabindex="-1"></a>    data_test<span class="sc">$</span>Pred_Detect_Concentration <span class="ot">=</span> <span class="fu">predict</span>(reg_rf, <span class="at">newdata =</span> data_test, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb553-49"><a href="supervised-machine-learning-model-interpretation.html#cb553-49" tabindex="-1"></a>    matrix <span class="ot">=</span> <span class="fu">confusionMatrix</span>(<span class="at">data =</span> data_test<span class="sc">$</span>Pred_Detect_Concentration, </span>
+<span id="cb553-50"><a href="supervised-machine-learning-model-interpretation.html#cb553-50" tabindex="-1"></a>                             <span class="at">reference =</span> data_test<span class="sc">$</span>Detect_Concentration, <span class="at">positive =</span> <span class="st">&quot;D&quot;</span>)</span>
+<span id="cb553-51"><a href="supervised-machine-learning-model-interpretation.html#cb553-51" tabindex="-1"></a>    </span>
+<span id="cb553-52"><a href="supervised-machine-learning-model-interpretation.html#cb553-52" tabindex="-1"></a>    <span class="co"># Extracting accuracy, sens, spec, PPV, NPV and adding to the dataframe to take mean later</span></span>
+<span id="cb553-53"><a href="supervised-machine-learning-model-interpretation.html#cb553-53" tabindex="-1"></a>    matrix_values <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">t</span>(<span class="fu">c</span>(matrix<span class="sc">$</span>byClass[<span class="dv">11</span>])), <span class="fu">t</span>(<span class="fu">c</span>(matrix<span class="sc">$</span>byClass[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])))</span>
+<span id="cb553-54"><a href="supervised-machine-learning-model-interpretation.html#cb553-54" tabindex="-1"></a>    metrics <span class="ot">=</span> <span class="fu">rbind</span>(metrics, matrix_values)</span>
+<span id="cb553-55"><a href="supervised-machine-learning-model-interpretation.html#cb553-55" tabindex="-1"></a></span>
+<span id="cb553-56"><a href="supervised-machine-learning-model-interpretation.html#cb553-56" tabindex="-1"></a>    <span class="co"># Extracting variable importance</span></span>
+<span id="cb553-57"><a href="supervised-machine-learning-model-interpretation.html#cb553-57" tabindex="-1"></a>    variable_importance_values <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">importance</span>(reg_rf)) <span class="sc">%&gt;%</span></span>
+<span id="cb553-58"><a href="supervised-machine-learning-model-interpretation.html#cb553-58" tabindex="-1"></a>        <span class="fu">rownames_to_column</span>(<span class="at">var =</span> <span class="st">&quot;Predictor&quot;</span>)</span>
+<span id="cb553-59"><a href="supervised-machine-learning-model-interpretation.html#cb553-59" tabindex="-1"></a>    variable_importance_df <span class="ot">=</span> <span class="fu">rbind</span>(variable_importance_df, variable_importance_values)</span>
+<span id="cb553-60"><a href="supervised-machine-learning-model-interpretation.html#cb553-60" tabindex="-1"></a>}</span>
+<span id="cb553-61"><a href="supervised-machine-learning-model-interpretation.html#cb553-61" tabindex="-1"></a></span>
+<span id="cb553-62"><a href="supervised-machine-learning-model-interpretation.html#cb553-62" tabindex="-1"></a><span class="co"># Taking average across the 5 folds</span></span>
+<span id="cb553-63"><a href="supervised-machine-learning-model-interpretation.html#cb553-63" tabindex="-1"></a>metrics <span class="ot">=</span> metrics <span class="sc">%&gt;%</span></span>
+<span id="cb553-64"><a href="supervised-machine-learning-model-interpretation.html#cb553-64" tabindex="-1"></a>        <span class="fu">summarise</span>(<span class="st">`</span><span class="at">Balanced Accuracy</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">mean</span>(Balanced.Accuracy), <span class="at">Sensitivity =</span> <span class="fu">mean</span>(Sensitivity), </span>
+<span id="cb553-65"><a href="supervised-machine-learning-model-interpretation.html#cb553-65" tabindex="-1"></a>              <span class="at">Specificity =</span> <span class="fu">mean</span>(Specificity), <span class="at">PPV =</span> <span class="fu">mean</span>(Pos.Pred.Value), <span class="at">NPV =</span> <span class="fu">mean</span>(Neg.Pred.Value))</span>
+<span id="cb553-66"><a href="supervised-machine-learning-model-interpretation.html#cb553-66" tabindex="-1"></a></span>
+<span id="cb553-67"><a href="supervised-machine-learning-model-interpretation.html#cb553-67" tabindex="-1"></a>variable_importance_df <span class="ot">=</span> variable_importance_df <span class="sc">%&gt;%</span></span>
+<span id="cb553-68"><a href="supervised-machine-learning-model-interpretation.html#cb553-68" tabindex="-1"></a>    <span class="fu">group_by</span>(Predictor) <span class="sc">%&gt;%</span></span>
+<span id="cb553-69"><a href="supervised-machine-learning-model-interpretation.html#cb553-69" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">MeanDecreaseGini =</span> <span class="fu">mean</span>(MeanDecreaseGini)) <span class="sc">%&gt;%</span></span>
+<span id="cb553-70"><a href="supervised-machine-learning-model-interpretation.html#cb553-70" tabindex="-1"></a>    <span class="co"># Sorting from highest to lowest</span></span>
+<span id="cb553-71"><a href="supervised-machine-learning-model-interpretation.html#cb553-71" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="sc">-</span>MeanDecreaseGini)</span></code></pre></div>
+<p>The confusion matrix results from the previous module are shown below.
+<img src="Chapter_5/Module5_3_Input/Module5_3_Image2.png" alt="" width="80%" style="display: block; margin: auto;" /></p>
+<p>Now let’s double check that when using this new method, our results are still comparable.</p>
+<div class="sourceCode" id="cb554"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb554-1"><a href="supervised-machine-learning-model-interpretation.html#cb554-1" tabindex="-1"></a><span class="co"># First comparing results to the previous module</span></span>
+<span id="cb554-2"><a href="supervised-machine-learning-model-interpretation.html#cb554-2" tabindex="-1"></a><span class="fu">round</span>(metrics, <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##   Balanced Accuracy Sensitivity Specificity  PPV  NPV
+## 1              0.63        0.39        0.87 0.54 0.79</code></pre>
+<p>They are! Now we’ll take a look at the model’s variable importance.</p>
+<div class="sourceCode" id="cb556"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb556-1"><a href="supervised-machine-learning-model-interpretation.html#cb556-1" tabindex="-1"></a>variable_importance_df</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 2
+##   Predictor          MeanDecreaseGini
+##   &lt;chr&gt;                         &lt;dbl&gt;
+## 1 Casing_Depth                   49.8
+## 2 pH                             42.0
+## 3 Water_Sample_Date              37.2
+## 4 Flow_Rate                      33.8
+## 5 Static_Water_Depth             32.1
+## 6 Well_Depth                     32.0</code></pre>
+<p>Although we have the results we need, let’s take it a step further and plot the data.</p>
+<div id="reformatting-the-dataframe-for-plotting" class="section level3 hasAnchor">
+<h3>Reformatting the dataframe for plotting<a href="supervised-machine-learning-model-interpretation.html#reformatting-the-dataframe-for-plotting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>First, the dataframe will be transformed so that the figure is more legible. Specifically, spaces will be added between the variables, and the <code>Predictor</code> column will be put into a factor to rearrange the order of the variables from lowest to highest mean decrease gini. For additional information on tricks like this to make visualizations easier to read, see <strong>TAME 2.0 Module 3.2 Improving Data Visualizations</strong>.</p>
+<div class="sourceCode" id="cb558"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb558-1"><a href="supervised-machine-learning-model-interpretation.html#cb558-1" tabindex="-1"></a><span class="co"># Adding spaces between the variables that need the space</span></span>
+<span id="cb558-2"><a href="supervised-machine-learning-model-interpretation.html#cb558-2" tabindex="-1"></a>modified_variable_importance_df <span class="ot">=</span> variable_importance_df <span class="sc">%&gt;%</span></span>
+<span id="cb558-3"><a href="supervised-machine-learning-model-interpretation.html#cb558-3" tabindex="-1"></a>     <span class="fu">mutate</span>(<span class="at">Predictor =</span> <span class="fu">gsub</span>(<span class="st">&quot;_&quot;</span>, <span class="st">&quot; &quot;</span>, Predictor))</span>
+<span id="cb558-4"><a href="supervised-machine-learning-model-interpretation.html#cb558-4" tabindex="-1"></a></span>
+<span id="cb558-5"><a href="supervised-machine-learning-model-interpretation.html#cb558-5" tabindex="-1"></a><span class="co"># Saving the order of the variables from lowest to highest mean decrease gini by putting into a factor</span></span>
+<span id="cb558-6"><a href="supervised-machine-learning-model-interpretation.html#cb558-6" tabindex="-1"></a>predictor_order <span class="ot">=</span> <span class="fu">rev</span>(modified_variable_importance_df<span class="sc">$</span>Predictor)</span>
+<span id="cb558-7"><a href="supervised-machine-learning-model-interpretation.html#cb558-7" tabindex="-1"></a>modified_variable_importance_df<span class="sc">$</span>Predictor <span class="ot">=</span> <span class="fu">factor</span>(modified_variable_importance_df<span class="sc">$</span>Predictor, </span>
+<span id="cb558-8"><a href="supervised-machine-learning-model-interpretation.html#cb558-8" tabindex="-1"></a>                                                   <span class="at">levels =</span> predictor_order)</span>
+<span id="cb558-9"><a href="supervised-machine-learning-model-interpretation.html#cb558-9" tabindex="-1"></a></span>
+<span id="cb558-10"><a href="supervised-machine-learning-model-interpretation.html#cb558-10" tabindex="-1"></a><span class="fu">head</span>(modified_variable_importance_df)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 2
+##   Predictor          MeanDecreaseGini
+##   &lt;fct&gt;                         &lt;dbl&gt;
+## 1 Casing Depth                   49.8
+## 2 pH                             42.0
+## 3 Water Sample Date              37.2
+## 4 Flow Rate                      33.8
+## 5 Static Water Depth             32.1
+## 6 Well Depth                     32.0</code></pre>
+</div>
+</div>
+<div id="variable-importance-plot" class="section level2 hasAnchor">
+<h2>Variable Importance Plot<a href="supervised-machine-learning-model-interpretation.html#variable-importance-plot" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb560"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb560-1"><a href="supervised-machine-learning-model-interpretation.html#cb560-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> modified_variable_importance_df , </span>
+<span id="cb560-2"><a href="supervised-machine-learning-model-interpretation.html#cb560-2" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> MeanDecreaseGini, <span class="at">y =</span> Predictor, <span class="at">size =</span> <span class="dv">2</span>)) <span class="sc">+</span> </span>
+<span id="cb560-3"><a href="supervised-machine-learning-model-interpretation.html#cb560-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb560-4"><a href="supervised-machine-learning-model-interpretation.html#cb560-4" tabindex="-1"></a></span>
+<span id="cb560-5"><a href="supervised-machine-learning-model-interpretation.html#cb560-5" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span> </span>
+<span id="cb560-6"><a href="supervised-machine-learning-model-interpretation.html#cb560-6" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>), <span class="co">#making x and y axes black</span></span>
+<span id="cb560-7"><a href="supervised-machine-learning-model-interpretation.html#cb560-7" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>), <span class="co">#changing size of x axis labels</span></span>
+<span id="cb560-8"><a href="supervised-machine-learning-model-interpretation.html#cb560-8" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="fu">rel</span>(<span class="fl">1.7</span>)), <span class="co">#changes axis titles</span></span>
+<span id="cb560-9"><a href="supervised-machine-learning-model-interpretation.html#cb560-9" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&#39;bold&#39;</span>, <span class="at">size =</span> <span class="dv">14</span>), <span class="co">#changes legend title</span></span>
+<span id="cb560-10"><a href="supervised-machine-learning-model-interpretation.html#cb560-10" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>), <span class="co">#changes legend text</span></span>
+<span id="cb560-11"><a href="supervised-machine-learning-model-interpretation.html#cb560-11" tabindex="-1"></a>        <span class="at">strip.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>), <span class="co">#changes size of facet x axis </span></span>
+<span id="cb560-12"><a href="supervised-machine-learning-model-interpretation.html#cb560-12" tabindex="-1"></a>        <span class="at">strip.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>)) <span class="sc">+</span> <span class="co">#changes size of facet y axis </span></span>
+<span id="cb560-13"><a href="supervised-machine-learning-model-interpretation.html#cb560-13" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Variable Importance&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Predictor&#39;</span>) <span class="sc">+</span> <span class="co">#changing axis labels </span></span>
+<span id="cb560-14"><a href="supervised-machine-learning-model-interpretation.html#cb560-14" tabindex="-1"></a>  </span>
+<span id="cb560-15"><a href="supervised-machine-learning-model-interpretation.html#cb560-15" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">size =</span> <span class="st">&quot;none&quot;</span>)<span class="co">#removing size legend</span></span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-410-1.png" alt="" width="65%" style="display: block; margin: auto;" />
+An appropriate title for this figure could be:</p>
+<p>“<strong>Figure X. Variable importance from random forest models predicting iAs detection.</strong> Variable importance is derived from mean decrease gini values extracted from random forest models. Features are listed on the y axis from greatest (top) to least (bottom) mean decrease gini.”</p>
+<div id="answer-to-environmental-health-question-1-9" class="section level3 hasAnchor">
+<h3>Answer to Environmental Health Question 1<a href="supervised-machine-learning-model-interpretation.html#answer-to-environmental-health-question-1-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="question">
+<p><em>With this, we can answer <strong>Environmental Health Question #1</strong></em>: After plotting variable importance from highest to lowest, which two predictors have the highest variable importance on the predictive accuracy of iAs detection from a RF algorithm?</p>
+</div>
+<div class="answer">
+<p><strong>Answer</strong>: From the variable importance dataframe and plot, we can see that casing depth and pH had the greatest impact on RF followed by water sample date, flow rate, static water depth, and well depth in descending order.</p>
+</div>
+<p>Since casing depth and pH have been identified as the predictors with the highest variable importance, they will be prioritized as the two predictors included in the decision boundary plot example below.</p>
+<p><br></p>
+</div>
+<div id="decision-boundary-calculation" class="section level3 hasAnchor">
+<h3>Decision Boundary Calculation<a href="supervised-machine-learning-model-interpretation.html#decision-boundary-calculation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>First, models will be trained using only casing depth and pH as variables. Since, the decision boundary plot will be used for visualization purposes, and a 2-D figure can only plot two variables, we will not worry about tuning the parameters as was previously done. In this module, we’re creating a decision boundary based on a random forest model, however we’ll also explore what decision boundaries look like for other algorithms including support vector machine (SVM), and k nearest neighbor (KNN), logistic regression. Each supervised ML method has its advantages and performance is dependent upon the situation and the dataset. Therefore, it is common to see multiple models used to predict an outcome of interest in a publication. Let’s create additional boundary plots still using casing depth and pH, but this time we will use logistic regression, SVM, and KNN as comparisons to RF.</p>
+<div class="sourceCode" id="cb561"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb561-1"><a href="supervised-machine-learning-model-interpretation.html#cb561-1" tabindex="-1"></a><span class="co"># Creating a dataframe with variables based on the highest predictors</span></span>
+<span id="cb561-2"><a href="supervised-machine-learning-model-interpretation.html#cb561-2" tabindex="-1"></a>highest_pred_data <span class="ot">=</span> <span class="fu">data.frame</span>(arsenic_data[,<span class="fu">c</span>(<span class="st">&quot;Casing_Depth&quot;</span>, <span class="st">&quot;pH&quot;</span>, <span class="st">&quot;Detect_Concentration&quot;</span>)])</span>
+<span id="cb561-3"><a href="supervised-machine-learning-model-interpretation.html#cb561-3" tabindex="-1"></a></span>
+<span id="cb561-4"><a href="supervised-machine-learning-model-interpretation.html#cb561-4" tabindex="-1"></a><span class="co"># Training RF</span></span>
+<span id="cb561-5"><a href="supervised-machine-learning-model-interpretation.html#cb561-5" tabindex="-1"></a>rf_detect_arsenic <span class="ot">=</span> <span class="fu">randomForest</span>(Detect_Concentration<span class="sc">~</span>., <span class="at">data =</span> highest_pred_data)</span>
+<span id="cb561-6"><a href="supervised-machine-learning-model-interpretation.html#cb561-6" tabindex="-1"></a></span>
+<span id="cb561-7"><a href="supervised-machine-learning-model-interpretation.html#cb561-7" tabindex="-1"></a><span class="co"># Logistic regression</span></span>
+<span id="cb561-8"><a href="supervised-machine-learning-model-interpretation.html#cb561-8" tabindex="-1"></a>lr_detect_arsenic <span class="ot">=</span> <span class="fu">glm</span>(Detect_Concentration<span class="sc">~</span>., <span class="at">data =</span> highest_pred_data, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&#39;logit&#39;</span>))</span>
+<span id="cb561-9"><a href="supervised-machine-learning-model-interpretation.html#cb561-9" tabindex="-1"></a></span>
+<span id="cb561-10"><a href="supervised-machine-learning-model-interpretation.html#cb561-10" tabindex="-1"></a><span class="co"># SVM with a radial kernel (hyperplane)</span></span>
+<span id="cb561-11"><a href="supervised-machine-learning-model-interpretation.html#cb561-11" tabindex="-1"></a>svm_detect_arsenic <span class="ot">=</span> <span class="fu">svm</span>(Detect_Concentration<span class="sc">~</span>., <span class="at">data =</span> highest_pred_data, <span class="at">kernel =</span> <span class="st">&quot;radial&quot;</span>)</span>
+<span id="cb561-12"><a href="supervised-machine-learning-model-interpretation.html#cb561-12" tabindex="-1"></a></span>
+<span id="cb561-13"><a href="supervised-machine-learning-model-interpretation.html#cb561-13" tabindex="-1"></a><span class="co"># KNN</span></span>
+<span id="cb561-14"><a href="supervised-machine-learning-model-interpretation.html#cb561-14" tabindex="-1"></a>knn_detect_arsenic <span class="ot">=</span> <span class="fu">knn3</span>(Detect_Concentration<span class="sc">~</span>., <span class="at">data =</span> highest_pred_data) <span class="co"># specifying 2 classes</span></span></code></pre></div>
+<p>From these predictions, decision boundaries will be calculated. This will be done by predicting <code>Detect_Concentration</code> between a grid of values - specifically the minimum and maximum of the two predictors (casing depth and pH). A non-linear line will be drawn on the plot to separate the two classes.</p>
+<div class="sourceCode" id="cb562"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb562-1"><a href="supervised-machine-learning-model-interpretation.html#cb562-1" tabindex="-1"></a>get_grid_df <span class="ot">&lt;-</span> <span class="cf">function</span>(classification_model, data, <span class="at">resolution =</span> <span class="dv">100</span>, predict_type) {</span>
+<span id="cb562-2"><a href="supervised-machine-learning-model-interpretation.html#cb562-2" tabindex="-1"></a>    <span class="co"># This function predicts the outcome (Detect_Concentration) at evenly spaced data points using the two variables (pH and casing depth)</span></span>
+<span id="cb562-3"><a href="supervised-machine-learning-model-interpretation.html#cb562-3" tabindex="-1"></a>    <span class="co"># to create a decision boundary between the outcome classes (detect and non-detect samples).</span></span>
+<span id="cb562-4"><a href="supervised-machine-learning-model-interpretation.html#cb562-4" tabindex="-1"></a></span>
+<span id="cb562-5"><a href="supervised-machine-learning-model-interpretation.html#cb562-5" tabindex="-1"></a>    <span class="co"># :parameters: a classification-based supervised machine learning model, dataset containing the predictors and outcome variable,</span></span>
+<span id="cb562-6"><a href="supervised-machine-learning-model-interpretation.html#cb562-6" tabindex="-1"></a>    <span class="co"># specifies the number of data points to make between the minimum and maximum predictor values, prediction type</span></span>
+<span id="cb562-7"><a href="supervised-machine-learning-model-interpretation.html#cb562-7" tabindex="-1"></a>    <span class="co"># :output: a grid of values for both predictors and their corresponding predicted outcome class</span></span>
+<span id="cb562-8"><a href="supervised-machine-learning-model-interpretation.html#cb562-8" tabindex="-1"></a></span>
+<span id="cb562-9"><a href="supervised-machine-learning-model-interpretation.html#cb562-9" tabindex="-1"></a>    <span class="co"># Grabbing only the predictor data</span></span>
+<span id="cb562-10"><a href="supervised-machine-learning-model-interpretation.html#cb562-10" tabindex="-1"></a>    predictor_data <span class="ot">&lt;-</span> data[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb562-11"><a href="supervised-machine-learning-model-interpretation.html#cb562-11" tabindex="-1"></a>    </span>
+<span id="cb562-12"><a href="supervised-machine-learning-model-interpretation.html#cb562-12" tabindex="-1"></a>    <span class="co"># Creating a dataframe that contains the min and max for both features</span></span>
+<span id="cb562-13"><a href="supervised-machine-learning-model-interpretation.html#cb562-13" tabindex="-1"></a>    min_max_df <span class="ot">&lt;-</span> <span class="fu">sapply</span>(predictor_data, range, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb562-14"><a href="supervised-machine-learning-model-interpretation.html#cb562-14" tabindex="-1"></a></span>
+<span id="cb562-15"><a href="supervised-machine-learning-model-interpretation.html#cb562-15" tabindex="-1"></a>    <span class="co"># Creating a vector of evenly spaced points between the min and max for the first variable (casing depth)</span></span>
+<span id="cb562-16"><a href="supervised-machine-learning-model-interpretation.html#cb562-16" tabindex="-1"></a>    variable1_vector <span class="ot">&lt;-</span> <span class="fu">seq</span>(min_max_df[<span class="dv">1</span>,<span class="dv">1</span>], min_max_df[<span class="dv">2</span>,<span class="dv">1</span>], <span class="at">length.out =</span> resolution)</span>
+<span id="cb562-17"><a href="supervised-machine-learning-model-interpretation.html#cb562-17" tabindex="-1"></a>    <span class="co"># Creating a vector of evenly spaced points between the min and max for the second variable (pH)</span></span>
+<span id="cb562-18"><a href="supervised-machine-learning-model-interpretation.html#cb562-18" tabindex="-1"></a>    variable2_vector <span class="ot">&lt;-</span> <span class="fu">seq</span>(min_max_df[<span class="dv">1</span>,<span class="dv">2</span>], min_max_df[<span class="dv">2</span>,<span class="dv">2</span>], <span class="at">length.out =</span> resolution)</span>
+<span id="cb562-19"><a href="supervised-machine-learning-model-interpretation.html#cb562-19" tabindex="-1"></a></span>
+<span id="cb562-20"><a href="supervised-machine-learning-model-interpretation.html#cb562-20" tabindex="-1"></a>    <span class="co"># Creating a dataframe of grid values by combining the two vectors</span></span>
+<span id="cb562-21"><a href="supervised-machine-learning-model-interpretation.html#cb562-21" tabindex="-1"></a>    grid_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">cbind</span>(<span class="fu">rep</span>(variable1_vector, <span class="at">each =</span> resolution), <span class="fu">rep</span>(variable2_vector, </span>
+<span id="cb562-22"><a href="supervised-machine-learning-model-interpretation.html#cb562-22" tabindex="-1"></a>                                                                              <span class="at">time =</span> resolution)))</span>
+<span id="cb562-23"><a href="supervised-machine-learning-model-interpretation.html#cb562-23" tabindex="-1"></a>    <span class="fu">colnames</span>(grid_df) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(min_max_df)</span>
+<span id="cb562-24"><a href="supervised-machine-learning-model-interpretation.html#cb562-24" tabindex="-1"></a>    </span>
+<span id="cb562-25"><a href="supervised-machine-learning-model-interpretation.html#cb562-25" tabindex="-1"></a>    <span class="co"># Predicting class label based on all the predictor pairs of data</span></span>
+<span id="cb562-26"><a href="supervised-machine-learning-model-interpretation.html#cb562-26" tabindex="-1"></a>    grid_df<span class="sc">$</span>Pred_Class <span class="ot">=</span> <span class="fu">predict</span>(classification_model, grid_df, <span class="at">type =</span> predict_type)</span>
+<span id="cb562-27"><a href="supervised-machine-learning-model-interpretation.html#cb562-27" tabindex="-1"></a>    </span>
+<span id="cb562-28"><a href="supervised-machine-learning-model-interpretation.html#cb562-28" tabindex="-1"></a>    <span class="fu">return</span>(grid_df)</span>
+<span id="cb562-29"><a href="supervised-machine-learning-model-interpretation.html#cb562-29" tabindex="-1"></a>}</span>
+<span id="cb562-30"><a href="supervised-machine-learning-model-interpretation.html#cb562-30" tabindex="-1"></a></span>
+<span id="cb562-31"><a href="supervised-machine-learning-model-interpretation.html#cb562-31" tabindex="-1"></a><span class="co"># calling function</span></span>
+<span id="cb562-32"><a href="supervised-machine-learning-model-interpretation.html#cb562-32" tabindex="-1"></a><span class="co"># RF</span></span>
+<span id="cb562-33"><a href="supervised-machine-learning-model-interpretation.html#cb562-33" tabindex="-1"></a>grid_df_rf <span class="ot">=</span> <span class="fu">get_grid_df</span>(rf_detect_arsenic, highest_pred_data, <span class="at">predict_type =</span> <span class="st">&quot;class&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb562-34"><a href="supervised-machine-learning-model-interpretation.html#cb562-34" tabindex="-1"></a>  <span class="co"># Adding in a column that indicates the model so all the dataframes can be combined</span></span>
+<span id="cb562-35"><a href="supervised-machine-learning-model-interpretation.html#cb562-35" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Model =</span> <span class="st">&quot;A. Random Forest&quot;</span>)</span>
+<span id="cb562-36"><a href="supervised-machine-learning-model-interpretation.html#cb562-36" tabindex="-1"></a></span>
+<span id="cb562-37"><a href="supervised-machine-learning-model-interpretation.html#cb562-37" tabindex="-1"></a><span class="co"># SVM with a radial kernel (hyperplane)</span></span>
+<span id="cb562-38"><a href="supervised-machine-learning-model-interpretation.html#cb562-38" tabindex="-1"></a>grid_df_svm <span class="ot">=</span> <span class="fu">get_grid_df</span>(svm_detect_arsenic, highest_pred_data, <span class="at">predict_type =</span> <span class="st">&quot;class&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb562-39"><a href="supervised-machine-learning-model-interpretation.html#cb562-39" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Model =</span> <span class="st">&quot;B. Support Vector Machine&quot;</span>)</span>
+<span id="cb562-40"><a href="supervised-machine-learning-model-interpretation.html#cb562-40" tabindex="-1"></a></span>
+<span id="cb562-41"><a href="supervised-machine-learning-model-interpretation.html#cb562-41" tabindex="-1"></a><span class="co"># KNN</span></span>
+<span id="cb562-42"><a href="supervised-machine-learning-model-interpretation.html#cb562-42" tabindex="-1"></a>grid_df_knn <span class="ot">=</span> <span class="fu">get_grid_df</span>(knn_detect_arsenic, highest_pred_data, <span class="at">predict_type =</span> <span class="st">&quot;class&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb562-43"><a href="supervised-machine-learning-model-interpretation.html#cb562-43" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Model =</span> <span class="st">&quot;C. K Nearest Neighbor&quot;</span>)</span>
+<span id="cb562-44"><a href="supervised-machine-learning-model-interpretation.html#cb562-44" tabindex="-1"></a></span>
+<span id="cb562-45"><a href="supervised-machine-learning-model-interpretation.html#cb562-45" tabindex="-1"></a><span class="co"># Logistic regression</span></span>
+<span id="cb562-46"><a href="supervised-machine-learning-model-interpretation.html#cb562-46" tabindex="-1"></a>grid_df_lr <span class="ot">=</span> <span class="fu">get_grid_df</span>(lr_detect_arsenic, highest_pred_data, <span class="at">predict_type =</span> <span class="st">&quot;response&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb562-47"><a href="supervised-machine-learning-model-interpretation.html#cb562-47" tabindex="-1"></a>  <span class="co"># First specifying the cutoff point for logistic regression predictions</span></span>
+<span id="cb562-48"><a href="supervised-machine-learning-model-interpretation.html#cb562-48" tabindex="-1"></a>  <span class="co"># If the response is &gt;= 0.5 it will be classified as a detect prediction</span></span>
+<span id="cb562-49"><a href="supervised-machine-learning-model-interpretation.html#cb562-49" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Pred_Class =</span> <span class="fu">relevel</span>(<span class="fu">factor</span>(<span class="fu">ifelse</span>(Pred_Class <span class="sc">&gt;=</span> <span class="fl">0.5</span>, <span class="st">&quot;D&quot;</span>, <span class="st">&quot;ND&quot;</span>)), <span class="at">ref =</span> <span class="st">&quot;ND&quot;</span>), </span>
+<span id="cb562-50"><a href="supervised-machine-learning-model-interpretation.html#cb562-50" tabindex="-1"></a>           <span class="at">Model =</span> <span class="st">&quot;D. Logistic Regression&quot;</span>)</span>
+<span id="cb562-51"><a href="supervised-machine-learning-model-interpretation.html#cb562-51" tabindex="-1"></a></span>
+<span id="cb562-52"><a href="supervised-machine-learning-model-interpretation.html#cb562-52" tabindex="-1"></a><span class="co"># Creating 1 dataframe</span></span>
+<span id="cb562-53"><a href="supervised-machine-learning-model-interpretation.html#cb562-53" tabindex="-1"></a>grid_df <span class="ot">=</span> <span class="fu">rbind</span>(grid_df_rf, grid_df_lr, grid_df_svm, grid_df_knn)</span>
+<span id="cb562-54"><a href="supervised-machine-learning-model-interpretation.html#cb562-54" tabindex="-1"></a></span>
+<span id="cb562-55"><a href="supervised-machine-learning-model-interpretation.html#cb562-55" tabindex="-1"></a><span class="co"># Viewing the dataframe to be plotted</span></span>
+<span id="cb562-56"><a href="supervised-machine-learning-model-interpretation.html#cb562-56" tabindex="-1"></a><span class="fu">head</span>(grid_df)</span></code></pre></div>
+<pre><code>##   Casing_Depth       pH Pred_Class            Model
+## 1           27 5.400000         ND A. Random Forest
+## 2           27 5.433333         ND A. Random Forest
+## 3           27 5.466667         ND A. Random Forest
+## 4           27 5.500000         ND A. Random Forest
+## 5           27 5.533333         ND A. Random Forest
+## 6           27 5.566667         ND A. Random Forest</code></pre>
+</div>
+</div>
+<div id="decision-boundary-plot" class="section level2 hasAnchor">
+<h2>Decision Boundary Plot<a href="supervised-machine-learning-model-interpretation.html#decision-boundary-plot" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Now let’s plot the grid of predictions with the sampled data.</p>
+<div class="sourceCode" id="cb564"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb564-1"><a href="supervised-machine-learning-model-interpretation.html#cb564-1" tabindex="-1"></a><span class="co"># choosing palette from package</span></span>
+<span id="cb564-2"><a href="supervised-machine-learning-model-interpretation.html#cb564-2" tabindex="-1"></a>ggsci_colors <span class="ot">=</span> <span class="fu">pal_npg</span>()(<span class="dv">5</span>)</span>
+<span id="cb564-3"><a href="supervised-machine-learning-model-interpretation.html#cb564-3" tabindex="-1"></a></span>
+<span id="cb564-4"><a href="supervised-machine-learning-model-interpretation.html#cb564-4" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb564-5"><a href="supervised-machine-learning-model-interpretation.html#cb564-5" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> arsenic_data, <span class="fu">aes</span>(<span class="at">x =</span> pH, <span class="at">y =</span> Casing_Depth, <span class="at">color =</span> Detect_Concentration),</span>
+<span id="cb564-6"><a href="supervised-machine-learning-model-interpretation.html#cb564-6" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">w =</span> <span class="fl">0.1</span>, <span class="at">h =</span> <span class="fl">0.1</span>), <span class="at">size =</span> <span class="dv">4</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span> </span>
+<span id="cb564-7"><a href="supervised-machine-learning-model-interpretation.html#cb564-7" tabindex="-1"></a>  <span class="fu">geom_contour</span>(<span class="at">data =</span> grid_df, <span class="fu">aes</span>(<span class="at">x =</span> pH, <span class="at">y =</span> Casing_Depth, <span class="at">z =</span> <span class="fu">as.numeric</span>(Pred_Class <span class="sc">==</span> <span class="st">&quot;D&quot;</span>)), </span>
+<span id="cb564-8"><a href="supervised-machine-learning-model-interpretation.html#cb564-8" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">breaks =</span> <span class="fl">0.5</span>) <span class="sc">+</span> <span class="co"># adds contour line</span></span>
+<span id="cb564-9"><a href="supervised-machine-learning-model-interpretation.html#cb564-9" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> grid_df, <span class="fu">aes</span>(<span class="at">x =</span> pH, <span class="at">y =</span> Casing_Depth, <span class="at">color =</span> Pred_Class), </span>
+<span id="cb564-10"><a href="supervised-machine-learning-model-interpretation.html#cb564-10" tabindex="-1"></a>             <span class="at">size =</span> <span class="fl">0.1</span>) <span class="sc">+</span> <span class="co"># shades plot</span></span>
+<span id="cb564-11"><a href="supervised-machine-learning-model-interpretation.html#cb564-11" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="fl">5.9</span>, <span class="cn">NA</span>) <span class="sc">+</span> <span class="co"># changes the limits of the x axis</span></span>
+<span id="cb564-12"><a href="supervised-machine-learning-model-interpretation.html#cb564-12" tabindex="-1"></a>  </span>
+<span id="cb564-13"><a href="supervised-machine-learning-model-interpretation.html#cb564-13" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Model, <span class="at">scales =</span> <span class="st">&#39;free&#39;</span>) <span class="sc">+</span> </span>
+<span id="cb564-14"><a href="supervised-machine-learning-model-interpretation.html#cb564-14" tabindex="-1"></a></span>
+<span id="cb564-15"><a href="supervised-machine-learning-model-interpretation.html#cb564-15" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span> </span>
+<span id="cb564-16"><a href="supervised-machine-learning-model-interpretation.html#cb564-16" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>), <span class="co">#making x and y axes black</span></span>
+<span id="cb564-17"><a href="supervised-machine-learning-model-interpretation.html#cb564-17" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>), <span class="co">#changing size of x axis labels</span></span>
+<span id="cb564-18"><a href="supervised-machine-learning-model-interpretation.html#cb564-18" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="fu">rel</span>(<span class="fl">1.7</span>)), <span class="co">#changes axis titles</span></span>
+<span id="cb564-19"><a href="supervised-machine-learning-model-interpretation.html#cb564-19" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&#39;bold&#39;</span>, <span class="at">size =</span> <span class="dv">12</span>), <span class="co">#changes legend title</span></span>
+<span id="cb564-20"><a href="supervised-machine-learning-model-interpretation.html#cb564-20" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>), <span class="co">#changes legend text</span></span>
+<span id="cb564-21"><a href="supervised-machine-learning-model-interpretation.html#cb564-21" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>, <span class="co"># move legend to top left corner</span></span>
+<span id="cb564-22"><a href="supervised-machine-learning-model-interpretation.html#cb564-22" tabindex="-1"></a>        <span class="at">legend.background =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="st">&#39;black&#39;</span>, <span class="at">fill =</span> <span class="st">&#39;white&#39;</span>, <span class="at">linetype =</span> <span class="st">&#39;solid&#39;</span>), <span class="co"># changes legend background</span></span>
+<span id="cb564-23"><a href="supervised-machine-learning-model-interpretation.html#cb564-23" tabindex="-1"></a>        <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>)) <span class="sc">+</span>  <span class="co">#changes size of facet x axis </span></span>
+<span id="cb564-24"><a href="supervised-machine-learning-model-interpretation.html#cb564-24" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&#39;Casing Depth (ft)&#39;</span>) <span class="sc">+</span> <span class="co">#changing axis labels</span></span>
+<span id="cb564-25"><a href="supervised-machine-learning-model-interpretation.html#cb564-25" tabindex="-1"></a></span>
+<span id="cb564-26"><a href="supervised-machine-learning-model-interpretation.html#cb564-26" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">&quot;Arsenic Detection&quot;</span>, <span class="co"># renaming the legend</span></span>
+<span id="cb564-27"><a href="supervised-machine-learning-model-interpretation.html#cb564-27" tabindex="-1"></a>                     <span class="at">values =</span> ggsci_colors[<span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>)],</span>
+<span id="cb564-28"><a href="supervised-machine-learning-model-interpretation.html#cb564-28" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&#39;Non-Detect&#39;</span>,<span class="st">&#39;Detect&#39;</span>)) <span class="co"># renaming the classes</span></span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-413-1.png" alt="" width="1440" style="display: block; margin: auto;" /></p>
+<div id="answer-to-environmental-health-question-2-10" class="section level3 hasAnchor">
+<h3>Answer to Environmental Health Question 2<a href="supervised-machine-learning-model-interpretation.html#answer-to-environmental-health-question-2-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="question">
+<p><em>With this, we can answer <strong>Environmental Health Question #2</strong></em>: Using the two features with the highest variable importance, under what conditions are we more likely to predict detectable iAs in wells based on a decision boundary plot?</p>
+</div>
+<div class="answer">
+<p><strong>Answer</strong>: There is some overlap between detect and non-detect iAs samples; however, it is evident that wells with detectable levels of iAs were more likely to have lower (&lt;80 ft) casing depths and a more basic pH (&gt; 7) based on RF and KNN models. It seems like SVM and logistic regression could have potentially captured a greater “detect” region indicating that the models likely struggled to predict “detect” values. In the next section, SMOTE will be used to see if these decision boundaries can be improved.</p>
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="decision-boundary-plot-incorporating-smote" class="section level2 hasAnchor">
+<h2>Decision Boundary Plot Incorporating SMOTE<a href="supervised-machine-learning-model-interpretation.html#decision-boundary-plot-incorporating-smote" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Here, we will create a decision boundary plot still using casing depth and pH, but this time we will make our dataset more balance to see how improve model performance visually. The <strong>Synthetic Minority Oversampling Technique (SMOTE)</strong> was introduced in <strong>TAME 2.0 Module 5.2 Supervised Machine Learning</strong> and will be used to make the dataset more balanced by oversampling the minority class (detect values) and undersampling the majority class (non-detect values).</p>
+<p>Starting by training each model:</p>
+<div class="sourceCode" id="cb565"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb565-1"><a href="supervised-machine-learning-model-interpretation.html#cb565-1" tabindex="-1"></a><span class="co"># Using SMOTE first to balance classes</span></span>
+<span id="cb565-2"><a href="supervised-machine-learning-model-interpretation.html#cb565-2" tabindex="-1"></a>balanced_highest_pred_data <span class="ot">=</span> <span class="fu">smotenc</span>(highest_pred_data, <span class="st">&quot;Detect_Concentration&quot;</span>)</span>
+<span id="cb565-3"><a href="supervised-machine-learning-model-interpretation.html#cb565-3" tabindex="-1"></a></span>
+<span id="cb565-4"><a href="supervised-machine-learning-model-interpretation.html#cb565-4" tabindex="-1"></a><span class="co"># Training RF</span></span>
+<span id="cb565-5"><a href="supervised-machine-learning-model-interpretation.html#cb565-5" tabindex="-1"></a>rf_detect_arsenic <span class="ot">=</span> <span class="fu">randomForest</span>(Detect_Concentration<span class="sc">~</span>., <span class="at">data =</span> balanced_highest_pred_data)</span>
+<span id="cb565-6"><a href="supervised-machine-learning-model-interpretation.html#cb565-6" tabindex="-1"></a></span>
+<span id="cb565-7"><a href="supervised-machine-learning-model-interpretation.html#cb565-7" tabindex="-1"></a><span class="co"># Logistic regression</span></span>
+<span id="cb565-8"><a href="supervised-machine-learning-model-interpretation.html#cb565-8" tabindex="-1"></a>lr_detect_arsenic <span class="ot">=</span> <span class="fu">glm</span>(Detect_Concentration<span class="sc">~</span>., <span class="at">data =</span> balanced_highest_pred_data, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&#39;logit&#39;</span>))</span>
+<span id="cb565-9"><a href="supervised-machine-learning-model-interpretation.html#cb565-9" tabindex="-1"></a></span>
+<span id="cb565-10"><a href="supervised-machine-learning-model-interpretation.html#cb565-10" tabindex="-1"></a><span class="co"># SVM with a radial kernel (hyperplane)</span></span>
+<span id="cb565-11"><a href="supervised-machine-learning-model-interpretation.html#cb565-11" tabindex="-1"></a>svm_detect_arsenic <span class="ot">=</span> <span class="fu">svm</span>(Detect_Concentration<span class="sc">~</span>., <span class="at">data =</span> balanced_highest_pred_data, <span class="at">kernel =</span> <span class="st">&quot;radial&quot;</span>)</span>
+<span id="cb565-12"><a href="supervised-machine-learning-model-interpretation.html#cb565-12" tabindex="-1"></a></span>
+<span id="cb565-13"><a href="supervised-machine-learning-model-interpretation.html#cb565-13" tabindex="-1"></a><span class="co"># KNN</span></span>
+<span id="cb565-14"><a href="supervised-machine-learning-model-interpretation.html#cb565-14" tabindex="-1"></a>knn_detect_arsenic <span class="ot">=</span> <span class="fu">knn3</span>(Detect_Concentration<span class="sc">~</span>., <span class="at">data =</span> balanced_highest_pred_data) <span class="co"># specifying 2 classes  </span></span></code></pre></div>
+<p>Now calling the <code>get_grid_df()</code> function we created above to create a grid of predictions.</p>
+<div class="sourceCode" id="cb566"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb566-1"><a href="supervised-machine-learning-model-interpretation.html#cb566-1" tabindex="-1"></a><span class="co"># Calling function</span></span>
+<span id="cb566-2"><a href="supervised-machine-learning-model-interpretation.html#cb566-2" tabindex="-1"></a><span class="co"># RF</span></span>
+<span id="cb566-3"><a href="supervised-machine-learning-model-interpretation.html#cb566-3" tabindex="-1"></a>balanced_grid_df_rf <span class="ot">=</span> <span class="fu">get_grid_df</span>(rf_detect_arsenic, balanced_highest_pred_data, <span class="at">predict_type =</span> <span class="st">&quot;class&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb566-4"><a href="supervised-machine-learning-model-interpretation.html#cb566-4" tabindex="-1"></a>  <span class="co"># Adding in a column that indicates the model so all the dataframes can be combined</span></span>
+<span id="cb566-5"><a href="supervised-machine-learning-model-interpretation.html#cb566-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Model =</span> <span class="st">&quot;A. Random Forest&quot;</span>)</span>
+<span id="cb566-6"><a href="supervised-machine-learning-model-interpretation.html#cb566-6" tabindex="-1"></a></span>
+<span id="cb566-7"><a href="supervised-machine-learning-model-interpretation.html#cb566-7" tabindex="-1"></a><span class="co"># SVM with a radial kernel (hyperplane)</span></span>
+<span id="cb566-8"><a href="supervised-machine-learning-model-interpretation.html#cb566-8" tabindex="-1"></a>balanced_grid_df_svm <span class="ot">=</span> <span class="fu">get_grid_df</span>(svm_detect_arsenic, balanced_highest_pred_data, <span class="at">predict_type =</span> <span class="st">&quot;class&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb566-9"><a href="supervised-machine-learning-model-interpretation.html#cb566-9" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Model =</span> <span class="st">&quot;B. Support Vector Machine&quot;</span>)</span>
+<span id="cb566-10"><a href="supervised-machine-learning-model-interpretation.html#cb566-10" tabindex="-1"></a></span>
+<span id="cb566-11"><a href="supervised-machine-learning-model-interpretation.html#cb566-11" tabindex="-1"></a><span class="co"># KNN</span></span>
+<span id="cb566-12"><a href="supervised-machine-learning-model-interpretation.html#cb566-12" tabindex="-1"></a>balanced_grid_df_knn <span class="ot">=</span> <span class="fu">get_grid_df</span>(knn_detect_arsenic, balanced_highest_pred_data, <span class="at">predict_type =</span> <span class="st">&quot;class&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb566-13"><a href="supervised-machine-learning-model-interpretation.html#cb566-13" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Model =</span> <span class="st">&quot;C. K Nearest Neighbor&quot;</span>)</span>
+<span id="cb566-14"><a href="supervised-machine-learning-model-interpretation.html#cb566-14" tabindex="-1"></a></span>
+<span id="cb566-15"><a href="supervised-machine-learning-model-interpretation.html#cb566-15" tabindex="-1"></a><span class="co"># Logistic regression</span></span>
+<span id="cb566-16"><a href="supervised-machine-learning-model-interpretation.html#cb566-16" tabindex="-1"></a>balanced_grid_df_lr <span class="ot">=</span> <span class="fu">get_grid_df</span>(lr_detect_arsenic, balanced_highest_pred_data, <span class="at">predict_type =</span> <span class="st">&quot;response&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb566-17"><a href="supervised-machine-learning-model-interpretation.html#cb566-17" tabindex="-1"></a>  <span class="co"># First specifying the cutoff point for logistic regression predictions</span></span>
+<span id="cb566-18"><a href="supervised-machine-learning-model-interpretation.html#cb566-18" tabindex="-1"></a>  <span class="co"># If the response is &gt;= 0.5 it will be classified as a detect prediction</span></span>
+<span id="cb566-19"><a href="supervised-machine-learning-model-interpretation.html#cb566-19" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Pred_Class =</span> <span class="fu">relevel</span>(<span class="fu">factor</span>(<span class="fu">ifelse</span>(Pred_Class <span class="sc">&gt;=</span> <span class="fl">0.5</span>, <span class="st">&quot;D&quot;</span>, <span class="st">&quot;ND&quot;</span>)), <span class="at">ref =</span> <span class="st">&quot;ND&quot;</span>), </span>
+<span id="cb566-20"><a href="supervised-machine-learning-model-interpretation.html#cb566-20" tabindex="-1"></a>           <span class="at">Model =</span> <span class="st">&quot;D. Logistic Regression&quot;</span>)</span>
+<span id="cb566-21"><a href="supervised-machine-learning-model-interpretation.html#cb566-21" tabindex="-1"></a></span>
+<span id="cb566-22"><a href="supervised-machine-learning-model-interpretation.html#cb566-22" tabindex="-1"></a></span>
+<span id="cb566-23"><a href="supervised-machine-learning-model-interpretation.html#cb566-23" tabindex="-1"></a><span class="co"># Creating 1 dataframe</span></span>
+<span id="cb566-24"><a href="supervised-machine-learning-model-interpretation.html#cb566-24" tabindex="-1"></a>balanced_grid_df <span class="ot">=</span> <span class="fu">rbind</span>(balanced_grid_df_rf, balanced_grid_df_lr, balanced_grid_df_svm, balanced_grid_df_knn)</span>
+<span id="cb566-25"><a href="supervised-machine-learning-model-interpretation.html#cb566-25" tabindex="-1"></a></span>
+<span id="cb566-26"><a href="supervised-machine-learning-model-interpretation.html#cb566-26" tabindex="-1"></a><span class="co"># Viewing the dataframe to be plotted</span></span>
+<span id="cb566-27"><a href="supervised-machine-learning-model-interpretation.html#cb566-27" tabindex="-1"></a><span class="fu">head</span>(balanced_grid_df)</span></code></pre></div>
+<pre><code>##   Casing_Depth       pH Pred_Class            Model
+## 1           27 5.400000         ND A. Random Forest
+## 2           27 5.433333         ND A. Random Forest
+## 3           27 5.466667         ND A. Random Forest
+## 4           27 5.500000         ND A. Random Forest
+## 5           27 5.533333         ND A. Random Forest
+## 6           27 5.566667         ND A. Random Forest</code></pre>
+<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb568-1"><a href="supervised-machine-learning-model-interpretation.html#cb568-1" tabindex="-1"></a><span class="co"># choosing palette from package</span></span>
+<span id="cb568-2"><a href="supervised-machine-learning-model-interpretation.html#cb568-2" tabindex="-1"></a>ggsci_colors <span class="ot">=</span> <span class="fu">pal_npg</span>()(<span class="dv">5</span>)</span>
+<span id="cb568-3"><a href="supervised-machine-learning-model-interpretation.html#cb568-3" tabindex="-1"></a></span>
+<span id="cb568-4"><a href="supervised-machine-learning-model-interpretation.html#cb568-4" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb568-5"><a href="supervised-machine-learning-model-interpretation.html#cb568-5" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> arsenic_data, <span class="fu">aes</span>(<span class="at">x =</span> pH, <span class="at">y =</span> Casing_Depth, <span class="at">color =</span> Detect_Concentration),</span>
+<span id="cb568-6"><a href="supervised-machine-learning-model-interpretation.html#cb568-6" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">w =</span> <span class="fl">0.1</span>, <span class="at">h =</span> <span class="fl">0.1</span>), <span class="at">size =</span> <span class="dv">4</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span> </span>
+<span id="cb568-7"><a href="supervised-machine-learning-model-interpretation.html#cb568-7" tabindex="-1"></a>  <span class="fu">geom_contour</span>(<span class="at">data =</span> balanced_grid_df, <span class="fu">aes</span>(<span class="at">x =</span> pH, <span class="at">y =</span> Casing_Depth, <span class="at">z =</span> <span class="fu">as.numeric</span>(Pred_Class <span class="sc">==</span> <span class="st">&quot;D&quot;</span>)), </span>
+<span id="cb568-8"><a href="supervised-machine-learning-model-interpretation.html#cb568-8" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">breaks =</span> <span class="fl">0.5</span>) <span class="sc">+</span> <span class="co"># adds contour line</span></span>
+<span id="cb568-9"><a href="supervised-machine-learning-model-interpretation.html#cb568-9" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> balanced_grid_df, <span class="fu">aes</span>(<span class="at">x =</span> pH, <span class="at">y =</span> Casing_Depth, <span class="at">color =</span> Pred_Class), </span>
+<span id="cb568-10"><a href="supervised-machine-learning-model-interpretation.html#cb568-10" tabindex="-1"></a>             <span class="at">size =</span> <span class="fl">0.1</span>) <span class="sc">+</span> <span class="co"># shades plot</span></span>
+<span id="cb568-11"><a href="supervised-machine-learning-model-interpretation.html#cb568-11" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="fl">5.9</span>, <span class="cn">NA</span>) <span class="sc">+</span> <span class="co"># changes the limits of the x axis</span></span>
+<span id="cb568-12"><a href="supervised-machine-learning-model-interpretation.html#cb568-12" tabindex="-1"></a>  </span>
+<span id="cb568-13"><a href="supervised-machine-learning-model-interpretation.html#cb568-13" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Model, <span class="at">scales =</span> <span class="st">&#39;free&#39;</span>) <span class="sc">+</span> </span>
+<span id="cb568-14"><a href="supervised-machine-learning-model-interpretation.html#cb568-14" tabindex="-1"></a></span>
+<span id="cb568-15"><a href="supervised-machine-learning-model-interpretation.html#cb568-15" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span> </span>
+<span id="cb568-16"><a href="supervised-machine-learning-model-interpretation.html#cb568-16" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>), <span class="co">#making x and y axes black</span></span>
+<span id="cb568-17"><a href="supervised-machine-learning-model-interpretation.html#cb568-17" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>), <span class="co">#changing size of x axis labels</span></span>
+<span id="cb568-18"><a href="supervised-machine-learning-model-interpretation.html#cb568-18" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="fu">rel</span>(<span class="fl">1.7</span>)), <span class="co">#changes axis titles</span></span>
+<span id="cb568-19"><a href="supervised-machine-learning-model-interpretation.html#cb568-19" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&#39;bold&#39;</span>, <span class="at">size =</span> <span class="dv">12</span>), <span class="co">#changes legend title</span></span>
+<span id="cb568-20"><a href="supervised-machine-learning-model-interpretation.html#cb568-20" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>), <span class="co">#changes legend text</span></span>
+<span id="cb568-21"><a href="supervised-machine-learning-model-interpretation.html#cb568-21" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>, <span class="co"># move legend to top left corner</span></span>
+<span id="cb568-22"><a href="supervised-machine-learning-model-interpretation.html#cb568-22" tabindex="-1"></a>        <span class="at">legend.background =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="st">&#39;black&#39;</span>, <span class="at">fill =</span> <span class="st">&#39;white&#39;</span>, <span class="at">linetype =</span> <span class="st">&#39;solid&#39;</span>), <span class="co"># changes legend background</span></span>
+<span id="cb568-23"><a href="supervised-machine-learning-model-interpretation.html#cb568-23" tabindex="-1"></a>        <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>)) <span class="sc">+</span>  <span class="co">#changes size of facet x axis </span></span>
+<span id="cb568-24"><a href="supervised-machine-learning-model-interpretation.html#cb568-24" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&#39;Casing Depth (ft)&#39;</span>) <span class="sc">+</span> <span class="co">#changing axis labels</span></span>
+<span id="cb568-25"><a href="supervised-machine-learning-model-interpretation.html#cb568-25" tabindex="-1"></a></span>
+<span id="cb568-26"><a href="supervised-machine-learning-model-interpretation.html#cb568-26" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">&quot;Arsenic Detection&quot;</span>, <span class="co"># renaming the legend</span></span>
+<span id="cb568-27"><a href="supervised-machine-learning-model-interpretation.html#cb568-27" tabindex="-1"></a>                     <span class="at">values =</span> ggsci_colors[<span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>)],</span>
+<span id="cb568-28"><a href="supervised-machine-learning-model-interpretation.html#cb568-28" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&#39;Non-Detect&#39;</span>,<span class="st">&#39;Detect&#39;</span>)) <span class="co"># renaming the classes</span></span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-416-1.png" alt="" width="1440" style="display: block; margin: auto;" />
+An appropriate title for this figure could be:</p>
+<p>“<strong>Figure X. Decision boundary plots from supervised machine learning models predicting iAs detection.</strong> The top two predictors on model performance, casing depth and pH, were used to visualize arsenic detection [non-detect (red) and detect (blue)]. The shaded regions represent prediction of a well’s detection class based on varying casing depth and pH values using (A) Random Forest, (B) Support Vector Machine, (C) K Nearest Neighbor, and (D) Logistic Regression.</p>
+<div id="answer-to-environmental-health-question-3-4" class="section level3 hasAnchor">
+<h3>Answer to Environmental Health Question 3<a href="supervised-machine-learning-model-interpretation.html#answer-to-environmental-health-question-3-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="question">
+<p><em>With this, we can answer <strong>Environmental Health Question #3</strong></em>: How do the decision boundaries shift after incorporating SMOTE to address class imbalance?</p>
+</div>
+<div class="answer">
+<p><strong>Answer</strong>: It is still evident that wells with detectable levels of iAs were more likely to have lower (&lt;80 ft) casing depths and a more basic pH (&gt; 7). However, we see the greatest shifts in the decision boundaries of SVM and logistic regression with both models now predicting greater regions to detectable iAs levels.</p>
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="concluding-remarks-20" class="section level2 hasAnchor">
+<h2>Concluding Remarks<a href="supervised-machine-learning-model-interpretation.html#concluding-remarks-20" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In conclusion, this training module provided methodologies to aid in the interpretation of supervised ML with variable importance and decision boundary plots. Variable importance helps quantify the impact of each feature’s importance on an algorithm’s predictivity. The most important or environmentally-relevant predictors can be selected in a decision boundary plot to further understand and visualize the features impact on the model’s classification.</p>
+<p><br></p>
+<div id="additional-resources-8" class="section level3 hasAnchor">
+<h3>Additional Resources<a href="supervised-machine-learning-model-interpretation.html#additional-resources-8" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Christoph Molnar. (2019, August 27). Interpretable Machine Learning. Github.io. <a href="https://christophm.github.io/interpretable-ml-book/" class="uri">https://christophm.github.io/interpretable-ml-book/</a></li>
+<li><a href="https://compgenomr.github.io/book/trees-and-forests-random-forests-in-action.html#variable-importance-1">Variable Importance</a></li>
+<li><a href="https://rpubs.com/ZheWangDataAnalytics/DecisionBoundary">Decision Boundary</a></li>
+</ul>
+<p><br></p>
+<p><label class="tykfont">
+Test Your Knowledge
+</label></p>
+<div class="tyk">
+<ol style="list-style-type: decimal">
+<li><p>Using the “Module5_2_TYKInput.xlsx”, use RF to determine if well water data can be accurate predictors of manganese detection as was done in the previous module. However, this time, incorporate SMOTE in the model. Feel free to use either the <code>trainControl()</code> or <code>createFolds()</code> function for CV. Extract the variable importance for each predictor on a RF model. What two features have the highest variable importance? <strong>Hint</strong>: Regardless of the cross validation function you choose, run SMOTE on the training dataset only to create a more balanced training set while the test set will remain unchanged.</p></li>
+<li><p>Using casing depth and the feature with the highest variable importance, construct a decision boundary plot. Under what conditions are a well more likely to predict detectable manganese levels based on a decision boundary plot?</p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="supervised-machine-learning.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="unsupervised-machine-learning-part-1-k-means-clustering-pca.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["_main.pdf", "_main.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
