@@ -2160,3 +2160,113 @@ Using the same dataset, answer the questions below.
 2. How do those clusters compare to the ones that were derived at baseline (in non-smokers)?
 3. Which cytokines have the greatest contributions to the first two eigenvectors?
 :::
+
+# 5.6 Cloud Computing
+This training module was developed by Alexis Payton, Jessie Chappel, Timothy Weigand, and Julia E. Rager
+
+All input files (script, data, and figures) can be downloaded from the [UNC-SRP TAME2 GitHub website](https://github.com/UNCSRP/TAME2).
+
+## Introduction to Training Module
+
+Traditionally, computing operations (including analyses, visualizations etc.) have been performed using on-premises computing on local computers. This requires a need to constantly update existing software, handle the privacy and storage of data, in addition to paying for and managing these platforms as the needs and usage of the organization may fluctuate. Gaining in popularity over recent years, cloud computing provides a solution to many of these problems. In this module, we'll define 
+
+We'll explore the following concepts in this module:
+
++ Deployment Models
++ How to create an account with Amazon Web Services (AWS)
++ Starting a data analysis in AWS
+
+<br>
+
+## Introduction to Cloud Computing
+**Cloud computing** refers to the on-demand delivery of computing services over the internet often with pay-as-you-go pricing. These computing services that you probably use frequently include databases (ie. PubMed), web servers (ie. Google Chrome), storage (ie. iCloud), emails (ie. Gmail), software (ie. OneDrive), analytics (ie. Ingenuity Pathway Analysis), and intelligence (ie. ChatGPT). Here are some benefits of cloud computing:
+
++ It **defers cost** of building, maintaining, and using electricity to run the servers to the third-party cloud provider (at least for public and hybrid clouds). 
++ It **increases relability** in the event of a disaster recovery. The cloud provider likely has multiple servers that can be used as back ups if one becomes compromised. This is in addtion to having staff that are well versed in the ever changing landscape of cloud computing.  
++ It **improves scability** by allowing a customer to use (and pay for) the infrastructure needed depending on the project. Many providers allow you to choose the number of virtual machines, the computing power or central processing unit (CPU), and memory.
++ It **enhances collaboration** virtually.
+
+Traditionally, these resources were stored "on premises" or in-house (as opposed to in the cloud). More specifically, on premises infrastructure can include resources stored on a local computer or having data maintained soley within an organization. The following section describes deployment models that explain how these parameters can be divided between on premises and cloud computing. I MIGHT NEED SOME HELP MAKING THIS MORE CLEAR
+
+<br>
+
+## Deployment Models
+Deployment models are paradigms that dictate the accessiblity, management and ownership of the infrastructure. Three commonly used models are described below:
+
+1. A **Public Cloud** is when a cloud provider makes computing resources available over the public internet. The public cloud provider is responsible for owning, managing, and running the infrastructure necessary to run these services. Some public clouds are completely free while other services allow the user to pay for what they use, aiding in flexibility and scalability of computing resources based on the project. Well known public cloud providers include Amazon Web Services (AWS), Microsoft Azure, and Oracle to name a few. 
+
+2. A **Private Cloud** is when both the software and hardware are designed for one customer or organization. However, the infrastructure can either be housed through a third-party cloud provider or housed onsite. 
+
+3. A **Hybrid Cloud** combines features of both a public and private cloud. It's great for entities like the federal government that require the protection of sensitive data in private clouds, but can use public clouds to share data with the public or other governmental organizations. 
+
+```{r, echo=FALSE, out.width = "55%", fig.align='center'}
+knitr::include_graphics("Module5_6_Input/Module5_6_Image1.png")
+```
+
+We've covered the basics of cloud computing and various applications that provide this service, but [Cloud Computing in 6 Minutes](https://www.youtube.com/watch?v=M988_fsOSWo) provides great visuals that further describe these topics. From here, we'll focus more on public clouds and applications that support them.
+
+<br>
+
+## Public Cloud Providers 
+
+Amazon Web Services (AWS) leads the cloud computing market, offers the widest range of services, and has great interoperability between third-party organizations. Some other popular public cloud providers include Microsoft Azure and Google Cloud. The National Institute of Health (NIH) offers a training program to help researchers navigate how to integrate these cloud computing technologies into their research practices for AWS, Microsoft Azure, and Google Cloud through the [NIH Cloud Lab](https://cloud.nih.gov/resources/cloudlab/). 
+
+
+Another public cloud provider, [Binder](https://jupyter.org/binder) creates a coding environment using a public Github repository that allows a user to interact directly with the jupyter notebooks and data housed in that repository. Binder is great for teaching purposes as students and researchers are able to launch a coding environment with data and packages already loaded into the system without running into operating system conflicts that can occur when downloading software needed to run code on a local computer.
+
+```{r, echo=FALSE, out.width = "65%", fig.align='center'}
+knitr::include_graphics("Module5_6_Input/Module5_6_Image2.png")
+```
+
+Choosing the right cloud provider is largely dependent on the needs of the project and organization. Check out [AWS vs Azure vs Google: Cloud Services Comparison](https://www.varonis.com/blog/aws-vs-azure-vs-google) for more criteria to be mindful of when choosing a provider. For the purposes of this module, we'll just focus on AWS and start by creating an account below. 
+
+<br>
+
+## Create an AWS Account
+Head to [AWS](aws.amazon.com). Enter your email and billing information to get started.
+
+## Running Data Analyses in AWS
+1. Uploading Data into the Cloud (Costs for storing data on the cloud – provide example)
+
+Before jumping right into data analysis, let's upload our data. It's recommended to store data in a **Simply Storage Service (S3)** bucket, which has ample space for large datasets. Here, data can easily be uploaded or downloaded from S3. Even if you stop your virtual machine from running, the data uploaded to S3 will be stored in your account. 
+
+```{r, echo=FALSE, out.width = "75%",fig.align='center'}
+knitr::include_graphics("Module5_6_Input/Module5_6_Image3.png")
+```
+
+2. Running Analyses
+
+Now that our data is stored on the cloud, let's choose our virtual machine by going to **Elastic Compute Cloud (EC2)**. EC2 allows you to...
+   
+4. Run time discussion and costs
+5. Select a higher performance CPU on the cloud, and state that it was at this additional cost
+Data requirements for uploading to the cloud
+
+Best Practices
+If you leave a job idle, you are being charged for it!
+End your jobs!
+If you’re uploading & downloading & uploading & downloading a lot you get charged!
+Be strategic – prep everything together, upload it all, run it, and download it all (though this is often difficult but ideal)
+
+<br>
+
+## Concluding Remarks
+ADD WORDS
+
+<br>
+
+### Additional Resources
+
++ [Cloud Computing](https://www.ibm.com/think/topics/cloud-computing)
++ [On Premises vs Cloud](https://www.cleo.com/blog/knowledge-base-on-premise-vs-cloud)
++ [Domain Specfic Tutorials through NIH](https://github.com/STRIDES/NIHCloudLabAWS/tree/main/?tab=readme-ov-file#bio)
+
+<br>
+
+<label class="tykfont">
+Test Your Knowledge 
+</label>
+
+:::tyk
+Try creating your own AWS profile, choose a server with the right CPU...
+:::
