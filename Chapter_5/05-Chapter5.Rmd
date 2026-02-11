@@ -2200,7 +2200,7 @@ Deployment models are paradigms that dictate the accessiblity, management and ow
 3. A **Hybrid Cloud** combines features of both a public and private cloud. It's great for entities like the federal government that require the protection of sensitive data in private clouds, but can use public clouds to share data with the public or other governmental organizations. 
 
 ```{r, echo=FALSE, out.width = "55%", fig.align='center'}
-knitr::include_graphics("Module5_6_Input/Module5_6_Image1.png")
+knitr::include_graphics("Chapter_5/Module5_6_Input/Module5_6_Image1.png")
 ```
 
 We've covered the basics of cloud computing and various applications that provide this service, but [Cloud Computing in 6 Minutes](https://www.youtube.com/watch?v=M988_fsOSWo) provides great visuals that further describe these topics. From here, we'll focus more on public clouds and applications that support them.
@@ -2215,7 +2215,7 @@ Amazon Web Services (AWS) leads the cloud computing market, offers the widest ra
 Another public cloud provider, [Binder](https://jupyter.org/binder) creates a coding environment using a public Github repository that allows a user to interact directly with the jupyter notebooks and data housed in that repository. Binder is great for teaching purposes as students and researchers are able to launch a coding environment with data and packages already loaded into the system without running into operating system conflicts that can occur when downloading software needed to run code on a local computer.
 
 ```{r, echo=FALSE, out.width = "65%", fig.align='center'}
-knitr::include_graphics("Module5_6_Input/Module5_6_Image2.png")
+knitr::include_graphics("Chapter_5/Module5_6_Input/Module5_6_Image2.png")
 ```
 
 Choosing the right cloud provider is largely dependent on the needs of the project and organization. Check out [AWS vs Azure vs Google: Cloud Services Comparison](https://www.varonis.com/blog/aws-vs-azure-vs-google) for more criteria to be mindful of when choosing a provider. For the purposes of this module, we'll just focus on AWS and start by creating an account below. 
@@ -2231,7 +2231,7 @@ Head to [AWS](aws.amazon.com). Enter your email and billing information to get s
 Before jumping right into data analysis, let's upload our data. It's recommended to store data in a **Simply Storage Service (S3)** bucket, which has ample space for large datasets. Here, data can easily be uploaded or downloaded from S3. Even if you stop your virtual machine from running, the data uploaded to S3 will be stored in your account. 
 
 ```{r, echo=FALSE, out.width = "75%",fig.align='center'}
-knitr::include_graphics("Module5_6_Input/Module5_6_Image3.png")
+knitr::include_graphics("Chapter_5/Module5_6_Input/Module5_6_Image3.png")
 ```
 
 2. Running Analyses
