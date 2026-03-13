@@ -1,0 +1,9 @@
+repos:
+  - repo: local
+    hooks:
+      - id: namer
+        name: Name Rmd chunks with namer
+        language: system
+        entry: Rscript -e 'files <- list.files(".", pattern="[.][Rr]md$", recursive=TRUE, full.names=TRUE); files <- files[!grepl("(^|/)book/|(^|/)_book/", files)]; for (f in files) namer::name_chunks(f); cat("Processed", length(files), "Rmd files\n")'
+        pass_filenames: false
+        always_run: true

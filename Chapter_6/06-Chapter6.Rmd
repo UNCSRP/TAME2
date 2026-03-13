@@ -20,7 +20,7 @@ Our example data are derived from a study in which chemical exposure profiles we
 
 ### Workspace Preparation and Data Import
 
-```{r message = FALSE}
+```{r 06-Chapter6-1, message = FALSE}
 # Load packages
 library(tidyverse) # for data organization and manipulation
 library(janitor) # for data cleaning
@@ -40,7 +40,7 @@ theme_set(theme_bw())
 ```
 
 First, we will import our raw chemical data and preview it.
-```{r warning = FALSE}
+```{r 06-Chapter6-2, warning = FALSE}
 wrist_data <- read.xlsx("Chapter_6/Module6_1_Input/Module6_1_InputData1.xlsx") %>%
   mutate(across(everything(), \(x) as.numeric(x)))
 
@@ -72,7 +72,7 @@ Although these steps are somewhat specific to our example dataset, similar steps
 
 We can use *tidyverse* functions to quickly tabulate how many days participants wore the wristbands.
 
-```{r}
+```{r 06-Chapter6-3}
 wrist_data %>%
   
   # Count number of participants for each number of days
@@ -100,7 +100,7 @@ wrist_data %>%
 Because a few participants did not wear their wristbands for all seven days, it will be important to further explore whether there are outlier participants and to normalize the chemical concentrations by number of days the wristband was worn. We can first assess whether any participants have a particularly low or high number of chemicals detected relative to the other participants.
 
 We'll prepare the data for graphing by creating a dataframe containing information about how many chemicals were detected per participant.
-```{r}
+```{r 06-Chapter6-4}
 wrist_det_by_participant <- wrist_data %>%
   
   # Remove Ndays column because we don't need it for this step
@@ -120,7 +120,7 @@ datatable(wrist_det_by_participant)
 ```
 
 Then, we can make our histogram:
-```{r warning = FALSE, fig.align = "center"}
+```{r 06-Chapter6-5, warning = FALSE, fig.align = "center"}
 det_per_participant_graph <- ggplot(wrist_det_by_participant, aes(x = n_det)) +
   geom_histogram(color = "black", 
                  fill = "gray60",
@@ -145,7 +145,7 @@ From this histogram, we can see that the number of chemicals detected per partic
 
 Next, we want to apply a chemical detection filter to remove chemicals from the dataset with very low detection. To start, let's make a dataframe summarizing the percentage of participants in which each chemical was detected and graph this distribution using a histogram.
 
-```{r}
+```{r 06-Chapter6-6}
 # Create dataframe where n_detected is the sum of the rows where there are not NA values
 chemical_counts <- data.frame(n_detected = colSums(!is.na(wrist_data %>% select(-c(S_ID, Ndays))))) %>%
   
@@ -164,7 +164,7 @@ chemical_counts <- data.frame(n_detected = colSums(!is.na(wrist_data %>% select(
 datatable(chemical_counts)
 ```
 
-```{r fig.align = "center"}
+```{r 06-Chapter6-7, fig.align = "center"}
 det_per_chemical_graph <- ggplot(chemical_counts, aes(x = perc_detected)) +
     geom_histogram(color = "black",
                    fill = "gray60",
@@ -183,7 +183,7 @@ det_per_chemical_graph
 ```
 
 From this histogram, we can see that many of the chemicals fall in the < 15% or > 90% detection range, with the others distributed evenly between 20 and 90% detection. How we choose to filter our data in part depends on the goals of our analysis. For example, if we only want to keep chemicals detected for almost all of the participants, we could set our threshold at 90% detection:
-```{r fig.align = "center"}
+```{r 06-Chapter6-8, fig.align = "center"}
 # Add annotation column
 chemical_counts <- chemical_counts %>%
   mutate(det_filter_90 = ifelse(perc_detected > 90, "Yes", "No"))
@@ -213,7 +213,7 @@ det_per_chemical_graph_90
 
 However, this only keeps 34 chemicals in our dataset, which is a significant proportion of all of the chemicals measured. We could also consider setting the filter at 20% detection to maximize inclusion of as many chemicals as possible.
 
-```{r fig.align = "center"}
+```{r 06-Chapter6-9, fig.align = "center"}
 # Add annotation column
 chemical_counts <- chemical_counts %>%
   mutate(det_filter_20 = ifelse(perc_detected > 20, "Yes", "No"))
@@ -252,7 +252,7 @@ det_per_chemical_graph_20
 
 We'll use the 20% detection filter for downstream analyses to maximize inclusion of data for our study. Note that selection of data filters is highly project- and goal- dependent, so be sure to take into consideration typical workflows for your type of data, study, or lab group. 
 
-```{r}
+```{r 06-Chapter6-10}
 # Create vector of chemicals to keep
 chemicals_20perc <- chemical_counts %>%
   filter(perc_detected > 20) %>%
@@ -266,7 +266,7 @@ wrist_data_filtered <- wrist_data %>%
 
 We can also summarize chemical detection vs. non-detection by chemical class to understand the number of chemicals in each class that were 1) detected in any participant or 2) detected in more than 20% of participants. 
 
-```{r}
+```{r 06-Chapter6-11}
 chemical_count_byclass <- chemical_counts %>%
   separate(class_chemical, into = c("class", NA), remove = FALSE, sep = "_") %>%
   group_by(class) %>%
@@ -291,7 +291,7 @@ Next, we will check to see if any participants are outliers based on the entire 
 
 Here, we'll read in the fully cleaned and processed data, which contains data for all 97 participants and the 62 chemicals that passed the detection filter (imputed, time-weighted). We will also apply log2 transformation to move the data closer to a normal distribution. For more on these steps, see **TAME 2.0 Module 3.3 Normality Tests and Data Transformations** and **TAME 2.0 Module 4.2 Data Import, Processing, and Summary Statistics**.
 
-```{r}
+```{r 06-Chapter6-12}
 wrist_data_cleaned <- read.xlsx("Chapter_6/Module6_1_Input/Module6_1_InputData2.xlsx") %>%
   column_to_rownames("S_ID") %>%
   mutate(across(everything(), \(x) log2(x+1)))
@@ -300,7 +300,7 @@ datatable(wrist_data_cleaned[ 1:6])
 ```
 
 First, let's run PCA and plot our data.
-```{r fig.align = "center"}
+```{r 06-Chapter6-13, fig.align = "center"}
 # Prepare dataframe
 wrist_data_cleaned_scaled <- wrist_data_cleaned %>%
   scale() %>% data.frame()
@@ -326,7 +326,7 @@ By visual inspection, it looks like there may be some outliers, so we can use a 
 
 We can apply this approach to our data by first creating a function to detect PCA outliers based on whether or not that participant passed a certain standard deviation cutoff. 
 
-```{r}
+```{r 06-Chapter6-14}
 # Create a function to detect PCA sample outliers. The input is the PCA results data frame and the number of standard deviations for the cutoff. The output is outlier names. 
 outlier_detection = function(pca_df, sd){
 
@@ -363,7 +363,7 @@ Now that we have explored our dataset and finished processing the data, we can m
 
 There are many ways to generate summary statistics tables in R. Here, we will demonstrate a method using the `map_dfr()` function, which takes a list of functions and applies them across columns of the data. The summary statistics are then placed in rows, with each column representing a variable.
 
-```{r warning = FALSE}
+```{r 06-Chapter6-15, warning = FALSE}
 # Define summary functions
 summary_functs <- lst(min, median, mean, max)
 
@@ -375,7 +375,7 @@ datatable(summarystats_raw[, 1:6])
 ```
 
 Through a few cleaning steps, we can transpose and format these data so that they are publication-quality.
-```{r}
+```{r 06-Chapter6-16}
 summarystats_raw <- summarystats_raw %>% 
   
   # Transpose dataframe and return to dataframe class
@@ -402,7 +402,7 @@ datatable(summarystats_raw)
 
 We can apply the same steps to the cleaned data.
 
-```{r}
+```{r 06-Chapter6-17}
 summarystats_cleaned <- map_dfr(summary_functs, ~ summarise(wrist_data_cleaned, across(1:ncol(wrist_data_cleaned), .x, na.rm = TRUE)), 
                                 .id = "statistic") %>%
   t() %>% as.data.frame() %>%
@@ -418,7 +418,7 @@ datatable(summarystats_cleaned)
 
 Finally, we will merge the data from our `chemical_counts` dataframe (which contains detection information for all of our chemicals) with our summary statistics dataframes. 
 
-```{r}
+```{r 06-Chapter6-18}
 summarystats_final <- chemical_counts %>%
   
   # Remove 90% detection filter column
@@ -438,14 +438,14 @@ datatable(summarystats_final, width = 600)
 Another important element of any analysis of human data is the demographics table. The demographics table provides key information about the study participants and can help inform downstream analyses, such as exploration of the impact of covariates on the endpoint of interest. There are many different ways to make demographics tables in R. Here, we will demonstrate making a demographics table with the *table1* package. For more on this package, including making tables with multiple groups and testing for statistical differences in demographics between groups, see the *table1* vignette [here](https://benjaminrich.github.io/table1/vignettes/table1-examples.html). 
 
 First, we'll read in and view our demographic data:
-```{r}
+```{r 06-Chapter6-19}
 demo_data <- read.xlsx("Chapter_6/Module6_1_Input/Module6_1_InputData3.xlsx")
 
 datatable(demo_data)
 ```
 
 Then, we can create new labels for our variables so that they are more nicely formatted and more intuitive for display in the table.
-```{r}
+```{r 06-Chapter6-20}
 # Create new labels for the demographics table
 label(demo_data$mat_age_birth) <- "Age at Childbirth"
 label(demo_data$pc_sex) <- "Sex"
@@ -456,7 +456,7 @@ label(demo_data$pc_ed) <- "Educational Attainment"
 ```
 
 Our demographics data also had "F" for female in the sex column. We can change this to "Female" so that the demographics table is more readable.
-```{r}
+```{r 06-Chapter6-21}
 demo_data <- demo_data %>%
   mutate(pc_sex = dplyr::recode(pc_sex, "F" = "Female"))
 
@@ -464,7 +464,7 @@ label(demo_data$pc_sex) <- "Sex"
 ```
 
 Now, let's make the table. The first argument in the formula is all of the columns you want to include in the table, followed by the input dataframe.
-```{r}
+```{r 06-Chapter6-22}
 table1(~ mat_age_birth + pc_sex + pc_gender + pc_latino_hispanic + pc_race_cleaned + pc_ed, data = demo_data)
 ```
 
@@ -476,7 +476,7 @@ There are a couple of steps we could take to clean up the table:
 2. Order educational attainment so that it progresses from least to most education.
 
 We can change the rendering for our continuous variable by defining our own rendering function (as demonstrated in the package's vignette).
-```{r}
+```{r 06-Chapter6-23}
 # Create function for custom table so that Mean (SD) is shown for continuous variables
 my.render.cont <- function(x) {
   with(stats.apply.rounding(stats.default(x), digits=2), 
@@ -485,7 +485,7 @@ my.render.cont <- function(x) {
 ```
 
 We can order the education attainment by changing it to a factor and defining the levels.
-```{r}
+```{r 06-Chapter6-24}
 demo_data <- demo_data %>%
   mutate(pc_ed = factor(pc_ed, levels = c("High School or GED", "Associate Degree", "Four-Year Degree", 
                                           "Master's Degree", "Professional Degree or PhD")))
@@ -494,7 +494,7 @@ label(demo_data$pc_ed) <- "Educational Attainment"
 ```
 
 Then, we can make our final table. 
-```{r}
+```{r 06-Chapter6-25}
 table1(~ mat_age_birth + pc_sex + pc_gender + pc_latino_hispanic + pc_race_cleaned + pc_ed, 
        data = demo_data,
        render.continuous = my.render.cont)
@@ -563,7 +563,7 @@ Traditional molecular biology techniques typically evaluate the function(s) of i
 
 To further understand the molecular consequences of -omics-based alterations, molecules can be overlaid onto molecular networks to uncover biological pathways and molecular functions that are perturbed at the systems biology level. An overview of these generally methods, starting with high-content technologies and ending of systems biology, is provided in the below figure (created with BioRender.com).
 
-```{r, echo=FALSE, fig.align='center'} 
+```{r 06-Chapter6-26, echo=FALSE, fig.align='center' }
 knitr::include_graphics("Chapter_6/Module6_2_Input/Module6_2_Image1.png")
 ```
 
@@ -587,7 +587,7 @@ Parallel to human genomics/epigenomics-based research is the newer "-omics" topi
 ## Introduction to Transcriptomics
 One of the most widely evaluated -omics endpoints is messenger RNA (mRNA) expression (also termed gene expression). As a reminder, mRNA molecules are a major type of RNA produced as the "middle step" in the [Central Dogma Theory](https://en.wikipedia.org/wiki/Central_dogma_of_molecular_biology#:~:text=The%20central%20dogma%20of%20molecular,The%20Central%20Dogma), which describes how genetic DNA is first transcribed into RNA and then translated into protein. Protein molecules are ultimately the major regulators of cellular processes and overall health. Therefore, any perturbations to this process (including changes to mRNA expression levels) can have tremendous consequences on overall cell function and health. A visualization of these steps in the Central Dogma theory are included below.
 
-```{r, echo=FALSE, fig.align='center'} 
+```{r 06-Chapter6-27, echo=FALSE, fig.align='center' }
 knitr::include_graphics("Chapter_6/Module6_2_Input/Module6_2_Image2.png")
 ```
 
@@ -651,7 +651,7 @@ if (!requireNamespace("piano"))
 
 
 #### Loading R packages required for this session
-```{r, message=FALSE, warning=FALSE, error=FALSE}
+```{r 06-Chapter6-28, message=FALSE, warning=FALSE, error=FALSE}
 library(tidyverse)
 library(DESeq2)
 library(edgeR)
@@ -667,7 +667,7 @@ library(piano)
 
 
 #### Set your working directory
-```{r, eval=FALSE, echo=TRUE}
+```{r 06-Chapter6-29, eval=FALSE, echo=TRUE}
 setwd("/filepath to where your input files are")
 ```
 
@@ -687,17 +687,17 @@ sampleinfo <- read.csv(file = "Chapter_6/Module6_2_Input/Module6_2_InputData2_Sa
 ### Data Viewing
 
 Let's see how many rows and columns of data are present in the countdata dataframe 
-```{r}
+```{r 06-Chapter6-30}
 dim(countdata)
 ```
 
 Let's also view the column headers
-```{r}
+```{r 06-Chapter6-31}
 colnames(countdata)
 ```
 
 And finally let's view the top few rows of data
-```{r}
+```{r 06-Chapter6-32}
 head(countdata)
 ```
 Together, this dataframe contains information across 30146 mRNA identifiers, that are labeled according to "Gene name" followed by an underscore and probe number assigned by the platform used in this analysis, BioSpyder TempoSeq Technologies.  
@@ -706,17 +706,17 @@ A total of 23 columns are included in this dataframe, the first of which represe
 
 
 Let's also see what the metadata dataframe looks like
-```{r}
+```{r 06-Chapter6-33}
 dim(sampleinfo)
 ```
 
 Let's also view the column headers
-```{r}
+```{r 06-Chapter6-34}
 colnames(sampleinfo)
 ```
 
 And finally let's view the top few rows of data
-```{r}
+```{r 06-Chapter6-35}
 head(sampleinfo)
 ```
 Together, this dataframe contains information across the 22 total samples, that are labeled according to "SampleID_BioSpyderCountFile" header. These identifiers match those used as column headers in the countdata dataframe.
@@ -736,7 +736,7 @@ A total of 9 columns are included in this dataframe, including the following:
 ### Checking for Duplicate mRNA IDs
 
 One common QC/preparation step that is helpful when organizing transcriptomics data is to check for potential duplicate mRNA IDs in the countdata. 
-```{r}
+```{r 06-Chapter6-36}
 # Visualize this data quickly by viewing top left corner, to check where ID column is located:
 countdata[1:3,1:5]
 
@@ -763,7 +763,7 @@ In this case, because all potential duplicate checks turn up "FALSE", these data
 Most of the statistical analyses included in this training module will be carried out using the DESeq2 pipeline. This package requires that the count data and sample information data be formatted in a certain manner, which will expedite the downstream coding needed to carry out the statistics. Here, we will walk users through these initial formatting steps.
 
 DESeq2 first requires a `coldata` dataframe, which includes the sample information (i.e., metadata). Let's create this new dataframe based on the original `sampleinfo` dataframe:
-```{r, message=F, warning=F, error=F}
+```{r 06-Chapter6-37, message=F, warning=F, error=F}
 coldata <- sampleinfo
 ```
 
@@ -771,24 +771,24 @@ coldata <- sampleinfo
 DESeq2 also requires a `countdata` dataframe, which we've previously created; however, this dataframe requires some minor formatting before it can be used as input for downstream script. 
 
 First, the gene identifiers need to be converted into row names:
-```{r, message=F, warning=F, error=F}
+```{r 06-Chapter6-38, message=F, warning=F, error=F}
 countdata <- countdata %>% column_to_rownames("Gene")
 ```
 
 Then, the column names need to be edited. Let's remind ourselves what the column names are currently:
-```{r, message=F, warning=F, error=F}
+```{r 06-Chapter6-39, message=F, warning=F, error=F}
 colnames(countdata)
 ```
 
 These column identifiers need to be converted into more intuitive sample IDs, that also indicate treatment. This information can be found in the coldata dataframe. Specifically, information in the column labeled `SampleID_BioSpyderCountFile` will be helpful for these purposes.
 
 To replace these original column identifiers with these more helpful sample identifiers, let's first make sure the order of the countdata columns are in the same order as the coldata column of `SampleID_BioSpyderCountFile`:
-```{r, message=F, warning=F, error=F}
+```{r 06-Chapter6-40, message=F, warning=F, error=F}
 countdata <- setcolorder(countdata, as.character(coldata$SampleID_BioSpyderCountFile))
 ```
 
 Now, we can rename the column names within the countdata dataframe with these more helpful identifiers, since both dataframes are now arranged in the same order:
-```{r, message=F, warning=F, error=F}
+```{r 06-Chapter6-41, message=F, warning=F, error=F}
 colnames(countdata) <- coldata$ID # Rename the countdata column names with the treatment IDs. 
 colnames(countdata) # Viewing these new column names
 ```
@@ -796,7 +796,7 @@ These new column identifiers look much better, and can better inform downstream 
 
 
 When relabeling dataframes, it's always important to triple check any of these major edits. For example, here, let's double check that the same samples appear in the same order between the two working dataframes required for dowstream DESeq2 code:
-```{r, message=F, warning=F, error=F}
+```{r 06-Chapter6-42, message=F, warning=F, error=F}
 setequal(as.character(coldata$ID), colnames(countdata))
 identical(as.character(coldata$ID), colnames(countdata))
 ```
@@ -883,7 +883,7 @@ Prior to final statistical analysis, raw transcriptomic data are commonly evalua
 Let's start by using PCA to identify potential outliers, while providing a visualization of potential sources of variation across the dataset.
 
 First we need to move the Gene column back to the rownames so our dataframe is numeric and we can run the PCA script
-```{r, message=FALSE, warning=FALSE, error=FALSE}
+```{r 06-Chapter6-43, message=FALSE, warning=FALSE, error=FALSE}
 countdata <- countdata %>% column_to_rownames("Gene")
 
 # Let's remind ourselves what these data look like
@@ -892,13 +892,13 @@ countdata[1:10,1:5] #viewing first 10 rows and 5 columns
 
 
 Then we can calculate principal components using transposed count data 
-```{r}
+```{r 06-Chapter6-44}
 pca <- prcomp(t(countdata))
 ```
 
 
 And visualize the percent variation captured by each principal component (PC) with a scree plot
-```{r, fig.align='center'}
+```{r 06-Chapter6-45, fig.align='center'}
 # We can generate a scree plot that shows the eigenvalues of each component, indicating how much of the total variation is captured by each component
 fviz_eig(pca, addlabels = TRUE)
 ```
@@ -908,7 +908,7 @@ This scree plot indicates that nearly all variation is explained in PC1 and PC2,
 #### Visualization of Transcriptomic Data using PCA
 
 Further visualization of how these transcriptomic data appear through PCA can be produced through a scatter plot showing the data reduced values per sample:
-```{r, fig.align='center', warning = FALSE}
+```{r 06-Chapter6-46, fig.align='center', warning = FALSE}
 # Calculate the percent variation captured by each PC
 pca_percent <- round(100*pca$sdev^2/sum(pca$sdev^2),1)
 
@@ -934,14 +934,14 @@ With this plot, we can see that samples do not demonstrate obvious groupings, wh
 #### Now lets implement hierarchical clustering to identify potential outliers
 
 First we need to create a dataframe of our transposed `countdata` such that samples are rows and genes are columns to input into the clustering algorithm.
-```{r}
+```{r 06-Chapter6-47}
 countdata_for_clustering <- t(countdata)
 countdata_for_clustering[1:5,1:10] # Viewing what this transposed dataframe looks like
 ```
 
 
 Next we can run hierarchical clustering in conjunction with the generation of a heatmap. Note that we scale these data for improved visualization.
-```{r, fig.align='center'}
+```{r 06-Chapter6-48, fig.align='center'}
 pheatmap(scale(countdata_for_clustering), main="Hierarchical Clustering",
          cluster_rows=TRUE, cluster_cols = FALSE,
          fontsize_col = 7, treeheight_row = 60, show_colnames = FALSE)
@@ -981,7 +981,7 @@ Here, we leverage the package called *RUVseq* to employ RUV on this sequencing d
 
 
 #### Steps in carrying out RUV using RUVseq on this example dataset:
-```{r, message=F, warning=F, error=F}
+```{r 06-Chapter6-49, message=F, warning=F, error=F}
 # First we store the treatment IDs and exposure conditions as a separate vector
 ID <- coldata$ID
 
@@ -1002,14 +1002,14 @@ trt_groups
 ```
 
 *RUVseq* contains its own set of plotting and normalization functions, though requires input of what's called an object of S4 class SeqExpressionSet. Let's go ahead and make this object, using the *RUVseq* function `newSeqExpressionSet()`:
-```{r}
+```{r 06-Chapter6-50}
 exprSet <- newSeqExpressionSet(as.matrix(countdata),phenoData = data.frame(groups,row.names=colnames(countdata)))
 ```
 
 
 And then use this object to generate some exploratory plots using built-in tools within *RUVseq*.
 First starting with some bar charts summarizing overall data distributions per sample:
-```{r, fig.align='center'}
+```{r 06-Chapter6-51, fig.align='center'}
 colors <- brewer.pal(4, "Set2")
 plotRLE(exprSet, outline=FALSE, ylim=c(-4, 4), col=colors[groups])
 ```
@@ -1018,7 +1018,7 @@ We can see from this plot that some of the samples show distributions that may v
 
 
 Then viewing a PCA plot of these samples:
-```{r, fig.align='center'}
+```{r 06-Chapter6-52, fig.align='center'}
 colors <- brewer.pal(4, "Set2")
 plotPCA(exprSet, col=colors[groups], cex=1.2)
 ```
@@ -1027,7 +1027,7 @@ This PCA plot shows pretty good data distributions, with samples mainly showing 
 
 
 Now to actually run the RUVseq algorithm, to control for potential sources of sample heterogeneity, we need to first construct a matrix specifying the replicates (samples of the same exposure condition):
-```{r}
+```{r 06-Chapter6-53}
 # Construct a matrix specifying the replicates (samples of the same exposure condition) for running RUV
 differences <- makeGroups(groups)
 
@@ -1039,7 +1039,7 @@ This matrix groups the samples by exposure condition. Here, each of the four row
 
 
 Let's now implement the RUVseq algorithm and, for this example, capture one factor (k=1) of unwanted variation. Note that the k parameter can be modified to capture additional factors, if necessary.
-```{r}
+```{r 06-Chapter6-54}
 # Now capture 1 factor (k=1) of unwanted variation
 ruv_set <- RUVs(exprSet, rownames(countdata), k=1, differences) 
 ```
@@ -1048,21 +1048,21 @@ ruv_set <- RUVs(exprSet, rownames(countdata), k=1, differences)
 This results in a list of objects within `ruv_set`, which include the following important pieces of information:
 
 (1) Estimated factors of unwanted variation are provided in the phenoData object, as viewed using the following:
-```{r}
+```{r 06-Chapter6-55}
 # viewing the estimated factors of unwanted variation in the column W_1
 pData(ruv_set)
 ```
 
 
 (2) Normalized counts obtained by regressing the original counts on the unwanted factors (normalizedCounts object within `ruv_set`). Note that the normalized counts should only used for exploratory purposes and not subsequent differential expression analyses. For additional information on this topic, please refer official *RUVSeq* documentation. The normalized counts can be viewed using the following:
-```{r}
+```{r 06-Chapter6-56}
 # Viewing the head of the normalized count data, accounting for unwanted variation
 head(normCounts(ruv_set))
 ```
 
 
 Let's again generate an exploratory plot using this updated dataset, focusing on the bar chart view since that was the most informative pre-RUV. Here are the updated bar charts summarizing overall data distributions per sample:
-```{r, fig.align='center'}
+```{r 06-Chapter6-57, fig.align='center'}
 colors <- brewer.pal(4, "Set2")
 plotRLE(ruv_set, outline=FALSE, ylim=c(-4, 4), col=colors[groups])
 ```
@@ -1114,7 +1114,7 @@ Note that these calculations, among others, are embedded within the DESeq2 funct
 Here we provide example script that is used to identify which genes are significantly differentially expressed in association with the example biomass smoke exposures, smoldering pine needles and flaming pine needles, as well as a positive inflammation control, LPS.
 
 First, we need to set-up the DESeq2 experiment:
-```{r, message=FALSE, warning=FALSE, error=FALSE}
+```{r 06-Chapter6-58, message=FALSE, warning=FALSE, error=FALSE}
 # Set up our experiment using our RUV adjusted count and phenotype data.
 # Our design indicates that our count data is dependent on the exposure condition (groups variable) and our factor of unwanted variation, and we have specified that there not be an intercept term through the use of '~0'
 dds <- DESeqDataSetFromMatrix(countData = counts(ruv_set), # Grabbing count data from the 'ruv_set' object
@@ -1147,7 +1147,7 @@ vsd_matrix <- as.matrix(assay(vsd))
 ```
 
 We could also export them using code such as:
-```{r eval = FALSE}
+```{r 06-Chapter6-59, eval = FALSE}
 # Export data
 write.csv(normcounts, "Chapter_6/Module6_2_Input/Module6_2_Output_NormalizedCounts.csv")
 write.csv(vsd_matrix, "Chapter_6/Module6_2_Input/Module6_2_Output_VSDCounts.csv", row.names=TRUE)
@@ -1165,7 +1165,7 @@ which we can easily code for using a loop function, as detailed below.
 
 Note that we have commented out the line of code for writing out the CSV because we do not need it for the rest of the module, but this could be used if you need to write out and view results in an external application such as Excel for supplementary materials. 
 
-```{r, message=FALSE, warning=FALSE, error=FALSE}
+```{r 06-Chapter6-60, message=FALSE, warning=FALSE, error=FALSE}
 # Run experiment
 dds_run <- DESeq(dds, betaPrior=FALSE) 
 
@@ -1224,7 +1224,7 @@ for (trt in trt_groups){ # Iterate for each of the treatments listed in 'trt_gro
 
 Here, we leverage MA plots to show how log fold changes relate to expression levels. In these plots, the log fold change is plotted on the y-axis and expression values are plotted along the x-axis, and dots are colored according to statistical significance (using padj<0.05 as the statistical filter). Here we will generate an MA plot for Flaming Pine Needles.
 
-```{r, message=F, warning=F, error=F, fig.align='center'}
+```{r 06-Chapter6-61, message=F, warning=F, error=F, fig.align='center'}
 
 res <- results(dds_run, pAdjustMethod = "BH", contrast = c("groups","PineNeedlesFlame_4h_Lung",ctrl)) # Re-extract the DESeq2 results for the flaming pine needles 
 MA <- data.frame(res) # Make a preliminary dataframe of the flaming pine needle results
@@ -1259,7 +1259,7 @@ An appropriate title for this figure could be:
 Similar to MA plots, volcano plots provide visualizations of fold changes in expression from transcriptomic data. However, instead of plotting these values against expression, log fold change is plotted against (adjusted) p-values in volcano plots. Here, we use functions within the *[EnhancedVolcano package](https://www.rdocumentation.org/packages/EnhancedVolcano/versions/1.11.3/topics/EnhancedVolcano)* to generate a volcano plot for Flaming Pine Needles. 
 
 Running the `EnhancedVolcano()` function to generate an example volcano plot:
-```{r, message=FALSE, warning=FALSE, error=FALSE, fig.align='center', out.width = 700, out.height = 580}
+```{r 06-Chapter6-62, message=FALSE, warning=FALSE, error=FALSE, fig.align='center', out.width = 700, out.height = 580}
 Vol <- data.frame(res) # Dataset to use for plotting
 
 EnhancedVolcano(Vol, 
@@ -1297,7 +1297,7 @@ To detail, the following input data are required to run *PIANO*:
 
 
 (1) Background gene set:
-```{r}
+```{r 06-Chapter6-63}
 # First grab the rownames of the 'res' object, which was redefined as the DESeq2 results for flaming pine needles prior to MA plot generation, and remove the BioSpyder numeric identifier using a sub function, while maintaining the gene symbol and place these IDs into a new list within the 'res' object (saved as 'id')
 res$id <- gsub("_.*", "", rownames(res));
 
@@ -1312,7 +1312,7 @@ Background[1:200] # viewing the first 200 genes in this background list
 ```
 
 (2) The list of genes identified with significant differential expression associated with flaming pine needles:
-```{r}
+```{r 06-Chapter6-64}
 # Similar to the above script, but starting with the res$id object
 # and filtering for genes with padj < 0.05
 
@@ -1328,7 +1328,7 @@ Therefore, this gene set includes 488 *unique* genes significantly associated wi
 
 (3) The underlying KEGG pathway dataset.
 Note that this file was simply downloaded from [MSigDB](https://www.gsea-msigdb.org/gsea/msigdb/), ready for upload as a .gmt file. Here, we use the `loadGSC()` function enabled through the *PIANO* package to upload and organize these pathways.
-```{r}
+```{r 06-Chapter6-65}
 KEGG_Pathways <- loadGSC(file="Chapter_6/Module6_2_Input/Module6_2_InputData3_KEGGv7.gmt", type="gmt")
 
 length(KEGG_Pathways$gsc) # viewing the number of biological pathways contained in the database
@@ -1337,7 +1337,7 @@ This KEGG pathway database therefore includes 186 biological pathways available 
 
 
 With these data inputs ready, we can now run the pathway enrichment analysis. The enrichment statistic that is commonly employed through the *PIANO* package is based of a hypergeometric test, run through the `runGSAhyper()` function. This returns a p-value for each gene set from which you can determine enrichment status.
-```{r, message=F, warning=F, error=F}
+```{r 06-Chapter6-66, message=F, warning=F, error=F}
 # Running the piano function based on the hypergeometric statistic
 Results_GSA <- piano::runGSAhyper(genes=SigGenes, universe=Background,gsc=KEGG_Pathways, gsSizeLim=c(1,Inf), adjMethod = "fdr")
 
@@ -1352,7 +1352,7 @@ This dataframe therefore summarizes the enrichment p-value for each pathway, FDR
 
 
 With these results, let's identify which pathways meet a statistical enrichment p-value filter of 0.05:
-```{r}
+```{r 06-Chapter6-67}
 SigPathways <- PathwayResults[which(PathwayResults$`p-value` < 0.05),]
 rownames(SigPathways)
 ```
@@ -1482,7 +1482,7 @@ Though statistical methodologies are still evolving, we will be discussing our c
 
 There are many methods that can be implemented to also elucidate relationships between individual chemicals/chemical groups in complex mixtures and their resulting toxicity/health effects. Some of the more common methods used in mixtures analyses, as identified by our team, are summarized in the below figure according to potential questions that could be asked in a study. Two of the methods, specifically quantile based g-computation (qgcomp) and bayesian kernel machine regression (BKMR) are highlighted as example mixtures scripted activities (qgcomp in this script and BKMR in Mixtures Methods 2). Throughout TAME 2.0 training materials, other methods are included such as Principal Component Analysis (PCA), K-means clustering, hierarchical clustering, and predictive modeling / machine learning (e.g., Random Forest modeling and variable selection). The following figure provides an overview of the types of questions that can be asked regarding mixtures and models that are commonly used to answer these questions:
 
-```{r, echo=FALSE, fig.align='center'} 
+```{r 06-Chapter6-68, echo=FALSE, fig.align='center' }
 knitr::include_graphics("Chapter_6/Module6_3_Input/Module6_3_Mixtures_Methods_Overview.png")
 ```
 
@@ -1527,7 +1527,7 @@ library(qgcomp)
 
 
 Optionally, you can also create a current date variable to name output files, and create an output folder. 
-```{r eval = FALSE}
+```{r 06-Chapter6-69, eval = FALSE}
 # Create a current date variable to name outputfiles
 cur_date <- str_replace_all(Sys.Date(),"-","")
 
@@ -1536,7 +1536,7 @@ Output_Folder <- ("Module6_3_Output/")
 ```
 
 ### Data Import 
-```{r}
+```{r 06-Chapter6-70}
 cohort <- read.csv(file="Chapter_6/Module6_3_Input/Module6_3_InputData.csv")
 colnames(cohort)
 head(cohort)
@@ -1568,7 +1568,7 @@ Other variables of interest (outcome and covariates) in this dataset:
 #### Check variable formats
 
 Ensure that the outcome variable is binomial (factor) and has the correct reference level. Ensure that the exposure variables are categorical (factors). Ensure that covariates are in the correct variable format 
-```{r, message=F, warning=F, error=F}
+```{r 06-Chapter6-71, message=F, warning=F, error=F}
 
 #outcome variable
 cohort <- cohort %>% 
@@ -1610,7 +1610,7 @@ cohort <- cohort %>%
 #### Fit adjusted logistic regression models for each metal, for each categorical variable
 
 First, we will fit an adjusted logistic regression model for each metal, for each categorical variable, to demonstrate a variable by variable approach before diving into mixtures methods. Note that there are different regression techniques (linear and logistic are covered in another TAME module) and that here we will start with using percentage variables.
-```{r, message=F, warning=F, error=F}
+```{r 06-Chapter6-72, message=F, warning=F, error=F}
 
 metals <- c("Arsenic","Cadmium","Chromium", "Copper","Lead","Manganese","Zinc")
 
@@ -1647,7 +1647,7 @@ for (i in 1:length(metals)) {
 ```
 
 Plot the results:
-```{r, message=F, warning=F, error=F, fig.align='center'}
+```{r 06-Chapter6-73, message=F, warning=F, error=F, fig.align='center'}
 
 
 perc_plots <- ggarrange(Arsenic_adj_perc_plot,
@@ -1663,7 +1663,7 @@ plot(perc_plots1)
 ```
 
 Save the plots:
-```{r, eval = FALSE}
+```{r 06-Chapter6-74, eval = FALSE}
 tiff(file = (paste0(Output_Folder,"/", cur_date, "_NCbirths_pretermbirth_singlemetal_adjusted_models_percplots_1.tiff")), width = 10, height = 8, units = "in", pointsize = 12, res = 600)
 plot(perc_plots)
 dev.off()
@@ -1675,7 +1675,7 @@ dev.off()
 ```
 
 We can also run the analysis using limit variables: 
-```{r, message=F, warning=F, error=F, fig.align='center'}
+```{r 06-Chapter6-75, message=F, warning=F, error=F, fig.align='center'}
 
   for (i in 1:length(metals)) {
   metal <- metals[[i]]
@@ -1712,7 +1712,7 @@ Note: you will get this warning for some of the models:
 This is because for the variability in the exposure data, ideally the sample size would be larger (as noted above the analysis this draws from was completed on >1.3million observations). 
 
 Plot the results:
-```{r, message=F, warning=F, error=F, fig.align='center'}
+```{r 06-Chapter6-76, message=F, warning=F, error=F, fig.align='center'}
 limit_plots <- ggarrange(Arsenic_adj_limit_plot,
                         Cadmium_adj_limit_plot,
                         Chromium_adj_limit_plot,
@@ -1728,7 +1728,7 @@ plot(limit_plots1)
 ```
 
 Save the plots:
-```{r, eval = FALSE}
+```{r 06-Chapter6-77, eval = FALSE}
 tiff(file = (paste0(Output_Folder,"/", cur_date, "_NCbirths_pretermbirth_singlemetal_adjusted_models_limitplots1.tiff")), width = 10, height = 8, units = "in", pointsize = 12, res = 600)
 plot(limit_plots)
 dev.off()
@@ -1739,7 +1739,7 @@ dev.off()
 ```
 
 Merge all of the logistic regression model results. This is the data frame that you could export for supplementary material or to view the results in Excel. 
-```{r, message=F, warning=F, error=F}
+```{r 06-Chapter6-78, message=F, warning=F, error=F}
 #merge all model output 
 results_df <- rbind(Arsenic_adj_perc, Arsenic_adj_limit,
                     Cadmium_adj_perc, Cadmium_adj_limit,
@@ -1751,7 +1751,7 @@ results_df <- rbind(Arsenic_adj_perc, Arsenic_adj_limit,
 ```
 
 To select only the coefficients related to the primary exposures:
-```{r}
+```{r 06-Chapter6-79}
 results_df <- results_df %>% filter(str_detect(term, 'limit|50to90|over90')) 
 ```
 
@@ -1773,7 +1773,7 @@ This file outputs the coefficients and the odds ratios (OR) of the logistic regr
 While the single contaminant models provide useful information, they cannot inform us of the effect of multiple simultaneous exposures or account for co-occurring contaminant confounding. Therefore, we want to utilize quantile g-compuation to assess mixtures. 
 
 ## Mixtures Model with Standard qqcomp
-```{r, message=F, warning=F, error=F}
+```{r 06-Chapter6-80, message=F, warning=F, error=F}
 #list of exposure variables
 Xnm <- c('Arsenic.Mean_avg', 'Cadmium.Mean_avg', 'Lead.Mean_avg', 'Manganese.Mean_avg', 'Chromium.Mean_avg', 'Copper.Mean_avg', 'Zinc.Mean_avg')
 #list of covariates 
@@ -1788,7 +1788,7 @@ PTB_adj_ppb <- qgcomp.noboot(preterm~.,
 In English, `preterm~.` is saying fit a model that has preterm (1/0) as the dependent variable and then the independent variables (exposures and covariates) are all other variables in the dataset (`.`). `expnms=Xnm` is saying that the mixture of exposures is given by the vector `Xnm,` defined above. `dat=cohort[,c(Xnm,covars,'preterm')]` is saying that the dataset to be used to fit this model includes all columns in the cohort dataset that are listed in the `Xnm` and `covars` vectors and also the `preterm` variable. `family=binomial()` is saying that the outcome is a binary outcome and therefore the model will fit a logistic regression model. `q=4` is saying break the exposures into quartiles, other options would be q=3 for teriltes, q=5 for quintiles and so forth. 
 
 This is a summary of the qgcomp model output
-```{r, message=F, warning=F, error=F}
+```{r 06-Chapter6-81, message=F, warning=F, error=F}
 PTB_adj_ppb
 ```
 This output can be interpreted as:
@@ -1801,12 +1801,12 @@ This output can be interpreted as:
 IMPORTANT NOTE: as described above, these results differ from the publication (Eaves et al. 2023) because this scripted example is conducted on a smaller subsetted dataset.
 
 This is the plot that gives you the weights of the components 
-```{r, message=F, warning=F, error=F, fig.align='center'}
+```{r 06-Chapter6-82, message=F, warning=F, error=F, fig.align='center'}
 plot(PTB_adj_ppb)
 ```
 
 To save the plot: 
-```{r, eval = FALSE}
+```{r 06-Chapter6-83, eval = FALSE}
 tiff(file = (paste0(Output_Folder,"/", cur_date, "_NCbirths_pretermbirth_qgcomp_weights.tiff")), width = 10, height = 8, units = "in", pointsize = 12, res = 600)
 plot(PTB_adj_ppb)
 dev.off()
@@ -1847,7 +1847,7 @@ We can export the mixtures modeling results using the following code, which stor
 + Results_SlopeParams outputs the overall mixture effect results
 + Results_MetalCoeffs outputs the individual mixture components (metals) coefficients. Note that this will also output coefficient for covariates included in the model. 
 + Results_MetalWeights outputs the individual mixture components (metals) weights 
-```{r, message=F, warning=F, error=F, eval = FALSE}
+```{r 06-Chapter6-84, message=F, warning=F, error=F, eval = FALSE}
 allmodels <- c("PTB_adj_ppb") #if you run more than one qgcomp model, list them here and the following code can output the results in clean format all together
 
 clean_print <- function(x){
@@ -2021,7 +2021,7 @@ library(bkmr)
 ```
 
 Optionally, you can also create a current date variable to name output files, and create an output folder. 
-```{r eval = FALSE}
+```{r 06-Chapter6-85, eval = FALSE}
 #Create a current date variable to name outputfiles
 cur_date <- str_replace_all(Sys.Date(),"-","")
 
@@ -2030,7 +2030,7 @@ Output_Folder <- ("Module6_4_Output/")
 ```
 
 ### Data Import
-```{r}
+```{r 06-Chapter6-86}
 cohort <- read.csv(file="Chapter_6/Module6_4_Input/Module6_4_InputData.csv")
 colnames(cohort)
 head(cohort)
@@ -2071,7 +2071,7 @@ In addition, it is highly recommended to conduct single-contaminant modeling ini
 First, define a matrix/vector of the exposure mixture, outcome, and confounders/covariates. BKMR performs better when the exposures are on a similar scale and when there are not outliers. Thus, we center and scale the exposure variables first. As noted above, in a complete analysis, thorough examination of exposure variable distributions, including outliers and normality, would be conducted before any exposure-outcome modeling. For more information on normality testing, see **TAME 2.0 Module 3.3 Normality Tests and Data Transformations.** 
 
 First, we'll assign the matrix variables to their own data frame and scale the data.
-```{r, message=F, warning=F, error=F}
+```{r 06-Chapter6-87, message=F, warning=F, error=F}
 #exposure mixture variables
 mixture <- as.matrix(cohort[,10:17])
 mixture <- log(mixture)
@@ -2080,7 +2080,7 @@ summary(mixture)
 ```
 
 Then, we'll define the outcome variable and ensure it is the proper class and leveling.
-```{r}
+```{r 06-Chapter6-88}
 #outcome variable
 cohort$inflam_intense  <-as.factor(cohort$inflam_intense)
 cohort$inflam_intense <- relevel(cohort$inflam_intense, ref = "0")
@@ -2088,13 +2088,13 @@ y<-as.numeric(as.character(cohort$inflam_intense))
 ```
 
 Next, we'll assign the covariates to a matrix. 
-```{r}
+```{r 06-Chapter6-89}
 #covariates
 covariates<-as.matrix(cohort[,7:9])
 ```
 
 Then, we can fit the BKMR model. Note that this script will take a few minutes to run. 
-```{r}
+```{r 06-Chapter6-90}
 set.seed(111)
 fitkm <- kmbayes(y = y, Z = mixture, X = covariates, iter = 5000, verbose = FALSE, varsel = TRUE, family="binomial", est.h = TRUE)
 ```
@@ -2103,7 +2103,7 @@ For full information regarding options for the kmbayes function, refer to the BK
  
 ### Assess Variable Importance  
 BKMR conducts a variable selection procedure and generates posterior inclusion probabilities (PIP). The larger the PIP, the more a variable is contributing to the overall exposure-outcome effect. These are relative to each other,so there is no threshold as to when a variable becomes an "important" contributor (similar to the weights in quantile g-computation). 
-```{r, message=F, warning=F, error=F}
+```{r 06-Chapter6-91, message=F, warning=F, error=F}
 ExtractPIPs(fitkm)
 ```
 
@@ -2123,13 +2123,13 @@ Relative to each other, the contributions to the effect of the mixture on neonat
 
 We can use trace plots to evaluate how the parameters in the model converge over the many iterations. We hope to see that the line moves randomly but centers around a straight line 
 
-```{r, message=F, warning=F, error=F, fig.align = "center"}
+```{r 06-Chapter6-92, message=F, warning=F, error=F, fig.align = "center"}
 sel<-seq(0,5000,by=1)
 TracePlot(fit = fitkm, par = "beta", sel=sel)
 ```
 
 Based on this plot, it looks like the burn in period is roughly 1000 iterations. We will remove these from the results. 
-```{r, message=F, warning=F, error=F, fig.align = "center"}
+```{r 06-Chapter6-93, message=F, warning=F, error=F, fig.align = "center"}
 sel<-seq(1000,5000,by=1)
 TracePlot(fit = fitkm, par = "beta", sel=sel)
 ```
@@ -2141,7 +2141,7 @@ As described above, one way to examine single effects is to calculate the odds r
 
 Here, we use the `PredictorResponseUnivar()` function to generate a dataset that details, at varying levels of each exposure (`z`), the relationship between that exposure and the outcome, holding other exposures at their 50th percentile and covariates constant. This relationship is given by a beta value, which because we have a binomial outcome and fit a probit model represents the log(odds) (`est`). The standard error for the beta value is also calculated (`se`). 
 
-```{r, message=F, warning=F, error=F, fig.align = "center"}
+```{r 06-Chapter6-94, message=F, warning=F, error=F, fig.align = "center"}
 pred.resp.univar <- PredictorResponseUnivar(fit=fitkm, sel=sel, 
                                             method="approx", q.fixed = 0.5)
 
@@ -2150,7 +2150,7 @@ head(pred.resp.univar)
 
 We can then plot these data for each exposure to visualize the exposure-response function for each exposure. 
 
-```{r}
+```{r 06-Chapter6-95}
 ggplot(pred.resp.univar, aes(z, est, ymin = est - 1.96*se, 
                              ymax = est + 1.96*se)) + 
   geom_smooth(stat = "identity") + ylab("h(z)") + facet_wrap(~ variable) 
@@ -2158,7 +2158,7 @@ ggplot(pred.resp.univar, aes(z, est, ymin = est - 1.96*se,
 
 Then, we can generate a dataset that contains for each exposure (`variable`), the log(OR) (`est`) (and its standard deviation (`sd`)) corresponding to the odds of neonatal inflammation when an exposure is at its 75th compared to the odds when at the 25th percentile. The log(OR) is estimated at three levels of the other exposures (25th, 50th and 75th percentiles). We can use this dataset to identify odds ratios for neonatal inflammation (comparing the 75th to 25th percentile odds) for each exposure at differing levels of the other exposures. These odds ratios approximate risk, whereby an odds ratio >1 means there is increased risk of neonatal inflammation when that exposure is at its 75th percentile compared to its 25th percentile. We can then plot these data to see the logOR for each metal in relation to neonatal inflammation at varying levels of the rest of the exposures. 
 
-```{r, message=F, warning=F, error=F, fig.align = "center"}
+```{r 06-Chapter6-96, message=F, warning=F, error=F, fig.align = "center"}
 risks.singvar <- SingVarRiskSummaries(fit=fitkm, qs.diff = c(0.25, 0.75),
                                       q.fixed = c(0.25, 0.50, 0.75), 
                                       method = "approx")
@@ -2198,7 +2198,7 @@ ggplot(risks.singvar, aes(variable, est, ymin = est - 1.96*sd,
 
 Next, we can generate a dataset that details the effect (ie. log(OR) (`est`) and corresponding standard deviation (`sd`)) on neonatal inflammation of all exposures when at a particular quantile (`quantile`) compared to all exposures being at the 50th percentile. We can use this dataset to identify odds ratios for neonatal inflammation upon simultaneous exposure to the entire mixture for different quantile threshold comparisons. These odds ratios approximate risk, whereby an odds ratio >1 means there is increased risk of neonatal inflammation when the entire mixture is set at the index quantile, compared to the 50th percentile. We can also plot these results to visualize the overall mixture effect dose-response relationship. 
 
-```{r, message=F, warning=F, error=F, fig.align = "center"}
+```{r 06-Chapter6-97, message=F, warning=F, error=F, fig.align = "center"}
 risks.overall <- OverallRiskSummaries(fit=fitkm, qs=seq(0.25, 0.75, by=0.05), 
                                       q.fixed = 0.5, method = "approx",
                                       sel=sel)
@@ -2223,7 +2223,7 @@ ggplot(risks.overall, aes(quantile, est, ymin = est - 1.96*sd,
 ### Evaluating interactive effects  
 
 To understand bivariate interactions, we can generate a dataset that for each pairing of exposures details at varying levels of both exposures, the log(odds) (`est`, and associated standard deviation (`sd`)) of neonatal inflammation when all the other exposures are held constant. These plots can be tricky to interpret, so another way of looking at these results is to take "cross sections" at specific quantiles of the second exposure (see next step). 
-```{r, message=F, warning=F, error=F, fig.align = "center"}
+```{r 06-Chapter6-98, message=F, warning=F, error=F, fig.align = "center"}
 pred.resp.bivar  <- PredictorResponseBivar(fit=fitkm,  min.plot.dist = 1, 
                                            sel=sel,  method="approx")
 
@@ -2238,7 +2238,7 @@ ggplot(pred.resp.bivar, aes(z1, z2, fill = est)) +
 
 Next, we generate a dataset that includes for each pairing of exposures, the log(odds) (`est` and associated standard deviation `sd`) of neonatal inflammation at varying concentrations (`z1`) of the first exposure (`variable 1`) when the second exposure (`variable 2` is at its 25th, 50th and 75th percentile (`quantile`). 
 
-```{r, message=F, warning=F, error=F, fig.align = "center"}
+```{r 06-Chapter6-99, message=F, warning=F, error=F, fig.align = "center"}
 pred.resp.bivar.levels <- PredictorResponseBivarLevels(pred.resp.df= 
                         pred.resp.bivar,   Z = mixture, both_pairs=TRUE, 
                         qs = c(0.25, 0.5, 0.75))
@@ -2252,7 +2252,7 @@ ggplot(pred.resp.bivar.levels, aes(z1, est)) +
 
 There is evidence of an interactive effect between two exposures when the exposure-response function for exposure 1 varies in form between the different quantiles of exposure 2. You can also zoom in on one plot, for example: 
 
-```{r, message=F, warning=F, error=F, fig.align = "center"}
+```{r 06-Chapter6-100, message=F, warning=F, error=F, fig.align = "center"}
 HgCd <- pred.resp.bivar.levels %>% 
   filter(variable1=="Hg_ngg") %>% 
   filter(variable2=="Cd_ngg")
@@ -2274,7 +2274,7 @@ ggplot(CdHg, aes(z1, est)) +
 ```
 
 To visualize interactions between one exposure and the rest of the exposure components, we generate a dataset that details the difference in each exposure's (`variable`) log(OR) comparing 75th to 25th percentile (`est`, and associated standard deviation `sd`) when the other exposure components are at their 75th versus 25th percentile. Perhaps more intuitively, these estimates represent the blue - red points plotted in the second figure under the single exposure effects section. 
-```{r, message=F, warning=F, error=F, fig.align = "center"}
+```{r 06-Chapter6-101, message=F, warning=F, error=F, fig.align = "center"}
 
 risks.int <- SingVarIntSummaries(fit=fitkm, qs.diff = c(0.25, 0.75),
                                  qs.fixed = c(0.25, 0.75))
@@ -2331,7 +2331,7 @@ Using the simulated dataset within the bkmr package (see below code for how to c
 Note that the outcome (y) variable is a continuous variable here, rather than binary as in the scripted example. 
 :::
 
-```{r}
+```{r 06-Chapter6-102}
 # Set seed for reproducibility
 set.seed(111)
 
@@ -2395,7 +2395,7 @@ The toxicological profiles of these samples were also analyzed using *in vitro* 
 
 #### Install required R packages
 If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you
-```{r, results=FALSE, message=FALSE}
+```{r 06-Chapter6-103, results=FALSE, message=FALSE}
 if (!requireNamespace("tidyverse"))
   install.packages("tidyverse");
 if (!requireNamespace("readxl"))
@@ -2411,7 +2411,7 @@ if (!requireNamespace("ggplotify"))
 ```
 
 #### Loading required packages
-```{r, results=FALSE, message=FALSE}
+```{r 06-Chapter6-104, results=FALSE, message=FALSE}
 library(readxl) #used to read in and work with excel files
 library(factoextra) #used to run and visualize multivariate analyses, here PCA
 library(pheatmap) #used to make heatmaps. This can be done in ggplot2 but pheatmap is easier and nicer
@@ -2421,7 +2421,7 @@ library(tidyverse) #all tidyverse packages, including dplyr and ggplot2
 ```
 
 #### Set your working directory
-```{r, eval=FALSE, echo=TRUE}
+```{r 06-Chapter6-105, eval=FALSE, echo=TRUE}
 setwd("/filepath to where your input files are")
 ```
 
@@ -2429,7 +2429,7 @@ setwd("/filepath to where your input files are")
 
 We need to first read in the chemistry and toxicity data from the provided excel file. Here, data were originally organized such that the actual observations start on row 2 (dataset descriptions were in the first row). So let's implement skip=1, which skips reading in the first row.
 
-```{r}
+```{r 06-Chapter6-106}
 chem <- read_xlsx("Chapter_6/Module6_5_Input/Module6_5_InputData.xlsx" , sheet = "chemistry data", skip=1) # loads the chemistry data tab
 tox  <- read_xlsx("Chapter_6/Module6_5_Input/Module6_5_InputData.xlsx" , sheet = "in vitro data", skip=1) # loads the toxicity data tab
 ```
@@ -2437,13 +2437,13 @@ tox  <- read_xlsx("Chapter_6/Module6_5_Input/Module6_5_InputData.xlsx" , sheet =
 ### View example dataset
 
 Let's first see how many rows and columns of data are present in both datasets:
-```{r}
+```{r 06-Chapter6-107}
 dim(chem)
 ```
 
 The chemistry dataset contains information on 29 samples (rows); and 1 sample identifier + 12 chemicals (total of 13 columns).
 
-```{r}
+```{r 06-Chapter6-108}
 dim(tox)
 ```
 
@@ -2451,19 +2451,19 @@ The tox dataset contains information on 29 samples (rows); and 1 sample identifi
 
 
 Let's also see what kind of data are organized within the datasets:
-```{r}
+```{r 06-Chapter6-109}
 colnames(chem)
 ```
 
-```{r}
+```{r 06-Chapter6-110}
 head(chem)
 ```
 
-```{r}
+```{r 06-Chapter6-111}
 colnames(tox)
 ```
 
-```{r}
+```{r 06-Chapter6-112}
 head(tox)
 ```
 
@@ -2477,18 +2477,18 @@ In summary, PCA finds dimensions (eigenvectors) in the higher dimensional origin
 Before we can run PCA on this chemistry dataset, we first need to scale the data across samples. We do this here for the chemistry dataset, because we specifically want to evaluate and potentially highlight/emphasize chemicals that may be at relatively low abundance. These low-abundance chemicals may actually be contaminants that drive toxicological effects.
 
 Let's first re-save the original chemistry dataset to compare off of:
-```{r}
+```{r 06-Chapter6-113}
 chem_original <- chem
 ```
 
 Then, we'll make a scaled version to carry forward in this analysis. To do this, we move the sample column the row names and then scale and center the data.
-```{r}
+```{r 06-Chapter6-114}
 chem <- chem %>% column_to_rownames("Sample")
 chem <- as.data.frame(scale(as.matrix(chem)))
 ```
 
 Let's now compare one of the rows of data (here, sample GbE_E) to see what scaling did:
-```{r}
+```{r 06-Chapter6-115}
 chem_original[5,]
 chem[5,]
 ```
@@ -2496,28 +2496,28 @@ chem[5,]
 You can see that scaling made the concentrations distributed across each chemical center around 0.
 
 Now, we can run PCA on the scaled data:
-```{r}
+```{r 06-Chapter6-116}
 chem_pca <- princomp(chem)
 ```
 
 Looking at the scree plot, we see the first two principal components capture most of the variance in the data (~64%):
-```{r fig.align = "center"}
+```{r 06-Chapter6-117, fig.align = "center"}
 fviz_eig(chem_pca, addlabels = TRUE)
 ```
 
 
 Here are the resulting PCA scores for each sample, for each principal component (shown here as components 1-12):
-```{r}
+```{r 06-Chapter6-118}
 head(chem_pca$scores)
 ```
 
 And the resulting loading factors of each chemical's contribution towards each principal component. Results are arranged by a chemical's contribution to PC1, the component accounting for most of the variation in the data.
-```{r}
+```{r 06-Chapter6-119}
 head(chem_pca$loadings)
 ```
 
 We can save the chemical-specific loadings into a separate matrix and view them from highest to lowest values for PC1. 
-```{r}
+```{r 06-Chapter6-120}
 loadings <- as.data.frame.matrix(chem_pca$loadings)  
 loadings %>% arrange(desc(Comp.1))
 ```
@@ -2525,7 +2525,7 @@ loadings %>% arrange(desc(Comp.1))
 These resulting loading factors allow us to identify which constituents (of the 12 total) contribute to the principal components explaining data variabilities. For instance, we can see here that **Quercetin** is listed at the top, with the largest loading value for principal component 1. Thus, Quercetin represents the constituents that contributes to the overall variability in the dataset to the greatest extent. The next three chemicals are all **Ginkgolide** constituents, followed by **Bilobalide** and **Kaempferol**, and so forth.
 
 If we look at principal component 2 (PC2), we can now see a different set of chemicals contributing to the variability captured in this component:
-```{r}
+```{r 06-Chapter6-121}
 loadings %>% arrange(desc(Comp.2))
 ```
 
@@ -2533,7 +2533,7 @@ Here, **Ginkgolic Acids** are listed first.
 
 We can also visualize sample groupings based on these principal components 1 & 2:
 
-```{r, warning=FALSE, message=FALSE, fig.height=6, fig.width=8, fig.align = "center"}
+```{r 06-Chapter6-122, warning=FALSE, message=FALSE, fig.height=6, fig.width=8, fig.align = "center"}
 # First pull the percent variation captured by each component
 pca_percent <- round(100*chem_pca$sdev^2/sum(chem_pca$sdev^2),1)
 
@@ -2584,7 +2584,7 @@ As an alternative way of viewing the chemical profile data, we can make a heatma
 
 By default, `pheatmap()` uses a Euclidean distance to cluster the observations, which is a very common clustering algorithm.
 For more details, see the following description of [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) and for more information on hierarchical clustering, see **TAME 2.0 Module 5.5 Unsupervised Machine Learning Part 2: Additional Clustering Applications**.
-```{r, warning=FALSE, message=FALSE, fig.align = "center"}
+```{r 06-Chapter6-123, warning=FALSE, message=FALSE, fig.align = "center"}
 chem_hm <- pheatmap(chem, main="GbE Sample Heatmap by Chemistry Profiles",
                     cluster_rows=TRUE, cluster_cols = FALSE,
                     angle_col = 45, fontsize_col = 7, treeheight_row = 60)
@@ -2602,14 +2602,14 @@ This plot tells us a lot about the individual chemicals that differentiate the s
 :::
 
 Let's now revisit the PCA plot:
-```{r, warning=FALSE, message=FALSE, fig.height=3, fig.width=5, fig.align = "center"}
+```{r 06-Chapter6-124, warning=FALSE, message=FALSE, fig.height=3, fig.width=5, fig.align = "center"}
 chem_pca_plt
 ```
 
 GbE_G and GbE_N look so different from the rest of the samples that they could be outliers and potentially influencing overall data trends. Let's make sure that, if we remove these two samples, our sample groupings still look the same.
 
 First, we remove those two samples from the dataframe:
-```{r, warning=FALSE, message=FALSE}
+```{r 06-Chapter6-125, warning=FALSE, message=FALSE}
 chem_filt <- chem %>%
   rownames_to_column("Sample") %>%
   filter(!Sample %in% c("GbE_G","GbE_N")) %>%
@@ -2617,7 +2617,7 @@ chem_filt <- chem %>%
 ```
 
 Then, we can re-run PCA and generate a heatmap of the chemical data with these outlier samples removed:
-```{r, warning=FALSE, message=FALSE, fig.align = "center"}
+```{r 06-Chapter6-126, warning=FALSE, message=FALSE, fig.align = "center"}
 chem_filt_pca <- princomp(chem_filt)
 
 # Get the percent variation captured by each component
@@ -2646,7 +2646,7 @@ chem_filt_pca_plt
 
 
 To view the PCA plots of all samples vs filtered samples:
-```{r, warning=FALSE, message=FALSE, fig.height=9, fig.width=8, fig.align = "center"}
+```{r 06-Chapter6-127, warning=FALSE, message=FALSE, fig.height=9, fig.width=8, fig.align = "center"}
 grid.arrange(chem_pca_plt, chem_filt_pca_plt)
 ```
 
@@ -2667,22 +2667,22 @@ grid.arrange(chem_pca_plt, chem_filt_pca_plt)
 Now, we will perform sufficient similarity analysis using the toxicity data. Unlike the chemistry dataset, we can use the toxicity dataset as is without scaling because we want to focus on genes that are showing a large response. Similarly, we want to de-emphasize genes that are showing a strong response to the exposure condition. If we scale these data, we will reduce this needed variability.
 
 Here, we first move the sample column to row names:
-```{r, warning=FALSE, message=FALSE}
+```{r 06-Chapter6-128, warning=FALSE, message=FALSE}
 tox <- tox %>% column_to_rownames("Sample")
 ```
 
 Then, we can run PCA on this tox dataframe:
-```{r, warning=FALSE, message=FALSE}
+```{r 06-Chapter6-129, warning=FALSE, message=FALSE}
 tox_pca <- princomp(tox)
 ```
 
 Looking at the scree plot, we see the first two principal components capture most of the variation (~93%):
-```{r, warning=FALSE, message=FALSE, fig.align = "center"}
+```{r 06-Chapter6-130, warning=FALSE, message=FALSE, fig.align = "center"}
 fviz_eig(tox_pca, addlabels = TRUE)
 ```
 
 We can then create a plot of the samples by principal components:
-```{r, warning=FALSE, message=FALSE, fig.height=7, fig.width=6, fig.align = "center"}
+```{r 06-Chapter6-131, warning=FALSE, message=FALSE, fig.height=7, fig.width=6, fig.align = "center"}
 # Get the percent variation captured by each component
 pca_percent <- round(100*tox_pca$sdev^2/sum(tox_pca$sdev^2),1)
 
@@ -2719,7 +2719,7 @@ This plot tells us a lot about sample groupings based on toxicity profiles!
 
 
 Similar to the chemistry data, as an alternative way of viewing the toxicity profile data, we can make a heatmap of the toxicity data:
-```{r, warning=FALSE, message=FALSE, fig.align = "center"}
+```{r 06-Chapter6-132, warning=FALSE, message=FALSE, fig.align = "center"}
 tox_hm <- pheatmap(tox, main="GbE Sample Heatmap by Toxicity Profiles",
                cluster_rows=TRUE, cluster_cols = FALSE,
                angle_col = 45, fontsize_col = 7, treeheight_row = 60)
@@ -2741,18 +2741,18 @@ This plot tells us a lot about the individual genes that differentiate the sampl
 ## Comparing Chemistry vs. Toxicity Sufficient Similarity Analyses
 
 Let's view the PCA plots for both datasets together, side-by-side:
-```{r, fig.height=8, fig.width=11, fig.align = "center"}
+```{r 06-Chapter6-133, fig.height=8, fig.width=11, fig.align = "center"}
 pca_compare <- grid.arrange(chem_pca_plt,tox_pca_plt, nrow=1)
 ```
 
 Let's also view the PCA plots for both datasets together, top-to-bottom, to visualize the trends along both axes better between these two views:
-```{r, fig.height=10, fig.width=10, fig.align = "center"}
+```{r 06-Chapter6-134, fig.height=10, fig.width=10, fig.align = "center"}
 pca_compare <- grid.arrange(chem_pca_plt,tox_pca_plt)
 ```
 
 Here is an edited version of the above figures, highlighting with colored circles some chemical groups of interest identified through chemistry vs toxicity-based sufficient similarity analyses:
 
-```{r, echo=FALSE, fig.align = "center"} 
+```{r 06-Chapter6-135, echo=FALSE, fig.align = "center" }
 knitr::include_graphics("Chapter_6/Module6_5_Input/Module6_5_Image1.png")
 ```
 
@@ -2841,7 +2841,7 @@ The bioactivity-exposure ratio (BER) is then calculated across chemicals with bo
 
 To understand what toxicokinetic modeling is, consider the following scenario:
 
-```{r, echo=FALSE, fig.align = "center"} 
+```{r 06-Chapter6-136, echo=FALSE, fig.align = "center" }
 knitr::include_graphics("Chapter_6/Module6_6_Input/Module6_6_Image1.png")
 ```
 
@@ -2894,13 +2894,13 @@ For further information on TK modeling background, math, and example models, the
 ### Script Preparations
 
 #### Cleaning the global environment
-```{r}
+```{r 06-Chapter6-137}
 rm(list=ls())
 ```
 
 #### Installing required R packages
 If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you
-```{r, results=FALSE, message=FALSE}
+```{r 06-Chapter6-138, results=FALSE, message=FALSE}
 if(!nzchar(system.file(package = "ggplot2"))){
   install.packages("ggplot2")}
 if(!nzchar(system.file(package = "reshape2"))){
@@ -2915,7 +2915,7 @@ if(!nzchar(system.file(package = "eulerr"))){
 
 
 #### Loading R packages required for this session
-```{r, results=FALSE, message=FALSE}
+```{r 06-Chapter6-139, results=FALSE, message=FALSE}
 library(ggplot2) # ggplot2 will be used to generate associated graphics
 library(reshape2) # reshape2 will be used to organize and transform datasets
 library(stringr) # stringr will be used to aid in various data manipulation steps through this module
@@ -2941,14 +2941,14 @@ You can see a browsable list of vignettes by typing `browseVignettes("httk")` at
 
 You can get information about any function in *httk*, or indeed any function in any R package, by typing `help()` and placing the function name in quotation marks inside the parentheses. For example, to get information about the *httk* function `solve_model()`, type this:
 
-```{r, eval=FALSE}
+```{r 06-Chapter6-140, eval=FALSE}
 help("solve_model")
 ```
 
 Note that this module was run with `httk` version 2.4.0.
 
 #### Set your working directory
-```{r, eval=FALSE, echo=TRUE}
+```{r 06-Chapter6-141, eval=FALSE, echo=TRUE}
 setwd("/filepath to where your input files are")
 ```
 
@@ -2996,7 +2996,7 @@ Each of these TK models has chemical-specific parameters. The chemical-specific 
 
 Look at the first few rows of this data.frame to see everything that's in there (it is a lot of information).
 
-```{r}
+```{r 06-Chapter6-142}
 head(chem.physical_and_invitro.data)
 ```
 
@@ -3010,7 +3010,7 @@ You can easily get a list of all the chemicals for which a specific TK model can
 
 For example, here is how you get a list of all the chemicals for which the PBTK model can be parameterized for humans.
 
-```{r, warning = FALSE}
+```{r 06-Chapter6-143, warning = FALSE}
 chems_pbtk <- get_cheminfo(info = c("Compound", "CAS", "DTXSID"),
                            model = "pbtk",
                            species = "Human")
@@ -3020,19 +3020,19 @@ head(chems_pbtk) #first few rows
 
 
 How many such chemicals have parameter data to run a PBTK model in this package?
-```{r}
+```{r 06-Chapter6-144}
 nrow(chems_pbtk)
 ```
 
 Here is how you get all the chemicals for which the 3-compartment steady-state model can be parameterized for humans.
-```{r}
+```{r 06-Chapter6-145}
 chems_3compss <- get_cheminfo(info = c("Compound", "CAS", "DTXSID"),
                            model = "3compartmentss",
                            species = "Human")
 ```
 
 How many such chemicals have parameter data to run a 3-compartment steady-state model in this package?
-```{r}
+```{r 06-Chapter6-146}
 nrow(chems_3compss)
 ```
 
@@ -3042,7 +3042,7 @@ The 3-compartment steady-state model can be parameterized for a few more chemica
 
 You can solve any of the models for a specified chemical and specified dosing protocol, and get concentration vs. time predictions, using the function `solve_model()`. For example:
 
-```{r, warning=FALSE}
+```{r 06-Chapter6-147, warning=FALSE}
 sol_pbtk <- solve_model(chem.name = "Bisphenol-A", #chemical to simulate
             model = "pbtk", #TK model to use
             dosing = list(initial.dose = NULL, #for repeated dosing, if first dose is different from the rest, specify first dose here
@@ -3056,13 +3056,13 @@ There are some cryptic-sounding warnings that can safely be ignored. (They are p
 
 The output, assigned to `sol_pbtk`, is a matrix with concentration vs. time data for each of the compartments in the pbtk model. Time is in units of days. Additionally, the output traces the amount excreted via passive renal filtration (`Atubules`), the amount metabolized in the liver (`Ametabolized`), and the cumulative area under the curve for plasma concentration vs. time (`AUC`). Here are the first few rows of `sol_pbtk` so you can see the format.
 
-```{r}
+```{r 06-Chapter6-148}
 head(sol_pbtk)
 ```
 
 You can plot the results, for example plasma concentration vs. time.
 
-```{r fig.align = "center"}
+```{r 06-Chapter6-149, fig.align = "center"}
 sol_pbtk <- as.data.frame(sol_pbtk) #because ggplot2 requires data.frame input, not matrix
 
 ggplot(sol_pbtk) +
@@ -3078,7 +3078,7 @@ ggplot(sol_pbtk) +
 
 We can calculate summary metrics of internal dose -- peak concentration, average concentration, and AUC -- using the function `calc_tkstats()`. We have to specify the dosing protocol and length of simulation. Here, we use the same dosing protocol and simulation length as in the plot above.
 
-```{r, warning = FALSE}
+```{r 06-Chapter6-150, warning = FALSE}
 tkstats <- calc_tkstats(chem.name = "Bisphenol-A", #chemical to simulate
              stats = c("AUC", "peak", "mean"), #which metrics to return (these are the only three choices)
              model = "pbtk", #model to use
@@ -3107,7 +3107,7 @@ Another summary metric is the steady-state concentration: If the same dose is gi
 
 For example, here is a plot of plasma concentration vs. time for 1 mg/kg/day Bisphenol-A, administered for 12 days. You can see how the average plasma concentration reaches a steady state around 1.5 uM. Each peak represents one day's dose.
 
-```{r, warning = FALSE, fig.align = "center"}
+```{r 06-Chapter6-151, warning = FALSE, fig.align = "center"}
 foo <- as.data.frame(solve_pbtk(
     chem.name='Bisphenol-A',
     daily.dose=1,
@@ -3127,7 +3127,7 @@ ggplot(foo) +
 
 Here is the result of `calc_analytic_css()` for a 1 mg/kg/day dose of bisphenol-A.
 
-```{r, warning = FALSE}
+```{r 06-Chapter6-152, warning = FALSE}
 calc_analytic_css(chem.name = "Bisphenol-A",
                   daily.dose = 1,
                   output.units = "uM",
@@ -3151,7 +3151,7 @@ calc_analytic_css(chem.name = "Bisphenol-A",
 
 For the TK models included in the *httk* package, steady-state concentration is linear with dose for a given chemical. The slope of the line is simply the steady-state concentration for a dose of 1 mg/kg/day. This can be shown by solving `calc_analytic_css()` for several doses, and plotting the dose-$C_{ss}$ points along a line whose slope is equal to $C_{ss}$ for 1 mg/kg/day.
 
-```{r fig.align = "center"}
+```{r 06-Chapter6-153, fig.align = "center"}
 #choose five doses at which to find the Css
 doses <- c(0.1, #all mg/kg/day
            0.5,
@@ -3205,7 +3205,7 @@ The procedure is illustrated graphically below.
 2. Draw a horizontal line over to the $C_{ss}$-dose line.
 3. Drop down vertically to the x-axis and read off the corresponding dose. This is the *administered equivalent dose* (AED): the the external dose or exposure rate, in mg/kg/day, that would produce an internal steady-state plasma concentration equal to the target concentration.
 
-```{r, echo = FALSE, warning = FALSE, fig.align = "center"}
+```{r 06-Chapter6-154, echo = FALSE, warning = FALSE, fig.align = "center"}
 reverseTKfig <- Cssdosefig +
   geom_segment(aes(x = -Inf, y = 0.8671, xend = 0.75, yend = 0.8671),
                size = 2,
@@ -3269,7 +3269,7 @@ $$ AED = \frac{C_{\textrm{target}}}{C_{ss}\textrm{ for 1 mg/kg/day}} $$
 
 For a given dose, $C_{ss}$ is determined by the values of the parameters of the TK model. These parameters describe absorption, distribution, metabolism, and excretion (ADME) of each chemical. They include both chemical-specific parameters, describing hepatic clearance and protein binding, and chemical-independent parameters, describing physiology. A table of these parameters is presented below.
 
-```{r, results = "asis", echo = FALSE}
+```{r 06-Chapter6-155, results = "asis", echo = FALSE}
 paramtable <- data.frame("Parameter" = c("Intrinsic hepatic clearance rate",
                                          "Fraction unbound to plasma protein",
                                          "Tissue:plasma partition coefficients",
@@ -3305,7 +3305,7 @@ The $C_{ss}$-dose relationship is still linear when variability and uncertainty 
 A distribution of $C_{ss}$-dose slopes is illustrated in the figure below, along with boxplots illustrating the distributions for $C_{ss}$ itself at five different dose levels: 0.05, 0.25, 0.5, 0.75, and 0.95 mg/kg/day.
 
 
-```{r, echo = FALSE, warning = FALSE, fig.align = "center"}
+```{r 06-Chapter6-156, echo = FALSE, warning = FALSE, fig.align = "center"}
 
 suppressWarnings(css_examp <- calc_mc_css(chem.name = "Bisphenol-A",
             which.quantile = c(0.05, #specify which quantiles to return
@@ -3387,7 +3387,7 @@ The steps are the same as before:
 2. Draw a horizontal line over to intersect each $C_{ss}$-dose line.
 3. Where the horizontal line intersects each $C_{ss}$-dose line, drop down vertically to the x-axis and read off each corresponding AED (marked with colored circles matching the color of each $C_{ss}$-dose line).
 
-```{r, echo = FALSE, warning = FALSE, fig.align = "center"}
+```{r 06-Chapter6-157, echo = FALSE, warning = FALSE, fig.align = "center"}
 
 ggplot(css_dist_wide,
        aes(x=dose, y = `95%`)) +
@@ -3438,7 +3438,7 @@ Next, *httk* calculates the $C_{ss}$-dose slope for each "simulated individual."
 
 The following code estimates the 5th percentile, 50th percentile, and 95th percentile of the $C_{ss}$-dose slope for the chemical bisphenol-A. For the sake of simplicity, we will use the 3-compartment steady-state model (rather than the PBTK model used in the previous examples). 
 
-```{r, warning=FALSE}
+```{r 06-Chapter6-158, warning=FALSE}
 css_examp <- calc_mc_css(chem.name = "Bisphenol-A",
             which.quantile = c(0.05, #specify which quantiles to return
                                0.5,
@@ -3470,7 +3470,7 @@ We can easily and (fairly) quickly do this for all 998 chemicals for which the 3
 
 In order to make the Monte Carlo sampling reproducible, set a seed for the random number generator. It doesn't matter what seed you choose -- it can be any integer. Here, the seed is set to 42, because it's the answer to the ultimate question of life, the universe, and everything [(Adams, 1979)](https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy_(novel)).
 
-```{r}
+```{r 06-Chapter6-159}
 set.seed(42)
 
 system.time(
@@ -3487,7 +3487,7 @@ system.time(
 ```
 
 Organizing the results:
-```{r}
+```{r 06-Chapter6-160}
 #css_3compss comes out as a 3 x 998 array,
 #where rows are quantiles and columns are chemicals
 #transpose it so that rows are chemicals and columns are quantiles
@@ -3508,17 +3508,17 @@ Here, we will plot the resulting concentration distribution quantiles for each c
 By default, *ggplot2* will plot the chemical CASRNs in alphabetically-sorted order. To force it to plot them in another order, we have to explicitly specify the desired order. The easiest way to do this is to add a column in the data.frame that contains the chemical names as a factor (categorical) variable, whose levels (categories) are explicitly set to be the CASRNs in our desired plotting order. Then we can tell *ggplot2* to plot that factor variable on the x-axis, rather than the original CASRN variable.
 
 Set the ordering of the chemical CASRNs from lowest to highest median value
-```{r}
+```{r 06-Chapter6-161}
 chemical_order <- order(css_3compss$`50%`)
 ```
 
 Create a factor (categorical) CAS column where the factor levels are given by the CASRNs with this ordering.
-```{r}
+```{r 06-Chapter6-162}
 css_3compss$CAS_factor <- factor(css_3compss$CAS, levels = css_3compss$CAS[chemical_order])
 ```
 
 For plotting ease, reshape the data.frame into "long" format -- rather than having one column for each quantile of the $C_{ss}$ distribution, have a row for each chemical/quantile combination. We use the `melt()` function from the *reshape2* package.
-```{r, warning = FALSE}
+```{r 06-Chapter6-163, warning = FALSE}
 css_3compss_melt <- reshape2::melt(css_3compss,
                                    id.vars = "CAS_factor",
                                    measure.vars = c("5%", "50%", "95%"),
@@ -3528,7 +3528,7 @@ head(css_3compss_melt)
 ```
 
 Plot the slope percentiles. Use a log scale for the y-axis because the slopes span orders of magnitude. Suppress the x-axis labels (the CASRNs) because they are not readable anyway.
-```{r fig.align = "center"}
+```{r 06-Chapter6-164, fig.align = "center"}
 ggplot(css_3compss_melt) +
   geom_point(aes(x=CAS_factor,
                  y = Css_slope,
@@ -3573,7 +3573,7 @@ The latest public release of ToxCast high-throughput screening assay data can be
 
 Read in the pre-processed dataset and view the first few rows.
 
-```{r}
+```{r 06-Chapter6-165}
 toxcast <- read.csv("Chapter_6/Module6_6_Input/Module6_6_InputData1.csv")
 head(toxcast)
 ```
@@ -3588,7 +3588,7 @@ The columns of this data frame are:
 
 How many ToxCast chemicals are in this dataset?
 
-```{r}
+```{r 06-Chapter6-166}
 length(unique(toxcast$DTXSID))
 ```
 
@@ -3609,7 +3609,7 @@ Not all of the ToxCast chemicals have TK data built into *httk* such that we can
 
 Previously, we used `get_cheminfo()` to get a list of chemicals for which we could run the 3-compartment steady state model, including the names, CASRNs, and DSSTox IDs of those chemicals. That list is stored in variable `chems_3compss`, a data.frame with compound name, CASRN, and DTXSID. Now, we can use that chemical list to subset the ToxCast data.
 
-```{r}
+```{r 06-Chapter6-167}
 toxcast_httk <- subset(toxcast,
                        subset = toxcast$DTXSID %in%
                          chems_3compss$DTXSID)
@@ -3617,7 +3617,7 @@ toxcast_httk <- subset(toxcast,
 
 How many chemicals are in this subset?
 
-```{r}
+```{r 06-Chapter6-168}
 length(unique(toxcast_httk$DTXSID))
 ```
 
@@ -3626,7 +3626,7 @@ There were 869 *httk* chemicals for which we could run the 3-compartment steady-
 ### Identifying the Lower-Bound *In Vitro* AC50 Value per Chemical
 ToxCast/Tox21 screens chemicals across multiple assays, such that each chemical has multiple resulting AC50 values, spanning a range of values. For example, here are boxplots of the AC50s for the first 20 chemicals listed in `chems_3compss`. Note that the chemical identifiers, DTXSID, are used here in these visualizations to represent unique chemicals.
 
-```{r fig.align = "center"}
+```{r 06-Chapter6-169, fig.align = "center"}
 ggplot(toxcast_httk[toxcast_httk$DTXSID %in%
                       chems_3compss[1:20,
                                     "DTXSID"],
@@ -3646,7 +3646,7 @@ However, sometimes we just want a general idea of what concentrations showed bio
 
 Let's calculate the tenth percentile ToxCast AC50 for each chemical. Here, we use the base R function `aggregate()`, which groups a vector (specified in the `x` argument) by a list of factors (specified in the `by` argument), and applies a function to each group (specified in the `FUN` argument). You can add any extra arguments to the `FUN` function as named arguments to `aggregate()`.
 
-```{r}
+```{r 06-Chapter6-170}
 toxcast_httk_P10 <- aggregate(x = toxcast_httk$log10_ac50, #aggregate the AC50s
                               by = list(DTXSID = toxcast_httk$DTXSID), #group AC50s by DTXSID
                               FUN = quantile, #the function to apply to each group
@@ -3658,13 +3658,13 @@ names(toxcast_httk_P10) <- c("DTXSID", "log10_ac50_P10")
 
 Let's transform the tenth-percentile AC50 values back to the natural scale (they are currently on the log10 scale) and put them in a new column `AC50`. These AC50s will be in uM.
 
-```{r}
+```{r 06-Chapter6-171}
 toxcast_httk_P10$AC50 <- 10^(toxcast_httk_P10$log10_ac50_P10)
 ```
 
 View the first few rows:
 
-```{r}
+```{r 06-Chapter6-172}
 head(toxcast_httk_P10)
 ```
 
@@ -3679,7 +3679,7 @@ Under the hood, `calc_mc_oral_equiv()` first calls `calc_mc_css()` to get percen
 
 Here, we're using the `mapply()` function in base R to call `calc_mc_oral_equiv()` in a loop over chemicals. This is because `calc_mc_oral_equiv()` requires two chemical-specific arguments -- the chemical identifier and the concentration for which to compute the equivalent dose. `mapply()` lets us provide vectors of values for each argument (in the named arguments `dtxsid` and `conc`), and will automatically loop over those vectors. We also use the argument `MoreArgs`, a named list of additional arguments to the function in `FUN` that will be the same for every iteration of the loop. Note that this line of code takes a few minutes to run.
 
-```{r, results="hide"}
+```{r 06-Chapter6-173, results="hide"}
 set.seed(42)
 
 system.time(
@@ -3703,19 +3703,19 @@ head(toxcast_equiv_dose) #look at first few rows
 
 Let's add the DTXSIDs back into this data.frame.
 
-```{r}
+```{r 06-Chapter6-174}
 toxcast_equiv_dose$DTXSID <- toxcast_httk_P10$DTXSID
 ```
 
 We can get the names of these chemicals by using the list of chemicals for which the 3-compartment steady-state model can be parameterized, which was stored in the variable `chems_3compss`. In that dataframe, we have the compound name and CASRN corresponding to each DTXSID.
 
-```{r}
+```{r 06-Chapter6-175}
 head(chems_3compss)
 ```
 
 Merge `chems_3compss` with `toxcast_equiv_dose`.
 
-```{r}
+```{r 06-Chapter6-176}
 toxcast_equiv_dose <- merge(chems_3compss,
                             toxcast_equiv_dose,
                             by = "DTXSID",
@@ -3727,7 +3727,7 @@ head(toxcast_equiv_dose)
 
 To find the chemicals with the lowest equivalent doses at the 95th percentile level (corresponding to the most-sensitive 5\% of the population), sort this data.frame in ascending order on the `95%` column.
 
-```{r}
+```{r 06-Chapter6-177}
 toxcast_equiv_dose <- toxcast_equiv_dose[order(toxcast_equiv_dose$`95%`), ]
 head(toxcast_equiv_dose, 10) #first ten rows of sorted table
 ```
@@ -3752,7 +3752,7 @@ To estimate potential risk, hazard -- in the form of the equivalent dose for the
 
 Here, we will use exposure estimates that have been inferred from CDC NHANES urinary biomonitoring data (Ring et al., 2019). These estimates consist of an estimated median, and estimated upper and lower 95\% credible interval bounds representing uncertainty in that estimated median. These estimates are provided here in the following csv file:
 
-```{r}
+```{r 06-Chapter6-178}
 exposure <- read.csv("Chapter_6/Module6_6_Input/Module6_6_InputData2.csv")
 head(exposure) #view first few rows
 ```
@@ -3761,7 +3761,7 @@ head(exposure) #view first few rows
 
 To calculate a BER for a chemical, it needs to have both an equivalent dose and an exposure estimate. Not all of the chemicals for which equivalent doses could be computed (*i.e.*, chemicals with both ToxCast AC50s and `httk` data) also have exposure estimates inferred from NHANES. Find out how many do.
 
-```{r}
+```{r 06-Chapter6-179}
 length(intersect(toxcast_equiv_dose$DTXSID, exposure$DTXSID))
 ```
 
@@ -3769,7 +3769,7 @@ This means that, using the ToxCast AC50 data for bioactive concentrations, the N
 
 Merge together the ToxCast equivalent doses and the exposure data into a single data frame. Keep only the chemicals that have data in both ToxCast equivalent doses and exposure data frames.
 
-```{r}
+```{r 06-Chapter6-180}
 hazard_exposure <- merge(toxcast_equiv_dose,
                          exposure,
                          by = "DTXSID",
@@ -3781,7 +3781,7 @@ head(hazard_exposure) #view first few rows of result
 
 We can visually compare the equivalent doses and the inferred exposure estimates by plotting them together.
 
-```{r fig.align = "center"}
+```{r 06-Chapter6-181, fig.align = "center"}
 ggplot(hazard_exposure) +
   geom_crossbar(aes(x = Compound.x, #Boxes for equivalent doses
                      y = `50%`,
@@ -3813,7 +3813,7 @@ ggplot(hazard_exposure) +
 
 The bioactivity-exposure ratio (BER) is simply the ratio of the lower-end equivalent dose (for the most-sensitive 5\% of the population) divided by the upper-end estimated exposure (here, the upper bound on the inferred population median exposure). In the data frame `hazard_exposure` containing the hazard and exposure data, the lower-end equivalent dose is in column `95%` (corresponding to the 95th-percentile $C_{ss}$-dose slope) and the upper-end exposure is in column `up95`. Calculate the BER, and assign the result to a new column in the `hazard_exposure` data frame called `BER`.
 
-```{r}
+```{r 06-Chapter6-182}
 hazard_exposure[["BER"]] <- hazard_exposure[["95%"]]/hazard_exposure[["up95"]]
 ```
 
@@ -3823,7 +3823,7 @@ To prioritize chemicals according to potential risk, they can be sorted from low
 
 Sort the rows of the data.frame from lowest to highest BER.
 
-```{r}
+```{r 06-Chapter6-183}
 hazard_exposure <- hazard_exposure[order(hazard_exposure$BER), ]
 head(hazard_exposure)
 ```
@@ -3832,7 +3832,7 @@ The hazard-exposure plot above showed chemicals in alphabetical order. It can be
 
 First, create a categorical (factor) variable for the compound names, whose levels are in order of increasing BER. (Since we already sorted the data.frame in order of increasing BER, we can just take the compound names in the order that they appear.)
 
-```{r}
+```{r 06-Chapter6-184}
 hazard_exposure$Compound_factor <- factor(hazard_exposure$Compound.x,
                                           levels = hazard_exposure$Compound.x)
 
@@ -3840,7 +3840,7 @@ hazard_exposure$Compound_factor <- factor(hazard_exposure$Compound.x,
 
 Now, make the same plot as before, but use `Compound_factor` as the x-axis variable instead of `Compound`.
 
-```{r fig.align = "center"}
+```{r 06-Chapter6-185, fig.align = "center"}
 ggplot(hazard_exposure) +
   geom_crossbar(aes(x = Compound_factor, #Boxes for equivalent dose
                      y = `50%`,
@@ -3907,7 +3907,7 @@ Now, the chemicals are displayed in order of increasing BER. From left to right,
 
 To calculate a BER for a chemical, both bioactivity and exposure data are required, as well as sufficient TK data to perform reverse TK. In this training module, bioactivity data came from ToxCast AC50s; exposure data consisted of exposure inferences made from NHANES urinary biomonitoring data; and TK data consisted of parameter values measured *in vitro* and built into the *httk* R package. The intersections are illustrated in an Euler diagram below. BERs can only be calculated for chemicals in the triple intersection.
 
-```{r fig.align = "center"}
+```{r 06-Chapter6-186, fig.align = "center"}
 fit <- eulerr::euler(list('ToxCast AC50s' = unique(toxcast$DTXSID),
                    'HTTK' = unique(chems_3compss$DTXSID),
                    'NHANES inferred exposure' = unique(exposure$DTXSID)
@@ -3943,7 +3943,7 @@ This training module provides an overview of toxicokinetic modeling using the *h
 
 We would like to acknowledge the developers of the *httk* package, as detailed below via the CRAN website:
 
-```{r, echo=FALSE, fig.align='center'} 
+```{r 06-Chapter6-187, echo=FALSE, fig.align='center' }
 knitr::include_graphics("Chapter_6/Module6_6_Input/Module6_6_Image2.png")
 ```
 
@@ -3992,7 +3992,7 @@ All input files (script, data, and figures) can be downloaded from the [UNC-SRP 
 
 *Disclaimer: The views expressed in this document are those of the author and do not necessarily reflect the views or policies of the U.S. EPA.*
 
-```{r, include=FALSE}
+```{r 06-Chapter6-188, include=FALSE}
 #set default values for R Markdown "knitting" to HTML, Word, or PDF
 knitr::opts_chunk$set(echo = TRUE) #print code chunks
 ```
@@ -4000,7 +4000,7 @@ knitr::opts_chunk$set(echo = TRUE) #print code chunks
 ## Introduction to Training Module
 
 The method of **read-across** represents one type of computational approach that is commonly used to predict a chemical's toxicological effects using its properties. Other types of approaches that you will hear commonly used in this field include **SAR** and **QSAR** analyses. A high-level overview of each of these definitions and simple illustrative examples of these three computational modeling approaches is provided in the following schematic:
-```{r, echo=FALSE} 
+```{r 06-Chapter6-189, echo=FALSE }
 knitr::include_graphics("Chapter_6/Module6_7_Input/Module6_7_Image1.png")
 ```
 
@@ -4036,13 +4036,13 @@ This training module was specifically developed to answer the following environm
 ### Script Preparations
 
 #### Cleaning the global environment
-```{r}
+```{r 06-Chapter6-190}
 rm(list=ls())
 ```
 
 #### Installing required R packages
 If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you:
-```{r, results=FALSE, message=FALSE}
+```{r 06-Chapter6-191, results=FALSE, message=FALSE}
 if (!requireNamespace("tidyverse"))
   install.packages("tidyverse");
 if (!requireNamespace("fingerprint"))
@@ -4052,14 +4052,14 @@ if (!requireNamespace("rcdk"))
 ```
 
 #### Loading R packages required for this session
-```{r, results=FALSE, message=FALSE}
+```{r 06-Chapter6-192, results=FALSE, message=FALSE}
 library(tidyverse) #all tidyverse packages, including dplyr and ggplot2
 library(fingerprint) # a package that supports operations on molecular fingerprint data
 library(rcdk) # a package that interfaces with the 'CDK', a Java framework for chemoinformatics libraries packaged for R
 ```
 
 #### Set your working directory
-```{r, eval=FALSE, echo=TRUE}
+```{r 06-Chapter6-193, eval=FALSE, echo=TRUE}
 setwd("/filepath to where your input files are")
 ```
 
@@ -4073,21 +4073,21 @@ Let's start by loading the datasets needed for this training module. We are goin
 The first file to upload is named `Module6_6_InputData1.csv` and contains the list of substances and their structural information, in the form of SMILES nomenclature. SMILES stands for Simplified molecular-input line-entry system, a form of line notation to describe the structure of a chemical.
 
 The second file to upload is named `Module6_6_InputData2.csv` and contains the substances and their acute toxicity information.
-```{r}
+```{r 06-Chapter6-194}
 substances <- read.csv("Chapter_6/Module6_7_Input/Module6_7_InputData1.csv")
 acute_data <- read.csv("Chapter_6/Module6_7_Input/Module6_7_InputData2.csv")
 ```
 
 Let's first view the substances dataset:
-```{r}
+```{r 06-Chapter6-195}
 dim(substances)
 ```
 
-```{r}
+```{r 06-Chapter6-196}
 colnames(substances)
 ```
 
-```{r}
+```{r 06-Chapter6-197}
 head(substances)
 ```
 
@@ -4098,20 +4098,20 @@ We can see that this dataset contains information on 6955 chemicals (rows).  The
 + `QSAR_READY_SMILES`: `SMILES` that have been standardized related to salts, tautomers, inorganics, aromaticity, and stereochemistry (among other factors) prior to any QSAR modeling or prediction.
 
 Let's make sure that these values are recognized as character format and placed in its own vector, to ensure proper execution of functions throughout this script:
-```{r}
+```{r 06-Chapter6-198}
 all_smiles <- as.character(substances$QSAR_READY_SMILES)
 ```
 
 Now let's view the acute toxicity dataset:
-```{r}
+```{r 06-Chapter6-199}
 dim(acute_data)
 ```
 
-```{r}
+```{r 06-Chapter6-200}
 colnames(acute_data)
 ```
 
-```{r}
+```{r 06-Chapter6-201}
 head(acute_data)
 ```
 
@@ -4125,7 +4125,7 @@ We can see that this dataset contains information on 6955 chemicals (rows). Some
 In modeling studies, the convention is to convert toxicity values expressed as mg per unit into their molar or millimolar values and then to convert these to the base 10 logarithm. To increase clarity when plotting, such that higher toxicities would be expressed by higher values, the negative logarithm is then taken. For example, substance DTXSID00142939 has a molecular weight of 99.089 (grams per mole) and a LD50 of 32 mg/kg. This would be converted to a toxicity value of ($\frac{32}{99.089} = 0.322942~mmol/kg$). The logarithm of that would be -0.4908755. By convention, the negative logarithm of the millimolar concentration would then be used i.e. -log[mmol/kg]. This conversion has been used to create the `LD50_LM` values in the acute toxicity dataset. 
 
 Let's check to see whether the same chemicals are present in both datasets:
-```{r}
+```{r 06-Chapter6-202}
 # First need to make sure that both dataframes are sorted by the identifier, DTXSID
 substances <- substances[order(substances$DTXSID),]
 acute_data <- acute_data[order(acute_data$DTXSID),]
@@ -4138,7 +4138,7 @@ All accounts are true, meaning they are all equal (the same chemical).
 ### Data Visualizations of Acute Toxicity Values
 
 Let's create a plot to show the distribution of the LD50 values in the dataset.
-```{r fig.align = "center"}
+```{r 06-Chapter6-203, fig.align = "center"}
 ggplot(data = acute_data, aes(LD50_mgkg)) + 
   stat_ecdf(geom = "point")
 
@@ -4155,12 +4155,12 @@ For this exercise, we will select a 'target' substance of interest from our data
 
 Our target substance for this exercise is going to be DTXSID5020281, which is 1-chloro-4-nitrobenzene. This chemical is an organic compound with the formula ClC~6~H~4~NO~2~, and is a common intermediate in the production of a number of industrially useful compounds, including common antioxidants found in rubber. Here is an image of the chemical structure (https://comptox.epa.gov/dashboard/dsstoxdb/results?search=DTXSID5020281):
 
-```{r, echo=FALSE, fig.align='center'} 
+```{r 06-Chapter6-204, echo=FALSE, fig.align='center' }
 knitr::include_graphics("Chapter_6/Module6_7_Input/Module6_7_Image2.png")
 ```
 
 Filtering the dataframes for only data on this target substance:
-```{r}
+```{r 06-Chapter6-205}
 target_substance <-filter(substances, DTXSID == 'DTXSID5020281')
 target_acute_data <- filter(acute_data, DTXSID == 'DTXSID5020281')
 ```
@@ -4177,7 +4177,7 @@ To eventually identify chemical analogues with information that can be 'read-acr
 To derive structure fingerprints across all evaluated substances, we need to first convert the chemical identifiers originally provided as `QSAR_READY_SMILES` into molecular objects. The standard exchange format for molecular information is a MOL file. This is a chemical file format that contains plain text information and stores information about atoms, bonds and their connections.
 
 We can carry out these identifier conversions using the 'parse.smiles' function within the rcdk package. Here we do this for the target chemical of interest, as well as all substances in the dataset.
-```{r}
+```{r 06-Chapter6-206}
 target_mol <- parse.smiles(as.character(target_substance$QSAR_READY_SMILES)) 
 all_mols <-parse.smiles(all_smiles)
 ```
@@ -4185,13 +4185,13 @@ all_mols <-parse.smiles(all_smiles)
 #### Computing chemical fingerprints
 
 With these mol data, we can now compute the fingerprints for our target substance, as well as all the substances in the dataset. We can compute fingerprints leveraging the `get.fingerprint()` function. Let's first run it on the target chemical:
-```{r}
+```{r 06-Chapter6-207}
 target.fp <- get.fingerprint(target_mol[[1]], type = 'standard')
 target.fp # View fingerprint
 ```
 
 We can run the same function over the entire `all_mols` dataset, leveraging the `lapply()` function:
-```{r}
+```{r 06-Chapter6-208}
 all.fp <- lapply(all_mols, get.fingerprint, type = 'standard')
 ```
 
@@ -4204,7 +4204,7 @@ Using these molecular fingerprint data, we can now calculate the degree to which
 Once these Tanimoto similarity indices are calculated between every possible chemical pair, the similarity results can be viewed in the form of a similarity matrix. In this matrix, all substances are listed across the rows and columns, and the degree to which every possible chemical pair is similar is summarized through values contained within the matrix. Further information about chemical similarity can be found here: https://en.wikipedia.org/wiki/Chemical_similarity
 
 Steps to generate this similarity matrix are detailed here:
-```{r}
+```{r 06-Chapter6-209}
 all.fp.sim <- fingerprint::fp.sim.matrix(all.fp, method = 'tanimoto')
 all.fp.sim <- as.data.frame(all.fp.sim) # Convert the outputted matrix to a dataframe
 colnames(all.fp.sim) = substances$DTXSID # Placing chemical identifiers back as column headers
@@ -4212,23 +4212,23 @@ row.names(all.fp.sim) = substances$DTXSID # Placing chemical identifiers back as
 ```
 
 Since we are querying a large number of chemicals, it is difficult to view the entire resulting similarity matrix. Let's, instead view portions of these results:
-```{r}
+```{r 06-Chapter6-210}
 all.fp.sim[1:5,1:5] # Viewing the first five rows and columns of data
 ```
 
 
-```{r}
+```{r 06-Chapter6-211}
 all.fp.sim[6:10,6:10] # Viewing the next five rows and columns of data
 ```
 You can see that there is an identity line within this similarity matrix, where instances when a chemical's structure is being compared to itself, the similarity values are 1.00000.
 
 All other possible chemical pairings show variable similarity scores, ranging from:
-```{r}
+```{r 06-Chapter6-212}
 min(all.fp.sim)
 ```
 
 a minimum of zero, indicating no similarities between chemical structures.
-```{r}
+```{r 06-Chapter6-213}
 max(all.fp.sim)
 ```
 
@@ -4238,13 +4238,13 @@ a maximum of 1, indicating the identical chemical structure (which occurs when c
 This step will find substances that are structurally similar to the target chemical, 1-chloro-4-nitrobenzene (with DTXSID5020281). Structurally similar chemicals are referred to as 'source analogues', with information that will be carried forward in this read-across analysis.
 
 The first step to identifying chemical analogues is to subset the full similarity matrix to focus just on our target chemical.
-```{r}
+```{r 06-Chapter6-214}
 target.sim <- all.fp.sim %>% 
   filter(row.names(all.fp.sim) == 'DTXSID5020281')
 ```
 
 Then we'll extract the substances that exceed a similarity threshold of 0.75 by selecting to keep columns which are > 0.75.
-```{r}
+```{r 06-Chapter6-215}
 target.sim <- target.sim %>% 
   select_if(function(x) any(x > 0.75))
 
@@ -4252,7 +4252,7 @@ dim(target.sim) # Show dimensions of subsetted matrix
 ```
 
 This gives us our analogues list! Specifically, we selected 12 columns of data, representing our target chemical plus 11 structurally similar chemicals. Let's create a dataframe of these substance identifiers to carry forward in the read-across analysis:
-```{r}
+```{r 06-Chapter6-216}
 source_analogues <- t(target.sim) # Transposing the filtered similarity matrix results
 DTXSID <-rownames(source_analogues) # Temporarily grabbing the dtxsid identifiers from this matrix
 source_analogues <- cbind(DTXSID, source_analogues) # Adding these identifiers as a column
@@ -4276,12 +4276,12 @@ source_analogues[1:12,1:2] # Viewing the cleaned dataframe of analogues
 Acute toxicity data from these chemical analogues can now be extracted and read across to the target chemical (1-chloro-4-nitrobenzene) to make predictions about its toxicity.
 
 Let's first merge the acute data for these analogues into our working dataframe:
-```{r}
+```{r 06-Chapter6-217}
 source_analogues <- merge(source_analogues, acute_data, by.x = 'DTXSID', by.y = 'DTXSID')
 ```
 
 Then, let's remove the target chemical of interest and create a new dataframe of just the source analogues:
-```{r}
+```{r 06-Chapter6-218}
 source_analogues_only <- source_analogues %>% 
   filter(Target_TanimotoSim!=1) # Removing the row of data with the target chemical, identified as the chemical with a similarity of 1 to itself
 
@@ -4294,7 +4294,7 @@ The final generalized read-across (GenRA) prediction is based on a similarity-we
 (pairwise similarity between the target and source analogue) * (the toxicity of the source analogue), summed across each individual analogue; and then this value is divided by the sum of all pairwise similarities. For further details surrounding this algorithm and its spelled out formulation, see [Shah et al.](https://pubmed.ncbi.nlm.nih.gov/27174420/).
 
 Here are the underlying calculations needed to derive the similarity weighted activity score for this current exercise:
-```{r}
+```{r 06-Chapter6-219}
 source_analogues_only$wt_tox_calc <- 
   as.numeric(source_analogues_only$Target_TanimotoSim) * source_analogues_only$LD50_LM  
 # Calculating (pairwise similarity between the target and source analogue) * (the toxicity of the source analogue) 
@@ -4311,7 +4311,7 @@ ReadAcross_Pred <- sum_tox/sum_sims  # Final calculation for the weighted activi
 
 ### Converting LD50 Units
 Right now, these results are in units of -log~10~ millimolar. So we still need to convert them into mg/kg equivalent, by converting out of -log~10~ and multiplying by the molecular weight of 1-chloro-4-nitrobenzene (g/mol):
-```{r}
+```{r 06-Chapter6-220}
 ReadAcross_Pred <- (10^(-ReadAcross_Pred))*157.55
 ReadAcross_Pred 
 ```
@@ -4328,7 +4328,7 @@ ReadAcross_Pred
 ### Visual Representation of this Read-Across Approach
 
 Here is a schematic summarizing the steps we employed in this analysis:
-```{r, echo=FALSE} 
+```{r 06-Chapter6-221, echo=FALSE }
 knitr::include_graphics("Chapter_6/Module6_7_Input/Module6_7_Image3.png")
 ```
 <br>
@@ -4336,7 +4336,7 @@ knitr::include_graphics("Chapter_6/Module6_7_Input/Module6_7_Image3.png")
 ### Comparing Read-Across Predictions to Experimental Observations
 
 Let's now compare how close this computationally-based prediction is to the experimentally observed LD50 value
-```{r}
+```{r 06-Chapter6-222}
 target_acute_data$LD50_mgkg
 ```
 We can see that the experimentally observed LD50 values for this chemical is 460 mg/kg.

@@ -56,7 +56,7 @@ For additional resources on *ggplot2* see [ggplot2 Posit Documentation](https://
 ### Script Preparations
 
 #### Cleaning the global environment
-```{r}
+```{r 03-Chapter3-1}
 rm(list=ls())
 ```
 
@@ -72,7 +72,7 @@ if (!requireNamespace("pheatmap"))
 ```
 
 #### Loading R packages required for this session
-```{r echo=TRUE, eval=TRUE, warning=FALSE, results='hide', message=FALSE}
+```{r 03-Chapter3-2, echo=TRUE, eval=TRUE, warning=FALSE, results='hide', message=FALSE}
 library(tidyverse)
 library(GGally)
 library(corrplot)
@@ -81,13 +81,13 @@ library(pheatmap)
 ```
 
 #### Set your working directory
-```{r, eval=FALSE, echo=TRUE}
+```{r 03-Chapter3-3, eval=FALSE, echo=TRUE}
 setwd("/filepath to where your input files are")
 ```
 
 #### Importing example dataset
 Then let's read in our example dataset. As mentioned in the introduction, this example dataset represents chemical measurements across 12 different biomass burn scenarios representing potential wildfire events. Let's upload and view these data:
-```{r}
+```{r 03-Chapter3-4}
 # Load the data
 smoke_data <- read.csv("Chapter_3/Module3_1_Input/Module3_1_InputData.csv")
 
@@ -109,7 +109,7 @@ We can create a **density plot** to answer the first question. Similar to a hist
 In this example of a density plot, we'll visualize the distributions of chemical concentration data on the x axis. A density plot automatically displays where values are concentrated on the y axis. Additionally, we'll want to have multiple density plots within the same figure for each biomass burn condition. 
 
 Before the data can be visualized, it needs to be converted from a wide to long format. This is because we need to have variable or column names entitled `Chemical_Concentration` and `Biomass_Burn_Condition` that can be placed into `ggplot()`. For review on converting between long and wide formats and using other tidyverse tools, see **TAME 2.0 Module 2.3 Data Manipulation & Reshaping**.
-```{r}
+```{r 03-Chapter3-5}
 longer_smoke_data = pivot_longer(smoke_data, cols = 4:13, names_to = "Biomass_Burn_Condition", 
                                  values_to = "Chemical_Concentration")
 
@@ -123,7 +123,7 @@ A data preparation method that is commonly used to convert values into those tha
 For this example, we will normalize the chemical concentration dataset using a basic scaling and centering procedure using the base R function, `scale()`. This algorithm results in the normalization of a dataset using the mean value and standard deviation. This scaling step will convert chemical concentration values in our dataset into normalized values across samples, such that each chemical's concentration distributions are more easily comparable between the different biomass burn conditions.
 
 For more information on the `scale()` function, see its associated [RDocumentation](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/scale) and helpful tutorial on [Implementing the scale() function in R](https://www.journaldev.com/47818/r-scale-function).
-```{r}
+```{r 03-Chapter3-6}
 scaled_longer_smoke_data = longer_smoke_data %>%
     # scaling within each chemical
     group_by(Chemical) %>%
@@ -140,7 +140,7 @@ Now that we have our dataset formatted, let's plot it.
 ## Density Plot Visualization
 
 The following code can be used to generate a density plot:
-```{r fig.align = "center"}
+```{r 03-Chapter3-7, fig.align = "center"}
 ggplot(scaled_longer_smoke_data, aes(x = Scaled_Chemical_Concentration, color = Biomass_Burn_Condition)) + 
   geom_density()
 ```
@@ -160,7 +160,7 @@ ggplot(scaled_longer_smoke_data, aes(x = Scaled_Chemical_Concentration, color = 
 A **boxplot** can also be used to answer our first environmental health question: **How do the distributions of the chemical concentration data differ based on each biomass burn scenario?**. A boxplot also displays a data's distribution, but it incorporates a visualization of a five number summary (i.e., minimum, first quartile, median, third quartile, and maximum). Any outliers are displayed as dots.
 
 For this example, let's have `Scaled_Chemical_Concentration` on the x axis and `Biomass_Burn_Condition` on the y axis. The `scaled_longer_smoke_data` dataframe is the format we need, so we'll use that for plotting.
-```{r fig.align = "center"}
+```{r 03-Chapter3-8, fig.align = "center"}
 ggplot(scaled_longer_smoke_data, aes(x = Scaled_Chemical_Concentration, y = Biomass_Burn_Condition, 
                                      color = Biomass_Burn_Condition)) + 
   geom_boxplot()
@@ -183,7 +183,7 @@ Let's turn our attention to the second environmental health question: **Are ther
 *GGally* is a package that serves as an extension of *ggplot2*, the baseline R plotting system based on the grammar of graphics. GGally is very useful for creating plots that compare groups or features within a dataset, among many other utilities. Here we will demonstrate the `ggpairs()` function within *GGally* using the scaled chemistry dataset. This function will produce an image that shows correlation values between biomass burn sample pairs and also illustrates the overall distributions of values in the samples. For more information on *GGally*, see its associated [RDocumentation](https://www.rdocumentation.org/packages/GGally/versions/1.5.0) and [example helpful tutorial](http://www.sthda.com/english/wiki/ggally-r-package-extension-to-ggplot2-for-correlation-matrix-and-survival-plots-r-software-and-data-visualization).
 
 *GGally* requires a wide dataframe with ids (i.e.,`Chemical`) as the rows and the variables that will be compared to each other (i.e.,`Biomass_Burn_Condition`) as the columns. Let's create that dataframe.
-```{r}
+```{r 03-Chapter3-9}
 # first selecting the chemical, biomass burn condition, and 
 # the scaled chemical concentration columns
 wide_scaled_data = scaled_longer_smoke_data %>%
@@ -196,7 +196,7 @@ head(wide_scaled_data)
 ```
 
 By default, `ggpairs()` displays Pearson's correlations. To show Spearman's correlations takes more nuance, but can be done using the code that has been commented out below. 
-```{r fig.align = "center", fig.width = 15, fig.height = 15}
+```{r 03-Chapter3-10, fig.align = "center", fig.width = 15, fig.height = 15}
 
 # ggpairs with Pearson's correlations
 wide_scaled_data = data.frame(as.matrix(wide_scaled_data))
@@ -225,7 +225,7 @@ The upper right portion displays the correlation values, where a value less than
 :::
 
 We can visualize correlations another way using the other function from *GGally*, `ggcorr()`, which visualizes each correlation as a square. Note that this function calculates Pearson's correlations by default. However, this can be changed using the `method` parameter shown in the code commented out below.
-```{r fig.align = "center", fig.width = 10, fig.height = 7}
+```{r 03-Chapter3-11, fig.align = "center", fig.width = 10, fig.height = 7}
 # Pearson's correlations
 ggcorr(wide_scaled_data)
 
@@ -234,7 +234,7 @@ ggcorr(wide_scaled_data)
 ```
 
 We'll visualize correlations between each of the groups using one more figure using the `corrplot()` function from the *corrplot* package.
-```{r fig.align = "center"}
+```{r 03-Chapter3-12, fig.align = "center"}
 # Need to supply corrplot with a correlation matrix, here, using the 'cor' function
 corrplot(cor(wide_scaled_data))
 ```
@@ -252,7 +252,7 @@ Last, we'll turn our attention to answering the final environmental health quest
 For this example, we can plot `Biomass_Burn_Condition` and `Chemical.Category` on the axes and fill in the values with `Scaled_Chemical_Concentration`. When generating heatmaps, scaled values are often used to better distinguish patterns between groups/samples. 
 
 In this example, we also plan to display the median scaled concentration value within the heatmap as an additional layer of helpful information to aid in interpretation. To do so, we'll need to take the median chemical concentration for each biomass burn condition within each chemical category. However, since we want `ggplot()` to visualize the median scaled values with the color of the tiles this step was already necessary. 
-```{r}
+```{r 03-Chapter3-13}
 # We'll find the median value and add that data to the dataframe as an additional column
 heatmap_df = scaled_longer_smoke_data %>%
     group_by(Biomass_Burn_Condition, Chemical.Category) %>%
@@ -262,7 +262,7 @@ head(heatmap_df)
 ```
 
 Now we can plot the data and add the `Median_Scaled_Concentration` to the figure using `geom_text()`. Note that specifying the original `Scaled_Chemical_Concentration` in the **fill** parameter will NOT give you the same heatmap as specifying the median values in `ggplot()`.
-```{r fig.align = "center", fig.width = 12, fig.height= 5}
+```{r 03-Chapter3-14, fig.align = "center", fig.width = 12, fig.height= 5}
 ggplot(data = heatmap_df, aes(x = Chemical.Category, y = Biomass_Burn_Condition,
                                            fill = Median_Scaled_Concentration)) + 
   geom_tile() + # function used to specify a heatmap for ggplot
@@ -279,7 +279,7 @@ ggplot(data = heatmap_df, aes(x = Chemical.Category, y = Biomass_Burn_Condition,
 :::
 
 This same heatmap can be achieved another way using the `pheatmap()` function from the *pheatmap* package. Using this function requires us to use a wide dataset, which we need to create. It will contain `Chemical.Category`, `Biomass_Burn_Condition` and `Scaled_Chemical_Concentration`. 
-```{r, message=FALSE}
+```{r 03-Chapter3-15, message=FALSE}
 heatmap_df2 = scaled_longer_smoke_data %>%
     group_by(Biomass_Burn_Condition, Chemical.Category) %>%
     # using the summarize function instead of mutate function as was done previously since we only need the median values now
@@ -294,7 +294,7 @@ head(heatmap_df2)
 ```
 
 Now let's generate the same heatmap this time using the `pheatmap()` function:
-```{r fig.align = "center"}
+```{r 03-Chapter3-16, fig.align = "center"}
 pheatmap(heatmap_df2, 
         # removing the clustering option from both rows and columns
         cluster_rows = FALSE, cluster_cols = FALSE,
@@ -324,7 +324,7 @@ For additional figures available and to view aspects of figures that can be chan
 
 **Hint 2**: Use the function `facet_wrap()` within `ggplot()` to separate the heatmaps by `Burn_Condition`.
 :::
-```{r, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
+```{r 03-Chapter3-17, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
 knitr::include_graphics("Chapter_3/Module3_1_Input/Module3_1_Image1.png")
 ```
 
@@ -369,20 +369,20 @@ Keys to successful data visualizations:
   Color can be used to visualize a variable. There are three ways to categorize color schemes - sequential, diverging, and qualitative. Below, definitions are provided for each along with example figures that we've previously published that illustrate each color scheme. In addition, figure titles and captions are also provided for context. Note that some of these figures have been simplified from what was originally published to show more streamlined examples for TAME. 
 
   - **Sequential**: intended for ordered categorical data (i.e., disease severity, likert scale, quintiles). The choropleth map below is from [Winker, Payton et. al](https://doi.org/10.3389/fpubh.2024.1339700). 
-```{r, echo=FALSE, out.width = "65%", fig.align='center'}
+```{r 03-Chapter3-18, echo=FALSE, out.width = "65%", fig.align='center'}
 knitr::include_graphics("Chapter_3/Module3_2_Input/Module3_2_Image1.png")
 ```
 <center>**Figure 1. Geospatial distribution of the risk of future wildfire events across North Carolina.** Census tracts in North Carolina were binned into quintiles based on Wildfire Hazard Potential (WHP) with 1 (pale orange) having the lowest risk and 5 (dark red) having the highest risk. Figure regenerated here in alignment with its published
 [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/)] </center>
 
   - **Diverging**: intended to emphasize continuous data at extremes of the data range (typically using darker colors) and mid-range values (typically using lighter colors). This color scheme is ideal for charts like heatmaps. The heatmap below is from [Payton, Perryman et. al](0.1152/ajplung.00299.2021).
-```{r, echo=FALSE, out.width = "90%", fig.align='center'}
+```{r 03-Chapter3-19, echo=FALSE, out.width = "90%", fig.align='center'}
 knitr::include_graphics("Chapter_3/Module3_2_Input/Module3_2_Image2.png")
 ```
 <center> **Figure 2. Individual cytokine expression levels across all subjects.** Cytokine concentrations were derived from nasal lavage fluid samples. On the x axis, subjects were ordered first according to tobacco use status, starting with non-smokers then cigarette smokers and e-cigarette users. Within tobacco use groups, subjects are ordered from lowest to highest average cytokine concentration from left to right. Within each cluster shown on the y axis, cytokines are ordered from lowest to highest average cytokine concentration from bottom to top. Figure regenerated here in alignment with its published [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/) </center>
 
   - **Qualitative**: intended for nominal categorical data to visualize clear differences between groups (i.e., soil types and exposure groups). The dendrogram below is from [Koval et. al](10.1038/s41370-022-00451-8).
-```{r, echo=FALSE, out.width = "75%", fig.align='center'}
+```{r 03-Chapter3-20, echo=FALSE, out.width = "75%", fig.align='center'}
 knitr::include_graphics("Chapter_3/Module3_2_Input/Module3_2_Image3.png")
 ```
 <center>**Figure 3. Translating chemical use inventory data to inform human exposure patterning.** Groups A-I illustrate the identified clusters of exposure source categories. Figure regenerated here in alignment with its published [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/)</center>
@@ -401,13 +401,13 @@ In this module, *ggplot2*, R's data visualization package will be used to walk t
 ### Script Preparations
 
 #### Cleaning the global environment
-```{r, clear_ env, echo=TRUE, eval=TRUE}
+```{r 03-Chapter3-21, clear_env, echo=TRUE, eval=TRUE}
 rm(list=ls())
 ```
 
 #### Installing required R packages
 If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you
-```{r, install_libs2, echo=TRUE, eval=TRUE, warning=FALSE, results='hide', message=FALSE}
+```{r 03-Chapter3-22, install_libs2, echo=TRUE, eval=TRUE, warning=FALSE, results='hide', message=FALSE}
 if (!requireNamespace("MetBrewer"))
   install.packages("MetBrewer");
 if (!requireNamespace("RColorBrewer"))
@@ -419,7 +419,7 @@ if (!requireNamespace("cowplot"))
 ```
 
 #### Loading required R packages
-```{r, echo=TRUE, eval=TRUE, warning=FALSE, results='hide', message=FALSE}
+```{r 03-Chapter3-23, echo=TRUE, eval=TRUE, warning=FALSE, results='hide', message=FALSE}
 library(tidyverse)
 library(MetBrewer)
 library(RColorBrewer)
@@ -428,13 +428,13 @@ library(cowplot)
 ```
 
 #### Set your working directory
-```{r, eval=FALSE, echo=TRUE}
+```{r 03-Chapter3-24, eval=FALSE, echo=TRUE}
 setwd("/filepath to where your input files are")
 ```
 
 #### Importing example dataset
 Let's now read in our example dataset. As mentioned in the introduction, this example dataset represents chemical measurements across 12 different biomass burn scenarios, representing chemicals emitted during potential wildfire events. Let's upload and view these data:
-```{r}
+```{r 03-Chapter3-25}
 # Load the data
 smoke_data <- read.csv("Chapter_3/Module3_2_Input/Module3_2_InputData.csv")
 
@@ -453,7 +453,7 @@ This training module was specifically developed to answer the following environm
 
 #### Formatting dataframes for downstream visualization code
 First, format the dataframe by changing it from a wide to long format and normalizing the chemical concentration data. For more details on this data reshaping visit **TAME 2.0 Module 2.3 Data Manipulation & Reshaping**.
-```{r}
+```{r 03-Chapter3-26}
 scaled_longer_smoke_data = pivot_longer(smoke_data, cols = 4:13, names_to = "Biomass_Burn_Condition", 
                                  values_to = "Chemical_Concentration") %>%
     # scaling within each chemical
@@ -469,7 +469,7 @@ head(scaled_longer_smoke_data)
 
 As we did in the previous module, a boxplot will be constructed to answer the first environmental heath question: **How do the distributions of the chemical concentration data differ based on each biomass burn scenario?**. Let's remind ourselves of the original figure from the previous module. 
 
-```{r fig.align = "center", echo = FALSE, fig.width = 7, fig.height = 5}
+```{r 03-Chapter3-27, fig.align = "center", echo = FALSE, fig.width = 7, fig.height = 5}
 ggplot(data = scaled_longer_smoke_data, aes(x = Scaled_Chemical_Concentration, color = Biomass_Burn_Condition)) + 
   geom_boxplot()
 ```
@@ -497,7 +497,7 @@ Many journals now require that authors report every single value when making dat
 :::
 
 Let's start with addressing **#1: Legibility of Axis Text**. The legend title and axis titles can easily be changed with `ggplot()`, so that will be done later. To remove the underscore from the `Biomass_Burn_Condition` column, we can use the function `gsub()`, which will replace all of the underscores with spaces, resulting in a cleaner-looking graph. 
-```{r}
+```{r 03-Chapter3-28}
 # First adding spaces between the biomass burn conditions
 scaled_longer_smoke_data = scaled_longer_smoke_data %>%
   mutate(Biomass_Burn_Condition = gsub("_", " ", Biomass_Burn_Condition))
@@ -510,7 +510,7 @@ head(scaled_longer_smoke_data)
 After calculating the median scaled chemical concentration for each biomass burn condition, the new dataframe will be arranged from lowest to highest median scaled concentration from the top of the dataframe to the bottom. This order will be saved in a vector, `median_biomass_order`. Although the biomass burn conditions are saved from lowest to highest concentration, `ggplot()` will plot them in reverse order with the highest concentration at the top and the lowest at the bottom of the y axis.
 
 Axis reordering can also be accomplished using `reorder` within the `ggplot()` function as described [here](https://guslipkin.medium.com/reordering-bar-and-column-charts-with-ggplot2-in-r-435fad1c643e) and [here](https://r-graph-gallery.com/267-reorder-a-variable-in-ggplot2.html).
-```{r}
+```{r 03-Chapter3-29}
 median_biomass = scaled_longer_smoke_data %>%
     group_by(Biomass_Burn_Condition) %>%
     summarize(Median_Concentration = median(Scaled_Chemical_Concentration)) %>%
@@ -524,7 +524,7 @@ median_biomass_order = median_biomass$Biomass_Burn_Condition
 ```
 
 
-```{r}
+```{r 03-Chapter3-30}
 # Putting into factor to organize the burn conditions
 scaled_longer_smoke_data$Biomass_Burn_Condition = factor(scaled_longer_smoke_data$Biomass_Burn_Condition, 
                                                                 levels = median_biomass_order)
@@ -534,14 +534,14 @@ head(scaled_longer_smoke_data)
 ```
 
 Now that the dataframe has been finalized, we can plot the new boxplot. The final revision, **#3: Making Use of Color**, will be addressed with `ggplot()`. However, a palette can be chosen from the *MetBrewer* package.
-```{r}
+```{r 03-Chapter3-31}
 # Choosing the "Jurarez" palette from the `MetBrewer` package
 # `n = 12`, since there are 12 biomass burn conditions
 juarez_colors = met.brewer(name = "Juarez", n = 12)[1:12]
 ```
 
 **#4. Show all data points when possible** will also be addressed with `ggplot()` by simply using `geom_point()`. 
-```{r fig.align = "center", out.width = "75%", out.height = "75%"}
+```{r 03-Chapter3-32, fig.align = "center", out.width = "75%", out.height = "75%"}
 FigureX1 = ggplot(scaled_longer_smoke_data, aes(x = Scaled_Chemical_Concentration, y = Biomass_Burn_Condition, 
                                    color = Biomass_Burn_Condition)) + 
   geom_boxplot() +
@@ -581,7 +581,7 @@ Other aspects of the figure were changed in the latest version, but those are mi
 ## Creating an Improved Heatmap Visualization
 
 We'll use a heatmap to answer the second environmental health question: **Which classes of chemicals show the highest concentrations across the evaluated biomass burn conditions?** Let's view the original heatmap from the previous module and find aspects of it that can be improved.
-```{r fig.align = "center", fig.width = 10, fig.height= 5}
+```{r 03-Chapter3-33, fig.align = "center", fig.width = 10, fig.height= 5}
 # Changing the biomass condition variable back to a character from a factor
 scaled_longer_smoke_data$Biomass_Burn_Condition = as.character(scaled_longer_smoke_data$Biomass_Burn_Condition)
 
@@ -615,7 +615,7 @@ Notice that in the boxplot we used a qualitative palette, which is best for crea
 **#1: Legibility of Text** can be addressed in `ggplot()` and so can **#2: Reordering the heatmap**.
 
 `Biomass_Burn_Condition` has already been reordered and put into a factor, but we need to do the same with `Chemical.Category`. Similar to before, median scaled chemical concentration for each chemical category will be calculated. However, this time the new dataframe will be arranged from highest to lowest median scaled concentration from the top of the dataframe to the bottom. `ggplot()` will plot them in the SAME order with the highest concentration on the left side and the lowest on the right side of the figure.
-```{r}
+```{r 03-Chapter3-34}
 # Order the chemical category by the median scaled chemical concentration
 median_chemical = scaled_longer_smoke_data %>%
     group_by(Chemical.Category) %>%
@@ -628,7 +628,7 @@ head(median_chemical)
 median_chemical_order = median_chemical$Chemical.Category
 ```
 
-```{r}
+```{r 03-Chapter3-35}
 # Putting into factor to organize the chemical categories
 scaled_longer_smoke_data$Chemical.Category = factor(scaled_longer_smoke_data$Chemical.Category, 
                                                                 levels = median_chemical_order)
@@ -642,14 +642,14 @@ head(scaled_longer_smoke_data)
 ```
 
 Now that the dataframe has been finalized, we can plot the new boxplot. The final revision, **#3: Making Use of Color**, will be addressed with `ggplot()`. Here a palette is chosen from the *RColorBrewer* package.
-```{r}
+```{r 03-Chapter3-36}
 # Only needed to choose 2 colors for 'low' and 'high' in the heatmap
 # `n = 8` in the code to generate more colors that can be chosen from
 rcolorbrewer_colors = brewer.pal(n = 8, name = 'Accent')
 ```
 
 
-```{r fig.align = "center", fig.width = 10, fig.height = 4}
+```{r 03-Chapter3-37, fig.align = "center", fig.width = 10, fig.height = 4}
 FigureX2 = ggplot(data = scaled_longer_smoke_data, aes(x = Chemical.Category, y = Biomass_Burn_Condition,
                                            fill = Median_Scaled_Concentration)) + 
   geom_tile(color = 'white') + # adds white space between the tiles
@@ -684,7 +684,7 @@ An appropriate title for this figure could be:
 It would be helpful if there was a way to group these chemical profiles based on similarity and that's where the `pheatmap()` function can be helpful when it can be difficult to spot those patterns using visual inspection alone. Just for fun, let's briefly visualize a hierarchical clustering heatmap, which will be used to group both the biomass burn conditions and chemical categories based on their chemical concentrations. In this module, we'll focus only on the `pheatmap()` visualization, but more information on hierarchical clustering can be found in **Module 5.5 Unsupervised Machine Learning II: Additional Clustering Applications**.
 
 As we showed in the previous module, this function requires a wide dataframe which we'll need to create. It will contain `Chemical.Category`, `Biomass_Burn_Condition` and `Scaled_Chemical_Concentration`. 
-```{r, message=FALSE}
+```{r 03-Chapter3-38, message=FALSE}
 heatmap_df2 = scaled_longer_smoke_data %>%
     group_by(Biomass_Burn_Condition, Chemical.Category) %>%
     # using the summarize function instead of mutate function as was done previously since we only need the median values now
@@ -699,7 +699,7 @@ head(heatmap_df2)
 ```
 
 Now let's generate the same heatmap this time using the `pheatmap()` function:
-```{r fig.align = "center"}
+```{r 03-Chapter3-39, fig.align = "center"}
 # creating a color palette 
 blue_pink_palette = colorRampPalette(c(rcolorbrewer_colors[5], rcolorbrewer_colors[6]))
 
@@ -723,7 +723,7 @@ By using incorporating the dendrogram into the visualization, it's easier to see
 We can combine figures using the `plot_grid()` function from the *cowplot* package. For additional information on the `plot_grid()` function and parameters that can be changed see [Arranging Plots in a Grid](https://wilkelab.org/cowplot/articles/plot_grid.html). Other packages that have figure combining capabilities include the *[patchwork](https://patchwork.data-imaginist.com/)* package and the [`grid_arrange()`](https://cran.r-project.org/web/packages/gridExtra/vignettes/arrangeGrob.html) function from the *gridExtra* package.
 
 Figures can also be combined after they're exported from R using other applications like MS powerpoint and Adobe pdf. 
-```{r fig.align = "center", fig.width = 20, fig.height = 6, fig.retina= 3} 
+```{r 03-Chapter3-40, fig.align = "center", fig.width = 20, fig.height = 6, fig.retina= 3 }
 FigureX = plot_grid(FigureX1, FigureX2,
                      # Adding labels, changing size their size and position
                      labels = "AUTO", label_size = 15, label_x = 0.04,
@@ -765,7 +765,7 @@ Replicate the figure below! The heatmap is the same as the "Test Your Knowledge"
 
 **Hint**: To view additional aspects of figures that can be changed in *ggplot2* check out this [GGPlot2 Cheat Sheet](https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf). It might come in handy!
 :::
-```{r, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
+```{r 03-Chapter3-41, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
 knitr::include_graphics("Chapter_3/Module3_2_Input/Module3_2_Image4.png")
 ```
 
@@ -806,14 +806,14 @@ In the current example dataset, chemical exposure profiles were obtained from th
 ### Script Preparations
 
 #### Cleaning the global environment
-```{r}
+```{r 03-Chapter3-42}
 rm(list=ls())
 ```
 
 #### Installing required R packages
 If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you
 
-```{r message = FALSE}
+```{r 03-Chapter3-43, message = FALSE}
 if (!requireNamespace("openxlsx"))
   install.packages("openxlsx");
 if (!requireNamespace("tidyverse"))
@@ -823,19 +823,19 @@ if (!requireNamespace("ggpubr"))
 ```
 
 #### Loading R packages required for this session
-```{r message = FALSE}
+```{r 03-Chapter3-44, message = FALSE}
 library(openxlsx) # for importing data
 library(tidyverse) # for manipulating and plotting data
 library(ggpubr) # for making Q-Q plots with ggplot 
 ```
 
 #### Set your working directory
-```{r eval = FALSE}
+```{r 03-Chapter3-45, eval = FALSE}
 setwd("/filepath to where your input files are")
 ```
 
 #### Importing example dataset
-```{r message = FALSE}
+```{r 03-Chapter3-46, message = FALSE}
 # Import data
 wrist_data <- read.xlsx("Chapter_3/Module3_3_Input/Module3_3_InputData.xlsx")
 
@@ -871,7 +871,7 @@ Before answering these questions, let's define normality and how to test for it 
 ## What is a Normal Distribution?
 
 A normal distribution is a distribution of data in which values are distributed roughly symmetrically out from the mean such that 68.3% of values fall within one standard deviation of the mean, 95.4% of values fall within 2 standard deviations of the mean, and 99.7% of values fall within three standard deviations of the mean.
-```{r out.width = "800px", echo = FALSE, fig.align = 'center'}
+```{r 03-Chapter3-47, out.width = "800px", echo = FALSE, fig.align = 'center'}
 knitr::include_graphics("Chapter_3/Module3_3_Input/Module3_3_Image1.png")
 ```
 <center> Figure Credit: D Wells, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons</center>
@@ -887,12 +887,12 @@ We can begin by assessing the normality of our data through plots. For example, 
 ### Histograms
 
 Let's start with visualizing the distribution of the participant's ages using the `hist()` function that is part of base R.
-```{r fig.align = 'center'}
+```{r 03-Chapter3-48, fig.align = 'center'}
 hist(wrist_data$Age)
 ```
 
 We can edit some of the parameters to improve this basic histogram visualization. For example, we can decrease the size of each bin using the breaks parameter:
-```{r fig.align = 'center'}
+```{r 03-Chapter3-49, fig.align = 'center'}
 hist(wrist_data$Age, breaks = 10)
 ```
 
@@ -900,7 +900,7 @@ The `hist()` function is useful for plotting single distributions, but what if w
 
 First, we'll pivot our data to longer to prepare for plotting. Then, we'll make our plot. We can use the `theme_set()` function to set a default graphing theme for the rest of the script. A graphing theme represents a set of default formatting parameters (mostly colors) that ggplot will use to make your graphs. `theme_bw()` is a basic theme that includes a white background for the plot and dark grey axis text and minor axis lines. The theme that you use is a matter of personal preference. For more on the different themes available through *ggplot2*, see [here](https://ggplot2.tidyverse.org/reference/ggtheme.html).
 
-```{r message = FALSE, fig.align = 'center'}
+```{r 03-Chapter3-50, message = FALSE, fig.align = 'center'}
 # Pivot data longer to prepare for plotting
 wrist_data_long <- wrist_data %>%
   pivot_longer(!S_ID, names_to = "variable", values_to = "value")
@@ -920,7 +920,7 @@ From these histograms, we can see that our chemical variables do not appear to b
 ### Q-Q Plots
 
 Q-Q (quantile-quantile) plots are another way to visually assess normality. Similar to the histogram above, we can create a single Q-Q plot for the age variable using base R functions. Normal Q-Q plots (Q-Q plots where the theoretical quantiles are based on a normal distribution) have theoretical quantiles on the x-axis and sample quantiles, representing the distribution of the variable of interest from the dataset, on the y-axis. If the variable of interest is normally distributed, the points on the graph will fall along the reference line. 
-```{r fig.align = 'center'}
+```{r 03-Chapter3-51, fig.align = 'center'}
 # Plot points
 qqnorm(wrist_data$Age)
 
@@ -930,7 +930,7 @@ qqline(wrist_data$Age)
 Small variations from the reference line, as seen above, are to be expected for the most extreme values. Overall, we can see that the age data are relatively normally distributed, as the points fall along the reference line.
 
 To make a figure panel with Q-Q plots for all of our variables of interest, we can use the `ggqqplot()` function within the *[ggpubr](https://rpkgs.datanovia.com/ggpubr/)* package. This function generates Q-Q plots and has arguments that are similar to *ggplot2*.
-```{r fig.align = 'center'}
+```{r 03-Chapter3-52, fig.align = 'center'}
 ggqqplot(wrist_data_long, x = "value", facet.by = "variable", ggtheme = theme_bw(), scales = "free")
 ```
 With this figure panel, we can see that the chemical data have very noticeable deviations from the reference, suggesting non-normal distributions.  
@@ -946,7 +946,7 @@ Next, we will implement a quantitative approach to assessing normality, based on
 ### Single Variable Normality Assessment
 
 We will use the Shapiro-Wilk test to quantitatively assess whether our data distribution is normal, again looking at the age data. This test can be carried out simply using the `shapiro.test()` function from the base R stats package. When using this test and interpreting its results, it is important to remember that the null hypothesis is that the sample distribution is normal, and a significant p-value means the distribution is non-normal.
-```{r}
+```{r 03-Chapter3-53}
 shapiro.test(wrist_data$Age)
 ```
 This test resulted in a p-value of 0.8143, so we cannot reject the null hypothesis (that data are normally distributed). This means that we can assume that age is normally distributed, which is consistent with our visualizations above. 
@@ -954,7 +954,7 @@ This test resulted in a p-value of 0.8143, so we cannot reject the null hypothes
 ### Multiple Variable Normality Assessment
 
 With a large dataset containing many variables of interest (e.g., our example data with multiple chemicals), it is more efficient to test each column for normality and then store those results in a dataframe. We can use the base R function `apply()` to apply the Shapiro Wilk test over all of the numeric columns of our dataframe. This function generates a list of results, with a list element for each variable tested. There are also other ways that you could iterate through each of your columns, such as a `for` loop or a function as discussed in **TAME 2.0 Module 2.4 Improving Coding Efficiencies**.
-```{r}
+```{r 03-Chapter3-54}
 # Apply Shapiro Wilk test
 shapiro_res <-  apply(wrist_data %>% select(-S_ID), 2, shapiro.test)
 
@@ -963,7 +963,7 @@ glimpse(shapiro_res[1:3])
 ```
 
 We can then convert those list results into a dataframe. Each variable is now in a row, with columns describing outputs of the statistical test. 
-```{r}
+```{r 03-Chapter3-55}
 # Create results dataframe
 shapiro_res <- do.call(rbind.data.frame, shapiro_res)
 
@@ -972,7 +972,7 @@ shapiro_res
 ```
 
 Finally, we can clean up our results dataframe and add a column that will quickly tell us whether our variables are normally or non-normally distributed based on the Shapiro-Wilk normality test results.
-```{r}
+```{r 03-Chapter3-56}
 # Clean dataframe
 shapiro_res <- shapiro_res %>% 
   
@@ -1023,7 +1023,7 @@ There are a number of approaches that can be used to change the range and/or dis
 When data are non-normally distributed, such as with the chemical concentrations in our example dataset, it may be desirable to transform the data so that the distribution becomes closer to a normal distribution, particularly if there are only parametric tests available to test your hypothesis. A common transformation used in environmental health research is log~2~ transformation, in which data are transformed by taking the log~2~ of each value in the dataframe.
 
 Let's log~2~ transform our chemical data and examine the resulting histograms and Q-Q plots to qualitatively assess whether data appear more normal following transformation. We will apply a pseudo-log~2~ transformation, where we will add 1 to each value before log~2~ transforming so that all resulting values are positive and any zeroes in the dataframe do not return -Inf. 
-```{r fig.align = 'center'}
+```{r 03-Chapter3-57, fig.align = 'center'}
 # Apply psuedo log2 (pslog2) transformation to chemical data
 wrist_data_pslog2 <- wrist_data %>%
   mutate(across(DEP:TOTM, ~ log2(.x + 1)))
@@ -1039,13 +1039,13 @@ ggplot(wrist_data_pslog2_long, aes(value)) +
   labs(y = "# of Observations", x = "Value")
 ```
 
-```{r fig.align = 'center'}
+```{r 03-Chapter3-58, fig.align = 'center'}
 # Make a figure panel of Q-Q plots
 ggqqplot(wrist_data_pslog2_long, x = "value", facet.by = "variable", ggtheme = theme_bw(), scales = "free")
 ```
 
 Both the histograms and the Q-Q plots demonstrate that our log~2~ transformed data are more normally distributed than the raw data graphed above. Let's apply the Shapiro-Wilk test to our log~2~ transformed data to determine if the chemical distributions are normally distributed.
-```{r}
+```{r 03-Chapter3-59}
 # Apply Shapiro Wilk test
 shapiro_res_pslog2 <-  apply(wrist_data_pslog2 %>% select(-S_ID), 2, shapiro.test)
 
@@ -1066,7 +1066,7 @@ shapiro_res_pslog2
 ```
 
 The results from the Shapiro-Wilk test demonstrate that the the log~2~ chemical concentration data are more normally distributed than the raw data. Overall, the p-values, even for the chemicals that are still non-normally distributed, are much higher, and only 2 out of the 8 chemicals are non-normally distributed by the Shapiro-Wilk test. We can also calculate average p-values across all variables for our raw and log~2~ transformed data to further demonstrate this point. 
-```{r}
+```{r 03-Chapter3-60}
 # Calculate the mean Shapiro-Wilk p-value for the raw chemical data
 mean(shapiro_res$p.value)
 
@@ -1152,13 +1152,13 @@ These statistical tests are very simple, with more extensive examples and associ
 ### Script Preparations
 
 #### Cleaning the global environment
-```{r}
+```{r 03-Chapter3-61}
 rm(list=ls())
 ```
 
 #### Installing required R packages
 If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you
-```{r, results=FALSE, message=FALSE}
+```{r 03-Chapter3-62, results=FALSE, message=FALSE}
 if (!requireNamespace("tidyverse"))
   install.packages("tidyverse");
 if (!requireNamespace("car"))
@@ -1170,7 +1170,7 @@ if(!requireNamespace("effects"))
 ```
 
 #### Loading R packages required for this session
-```{r, results=FALSE, message=FALSE}
+```{r 03-Chapter3-63, results=FALSE, message=FALSE}
 library(tidyverse) # all tidyverse packages, including dplyr and ggplot2
 library(car) # package for statistical tests
 library(ggpubr) # ggplot2 based plots
@@ -1178,20 +1178,20 @@ library(effects) # for linear modeling
 ```
 
 #### Set your working directory
-```{r, eval=FALSE, echo=TRUE}
+```{r 03-Chapter3-64, eval=FALSE, echo=TRUE}
 setwd("/filepath to where your input files are")
 ```
 
 #### Importing example datasets
 
 Let's read in our example dataset. Note that these data are similar to those used previously, except that demographic and chemical measurement data were previously merged, and a few additional columns of subject information/demographics were added to serve as more thorough examples of data for use in this training module.
-```{r}
+```{r 03-Chapter3-65}
 # Loading data
 full.data <- read.csv("Chapter_3/Module3_4_Input/Module3_4_InputData.csv")
 ```
 
 Let's view the top of the first 9 columns of data in this dataframe:
-```{r}
+```{r 03-Chapter3-66}
 full.data[1:10,1:9]
 ```
 
@@ -1208,7 +1208,7 @@ These represent the subject information/demographic data, which include the foll
 + `Smoker3`: "Never", "Former", or "Current" smoking status
 
 Let's now view the remaining columns (columns 10-15) in this dataframe:
-```{r}
+```{r 03-Chapter3-67}
 full.data[1:10,10:15]
 ```
 
@@ -1252,12 +1252,12 @@ As discussed in the previous module, there are a few ways to evaluate the normal
 Let's start with the first approach based on data visualizations. In this module, we'll primarily be generating figures using the ***ggubr*** package which is specifically designed to generate ggplot2-based figures using more streamlined coding syntax. In addition, this package has statistical parameters for plotting that are useful for basic statistical analysis, especially for people with introductory experience to plotting in R. For further documentation on *ggubr*, click [here](https://jtr13.github.io/cc20/brief-introduction-and-tutorial-of-ggpubr-package.html).
 
 Let's begin with a [histogram](https://en.wikipedia.org/wiki/Histogram) to view the distribution of BMI data using the `gghistogram()` function from the *ggubr* package:
-```{r fig.width=5, fig.height=4, fig.align = 'center'}
+```{r 03-Chapter3-68, fig.width=5, fig.height=4, fig.align = 'center'}
 gghistogram(data = full.data, x = "BMI", bins = 20)
 ```
 
 Let's also view the [Q–Q (quantile-quantile) plot](https://en.wikipedia.org/wiki/Q%E2%80%93Q_plot) using the `ggqqplot()` function also from the *ggubr* package:
-```{r fig.width=5, fig.height=5, fig.align = 'center'}
+```{r 03-Chapter3-69, fig.width=5, fig.height=5, fig.align = 'center'}
 ggqqplot(full.data$BMI, ylab = "BMI")
 ```
 
@@ -1266,14 +1266,14 @@ From these visualizations, the BMI variable appears to be normally distributed, 
 <br>
 
 Let's now implement the second approach based on statistical tests for normality. Here, let's use the [Shapiro-Wilk test](https://en.wikipedia.org/wiki/Shapiro%E2%80%93Wilk_test) as an example, again looking at the BMI data. 
-```{r}
+```{r 03-Chapter3-70}
 shapiro.test(full.data$BMI)
 ```
 
 This test resulted in a p-value of 0.3773, so we cannot reject the null hypothesis (that the BMI data are normally distributed). These findings support the assumption that these data are normally distributed.
 
 Next, we'll assess homogeneity of variance using the Levene's test. This will be done using the `leveneTest()`function from the *car* package:
-```{r}
+```{r 03-Chapter3-71}
 # First convert the smoker variable to a factor
 full.data$Smoker = factor(full.data$Smoker, levels = c("NS", "S"))
 leveneTest(BMI ~ Smoker, data = full.data)
@@ -1288,14 +1288,14 @@ T-tests are commonly used to test for a significant difference between the means
 We will specifically implement a two sample t-test (or independent samples t-test).
 
 Let’s first visualize the BMI data across these two groups using boxplots:
-```{r fig.width=5, fig.height=4, fig.align = 'center'}
+```{r 03-Chapter3-72, fig.width=5, fig.height=4, fig.align = 'center'}
 ggboxplot(data = full.data, x = "Smoker", y = "BMI")
 ```
 
 From this plot, it looks like non-smokers (labeled "NS") *may* have significantly higher BMI than smokers (labeled "S"), though we need statistical evaluation of these data to more thoroughly evaluate this potential data trend.
 
 It is easy to perform a t-test on these data using the `t.test()` function from the base R stats package:
-```{r}
+```{r 03-Chapter3-73}
 t.test(data = full.data, BMI ~ Smoker)
 ```
 
@@ -1309,7 +1309,7 @@ t.test(data = full.data, BMI ~ Smoker)
 :::
 
 It's also helpful to save these results into a variable within the R global environment, which then allows us to access specific output values and extract them more easily for our records. For example, we can run the following to specifically extract the resulting p-value from this test:
-```{r fig.align = 'center'}
+```{r 03-Chapter3-74, fig.align = 'center'}
 ttest.res <- t.test(data = full.data, BMI ~ Smoker) # making a list in the R global environment with the statistical results
 signif(ttest.res$p.value, 2) # pulling the p-value and using the `signif` function to round to 2 significant figures
 ```
@@ -1320,20 +1320,20 @@ signif(ttest.res$p.value, 2) # pulling the p-value and using the `signif` functi
 Analysis of Variance (ANOVA) is a statistical method that can be used to compare means across three or more groups in normally distributed data. To demonstrate an ANOVA test on this dataset, let's answer **Environmental Health Question 2**: Are there statistically significant differences in BMI between current, former, and never smokers? To do this we'll use the `Smoker3` variable from our dataset.
 
 Let's again start by viewing these data distributions using a boxplot:
-```{r fig.align = 'center'}
+```{r 03-Chapter3-75, fig.align = 'center'}
 ggboxplot(data = full.data, x = "Smoker3", y = "BMI")
 ```
 
 From this cursory review of the data, it looks like the current smokers likely demonstrate significantly different BMI measures than the former and never smokers, though we need statistical tests to verify this potential trend. We also require statistical tests to evaluate potential differences (or lack of differences) between former and never smokers.
 
 Let’s now run the ANOVA to compare BMI between smoking groups, using the `aov()` function to fit an ANOVA model:
-```{r}
+```{r 03-Chapter3-76}
 smoker_anova = aov(data = full.data, BMI ~ Smoker3)
 smoker_anova
 ```
 
 We need to extract the typical ANOVA results table using either the `summary()` or `anova()` function on the resulting fitted object:
-```{r}
+```{r 03-Chapter3-77}
 anova(smoker_anova)
 ```
 
@@ -1350,7 +1350,7 @@ This table outputs a lot of information, including the `F value` referring to th
 :::
 
 Let's run a Tukey's post hoc test using the `TukeyHSD()` function in base R to determine which of the current, former, and never smokers have significant differences in BMI:
-```{r}
+```{r 03-Chapter3-78}
 smoker_tukey = TukeyHSD(smoker_anova)
 smoker_tukey
 ```
@@ -1358,7 +1358,7 @@ smoker_tukey
 Although the above Tukey object contains a column `p adj`, those are the raw unadjusted p values. It is common practice to adjust p values from multiple comparisons to prevent the reporting of false positives or reporting of a significant difference that doesn't actually exist ([Feise, 2002](https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/1471-2288-2-8#:~:text=Thus%2C%20the%20main%20benefit%20of,exists%20%5B10%E2%80%9321%5D.)). There are a couple of different methods that are used to adjust p values including the Bonferroni and the Benjamini & Hochberg approaches. 
 
 For this example, we'll use the `p.adjust()` function to obtain the Benjamini & Hochberg adjusted p values. Check out the associated [RDocumentation](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/p.adjust) to discover other methods that can be used to adjust p values using the `p.adjust()` function:
-```{r}
+```{r 03-Chapter3-79}
 # First converting the Tukey object into a dataframe
 smoker_tukey_df = data.frame(smoker_tukey$Smoker3) %>%
     # renaming the `p adj` to `P Value` for clarity
@@ -1388,7 +1388,7 @@ We will first visualize the data and a run simple correlation analysis to evalua
 
 
 Plotting the variables against one another and adding a linear regression line using the function `ggscatter()` from the *ggubr* package:
-```{r fig.align = 'center'}
+```{r 03-Chapter3-80, fig.align = 'center'}
 ggscatter(full.data, x = "BMI", y = "BW", 
           # Adding a linear line with 95% condfidence intervals as the shaded region
           add = "reg.line", conf.int = TRUE, 
@@ -1399,7 +1399,7 @@ ggscatter(full.data, x = "BMI", y = "BW",
 ```
 
 We can also run a basic correlation analysis between these two variables using the `cor.test()` function. This function uses the Pearson's correlation test as default, which we can implement here due to the previously discussed assumption of normality for this dataset. Note that other tests are needed in instances when data are not normally distributed (e.g., Spearman Rank). This function is used here to extract the Pearson's correlation coefficient and p-value (which also appear above in the upper left corner of the graph):
-```{r}
+```{r 03-Chapter3-81}
 cor.res <- cor.test(full.data$BW, full.data$BMI)
 signif(cor.res$estimate, 2)
 signif(cor.res$p.value, 2)
@@ -1408,7 +1408,7 @@ signif(cor.res$p.value, 2)
 Together, it looks like there may be an association between BW and BMI, based on these correlation results, demonstrating a significant p-value of 0.0004.
 
 To test this further, let’s run a linear regression analysis using the `lm()` function, using BMI (X) as the independent variable and BW as the dependent variable (Y):
-```{r}
+```{r 03-Chapter3-82}
 crude_lm <- lm(data = full.data, BW ~ BMI)
 summary(crude_lm) # viewing the results summary
 ```
@@ -1424,12 +1424,12 @@ summary(crude_lm) # viewing the results summary
 
 
 Additionally, we can derive confidence intervals for the BMI estimate using:
-```{r}
+```{r 03-Chapter3-83}
 confint(crude_lm)["BMI",]
 ```
 
 Notice that the r-squared (R^2^) value in regression output is the squared value of the previously calculated correlation coefficient (R).
-```{r}
+```{r 03-Chapter3-84}
 signif(sqrt(summary(crude_lm)$r.squared), 2)
 ```
 
@@ -1437,7 +1437,7 @@ signif(sqrt(summary(crude_lm)$r.squared), 2)
 
 In epidemiological studies, the potential influence of confounders is considered by including important covariates within the final regression model. Let's go ahead and investigate **Environmental Health Question 4**: Are maternal age and gestational age considered potential covariates in the relationship between maternal BMI and birth weight? We can do that by adding those variables to the linear model.
 
-```{r}
+```{r 03-Chapter3-85}
 adjusted_lm = lm(data = full.data, BW ~ BMI + MAge + GA)
 summary(adjusted_lm)
 ```
@@ -1447,7 +1447,7 @@ summary(adjusted_lm)
 Let's further visualize these regression modeling results by adding a regression line to the original scatterplot. Before doing so, we'll use the `effect()` function from the *effects* package to make estimated predictions of birth weight values for the crude and adjusted linear models. The crude model only has BMI as the dependent variable, while the adjusted model includes BMI, maternal age, and gestational age as dependent variables. This function creates a table that contains 5 columns: fitted values for BMI (`BMI`), predictor values (`fit`), standard errors of the predictions (`se`), lower confidence limits (`lower`), and upper confidence limits (`upper`). An additional column, `Model`, was added to specify whether the values correspond to the crude or adjusted model. 
 
 For additional information on visualizing adjusted linear models, see [Plotting Adjusted Associations in R](https://nickmichalak.com/post/2019-02-13-plotting-adjusted-associations-in-r/plotting-adjusted-associations-in-r/).
-```{r}
+```{r 03-Chapter3-86}
 crude_lm_predtable = data.frame(effect(term = "BMI", mod = crude_lm), Model = "Crude") 
 adjusted_lm_predtable = data.frame(effect(term = "BMI", mod = adjusted_lm), Model = "Adjusted") 
 
@@ -1456,7 +1456,7 @@ crude_lm_predtable
 ```
 
 Now we can plot each linear model and their corresponding 95% confidence intervals (CI). It's easier to visualize this using *ggplot2* instead of *ggubr* so that's what we'll use: 
-```{r fig.align = 'center'}
+```{r 03-Chapter3-87, fig.align = 'center'}
 options(repr.plot.width=9, repr.plot.height=6) # changing dimensions of the entire figure
 ggplot(full.data, aes(x = BMI, y = BW)) + 
   geom_point() + 
@@ -1485,7 +1485,7 @@ ggplot(full.data, aes(x = BMI, y = BW)) +
 To carry out a logistic regression, we need to evaluate one continuous variable (here, we select gestational age, using the `GA` variable) and one dichotomous variable (here, we select smoking status, using the `Smoker` variable) to evaluate **Environmental Health Question 5**: Are there statistically significant differences in gestational age based on whether a subject is a non-smoker or a smoker?
 
 Because smoking status is a dichotomous variable, we will use logistic regression to look at this relationship. Let's first visualize these data using a stacked bar plot for the dichotomous smoker dataset:
-```{r fig.width=5, fig.height=4, fig.align = 'center'}
+```{r 03-Chapter3-88, fig.width=5, fig.height=4, fig.align = 'center'}
 ggboxplot(data = full.data, x = "Smoker", y = "GA")
 ```
 
@@ -1494,7 +1494,7 @@ With this visualization, it's difficult to tell whether or not there are signifi
 <br>
 
 Let's now run the statistical analysis, using logistic regression modeling:
-```{r}
+```{r 03-Chapter3-89}
 # Before running the model, "Smoker", needs to be binarized to 0's or 1's for the glm function
 glm_data = full.data %>%
     mutate(Smoker = ifelse(Smoker == "NS", 0,1))
@@ -1507,7 +1507,7 @@ summary(log.res) # viewing the results
 ```
 
 Similar to the regression modeling analysis, we can also derive confidence intervals:
-```{r}
+```{r 03-Chapter3-90}
 confint(log.res)["GA",]
 ```
 
@@ -1531,23 +1531,23 @@ The number of samples or subjects (*n*) considered to be sufficiently large enou
 For this example, we are interested in evaluating the potential relationship between two categorical variables: smoking status (using the `Smoker` variable) and categorical BMI group (using the `BMIcat` variable) to address **Environmental Health Question 6**: Is there a relationship between smoking status and BMI?
 
 To run these categorical statistical tests, let's first create and view a 2-way contingency table describing the frequencies of observations across the categorical BMI and smoking groups:
-```{r}
+```{r 03-Chapter3-91}
 ContingencyTable <- with(full.data, table(BMIcat, Smoker))
 ContingencyTable
 ```
 
 Now let's run the Chi-squared test on this table:
-```{r}
+```{r 03-Chapter3-92}
 chisq.test(ContingencyTable)
 ```
 
 Note that we can also run the Chi-squared test using the following code, without having to generate the contingency table:
-```{r warning = FALSE}
+```{r 03-Chapter3-93, warning = FALSE}
 chisq.test(full.data$BMIcat, full.data$Smoker)
 ```
 
 Or:
-```{r warning = FALSE}
+```{r 03-Chapter3-94, warning = FALSE}
 with(full.data, chisq.test(BMIcat, Smoker))
 ```
 
@@ -1562,7 +1562,7 @@ Note that these all produce the same results. *With this, we can answer **Enviro
 
 <br>
 We can also run a Fisher's Exact Test when considering sample sizes. We won't run this here due to computing time, but here is some example code for your records:
-```{r}
+```{r 03-Chapter3-95}
 #With small sample sizes, can use Fisher's Exact Test
 #fisher.test(full.data$BMI, full.data$Smoker)
 ```

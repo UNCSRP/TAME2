@@ -2,7 +2,7 @@ Package: tame2book
 Title: TAME 2.0 Bookdown Project
 Version: 0.0.1
 Authors@R: 
-    person("Rager", "Lab", role = c("aut", "cre"), email = "you@example.com")
+    person("Rager", "Lab", role = c("aut", "cre"), email = "jrager@unc.edu")
 Description: Bookdown project for the TAME 2.0 toolkit.
 License: MIT
 Encoding: UTF-8
@@ -45,10 +45,10 @@ Imports:
     themis,
     e1071,
     ggsci,
+    ggrepel,
     factoextra,
     dendextend,
     FactoMineR,
-    ggrepel,
     vegan,
     patchwork,
     purrr,
