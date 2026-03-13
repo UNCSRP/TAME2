@@ -27,7 +27,7 @@ jobs:
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
         with:
-          r-version: "4.4.0"
+          r-version: "4.5.0"
 
       - name: Install system dependencies
         run: |
@@ -41,7 +41,11 @@ jobs:
           # Install BiocManager and Bioconductor packages FIRST
           # so remotes::install_deps() doesn't warn about missing deps
           Rscript -e 'if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")'
+
           Rscript -e 'BiocManager::install(c("EnhancedVolcano","DESeq2","edgeR","RUVSeq","piano","pcaMethods","impute","imputeLCMD","GEOquery"), ask = FALSE)'
+
+          # Pin factoextra
+          Rscript -e 'remotes::install_version("factoextra", version = "1.0.7", repos = "https://cran.rstudio.com")'
 
           # Now install remaining CRAN deps from DESCRIPTION
           Rscript -e 'remotes::install_deps(dependencies = TRUE, upgrade = "never")'
