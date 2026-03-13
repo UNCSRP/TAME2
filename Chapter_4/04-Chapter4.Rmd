@@ -24,7 +24,7 @@ Biological replicates are the preferred unit of statistical comparison because t
 
 The final "N" that you report should reflect your biological replicates, or independent experiments. What constitutes an independent experiment or biological replicate is highly field-, lab-, organism-, and endpoint-dependent, so make sure to discuss this within your research group in the experiment planning phase and again before your analysis begins. No matter what you choose, ensure that when you report your results, you are transparent about what your biological replicates are. For example, the below diagram (adapted from [BitesizeBio](https://bitesizebio.com/47982/n-number-cell-lines/)) illustrates different ways of defining replicates in experiments with cell lines: 
 
-```{r, echo = FALSE, fig.align = "center", out.width = "650px"} 
+```{r 04-Chapter4-1, echo = FALSE, fig.align = "center", out.width = "650px" }
 knitr::include_graphics("Chapter_4/Module4_1_Input/Module4_1_Image1.png")
 ```
 
@@ -39,7 +39,7 @@ Also note that to perform statistical analyses, an N of at least 3 biological re
 
 Technical replicates are repeated measurements on the same sample or biological source, demonstrating the variation underlying protocols, equipment, and sample handling. In environmental health research, there can be technical replicates separately related to either the experimental design or the downstream analyses. Technical replicates related to experimental design refer to the chemical exposure for cell-based (*in vitro*) experiments, where there may be multiple wells of cells from the same passage or human/mouse exposed to the same treatment. Technical replicates related to downstream analyses refer to the endpoints that are measured after chemical exposure in each sample. To illustrate this, consider an experiment where cells from four unique human donors (D1-D4) are grown in cell culture plates, and then three wells of cells from each donor are exposed to a chemical treatment (Tx) or a vehicle control (Ctrl). The plate layout might look something like this, with technical replicates related to experimental design, i.e. chemical exposure, in the same color:
 
-```{r, echo = FALSE, fig.align = "center", out.width = "500px"} 
+```{r 04-Chapter4-2, echo = FALSE, fig.align = "center", out.width = "500px" }
 knitr::include_graphics("Chapter_4/Module4_1_Input/Module4_1_Image2.png")
 ```
 
@@ -47,7 +47,7 @@ For this experiment, we have four biological replicates (the four donors) and th
 
 Following the exposure of the cells to a chemical of interest, the media is collected from each well and assayed using a plate reader assay for concentrations of a marker of inflammation. For each sample collected (from each well), there are three technical replicates used to measure the concentration of the inflammatory marker. The purpose of these technical replicates is to capture potential unintended well-to-well variation in the plate reader assay. The plate layout might look something like this, ***with the letter and number in each well of the plate layout representing the well in the exposure plate layout that the media sample being assayed came from***:
 
-```{r, echo = FALSE, fig.align = "center", out.width = "800px"} 
+```{r 04-Chapter4-3, echo = FALSE, fig.align = "center", out.width = "800px" }
 knitr::include_graphics("Chapter_4/Module4_1_Input/Module4_1_Image3.png")
 ```
 
@@ -82,7 +82,7 @@ In this chapter, we will be using an example dataset derived from an *in vitro*,
 
 In this experiment, primary human bronchial epithelial cells (HBECs) from sixteen different donors were exposed to the gas acrolein, which is emitted from the combustion of fossil fuels, tobacco, wood, and plastic. Inhalation exposure to acrolein is associated with airway inhalation, and this study aimed to understand how exposure to acrolein changes secretion of markers of inflammation. Prior to experimentation, the HBECs were grown on a permeable membrane support for 24 days with air on one side and liquid media on the other side, allowing them to differentiate into a form that is very similar to what is found in the human body. The cells were then exposed for 2 hours to 0 (filtered air), 0.6, 1, 2, or 4 ppm acrolein, with two technical replicate wells from each donor per dose. Twenty-four hours later, the media was collected, and concentrations of inflammatory markers were measured using an [enzyme-linked immunosorbent assay (ELISA)](https://www.thermofisher.com/us/en/home/life-science/protein-biology/protein-biology-learning-center/protein-biology-resource-library/pierce-protein-methods/overview-elisa.html). 
 
-```{r, echo = FALSE, fig.align = "center", out.width = "900px"} 
+```{r 04-Chapter4-4, echo = FALSE, fig.align = "center", out.width = "900px" }
 knitr::include_graphics("Chapter_4/Module4_1_Input/Module4_1_Image4.png")
 ```
 
@@ -92,7 +92,7 @@ Note that this is a matched experimental design because cells from every donor w
 
 Next, let's familiarize ourselves with the data that resulted from this experiment. There are two input data files, one that contains cytokine concentration data and one that contains demographic information about the donors:
 
-```{r, echo = FALSE, fig.align = "center", out.width = "900px"} 
+```{r 04-Chapter4-5, echo = FALSE, fig.align = "center", out.width = "900px" }
 knitr::include_graphics("Chapter_4/Module4_1_Input/Module4_1_Image5.png")
 ```
 
@@ -137,7 +137,7 @@ This training module was specifically developed to answer the following environm
 ## Data Import
 
 First, we need to import our data. Data can be imported into R from many different file formats, including .csv (as demonstrated in previous chapters), .txt, .xlsx, and .pdf. Often, data are formatted in Excel prior to import, and the [*openxlsx*](https://ycphs.github.io/openxlsx/) package provides helpful functions that allow the user to import data from Excel, create workbooks for storing results generated in R, and export data from R to Excel workbooks. Below, we will use the `read.xlsx()` function to import our data directly from Excel. Other useful packages include [*pdftools*](https://github.com/ropensci/pdftools) (PDF import),  [*tm*](https://cran.r-project.org/web/packages/tm/vignettes/tm.pdf) (text mining of PDFs), and [*plater*](https://cran.r-project.org/web/packages/plater/vignettes/plater-basics.html) (plate reader formatted data import).
-```{r, echo = FALSE, fig.align = "center", out.width = "850px"} 
+```{r 04-Chapter4-6, echo = FALSE, fig.align = "center", out.width = "850px" }
 knitr::include_graphics("Chapter_4/Module4_2_Input/Module4_2_Image1.png")
 ```
 
@@ -146,13 +146,13 @@ knitr::include_graphics("Chapter_4/Module4_2_Input/Module4_2_Image1.png")
 #### Set working directory
 
 In preparation, first let's set our working directory to the folder path that contains our input files:
-```{r eval = FALSE}
+```{r 04-Chapter4-7, eval = FALSE}
 setwd("/filepath to where your input files are")
 ```
 
 #### Installing required R packages
 If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you
-```{r, install__libs, echo=TRUE, eval=FALSE, warning=FALSE, results='hide', message=FALSE}
+```{r 04-Chapter4-8, install__libs, echo=TRUE, eval=FALSE, warning=FALSE, results='hide', message=FALSE}
 if (!requireNamespace("table1"))
   install.packages("table1");
 if (!requireNamespace("vtable"))
@@ -167,7 +167,7 @@ BiocManager::install("imputeLCMD")
 #### Load required packages
 
 And load required packages:
-```{r message = FALSE}
+```{r 04-Chapter4-9, message = FALSE}
 library(openxlsx) # for importing Excel files
 library(DT) # for easier viewing of data tables
 library(tidyverse) # for data cleaning and graphing
@@ -180,7 +180,7 @@ library(ggpubr) # for making Q-Q plots with ggplot
 #### Import example datasets
 
 Next, let's read in our example datasets:
-```{r}
+```{r 04-Chapter4-10}
 biomarker_data <- read.xlsx("Chapter_4/Module4_2_Input/Module4_2_InputData1.xlsx")
 demographic_data <- read.xlsx("Chapter_4/Module4_2_Input/Module4_2_InputData2.xlsx")
 ```
@@ -188,12 +188,12 @@ demographic_data <- read.xlsx("Chapter_4/Module4_2_Input/Module4_2_InputData2.xl
 #### View example datasets
 
 First, let's preview our example data. Using the `datatable()` function from the *DT* package allows us to interactively scroll through our biomarker data.
-```{r}
+```{r 04-Chapter4-11}
 datatable(biomarker_data)
 ```
 
 We can see that our biomarker data are arranged with samples in rows and sample information and biomarker measurements in the columns. 
-```{r}
+```{r 04-Chapter4-12}
 datatable(demographic_data)
 ```
 
@@ -204,7 +204,7 @@ Our demographic data provide information about the donors that our cells came fr
 ## Handling Missing Values
 
 Next, we will investigate whether we have missing values and which variables and donors have missing values.
-```{r}
+```{r 04-Chapter4-13}
 # Calculate the total number of NAs per variable
 biomarker_data %>% 
   summarise(across(IL1B:VEGF, ~sum(is.na(.))))
@@ -256,7 +256,7 @@ If you do impute missing values, make sure to include both your raw and imputed 
 Before imputing our data, it is a good idea to implement a background filter that checks to see if a certain percentage of values for each variable are missing. For variables with a very high percentage of missing values, imputation can be unreliable because there is not enough information for the imputation algorithm to reference. The threshold for what this percentage should be can vary by study design and the extent to which your data are subset into groups that may have differing biomarker profiles; however, a common threshold we frequently use is to remove variables with missing data for 25% or more of samples. 
 
 We can use the following code to calculate the percentage values missing for each endpoint:
-```{r}
+```{r 04-Chapter4-14}
 biomarker_data %>% 
   summarise(across(IL1B:VEGF, ~sum(is.na(.))/nrow(biomarker_data)*100))
 ```
@@ -264,7 +264,7 @@ biomarker_data %>%
 Here, we can see that only about 3-4% of values are missing for our variables with missing data, so we will proceed to imputation with our dataset as-is. 
 
 We will impute values using QRILC, which pulls from the left side of the data distribution (the lower values) to impute missing values. We will write a function that will apply QRILC imputation to our dataframe. This function takes a dataframe with missing values as input and returns a dataframe with QRILC imputed values in place of NAs as output. 
-```{r}
+```{r 04-Chapter4-15}
 QRILC_imputation = function(df){
     # Normalize data before applying QRILC per QRILC documentation
     ## Select only numeric columns, psuedo log2 transform, and convert to a matrix
@@ -292,7 +292,7 @@ QRILC_imputation = function(df){
 ```
 
 Now we can apply the `QRILC_imputation()` function to our dataframe. We use the function `set.seed()` to ensure that the QRILC function generates the same numbers each time we run the script. For more on setting seeds, see [here](https://www.statology.org/set-seed-in-r/).
-```{r}
+```{r 04-Chapter4-16}
 # Set random seed to ensure reproducibility in results
 set.seed(1104)
 
@@ -304,7 +304,7 @@ biomarker_data_imp <- QRILC_imputation(biomarker_data)
 ## Averaging Replicates
 
 The last step we need to take before our data are ready for analysis is averaging the two technical replicates for each donor and dose. We will do this by creating an ID column that represents the donor and dose together and using that column to group and average the data. This results in a dataframe where our rows contain data representing each biological replicate exposed to each of the five concentrations of acrolein. 
-```{r}
+```{r 04-Chapter4-17}
 biomarker_data_imp_avg <- biomarker_data_imp %>%
   
   # Create an ID column that represents the donor and dose
@@ -332,7 +332,7 @@ Generating descriptive statistics (e.g., mean, median, mode, range, standard dev
 ### Method #1 - Tidyverse and Basic Functions
 
 The mean, or average of data points, is one of the most commonly reported summary statistics and is often reported as mean ± standard deviation to demonstrate the spread in the data. Here, we will make a table of mean ± standard deviation for each of our biomarkers across each of the dose groups using *tidyverse* functions. 
-```{r}
+```{r 04-Chapter4-18}
 # Calculate means
 biomarker_group_means <- biomarker_data_imp_avg %>%
   group_by(Dose) %>%
@@ -343,7 +343,7 @@ datatable(biomarker_group_means)
 ```
 
 You'll notice that there are a lot of decimal places in our calculated means, while in our original data, there are only two decimal places. We can add a step to round the data to our above code chunk to produce cleaner results.
-```{r}
+```{r 04-Chapter4-19}
 # Calculate means
 biomarker_group_means <- biomarker_data_imp_avg %>%
   group_by(Dose) %>%
@@ -364,7 +364,7 @@ datatable(biomarker_group_means)
 :::
 
 We can use very similar code to calculate our standard deviations:
-```{r}
+```{r 04-Chapter4-20}
 # Calculate means
 biomarker_group_sds <- biomarker_data_imp_avg %>%
   group_by(Dose) %>%
@@ -384,7 +384,7 @@ Now we've calculated both the means and standard deviations! However, these are 
 5. Pivot the dataframe wider so that the dataframe resembles what we started with for the means and standard deviations. 
 
 First, we'll pivot each dataframe to a long format and create a variable that represents each unique row. 
-```{r}
+```{r 04-Chapter4-21}
 # Pivot dataframes longer and create variable column for each row
 biomarker_group_means_long <- pivot_longer(biomarker_group_means, 
                                            !Dose, names_to = "variable", values_to = "mean") %>%
@@ -400,7 +400,7 @@ datatable(biomarker_group_means_long)
 ```
 
 Next, we will join the mean and standard deviation datasets. Notice that we are only joining the `Dose_variable` and `sd` columns from the standard deviation dataframe to prevent duplicate columns (`Dose`, `variable`) from being included.
-```{r}
+```{r 04-Chapter4-22}
 # Merge the dataframes by row
 biomarker_group_summstats <- left_join(biomarker_group_means_long, 
                                        biomarker_group_sds_long %>% select(c(Dose_variable, sd)), 
@@ -411,7 +411,7 @@ datatable(biomarker_group_summstats)
 ```
 
 Then, we can unite the mean and standard deviation columns and add the ± symbol between them by storing that character as a variable and pasting that variable in our `paste()` function. 
-```{r}
+```{r 04-Chapter4-23}
 # Store plus/minus character
 plusminus <-"\u00b1"
 Encoding(plusminus)<-"UTF-8"
@@ -425,7 +425,7 @@ datatable(biomarker_group_summstats)
 ```
 
 Last, we can pivot the dataframe wider to revert it to its original layout, which is easier to read.
-```{r}
+```{r 04-Chapter4-24}
 # Pivot dataframe wider
 biomarker_group_summstats <- biomarker_group_summstats %>%
   
@@ -444,7 +444,7 @@ These data are now in a publication-ready format that can be exported to a .txt,
 ### Method #2 - Applying a List of Functions
 
 Calculating our mean and standard deviation separately using *tidyverse* wasn't too difficult, but what if we want to calculate other descriptive statistics, such as minimum, median, and maximum? We could use the above approach, but we would need to make a separate dataframe for each and then merge them all together. Instead, we can use the `map_dfr()` function from the *purrr* package, which is also part of *tidyverse.* This function takes a list of functions you want to apply to your data and applies these functions over specified columns in the data. Let's see how it works:
-```{r}
+```{r 04-Chapter4-25}
 # Define summary functions
 summary_functs <- lst(min, median, mean, max, sd)
 
@@ -467,24 +467,24 @@ There are also packages that have been developed for specifically making summary
 #### Table1
 
 The *table1* package makes summary tables using the function `table1()`, which takes the columns that you want in the rows of the table on the left side of the first argument, followed by `|` and then the grouping variable. The output table can be customized in a number of ways, including what summary statistics are output and whether or not statistical comparisons are run between groups (see package vignette for more details). 
-```{r}
+```{r 04-Chapter4-26}
 # Get names of all of the columns to include in the table
 paste(names(biomarker_data_imp_avg %>% select(IL1B:VEGF)), collapse=" + ")
 ```
 
-```{r eval = FALSE}
+```{r 04-Chapter4-27, eval = FALSE}
 # Make the table
 table1(~ IL1B + IL6 + IL8 + IL10 + TNFa + VEGF | Dose, data = biomarker_data_imp_avg)
 ```
 
-```{r, echo = FALSE, fig.align = "center", out.width = "850px"} 
+```{r 04-Chapter4-28, echo = FALSE, fig.align = "center", out.width = "850px" }
 knitr::include_graphics("Chapter_4/Module4_2_Input/Module4_2_Image2.png")
 ```
 
 #### Vtable
 
 The *vtable* package includes the function `st()`, which can also be used to make HTML tables (and other output formats; see `out` argument). For example: 
-```{r}
+```{r 04-Chapter4-29}
 # HTML output
 st(biomarker_data_imp_avg, group = 'Dose')
 
@@ -501,7 +501,7 @@ Similar to *table1*, see the package vignette for detailed information about how
 The last step we will take before beginning to test our data for statistical differences between groups (in the next module) is to understand our data's distribution through normality assessment. This will inform which statistical tests we will perform on our data. For more detail on normality testing, including detailed explanations of each type of normality assessment and explanations of the code underlying the following graphs and tables, see **TAME 2.0 Module 3.3 Normality Tests and Data Transformations**.
 
 We'll start by looking at histograms of our data for qualitative normality assessment:
-```{r message = FALSE, fig.align = 'center'}
+```{r 04-Chapter4-30, message = FALSE, fig.align = 'center'}
 # Set theme
 theme_set(theme_bw())
 
@@ -519,14 +519,14 @@ ggplot(biomarker_data_imp_avg_long, aes(value)) +
 From these histograms, we can see that IL-1$\beta$ appears to be normally distributed, while the other endpoints do not appear to be normally distributed. 
 
 We can also use Q-Q plots to assess normality qualitatively:
-```{r fig.align = 'center'}
+```{r 04-Chapter4-31, fig.align = 'center'}
 ggqqplot(biomarker_data_imp_avg_long, x = "value", facet.by = "variable", ggtheme = theme_bw(), scales = "free")
 ```
 
 With this figure panel, we can see that most of the variables have very noticeable deviations from the reference, suggesting non-normal distributions.
 
 To assess normality quantitatively, we can use the Shapiro-Wilk test. Note that the null hypothesis is that the sample distribution is normal, and a significant p-value means the distribution is non-normal.
-```{r}
+```{r 04-Chapter4-32}
 # Apply Shapiro Wilk test to dataframe
 shapiro_res <-  apply(biomarker_data_imp_avg %>% select(IL1B:VEGF), 2, shapiro.test)
 
@@ -558,14 +558,14 @@ datatable(shapiro_res)
 ### Log~2~ Transforming and Re-Assessing Normality
 
 Log~2~ transformation is a common transformation used in environmental health research and can move data closer to a normal distribution. For more on data transformation, see **TAME 2.0 Module 3.3 Normality Tests and Data Transformations**. We will pseudo-log~2~ transform our data, which adds a 1 to each value before log~2~ transformation and ensures that resulting values are positive real numbers. Let's see if the log~2~ data are more normally distributed than the raw data. 
-```{r}
+```{r 04-Chapter4-33}
 # Apply log2 transformation to data
 biomarker_data_imp_avg_log2 <- biomarker_data_imp_avg %>%
   mutate(across(IL1B:VEGF, ~ log2(.x + 1)))
 ```
 
 Make histogram panel:
-```{r fig.align = 'center'}
+```{r 04-Chapter4-34, fig.align = 'center'}
 # Pivot data longer and make figure panel of histograms
 biomarker_data_imp_avg_log2_long <- biomarker_data_imp_avg_log2 %>%
   pivot_longer(-c(Donor, Dose), names_to = "variable", values_to = "value")
@@ -578,12 +578,12 @@ ggplot(biomarker_data_imp_avg_log2_long, aes(value)) +
 ```
 
 Make Q-Q plot panel:
-```{r fig.align = 'center'}
+```{r 04-Chapter4-35, fig.align = 'center'}
 ggqqplot(biomarker_data_imp_avg_log2_long, x = "value", facet.by = "variable", ggtheme = theme_bw(), scales = "free")
 ```
 
 Run Shapiro-Wilk test:
-```{r}
+```{r 04-Chapter4-36}
 # Apply Shapiro Wilk test
 shapiro_res_log2 <-  apply(biomarker_data_imp_avg_log2 %>% select(IL1B:VEGF), 2, shapiro.test)
 
@@ -669,12 +669,12 @@ The following example is based on extracting data from PDFs generated by Nanopar
 For this example, we will be extracting data from 5 PDFs that are identically formatted but contain information unique to each sample. The samples represent particles isolated from epithelial cell media following an experiment where cells were exposed to four different environmental chemicals (labeled "A", "B", "C", and "D") or a vehicle control (labeled "Ctrl").
 
 Here is what a full view of one of the PDFs looks like, with values we want to extract highlighted in yellow:
-```{r echo = FALSE, out.width = "850px", fig.align = "center"}
+```{r 04-Chapter4-37, echo = FALSE, out.width = "850px", fig.align = "center"}
 knitr::include_graphics("Chapter_4/Module4_3_Input/Module4_3_Image1.png")
 ```
 
 Our goal is to extract these values and end up with a dataframe that looks like this, with each sample in a row and each variable in a column:
-```{r echo = FALSE, message = FALSE}
+```{r 04-Chapter4-38, echo = FALSE, message = FALSE}
 # Loading packages
 library(tidyverse)
 library(openxlsx)
@@ -694,7 +694,7 @@ datatable(ending_data)
 ```
 
 If your files are not already named in a way that reflects unique sample information, such as the date of the experiment or sample ID, update your file names to contain this information before proceeding with the script. Here are the names for the example PDF files:
-```{r, out.width = "400px", echo = FALSE, fig.align = 'center'}
+```{r 04-Chapter4-39, out.width = "400px", echo = FALSE, fig.align = 'center'}
 knitr::include_graphics("Chapter_4/Module4_3_Input/Module4_3_Image2.png")
 ```
 
@@ -706,7 +706,7 @@ knitr::include_graphics("Chapter_4/Module4_3_Input/Module4_3_Image2.png")
 
 If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you. We will be using the *pdftools* and *tm* packages to extract text from the PDF. And instead of using `head()` to preview dataframes, we will be using the function `datatable()` from the *DT* package. This function produces interactive tables and generates better formatting for viewing dataframes that have long character strings (like the ones we will be viewing in this section).
 
-```{r eval = FALSE}
+```{r 04-Chapter4-40, eval = FALSE}
 if (!requireNamespace("pdftools"))
   install.packages("pdftools")
 if (!requireNamespace("tm"))
@@ -718,7 +718,7 @@ if (!requireNamespace("janitor"))
 ```
 
 Next, load the packages.
-```{r warning = FALSE, message = FALSE}
+```{r 04-Chapter4-41, warning = FALSE, message = FALSE}
 library(tidyverse)
 library(pdftools)
 library(tm)
@@ -729,22 +729,22 @@ library(janitor)
 #### Initial data import from PDF files
 
 The following code stores the file names of all of the files in your directory that end in .pdf. To ensure that only PDFs of interest are imported, consider making a subfolder within your directory containing only the PDF extraction script file and the PDFs you want to extract data from.
-```{r}
+```{r 04-Chapter4-42}
 pdf_list <- list.files(path = "./Chapter_4/Module4_3_Input", pattern = "488.pdf$")
 ```
 
 We can see that each of our file names are now contained in the list.
-```{r}
+```{r 04-Chapter4-43}
 head(pdf_list)
 ```
 
 Next, we need to make a dataframe to store the extracted data. The `PDF Identifier` column will store the file name, and the `Text` column will store extracted text from the PDF.
-```{r}
+```{r 04-Chapter4-44}
 pdf_raw <- data.frame("PDF Identifier" = c(), "Text" = c())
 ```
 
 The following code uses a `for` loop to loop through each file (as stored in the pdf_list vector) and extract the text from the PDF. Sometimes this code generates duplicates, so we will also remove the duplicates with `distinct()`. 
-```{r message = FALSE, warning = FALSE}
+```{r 04-Chapter4-45, message = FALSE, warning = FALSE}
 for (i in 1:length(pdf_list)){
     
     # Iterating through each pdf file and separating each line of text 
@@ -766,7 +766,7 @@ pdf_raw <- pdf_raw %>%
 ```
 
 The new dataframe contains the data from all of the PDFs, with the `PDF Identifier` column containing the name of the input PDF file that corresponds to the text in the column next to it. 
-```{r}
+```{r 04-Chapter4-46}
 datatable(pdf_raw)
 ```
 
@@ -778,7 +778,7 @@ Specific variables of interest can be extracted from the `pdf_raw` dataframe by 
 It is important to note that there can be different numbers of spaces in each row and after each semicolon, which will change the `sep` argument for each variable. For example, there are a different number of spaces after the semicolon for "Dilution Factor" than there are for "Concentration" (see above PDF screen shot for reference). We will work through an example for the first variable of interest, dilution factor, in detail. 
 
 First, we can see what the dataframe looks like when we just filter rows based on keeping only rows that contain the string "Dilution Factor" in the text column using the `grepl()` function. 
-```{r}
+```{r 04-Chapter4-47}
 dilution_factor_df <- pdf_raw %>%
   filter(grepl("Dilution Factor", Text))
 
@@ -786,13 +786,13 @@ datatable(dilution_factor_df)
 ```
 
 The value we are trying to extract is at the end of a long character string. We will want to use the tidyverse function `separate()` to isolate those values, but we need to know what part of the character string will separate the dilution factor values from the rest of the text. To determine this, we can call just one of the data cells and copy the semicolon and following spaces for use in the `separate()` function. 
-```{r}
+```{r 04-Chapter4-48}
 # Return the value in the first row and second column.
 dilution_factor_df[1,2]
 ```
 
 Building on top of the previous code, we can now separate the dilution factor value from the rest of the text in the string. The `separate()` function takes an input data column and separates it into two or more columns based on the character passed to the separation argument. Here, everything before the separation string is discarded by setting the first new column to NA. Everything after the separation string will be stored in a new column called `Dilution Factor`, The starting `Text` column is removed by default.
-```{r}
+```{r 04-Chapter4-49}
 dilution_factor_df <- pdf_raw %>%
   filter(grepl("Dilution Factor", Text)) %>%
   separate(Text, into = c(NA, "Dilution Factor"), sep = ":                     ")
@@ -801,7 +801,7 @@ datatable(dilution_factor_df)
 ```
 
 For the "Original Concentration" variable, we filter rows by the string "pH" because the word concentration is found in multiple locations in the document. 
-```{r}
+```{r 04-Chapter4-50}
 concentration_df = pdf_raw %>%
     filter(grepl("pH", Text)) %>% 
     separate(Text, c(NA, "Concentration"), sep = ":        ") 
@@ -810,7 +810,7 @@ datatable(concentration_df)
 ```
 
 With the dilution factor variable, there were no additional characters after the value of interest, but here, "Particles / mL" remains and needs to be removed so that the data can be used in downstream analyses. We can add an additional cleaning step to remove "Particles / mL" from the data and add the units to the column title. `sep = " P"` refers to the space before and first letter of the string to be removed.
-```{r}
+```{r 04-Chapter4-51}
 concentration_df = pdf_raw %>%
     filter(grepl("pH", Text)) %>% 
     separate(Text, c(NA, "Concentration"), sep = ":        ") %>%
@@ -820,7 +820,7 @@ datatable(concentration_df)
 ```
 
 Next, we want to extract size distribution data from the lower table. Note that the space in the first `separate()` function comes from the space between the "Number" and "Concentration" column in the string, and the space in the second `separate()` function comes from the space between the variable name and the number of interest.  We can also convert values to numeric since they are currently stored as characters.
-```{r}
+```{r 04-Chapter4-52}
 size_distribution_df = pdf_raw %>%
     filter(grepl("X10", Text)| grepl("X50 ", Text)| grepl("X90", Text) | grepl("Mean", Text)| grepl("StdDev", Text)) %>%
     separate(Text, c("Text", NA), sep = "                ") %>%
@@ -834,7 +834,7 @@ datatable(size_distribution_df)
 ### Creating the final dataframe
 
 Now that we have created dataframes for all of the variables that we are interested in, we can join them together into one final dataframe.
-```{r}
+```{r 04-Chapter4-53}
 # Make list of all dataframes to include
 all_variables <- list(dilution_factor_df, concentration_df, size_distribution_df)
 
@@ -848,7 +848,7 @@ datatable(full_df)
 ```
 
 For easier downstream analysis, the last step is to separate the `PDF Identifier` column into an informative sample ID that matches up with other experimental data. 
-```{r}
+```{r 04-Chapter4-54}
 final_df <- full_df %>%
   separate('PDF Identifier', 
            # Split sample identifier column into new columns, retaining the original column
@@ -860,7 +860,7 @@ datatable(final_df)
 ```
 
 Let's make a graph to help us answer Environmental Health Question 1. 
-```{r message = FALSE}
+```{r 04-Chapter4-55, message = FALSE}
 theme_set(theme_bw())
 
 data_for_graphing <- final_df %>%
@@ -893,12 +893,12 @@ The above workflow is useful if you just want to extract a few specific values f
 The following example is based on extracting dataframes from a long PDF containing many individual data tables. This particular PDF came from the NIH's BioLINCC Repository and details variables that researchers can request from the repository. Variables are part of larger datasets that contain many variables, with each dataset in a separate table. All of the tables are stored in one PDF file, and some of the tables are longer than one page (this will become relevant later on!). Similar to the first PDF workflow, remember that this is a specific example intended to demonstrate how to work through extracting data from PDFs. Modifications will need to be made for differently formatted PDFs.
 
 Here is what the first three pages of our 75-page starting PDF look like:
-```{r echo = FALSE, out.width = "850px", fig.align = "center"}
+```{r 04-Chapter4-56, echo = FALSE, out.width = "850px", fig.align = "center"}
 knitr::include_graphics("Chapter_4/Module4_3_Input/Module4_3_Image3.png")
 ```
 
 If we zoom in a bit more on the first page, we can see that the dataset name is defined in bold above each table. This formatting is consistent throughout the PDF. 
-```{r echo = FALSE, out.width = "850px", fig.align = "center"}
+```{r 04-Chapter4-57, echo = FALSE, out.width = "850px", fig.align = "center"}
 knitr::include_graphics("Chapter_4/Module4_3_Input/Module4_3_Image4.png")
 ```
 
@@ -910,7 +910,7 @@ The zoomed in view also allows us to see the columns and their contents more cle
 - `Label`: A description of the variable and values associated with the variable. 
 
 After extracting the data, we want to end up with a dataframe that contains all of the variables, their corresponding columns, and a column that indicates which dataset the variable is associated with:
-```{r echo = FALSE}
+```{r 04-Chapter4-58, echo = FALSE}
 biolincc_final <- read.xlsx("Chapter_4/Module4_3_Input/Module4_3_InputData3.xlsx") %>%
   clean_names()
 
@@ -923,7 +923,7 @@ datatable(biolincc_final)
 
 Similar to previous sections, we need to install and load a few packages before proceeding. The *tabulapdf* package needs to be installed in a specific way as shown below and can sometimes be difficult to install on Macs. If errors are produced, follow the troubleshooting tips outlined in [this](https://stackoverflow.com/questions/67849830/how-to-install-rjava-package-in-mac-with-m1-architecture) Stack Overflow solution.
 
-```{r eval = FALSE}
+```{r 04-Chapter4-59, eval = FALSE}
 # To install all of the packages except for tabulapdf
 if (!requireNamespace("stringr"))
   install.packages("stringr")
@@ -933,7 +933,7 @@ if (!requireNamespace("rJava"))
   install.packages("rJava")
 ```
 
-```{r message = FALSE, eval = FALSE}
+```{r 04-Chapter4-60, message = FALSE, eval = FALSE}
 # To install tabulapdf
 if (!require("remotes")) {
     install.packages("remotes")
@@ -945,7 +945,7 @@ remotes::install_github(c("ropensci/tabulizerjars", "ropensci/tabulapdf"), force
 ```
 
 Load packages:
-```{r message = FALSE, eval = FALSE}
+```{r 04-Chapter4-61, message = FALSE, eval = FALSE}
 library(tabulapdf) 
 library(tidyverse) 
 library(janitor) 
@@ -956,17 +956,17 @@ library(stringr)
 #### Initial data import from PDF file
 
 The `extract_tables()` function automatically extracts tables from PDFs and stores them as tibbles (a specific tidyverse data structure similar to a dataframe) within a list. One table is extracted per page, even if the table spans multiple pages. This line of code can take a few seconds to run depending on the length of your PDF.
-```{r}
+```{r 04-Chapter4-62}
 tables <-tabulapdf::extract_tables("Chapter_4/Module4_3_Input/Module4_3_InputData4.pdf", output = "tibble")
 ```
 
 Glimpsing the first three elements in the tables list, we can see that each list element is a dataframe containing the columns from the PDF tables. 
-```{r}
+```{r 04-Chapter4-63}
 glimpse(tables[1:3])
 ```
 
 Exploring further, here is how each dataframe is formatted:
-```{r}
+```{r 04-Chapter4-64}
 datatable(tables[[1]])
 ```
 
@@ -975,7 +975,7 @@ Notice that, although the dataframe format mirrors the PDF table format, the lab
 ### Cleaning dataframes
 
 First, we will select the columns we are interested in and use the `fill()` function to change the NAs in the "Num" column so that each line of text in the "Label" column has the correct "Num" value in the same row. 
-```{r}
+```{r 04-Chapter4-65}
 cleaned_table1 <- data.frame(tables[[1]]) %>% # Extract the first table in the list
   
   # Select only the columns of interest
@@ -991,7 +991,7 @@ datatable(cleaned_table1)
 ```
 
 We still need to move all of the Label text for each variable into one cell in one row instead of across multiple rows. For this, we can use the `unlist()` function. Here is a demonstration of how the `unlist()` function works using just the first variable:
-```{r}
+```{r 04-Chapter4-66}
 cleaned_table1_var1 <- cleaned_table1 %>%
   
   # Filter dataframe to just contain rows associated with the first variable
@@ -1004,7 +1004,7 @@ datatable(cleaned_table1_var1)
 ```
 
 We now have all of the text we want in one cell, but we have duplicate rows that we don't need. We can get rid of these rows by assigning blank values "NA" and then omitting rows that contain NAs.
-```{r warning = FALSE}
+```{r 04-Chapter4-67, warning = FALSE}
 cleaned_table1_var1 <- cleaned_table1_var1 %>%
   mutate(across(Variable, na_if, ""))  %>%
     na.omit()
@@ -1013,7 +1013,7 @@ datatable(cleaned_table1_var1)
 ```
 
 We need to apply this code to the whole dataframe and not just one variable, so we can add `group_by(Num)` to our cleaning workflow, followed by the code we just applied to our filtered dataframe.
-```{r warning = FALSE}
+```{r 04-Chapter4-68, warning = FALSE}
 cleaned_table1 <- data.frame(tables[[1]]) %>% # Extract the first table in the list
   
   # Select only the columns of interest
@@ -1042,7 +1042,7 @@ datatable(cleaned_table1)
 Ultimately, we need to clean up each dataframe in the list the same way, and we need all of the dataframes to be in one dataframe, instead of in a list. There are a couple of different ways to do this. Both rely on the code shown above for cleaning up each dataframe. Option #1 uses a for loop, while Option #2 uses application of a function on the list of dataframes. Both result in the same ending dataframe!
 
 **Option #1**
-```{r warning = FALSE}
+```{r 04-Chapter4-69, warning = FALSE}
 # Create a dataframe for storing variables
 variables <- data.frame()
 
@@ -1066,7 +1066,7 @@ datatable(variables)
 ```
 
 **Option #2**
-```{r warning = FALSE}
+```{r 04-Chapter4-70, warning = FALSE}
 # Write a function that applies all of the cleaning steps to an dataframe (output = cleaned dataframe)
 clean_tables <- function(data) {
   
@@ -1101,14 +1101,14 @@ First, we will read in the pdf using the PDF tools package. This results in a ve
 + Each line is separated by `\n`
 + Elements [1] and [2] of the vector contain the text "dataset Name:", while element [3] does not because the third page was a continuation of the table from the second page and therefore did not have a table title. 
 
-```{r}
+```{r 04-Chapter4-71}
 table_names <- pdf_text("Chapter_4/Module4_3_Input/Module4_3_InputData4.pdf")
 
 head(table_names[1:3])
 ```
 
 Similar to the table cleaning section, we will work through an example of extracting the text of interest from one of these character vectors, then apply the same code to all of the character vectors. First, we will select just the first element in the vector and make it into a dataframe.
-```{r}
+```{r 04-Chapter4-72}
 # Create dataframe
 dataset_name_df_var1 <- data.frame(strsplit(table_names[1], "\n"))
 
@@ -1120,7 +1120,7 @@ datatable(dataset_name_df_var1)
 ```
 
 Next, we will extract the dataset name using the same approach used in extracting values from the nanoparticle tracking example above and assign the name to a variable. We filter by the string "Data Set Name" because this is the start of the text string in the row where our dataset name is stored and is the same across all of our datasets. 
-```{r}
+```{r 04-Chapter4-73}
 # Create dataframe
 dataset_name_df_var1 <- dataset_name_df_var1 %>%
   filter(grepl("Data Set Name", dataset_name_df_var1$Text)) %>%
@@ -1134,7 +1134,7 @@ dataset_name_var1
 ```
 
 Now that we have the dataset name stored as a variable, we can create a dataframe that will correspond to the rows in our `variables` dataframe. The challenge is that each dataset contains a different number of variables! We can determine how many rows each dataset contains by returning to our `variables` dataframe and calculating the number of rows associated with each dataset. The following code splits the `variables` dataframe into a list of dataframes by each occurrence of 1 in the "Num" column (when the numbering restarts for a new dataset).
-```{r}
+```{r 04-Chapter4-74}
 # Calculate the number of rows associated with each dataset for reference
 dataset_list <- split(variables, cumsum(variables$Num == 1))
 
@@ -1142,7 +1142,7 @@ glimpse(dataset_list[1:3])
 ```
 
 The number of rows in each list is the number of variables in that dataset. We can use this value in creating our dataframe of dataset names.
-```{r}
+```{r 04-Chapter4-75}
 # Store the number of rows in a variable
 n_rows = nrow(data.frame(dataset_list[1]))
   
@@ -1154,7 +1154,7 @@ datatable(dataset_name_var1)
 ```
 
 We now have a dataframe that can be joined with our `variables` dataframe for the first table. We can apply this approach to each table in our original PDF using a `for` loop.
-```{r}
+```{r 04-Chapter4-76}
 # Make dataframe to store dataset names
 dataset_names <- data.frame()
 
@@ -1201,7 +1201,7 @@ datatable(dataset_names)
 ### Combining Dataset Names and Variable Information
 
 Last, we will merge together the dataframe containing dataset names and variable information.
-```{r}
+```{r 04-Chapter4-77}
 # Merge together
 final_variable_df <- cbind(dataset_names, variables) %>%
   rename("Variable Description" = "Label", "Variable Number Within Dataset" = "Num") %>%
@@ -1211,7 +1211,7 @@ datatable(final_variable_df)
 ```
 
 We can also determine how many total variables we have, all of which are accessible via the table we just generated.  
-```{r}
+```{r 04-Chapter4-78}
 # Total number of variables
 nrow(final_variable_df)
 
@@ -1263,7 +1263,7 @@ This training module was specifically developed to answer the following environm
 ### Workspace Preparation and Data Import
 
 Here, we will import the processed data that we generated at the end of **TAME 2.0 Module 4.2 Data Import, Processing, and Summary Statistics**. These data, along with the associated demographic data, were introduced in **TAME 2.0 Module 4.1 Overview of Experimental Design and Example Data**. These data represent log~2~ concentrations of inflammatory biomarkers secreted by airway epithelial cells after exposure to four different concentrations of acrolein (plus filtered air as a control). We will also load packages that will be needed for the analysis, including previously introduced packages such as *openxlsx*, *tidyverse*, *DT*, and *ggpubr*, and additional packages relevant to statistical analysis and graphing that will be discussed in greater detail below. 
-```{r message = FALSE}
+```{r 04-Chapter4-79, message = FALSE}
 # Load packages
 library(openxlsx)
 library(tidyverse)
@@ -1272,7 +1272,7 @@ library(rstatix)
 library(ggpubr)
 ```
 
-```{r}
+```{r 04-Chapter4-80}
 # Import data
 biomarker_data <- read.xlsx("Chapter_4/Module4_4_Input/Module4_4_InputData1.xlsx")
 demographic_data <- read.xlsx("Chapter_4/Module4_4_Input/Module4_4_InputData2.xlsx")
@@ -1327,7 +1327,7 @@ This decision matters more when dealing with smaller sample sizes (*n*<10) as sm
 ### Which test should I choose?
 
 We provide the following flowchart to help guide your choice of statistical test to compare two groups:
-```{r, echo = FALSE, fig.align = "center", out.width = "800px"} 
+```{r 04-Chapter4-81, echo = FALSE, fig.align = "center", out.width = "800px" }
 knitr::include_graphics("Chapter_4/Module4_4_Input/Module4_4_Image1.png")
 ```
 
@@ -1345,34 +1345,34 @@ In discussions of effect size, the population size is also a consideration - a s
 
 We will start by performing a statistical test to determine whether there are significant differences in biomarker concentrations between male and female donors at baseline (0 ppm exposure). Previously we determined that the majority of our data was non-normally distributed (see **TAME 2.0 Module 4.2 Data Import, Processing, and Summary Statistics**), so we'll skip testing for that assumption in this module. Based on those results, we will use the Wilcoxon test to determine if there are significant differences between groups. The Wilcoxon test does not assume homogeneity of variance, so we do not need to test for that prior to applying the test. This is an unpaired analysis because samples collected from the cells derived from male and female donor cells are different sets of cells (i.e., independent from each other). Thus, the specific statistical test applied will be the Wilcoxon Rank Sum test. 
 First, we will filter our dataframe to only data representing the control (0 ppm) exposure:
-```{r}
+```{r 04-Chapter4-82}
 biomarker_data_malevsfemale <- biomarker_data %>% filter(Dose == "0")
 ```
 
 Next, we need to add the demographic data to our dataframe:
-```{r}
+```{r 04-Chapter4-83}
 biomarker_data_malevsfemale <- biomarker_data_malevsfemale %>% left_join(demographic_data %>% select(Donor, Sex), by = "Donor") 
 ```
 
 Here is what our data look like now:
-```{r}
+```{r 04-Chapter4-84}
 datatable(biomarker_data_malevsfemale)
 ```
 
 We can demonstrate the basic anatomy of the Wilcoxon test function `wilcox.test()` by running the function on just one variable. 
-```{r}
+```{r 04-Chapter4-85}
 wilcox.test(IL1B ~ Sex, data = biomarker_data_malevsfemale)
 ```
 The p-value of 0.8371 indicates that males and females do not have significantly different concentrations of IL-1$\beta$. 
 
 The `wilcox.test()` function is part of the pre-loaded package *stats*. The package [*rstatix*](https://rpkgs.datanovia.com/rstatix/) provides identical statistical tests to *stats* but in a pipe-friendly (tidyverse-friendly) format, and these functions output results as dataframes rather than the text displayed above. 
-```{r}
+```{r 04-Chapter4-86}
 biomarker_data_malevsfemale %>% wilcox_test(IL1B ~ Sex)
 ```
 Here, we can see the exact same results as with the `wilcox.test()` function. For the rest of this module, we'll proceed with using the *rstatix* version of statistical testing functions.
 
 Although it is simple to run the Wilcoxon test with the code above, it's impractical for a large number of endpoints and doesn't store the results in an organized way. Instead, we can run the Wilcoxon test over every variable of interest using a `for` loop. There are also other ways you could approach this, such as a function applied over a list. This `for` loop runs the Wilcoxon test on each endpoint, stores the results in a dataframe, and then binds together the results dataframes for each variable of interest. Note that you could easily change `wilcox_test()` to `t_test()` and add additional arguments to modify the way the statistical test is run. 
-```{r warning = FALSE}
+```{r 04-Chapter4-87, warning = FALSE}
 # Create a vector with the names of the variables you want to run the test on
 endpoints <- colnames(biomarker_data_malevsfemale %>% select(IL1B:VEGF)) 
 
@@ -1433,18 +1433,18 @@ For this analysis, we will not adjust for multiple hypothesis testing due to our
 To demonstrate an example of a paired two group test, we can also determine whether exposure to 4 ppm acrolein significantly changes biomarker concentrations. This is now a paired design because each donor's cells were exposed to both 0 and 4 ppm acrolein. 
 
 To prepare the data, we will filter the dataframe to only include 0 and 4 ppm:
-```{r}
+```{r 04-Chapter4-88}
 biomarker_data_0vs4 <- biomarker_data %>%
   filter(Dose == "0" | Dose == "4")
 ```
 
 Let's view the dataframe. Note how the measurements for each donor are next to each other - this an important element of the default handling of the paired analysis in R. The dataframe should have the donors in the same order for the 0 and 4 ppm data. 
-```{r}
+```{r 04-Chapter4-89}
 datatable(biomarker_data_0vs4)
 ```
 
 We can now run the same type of loop that we ran before, changing the independent variable in the formula to `~ Dose` and adding `paired = TRUE` to the `wilcox_test()` function.
-```{r}
+```{r 04-Chapter4-90}
 # Create a vector with the names of the variables you want to run the test on
 endpoints <- colnames(biomarker_data_0vs4 %>% select(IL1B:VEGF)) 
 
@@ -1472,7 +1472,7 @@ dose_wilcoxres
 
 Although this dataframe contains useful information about our statistical test, such as the groups being compared, the sample size (*n*) of each group, and the test statistic, what we really want (and what would likely be shared in supplemental material), is a more simplified version of these results in table format and more detailed information (*n*, specific statistical test, groups being compared) in the table legend. We can clean up the results using the following code to make clearer column names and ensure that the p-values are formatted consistently.
 
-```{r}
+```{r 04-Chapter4-91}
 dose_wilcoxres <- dose_wilcoxres %>%
   select(c(.y., p)) %>%
   mutate(p = format(p, digits = 3, scientific = TRUE)) %>%
@@ -1499,7 +1499,7 @@ Now, let's visualize our results using *ggplot2*. For an introduction to *ggplot
 
 ### Single Plots
 We will start by making a very basic box and whisker plot of the IL-1$\beta$ data with individual data points overlaid. It is best practice to show all data points, allowing the reader to view the whole spread of the data, which can be obscured by plots such as bar plots with mean and standard error.
-```{r, fig.align = "center"}
+```{r 04-Chapter4-92, fig.align = "center"}
 # Setting theme for plot
 theme_set(theme_bw())
 
@@ -1510,7 +1510,7 @@ ggplot(biomarker_data_0vs4, aes(x = Dose, y = IL1B)) +
 ```
 
 We could add statistical markings to denote significance to this graph manually in PowerPoint or Adobe Illustrator, but there are actually R packages that act as extensions to *ggplot2* and will do this for you! Two of our favorites are [*ggpubr*](http://www.sthda.com/english/articles/24-ggpubr-publication-ready-plots/76-add-p-values-and-significance-levels-to-ggplots/) and [*ggsignif*](https://cran.r-project.org/web/packages/ggsignif/vignettes/intro.html). Here is an example using *ggpubr*:
-```{r, fig.align = "center"}
+```{r 04-Chapter4-93, fig.align = "center"}
 ggplot(biomarker_data_0vs4, aes(x = Dose, y = IL1B)) +
   geom_boxplot() +
   geom_jitter(position = position_jitter(0.15)) +
@@ -1519,7 +1519,7 @@ ggplot(biomarker_data_0vs4, aes(x = Dose, y = IL1B)) +
 ```
 
 We can further clean up our figure by modifying elements of the plot's theme, including the font sizes, axis range, colors, and the way that the statistical results are presented. Perfecting figures can be time consuming but ultimately worth it, because clear figures aid greatly in presenting a coherent story that is understandable to readers/listeners. 
-```{r fig.align = "center"}
+```{r 04-Chapter4-94, fig.align = "center"}
 ggplot(biomarker_data_0vs4, aes(x = Dose, y = IL1B)) +
   # outlier.shape = NA removes outliers
   geom_boxplot(aes(fill = Dose), outlier.shape = NA) +
@@ -1548,7 +1548,7 @@ Making one plot was relatively straightforward, but to graph all of our endpoint
 While these are workable solutions and would get us to the same place, *ggplot2* actually contains a function - `facet_wrap()` - that can be used to graph multiple endpoints from the same groups in one figure panel, which takes care of a lot of the work for us! 
 
 To prepare our data for facet plotting, first we will pivot it longer:
-```{r}
+```{r 04-Chapter4-95}
 biomarker_data_0vs4_long <- biomarker_data_0vs4 %>%
   pivot_longer(-c(Donor, Dose), names_to = "variable", values_to = "value")
 
@@ -1572,7 +1572,7 @@ Then, we can use similar code to what we used to make our single graph, with a f
   
 - To add padding along the y axis, allowing space for significance asterisks, we added `scale_y_continuous(expand = expansion(mult = c(0.1, 0.4)))` 
 
-```{r warning = FALSE, fig.align = "center"}
+```{r 04-Chapter4-96, warning = FALSE, fig.align = "center"}
 # Create clean labels for the graph titles
 new_labels <- c("IL10" = "IL-10", "IL1B" = "IL-1\u03B2 ", "IL6" = "IL-6", "IL8" = "IL-8", 
                 "TNFa" = "TNF-\u03b1", "VEGF" = "VEGF")
@@ -1651,12 +1651,12 @@ This training module was specifically developed to answer the following environm
 Here, we will import the processed data that we generated at the end of TAME 2.0 Module 4.2, introduced in **TAME 2.0 Module 4.1 Overview of Experimental Design and Example Data** and the associated demographic data. These data represent log~2~ concentrations of inflammatory biomarkers secreted by airway epithelial cells after exposure to four different concentrations of acrolein (plus filtered air as a control). We will also load packages that will be needed for the analysis, including previously introduced packages such as *openxlsx*, *tidyverse*, *DT*, *ggpubr*, and *rstatix*. 
 
 #### Cleaning the global environment
-```{r, clear_envi, echo=TRUE, eval=TRUE}
+```{r 04-Chapter4-97, clear_envi, echo=TRUE, eval=TRUE}
 rm(list=ls())
 ```
 
 #### Loading R packages required for this session
-```{r, load_ libs, echo=TRUE, eval=TRUE, warning=FALSE, error=FALSE, results='hide', message=FALSE}
+```{r 04-Chapter4-98, load_libs, echo=TRUE, eval=TRUE, warning=FALSE, error=FALSE, results='hide', message=FALSE}
 library(openxlsx)
 library(tidyverse)
 library(DT)
@@ -1665,12 +1665,12 @@ library(ggpubr)
 ```
 
 #### Set your working directory
-```{r, file_path, echo=TRUE, eval=FALSE, error=FALSE, results='hide', message=FALSE}
+```{r 04-Chapter4-99, file_path, echo=TRUE, eval=FALSE, error=FALSE, results='hide', message=FALSE}
 setwd("/filepath to where your input files are")
 ```
 
 #### Importing example dataset
-```{r, read_ data, echo=TRUE, eval=TRUE}
+```{r 04-Chapter4-100, read_data, echo=TRUE, eval=TRUE}
 biomarker_data <- read.xlsx("Chapter_4/Module4_5_Input/Module4_5_InputData1.xlsx")
 demographic_data <- read.xlsx("Chapter_4/Module4_5_Input/Module4_5_InputData2.xlsx")
 
@@ -1683,7 +1683,7 @@ datatable(demographic_data)
 ## Overview of Multi-Group Statistical Tests
 
 Before applying statistical tests to our data, let's first review the mechanics of multi-group statistical tests, including overall effects tests and post-hoc tests. 
-```{r, echo = FALSE, fig.align = "center", out.width = "600px"} 
+```{r 04-Chapter4-101, echo = FALSE, fig.align = "center", out.width = "600px" }
 knitr::include_graphics("Chapter_4/Module4_5_Input/Module4_5_Image1.png")
 ```
 
@@ -1691,7 +1691,7 @@ knitr::include_graphics("Chapter_4/Module4_5_Input/Module4_5_Image1.png")
 
 The first step for multi-group statistical testing is to run an overall effects test. The null hypothesis for the overall effects test is that there are no differences among group means. A significant p-value rejects the null hypothesis that the groups are drawn from populations with the same mean and indicates that at least one group differs significantly from the overall mean. Similar to two-group statistical testing, choice of the specific overall statistical test to run depends on whether the data are normally or non-normally distributed and whether the experimental design is paired:
 
-```{r, echo = FALSE, fig.align = "center", out.width = "700px"} 
+```{r 04-Chapter4-102, echo = FALSE, fig.align = "center", out.width = "700px" }
 knitr::include_graphics("Chapter_4/Module4_5_Input/Module4_5_Image2.png")
 ```
 
@@ -1700,7 +1700,7 @@ Importantly, overall effects tests return **one** p-value regardless of the numb
 ### Post-Hoc Testing
 
 If significance is obtained with an overall effects test, we can use post-hoc testing to determine which specific pairs of groups are significantly different from each other. Just as with two group statistical tests and overall effects multi-group statistical tests, choosing the appropriate post-hoc test depends on the data's normality and whether the experimental design is paired:
-```{r, echo = FALSE, fig.align = "center", out.width = "700px"} 
+```{r 04-Chapter4-103, echo = FALSE, fig.align = "center", out.width = "700px" }
 knitr::include_graphics("Chapter_4/Module4_5_Input/Module4_5_Image3.png")
 ```
 
@@ -1715,7 +1715,7 @@ When applying a post-hoc test, you may choose to compare every group to every ot
 ### Which test should I choose?
 
 Use the following flowchart to help guide your choice of statistical test to compare multiple groups:
-```{r, echo = FALSE, fig.align = "center", out.width = "900px"} 
+```{r 04-Chapter4-104, echo = FALSE, fig.align = "center", out.width = "900px" }
 knitr::include_graphics("Chapter_4/Module4_5_Input/Module4_5_Image4.png")
 ```
 
@@ -1724,14 +1724,14 @@ knitr::include_graphics("Chapter_4/Module4_5_Input/Module4_5_Image4.png")
 ## Multi-Group Analysis Example
 
 To determine whether there are significant differences across all of our doses, the Friedman test is the most appropriate due to our matched experimental design and non-normally distributed data. The `friedman_test()` function is part of the [rstatix](https://github.com/kassambara/rstatix) package. This package also has many other helpful functions for statistical tests that are pipe/tidyverse friendly. To demonstrate how this test works, we will first perform the test on one variable:
-```{r}
+```{r 04-Chapter4-105}
 biomarker_data %>% friedman_test(IL1B ~ Dose | Donor)
 ```
 
 A p-value of 0.01 indicates that we can reject the null hypothesis that all of our data are drawn from groups that have equivalent means. 
 
 Now, we can run a `for` loop similar to our two-group comparisons in **TAME 2.0 Module 4.4 Two Group Comparisons and Visualizations** to determine the overall p-value for each endpoint:
-```{r}
+```{r 04-Chapter4-106}
 # Create a vector with the names of the variables you want to run the test on
 endpoints <- colnames(biomarker_data %>% select(IL1B:VEGF))
 
@@ -1757,7 +1757,7 @@ datatable(dose_friedmanres)
 ```
 
 These results demonstrate that all of our endpoints have significant overall differences across doses (p < 0.05). To determine which pairwise comparisons are significant, we next need to apply a post-hoc test. We will apply a pairwise, paired Wilcoxon test due to our experimental design and data distribution, with the Benjamini-Hochberg (BH) correction for multiple testing:
-```{r}
+```{r 04-Chapter4-107}
 dose_wilcox_posthoc_IL1B <- biomarker_data %>% 
   pairwise_wilcox_test(IL1B ~ Dose, paired = TRUE, p.adjust.method = "BH")
 
@@ -1765,7 +1765,7 @@ dose_wilcox_posthoc_IL1B
 ```
 
 Here, we can now see whether there are statistically significant differences in IL-1$\beta$ secretion between each of our doses. To generate pairwise comparison results for each of our inflammatory biomarkers, we can run a for loop similar to the one we ran for our overall test:
-```{r}
+```{r 04-Chapter4-108}
 # Create a vector with the names of the variables you want to run the test on
 endpoints <- colnames(biomarker_data %>% select(IL1B:VEGF))
 
@@ -1790,7 +1790,7 @@ datatable(dose_wilcox_posthoc)
 ```
 
 We now have a dataframe storing all of our pairwise comparison results. However, this is a lot to scroll through, making it hard to interpret. We can generate a publication-quality table by manipulating the table and joining it with the overall test data. 
-```{r}
+```{r 04-Chapter4-109}
 dose_results_cleaned <- dose_wilcox_posthoc %>%
   unite(comparison, group1, group2, sep = " vs. ") %>%
   select(c(.y., comparison, p.adj)) %>%
@@ -1804,7 +1804,7 @@ datatable(dose_results_cleaned)
 ```
 
 To more easily see overall significance patterns, we could also make the same table but with significance stars instead of p-values by keeping the `p.adjust.signif` column instead of the `p.adj` column in our post-hoc test results dataframe:
-```{r}
+```{r 04-Chapter4-110}
 dose_results_cleaned_2 <- dose_wilcox_posthoc %>%
   unite(comparison, group1, group2, sep = " vs. ") %>%
   select(c(.y., comparison, p.adj.signif)) %>%
@@ -1841,13 +1841,13 @@ We first need to format our existing statistical results so that they match the 
 + `y.position`, which tells the function where to plot the significance markers
 
 Our results dataframe for IL-1$\beta$ already contains our groups and p-values:
-```{r}
+```{r 04-Chapter4-111}
 datatable(dose_wilcox_posthoc_IL1B)
 ```
 
 We can add the position columns using the function `add_xy_position()`:
 
-```{r}
+```{r 04-Chapter4-112}
 dose_wilcox_posthoc_IL1B <- dose_wilcox_posthoc_IL1B %>%
   add_xy_position(x = "Dose", step.increase = 2)
 
@@ -1855,7 +1855,7 @@ datatable(dose_wilcox_posthoc_IL1B)
 ```
 
 Now, we are ready to make a graph of our results. We will use `stat_friedman_test()` to add our overall p-value and `stat_pvalue_manual()` to add our pairwise values. 
-```{r out.width = "600px", message = FALSE, fig.align = "center"}
+```{r 04-Chapter4-113, out.width = "600px", message = FALSE, fig.align = "center"}
 # Set graphing theme
 theme_set(theme_bw())
 
@@ -1884,7 +1884,7 @@ However, to make room for all of our annotations, our data become compressed, an
 
 First, let's filter our results to significant results and change the symbol for comparisons that are not to the 0 dose to a caret (^) instead of stars. We can do this by creating a new column called label that keeps the existing label if `group1` is 0, and if not, changes the label to a caret of the same length. We then use the summarize function to paste the labels for each of the groups together, resulting in a final dataframe containing our annotations for our plot. 
 
-```{r}
+```{r 04-Chapter4-114}
 dose_wilcox_posthoc_IL1B_2 <- dose_wilcox_posthoc_IL1B %>%
   
   # Filter results to those that are significant
@@ -1909,7 +1909,7 @@ dose_wilcox_posthoc_IL1B_2
 ```
 
 Then, we can use the same code as for our previous plot, but instead of using `stat_pvalue_manual()`, we will use `geom_text()` in combination with the dataframe we just created. 
-```{r out.width = "600px", fig.align = "center"}
+```{r 04-Chapter4-115, out.width = "600px", fig.align = "center"}
 ggplot(biomarker_data, aes(x = Dose, y = IL1B)) +
   geom_boxplot(aes(fill = Dose), outlier.shape = NA) +
   scale_fill_manual(values = c("#BFBFBF", "#D5A298", "#E38273", "#EB5F4E", "#EE2B2B")) +
@@ -1950,11 +1950,11 @@ We will take similar steps here that we did when constructing our single endpoin
 2. Add to the label/annotation dataframe what we want the y position for each of the labels to be, which will be different for each endpoint. 
 
 First, let's create our annotations dataframe. We will start with the results dataframe from our posthoc testing:
-```{r}
+```{r 04-Chapter4-116}
 datatable(dose_wilcox_posthoc)
 ```
 
-```{r}
+```{r 04-Chapter4-117}
 dose_wilcox_posthoc_forgraph <- dose_wilcox_posthoc %>%
   
   filter(p.adj <= 0.05) %>%
@@ -1970,7 +1970,7 @@ datatable(dose_wilcox_posthoc_forgraph)
 
 The `Dose` column will be used to tell *ggplot2* where to place the annotations on the x axis, but we need to also specify where to add the annotations on the y axis. This will be different for each variable because each variable is on a different scale. We can approach this by computing the maximum value of each variable, then increasing that by 20% to add some space on top of the points. 
 
-```{r}
+```{r 04-Chapter4-118}
 sig_labs_y <- biomarker_data %>%
   summarise(across(IL1B:VEGF, \(x) max(x))) %>%
   t() %>% as.data.frame() %>%
@@ -1982,13 +1982,13 @@ sig_labs_y
 ```
 
 Then, we can join these data to our labeling dataframe to complete what we need to make the annotations.
-```{r}
+```{r 04-Chapter4-119}
 dose_wilcox_posthoc_forgraph <- dose_wilcox_posthoc_forgraph %>%
   left_join(sig_labs_y, by = "variable")
 ```
 
 Now, it's time to graph! Keep in mind that although the plotting script can get long and unweildy, each line is just a new instruction to ggplot about a formatting element or an additional layer to add to the graph. 
-```{r out.width = "800px", fig.align = "center"}
+```{r 04-Chapter4-120, out.width = "800px", fig.align = "center"}
 # Pivot data longer
 biomarker_data_long <- biomarker_data %>%
   pivot_longer(-c(Donor, Dose), names_to = "variable", values_to = "value")
@@ -2090,12 +2090,12 @@ This training module was specifically developed to answer the following environm
 Here, we will import the processed data that we generated at the end of TAME 2.0 Module 4.2, introduced in **TAME 2.0 Module 4.1 Overview of Experimental Design and Example Data** and associated demographic data. These data represent log~2~ concentrations of inflammatory biomarkers secreted by airway epithelial cells after exposure to four different concentrations of acrolein (plus filtered air as a control). We will also load packages that will be needed for the analysis, including previously introduced packages such as *openxlsx*, *tidyverse*, *DT*, *ggpubr*, and *rstatix*.
 
 #### Cleaning the global environment
-```{r, clear__env, echo=TRUE, eval=FALSE}
+```{r 04-Chapter4-121, clear__env, echo=TRUE, eval=FALSE}
 rm(list=ls())
 ```
 
 #### Loading R packages required for this session
-```{r, load__libs, echo=TRUE, eval=TRUE, warning=FALSE, error=FALSE, results='hide', message=FALSE}
+```{r 04-Chapter4-122, load__libs, echo=TRUE, eval=TRUE, warning=FALSE, error=FALSE, results='hide', message=FALSE}
 library(openxlsx)
 library(tidyverse)
 library(DT)
@@ -2108,12 +2108,12 @@ theme_set(theme_bw()) # Set graphing theme
 ```
 
 #### Set your working directory
-```{r, file path, echo=TRUE, eval=FALSE, error=FALSE, results='hide', message=FALSE}
+```{r 04-Chapter4-123, file_path, echo=TRUE, eval=FALSE, error=FALSE, results='hide', message=FALSE}
 setwd("/filepath to where your input files are")
 ```
 
 #### Importing example dataset
-```{r, read__data, echo=TRUE, eval=TRUE}
+```{r 04-Chapter4-124, read__data, echo=TRUE, eval=TRUE}
 biomarker_data <- read.xlsx("Chapter_4/Module4_6_Input/Module4_6_InputData1.xlsx")
 demographic_data <- read.xlsx("Chapter_4/Module4_6_Input/Module4_6_InputData2.xlsx")
 
@@ -2160,7 +2160,7 @@ The first step would be to check that the assumptions (independence, homogeneity
 To run our two-way ANOVA, we will use the `anova_test()` function from the *rstatix* package. This function allows us to define subject identifiers for matching between-subject factor variables (such as sex - factors that differ between subjects) and within-subject factors (such as dose - factors that are measured within each subject). Since we have both between- and within- subject factors, we will specifically be running a two-way mixed ANOVA.
 
 First, we need to add our demographic data to our biomarker data so that these variables can be incorporated into the analysis. Also, we need to convert `Dose` into a factor to specify the levels.
-```{r}
+```{r 04-Chapter4-125}
 biomarker_data <- biomarker_data %>%
   left_join(demographic_data, by = "Donor") %>%
   mutate(Dose = factor(Dose, levels = c("0", "0.6", "1", "2", "4")))
@@ -2170,7 +2170,7 @@ datatable(biomarker_data)
 ```
 
 Then, we can demonstrate how to run the two-way ANOVA and what the results look like by running the test on just one of our variables (IL-1$\beta$).
-```{r}
+```{r 04-Chapter4-126}
 get_anova_table(anova_test(data = biomarker_data, 
            dv = IL1B, 
            wid = Donor, 
@@ -2193,7 +2193,7 @@ Similar to previous modules, we now want to apply our two-way ANOVA to each of o
 
 1. Loop through each column in the data and apply the test to each column.
 2. Pull out statistics we are interested in (for example, p-value) and bind the results from each column together into a results dataframe. 
-```{r}
+```{r 04-Chapter4-127}
 # Create a vector with the names of the variables you want to run the test on
 endpoints <- colnames(biomarker_data %>% dplyr::select(IL1B:VEGF))
 
@@ -2236,7 +2236,7 @@ An appropriate title for this table could be:
 From this table, dose is the only variable with significant differences in concentrations in all 6 biomarkers (p-value < 0.05).
 
 Although we know that dose has significant differences overall, an ANOVA test doesn't tell us which doses of acrolein differ from each other or the directionality of each biomarker's change in concentration after exposure to each dose. Therefore, we need to use a post-hoc test. One common post-hoc test following a one-way or two-way ANOVA is a Tukey’s HSD. However, there is no way to pass the output of the `anova_test()` function to the `TukeyHSD()` function. A good alternative is a pairwise t-test with a Bonferroni correction. Our data are paired in that there are repeated measures (doses) on each subject.
-```{r}
+```{r 04-Chapter4-128}
 # Create data frame to store results
 twoway_aov_pairedt <- data.frame(Comparison = c("0_0.6", "0_1", "0_2", "0_4", "0.6_1", "0.6_2", "0.6_4", "1_2", "1_4", "2_4"))  
 
@@ -2285,7 +2285,7 @@ Note that this table and the two-way ANOVA table would likely be put into supple
 Since our overall p-values associated with dose were significant for a number of mediators, we will proceed with creating our final figures with our endpoints by dose, showing the overall two-way ANOVA p-value and the pairwise comparisons from our post hoc paired pairwise t-tests. 
 
 To facilitate plotting in a faceted panel, we'll first pivot our `biomarker_data` dataframe longer. 
-```{r}
+```{r 04-Chapter4-129}
 biomarker_data_long <- biomarker_data %>%
   dplyr::select(-c(Age_yr, Sex)) %>%
   pivot_longer(-c(Donor, Dose), names_to = "Variable", values_to = "Value")
@@ -2294,7 +2294,7 @@ datatable(biomarker_data_long)
 ```
 
 Then, we will create an annotation dataframe for adding our overall two-way ANOVA p-values. This dataframe needs to contain a column for our variables (to match with our variable column in our `biomarker_data_long` dataframe) and the p-value for annotation. We can extract these from our `two_way_aov_res` dataframe generated above. 
-```{r}
+```{r 04-Chapter4-130}
 overall_dose_pvals <- twoway_aov_res %>%
   # Transpose dataframe
   column_to_rownames("Factor") %>%
@@ -2308,7 +2308,7 @@ datatable(overall_dose_pvals)
 ```
 
 We now have our p-values for each biomarker. Next, we'll make a column where our p-values are formatted with "p = " for annotation on the graph.
-```{r}
+```{r 04-Chapter4-131}
 overall_dose_pvals <- overall_dose_pvals %>%
   mutate(`P Value` = formatC(`P Value`, format = "e", digits = 2),
          label = paste("p = ", `P Value`, sep = "")) 
@@ -2317,7 +2317,7 @@ datatable(overall_dose_pvals)
 ```
 
 Finally, we'll add a column indicating where to add the labels on the y-axis. This will be different for each variable because each variable is on a different scale. We can approach this by computing the maximum value of each variable, then increasing that by 10% to add some space on top of the points.
-```{r}
+```{r 04-Chapter4-132}
 sig_labs_y <- biomarker_data %>%
   summarise(across(IL1B:VEGF, \(x) max(x))) %>%
   t() %>% as.data.frame() %>%
@@ -2336,7 +2336,7 @@ datatable(overall_dose_pvals)
 ```
 
 Now, we'll use the `biomarker_data` dataframe to plot our individual points and boxplots (similar to the plotting demonstrated in previous TAME Chapter 4 modules) and our `overall_dose_pvals` dataframe to add our p value annotation.
-```{r fig.width = 12, fig.height = 6, fig.align='center'}
+```{r 04-Chapter4-133, fig.width = 12, fig.height = 6, fig.align='center'}
 # Create clean labels for the graph titles
 new_labels <- c("IL10" = "IL-10", "IL1B" = "IL-1\u03B2 ", "IL6" = "IL-6", "IL8" = "IL-8", 
                 "TNFa" = "TNF-\u03b1", "VEGF" = "VEGF")
@@ -2376,7 +2376,7 @@ It's a bit more difficult to add the pairwise t test results to the boxplots com
 In the following ANCOVA example, we'll still investigate potential differences in cytokine concentrations as result of varying doses of acrolein. However, this time we'll adjust for sex and age to answer our second environmental health question: **Are there significant differences in inflammatory biomarker concentrations across different doses of acrolein after controlling for sex and age?**. 
 
 Let's first demonstrate how to run an ANCOVA and what the results look like by running the test on just one of our variables (IL-1$\beta$). The `Anova()` function was specifically designed to run type II or III ANOVA tests, which have different approaches to dealing with interactions terms and unbalanced datasets. For more information on Type I, II, III ANOVA tests, check out [Anova – Type I/II/III SS explained](https://md.psych.bio.uni-goettingen.de/mv/unit/lm_cat/lm_cat_unbal_ss_explained.html). For the purposes of this example just know that isn't much of a difference between the type I, II, or III results. 
-```{r}
+```{r 04-Chapter4-134}
 anova_test = aov(IL1B ~ Dose + Sex + Age_yr, data = biomarker_data)
 type3_anova = Anova(anova_test, type = 'III')
 type3_anova
@@ -2384,7 +2384,7 @@ type3_anova
 Based on the table above, there are significant differences in IL-1$\beta$ concentrations in dose after adjusting for sex and age (p-value = 0.009). 
 
 Now we'll run ANCOVA tests across all of our biomarkers. 
-```{r}
+```{r 04-Chapter4-135}
 # Create data frame to store results
 ancova_res = data.frame()
 
@@ -2417,7 +2417,7 @@ datatable(ancova_res)
 ```
 
 Looking at the table above, there are statistically differences in all cytokine concentrations with the exception of IL-6 based on dose (p adj < 0.05). To determine what doses were significantly different from one another we'll need to run Tukey's post hoc tests. 
-```{r}
+```{r 04-Chapter4-136}
 # Create results data frame with a column showing the comparisons (extracted from single run vs for loop)
 tukey_res <- data.frame(Comparison = c("0.6 - 0", "1 - 0", "2 - 0", "4 - 0", "1 - 0.6", "2 - 0.6", 
 "4 - 0.6", "2 - 1", "4 - 1", "4 - 2"))
@@ -2463,7 +2463,7 @@ Before graphing these results, we first need to think about which ones we want t
 2. Filter to comparisons including only the 0 group.
 3. Pivot the dataframe longer, to match the format of our data used as input for facet plotting.
 4. Filter to only p-values that are less that 0.05.
-```{r}
+```{r 04-Chapter4-137}
 tukey_res_forgraph <- tukey_res %>%
   separate(Comparison, into = c("group1", "group2"), sep = " - ") %>%
   filter(group2 == "0") %>%
@@ -2480,7 +2480,7 @@ Next, we can take a few steps to add columns to the dataframe that will aid in g
 
 1. Add a column for significance stars.
 2. Add a column to indicate the y position for the significance annotation (similar to the above example with the two-way ANOVA).
-```{r}
+```{r 04-Chapter4-138}
 # Add column for significance stars
 tukey_res_forgraph <- tukey_res_forgraph %>%
   mutate(p.signif = ifelse(`P Value` < 0.0001, "****", 
@@ -2507,7 +2507,7 @@ datatable(tukey_res_forgraph)
 ```
 
 We also need to prepare our overall p-values from our ANCOVA for display:
-```{r}
+```{r 04-Chapter4-139}
 ancova_res_forgraphing <- ancova_res %>%
   rename(`P Value` = Dose) %>%
   rownames_to_column("Variable") %>%
@@ -2518,7 +2518,7 @@ ancova_res_forgraphing <- ancova_res %>%
 ```
 
 Now, we are ready to make our graph! We will use similar code to the above, this time adding in our significance stars over specific columns.
-```{r fig.width = 12, fig.height = 7, fig.align='center'}
+```{r 04-Chapter4-140, fig.width = 12, fig.height = 7, fig.align='center'}
 # Make graph
 ggplot(biomarker_data_long, aes(x = Dose, y = Value)) +
   # outlier.shape = NA removes outliers

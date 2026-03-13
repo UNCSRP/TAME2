@@ -36,7 +36,7 @@ Before diving in to the applications of AI and ML in environmental health, let's
 **Machine Learning (ML)** can be thought of as a subset of AI and describes a computer system that iteratively learns and improves from that experience autonomously. 
 
 Below is a high level taxonomy of AI. It's not meant to be an exhaustive depiction of all AI techniques but a simple visualization of how some of these methodologies are nested within each other. **Note**: AI can be categorized in different ways and may deviate from what is illustrated below.
-```{r out.width = "800px", echo = FALSE, out.width = "75%", fig.align = 'center'}
+```{r 05-Chapter5-1, out.width = "800px", echo = FALSE, out.width = "75%", fig.align = 'center'}
 knitr::include_graphics("Chapter_5/Module5_1_Input/Module5_1_Image1.png")
 ```
 
@@ -48,7 +48,7 @@ Advantages of AI and ML include the automation of repetitive tasks, complex prob
 
 It is important to understand the methodological "roots" of current methods. Otherwise, it seems like every approach is novel! AI and ML methods have been around since the mid- to late- 1900s and continue to evolve in the present day. The earliest conceptual roots for these approaches can be traced from antiquity; however, it is generally thought that the field was named "artificial intelligence" at the ["Dartmouth Workshop"](https://home.dartmouth.edu/about/artificial-intelligence-ai-coined-dartmouth) in 1956, led by John McCarthy and others. The following schematic demonstrates the general taxonomy (categories, sub-fields, and specific methods) of modern AI and ML:
 
-```{r out.width = "800px", echo = FALSE, fig.align = 'center'}
+```{r 05-Chapter5-2, out.width = "800px", echo = FALSE, fig.align = 'center'}
 knitr::include_graphics("Chapter_5/Module5_1_Input/Module5_1_Image2.png")
 ```
 
@@ -74,17 +74,17 @@ There are many avenues to incorporate ML into environmental health research, all
 
 One well-known problem that can be better addressed by incorporating ML is the 'too many chemicals, too little data' problem. To detail, there are thousands of chemicals in commerce today. Testing these chemicals one by one for toxicity using comprehensive animal screening experiments would take decades and is not feasible financially. Current efforts to address this problem include using cell-based high throughput screening to efficiently determine biological responses to a variety of chemical exposures and treatment conditions. 
 
-```{r out.width = "700px", echo = FALSE, fig.align = 'center'}
+```{r 05-Chapter5-3, out.width = "700px", echo = FALSE, fig.align = 'center'}
 knitr::include_graphics("Chapter_5/Module5_1_Input/Module5_1_Image3.png")
 ```
 
 These screening efforts result in increasing amounts of data, which can be gathered to start building big databases.
-```{r out.width = "700px", echo = FALSE, fig.align = 'center'}
+```{r 05-Chapter5-4, out.width = "700px", echo = FALSE, fig.align = 'center'}
 knitr::include_graphics("Chapter_5/Module5_1_Input/Module5_1_Image4.png")
 ```
 
 When many of these datasets and databases are combined, including diversity across different types of screening platforms, technologies, cell types, species, and other experimental variables, the associated dimensionality of the data gets "big." 
-```{r out.width = "500px", echo = FALSE, fig.align = 'center'}
+```{r 05-Chapter5-5, out.width = "500px", echo = FALSE, fig.align = 'center'}
 knitr::include_graphics("Chapter_5/Module5_1_Input/Module5_1_Image5.png")
 ```
 
@@ -101,7 +101,7 @@ This image shows graphical abstractions of how a "problem" is solved using:
 + Traditional statistics ((A) logistic regression and (B) linear regression), OR
 + Machine learning ((C) support vector machines, (D) artificial neural networks, and (E) decision trees)
 
-```{r out.width = "700px", echo = FALSE, fig.align = 'center'}
+```{r 05-Chapter5-6, out.width = "700px", echo = FALSE, fig.align = 'center'}
 knitr::include_graphics("Chapter_5/Module5_1_Input/Module5_1_Image6.png")
 ```
 
@@ -115,7 +115,7 @@ Our *working definition* is that **predictive toxicology** describes a multidisc
 + Can this suite of *in vitro* assays **predict** what would happen in an organism?
 + Can we use diverse, high dimensional data to cluster chemicals into **predicted** activity classes?
 
-```{r out.width = "600px", echo = FALSE, fig.align = 'center'}
+```{r 05-Chapter5-7, out.width = "600px", echo = FALSE, fig.align = 'center'}
 knitr::include_graphics("Chapter_5/Module5_1_Input/Module5_1_Image7.png")
 ```
 
@@ -193,14 +193,14 @@ Supervised machine learning includes:
 
 + Classification: Using algorithms to classify a categorical outcome (ie. plant species, disease status, etc.)
 + Regression: Using algorithms to predict a continuous outcome (ie. gene expression, chemical concentration, etc.)
-```{r, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
+```{r 05-Chapter5-8, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
 knitr::include_graphics("Chapter_5/Module5_2_Input/Module5_2_Image1.png")
 ```
 <center> Soni, D. (2018, March 22). Supervised vs. Unsupervised Learning. Towards Data Science; Towards Data Science. https://towardsdatascience.com/supervised-vs-unsupervised-learning-14f68e32ea8d </center>
 
 **Unsupervised machine learning**, on the other hand, involves using models to find patterns or associations between variables in a dataset that lacks a known or labeled outcome. For example, unsupervised machine learning has been used to identify new patterns across genes that are co-expressed, informing potential biological pathways mediating human disease ([Botía et. al](https://bmcsystbiol.biomedcentral.com/articles/10.1186/s12918-017-0420-6), [Pagnuco et. al](https://www.sciencedirect.com/science/article/pii/S0888754317300575?via%3Dihub)).
 
-```{r, echo=FALSE, fig.width=52, fig.height=18, fig.align='center', out.width = "75%"}
+```{r 05-Chapter5-9, echo=FALSE, fig.width=52, fig.height=18, fig.align='center', out.width = "75%"}
 knitr::include_graphics("Chapter_5/Module5_2_Input/Module5_2_Image2.png")
 ```
 <center> Langs, G., Röhrich, S., Hofmanninger, J., Prayer, F., Pan, J., Herold, C., & Prosch, H. (2018). Machine learning: from radiomics to discovery and routine. Der Radiologe, 58(S1), 1–6. PMID: [34013136](https://doi.org/10.1007/s00117-018-0407-3). Figure regenerated here in alignment with its published [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/). </center>
@@ -214,19 +214,19 @@ Overall, the distinction between supervised and unsupervised learning is an impo
 Although this module's example will focus on a random forest model in the coding example below, other commonly used algorithms for supervised machine learning include: 
 
 + **K-Nearest Neighbors (KNN):** Uses distance to classify a data point in the test set based upon the most common class of neighboring data points from the training set. For more information on KNN, see [K-Nearest Neighbor](https://www.ibm.com/topics/knn).
-```{r, echo=FALSE, out.width = "50%",fig.width=4, fig.height=5, fig.align='center'}
+```{r 05-Chapter5-10, echo=FALSE, out.width = "50%",fig.width=4, fig.height=5, fig.align='center'}
 knitr::include_graphics("Chapter_5/Module5_2_Input/Module5_2_Image6.png")
 ```
 
 + **Support Vector Machine (SVM):** Creates a decision boundary line (hyperplane) in n-dimensional space to separate the data into each class so that when new data is presented, they can be easily categorized. For more information on SVM, see [Support Vector Machine](https://www.javatpoint.com/machine-learning-support-vector-machine-algorithm).
-```{r, echo=FALSE, out.width = "50%", fig.width=4, fig.height=5, fig.align='center'}
+```{r 05-Chapter5-11, echo=FALSE, out.width = "50%", fig.width=4, fig.height=5, fig.align='center'}
 knitr::include_graphics("Chapter_5/Module5_2_Input/Module5_2_Image7.png")
 ```
 
 + **Random Forest (RF):** Uses a multitude of decision trees trained on a subset of different samples from the training set and the resulting classification of a data point in the test set is aggregated from all the decision trees. A **decision tree** is a hierarchical model that depicts decisions from predictors and their resulting outcomes. It starts with a root node, which represents an initial test from a single predictor. The root node splits into subsequent decision nodes that test another feature. These decision nodes can either feed into more decision nodes or leaf nodes that represent the predicted class label. A branch or a sub-tree refers to a subsection of an entire decision tree.   
 
 Here is an example decision tree with potential variables and decisions informing a college basketball player's likelihood of being drafted to the NBA: 
-```{r, echo=FALSE, out.width = "75%",fig.width=4, fig.height=5, fig.align='center'}
+```{r 05-Chapter5-12, echo=FALSE, out.width = "75%",fig.width=4, fig.height=5, fig.align='center'}
 knitr::include_graphics("Chapter_5/Module5_2_Input/Module5_2_Image8.png")
 ```
 
@@ -253,7 +253,7 @@ Common partitions of the full dataset used to train and test a supervised machin
 
 It is common to split the dataset into a training set that contains 60% of the data and the test set that contains 40% of the data, though other common splits include 70% training / 30% test and 80% training / 20% test.
 
-```{r, echo=FALSE, out.width = "65%", fig.align='center'}
+```{r 05-Chapter5-13, echo=FALSE, out.width = "65%", fig.align='center'}
 knitr::include_graphics("Chapter_5/Module5_2_Input/Module5_2_Image3.png")
 ```
 
@@ -268,7 +268,7 @@ Although there are [a number of cross validation approaches](https://neptune.ai/
 1. Splitting the training data into 5 groups, or "folds". 
 2. Five iterations of training/testing are then run where each of the 5 folds serves as the test data once and as part of the training set four times, as seen in the figure below. 
 3. To measure predictive ability of each of the parameters tested, like the number of features to include, values like accuracy and specificity are calculated for each iteration. The parameters that optimize performance are selected for the final model which will be evaluated against the test set not used in training.
-```{r, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
+```{r 05-Chapter5-14, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
 knitr::include_graphics("Chapter_5/Module5_2_Input/Module5_2_Image4.png")
 ```
 
@@ -281,7 +281,7 @@ Evaluation metrics from a confusion matrix are often used to determine the best 
 
 Let's imagine you're interested in predicting whether or not a player will be drafted to the National Basketball Association (NBA) based on a dataset that contains variables regarding a player's assists, points, height etc. Let's say that this dataset contains information on 253 players with 114 that were actually drafted and 139 that weren't drafted. The confusion matrix below shows a model's results where a player that is drafted is the "positive" class and a player that is not drafted is the "negative" class.
 
-```{r, echo=FALSE, out.width = "50%", fig.width=4, fig.height=5, fig.align='center'}
+```{r 05-Chapter5-15, echo=FALSE, out.width = "50%", fig.width=4, fig.height=5, fig.align='center'}
 knitr::include_graphics("Chapter_5/Module5_2_Input/Module5_2_Image5.png")
 ```
 
@@ -338,13 +338,13 @@ This training module was specifically developed to answer the following environm
 ### Script Preparations
 
 #### Cleaning the global environment
-```{r, clear__envi, echo=TRUE, eval=TRUE}
+```{r 05-Chapter5-16, clear__envi, echo=TRUE, eval=TRUE}
 rm(list=ls())
 ```
 
 #### Installing required R packages
 If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you
-```{r, install_libs, echo=TRUE, eval=TRUE, warning=FALSE, results='hide', message=FALSE}
+```{r 05-Chapter5-17, install_libs, echo=TRUE, eval=TRUE, warning=FALSE, results='hide', message=FALSE}
 if (!requireNamespace("readxl"))
   install.packages("readxl");
 if (!requireNamespace("lubridate"))
@@ -362,7 +362,7 @@ if (!requireNamespace("randomForest"))
 ```
 
 #### Loading R packages required for this session
-```{r, load_libs, echo=TRUE, eval=TRUE, warning=FALSE, error=FALSE, results='hide', message=FALSE}
+```{r 05-Chapter5-18, load_libs, echo=TRUE, eval=TRUE, warning=FALSE, error=FALSE, results='hide', message=FALSE}
 library(readxl);
 library(lubridate);
 library(tidyverse);
@@ -374,12 +374,12 @@ library(cardx);
 ```
 
 #### Set your working directory
-```{r, filepath, echo=TRUE, eval=FALSE, error=FALSE, results='hide', message=FALSE}
+```{r 05-Chapter5-19, filepath, echo=TRUE, eval=FALSE, error=FALSE, results='hide', message=FALSE}
 setwd("/filepath to where your input files are")
 ```
 
 #### Importing example dataset
-```{r, read_data, echo=TRUE, eval=TRUE}
+```{r 05-Chapter5-20, read_data, echo=TRUE, eval=TRUE}
 # Load the data
 arsenic_data <- data.frame(read_xlsx("Chapter_5/Module5_2_Input/Module5_2_InputData.xlsx"))
 
@@ -400,7 +400,7 @@ The columns in this dataset are described below:
 
 ### Changing Data Types 
 First, `Detect_Concentration` needs to be converted from a character to a factor so that Random Forest knows that the non-detect class is the baseline or "negative" class, while the detect class will be the "positive" class. `Water_Sample_Date` will be converted from a character to a date type using the `mdy()` function from the *lubridate* package. This is done so that the model understands this column contains dates.
-```{r, convert_type, echo=TRUE, eval=TRUE}
+```{r 05-Chapter5-21, convert_type, echo=TRUE, eval=TRUE}
 arsenic_data <- arsenic_data %>%
     # Converting `Detect_Concentration` from a character to a factor
     mutate(Detect_Concentration = relevel(factor(Detect_Concentration), ref = "ND"), 
@@ -421,7 +421,7 @@ head(arsenic_data)
 It is useful to run summary statistics on the variables that will be used as predictors in the algorithm to see if there are differences in distributions between the outcomes classes (either non-detect or detect in this case). Typically, greater significance often leads to better predictivity for a certain variable, since the model is better able to separate the classes. We'll use the `tbl_summary()` function from the *gtsummary* package. Note, this may only be practical with smaller datasets or for a subset of predictors if there are many.
 
 For more information on the `tbl_summary()` function, check out this helpful [Tutorial](https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html).
-```{r, tbl, echo=TRUE, eval=TRUE, warning=F, message = F}
+```{r 05-Chapter5-22, tbl, echo=TRUE, eval=TRUE, warning=F, message = F}
 arsenic_data %>%
     # Displaying the mean and standard deviation in parentheses for all continuous variables
     tbl_summary(
@@ -458,7 +458,7 @@ With these findings, we feel comfortable moving forward with these well water de
 
 ### Setting up Cross Validation
 At this point, we can move forward with training and testing a RF model aimed at predicting whether or not detectable levels of iAs are present in well water samples. We'll take a glance at the distribution of `Detect_Concentration` between the two classes. 
-```{r, train_test, echo=TRUE, eval=TRUE}
+```{r 05-Chapter5-23, train_test, echo=TRUE, eval=TRUE}
 
 # Set seed for reproducibility
 set.seed(17)
@@ -479,7 +479,7 @@ We can see that there are notably more non-detects (`ND`) than detects (`D`) in 
 Now we can set up our cross validation and train our model. We will be using the `trainControl()` function from the *caret* package for this task. It is one of the most commonly used libraries for supervised machine learning in R and can be leveraged for a variety algorithms including RF, SVM, KNN, and others. This model will be trained with 5-fold cross validation. Additionally, we will test 2, 3, and 6 predictors through the `mtry` parameter.
 
 See the *caret* documentation [here](https://cran.r-project.org/web/packages/caret/vignettes/caret.html).
-```{r, train, echo=TRUE, eval=TRUE}
+```{r 05-Chapter5-24, train, echo=TRUE, eval=TRUE}
 
 # Establish the parameters for our cross validation with 5 folds
 control <- trainControl(method = 'cv',
@@ -495,7 +495,7 @@ tunegrid_rf <- expand.grid(mtry = c(floor(sqrt(p)), p/2, p)) # We will test sqrt
 <br>
 
 ## Predicting iAs Detection with a Random Forest (RF) Model
-```{r}
+```{r 05-Chapter5-25}
 # Look at the column names in training dataset
 colnames(iAs_train)
 
@@ -529,7 +529,7 @@ rf_final
 :::
 
 Now we can see how well our model does on data it hasn't seen before by applying it to our testing data.
-```{r, test, echo=TRUE, eval=TRUE}
+```{r 05-Chapter5-26, test, echo=TRUE, eval=TRUE}
 # Use our best model to predict the classes for our test data. We need to make sure we remove the column of Ds/NDs from our test data.
 rf_res <- predict(rf_final, iAs_test %>% 
                     select(!Detect_Concentration))
@@ -567,7 +567,7 @@ To address this issue, a few methods can be considered. Full implementation of t
 + **Alternative Performance Metrics**- When training the model, alternative metrics to overall accuracy may yield a more robust model capable of better predicting the minority class. Example alternatives may include balanced accuracy or an [F1-score](https://thedatascientist.com/f-1-measure-useful-imbalanced-class-problems/). The *caret* package further allows for [custom, user-defined metrics](https://topepo.github.io/caret/model-training-and-tuning.html#alternate-performance-metrics) to be evaluated during training by specifying the *summaryFunction* parameter in the `trainControl()` function, as seen below, in addition to the [`defaultSummary()` and `twoClassSummary()` functions](https://cran.r-project.org/web/packages/caret/vignettes/caret.html).
 
 In the example code below, we're creating a function (`f1`) that will calculate the F1 score and find the optimal model with the highest F1 score as opposed to the highest accuracy as we did above. 
-```{r, alt_metric, echo=TRUE, eval=FALSE}
+```{r 05-Chapter5-27, alt_metric, echo=TRUE, eval=FALSE}
 install.packages("MLmetrics")
 library(MLmetrics)
 
@@ -671,7 +671,7 @@ When choosing variables for decision boundary plots, features that have the most
 
 + Cholesterol, given that it had the highest variable importance and
 + Vitamin D, given its synthesis can be affected by ozone despite it having a lower variable importance in the paper's models.
-```{r, echo=FALSE, fig.align='center', out.width = "80%"}
+```{r 05-Chapter5-28, echo=FALSE, fig.align='center', out.width = "80%"}
 knitr::include_graphics("Chapter_5/Module5_3_Input/Module5_3_Image1.png")
 ```
 <center> **Figure 5. Decision boundary plot for SVM model predicting lung response class.** Cholesterol and 25-hydroxyvitamin D were used as predictors visualizing responder status [non-responders(green) and responders (yellow)] and disease status [non-asthmatics (triangles) and asthmatics (circles)]. The shaded regions are the model’s prediction of a subject’s lung response class at a given cholesterol and 25-hydroxyvitamin D concentration.</center>
@@ -701,13 +701,13 @@ This training module was specifically developed to answer the following environm
 ### Script Preparations
 
 #### Cleaning the global environment
-```{r}
+```{r 05-Chapter5-29}
 rm(list=ls())
 ```
 
 #### Installing required R packages
 If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you
-```{r message=FALSE}
+```{r 05-Chapter5-30, message=FALSE}
 if (!requireNamespace("readxl"))
   install.packages("readxl");
 if (!requireNamespace("lubridate"))
@@ -723,7 +723,7 @@ if (!requireNamespace("themis"))
 ```
 
 #### Loading R packages required for this session
-```{r message=FALSE}
+```{r 05-Chapter5-31, message=FALSE}
 library(readxl)
 library(lubridate)
 library(tidyverse)
@@ -735,12 +735,12 @@ library(themis)
 ```
 
 #### Set your working directory
-```{r, eval=FALSE, echo=TRUE}
+```{r 05-Chapter5-32, eval=FALSE, echo=TRUE}
 setwd("/filepath to where your input files are")
 ```
 
 #### Importing example dataset
-```{r}
+```{r 05-Chapter5-33}
 # Load the data
 arsenic_data <- data.frame(read_excel("Chapter_5/Module5_3_Input/Module5_3_InputData.xlsx"))
 
@@ -750,7 +750,7 @@ head(arsenic_data)
 
 ### Changing Data Types 
 First, `Detect_Concentration` needs to be converted from a character to a factor so that Random Forest knows that the non-detect class is the baseline or "negative" class, while the detect class will be the "positive" class. `Water_Sample_Date` will be converted from a character to a date type using the `mdy()` function from the *lubridate* package. This is done so that the model understands this column contains dates.
-```{r}
+```{r 05-Chapter5-34}
 arsenic_data <- arsenic_data %>%
     # Converting `Detect_Concentration` from a character to a factor
     mutate(Detect_Concentration = relevel(factor(Detect_Concentration), ref = "ND"), 
@@ -769,7 +769,7 @@ head(arsenic_data)
 Note that the code below is different than the code presented in the previous module, **TAME 2.0 Module 5.2 Supervised Machine Learning**. Both coding methods are valid and produce comparable results, however we wanted to present another way to run *k*-fold cross validation and random forest. In 5-fold cross validation (CV), there are 5 equally-sized folds (ideally!). This means that 80% of the original dataset is split into the 4 folds that comprise the training set and the remaining 20% in the last fold is reserved for the test set. 
 
 Previously, the `trainControl()` function was used for CV. This time we'll use the `createFolds()` function also from the *caret* package. 
-```{r}
+```{r 05-Chapter5-35}
 # Setting seed for reproducibility
 set.seed(12)
 
@@ -789,7 +789,7 @@ mtry_values = c(sqrt(p), p/2, p) # number of predictors to be used in the model
 
 ## Predicting iAs Detection with a Random Forest (RF) Model
 Notice that in the code below we are choosing the final RF model to be the one with the lowest out of bag (OOB) error. In the previous module, the final model was chosen based on the highest accuracy, however this is a similar approach here given that OOB error = 1 - Accuracy.
-```{r}
+```{r 05-Chapter5-36}
 # Setting the seed again so the predictions are consistent
 set.seed(12)
 
@@ -864,18 +864,18 @@ variable_importance_df = variable_importance_df %>%
 ```
 
 The confusion matrix results from the previous module are shown below.
-```{r, echo=FALSE, fig.align='center', out.width = "80%"}
+```{r 05-Chapter5-37, echo=FALSE, fig.align='center', out.width = "80%"}
 knitr::include_graphics("Chapter_5/Module5_3_Input/Module5_3_Image2.png")
 ```
 
 Now let's double check that when using this new method, our results are still comparable. 
-```{r}
+```{r 05-Chapter5-38}
 # First comparing results to the previous module
 round(metrics, 2)
 ```
 
 They are! Now we'll take a look at the model's variable importance.
-```{r}
+```{r 05-Chapter5-39}
 variable_importance_df
 ```
 
@@ -883,7 +883,7 @@ Although we have the results we need, let's take it a step further and plot the 
 
 ### Reformatting the dataframe for plotting 
 First, the dataframe will be transformed so that the figure is more legible. Specifically, spaces will be added between the variables, and the `Predictor` column will be put into a factor to rearrange the order of the variables from lowest to highest mean decrease gini. For additional information on tricks like this to make visualizations easier to read, see **TAME 2.0 Module 3.2 Improving Data Visualizations**.
-```{r}
+```{r 05-Chapter5-40}
 # Adding spaces between the variables that need the space
 modified_variable_importance_df = variable_importance_df %>%
      mutate(Predictor = gsub("_", " ", Predictor))
@@ -897,7 +897,7 @@ head(modified_variable_importance_df)
 ```
 
 ## Variable Importance Plot
-```{r fig.align='center', out.width = "65%"}
+```{r 05-Chapter5-41, fig.align='center', out.width = "65%"}
 ggplot(data = modified_variable_importance_df , 
              aes(x = MeanDecreaseGini, y = Predictor, size = 2)) + 
   geom_point() + 
@@ -934,7 +934,7 @@ Since casing depth and pH have been identified as the predictors with the highes
 ### Decision Boundary Calculation
 
 First, models will be trained using only casing depth and pH as variables. Since, the decision boundary plot will be used for visualization purposes, and a 2-D figure can only plot two variables, we will not worry about tuning the parameters as was previously done. In this module, we're creating a decision boundary based on a random forest model, however we'll also explore what decision boundaries look like for other algorithms including support vector machine (SVM), and k nearest neighbor (KNN), logistic regression. Each supervised ML method has its advantages and performance is dependent upon the situation and the dataset. Therefore, it is common to see multiple models used to predict an outcome of interest in a publication. Let's create additional boundary plots still using casing depth and pH, but this time we will use logistic regression, SVM, and KNN as comparisons to RF.
-```{r}
+```{r 05-Chapter5-42}
 # Creating a dataframe with variables based on the highest predictors
 highest_pred_data = data.frame(arsenic_data[,c("Casing_Depth", "pH", "Detect_Concentration")])
 
@@ -952,7 +952,7 @@ knn_detect_arsenic = knn3(Detect_Concentration~., data = highest_pred_data) # sp
 ```
 
 From these predictions, decision boundaries will be calculated. This will be done by predicting `Detect_Concentration` between a grid of values - specifically the minimum and maximum of the two predictors (casing depth and pH). A non-linear line will be drawn on the plot to separate the two classes. 
-```{r}
+```{r 05-Chapter5-43}
 get_grid_df <- function(classification_model, data, resolution = 100, predict_type) {
     # This function predicts the outcome (Detect_Concentration) at evenly spaced data points using the two variables (pH and casing depth)
     # to create a decision boundary between the outcome classes (detect and non-detect samples).
@@ -1013,7 +1013,7 @@ head(grid_df)
 ## Decision Boundary Plot
 
 Now let's plot the grid of predictions with the sampled data.
-```{r warning = FALSE, fig.width=15, fig.height=10, fig.align='center'}
+```{r 05-Chapter5-44, warning = FALSE, fig.width=15, fig.height=10, fig.align='center'}
 # choosing palette from package
 ggsci_colors = pal_npg()(5)
 
@@ -1062,7 +1062,7 @@ ggplot() +
 Here, we will create a decision boundary plot still using casing depth and pH, but this time we will make our dataset more balance to see how improve model performance visually. The **Synthetic Minority Oversampling Technique (SMOTE)** was introduced in **TAME 2.0 Module 5.2 Supervised Machine Learning** and will be used to make the dataset more balanced by oversampling the minority class (detect values) and undersampling the majority class (non-detect values). 
 
 Starting by training each model:
-```{r}
+```{r 05-Chapter5-45}
 # Using SMOTE first to balance classes
 balanced_highest_pred_data = smotenc(highest_pred_data, "Detect_Concentration")
 
@@ -1080,7 +1080,7 @@ knn_detect_arsenic = knn3(Detect_Concentration~., data = balanced_highest_pred_d
 ```
 
 Now calling the `get_grid_df()` function we created above to create a grid of predictions. 
-```{r}
+```{r 05-Chapter5-46}
 # Calling function
 # RF
 balanced_grid_df_rf = get_grid_df(rf_detect_arsenic, balanced_highest_pred_data, predict_type = "class") %>% 
@@ -1110,7 +1110,7 @@ balanced_grid_df = rbind(balanced_grid_df_rf, balanced_grid_df_lr, balanced_grid
 head(balanced_grid_df)
 ```
 
-```{r warning = FALSE, fig.width=15, fig.height=10, fig.align='center'}
+```{r 05-Chapter5-47, warning = FALSE, fig.width=15, fig.height=10, fig.align='center'}
 # choosing palette from package
 ggsci_colors = pal_npg()(5)
 
@@ -1196,7 +1196,7 @@ To reiterate what has been discussed in the previous module, machine learning is
 **Note**: Unsupervised machine learning is used for exploratory purposes, and just because it can find relationships between data points, that doesn't necessarily mean that those relationships have merit, are indicative of causal relationships, or have direct biological implications. Rather, these methods can be used to find new patterns that can also inform future studies testing direct relationships.
 :::
 
-```{r, echo=FALSE, out.width = "75%", fig.align = 'center'}
+```{r 05-Chapter5-48, echo=FALSE, out.width = "75%", fig.align = 'center'}
 knitr::include_graphics("Chapter_5/Module5_4_Input/Module5_4_Image1.png")
 ```
 <center>Langs, G., Röhrich, S., Hofmanninger, J., Prayer, F., Pan, J., Herold, C., & Prosch, H. (2018). Machine learning: from radiomics to discovery and routine. Der Radiologe, 58(S1), 1–6. PMID: [34013136](https://doi.org/10.1007/s00117-018-0407-3). Figure regenerated here in alignment with its published [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/)</center>
@@ -1241,7 +1241,7 @@ Principal Component Analysis, or PCA, is a dimensionality-reduction technique us
 3. Every instance (e.g. chemical) in the original dataset has a "weight" or score" on each PC.
 
 4. Any combination of PCs can be compared to summarize relationships amongst the instances (e.g. chemicals), but typically it's the first two eigenvectors that capture a majority of the variance.
-```{r, echo=FALSE, out.width= "80%", fig.align = 'center'}
+```{r 05-Chapter5-49, echo=FALSE, out.width= "80%", fig.align = 'center'}
 knitr::include_graphics("Chapter_5/Module5_4_Input/Module5_4_Image2.png")
 ```
 
@@ -1270,13 +1270,13 @@ This training module was specifically developed to answer the following environm
 ### Script Preparations
 
 #### Cleaning the global environment
-```{r, clear_env, echo=TRUE, eval=TRUE}
+```{r 05-Chapter5-50, clear_env, echo=TRUE, eval=TRUE}
 rm(list=ls())
 ```
 
 #### Installing required R packages
 If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you
-```{r, message=FALSE}
+```{r 05-Chapter5-51, message=FALSE}
 if (!requireNamespace("factoextra"))
   install.packages("factoextra");
 if (!requireNamespace("pheatmap"))
@@ -1286,7 +1286,7 @@ if (!requireNamespace("cowplot"))
 ```
 
 #### Loading required R packages
-```{r, results=FALSE, message=FALSE}
+```{r 05-Chapter5-52, results=FALSE, message=FALSE}
 library(tidyverse)
 library(factoextra)
 library(pheatmap) #used to make heatmaps
@@ -1294,7 +1294,7 @@ library(cowplot)
 ```
 
 Getting help with packages and functions
-```{r, eval = FALSE}
+```{r 05-Chapter5-53, eval = FALSE}
 ?tidyverse # Package documentation for tidyverse
 ?kmeans # Package documentation for kmeans (a part of the standard stats R package, automatically uploaded)
 ?prcomp # Package documentation for deriving principal components within a PCA (a part of the standard stats R package, automatically uploaded)
@@ -1302,49 +1302,49 @@ Getting help with packages and functions
 ```
 
 #### Set your working directory
-```{r, eval=FALSE, echo=TRUE}
+```{r 05-Chapter5-54, eval=FALSE, echo=TRUE}
 setwd("/filepath to where your input files are") 
 ```
 
 #### Loading the Example Dataset
 Let's start by loading the datasets needed for this training module. We are going to use a dataset of substances that have a diverse chemical space of PFAS and statin compounds. This list of chemicals will be uploaded alongside physicochemical property data. The chemical lists for 'PFAS' and 'Statins' were obtained from the EPA's Computational Toxicology Dashboard [Chemical Lists](https://comptox.epa.gov/dashboard/chemical-lists). The physicochemical properties were obtained by uploading these lists into the National Toxicology Program’s [Integrated Chemical Environment (ICE)](https://ice.ntp.niehs.nih.gov/). 
-```{r}
+```{r 05-Chapter5-55}
 dat <- read.csv("Chapter_5/Module5_4_Input/Module5_4_InputData.csv", fileEncoding = "UTF-8-BOM")
 ```
 
 #### Data Viewing
 
 Starting with the overall dimensions:
-```{r}
+```{r 05-Chapter5-56}
 dim(dat)
 ```
 
 Then looking at the first four rows and five columns of data:
-```{r}
+```{r 05-Chapter5-57}
 dat[1:4,1:5]
 ```
 
 Note that the first column, `List`, designates the following two larger chemical classes:
-```{r}
+```{r 05-Chapter5-58}
 unique(dat$List)
 ```
 
 Let's lastly view all of the column headers:
-```{r}
+```{r 05-Chapter5-59}
 colnames(dat)
 ```
 
 In the data file, the first four columns represent chemical identifier information. All remaining columns represent different physicochemical properties derived from OPERA via [Integrated Chemical Environment (ICE)](https://ice.ntp.niehs.nih.gov/). Because the original titles of these physicochemical properties contained commas and spaces, R automatically converted these into periods. Hence, titles like `OPERA..Boiling.Point`.
 
 For ease of downstream data analyses, let's create a more focused dataframe option containing only one chemical identifier (CASRN) as row names and then just the physicochemical property columns.
-```{r}
+```{r 05-Chapter5-60}
 # Creating a new dataframe that contains the physiocochemical properties
 chemical_prop_df <- dat[,5:ncol(dat)]
 rownames(chemical_prop_df) <- dat$CASRN
 ```
 
 Now explore this data subset:
-```{r}
+```{r 05-Chapter5-61}
 dim(chemical_prop_df) # overall dimensions
 chemical_prop_df[1:4,1:5] # viewing the first four rows and five columns
 colnames(chemical_prop_df)
@@ -1356,7 +1356,7 @@ colnames(chemical_prop_df)
 Let's first plot two physicochemical properties to determine if and how substances group together without any fancy data reduction or other machine learning techniques. This will answer **Environmental Health Question #1**: Can we differentiate between PFAS and statin chemical classes when considering just the raw physicochemical property variables without applying unsupervised machine learning techniques?
 
 Let's put molecular weight (`Molecular.Weight`) as one axis and boiling point (`OPERA..Boiling.Point`) on the other. We'll also color by the chemical classes using the `List` column from the original dataframe.
-```{r fig.align='center'}
+```{r 05-Chapter5-62, fig.align='center'}
 ggplot(chemical_prop_df[,1:2], aes(x = Molecular.Weight, y = OPERA..Boiling.Point, color = dat$List)) + 
   geom_point(size = 2) + theme_bw() + 
   ggtitle('Version A: Bivariate Plot of Two Original Physchem Variables') + 
@@ -1364,7 +1364,7 @@ ggplot(chemical_prop_df[,1:2], aes(x = Molecular.Weight, y = OPERA..Boiling.Poin
 ```
 
 Let's plot two other physicochemical property variables, Henry's Law constant (`OPERA..Henry.s.Law.Constant`) and melting point (`OPERA..Melting.Point`), to see if the same separation of chemical classes is apparent. 
-```{r fig.align='center'}
+```{r 05-Chapter5-63, fig.align='center'}
 ggplot(chemical_prop_df[,3:4], aes(x = OPERA..Henry.s.Law.Constant, y = OPERA..Melting.Point, 
                                                   color = dat$List)) + 
   geom_point(size = 2) + theme_bw() + 
@@ -1390,12 +1390,12 @@ Let's turn our attention to **Environmental Health Question #2**: If substances 
 For this example, let's coerce the *k*-means algorithms to calculate 2 distinct clusters (based on their corresponding mean centered values). Here, we choose to derive two distinct clusters, because we are ultimately going to see if we can use this information to predict each chemical's classification into two distinct chemical classes (i.e., PFAS vs statins). Note that we can derive more clusters using similar code depending on the question being addressed.
 
 We can give a name to this variable to easily provide the number of clusters in the next lines of code, `num.centers`:
-```{r}
+```{r 05-Chapter5-64}
 num.centers <- 2
 ```
 
 Here we derive chemical clusters using *k*-means:
-```{r}
+```{r 05-Chapter5-65}
 clusters <- kmeans(chemical_prop_df,                  # input dataframe
                    centers = num.centers,  # number of cluster centers to calculate
                    iter.max = 1000,        # the maximum number of iterations allowed
@@ -1403,26 +1403,26 @@ clusters <- kmeans(chemical_prop_df,                  # input dataframe
 ```
 
 The resulting property values that were derived as the final cluster centers can be pulled using:
-```{r}
+```{r 05-Chapter5-66}
 clusters$centers
 ```
 
 Let's add the cluster assignments to the physicochemical data and create a new dataframe, which can then be used in a heatmap visualization to see how these physicochemical data distributions clustered according to *k*-means.
 
 These cluster assignments can be pulled from the `cluster` list output, where chemicals are designated to each cluster with either a 1 or 2. You can view these using:
-```{r}
+```{r 05-Chapter5-67}
 clusters$cluster
 ```
 
 Because these results are listed in the exact same order as the inputted dataframe, we can simply add these assignments to the `chemical_prop_df` dataframe.
-```{r}
+```{r 05-Chapter5-68}
 dat_wclusters <- cbind(chemical_prop_df,clusters$cluster)
 colnames(dat_wclusters)[11] <- "Cluster"  # renaming this new column "Custer"
 dat_wclusters <- dat_wclusters[order(dat_wclusters$Cluster),]  # sorting data by cluster assignments
 ```
 
 To generate a heatmap, we need to first create a separate dataframe for the cluster assignments, ordered in the same way as the physicochemical data:
-```{r}
+```{r 05-Chapter5-69}
 hm_cluster <- data.frame(dat_wclusters$Cluster, row.names = row.names(dat_wclusters))  # creating the dataframe
 colnames(hm_cluster) <- "Cluster"   # reassigning the column name
 hm_cluster$Cluster <- as.factor(hm_cluster$Cluster)   # coercing the cluster numbers into factor variables, to make the heatmap prettier
@@ -1431,7 +1431,7 @@ head(hm_cluster)  # viewing this new cluster assignment dataframe
 ```
 
 We're going to go ahead and clean up the physiocochemical property names to make the heatmap a bit tidier. 
-```{r}
+```{r 05-Chapter5-70}
 clean_names1 = gsub("OPERA..", "", colnames(dat_wclusters))
 # "\\." denotes a period
 clean_names2 = gsub("\\.", " ", clean_names1)
@@ -1447,7 +1447,7 @@ Then we can call this dataframe (`data_wclusters`) into the following heatmap vi
 <br>
 
 ### Heatmap Visualization of the Resulting *K*-Means Clusters
-```{r, fig.height=8, fig.width=10}
+```{r 05-Chapter5-71, fig.height=8, fig.width=10}
 pheatmap(dat_wclusters[,1:10], 
             cluster_rows = FALSE, cluster_cols = FALSE, # no further clustering, for simplicity
             scale = "column",    # scaling the data to make differences across chemicals more apparent
@@ -1481,18 +1481,18 @@ Next, we will run through some example analyses applying the common data reducti
 
 
 We can calculate the principal components across ALL physicochemical data across all chemicals using the `prcomp()` function. Always make sure your data is centered and scaled prior to running to PCA, since it's sensitive to variables having different scales. 
-```{r}
+```{r 05-Chapter5-72}
 my.pca <- prcomp(chemical_prop_df,   # input dataframe of physchem data
                    scale = TRUE, center = TRUE) 
 ```
 
 We can see how much of the variance was able to be captured in each of the eigenvectors or dimensions using a scree plot. 
-```{r fig.align='center'}
+```{r 05-Chapter5-73, fig.align='center'}
 fviz_eig(my.pca, addlabels = TRUE)
 ```
 
 We can also calculate these values and pull them into a dataframe for future use. For example, to pull the percentage of variance explained by each principal component, we can run the following calculations, where first eigenvalues (eigs) are calculated and then used to calculate percent of variance per principal component:
-```{r}
+```{r 05-Chapter5-74}
 eigs <- my.pca$sdev^2
 Comp.stats <- data.frame(eigs, eigs/sum(eigs), row.names = names(eigs))
 colnames(Comp.stats) <- c("Eigen_Values", "Percent_of_Variance")
@@ -1514,12 +1514,12 @@ head(Comp.stats)
 Next, we'll use PCA to answer **Environmental Health Question #4**: Upon reducing the data through PCA, which physicochemical property contributes the most towards informing data variance captured in the primary principal component (Comp.1)?
 
 Here are the resulting scores for each chemical's contribution towards each principal component (shown here as components `PC1`-`PC10`).
-```{r}
+```{r 05-Chapter5-75}
 head(my.pca$x)
 ```
 
 And the resulting loading factors of each property's contribution towards each principal component. 
-```{r}
+```{r 05-Chapter5-76}
 my.pca$rotation
 ```
 
@@ -1540,7 +1540,7 @@ my.pca$rotation
 Let's turn our attention to **Environmental Health Question #5**: If we did not have information telling us which chemical belonged to which class, could we use PCA and *k*-means to inform whether a chemical is more similar to a PFAS or a statin?
 
 We can start by answering this question by visualizing the first two principal components and coloring each chemical according to class (i.e. PFAS vs statins).
-```{r fig.align='center'}
+```{r 05-Chapter5-77, fig.align='center'}
 ggplot(data.frame(my.pca$x), aes(x = PC1, y = PC2, color = dat$List)) + 
   geom_point(size = 2) + theme_bw() + 
   ggtitle('Version C: PCA Plot of the First 2 PCs, colored by Chemical Class') + 
@@ -1566,17 +1566,17 @@ We can also identify cluster-based trends within data that are reduced after run
 ### Estimate *K*-Means Clusters from PCA Results
 
 Let's first run code similar to the previous *k*-means analysis and associated parameters, though instead here we will use data reduced values from the PCA analysis. Specifically, clusters across PCA "scores" values will be derived, where scores represent the relative amount each chemical contributed to each principal component.
-```{r}
+```{r 05-Chapter5-78}
 clusters_PCA <- kmeans(my.pca$x, centers = num.centers, iter.max = 1000, nstart = 50)
 ```
 
 The resulting PCA score values that were derived as the final cluster centers can be pulled using:
-```{r}
+```{r 05-Chapter5-79}
 clusters_PCA$centers
 ```
 
 Viewing the final cluster assignment per chemical:
-```{r}
+```{r 05-Chapter5-80}
 head(cbind(rownames(chemical_prop_df),clusters_PCA$cluster))
 ```  
 
@@ -1585,7 +1585,7 @@ head(cbind(rownames(chemical_prop_df),clusters_PCA$cluster))
 #### Visualizing *K*-Means Clusters from PCA Results
 
 Let's now view, again, the results of the main PCA focusing on the first two principal components; though this time let's color each chemical according to *k*-means cluster.
-```{r fig.align='center'}
+```{r 05-Chapter5-81, fig.align='center'}
 ggplot(data.frame(my.pca$x), aes(x = PC1, y = PC2, color = as.factor(clusters_PCA$cluster))) + 
   geom_point(size = 2) + theme_bw() + 
   ggtitle('Version D: PCA Plot of the First 2 PCs, colored by k-means Clustering') + 
@@ -1594,7 +1594,7 @@ ggplot(data.frame(my.pca$x), aes(x = PC1, y = PC2, color = as.factor(clusters_PC
 ```
 
 Let's put these two PCA plots side by side to compare them more easily. We'll also tidy up the figures a bit so they're closer to publication-ready. 
-```{r fig.align='center', fig.width = 20, fig.height = 6, fig.retina= 3}
+```{r 05-Chapter5-82, fig.align='center', fig.width = 20, fig.height = 6, fig.retina= 3}
 # PCA plot colored by chemical class
 pcaplot1 = ggplot(data.frame(my.pca$x), aes(x = PC1, y = PC2, color = dat$List)) + 
   geom_point(size = 2) + 
@@ -1694,7 +1694,7 @@ Helpful resources on *k*-means clustering include the following: [The Elements o
 ## Hierarchical Clustering
 **Hierarchical clustering** groups objects into clusters by repetitively joining similar observations until there is one large cluster (aka agglomerative or bottom-up) or repetitively splitting one large cluster until each observation stands alone (aka divisive or top-down). Regardless of whether agglomerative or divisive hierarchical clustering is used, the results can be visually represented in a tree-like figure called a dendrogram. The dendrogram below is based on the `USArrests` dataset available in R. The datset contains statistics on violent crimes rates (murder, assault, and rape) per capita (per 100,000 residents) for each state in the United States in 1973. For more information on the `USArrests` dataset, check out its associated [RDocumentation](https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/USArrests).
 
-```{r fig.align = 'center', echo=FALSE, out.width = "55%"}
+```{r 05-Chapter5-83, fig.align = 'center', echo=FALSE, out.width = "55%"}
 knitr::include_graphics("Chapter_5/Module5_5_Input/Module5_5_Image1.png")
 ```
 
@@ -1722,21 +1722,21 @@ Each method has its advantages and disadvantages and more information on all dis
 Before clustering can be performed, the function needs to be informed of the number of clusters to group the objects into. In the previous module, an example was explored to see if *k*-means clustering would group the chemicals similarly to their chemical class (either a PFAS or statin). Therefore, we told the *k*-means function to cluster into 2 groups. In situations where there is little to no prior knowledge regarding the "correct" number of clusters to specify, methods exist for deriving the optimal number of clusters. Three common methods to find the optimal *k*, or number of clusters, for both *k*-means and hierarchical clustering include: the **elbow method**, **silhouette method**, and the **gap statistic method**. These techniques help us in determining the optimal *k* using visual inspection.
 
 + **Elbow Method**: uses a plot of the within cluster sum of squares (WCSS) on the y axis and different values of *k* on the x axis. The location where we no longer observe a significant reduction in WCSS, or where an "elbow" can be seen, is the optimal *k* value. As we can see, after a certain point, having more clusters does not lead to a significant reduction in WCSS. 
-```{r fig.align = 'center', out.width = "75%", echo=FALSE}
+```{r 05-Chapter5-84, fig.align = 'center', out.width = "75%", echo=FALSE}
 knitr::include_graphics("Chapter_5/Module5_5_Input/Module5_5_Image2.png")
 ```
 
 Looking at the figures above, the elbow point is much clearer in the first plot versus the second, however, elbow curves from real-world datasets typically resemble the second figure. This is why it's recommended to consider more than one method to determine the optimal number of clusters. 
 
 + **Silhouette Method**: uses a plot of the average silhouette width (score) on the y axis and different values of *k* on the x axis. The silhouette score is measure of each object's similarity to its own cluster and how dissimilar it is to other clusters. The location where the average silhouette width is *maximized* is the optimal *k* value.
-```{r fig.align = 'center', out.width = "65%", echo=FALSE}
+```{r 05-Chapter5-85, fig.align = 'center', out.width = "65%", echo=FALSE}
 knitr::include_graphics("Chapter_5/Module5_5_Input/Module5_5_Image3.png")
 ```
 
 Based on the figure above, the optimal number of clusters is 2 using the silhouette method. 
 
 + **Gap Statistic Method**: uses a plot of the gap statistic on the y axis and different values of *k* on the x axis. The gap statistic evaluates the intracluster variation in comparison to expected values derived from a Monte Carlo generated, null reference data distribution for varying values of *k*. The optimal number of clusters is the smallest value where the gap statistic of *k* is greater than or equal to the gap statistic of *k*+1 minus the standard deviation of *k*+1. More details can be found [here](https://uc-r.github.io/kmeans_clustering#:~:text=The%20gap%20statistic%20compares%20the,simulations%20of%20the%20sampling%20process.).
-```{r fig.align = 'center', out.width = "65%", echo=FALSE}
+```{r 05-Chapter5-86, fig.align = 'center', out.width = "65%", echo=FALSE}
 knitr::include_graphics("Chapter_5/Module5_5_Input/Module5_5_Image4.png")
 ```
 
@@ -1750,7 +1750,7 @@ For additional information and code on all three methods, check out [Determining
 ## Introduction to Example Data
 
 We will apply these techniques using an example dataset from a previously published study where 22 cytokine concentrations were derived from 44 subjects with varying smoking statuses (14 non-smokers, 17 e-cigarette users, and 13 cigarette smokers) from 4 different sampling regions in the body. These samples were derived from nasal lavage fluid (NLF), nasal epithelieum fluid (NELF), sputum, and serum as pictured below. Samples were taken from different regions in the body to compare cytokine expression in the upper respiratory tract, lower respiratory tract, and systemic circulation. 
-```{r fig.align = 'center', out.width = "75%", echo=FALSE}
+```{r 05-Chapter5-87, fig.align = 'center', out.width = "75%", echo=FALSE}
 knitr::include_graphics("Chapter_5/Module5_5_Input/Module5_5_Image5.png")
 ```
 
@@ -1765,13 +1765,13 @@ Let's read in and view the dataset we'll be working with.
 ### Script Preparations
 
 #### Cleaning the global environment
-```{r}
+```{r 05-Chapter5-88}
 rm(list=ls())
 ```
 
 #### Installing required R packages
 If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you
-```{r, message=FALSE}
+```{r 05-Chapter5-89, message=FALSE}
 if (!requireNamespace("vegan"))
   install.packages("vegan");
 if (!requireNamespace("ggrepel"))
@@ -1785,7 +1785,7 @@ install.packages("FactoMineR");
 ```
 
 #### Loading required R packages
-```{r, message=FALSE}
+```{r 05-Chapter5-90, message=FALSE}
 library(readxl)
 library(factoextra)
 library(FactoMineR)
@@ -1799,14 +1799,14 @@ suppressPackageStartupMessages(library(dendextend))
 ```
 
 #### Set your working directory
-```{r, eval=FALSE, echo=TRUE}
+```{r 05-Chapter5-91, eval=FALSE, echo=TRUE}
 setwd("/filepath to where your input files are")
 ```
 
 #### Importing example dataset
 
 Then let's read in our example dataset. As mentioned in the introduction, this example dataset contains cytokine concentrations derived from 44 subjects. Let's import and view these data:
-```{r}
+```{r 05-Chapter5-92}
 # Reading in file
 cytokines_df <- data.frame(read_excel("Chapter_5/Module5_5_Input/Module5_5_InputData.xlsx", sheet = 2))
 
@@ -1837,7 +1837,7 @@ This training module was specifically developed to answer the following environm
 5. Which cytokines have the greatest contributions to the first two eigenvectors?
 
 To answer the first environmental health question, let's start by filtering to include only NELF derived samples and non-smokers.
-```{r}
+```{r 05-Chapter5-93}
 baseline_df <- cytokines_df %>%
     filter(Group == "NS", Compartment == "NELF") 
 
@@ -1845,7 +1845,7 @@ head(baseline_df)
 ```
 
 The functions we use will require us to cast the data wider. We will accomplish this using the `dcast()` function from the *reshape2* package. 
-```{r}
+```{r 05-Chapter5-94}
 wider_baseline_df <- reshape2::dcast(baseline_df, Protein ~ SubjectID, value.var = "Conc_pslog2") %>% 
   column_to_rownames("Protein")
 
@@ -1853,7 +1853,7 @@ head(wider_baseline_df)
 ```
 
 Now we can derive clusters using the `fviz_nbclust()` function to determine the optimal *k* based on suggestions from the elbow, silhouette, and gap statistic methods. We can use this code for both *k*-means and hierarchical clustering by changing the `FUNcluster` parameter. Lets start with *k*-means:.
-```{r fig.align = 'center'}
+```{r 05-Chapter5-95, fig.align = 'center'}
 # Elbow method
 fviz_nbclust(wider_baseline_df, FUNcluster = kmeans, method = "wss") +
   labs(subtitle = "Elbow method") 
@@ -1868,7 +1868,7 @@ fviz_nbclust(wider_baseline_df, FUNcluster = kmeans, method = "gap_stat") +
 ```
 
 The elbow method is suggesting 2 or 3 clusters, the silhouette method is suggesting 2, and the gap statistic method is suggesting 1. Since each of these methods is recommending different *k* values, we can go ahead and run *k*-means to visualize the clusters and test those different *k*'s. *K*-means clusters will be visualized using the `fviz_cluster()` function.
-```{r fig.align = 'center'}
+```{r 05-Chapter5-96, fig.align = 'center'}
 # Choosing to iterate through 2 or 3 clusters using i as our iterator
 for (i in 2:3){
     # nstart = number of random starting partitions, it's recommended for nstart > 1
@@ -1888,7 +1888,7 @@ for (i in 2:3){
 :::
 
 The final cluster assignments can easily be obtained using the `kmeans()` function from the *stats* package. 
-```{r}
+```{r 05-Chapter5-97}
 cluster_kmeans_3 <- kmeans(wider_baseline_df, centers = 3, nstart = 25)
 cluster_kmeans_df <- data.frame(cluster_kmeans_3$cluster) %>%
     rownames_to_column("Cytokine") %>%
@@ -1906,7 +1906,7 @@ cluster_kmeans_df
 
 :::answer
 **Answer**: After choosing the number of clusters to be 3, the cluster assignments are as follows: 
-```{r fig.align = 'center', echo=FALSE}
+```{r 05-Chapter5-98, fig.align = 'center', echo=FALSE}
 knitr::include_graphics("Chapter_5/Module5_5_Input/Module5_5_Image7.png")
 ```
 :::
@@ -1918,7 +1918,7 @@ knitr::include_graphics("Chapter_5/Module5_5_Input/Module5_5_Image7.png")
 Next, we'll turn our attention to answering environmental health questions 3 and 4: What is the optimal number of clusters the cytokines can be grouped into that were derived from nasal epithelium fluid (NELF) in non-smokers using hierarchical clustering? How do the hierarchical cluster assignments compare to the *k*-means cluster assignments?
 
 Just as we used the elbow method, silhouette profile, and gap statistic to determine the optimal number of clusters for *k*-means, we can leverage the same approaches for hierarchical by changing the `FUNcluster` parameter.
-```{r fig.align = 'center'}
+```{r 05-Chapter5-99, fig.align = 'center'}
 # Elbow method
 fviz_nbclust(wider_baseline_df, FUNcluster = hcut, method = "wss") +
   labs(subtitle = "Elbow method") 
@@ -1943,13 +1943,13 @@ We can see the results are quite similar with 2-3 clusters appearing optimal.
 :::
 
 Now we can perform the clustering and visualize and extract the results. We'll start by using the `dist()` function to calculate the euclidean distance between the clusters followed by the `hclust()` function to obtain the hierarchical clustering assignments. 
-```{r}
+```{r 05-Chapter5-100}
 # Viewing the wider dataframe we'll be working with
 head(wider_baseline_df)
 ```
 
 
-```{r}
+```{r 05-Chapter5-101}
 # First scaling data with each subject (down columns)
 scaled_df <- data.frame(apply(wider_baseline_df, 2, scale))
 rownames(scaled_df) = rownames(wider_baseline_df)
@@ -1958,7 +1958,7 @@ head(scaled_df)
 ```
 
 The `dist()` function is initially used to calculate the Euclidean distance between each cytokine. Next, the `hclust()` function is used to run the hierarchical clustering analysis using the complete method by default. The method can be changed in the function using the method parameter.
-```{r}
+```{r 05-Chapter5-102}
 # Calculating euclidean dist
 dist_matrix <- dist(scaled_df, method = 'euclidean')
 
@@ -1967,7 +1967,7 @@ cytokines_hc <- hclust(dist_matrix)
 ```
 
 Now we can generate a dendrogram to help us evaluate the results using the `fviz_dend()` function from the *factoextra* package. We use k=3 to be consistent with the *k*-means analysis.
-```{r fig.align = 'center', out.width = "75%", warning=FALSE}
+```{r 05-Chapter5-103, fig.align = 'center', out.width = "75%", warning=FALSE}
     fviz_dend(cytokines_hc, k = 3, # Specifying k
               cex = 0.85, # Label size
               palette = "futurama", # Color palette see ?ggpubr::ggpar
@@ -1979,7 +1979,7 @@ Now we can generate a dendrogram to help us evaluate the results using the `fviz
 ```
 
 We can also extract those cluster assignments using the `cutree()` function from the *stats* package.
-```{r}
+```{r 05-Chapter5-104}
 hc_assignments_df <- data.frame(cutree(cytokines_hc, k = 3)) %>%
     rownames_to_column("Cytokine") %>%
     rename(`Hierarchical Cluster` = cutree.cytokines_hc..k...3.) %>%
@@ -2008,14 +2008,14 @@ For additional resources on running hierarchical clustering in R, see [Visualizi
 ## Clustering Plot
 
 One additional way to visualize clustering is to plot the first two principal components on the axes and color the data points based on their corresponding cluster. This visualization can be used for both *k*-means and hierarchical clustering using the `fviz_cluster()` function. This figure is essentially a PCA plot with shapes drawn around each cluster to make them distinct from each other.
-```{r fig.align = 'center', fig.height=5.5, fig.width=6}
+```{r 05-Chapter5-105, fig.align = 'center', fig.height=5.5, fig.width=6}
 fviz_cluster(cluster_kmeans_3, data = wider_baseline_df)
 ```
 
 Rather than using the `fviz_cluster()` function as shown in the figure above, we'll extract the data to recreate the sample figure using `ggplot()`. For the manuscript this was necessary, since it was important to facet the plots for each compartment (i.e., NLF, NELF, sputum, and serum). For a single plot, this data extraction isn't required, and the figure above can be further customized within the `fviz_cluster()` function. However, we'll go through the steps of obtaining the indices to recreate the same polygons in `ggplot()` directly. 
 
 *K*-means actually uses principal component analysis (PCA) to reduce a dataset's dimensionality prior to obtaining the cluster assignments and plotting those clusters. Therefore, to obtain the coordinates of each cytokine within their respective clusters, PCA will need to be run first. 
-```{r}
+```{r 05-Chapter5-106}
 # First running PCA
 pca_cytokine <- prcomp(wider_baseline_df, scale = TRUE, center = TRUE)
 # Only need PC1 and PC2 for plotting, so selecting the first two columns
@@ -2030,7 +2030,7 @@ head(baseline_scores_df)
 ```
 
 Within each cluster, the `chull()` function is used to compute the indices of the points on the convex hull. These are needed for `ggplot()` to create the polygon shapes of each cluster. 
-```{r}
+```{r 05-Chapter5-107}
 # hull values for cluster 1
 cluster_1 <- baseline_scores_df[baseline_scores_df$Cluster == 1, ][chull(baseline_scores_df %>% 
                                                                     filter(Cluster == 1)),]  
@@ -2048,7 +2048,7 @@ head(all_hulls_baseline)
 ```
 
 Now plotting the clusters using `ggplot()`.
-```{r fig.align = 'center', fig.height=5.5, fig.width=6}
+```{r 05-Chapter5-108, fig.align = 'center', fig.height=5.5, fig.width=6}
 ggplot() + 
   geom_point(data = baseline_scores_df, aes(x = PC1, y = PC2, color = Cluster, shape = Cluster), size = 4) + 
   # Adding cytokine names
@@ -2090,7 +2090,7 @@ Takeaways from this clustering plot:
 ## Hierarchical Clustering Visualization
 
 We can also build a heatmap using the `pheatmap()` function that has the capability to display hierarchical clustering dendrograms. To do so, we'll need to go back and use the `wider_baseline_df` dataframe.
-```{r fig.align = 'center', fig.height=7, fig.width=8}
+```{r 05-Chapter5-109, fig.align = 'center', fig.height=7, fig.width=8}
 pheatmap(wider_baseline_df, 
             cluster_cols = FALSE, # hierarchical clustering of cytokines
             scale = "column",    # scaling the data to make differences across cytokines more apparent
@@ -2116,7 +2116,7 @@ Nevertheless, let's identify some key takeaways from this heatmap:
 
 ## Variable Contributions
 To answer our final environmental health question: Which cytokines have the greatest contributions to the first two eigenvectors, we'll use the `fviz_contrib()` function that plots the percentage of each variable's contribution to the principal component(s). It also displays a red dashed line, and variables that fall above are considered to have significant contributions to those principal components. For a refresher on PCA and variable contributions, see the previous module, **TAME 2.0 Module 5.4 Unsupervised Machine Learning**.
-```{r fig.align = 'center'}
+```{r 05-Chapter5-110, fig.align = 'center'}
 # kmeans contributions
 fviz_contrib(pca_cytokine, 
              choice = "ind", addlabels = TRUE,

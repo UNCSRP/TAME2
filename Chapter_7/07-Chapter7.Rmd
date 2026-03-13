@@ -12,7 +12,7 @@ All input files (script, data, and figures) can be downloaded from the [UNC-SRP 
 The Comparative Toxicogenomics Database (CTD) is a publicly available, online database that provides manually curated information about chemical-gene/protein interactions, chemical-disease and gene-disease relationships. CTD also recently incorporated curation of exposure data and chemical-phenotype relationships.
 
 CTD is located at: http://ctdbase.org/. Here is a screenshot of the CTD homepage (as of August 5, 2021):
-```{r, echo=FALSE, fig.align='center'} 
+```{r 07-Chapter7-1, echo=FALSE, fig.align='center' }
 #knitr::include_graphics("_book/TAME_Toolkit_files/figure-html/Module3_1_CTD_homepage.jpg")
 knitr::include_graphics("Chapter_7/Module7_1_Input/Module7_1_Image1.jpg")
 ```
@@ -32,14 +32,14 @@ This training module was specifically developed to answer the following environm
 ### Script Preparations
 
 #### Cleaning the global environment
-```{r}
+```{r 07-Chapter7-2}
 rm(list=ls())
 ```
 
 
 #### Installing required R packages
 If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you.
-```{r, results=FALSE, message=FALSE}
+```{r 07-Chapter7-3, results=FALSE, message=FALSE}
 if (!requireNamespace("tidyverse"))
   install.packages("tidyverse")
 if (!requireNamespace("VennDiagram"))
@@ -50,7 +50,7 @@ install.packages("grid")
 
 
 #### Loading R packages required for this session
-```{r, results=FALSE, message=FALSE}
+```{r 07-Chapter7-4, results=FALSE, message=FALSE}
 library(tidyverse)
 library(VennDiagram)
 library(grid)
@@ -58,7 +58,7 @@ library(grid)
 
 
 #### Set your working directory
-```{r, eval=FALSE, echo=TRUE}
+```{r 07-Chapter7-5, eval=FALSE, echo=TRUE}
 setwd("/filepath to where your input files are")
 ```
 
@@ -74,7 +74,7 @@ Navigate to the main CTD website: http://ctdbase.org/.
 
 Select at the top, 'Search' -> 'Chemical-Gene Interactions'. 
 <br>
-```{r, echo=FALSE, fig.align='center'} 
+```{r 07-Chapter7-6, echo=FALSE, fig.align='center' }
 knitr::include_graphics("Chapter_7/Module7_1_Input/Module7_1_Image2.jpg")
 ```
 
@@ -82,7 +82,7 @@ knitr::include_graphics("Chapter_7/Module7_1_Input/Module7_1_Image2.jpg")
   
 Select to query all chemical-gene interaction data for arsenic.
 <br>
-```{r, echo=FALSE, fig.align='center'} 
+```{r 07-Chapter7-7, echo=FALSE, fig.align='center' }
 knitr::include_graphics("Chapter_7/Module7_1_Input/Module7_1_Image3.jpg")
 ```
 <br>
@@ -90,7 +90,7 @@ knitr::include_graphics("Chapter_7/Module7_1_Input/Module7_1_Image3.jpg")
   
 Note that there are lots of results, represented by many many rows of data! Scroll to the bottom of the webpage and select to download as 'CSV'.
 <br>
-```{r, echo=FALSE, fig.align='center'} 
+```{r 07-Chapter7-8, echo=FALSE, fig.align='center' }
 knitr::include_graphics("Chapter_7/Module7_1_Input/Module7_1_Image4.jpg")
 ```
   
@@ -106,14 +106,14 @@ Note that the data pulled here represent data available on August 1, 2021
 
 
 Read in the csv file of the results from CTD query:
-```{r, results=FALSE, message=FALSE}
+```{r 07-Chapter7-9, results=FALSE, message=FALSE}
 ctd = read_csv("Chapter_7/Module7_1_Input/Module7_1_InputData1.csv")
 ```
 
 
 
 Let's first see how many rows and columns of data this file contains:
-```{r}
+```{r 07-Chapter7-10}
 dim(ctd)
 ```
 This dataset includes 6280 observations (represented by rows) linking arsenic exposure to gene-level alterations
@@ -122,12 +122,12 @@ With information spanning across 9 columns
 
 
 Let's also see what kind of data are organized within the columns:
-```{r}
+```{r 07-Chapter7-11}
 colnames(ctd)
 ```
 
 
-```{r}
+```{r 07-Chapter7-12}
 # Viewing the first five rows of data, across all 9 columns
 ctd[1:9,1:5] 
 ```
@@ -140,19 +140,19 @@ ctd[1:9,1:5]
 
 
 To identify genes with altered expression in association with arsenic, we can leverage the results of our CTD query and filter this dataset to include only the rows that contain the term "expression" in the "Interaction Actions" column.
-```{r}
+```{r 07-Chapter7-13}
 exp_filt = ctd %>% filter(grepl("expression", `Interaction Actions`))
 ```
 
 We now have 2586 observations, representing instances of arsenic exposure causing a changes in a target gene's expression levels.
-```{r}
+```{r 07-Chapter7-14}
 dim(exp_filt)
 ```
 
 
 
 Let's see how many unique genes this represents:
-```{r}
+```{r 07-Chapter7-15}
 length(unique(exp_filt$`Gene Symbol`))
 ```
 This reflects 1878 unique genes that show altered expression in association with arsenic.
@@ -160,7 +160,7 @@ This reflects 1878 unique genes that show altered expression in association with
 
 
 Let's make a separate dataframe that includes only the unique genes, based on the "Gene Symbol" column.
-```{r}
+```{r 07-Chapter7-16}
 exp_genes = exp_filt %>% distinct(`Gene Symbol`, .keep_all=TRUE)
 
 # Removing columns besides gene identifier
@@ -193,18 +193,18 @@ Which genes show altered expression in response to arsenic exposure?
 
 
 For this dataset, let's focus on gene-level methylation as a marker of epigenetic regulation. Let's return to our main dataframe, representing the results of the CTD query, and filter these results for only the rows that contain the term "methylation" in the "Interaction Actions" column.
-```{r}
+```{r 07-Chapter7-17}
 met_filt = ctd %>% filter(grepl("methylation",`Interaction Actions`))
 ```
 
 We now have 3211 observations, representing instances of arsenic exposure causing a changes in a target gene's methylation levels.
-```{r}
+```{r 07-Chapter7-18}
 dim(met_filt)
 ```
 
 
 Let's see how many unique genes this represents.
-```{r}
+```{r 07-Chapter7-19}
 length(unique(met_filt$`Gene Symbol`))
 ```
 This reflects 3142 unique genes that show altered methylation in association with arsenic
@@ -212,7 +212,7 @@ This reflects 3142 unique genes that show altered methylation in association wit
 
 
 Let's make a separate dataframe that includes only the unique genes, based on the "Gene Symbol" column.
-```{r}
+```{r 07-Chapter7-20}
 met_genes = met_filt %>% distinct(`Gene Symbol`, .keep_all=TRUE)
 
 # Removing columns besides gene identifier
@@ -231,13 +231,13 @@ With this list of genes with altered methylation, we can now compare it to previ
 
 
 Merge the expression results with the methylation resuts on the Gene Symbol column found in both datasets.
-```{r}
+```{r 07-Chapter7-21}
 merge_df = merge(exp_genes, met_genes, by = "Gene Symbol")
 ```
 We end up with 315 rows reflecting the 315 genes that show altered expression and altered methylation
 
 Let's view these genes:
-```{r}
+```{r 07-Chapter7-22}
 merge_df[1:315,]
 ```
 
@@ -261,7 +261,7 @@ For further training, shown here is another method for pulling this list of inte
 
 
 Obtain a list of the overlapping genes in the overall expression results and the methylation results.
-```{r}
+```{r 07-Chapter7-23}
 inxn = intersect(exp_filt$`Gene Symbol`,met_filt$`Gene Symbol`)
 ```
 Again, we end up with a list of 315 unique genes that show altered expression and altered methylation.
@@ -269,21 +269,21 @@ Again, we end up with a list of 315 unique genes that show altered expression an
 
 
 This list can be viewed on its own or converted to a dataframe (df).
-```{r}
+```{r 07-Chapter7-24}
 inxn_df = data.frame(genes=inxn)
 ```
 
 
 
 This list can also be conveniently used to filter the original query results.
-```{r}
+```{r 07-Chapter7-25}
 inxn_df_all_data = ctd %>% filter(`Gene Symbol` %in% inxn)
 ```
 
 
 
 Note that in this last case, the same 315 genes are present, but this time the results contain all records from the original query results, hence the 875 rows (875 records observations reflecting the 315 genes).
-```{r}
+```{r 07-Chapter7-26}
 summary(unique(sort(inxn_df_all_data$`Gene Symbol`))==sort(merge_df$`Gene Symbol`))
 dim(inxn_df_all_data)
 ```
@@ -405,14 +405,14 @@ This training module was specifically developed to answer the following environm
 ### Script Preparations
 
 #### Cleaning the global environment
-```{r}
+```{r 07-Chapter7-27}
 rm(list=ls())
 ```
 
 
 #### Installing required R packages
 If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you
-```{r, results=FALSE, message=FALSE}
+```{r 07-Chapter7-28, results=FALSE, message=FALSE}
 if (!requireNamespace("tidyverse"))
   install.packages("tidyverse")
 if (!requireNamespace("reshape2"))
@@ -426,7 +426,7 @@ BiocManager::install("GEOquery")
 
 
 #### Loading R packages required for this session
-```{r, results=FALSE, message=FALSE, warning=FALSE}
+```{r 07-Chapter7-29, results=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(reshape2)
 library(GEOquery)
@@ -440,11 +440,11 @@ For more information on the **GEOquery package**, see its associated [Bioconduct
 
 
 #### Set your working directory
-```{r, eval=FALSE, echo=TRUE}
+```{r 07-Chapter7-30, eval=FALSE, echo=TRUE}
 setwd("/filepath to where your input files are")
 ```
 
-```{r, echo=FALSE}
+```{r 07-Chapter7-31, echo=FALSE}
 #setwd("/Users/juliarager/IEHS Dropbox/Julia Rager/Research Projects/1_SRP/4_DMAC/DMAC Training Modules/Training_Modules/3_Chapter 3/3_2_Database_GEO/Clean_Files/")
 ```
 
@@ -458,7 +458,7 @@ In this first method, we will navigate to the dataset within the GEO website, ma
 
 For the purposes of this training exercise, we manually downloaded the GEO series matrix file from the GEO series webpage, located at: https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE42394. The specific file that was downloaded was noted as "GSE42394_series_matrix.txt", pulled by clicking on the link indicated by the red arrow from the GEO series webpage:
 
-```{r, echo=FALSE, fig.width=4, fig.height=5, fig.align = "center"}
+```{r 07-Chapter7-32, echo=FALSE, fig.width=4, fig.height=5, fig.align = "center"}
 knitr::include_graphics("Chapter_7/Module7_2_Input/Module7_2_Image1.png")
 ```
 
@@ -467,7 +467,7 @@ For simplicity, we also have already pre-filtered this file for the samples we a
 
 
 At this point, we can simply read in this pre-filtered text file for the purposes of this training module
-```{r}
+```{r 07-Chapter7-33}
 geodata_manual = read.table(file="Chapter_7/Module7_2_Input/Module7_2_InputData1.txt",
                              header=T)
 ```
@@ -476,7 +476,7 @@ geodata_manual = read.table(file="Chapter_7/Module7_2_Input/Module7_2_InputData1
 Because this is a manual approach, we have to also manually define the treated and untreated samples (based on manually opening the surrounding metadata from the GEO webpage)
 
 Manually defining treated and untreated for these samples of interest:
-```{r}
+```{r 07-Chapter7-34}
 exposed_manual = c("GSM1150940", "GSM1150941", "GSM1150942")
 unexposed_manual = c("GSM1150937", "GSM1150938", "GSM1150939")
 ```
@@ -488,25 +488,25 @@ In this second method, we will leverage the GEOquery package, which allows for e
 
 
 Let's first use the getGEO function (from the GEOquery package) to load data from our series matrix ("GSE42394_series_matrix.txt", renamed "Module7_2_InputData2.txt" for use in this module). *Note that this line of code may take a couple of minutes to run.*
-```{r, message=FALSE}
+```{r 07-Chapter7-35, message=FALSE}
 geo.getGEO.data = getGEO(filename='Chapter_7/Module7_2_Input/Module7_2_InputData2.txt')
 ```
 
 
 
 One of the reasons the getGEO package is so helpful is that we can automatically link a dataset with nicely organized sample information using the `pData()` function.
-```{r}
+```{r 07-Chapter7-36}
 sampleInfo = pData(geo.getGEO.data)
 ```
 
 
 Let's view this sample information / metadata file, first by viewing what the column headers are.
-```{r}
+```{r 07-Chapter7-37}
 colnames(sampleInfo)
 ```
 
 Then viewing the first five columns.
-```{r}
+```{r 07-Chapter7-38}
 sampleInfo[1:10,1:5]
 ```
 
@@ -514,7 +514,7 @@ This shows that each sample is provided with a unique number starting with "GSM"
 
 
 Let's view the next five columns.
-```{r}
+```{r 07-Chapter7-39}
 sampleInfo[1:10,6:10]
 ```
 
@@ -531,7 +531,7 @@ Now, we can use this information to define the samples we want to analyze. Note 
 In this training exercise, we are focusing on responses in the nose, so we can easily filter for cell type = Nasal epithelial cells (specifically in the `cell type:ch1` variable). We are also focusing on responses collected after 7 days of exposure, which we can filter for using time = 7 day (specifically in the `time:ch1` variable). We will also define exposed and unexposed samples using the variable `treatment:ch1`.
 
 First, let's subset the sampleInfo dataframe to just keep the samples we're interested in
-```{r}
+```{r 07-Chapter7-40}
 # Define a vector variable (here we call it 'keep') that will store rows we want to keep
 keep = rownames(sampleInfo[which(sampleInfo$`cell type:ch1`=="Nasal epithelial cells" 
                                   & sampleInfo$`time:ch1`=="7 day"),])
@@ -542,13 +542,13 @@ sampleInfo = sampleInfo[keep,]
 
 
 Next, we can pull the exposed and unexposed animal IDs. Let's first see how these are labeled within the `treatment:ch1` variable.
-```{r}
+```{r 07-Chapter7-41}
 unique(sampleInfo$`treatment:ch1`)
 ```
 
 
 And then search for the rows of data, pulling the sample animal IDs (which are in the variable `geo_accession`).
-```{r}
+```{r 07-Chapter7-42}
 exposedIDs = sampleInfo[which(sampleInfo$`treatment:ch1`=="2 ppm formaldehyde"), 
                           "geo_accession"]
 unexposedIDs = sampleInfo[which(sampleInfo$`treatment:ch1`=="unexposed"), 
@@ -557,20 +557,20 @@ unexposedIDs = sampleInfo[which(sampleInfo$`treatment:ch1`=="unexposed"),
 
 
 The next step is to pull the expression data we want to use in our analyses. The GEOquery function, `exprs()`, allows us to easily pull these data. Here, we can pull the data we're interested in using the `exprs()` function, while defining the data we want to pull based off our previously generated 'keep' vector.
-```{r}
+```{r 07-Chapter7-43}
 # As a reminder, this is what the 'keep' vector includes 
 # (i.e., animal IDs that we're interested in)
 keep
 ```
 
-```{r}
+```{r 07-Chapter7-44}
 # Using the exprs() function
 geodata = exprs(geo.getGEO.data[,keep])
 ```
 
 
 Let's view the full dataset as is now:
-```{r}
+```{r 07-Chapter7-45}
 head(geodata)
 ```
 This now represents a matrix of data, with animal IDs as column headers and expression levels within the matrix.
@@ -580,18 +580,18 @@ This now represents a matrix of data, with animal IDs as column headers and expr
 These column names are not the easiest to interpret, so let's rename these columns to indicate which animals were from the exposed vs. unexposed groups.
 
 We need to first convert our expression dataset to a dataframe so we can edit columns names, and continue with downstream data manipulations that require dataframe formats.
-```{r}
+```{r 07-Chapter7-46}
 geodata = data.frame(geodata)
 ```
 
 
 Let's remind ourselves what the column names are:
-```{r}
+```{r 07-Chapter7-47}
 colnames(geodata)
 ```
 
 Which ones of these are exposed vs unexposed animals can be determined by viewing our previously defined vectors.
-```{r}
+```{r 07-Chapter7-48}
 exposedIDs
 unexposedIDs
 ```
@@ -599,14 +599,14 @@ unexposedIDs
 With this we can tell that the first three listed IDs are from unexposed animals, and the last three IDs are from exposed animals.
 
 Let's simplify the names of these columns to indicate exposure status and replicate number.
-```{r}
+```{r 07-Chapter7-49}
 colnames(geodata) = c("Control_1", "Control_2", "Control_3", "Exposed_1", 
                        "Exposed_2", "Exposed_3")
 ```
 
 
 And we'll now need to re-define our 'exposed' vs 'unexposed' vectors for downstream script.
-```{r}
+```{r 07-Chapter7-50}
 exposedIDs = c("Exposed_1", "Exposed_2", "Exposed_3")
 unexposedIDs = c("Control_1", "Control_2", "Control_3")
 ```
@@ -614,7 +614,7 @@ unexposedIDs = c("Control_1", "Control_2", "Control_3")
 
 
 Viewing the data again:
-```{r}
+```{r 07-Chapter7-51}
 head(geodata)
 ```
 
@@ -630,7 +630,7 @@ In instances where we want more information surrounding the molecular identifier
 
 For example, let's pull the platform-specific annotation file for this experiment. Let's revisit the [website](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE42394) that contained the original dataset on GEO. Scroll down to where it lists "Platforms", and there is a hyperlinked platform number "GPL6247" (see arrow below).
 
-```{r, echo=FALSE, fig.width=4, fig.height=5, fig.align = "center"}
+```{r 07-Chapter7-52, echo=FALSE, fig.width=4, fig.height=5, fig.align = "center"}
 knitr::include_graphics("Chapter_7/Module7_2_Input/Module7_2_Image2.png")
 ```
 
@@ -641,12 +641,12 @@ Here, we're interested in pulling the corresponding gene symbol information for 
 
 In this exercise, we've already done these steps and unzipped the file in our working directory. So at this point, we can simply read in this annotation dataset, renamed "Module7_2_InputData2.annot", still using the `GEOquery()` function to help automate.
 
-```{r, warning=FALSE}
+```{r 07-Chapter7-53, warning=FALSE}
 geo.annot = GEOquery::getGEO(filename="Chapter_7/Module7_2_Input/Module7_2_InputData3.annot")
 ```
 
 Now we can use the `Table()` function from GEOquery to pull data from the annotation dataset.
-```{r}
+```{r 07-Chapter7-54}
 id.gene.table = GEOquery::Table(geo.annot)[,c("ID", "Gene symbol")]
 id.gene.table[1:10,1:2]
 ```
@@ -654,12 +654,12 @@ id.gene.table[1:10,1:2]
 With these two columns of data, we now have the needed IDs and gene symbols to match with our dataset.
 
 Within the full dataset, we need to add a new column for the probeset ID, taken from the rownames, in preparation for the merging step.
-```{r}
+```{r 07-Chapter7-55}
 geodata$ID = rownames(geodata)
 ```
 
 We can now merge the gene symbol information by ID with our expression data.
-```{r}
+```{r 07-Chapter7-56}
 geodata_genes = merge(geodata, id.gene.table, by="ID")
 head(geodata_genes)
 ```
@@ -667,7 +667,7 @@ head(geodata_genes)
 Note that many of the probeset IDs do not map to full gene symbols, which is shown here by viewing the top few rows - this is expected in genome-wide analyses based on microarray platforms.
 
 Let's look at the first 25 unique genes in these data:
-```{r}
+```{r 07-Chapter7-57}
 UniqueGenes = unique(geodata_genes$`Gene symbol`)
 UniqueGenes[1:25]
 ```
@@ -677,22 +677,22 @@ Again, you can see that the first value listed is blank, representing probesetID
 You can also see that some gene symbols have multiple entries, separated by "///"
 
 To simplify identifiers, we can pull just the first gene symbol, and remove the rest by using gsub().
-```{r}
+```{r 07-Chapter7-58}
 geodata_genes$`Gene symbol` = gsub("///.*", "", geodata_genes$`Gene symbol`)
 ```
 
 Let's alphabetize by main expression dataframe by gene symbol.
-```{r}
+```{r 07-Chapter7-59}
 geodata_genes = geodata_genes[order(geodata_genes$`Gene symbol`),]
 ```
 
 And then re-view these data:
-```{r}
+```{r 07-Chapter7-60}
 geodata_genes[1:5,]
 ```
 
 In preparation for the visualization steps below, let's reset the probeset IDs to rownames.
-```{r}
+```{r 07-Chapter7-61}
 rownames(geodata_genes) = geodata_genes$ID
 
 # Can then remove this column within the dataframe
@@ -700,7 +700,7 @@ geodata_genes$ID = NULL
 ```
 
 Finally let's rearrange this dataset to include gene symbols as the first column, right after rownames (probeset IDs).
-```{r}
+```{r 07-Chapter7-62}
 geodata_genes = geodata_genes[,c(ncol(geodata_genes),1:(ncol(geodata_genes)-1))]
 geodata_genes[1:5,]
 dim(geodata_genes)
@@ -709,7 +709,7 @@ dim(geodata_genes)
 Note that this dataset includes expression measures across **29,214 probes, representing 14,019 unique genes**.
 For simplicity in the final exercises, let's just filter for rows representing mapped genes.
 
-```{r}
+```{r 07-Chapter7-63}
 geodata_genes = geodata_genes[!(geodata_genes$`Gene symbol` == ""), ]
 dim(geodata_genes)
 ```
@@ -748,14 +748,14 @@ To visualize the -omics data, we can generate boxplots, heat maps, any many othe
 For this example, let's simply use R's built in boxplot() function.
 
 We only want to use columns with our expression data (2 to 7), so let's pull those columns when running the boxplot function.
-```{r, fig.width=5, fig.height=4, fig.align = "center"}
+```{r 07-Chapter7-64, fig.width=5, fig.height=4, fig.align = "center"}
 boxplot(geodata_genes[,2:7])
 ```
 
 There seem to be a lot of variability within each sample's range of expression levels, with many outliers. This makes sense given that we are analyzing the expression levels across the rat's entire genome, where some genes won't be expressed at all while others will be highly expressed due to biological and/or potential technical variability.
   
 To show plots without outliers, we can simply use outline=F.
-```{r, fig.width=5, fig.height=4, fig.align = "center"}
+```{r 07-Chapter7-65, fig.width=5, fig.height=4, fig.align = "center"}
 boxplot(geodata_genes[,2:7], outline=F)
 ```
   
@@ -767,7 +767,7 @@ There are many different packages you can use to generate heat maps. Here, we us
 
 It also takes awhile to plot all genes across the genome, so to save time for this training module, let's randomly select 100 rows to plot.
 
-```{r, fig.width=9, fig.height=7, fig.align = "center"}
+```{r 07-Chapter7-66, fig.width=9, fig.height=7, fig.align = "center"}
 # To ensure that the same subset of genes are selected each time
 set.seed = 101                                     
 
@@ -794,18 +794,18 @@ Z-score is a very common method of scaling that transforms data points to reflec
 Let's see what happens when we scale this gene expression dataset by z-score across each probe. This can be easily done using the `scale()` function.
 
 This specific `scale()` function works by centering and scaling across columns, but since we want to use it across probesets (organized as rows), we need to first transpose our dataset, then run the scale function.
-```{r}
+```{r 07-Chapter7-67}
 geodata_genes_scaled = scale(t(geodata_genes[,2:7]), center=T, scale=T)
 ```
 
 Now we can transpose it back to the original format (i.e., before it was transposed).
-```{r}
+```{r 07-Chapter7-68}
 geodata_genes_scaled = t(geodata_genes_scaled)
 ```
 
 
 And then view what the normalized and now scaled expression data look like for now a random subset of 100 probesets (representing genes).
-```{r, echo=FALSE, fig.width=9, fig.height=7, fig.align = "center"}
+```{r 07-Chapter7-69, echo=FALSE, fig.width=9, fig.height=7, fig.align = "center"}
 superheat::superheat(geodata_genes_scaled[row.sample,],
                      pretty.order.rows = TRUE,
                      pretty.order.cols = TRUE,
@@ -844,13 +844,13 @@ We need to run a t-test for each row of our dataset. This exercise demonstrates 
 #### Method 1 (m1): 'For Loop'
 
 Let's first re-save the molecular probe IDs to a column within the dataframe, since we need those values in the loop function.
-```{r}
+```{r 07-Chapter7-70}
 geodata_genes$ID = rownames(geodata_genes)
 ```
 
 
 We also need to initially create an empty dataframe to eventually store p-values.
-```{r}
+```{r 07-Chapter7-71}
 pValue_m1 = matrix(0, nrow=nrow(geodata_genes), ncol=3)
 colnames(pValue_m1) = c("ID", "pval", "padj")
 head(pValue_m1)
@@ -859,7 +859,7 @@ head(pValue_m1)
 You can see the empty dataframe that was generated through this code.
 
 Then we can loop through the entire dataset to acquire p-values from t-test statistics, comparing n=3 exposed vs n=3 unexposed samples.
-```{r}
+```{r 07-Chapter7-72}
 for (i in 1:nrow(geodata_genes)) {
   
   #Get the ID
@@ -876,7 +876,7 @@ for (i in 1:nrow(geodata_genes)) {
 ```
 
 View the results:
-```{r}
+```{r 07-Chapter7-73}
 # Note that we're not pulling the last column (padj) since we haven't calculated these yet
 pValue_m1[1:5,1:2] 
 ```
@@ -886,14 +886,14 @@ pValue_m1[1:5,1:2]
 #### Method 2 (m2): Apply Function
 For the second method, we can use the *apply()* function to calculate resulting t-test p-values more efficiently labeled. 
 
-```{r}
+```{r 07-Chapter7-74}
 pValue_m2 = apply(geodata_genes[,2:7], 1, function(x) t.test(x[unexposedIDs],
                                                               x[exposedIDs])$p.value)
 names(pValue_m2) = geodata_genes[,"ID"]
 ```
 
 We can convert the results into a dataframe to make it similar to m1 matrix we created above.
-```{r}
+```{r 07-Chapter7-75}
 pValue_m2  = data.frame(pValue_m2)
 
 # Now create an ID column
@@ -901,7 +901,7 @@ pValue_m2$ID = rownames(pValue_m2)
 ```
 
 Then we can view at the two datasets to see they result in the same pvalues.
-```{r}
+```{r 07-Chapter7-76}
 head(pValue_m1)
 head(pValue_m2)
 ```
@@ -912,25 +912,25 @@ We can see from these results that both methods (m1 and m2) generate the same st
 Let's again merge these data with the gene symbols to tell which genes are significant.
 
 First, let's convert to a dataframe and then merge as before, for one of the above methods as an example (m1).
-```{r}
+```{r 07-Chapter7-77}
 pValue_m1 = data.frame(pValue_m1)
 pValue_m1 = merge(pValue_m1, id.gene.table, by="ID")
 ```
 
 We can also add a multiple test correction by applying a false discovery rate-adjusted p-value; here, using the Benjamini Hochberg (BH) method.
-```{r}
+```{r 07-Chapter7-78}
 # Here fdr is an alias for B-H method
 pValue_m1[,"padj"] = p.adjust(pValue_m1[,"pval"], method=c("fdr"))
 ```
 
 Now, we can sort these statistical results by adjusted p-values.
-```{r}
+```{r 07-Chapter7-79}
 pValue_m1.sorted = pValue_m1[order(pValue_m1[,'padj']),]
 head(pValue_m1.sorted)
 ```
 
 Pulling just the significant genes using an adjusted p-value threshold of 0.05.
-```{r}
+```{r 07-Chapter7-80}
 adj.pval.sig = pValue_m1[which(pValue_m1[,'padj'] < .05),]
 
 # Viewing these genes
@@ -950,13 +950,13 @@ What genes are altered in expression by formaldehyde inhalation exposure?
 
 Finally, let's plot these using a mini heat map.
 Note that we can use probesetIDs, then gene symbols, in rownames to have them show in heat map labels.
-```{r, echo=FALSE, fig.width=8, fig.height=4, fig.align = "center"}
+```{r 07-Chapter7-81, echo=FALSE, fig.width=8, fig.height=4, fig.align = "center"}
 rownames(geodata_genes) = paste(geodata_genes$ID, ": ",geodata_genes$`Gene symbol`)
 superheat::superheat(geodata_genes[which(geodata_genes$ID %in% adj.pval.sig[,"ID"]),2:7])
 ```
 
 Note that this statistical filter is pretty strict when comparing only n=3 vs n=3 biological replicates. If we loosen the statistical criteria to p-value < 0.05, this is what we can find:
-```{r}
+```{r 07-Chapter7-82}
 pval.sig = pValue_m1[which(pValue_m1[,'pval'] < .05),]
 nrow(pval.sig)
 ```
@@ -1008,7 +1008,7 @@ Using the same dataset that was used in this module, available from the [UNC-SRP
 # 7.3 CompTox Dashboard Data through APIs
 
 
-```{r, include = FALSE}
+```{r 07-Chapter7-83, include = FALSE}
 tpl <- knitr::opts_template$get("TAME_options")
 merged <- c(
   list(collapse = TRUE, comment = "#>"),
@@ -1085,14 +1085,14 @@ This training module was specifically developed to answer the following question
 
 ### Cleaning the Global Environment
 
-```{r, eval=FALSE}
+```{r 07-Chapter7-84, eval=FALSE}
 rm(list=ls())
 ```
 
 
 ### Installing Required R Packages
 
-```{r, eval=FALSE}
+```{r 07-Chapter7-85, eval=FALSE}
 if (!requireNamespace('ctxR'))
   install.packages('ctxR')
 
@@ -1102,7 +1102,7 @@ if (!requireNamespace('ggplot2'))
 
 ### Loading R Packages
 
-```{r}
+```{r 07-Chapter7-86}
 # Used to interface with CompTox Chemicals Dashboard
 library(ctxR)
 
@@ -1123,7 +1123,7 @@ The CCD can be searched either one chemical at a time, or using a batch search.
 
 In single-substance search, the user types a full or partial chemical identifier (name, CASRN, InChiKey, or DSSTox ID) into a search box on the CCD homepage. Autocomplete provides a list of possible matches; the user selects one by clicking on it, and is then taken to the CCD page for that substance. Here is an example of the CCD page for the chemical Bisphenol A: 
 
-```{r, echo = FALSE, out.width= "90%", fig.align= 'center'}
+```{r 07-Chapter7-87, echo = FALSE, out.width= "90%", fig.align= 'center'}
 knitr::include_graphics('Chapter_7/Module7_3_Input/Module7_3_Image1.png')
 ```
 
@@ -1135,13 +1135,13 @@ The different domains of data available for this chemical are shown by the tabs 
 In batch search, the user enters a list of search inputs, separated by newlines, into a batch-search box on https://comptox.epa.gov/dashboard/batch-search . The user selects the type(s) of inputs by selecting one or more checkboxes – these may include chemical identifiers, monoisotopic masses, or molecular formulas. Then, the user selects “Display All Chemicals” to display the list of substances matching the batch-search inputs, or “Choose Export Options” to choose options for exporting the batch-search results as a spreadsheet. The exported spreadsheet may include data from most of the domains available on an individual substance’s CCD page.
 
 
-```{r, echo = FALSE, out.width = "90%", fig.align = 'center'}
+```{r 07-Chapter7-88, echo = FALSE, out.width = "90%", fig.align = 'center'}
 knitr::include_graphics('Chapter_7/Module7_3_Input/Module7_3_Image2.png')
 ```
 
 The user can download the selected information in various formats, such as Excel (.xlsx), comma-separated values (.csv), or different types of chemical table files (.e.g, MOL). 
 
-```{r, echo=FALSE, out.width="90%", fig.align='center'}
+```{r 07-Chapter7-89, echo=FALSE, out.width="90%", fig.align='center'}
 knitr::include_graphics('Chapter_7/Module7_3_Input/Module7_3_Image3.png')
 ```
 
@@ -1192,7 +1192,7 @@ For more information on the data accessible through the CTX APIs and related too
 
 The APIs are organized into four sets of "endpoints" (chemical data domains): `Chemical`, `Hazard`, `Bioactivity`, and `Exposure`. Pictured below is what the `Chemical` section looks like and can be found at [CTX API Chemical Endpoints](https://api-ccte.epa.gov/docs/chemical.html).
 
-```{r, echo = FALSE, out.width = "90%", fig.align='center'}
+```{r 07-Chapter7-90, echo = FALSE, out.width = "90%", fig.align='center'}
 knitr::include_graphics('Chapter_7/Module7_3_Input/Module7_3_Image4.png')
 ```
 
@@ -1202,7 +1202,7 @@ The APIs can be explored through the pictured web interface at https://api-ccte.
 
 `Authentication` is the first tab on the left. Authentication is required to use the APIs. To authenticate yourself in the API web interface, input your unique API key.
 
-```{r, echo = FALSE, out.width = "90%", fig.align='center'}
+```{r 07-Chapter7-91, echo = FALSE, out.width = "90%", fig.align='center'}
 knitr::include_graphics('Chapter_7/Module7_3_Input/Module7_3_Image5.png')
 ```
 
@@ -1221,7 +1221,7 @@ In the CTX API web interface, the colored boxes next to each endpoint indicate t
 
 Click on the second item under `Chemical Details Resource`, the tab labeled `Get data by dtxsid`. The following page will appear.
 
-```{r, echo = FALSE, out.width = "90%", fig.align='center'}
+```{r 07-Chapter7-92, echo = FALSE, out.width = "90%", fig.align='center'}
 knitr::include_graphics('Chapter_7/Module7_3_Input/Module7_3_Image6.png')
 ```
 
@@ -1232,14 +1232,14 @@ This page has two subheadings: "Path Parameters" and "Query-String Parameters". 
 
 The default return format is displayed below and includes a variety of fields with data types represented.
 
-```{r, echo = FALSE, out.width = "90%", fig.align='center'}
+```{r 07-Chapter7-93, echo = FALSE, out.width = "90%", fig.align='center'}
 knitr::include_graphics('Chapter_7/Module7_3_Input/Module7_3_Image7.png')
 ```
 
 
 We show what reRturned data from searching Bisphenol A looks like using this endpoint with the `chemicaldetailstandard` value for `projection` selected.
 
-```{r, echo = FALSE, out.width = "90%", fig.align='center'}
+```{r 07-Chapter7-94, echo = FALSE, out.width = "90%", fig.align='center'}
 knitr::include_graphics('Chapter_7/Module7_3_Input/Module7_3_Image8.png')
 ```
 
@@ -1254,7 +1254,7 @@ Formatting an http request is not necessarily intuitive nor worth the time for s
 
 We store the API key required to access the APIs. To do this for the current session, run the first command. If you want to store your key across multiple sessions, run the second command.
 
-```{r, eval=FALSE}
+```{r 07-Chapter7-95, eval=FALSE}
 # This stores the key in the current session
 register_ctx_api_key(key = '<YOUR API KEY>')
 
@@ -1263,7 +1263,7 @@ register_ctx_api_key(key = '<YOUR API KEY>')
 register_ctx_api_key(key = '<YOUR API KEY>', write = TRUE)
 ```
 
-```{r, echo=FALSE, warning = FALSE}
+```{r 07-Chapter7-96, echo=FALSE, warning = FALSE}
 # This stores the key in the current session
 register_ctx_api_key(key = '706401cd-8bda-469d-9cdb-ac27f489c93a')
 
@@ -1274,7 +1274,7 @@ register_ctx_api_key(key = '706401cd-8bda-469d-9cdb-ac27f489c93a', write = TRUE)
 
 To check that your key has successfully been stored for the session, run the following command.
 
-```{r, eval=FALSE}
+```{r 07-Chapter7-97, eval=FALSE}
 ctx_key()
 ```
 
@@ -1282,7 +1282,7 @@ ctx_key()
 
 Now, we demonstrate how to retrieve the information for BPA given by the `Chemical Detail Resource` endpoint under the `chemicaldetailstandard` value for `projection`. Note, this `projection` value is the default value for the function `get_chemical_details()`.
 
-```{r}
+```{r 07-Chapter7-98}
 BPA_chemical_detail <- get_chemical_details(DTXSID = 'DTXSID7020182')
 dim(BPA_chemical_detail)
 class(BPA_chemical_detail)
@@ -1301,7 +1301,7 @@ These lists can be found in the CCD at [CCL4](https://comptox.epa.gov/dashboard/
 
 We explore details about these two lists of chemicals before diving into analyzing the data contained in each list.
 
-```{r}
+```{r 07-Chapter7-99}
 options(width = 100)
 ccl4_information <- get_public_chemical_list_by_name('CCL4')
 print(ccl4_information, trunc.cols = TRUE)
@@ -1312,7 +1312,7 @@ print(natadb_information, trunc.cols = TRUE)
 
 Now we pull the actual chemicals contained in the lists using the APIs.
 
-```{r}
+```{r 07-Chapter7-100}
 ccl4 <- get_chemicals_in_list('ccl4')
 ccl4 <- data.table::as.data.table(ccl4)
 
@@ -1322,7 +1322,7 @@ natadb <- data.table::as.data.table(natadb)
 
 We examine the dimensions of the data, the column names, and display a single row for illustrative purposes.
 
-```{r}
+```{r 07-Chapter7-101}
 dim(ccl4)
 dim(natadb)
 
@@ -1335,7 +1335,7 @@ head(ccl4, 1)
 
 Once we have the chemicals in each list, we access their physico-chemical properties. We will use the batch search forms of the function `get_chem_info()`, to which we supply a list of DTXSIDs.
 
-```{r}
+```{r 07-Chapter7-102}
 ccl4$dtxsid
 natadb$dtxsid
 
@@ -1347,7 +1347,7 @@ Observe that this returns a single data.table for each query, and the data.table
 
 Before any deeper analysis, let's take a look at the dimensions of the data and the column names.
 
-```{r}
+```{r 07-Chapter7-103}
 dim(ccl4_phys_chem)
 colnames(ccl4_phys_chem)
 ```
@@ -1357,14 +1357,14 @@ Next, we display the unique values for the columns `propertyID` and `propType`.
 
 
 
-```{r}
+```{r 07-Chapter7-104}
 ccl4_phys_chem[, unique(propName)]
 ccl4_phys_chem[, unique(propType)]
 ```
 
 Let's explore this further by examining the mean of the "boiling-point" and "melting-point" data.
 
-```{r}
+```{r 07-Chapter7-105}
 ccl4_phys_chem[propName == 'Boiling Point', .(Mean = mean(propValue, na.rm = TRUE))]
 ccl4_phys_chem[propName == 'Boiling Point', .(Mean = mean(propValue, na.rm = TRUE)),
                by = .(propType)]
@@ -1388,7 +1388,7 @@ These results tell us about some of the reported physico-chemical properties of 
 
 To explore **all** the values of the physico-chemical properties and calculate their means, we can do the following procedure. First we look at all the physico-chemical properties individually, then group them by each property ("Boiling Point", "Melting Point", etc...), and then additionally group those by property type ("experimental" vs "predicted"). In the grouping, we look at the columns `propValue`, `unit`, `propName` and `propType`. We also demonstrate how take the mean of the values for each grouping. We examine the chemical with `DTXSID` "DTXSID0020153" from CCL4.
 
-```{r}
+```{r 07-Chapter7-106}
 head(ccl4_phys_chem[dtxsid == 'DTXSID0020153', ])
 ccl4_phys_chem[dtxsid == 'DTXSID0020153', .(propType, propValue, propUnit),
                by = .(propName)]
@@ -1413,7 +1413,7 @@ We first examine the vapor pressures for all the chemicals in each list. We then
 
 Group first by DTXSID.
 
-```{r}
+```{r 07-Chapter7-107}
 ccl4_vapor_all <- ccl4_phys_chem[propName %in% 'Vapor Pressure', 
                                  .(mean_vapor_pressure = sapply(.SD, function(t) {mean(t, na.rm = TRUE)})), 
                                  .SDcols = c('propValue'), by = .(dtxsid)]
@@ -1424,7 +1424,7 @@ natadb_vapor_all <- natadb_phys_chem[propName %in% 'Vapor Pressure',
 
 Then group by DTXSID and then by property type.
 
-```{r}
+```{r 07-Chapter7-108}
 ccl4_vapor_grouped <- ccl4_phys_chem[propName %in% 'Vapor Pressure', 
                                      .(mean_vapor_pressure = sapply(.SD, function(t) {mean(t, na.rm = TRUE)})),
                                      .SDcols = c('propValue'), 
@@ -1438,7 +1438,7 @@ natadb_vapor_grouped <- natadb_phys_chem[propName %in% 'Vapor Pressure',
 
 Then examine the summary statistics of the data.
 
-```{r}
+```{r 07-Chapter7-109}
 summary(ccl4_vapor_all)
 summary(ccl4_vapor_grouped)
 summary(natadb_vapor_all)
@@ -1447,7 +1447,7 @@ summary(natadb_vapor_grouped)
 
 With such a large range of values covering several orders of magnitude, we log transform the data. Since some of these value are non-positive, some transformations may result in non-numeric values. These will be removed when plotting. We expect these values to be positive in general so we go ahead with these transformations.
 
-```{r}
+```{r 07-Chapter7-110}
 ccl4_vapor_all[, log_transform_mean_vapor_pressure := log(mean_vapor_pressure)]
 ccl4_vapor_grouped[, log_transform_mean_vapor_pressure := 
                      log(mean_vapor_pressure)]
@@ -1461,7 +1461,7 @@ natadb_vapor_grouped[, log_transform_mean_vapor_pressure :=
 Now we plot the log transformed data.
 
 First plot the CCL4 data.
-```{r, fig.align='center'}
+```{r 07-Chapter7-111, fig.align='center'}
 ggplot(ccl4_vapor_all, aes(log_transform_mean_vapor_pressure)) +
   geom_boxplot() +
   coord_flip()
@@ -1471,7 +1471,7 @@ ggplot(ccl4_vapor_grouped, aes(propType, log_transform_mean_vapor_pressure)) +
 
 Then plot the NATA data.
 
-```{r, fig.align='center'}
+```{r 07-Chapter7-112, fig.align='center'}
 ggplot(natadb_vapor_all, aes(log_transform_mean_vapor_pressure)) +
   geom_boxplot() + coord_flip()
 ggplot(natadb_vapor_grouped, aes(propType, log_transform_mean_vapor_pressure)) +
@@ -1480,7 +1480,7 @@ ggplot(natadb_vapor_grouped, aes(propType, log_transform_mean_vapor_pressure)) +
 
 Finally, we compare both sets simultaneously. We add in a column to each data.table denoting to which data set the rows correspond and then combine the rows from both data sets together using the function `rbind()`.
 
-```{r}
+```{r 07-Chapter7-113}
 ccl4_vapor_grouped[, set := 'CCL4']
 natadb_vapor_grouped[, set := 'NATADB']
 
@@ -1489,7 +1489,7 @@ all_vapor_grouped <- rbind(ccl4_vapor_grouped, natadb_vapor_grouped)
 
 Now we plot the combined data. First we color the boxplots based on the property type, with mean log transformed vapor pressure plotted for each data set and property type.
 
-```{r, fig.align='center'}
+```{r 07-Chapter7-114, fig.align='center'}
 vapor_box <- ggplot(all_vapor_grouped, 
                     aes(set, log_transform_mean_vapor_pressure)) + 
   geom_boxplot(aes(color = propType))
@@ -1498,7 +1498,7 @@ vapor_box
 
 Next we color the boxplots based on the data set.
 
-```{r, , fig.align='center'}
+```{r 07-Chapter7-115,, fig.align='center'}
 vapor <- ggplot(all_vapor_grouped, aes(log_transform_mean_vapor_pressure)) +
   geom_boxplot((aes(color = set))) + 
   coord_flip()
@@ -1511,7 +1511,7 @@ We also explore Henry's Law constant and boiling point in a similar fashion.
 
 Group by DTXSID.
 
-```{r}
+```{r 07-Chapter7-116}
 ccl4_hlc_all <- ccl4_phys_chem[propName %in% "Henry's Law Constant", 
                                .(mean_hlc = sapply(.SD, function(t) {mean(t, na.rm = TRUE)})), 
                                .SDcols = c('propValue'), by = .(dtxsid)]
@@ -1522,7 +1522,7 @@ natadb_hlc_all <- natadb_phys_chem[propName %in% "Henry's Law Constant",
 
 Group by DTXSID and property type.
 
-```{r}
+```{r 07-Chapter7-117}
 ccl4_hlc_grouped <- ccl4_phys_chem[propName %in% "Henry's Law Constant", 
                                    .(mean_hlc = sapply(.SD, function(t) {mean(t, na.rm = TRUE)})), 
                                    .SDcols = c('propValue'), 
@@ -1535,7 +1535,7 @@ natadb_hlc_grouped <- natadb_phys_chem[propName %in% "Henry's Law Constant",
 
 Examine summary statistics.
 
-```{r}
+```{r 07-Chapter7-118}
 summary(ccl4_hlc_all)
 summary(ccl4_hlc_grouped)
 summary(natadb_hlc_all)
@@ -1544,7 +1544,7 @@ summary(natadb_hlc_grouped)
 
 Again, we log transform the data as it covers several orders of magnitude. We expect these values to be positive in general so we go ahead with these transformations.
 
-```{r}
+```{r 07-Chapter7-119}
 ccl4_hlc_all[, log_transform_mean_hlc := log(mean_hlc)]
 ccl4_hlc_grouped[, log_transform_mean_hlc := log(mean_hlc)]
 
@@ -1557,7 +1557,7 @@ We compare both sets simultaneously. We add in a column to each data.table denot
 
 Label and combine data.
 
-```{r}
+```{r 07-Chapter7-120}
 ccl4_hlc_grouped[, set := 'CCL4']
 natadb_hlc_grouped[, set := 'NATADB']
 
@@ -1566,7 +1566,7 @@ all_hlc_grouped <- rbind(ccl4_hlc_grouped, natadb_hlc_grouped)
 
 Plot data. Some rows are removed due to transformations above that result in non-valid values.
 
-```{r, , fig.align='center'}
+```{r 07-Chapter7-121,, fig.align='center'}
 hlc_box <- ggplot(all_hlc_grouped, aes(set, log_transform_mean_hlc)) + 
   geom_boxplot(aes(color = propType))
 hlc_box
@@ -1583,7 +1583,7 @@ Finally, we consider boiling point.
 
 Group by DTXSID.
 
-```{r}
+```{r 07-Chapter7-122}
 ccl4_boiling_all <- ccl4_phys_chem[propName %in% 'Boiling Point', 
                                    .(mean_boiling_point = sapply(.SD, function(t) {mean(t, na.rm = TRUE)})), 
                                    .SDcols = c('propValue'), by = .(dtxsid)]
@@ -1595,7 +1595,7 @@ natadb_boiling_all <- natadb_phys_chem[propName %in% 'Boiling Point',
 
 Group by DTXSID and property type.
 
-```{r}
+```{r 07-Chapter7-123}
 ccl4_boiling_grouped <- ccl4_phys_chem[propName %in% 'Boiling Point', 
                                        .(mean_boiling_point = 
                                            sapply(.SD, function(t) {mean(t, na.rm = TRUE)})), 
@@ -1610,7 +1610,7 @@ natadb_boiling_grouped <- natadb_phys_chem[propName %in% 'Boiling Point',
 
 Calculate summary statistics.
 
-```{r}
+```{r 07-Chapter7-124}
 summary(ccl4_boiling_all)
 summary(ccl4_boiling_grouped)
 summary(natadb_boiling_all)
@@ -1619,7 +1619,7 @@ summary(natadb_boiling_grouped)
 
 Since some of the boiling point values have negative values, we cannot log transform these values. If we try, as you will see below, there will be warnings of NaNs produced.
 
-```{r, eval}
+```{r 07-Chapter7-125, eval}
 ccl4_boiling_all[, log_transform := log(mean_boiling_point)]
 ccl4_boiling_grouped[, log_transform := log(mean_boiling_point)]
 
@@ -1631,7 +1631,7 @@ We compare both sets simultaneously. We add in a column to each data.table denot
 
 Label and combine data.
 
-```{r}
+```{r 07-Chapter7-126}
 ccl4_boiling_grouped[, set := 'CCL4']
 natadb_boiling_grouped[, set := 'NATADB']
 
@@ -1640,7 +1640,7 @@ all_boiling_grouped <- rbind(ccl4_boiling_grouped, natadb_boiling_grouped)
 
 Plot the data.
 
-```{r, , fig.align='center'}
+```{r 07-Chapter7-127,, fig.align='center'}
 boiling_box <- ggplot(all_boiling_grouped, aes(set, mean_boiling_point)) + 
   geom_boxplot(aes(color = propType))
 boiling_box
@@ -1672,13 +1672,13 @@ Now, having examined some of the distributions of the physico-chemical propertie
 
 Using the standard CompTox Chemicals Dashboard approach to access genotoxicity, one would again navigate to the individual chemical page 
 
-```{r, echo = FALSE, out.width = "90%", fig.align='center'}
+```{r 07-Chapter7-128, echo = FALSE, out.width = "90%", fig.align='center'}
 knitr::include_graphics('Chapter_7/Module7_3_Input/Module7_3_Image9.png')
 ```
 
 Once one navigates to the genotoxicity tab highlighted in the previous page, the following is displayed as seen here:
 
-```{r, echo = FALSE, out.width = "90%", fig.align='center'}
+```{r 07-Chapter7-129, echo = FALSE, out.width = "90%", fig.align='center'}
 knitr::include_graphics('Chapter_7/Module7_3_Input/Module7_3_Image10.png')
 ```
 
@@ -1686,7 +1686,7 @@ This page includes two sets of information, the first of which provides a summar
 
 We again use the CTX APIs to streamline the process of retrieving this information in a programmatic fashion. To this end, we will use the genotoxicity endpoints found within the `Hazard` endpoints of the CTX APIs. Pictured below is the particular set of genotoxicity resources available in the `Hazard` endpoints of the CTX APIs.
 
-```{r, echo = FALSE, out.width = "90%", fig.align='center'}
+```{r 07-Chapter7-130, echo = FALSE, out.width = "90%", fig.align='center'}
 knitr::include_graphics('Chapter_7/Module7_3_Input/Module7_3_Image11.png')
 ```
 
@@ -1695,21 +1695,21 @@ There are both summary and detail resources, reflecting the information one can 
 To access the genetox endpoint, we will use the function `get_genetox_summary()`. Since we have a list of chemicals, rather than searching individually for each chemical, we use the batch search version of the function, named `get_genetox_summary_batch()`. We will examine this and then access the details.
 
 Grab the data using the APIs.
-```{r}
+```{r 07-Chapter7-131}
 ccl4_genotox <- get_genetox_summary_batch(DTXSID = ccl4$dtxsid)
 natadb_genetox <- get_genetox_summary_batch(DTXSID = natadb$dtxsid)
 ```
 
 Examine the dimensions.
 
-```{r}
+```{r 07-Chapter7-132}
 dim(ccl4_genotox)
 dim(natadb_genetox)
 ```
 
 Examine the column names and data from the first six chemicals with genetox data from CCL4.
 
-```{r}
+```{r 07-Chapter7-133}
 colnames(ccl4_genotox)
 head(ccl4_genotox)
 ```
@@ -1718,7 +1718,7 @@ The information returned is of the first variety highlighted in the image above,
 
 Observe that we have information on 71 chemicals from the CCL4 data and 153 from the NATA data. We note the chemicals not included in the results and then dig into the returned results.
 
-```{r}
+```{r 07-Chapter7-134}
 ccl4[!(dtxsid %in% ccl4_genotox$dtxsid), 
      .(dtxsid, casrn, preferredName, molFormula)]
 natadb[!(dtxsid %in% natadb_genetox$dtxsid), 
@@ -1729,21 +1729,21 @@ Now, we access the genotoxicity details of the chemicals in each data set using 
 
 Grab the data from the CTX APIs.
 
-```{r}
+```{r 07-Chapter7-135}
 ccl4_genetox_details <- get_genetox_details_batch(DTXSID = ccl4$dtxsid)
 natadb_genetox_details <- get_genetox_details_batch(DTXSID = natadb$dtxsid)
 ```
 
 Examine the dimensions.
 
-```{r}
+```{r 07-Chapter7-136}
 dim(ccl4_genetox_details)
 dim(natadb_genetox_details)
 ```
 
 Look at the column names and the first six rows of the data from the CCL4 chemicals.
 
-```{r}
+```{r 07-Chapter7-137}
 colnames(ccl4_genetox_details)
 head(ccl4_genetox_details)
 ```
@@ -1752,14 +1752,14 @@ We examine the information returned for the first chemical in each set of result
 
 Look at the dimensions first.
 
-```{r}
+```{r 07-Chapter7-138}
 dim(ccl4_genetox_details[dtxsid %in% 'DTXSID0020153', ])
 dim(natadb_genetox_details[dtxsid %in% 'DTXSID0020153', ])
 ```
 
 Now examine the first few rows.
 
-```{r}
+```{r 07-Chapter7-139}
 head(ccl4_genetox_details[dtxsid %in% 'DTXSID0020153', ])
 ```
 
@@ -1770,13 +1770,13 @@ We now explore the assays present for chemicals in each data set. We first deter
 
 Determine the unique assay categories.
 
-```{r}
+```{r 07-Chapter7-140}
 ccl4_genetox_details[, unique(assayCategory)]
 natadb_genetox_details[, unique(assayCategory)]
 ```
 Determine the unique assays for each data set and list them.
 
-```{r}
+```{r 07-Chapter7-141}
 ccl4_genetox_details[, unique(assayType)]
 
 natadb_genetox_details[, unique(assayType)]
@@ -1788,7 +1788,7 @@ natadb_genetox_details[, unique(assayType)]
 
 Determine the number of assays per unique `assayCategory` value.
 
-```{r}
+```{r 07-Chapter7-142}
 ccl4_genetox_details[, .(Assays = length(unique(assayType))), 
                      by = .(assayCategory)]
 
@@ -1799,14 +1799,14 @@ natadb_genetox_details[, .(Assays = length(unique(assayType))),
 
 We can analyze these results more closely, counting the number of assay results and grouping by `assayCategory`, and `assayType`. We also examine the different numbers of `assayCategory` and `assayTypes` values used.
 
-```{r}
+```{r 07-Chapter7-143}
 ccl4_genetox_details[, .N, by = .(assayCategory, assayType, assayResult)]
 ccl4_genetox_details[, .N, by = .(assayCategory)]
 ```
 
 We look at the `assayType` values and numbers of each for the three different `assayCategory` values.
 
-```{r}
+```{r 07-Chapter7-144}
 ccl4_genetox_details[assayCategory == 'in vitro', .N, by = .(assayType)]
 ccl4_genetox_details[assayCategory == 'ND', .N, by = .(assayType)]
 ccl4_genetox_details[assayCategory == 'in vivo', .N, by = .(assayType)]
@@ -1814,14 +1814,14 @@ ccl4_genetox_details[assayCategory == 'in vivo', .N, by = .(assayType)]
 
 Now we repeat this for NATADB.
 
-```{r}
+```{r 07-Chapter7-145}
 natadb_genetox_details[, .N, by = .(assayCategory, assayType, assayResult)]
 natadb_genetox_details[, .N, by = .(assayCategory)]
 ```
 
 Examine the number of rows for each `assayType` value by each `assaycategory` value.
 
-```{r, R.options=list(width=150) }
+```{r 07-Chapter7-146, R.options=list(width=150) }
 natadb_genetox_details[assayCategory == 'in vitro', .N, by = .(assayType)]
 natadb_genetox_details[assayCategory == 'ND', .N, by = .(assayType)]
 natadb_genetox_details[assayCategory == 'in vivo', .N, by = .(assayType)]
@@ -1839,7 +1839,7 @@ natadb_genetox_details[assayCategory == 'in vivo', .N, by = .(assayType)]
 
 Next, we dig into the results of the assays. One may be interested in looking at the number of chemicals for which an assay resulted in a positive or negative result for instance. We group by `assayResult` and determine the number of unique `dtxsid` values associated with each `assayResult` value.
 
-```{r}
+```{r 07-Chapter7-147}
 ccl4_genetox_details[, .(DTXSIDs = length(unique(dtxsid))), by = .(assayResult)]
 natadb_genetox_details[, .(DTXSIDs = length(unique(dtxsid))), 
                        by = .(assayResult)]
@@ -1857,7 +1857,7 @@ natadb_genetox_details[, .(DTXSIDs = length(unique(dtxsid))),
 
 We now determine the chemicals from each data set that are known to have genotoxic effects. For this, we look to see which chemicals produce at least one positive response in the `assayResult` column.
 
-```{r}
+```{r 07-Chapter7-148}
 ccl4_genetox_details[, .(is_positive = any(assayResult == 'positive')), 
                      by = .(dtxsid)][is_positive == TRUE, dtxsid]
 natadb_genetox_details[, .(is_positive = any(assayResult == 'positive')),
@@ -1866,7 +1866,7 @@ natadb_genetox_details[, .(is_positive = any(assayResult == 'positive')),
 
 With so much genotoxicity data, let us explore this data for one chemical more deeply to get a sense of the assays and results present for it. We will explore the chemical with DTXSID0020153. We will look at the assays, the number of each type of result, and which correspond to "positive" results. To determine this, we group by `assayResult` and calculate `.N` for each group. We also isolate which were positive and output a data.table with the number of each type.
 
-```{r}
+```{r 07-Chapter7-149}
 ccl4_genetox_details[dtxsid == 'DTXSID0020153', .(Number = .N), 
                      by = .(assayResult)]
 ccl4_genetox_details[dtxsid == 'DTXSID0020153' & assayResult == 'positive', 
@@ -1889,20 +1889,20 @@ ccl4_genetox_details[dtxsid == 'DTXSID0020153' & assayResult == 'positive',
 
 Finally, we examine the hazard data associated with the chemicals in each data set. For each chemical, there will be potentially hundreds of rows of hazard data, so the returned results will be much larger than in most other API endpoints.
 
-```{r}
+```{r 07-Chapter7-150}
 ccl4_hazard <- get_hazard_by_dtxsid_batch(DTXSID = ccl4$dtxsid)
 natadb_hazard <- get_hazard_by_dtxsid_batch(DTXSID = natadb$dtxsid)
 ```
 
 We do some preliminary exploration of the data. First we determine the dimensions of the data sets.
 
-```{r}
+```{r 07-Chapter7-151}
 dim(ccl4_hazard)
 dim(natadb_hazard)
 ```
 Next we record the column names and display the first six results in the CCL4 hazard data.
 
-```{r}
+```{r 07-Chapter7-152}
 colnames(ccl4_hazard)
 head(ccl4_hazard)
 ```
@@ -1911,26 +1911,26 @@ We determine the number of unique values in the `criticalEffect`, `toxvalTypeSup
 
 The number of unique values for `criticalEffect`.
 
-```{r}
+```{r 07-Chapter7-153}
 length(ccl4_hazard[, unique(criticalEffect)])
 length(natadb_hazard[, unique(criticalEffect)])
 ```
 The number of unique values of `toxvalTypeSuperCategory`.
 
-```{r}
+```{r 07-Chapter7-154}
 length(ccl4_hazard[, unique(toxvalTypeSuperCategory)])
 length(natadb_hazard[, unique(toxvalTypeSuperCategory)])
 ```
 The number of unique values for `toxvalType`.
 
-```{r}
+```{r 07-Chapter7-155}
 length(ccl4_hazard[, unique(toxvalType)])
 length(natadb_hazard[, unique(toxvalType)])
 ```
 
 Now we look at the number of entries per `toxvalTypeSuperCategory`.
 
-```{r}
+```{r 07-Chapter7-156}
 ccl4_hazard[, .N, by = .(toxvalTypeSuperCategory)]
 natadb_hazard[, .N, by = .(toxvalTypeSuperCategory)]
 
@@ -1938,7 +1938,7 @@ natadb_hazard[, .N, by = .(toxvalTypeSuperCategory)]
 With over 7,000 results for the `toxvalTypeSuperCategory` value "Dose Response Summary Value" for each data set, we dig into this further.
 
 We determine the number of rows grouped by `toxvalType` that have the "Dose Response Summary Value" `toxvalTypeSuperCategory` value, and display this descending.
-```{r}
+```{r 07-Chapter7-157}
 ccl4_hazard[toxvalTypeSuperCategory %in% 'Dose Response Summary Value', .N, 
              by = .(toxvalType)][order(-N),]
 natadb_hazard[toxvalTypeSuperCategory %in% 'Dose Response Summary Value', .N, 
@@ -1949,7 +1949,7 @@ We explore "NOAEL", "LOAEL", and "NOEL" further. Let us look at the the case whe
 
 First, we look at "food". We order by `toxvalType` and by the minimum `toxvalNumeric` value in each group, descending.
 
-```{r}
+```{r 07-Chapter7-158}
 ccl4_hazard[media %in% 'food' & toxvalType %in% c('LOAEL', 'NOAEL', 'NOEL'), 
             .(toxvalNumeric = min(toxvalNumeric)), 
             by = .(toxvalType, toxvalUnits, dtxsid)][order(toxvalType,
@@ -1962,7 +1962,7 @@ natadb_hazard[media %in% 'food' & toxvalType %in% c('LOAEL', 'NOAEL', 'NOEL'),
 
 Next we look at "culture", repeating the same grouping and ordering as in the previous case.
 
-```{r}
+```{r 07-Chapter7-159}
 ccl4_hazard[media %in% 'culture' & toxvalType %in% c('LOAEL', 'NOAEL', 'NOEL'), 
             .(toxvalNumeric = min(toxvalNumeric)), 
             by = .(toxvalType, toxvalUnits, dtxsid)][order(toxvalType,
@@ -1977,7 +1977,7 @@ Now, let us restrict our attention to human hazard and focus on the exposure rou
 
 First, let us determine the exposure routes in general.
 
-```{r}
+```{r 07-Chapter7-160}
 ccl4_hazard[humanEco %in% 'human health', unique(exposureRoute)]
 natadb_hazard[humanEco %in% 'human health', unique(exposureRoute)]
 ```
@@ -1988,7 +1988,7 @@ Then, let's focus on the inhalation and oral exposure routes for human hazard.
 
 To answer this, filter the data into the corresponding exposure routes, then group by `exposureRoute` and `riskAssessmentClass`, and finally count the number of instances for each grouping. To determine the most represented class, one can order the results descending.
 
-```{r}
+```{r 07-Chapter7-161}
 ccl4_hazard[humanEco %in% 'human health' & 
               exposureRoute %in% c('inhalation', 'oral'), .(Hits = .N), 
             by = .(exposureRoute, riskAssessmentClass)][order(exposureRoute, 
@@ -2018,7 +2018,7 @@ To answer this, we filter the rows to the "human health" `humanEco` value and "i
 
 First we look at CCL4.
 
-```{r}
+```{r 07-Chapter7-162}
 ccl4_hazard[humanEco %in% 'human health' &
               exposureRoute %in% c('inhalation'), unique(toxvalType)]
 ccl4_hazard[humanEco %in% 'human health' &
@@ -2028,7 +2028,7 @@ intersect(ccl4_hazard[humanEco %in% 'human health' & exposureRoute %in% 'inhalat
 
 Then we look at NATADB.
 
-```{r}
+```{r 07-Chapter7-163}
 natadb_hazard[humanEco %in% 'human health' & 
                 exposureRoute %in% c('inhalation'), unique(toxvalType)]
 natadb_hazard[humanEco %in% 'human health' & 
@@ -2049,7 +2049,7 @@ intersect(natadb_hazard[humanEco %in% 'human health' & exposureRoute %in% 'inhal
 
 For the next data exploration, we will examine the "NOAEL" and "LOAEL" values for chemicals with oral exposure  and human hazard. We also examine the units to determine whether any unit conversions are necessary to compare numeric values.
 
-```{r}
+```{r 07-Chapter7-164}
 ccl4_hazard[humanEco %in% 'human health' & exposureRoute %in% 'oral' & 
               toxvalType %in% c('NOAEL', 'LOAEL'), ]
 ccl4_hazard[humanEco %in% 'human health' & exposureRoute %in% 'oral' &
@@ -2062,7 +2062,7 @@ natadb_hazard[humanEco %in% 'human health' & exposureRoute %in% 'oral' &
 
 Observe that for both CCL4 and NATADB, the units are given by "mg/kg-day", "ppm", "mg/L" and additionally "-" for NATADB. In this case, we treat "mg/kg-day" and "ppm" the same and exclude "-" and "mg/L". We group by DTXSID to find the lowest or highest value.
 
-```{r}
+```{r 07-Chapter7-165}
 ccl4_hazard[humanEco %in% 'human health' & exposureRoute %in% 'oral' & 
             toxvalType %in% c('NOAEL', 'LOAEL') & !(toxvalUnits %in% c('-', 'mg/L')),
             .(numeric_value = min(toxvalNumeric), 
@@ -2077,7 +2077,7 @@ natadb_hazard[humanEco %in% 'human health' & exposureRoute %in% 'oral' &
 
 Now, we also explore the values of "RfD", "RfC", and "cancer slope factor" of the `toxvalType` rows. We first determine the set of units for each, make appropriate conversions if necessary, and then make comparisons.
 
-```{r}
+```{r 07-Chapter7-166}
 ccl4_hazard[humanEco %in% 'human health' & toxvalType %in% 
             c('cancer slope factor', 'RfD', 'RfC'), .N, 
             by = .(toxvalType, toxvalUnits)][order(toxvalType, -N)]
@@ -2089,7 +2089,7 @@ For CCL4 and NATADB, there is a single unit type for each `toxvalType` value, so
 
 First, we filter and separate out the relevant data subsets.
 
-```{r}
+```{r 07-Chapter7-167}
 # Separate out into relevant data subsets
 ccl4_csf <- ccl4_hazard[humanEco %in% 'human health' & 
                           toxvalType %in% c('cancer slope factor') & (toxvalUnits != 'mg/kg-day'), ]
@@ -2101,7 +2101,7 @@ ccl4_rfd <- ccl4_hazard[humanEco %in% 'human health' &
 
 While there are no unit conversions needed, we demonstrate how we would convert units if they were required. 
 
-```{r}
+```{r 07-Chapter7-168}
 # Set mass by volume units to mg/m3, so scale g/m3 by 1E3 and ug/m3 by 1E-3
 ccl4_rfc[toxvalUnits == 'mg/m3', conversion := 1]
 ccl4_rfc[toxvalUnits == 'g/m3', conversion := 1E3]
@@ -2114,7 +2114,7 @@ ccl4_rfd[toxvalUnits %in% c('mg/kg-day', 'mg/kg'), units := 'mg/kg']
 
 Then aggregate the data.
 
-```{r}
+```{r 07-Chapter7-169}
 # Run data aggregations grouping by dtxsid and taking either the max or the min
 # depending on the toxvalType we are considering.
 ccl4_csf[,.(numeric_value = max(toxvalNumeric), 
@@ -2130,7 +2130,7 @@ ccl4_rfd[,.(numeric_value = min(toxvalNumeric*conversion),
 
 Repeat the process for NATADB, first separating out the relevant subsets of the data.
 
-```{r}
+```{r 07-Chapter7-170}
 # Separate out into relevant data subsets
 natadb_csf <- natadb_hazard[humanEco %in% 'human health' & 
                               toxvalType %in% c('cancer slope factor') & (toxvalUnits != 'mg/kg-day'), ]
@@ -2142,7 +2142,7 @@ natadb_rfd <- natadb_hazard[humanEco %in% 'human health' &
 
 Now handle the unit conversions.
 
-```{r}
+```{r 07-Chapter7-171}
 # Set mass by mass units to mg/kg. Note that ppm is already in mg/kg
 natadb_rfc <- natadb_rfc[toxvalUnits != 'ppm',]
 natadb_rfd[, units := 'mg/kg-day']
@@ -2150,7 +2150,7 @@ natadb_rfd[, units := 'mg/kg-day']
 
 Finally, aggregate the data.
 
-```{r}
+```{r 07-Chapter7-172}
 # Run data aggregations grouping by dtxsid and taking either the max or the min
 # depending on the toxvalType we are considering.
 natadb_csf[, .(numeric_value = max(toxvalNumeric), 
