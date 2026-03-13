@@ -1,10 +1,6 @@
 name: Test Bookdown
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
   schedule:
     - cron: "0 14 * * 1" # Every Monday 14:00 UTC
   workflow_dispatch:
