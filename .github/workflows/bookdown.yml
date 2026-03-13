@@ -1,5 +1,4 @@
 name: Build Bookdown
-
 on:
   push:
     branches:
@@ -14,7 +13,6 @@ permissions:
 jobs:
   build:
     runs-on: macos-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -31,17 +29,15 @@ jobs:
 
       - name: Install CRAN & Bioconductor packages
         run: |
-          # Install remotes if missing
           Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")'
 
-          # Install CRAN dependencies from DESCRIPTION
-          Rscript -e 'remotes::install_deps(dependencies = TRUE, upgrade = "never")'
-
-          # Install BiocManager if missing
+          # Install BiocManager and Bioconductor packages FIRST
+          # so remotes::install_deps() doesn't warn about missing deps
           Rscript -e 'if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")'
+          Rscript -e 'BiocManager::install(c("EnhancedVolcano","DESeq2","edgeR","RUVSeq","piano","pcaMethods","impute","imputeLCMD","GEOquery"), ask = FALSE)'
 
-          # Install Bioconductor packages
-          Rscript -e 'BiocManager::install(c("EnhancedVolcano","DESeq2","edgeR","RUVSeq","piano","pcaMethods","impute", "imputeLCMD"), ask = FALSE)'
+          # Now install remaining CRAN deps from DESCRIPTION
+          Rscript -e 'remotes::install_deps(dependencies = TRUE, upgrade = "never")'
 
       - name: Build bookdown
         run: |
