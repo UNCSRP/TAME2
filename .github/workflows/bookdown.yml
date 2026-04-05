@@ -40,6 +40,9 @@ jobs:
           # Pin factoextra
           Rscript -e 'remotes::install_version("factoextra", version = "1.0.7", repos = "https://cran.rstudio.com")'
 
+          # Install ctxR from GitHub
+          Rscript -e 'remotes::install_github("USEPA/ctxR")'
+
           # Now install remaining CRAN deps from DESCRIPTION
           Rscript -e 'remotes::install_deps(dependencies = TRUE, upgrade = "never")'
 
