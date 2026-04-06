@@ -1,5 +1,5 @@
 
-# 1.4 Data Wrangling in Excel
+# 1.5 Data Wrangling in Excel
 
 This training module was developed by Alexis Payton, Elise Hickman, and Julia E. Rager.
 
@@ -31,8 +31,8 @@ Open Microsoft Excel and prior to **ANY** edits, click “File” --> “Save As
 
 Let's first view what the dataset currently looks like:
 
-```{r 1-4-Excel-1, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Chapter_1/1_4_Excel/Module1_4_Image1.png")
+```{r 1-5-Excel-1, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
+knitr::include_graphics("Chapter_1/1_5_Excel/Module1_5_Image1.png")
 ```
 
 <br>
@@ -64,8 +64,8 @@ Before we can begin organizing the data, we need to remove the entirely blank ro
 + **Excel Trick #2:** An easier way to remove blank rows and cells for larger datasets, includes clicking "Find & Select"--> "Special" --> "Blanks" --> click "OK" to select all blank rows and cells. Click "Delete" within the home tab --> "Delete sheet rows".
 
 After removing the blank rows, the file should look like the screenshot below. 
-```{r 1-4-Excel-2, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Chapter_1/1_4_Excel/Module1_4_Image2.png")
+```{r 1-5-Excel-2, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
+knitr::include_graphics("Chapter_1/1_5_Excel/Module1_5_Image2.png")
 ```
 
 <br>
@@ -89,8 +89,8 @@ Metadata explains what each column represents in the dataset. Metadata is now a 
 + Then relabel the original data tab as “XXXX_DATA” (ie., “Allostatic_DATA). 
 + Within the metadata tab, create three columns: the first, "Column Identifier", contains each of the column names found in the data tab; the second, "Code", contains the individual variable/ abbreviation for each column identifier; the third, "Description" contains additional information and definitions for abbreviations.
 
-```{r 1-4-Excel-3, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Chapter_1/1_4_Excel/Module1_4_Image3.png")
+```{r 1-5-Excel-3, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
+knitr::include_graphics("Chapter_1/1_5_Excel/Module1_5_Image3.png")
 ```
 
 <br>
@@ -113,8 +113,8 @@ For this dataset, the following variables were edited:
 **Excel Trick:** To change cells that contain the same data simultaneously, navigate to "Edit", click "Find", and then "Replace". 
 
 Once the categorical data have been abbreviated, add those abbreviations to the metadata and describe what they symbolize. 
-```{r 1-4-Excel-4, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Chapter_1/1_4_Excel/Module1_4_Image4.png")
+```{r 1-5-Excel-4, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
+knitr::include_graphics("Chapter_1/1_5_Excel/Module1_5_Image4.png")
 ```
 
 <br>
@@ -133,8 +133,8 @@ Analysis-specific subjects are created to give an ordinal subject number to each
 + Relabel the subject number/identifier column as “Original_Subject_Number” and create an ordinal subject number column labeled “Subject_Number”.
 
 R reads in spaces between words as periods, therefore it’s common practice to replace spaces with underscores when doing data analysis in R. Avoid using dashes in column names or anywhere else in the dataset. 
-```{r 1-4-Excel-5, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Chapter_1/1_4_Excel/Module1_4_Image5.png")
+```{r 1-5-Excel-5, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
+knitr::include_graphics("Chapter_1/1_5_Excel/Module1_5_Image5.png")
 ```
 
 <br>
@@ -150,8 +150,8 @@ In this case, this dataset contains dashes and Greek letters within some of the 
 These data will likely be shared with collaborators, uploaded onto data deposition websites, and used as supporting information in published manuscripts. For these purposes, it is nice to format data in Excel such that it is visually appealing and easy to digest.
 
 For example, here, it is nice to bold column identifiers and center the data, as shown below:
-```{r 1-4-Excel-6, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Chapter_1/1_4_Excel/Module1_4_Image6.png")
+```{r 1-5-Excel-6, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
+knitr::include_graphics("Chapter_1/1_5_Excel/Module1_5_Image6.png")
 ```
 
 <br>
@@ -165,8 +165,8 @@ The subject identifier column labeled, “Group_Subject_No”, combines the subj
 + Copy the entire column and paste only the values in the second column by navigating to the drop down arrow next to "Paste" and click "Paste Values".
 + Label the second column "Group_Subject_No" and delete the first column.
 
-```{r 1-4-Excel-7, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Chapter_1/1_4_Excel/Module1_4_Image7.png")
+```{r 1-5-Excel-7, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
+knitr::include_graphics("Chapter_1/1_5_Excel/Module1_5_Image7.png")
 ```
 
 ## Separate Subject Demographic Data from Experimental Measurements
@@ -180,15 +180,15 @@ This step was not completed for this current data, since it had a smaller size a
 A wide format contains values that **DO NOT** repeat the subject identifier column. For this dataset, each subject has one row containing all of its data, therefore the subject identifier occurs once in the dataset.
 
 **Wide Format**
-```{r 1-4-Excel-8, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Chapter_1/1_4_Excel/Module1_4_Image8.png")
+```{r 1-5-Excel-8, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
+knitr::include_graphics("Chapter_1/1_5_Excel/Module1_5_Image8.png")
 ```
 
 A long format contains values that **DO** repeat the subject identifier column. For this dataset, that means a new column was created entitled "Variable" containing all the mediator names and a column entitled "Value" containing all their corresponding values. In the screenshot, an additional column, "Category", was added to help with the categorization of mediators in R analyses. 
 
 **Long Format**
-```{r 1-4-Excel-9, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Chapter_1/1_4_Excel/Module1_4_Image9.png")
+```{r 1-5-Excel-9, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
+knitr::include_graphics("Chapter_1/1_5_Excel/Module1_5_Image9.png")
 ```
 
 The reason a long format is preferred is because it makes visualizations and statistical analyses more efficient in R. In the long format, we were able to add a column entitled "Category" to categorize the mediators into "AL Biomarker" or "Cytokine" allowing us to more easily subset the mediators in R. Read more about wide and long formats [here](https://towardsdatascience.com/long-and-wide-formats-in-data-explained-e48d7c9a06cb).
@@ -202,24 +202,24 @@ To do this, a power query in Excel will be used. Note: If you are working on a M
 2. Click the tab at the top that says "Data". Then click "Get Data (Power Query)" at the far left. 
 3. It will ask you to choose a data source. Click "Blank table" in the bottom row. 
 4. Paste the data into the table. (Hint: Use the shortcut Ctrl + "v"). At this point, your screen should look like the screenshot below. 
-```{r 1-4-Excel-10, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Chapter_1/1_4_Excel/Module1_4_Image10.png")
+```{r 1-5-Excel-10, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
+knitr::include_graphics("Chapter_1/1_5_Excel/Module1_5_Image10.png")
 ```
 
 5. Click "Use first row as headers" and then click "Next" in the bottom right hand corner.
 6. Select all the columns with biomarker names. That should be the column "Cortisol" through the end.
-```{r 1-4-Excel-11, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Chapter_1/1_4_Excel/Module1_4_Image11.png")
+```{r 1-5-Excel-11, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
+knitr::include_graphics("Chapter_1/1_5_Excel/Module1_5_Image11.png")
 ```
 
 7. Click the "Transform" button in the upper left hand corner. Then click "Unpivot columns" in the middle of the pane. The final result should look like the sceenshot below with all the biomarkers now in one column entitled "Attribute" and their corresponding values in another column entitled "Value". 
-```{r 1-4-Excel-12, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Chapter_1/1_4_Excel/Module1_4_Image12.png")
+```{r 1-5-Excel-12, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
+knitr::include_graphics("Chapter_1/1_5_Excel/Module1_5_Image12.png")
 ```
 
 8. To save this, go back to the "Home" tab and click "Close & load". You should see something similar to the screenshot below. 
-```{r 1-4-Excel-13, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Chapter_1/1_4_Excel/Module1_4_Image13.png")
+```{r 1-5-Excel-13, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
+knitr::include_graphics("Chapter_1/1_5_Excel/Module1_5_Image13.png")
 ```
 
 9. In the upper right with all the shaded tables (within the "Table" tab), click the arrow to the left of the green table until you see one with no shading. Then click the table with no colors. 
@@ -227,8 +227,8 @@ knitr::include_graphics("Chapter_1/1_4_Excel/Module1_4_Image13.png")
 11. Now the "Category" column can be created to identify the types of biomarkers in the dataset. The allostatic load (AL) biomarkers denoted in the "Category" column include the variables Cortisol, CRP, Fibrinogen, Hba1c, HDL, and Noradrenaline. The rest of the variables were labeled as cytokines. Additionally, we can make this data more closely resemble the final long format screenshot by bolding the headers, centering all the data, etc. 
 
 We have successfully wrangled our data and the final dataset now looks like this:
-```{r 1-4-Excel-14, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Chapter_1/1_4_Excel/Module1_4_Image14.png")
+```{r 1-5-Excel-14, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
+knitr::include_graphics("Chapter_1/1_5_Excel/Module1_5_Image14.png")
 ```
 
 <br>
@@ -237,18 +237,18 @@ knitr::include_graphics("Chapter_1/1_4_Excel/Module1_4_Image14.png")
 A PivotTable is a tool in Excel used to summarize numerical data. It’s called a pivot table, because it pivots or changes how the data is displayed to make statistical inferences. This can be useful for generating initial summary-level statistics to guage the distribution of data.  
 
 To create a PivotTable, start by selecting all of the data. (Hint: Try using the keyboard shortcut mentioned above.) Click "Insert" tab on the upper left-hand side, click "PivotTable", and click "OK". The new PivotTable should be available in a new sheet as seen in the screenshot below. 
-```{r 1-4-Excel-15, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Chapter_1/1_4_Excel/Module1_4_Image15.png")
+```{r 1-5-Excel-15, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
+knitr::include_graphics("Chapter_1/1_5_Excel/Module1_5_Image15.png")
 ```
 
 A PivotTable will be constructed based on the column headers that can be dragged into the PivotTable fields located on the right-hand side. For example, what if we were interested in determining if there were differences in average expression between non-smokers and cigarette smokers in each category of biomarkers? As seen below, drag the "Group" variable under the "Rows" field and drag the "Value" variable under the "Values" field. 
-```{r 1-4-Excel-16, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Chapter_1/1_4_Excel/Module1_4_Image16.png")
+```{r 1-5-Excel-16, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
+knitr::include_graphics("Chapter_1/1_5_Excel/Module1_5_Image16.png")
 ```
 
 Notice that it automatically calculates the sum of the expression values for each group. To change the function to average, click the "i" icon and select "Average". The output should mirror what's below with non-smokers having an average expression that's more than double that of cigarette smokers. 
-```{r 1-4-Excel-17, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
-knitr::include_graphics("Chapter_1/1_4_Excel/Module1_4_Image17.png")
+```{r 1-5-Excel-17, echo=FALSE, fig.width=4, fig.height=5, fig.align='center'}
+knitr::include_graphics("Chapter_1/1_5_Excel/Module1_5_Image17.png")
 ```
 
 <br>
@@ -288,7 +288,7 @@ Test Your Knowledge
 </label>
 
 :::tyk
-1. Try wrangling the "Module1_4_TYKInput.xlsx" to mimic the cleaned versions of the data found in "Module1_4_TYKSolution.xlsx". This dataset includes sterol and cytokine concentration levels extracted from induced sputum samples collected after ozone exposure. After wrangling, you should end up with a sheet for subject information and a sheet for experimental data.
+1. Try wrangling the "Module1_5_TYKInput.xlsx" to mimic the cleaned versions of the data found in "Module1_5_TYKSolution.xlsx". This dataset includes sterol and cytokine concentration levels extracted from induced sputum samples collected after ozone exposure. After wrangling, you should end up with a sheet for subject information and a sheet for experimental data.
 2. Using the a PivotTable on the cleaned dataset, find the standard deviation of each cytokine variable stratified by the disease status.
 :::
 

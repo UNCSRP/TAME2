@@ -6,7 +6,8 @@ rmd_files:
   - "Chapter_1/1_1_FAIR/1_1_FAIR.Rmd"
   - "Chapter_1/1_2_Data_Sharing/1_2_Data_Sharing.Rmd"
   - "Chapter_1/1_3_Github/1_3_Github.Rmd"
-  - "Chapter_1/1_4_Excel/1_4_Excel.Rmd"
+  - "Chapter_1/1_4_Cloud/1_4_Cloud.Rmd"
+  - "Chapter_1/1_5_Excel/1_5_Excel.Rmd"
 
   - "Chapter_2/2_1_R_Programming/2_1_R_Programming.Rmd"
   - "Chapter_2/2_2_Best_Practices/2_2_Best_Practices.Rmd"
