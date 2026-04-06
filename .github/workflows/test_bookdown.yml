@@ -31,6 +31,8 @@ jobs:
           brew install pandoc
 
       - name: Install CRAN & Bioconductor packages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")'
 
@@ -44,7 +46,7 @@ jobs:
           Rscript -e 'remotes::install_version("factoextra", version = "1.0.7", repos = "https://cran.rstudio.com")'
 
           # Install ctxR from GitHub
-          Rscript -e 'remotes::install_github("USEPA/ctxR")'
+          Rscript -e 'remotes::install_github("USEPA/ctxR", auth_token = Sys.getenv("GITHUB_TOKEN"))'
 
           # Now install remaining CRAN deps from DESCRIPTION
           Rscript -e 'remotes::install_deps(dependencies = TRUE, upgrade = "never")'
