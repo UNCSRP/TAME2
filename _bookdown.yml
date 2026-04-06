@@ -2,13 +2,46 @@ delete_merged_file: true
 
 rmd_files:
   - "index.Rmd"
-  - "Chapter_1/01-Chapter1.Rmd"
-  - "Chapter_2/02-Chapter2.Rmd"
-  - "Chapter_3/03-Chapter3.Rmd"
-  - "Chapter_4/04-Chapter4.Rmd"
-  - "Chapter_5/05-Chapter5.Rmd"
-  - "Chapter_6/06-Chapter6.Rmd"
-  - "Chapter_7/07-Chapter7.Rmd"
+
+  - "Chapter_1/1_1_FAIR/1_1_FAIR.Rmd"
+  - "Chapter_1/1_2_Data_Sharing/1_2_Data_Sharing.Rmd"
+  - "Chapter_1/1_3_Github/1_3_Github.Rmd"
+  - "Chapter_1/1_4_Excel/1_4_Excel.Rmd"
+
+  - "Chapter_2/2_1_R_Programming/2_1_R_Programming.Rmd"
+  - "Chapter_2/2_2_Best_Practices/2_2_Best_Practices.Rmd"
+  - "Chapter_2/2_3_Data_Manipulation/2_3_Data_Manipulation.Rmd"
+  - "Chapter_2/2_4_Code_Efficiency/2_4_Code_Efficiency.Rmd"
+  - "Chapter_3/3_1_Data_Visualization/3_1_Data_Visualization.Rmd"
+  
+  - "Chapter_3/3_2_Improving_Visualization/3_2_Improving_Visualization.Rmd"
+  - "Chapter_3/3_3_Normality_Tests/3_3_Normality_Tests.Rmd"
+  - "Chapter_3/3_4_Statistical_Tests/3_4_Statistical_Tests.Rmd"
+  - "Chapter_4/4_1_Experimental_Design/4_1_Experimental_Design.Rmd"
+  
+  - "Chapter_4/4_2_Data_Import/4_2_Data_Import.Rmd"
+  - "Chapter_4/4_3_PDF_Import/4_3_PDF_Import.Rmd"
+  - "Chapter_4/4_4_Two_Groups/4_4_Two_Groups.Rmd"
+  - "Chapter_4/4_5_Multiple_Groups/4_5_Multiple_Groups.Rmd"
+  - "Chapter_4/4_6_Advanced_Multiple_Groups/4_6_Advanced_Multiple_Groups.Rmd"
+  
+  - "Chapter_5/5_1_AI/5_1_AI.Rmd"
+  - "Chapter_5/5_2_Supervised_ML/5_2_Supervised_ML.Rmd"
+  - "Chapter_5/5_3_Supervised_ML_Interpretation/5_3_Supervised_ML_Interpretation.Rmd"
+  - "Chapter_5/5_4_Unsupervised_ML/5_4_Unsupervised_ML.Rmd"
+  - "Chapter_5/5_5_Unsupervised_ML_2/5_5_Unsupervised_ML_2.Rmd"
+
+  - "Chapter_6/6_1_Descriptive_Cohort_Analyses/6_1_Descriptive_Cohort_Analyses.Rmd"
+  - "Chapter_6/6_2_Omics_System_Biology/6_2_Omics_System_Biology.Rmd"
+  - "Chapter_6/6_3_Mixtures_Analysis/6_3_Mixtures_Analysis.Rmd"
+  - "Chapter_6/6_4_Mixtures_Analysis_2/6_4_Mixtures_Analysis_2.Rmd"
+  - "Chapter_6/6_5_Mixtures_Analysis_3/6_5_Mixtures_Analysis_3.Rmd"
+  - "Chapter_6/6_6_Toxicokinetic_Modeling/6_6_Toxicokinetic_Modeling.Rmd"
+  - "Chapter_6/6_7_Chemical_Read_Across/6_7_Chemical_Read_Across.Rmd"
+
+  - "Chapter_7/7_1_Comparative_Toxicogenomics_Database/7_1_Comparative_Toxicogenomics_Database.Rmd"
+  - "Chapter_7/7_2_Gene_Expression_Omnibus/7_2_Gene_Expression_Omnibus.Rmd"
+  - "Chapter_7/7_3_CompTox_Dashboard/7_3_CompTox_Dashboard.Rmd"
 
 #prefix name for each chapter
 language:
