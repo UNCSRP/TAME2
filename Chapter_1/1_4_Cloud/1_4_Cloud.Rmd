@@ -1,5 +1,5 @@
 # 1.4 Cloud Computing
-This training module was developed by Alexis Payton, Jessie Chappel, Timothy M. Weigand, and Julia E. Rager.
+This training module was developed by Timothy M. Weigand, Alexis Payton, Jessie Chappel, and Julia E. Rager.
 
 All input files (script, data, and figures) can be downloaded from the [UNC-SRP TAME2 GitHub website](https://github.com/UNCSRP/TAME2). Additional training materials and access to accounts with $500 credit can be found though the [NIH Cloud Lab](https://cloud.nih.gov/resources/cloudlab/).
 
@@ -16,6 +16,8 @@ In this module, we'll explore the following concepts:
 + Storing Data in the Cloud
 + Computing in the Cloud 
 
+<br>
+
 ## Introduction to Cloud Computing
 
 **Cloud computing** refers to the on-demand delivery of computing services over the internet, often with pay-as-you-go pricing. Common examples of cloud-based services that you likely use in your daily life include databases (e.g., PubMed), web servers (e.g., Apache), storage (e.g., iCloud), email (e.g., Gmail), software (e.g., Microsoft 365), analytics (e.g., Ingenuity Pathway Analysis), and artificial intelligence (e.g., ChatGPT).
@@ -29,6 +31,7 @@ Some key benefits of cloud computing are:
 
 Traditionally, these resources were stored **on premises**, meaning infrastructure and data were maintained locally, either on a personal computer or entirely within an organization's own facilities, rather than accessed through the cloud. The following section describes several **deployment models** that outline how computing resources can be divided between on-premises and cloud environments.
 
+<br>
 
 ## Deployment Models
 Deployment models are paradigms that dictate the accessiblity, management and ownership of the infrastructure. Three commonly used models are described below:
@@ -61,40 +64,33 @@ knitr::include_graphics("Chapter_1/1_4_Cloud/binder.png")
 
 Choosing the right cloud provider depends largely on the needs of your project and organization. For a detailed comparison of features, pricing, and use cases, see [AWS vs Azure vs Google: Cloud Services Comparison](https://www.varonis.com/blog/aws-vs-azure-vs-google). For the purposes of this module, we will focus on AWS.
 
-
 <br>
 
 ## Creating a Cloud Account
 
-For this tutorial, we will use AWS for our cloud provider. To get started with AWS, head to [aws.amazon.com](https://aws.amazon.com) and click **Create an AWS Account**. You will be prompted to enter your email address, create a password, and provide billing information. AWS offers a [Free Tier](https://aws.amazon.com/free/) that gives new users access to a range of services at no cost for the first 12 months, which is a good way to explore the platform before committing to paid resources. Once your account is created and verified, you will have access to the AWS Management Console, where you can launch and manage cloud services. Alternatively, the NIH Strides initiative provides access to [NIH Cloud Lab](https://cloud.nih.gov/resources/cloudlab/) accounts that come with $500 in credits to explore clouding computing. 
+For this tutorial, we will use AWS for our cloud provider. To get started with AWS, head to [aws.amazon.com](https://aws.amazon.com) and click "Create an AWS Account". You will be prompted to enter your email address, create a password, and provide billing information. AWS offers a [Free Tier](https://aws.amazon.com/free/) that gives new users access to a range of services at no cost for the first 12 months, which is a good way to explore the platform before committing to paid resources. Once your account is created and verified, you will have access to the AWS Management Console, where you can launch and manage cloud services. Alternatively, the NIH Strides initiative provides access to [NIH Cloud Lab](https://cloud.nih.gov/resources/cloudlab/) accounts that come with $500 in credits to explore clouding computing. 
+
+<br>
 
 ## Identity and Access Management (IAM)
 
-Identity and Access Management (IAM) is the AWS service that controls who and what has 
-access to your AWS resources. For a full overview, see the 
-[AWS IAM Getting Started Guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started.html).
+Identity and Access Management (IAM) is the AWS service that controls who and what has access to your AWS resources. For a full overview, see the [AWS IAM Getting Started Guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started.html).
 
-As a personal AWS account holder, you have full access to IAM. The two things you will 
-interact with most are **Roles** and **Policies**:
+As a personal AWS account holder, you have full access to IAM. The two things you will interact with most are **Roles** and **Policies**:
 
-- **Roles** are assigned to AWS services (such as a compute instance through EC2) to grant them permission 
-  to interact with other AWS services.
-- **Policies** define what actions are allowed. You attach policies to roles to grant 
-  specific permissions (for example, allowing an EC2 compute instance to read and write to storage via S3).
+- **Roles** are assigned to AWS services (such as a compute instance through EC2) to grant them permission to interact with other AWS services.
+- **Policies** define what actions are allowed. You attach policies to roles to grant specific permissions (for example, allowing an EC2 compute instance to read and write to storage via S3).
 
-For this tutorial, you will need to create an IAM role for your EC2 instance so that it 
-can access S3. To do this, navigate to **IAM → Roles → Create Role**. Select 
-**AWS Service** as the trusted entity and choose **EC2** as the use case. On the next 
-screen, search for and attach the **AmazonS3FullAccess** policy, give your role a name 
-(such as `ec2-s3-access`), and click **Create Role**. You can then attach this role to 
-any EC2 instance at launch, or after the fact via 
-**EC2 → Actions → Security → Modify IAM Role**.
+For this tutorial, you will need to create an IAM role for your EC2 instance so that it can access S3. To do this, navigate to **IAM → Roles → Create Role**. Select **AWS Service** as the trusted entity and choose **EC2** as the use case. On the next screen, search for and attach the **AmazonS3FullAccess** policy, give your role a name (such as `ec2-s3-access`), and click **Create Role**. You can then attach this role to 
+any EC2 instance at launch, or after the fact via **EC2 → Actions → Security → Modify IAM Role**.
 
 For more information see:
 
 - [AWS IAM Documentation](https://docs.aws.amazon.com/iam/)
 - [IAM Roles for EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html)
 - [AWS Managed Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html)
+
+<br>
 
 ## Storing Data in the Cloud
 
@@ -110,15 +106,15 @@ knitr::include_graphics("Chapter_1/1_4_Cloud/s3_bucket.png")
 
 Once on the S3 dashboard, click the Create bucket button to begin. You will be presented with several configuration options. For most users, the following settings are recommended:
 
-**General Configuration** Select the region closest to your location as the AWS Region. Under Bucket Type, select **General purpose**, which is recommended for most use cases. For the **Bucket namespace**, select **Account Regional namespace (recommended)**, which ensures your bucket name is unique to your account. Finally, enter a **Bucket name prefix**, keeping it short and descriptive such as "myproject-data".
++ **General Configuration**: Select the region closest to your location as the AWS Region. Under Bucket Type, select "General purpose", which is recommended for most use cases. For the **Bucket namespace**, select "Account Regional namespace (recommended)", which ensures your bucket name is unique to your account. Finally, enter a **Bucket name prefix**, keeping it short and descriptive such as "myproject-data".
 
-**Object Ownership** Leave this set to **ACLs disabled (recommended)**. This means your account will own all objects stored in the bucket and access is managed through policies rather than individual file permissions.
++ **Object Ownership**: Leave this set to "ACLs disabled (recommended)". This means your account will own all objects stored in the bucket and access is managed through policies rather than individual file permissions.
 
-**Block Public Access** Leave **Block all public access** turned on. This ensures your data remains private and is the recommended setting for research and analysis purposes.
++ **Block Public Access**: Leave "Block all public access" turned on. This ensures your data remains private and is the recommended setting for research and analysis purposes.
 
-**Bucket Versioning** This can be left as **Disabled** for most use cases. Enabling versioning allows AWS to keep a history of changes to your files, which can be useful but will increase storage costs over time.
++ **Bucket Versioning**: This can be left as "Disabled" for most use cases. Enabling versioning allows AWS to keep a history of changes to your files, which can be useful but will increase storage costs over time.
 
-**Default Encryption** Leave this set to the default **Server-side encryption with Amazon S3 managed keys (SSE-S3)**. This ensures your data is automatically encrypted when stored, adding a layer of security without any additional configuration required.
++ **Default Encryption**: Leave this set to the default "Server-side encryption with Amazon S3 managed keys (SSE-S3)". This ensures your data is automatically encrypted when stored, adding a layer of security without any additional configuration required.
 
 Once you have reviewed these settings, scroll to the bottom of the page and click **Create bucket**. Your bucket will now appear in your S3 dashboard and is ready to receive data.
 
@@ -128,7 +124,7 @@ knitr::include_graphics("Chapter_1/1_4_Cloud/aws_create_bucket.png")
 
 <br>
 
-To find your bucket at any time, navigate back to the S3 service and select Buckets from the left-hand menu, where all of your buckets will be listed by name.
+To find your bucket at any time, navigate back to the S3 service and select "Buckets" from the left-hand menu, where all of your buckets will be listed by name.
 
 ```{r 1-4-Cloud-5, echo=FALSE, out.width = "100%",fig.align='center'}
 knitr::include_graphics("Chapter_1/1_4_Cloud/aws_bucket.png")
@@ -146,12 +142,12 @@ As a cost reference, AWS S3 storage is priced at approximately $0.023 per GB per
 The AWS Management Console provides a straightforward point-and-click interface for uploading files and is recommended for users who are new to cloud storage or are uploading a small number of files.
 
 1. Log in to your AWS account and navigate to the S3 service by searching "S3" in the AWS search bar.
-2. Select **Buckets** from the left hand menu and click on the name of the bucket you created in the previous step.
-3. Once inside your bucket, click the **Upload** button.
-4. Click **Add files** to select individual files from your computer, or **Add folder** to upload an entire folder and its contents. You can also drag and drop files directly into the upload window.
+2. Select "Buckets" from the left hand menu and click on the name of the bucket you created in the previous step.
+3. Once inside your bucket, click the "Upload" button.
+4. Click "Add files" to select individual files from your computer, or "Add folder" to upload an entire folder and its contents. You can also drag and drop files directly into the upload window.
 5. Once your files have been added, a list of the selected items will appear on the screen. Review this list to confirm the correct files have been selected.
 6. Leave all other settings as their defaults unless you have specific access or encryption requirements.
-7. Click **Upload** at the bottom of the page. A progress bar will appear showing the status of your upload. Once complete, a confirmation message will be displayed and your files will be visible inside the bucket.
+7. Click "Upload" at the bottom of the page. A progress bar will appear showing the status of your upload. Once complete, a confirmation message will be displayed and your files will be visible inside the bucket.
 
 
 **Uploading via the Command Line Interface (CLI)**
@@ -162,9 +158,9 @@ For users who are comfortable working with a command line terminal, the AWS CLI 
 
 If your AWS account is managed by an organization, CloudShell is the simplest option as it comes pre-configured with your credentials, requiring no installation or setup.
 
-To open CloudShell, log in to the AWS Management Console and click the **CloudShell icon** in the toolbar at the top of the screen (it looks like a small terminal window). A terminal will open at the bottom of your screen after a few moments.
+To open CloudShell, log in to the AWS Management Console and click the "CloudShell icon" in the toolbar at the top of the screen (it looks like a small terminal window). A terminal will open at the bottom of your screen after a few moments.
 
-Before uploading files from your local computer, you must first transfer them into the CloudShell environment. To do this, click the **Actions** menu in the top right corner of the CloudShell panel and select **Upload file**. Browse to the file on your computer and confirm the upload. The file will appear in the home directory of your CloudShell session and can then be moved to S3.
+Before uploading files from your local computer, you must first transfer them into the CloudShell environment. To do this, click the "Actions" menu in the top right corner of the CloudShell panel and select "Upload file". Browse to the file on your computer and confirm the upload. The file will appear in the home directory of your CloudShell session and can then be moved to S3.
 
 To upload a single file, use the following command, replacing the file name and bucket name with your own:
 ```bash
@@ -214,9 +210,9 @@ aws s3 cp /path/to/your/file.csv s3://your-bucket-name/
 
 ### 3. Downloading from an S3 Bucket
 
-Data can be downloaded from S3 back to your local computer or to a cloud instance at any time. To download a file via the Console, navigate to your bucket, check the box next to the file you wish to download, and select **Download** from the **Actions** menu.
+Data can be downloaded from S3 back to your local computer or to a cloud instance at any time. To download a file via the Console, navigate to your bucket, check the box next to the file you wish to download, and select "Download" from the "Actions" menu.
 
-To download a file to your CloudShell environment, use the following command, then click the **Actions** menu in the CloudShell panel and select **Download file** to save it to your local computer:
+To download a file to your CloudShell environment, use the following command, then click the "Actions" menu in the CloudShell panel and select "Download file" to save it to your local computer:
 ```bash
 aws s3 cp s3://your-bucket-name/file.csv ./
 ```
@@ -226,8 +222,9 @@ To download a file directly to your local machine using the local CLI, use the f
 aws s3 cp s3://your-bucket-name/file.csv /path/to/local/destination/
 ```
 
-### 4. Addiitonal Information for S3
-Additional infromation can be found at: https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html
+Additional documentation can be found at [AmazonS3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html).
+
+<br>
 
 ## Computing in the Cloud
 
@@ -236,10 +233,10 @@ Now that your data is stored in the cloud, the next step is to select and launch
 ### 1. Creating an EC2 Instance
 
 **Step 1: Navigate to EC2**
-Log in to the AWS Management Console and search for "EC2" in the search bar at the top of the screen. Click on **EC2** in the results to open the EC2 dashboard. From here, click the **Launch instance** button to begin the setup process.
+Log in to the AWS Management Console and search for "EC2" in the search bar at the top of the screen. Click on "EC2" in the results to open the EC2 dashboard. From here, click the "Launch instance" button to begin the setup process.
 
 **Step 2: Name Your Instance**
-Enter a descriptive name for your instance in the **Name** field at the top of the page, such as "my-analysis-instance". This helps you identify it later if you have multiple instances running.
+Enter a descriptive name for your instance in the "Name" field at the top of the page, such as "my-analysis-instance". This helps you identify it later if you have multiple instances running.
 
 **Step 3: Choose an Amazon Machine Image (AMI)**
 An Amazon Machine Image (AMI) is the operating system and software that will be pre-installed on your instance. For general data analysis, select **Amazon Linux**, which is free tier eligible and comes with many common tools pre-installed. A range of other operating systems are also available including Windows, Ubuntu, and macOS, and can be browsed in the AMI selection list.
@@ -248,10 +245,10 @@ An Amazon Machine Image (AMI) is the operating system and software that will be 
 The instance type determines how much processing power and memory your virtual machine will have. For light data analysis tasks, **t2.micro** or **t3.micro** are free tier eligible and sufficient for getting started. For more demanding analyses involving larger datasets, consider a **t3.medium** or **t3.large**, which provide more memory and processing power at a modest hourly cost. A full list of instance types and their pricing can be found on the [AWS EC2 pricing page](https://aws.amazon.com/ec2/pricing/).
 
 **Step 5: Configure a Key Pair**
-A key pair is used to securely connect to your instance from your terminal. Click **Create new key pair**, enter a name for your key pair, leave the settings as their defaults, and click **Create key pair**. A file with a **pem** extension will automatically download to your computer. Store this file somewhere safe as it cannot be downloaded again and will be needed every time you connect to your instance.
+A key pair is used to securely connect to your instance from your terminal. Click "Create new key pair", enter a name for your key pair, leave the settings as their defaults, and click "Create key pair". A file with a **.pem** extension will automatically download to your computer. Store this file somewhere safe as it cannot be downloaded again and will be needed every time you connect to your instance.
 
 **Step 6: Configure Storage**
-Under the **Configure storage** section, you will see that a default EBS volume has already been attached to your instance. The default size is 8 GB, which is sufficient for most small analyses. If you anticipate working with larger datasets directly on the instance, increase this value by typing a new number into the size field.
+Under the "Configure storage" section, you will see that a default EBS volume has already been attached to your instance. The default size is 8 GB, which is sufficient for most small analyses. If you anticipate working with larger datasets directly on the instance, increase this value by typing a new number into the size field.
 
 **Step 7: Assign an IAM Role**
 Before launching, it is important to assign an IAM role to your instance. Without one, your instance will have no permissions to interact with any other AWS service — meaning you will not be able to read from or write to S3, or use any other AWS service from within the instance. Note that an IAM role has nothing to do with connecting to your instance via SSH; you can always SSH in with your .pem key regardless of whether a role is attached. The IAM role purely controls what AWS services the instance itself can access once it is running.
@@ -259,7 +256,7 @@ Before launching, it is important to assign an IAM role to your instance. Withou
 To assign a role, expand the **Advanced details** section and find the **IAM instance profile** dropdown. Select the role you created earlier (such as `ec2-s3-access`). If you have not yet created a role, see the [IAM section](#identity-and-access-management-iam) of this guide before proceeding.
 
 **Step 8: Launch the Instance**
-Leave all remaining settings as their defaults and click **Launch instance**. AWS will take a moment to start your instance. You can monitor its status from the EC2 dashboard — once the **Instance state** shows **Running** and the **Status check** shows **2/2 checks passed**, your instance is ready to connect to.
+Leave all remaining settings as their defaults and click "Launch instance". AWS will take a moment to start your instance. You can monitor its status from the EC2 dashboard — once the **Instance state** shows **Running** and the **Status check** shows **2/2 checks passed**, your instance is ready to connect to.
 
 ```{r 1-4-Cloud-6, echo=FALSE, out.width = "100%",fig.align='center'}
 knitr::include_graphics("Chapter_1/1_4_Cloud/launch_ec2.png")
@@ -268,29 +265,21 @@ knitr::include_graphics("Chapter_1/1_4_Cloud/launch_ec2.png")
 
 ### 2. Connecting to an EC2 Instance
 
-You can monitor your instance's status by navigating back to the EC2 dashboard and selecting 
-**Instances** from the left hand menu. Once the **Instance state** column shows **Running**, 
-your instance is ready to use.
+You can monitor your instance's status by navigating back to the EC2 dashboard and selecting **Instances** from the left hand menu. Once the **Instance state** column shows **Running**, your instance is ready to use.
 
-There are several ways to connect to an EC2 instance. The right method depends on your 
-account type and setup:
+There are several ways to connect to an EC2 instance. The right method depends on your account type and setup:
 
 ---
 
-**Option 1: SSH**
+**Option 1: Secure Shell (SSH)**
+SSH allows you to connect to your instance from your local terminal and control it as if you were typing directly on it. This is the most common method for personal AWS accounts and requires your **.pem** key file.
 
-SSH (Secure Shell) allows you to connect to your instance from your local terminal and 
-control it as if you were typing directly on it. This is the most common method for personal 
-AWS accounts and requires your **.pem** key file.
-
-Open your terminal and navigate to the folder where your **.pem** key file was saved. First, 
-set the correct permissions on the key file:
+Open your terminal and navigate to the folder where your **.pem** key file was saved. First, set the correct permissions on the key file:
 ```bash
 chmod 400 your-key-name.pem
 ```
 
-Then connect using the following command, replacing the IP address with your instance's 
-**Public IPv4 address**, which can be found by selecting your instance in the EC2 dashboard:
+Then connect using the following command, replacing the IP address with your instance's **Public IPv4 address**, which can be found by selecting your instance in the EC2 dashboard:
 ```bash
 ssh -i your-key-name.pem ec2-user@your-public-ip-address
 ```
@@ -301,14 +290,9 @@ ssh -i your-key-name.pem ec2-user@your-public-ip-address
 ---
 
 **Option 2: EC2 Instance Connect (Browser-Based)**
+EC2 Instance Connect allows you to connect directly from your browser without needing a .pem key file. This is a convenient option for quick access or if you have misplaced your key file.
 
-EC2 Instance Connect allows you to connect directly from your browser without needing a 
-.pem key file. This is a convenient option for quick access or if you have misplaced your 
-key file.
-
-To use it, select your instance in the EC2 dashboard, click the **Connect** button at the 
-top of the page, select the **EC2 Instance Connect** tab, and click **Connect**. A terminal 
-will open in your browser.
+To use it, select your instance in the EC2 dashboard, click the "Connect" button at the top of the page, select the "EC2 Instance Connect" tab, and click "Connect". A terminal will open in your browser.
 
 > **Note:** EC2 Instance Connect requires your instance to have a public IP address and the 
 > correct security group rules allowing inbound SSH traffic on port 22.
@@ -316,11 +300,7 @@ will open in your browser.
 ---
 
 **Option 3: AWS Systems Manager Session Manager**
-
-Session Manager allows you to connect to your instance through the AWS Management Console 
-without needing SSH, a public IP address, or an open port. This is the recommended method 
-for **federated or organizational accounts** (such as university or institutional AWS 
-accounts) where SSH access may be restricted by VPN or firewall rules.
+Session Manager allows you to connect to your instance through the AWS Management Console without needing SSH, a public IP address, or an open port. This is the recommended method for **federated or organizational accounts** (such as university or institutional AWS accounts) where SSH access may be restricted by VPN or firewall rules.
 
 To connect via Session Manager:
 
@@ -342,9 +322,9 @@ your instance, clicking the **Connect** button, and choosing the **Session Manag
 
 Once connected by any of the above methods, you will see a command prompt indicating that you are now working inside your cloud instance and can begin running your analysis. 
 
-### 3. Running in an EC2 Instance
+### 3. Running in an EC2 Instance - I'M NOT SURE WHAT THIS SECTION MEANS
 
-TODO:  Installing packlages for both R and Python, Access Your S3 Data, Run Analysis, Save Your Results Back to S3
+TODO:  Installing packages for both R and Python, Access Your S3 Data, Run Analysis, Save Your Results Back to S3
 
 ### 4. Creating a SageMaker Notebook
 
@@ -352,20 +332,18 @@ TODO:  Installing packlages for both R and Python, Access Your S3 Data, Run Anal
 
 **Step 1: Navigate to SageMaker**
 
-Log in to the AWS Management Console and search for "SageMaker" in the search bar. Click on **Amazon SageMaker** in the results to open the SageMaker dashboard. Links to tutorials and documentation are included on this landing page. 
+Log in to the AWS Management Console and search for "SageMaker" in the search bar. Click on "Amazon SageMaker" in the results to open the SageMaker dashboard. Links to tutorials and documentation are included on this landing page. 
 
 **Step 2: Open SageMaker Studio**
 
 From the landing page, click **Open** to launch SageMaker Studio Classic in a new browser tab.
-
 ```{r 1-4-Cloud-7, echo=FALSE, out.width = "100%",fig.align='center'}
 knitr::include_graphics("Chapter_1/1_4_Cloud/sagemaker_studio.png")
 ```
 
 **Step 3: Create a New Notebook**
 
-Once inside SageMaker Studio, click **Notebooks** in the left hand menu which will open a new page. The select **Create notebook** and you will be redirected to a new Jupyter Notebook. 
-
+Once inside SageMaker Studio, click "Notebooks" in the left hand menu which will open a new page. The select "Create notebook" and you will be redirected to a new Jupyter Notebook. 
 ```{r 1-4-Cloud-8, echo=FALSE, out.width = "100%",fig.align='center'}
 knitr::include_graphics("Chapter_1/1_4_Cloud/sagemaker_notebook.png")
 ```
@@ -374,16 +352,15 @@ knitr::include_graphics("Chapter_1/1_4_Cloud/sagemaker_notebook.png")
 
 The specific properties of the notebook can be managed via the left-hand menu, represented by a series of icons. This menu provides access to several key configuration areas:
 
-- **Files & Data** View and manage the files and datasets shared with the notebook, including the ability to upload additional files from your local machine.
-- **Compute Instance** View and change the EC2 instance currently powering your notebook environment.
-- **Python Packages** Browse the Python packages currently installed in your environment, and search for and install additional packages as needed.
+- **Files & Data**: View and manage the files and datasets shared with the notebook, including the ability to upload additional files from your local machine.
+- **Compute Instance**: View and change the EC2 instance currently powering your notebook environment.
+- **Python Packages**: Browse the Python packages currently installed in your environment, and search for and install additional packages as needed.
 
 The currently selected instance type is also displayed at the top right of the notebook interface. Clicking on it allows you to switch instances based on the demands of your analysis. Choosing the right instance is important both for performance and cost management. A full list of SageMaker instance pricing can be found on the [AWS SageMaker pricing page](https://aws.amazon.com/sagemaker/pricing/).
 
-### 4. Running a SageMaker Notebook Analysis
+### 4. Running a SageMaker Notebook Analysis - SAME THING HERE WAS THIS A TODO LIST THAT TIM WROTE FOR HIMSELF?
 
-TODO:  Access Your S3 Data, Run ANalysis, Save Your Results Back to S3
-
+TODO:  Access Your S3 Data, Run Analysis, Save Your Results Back to S3
 
 <br>
 
@@ -410,6 +387,11 @@ Cloud computing offers researchers a powerful and flexible alternative to tradit
 + [On Premises vs Cloud](https://www.cleo.com/blog/knowledge-base-on-premise-vs-cloud)
 + [Domain Specfic Tutorials through NIH](https://github.com/STRIDES/NIHCloudLabAWS/tree/main/?tab=readme-ov-file#bio)
 
+### Dictionary of Terminology
++ EC2:
++ S3: 
++ SSH:
+
 <br>
 
 <label class="tykfont">
@@ -417,5 +399,5 @@ Test Your Knowledge
 </label>
 
 :::tyk
-Try creating your own AWS profile, choose a server with the right CPU...
+Try creating your own AWS profile, choose a server with the right CPU... JESSIE ARE WE STILL MOVING FORWARD WITH USING THAT DATASET THAT YOU'VE PUBLISHED ON?
 :::
