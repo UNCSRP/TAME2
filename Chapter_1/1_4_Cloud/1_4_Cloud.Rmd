@@ -41,7 +41,6 @@ Deployment models are paradigms that dictate the accessiblity, management and ow
 2. A **Private Cloud** is when both the software and hardware are dedicated to a single customer or organization. The infrastructure can either be housed on-site or managed through a third-party cloud provider, but access remains restricted to that organization.
 
 3. A **Hybrid Cloud** combines features of both public and private clouds. This model is well-suited for organizations such as federal agencies that require the protection of sensitive data within a private cloud, while still being able to use public cloud resources to share non-sensitive data with the public or partner organizations.
-
 ```{r 1-4-Cloud-1, echo=FALSE, out.width = "55%", fig.align='center'}
 knitr::include_graphics("Chapter_1/1_4_Cloud/deployment_models.png")
 ```
@@ -56,8 +55,6 @@ Amazon Web Services (AWS) leads the cloud computing market, offers the widest ra
 
 
 Another public cloud option worth noting is [Binder](https://jupyter.org/binder), which creates a coding environment directly from a public GitHub repository. This allows users to interact with Jupyter notebooks and datasets housed in that repository without needing to install any software locally. Binder is particularly useful for teaching, as students and researchers can launch a fully configured environment — with data and packages already loaded — and avoid the operating system conflicts that often arise when setting up software on local computers.
-
-
 ```{r 1-4-Cloud-2, echo=FALSE, out.width = "65%", fig.align='center'}
 knitr::include_graphics("Chapter_1/1_4_Cloud/binder.png")
 ```
@@ -99,7 +96,6 @@ As the computing will be done on the cloud, the first step is to upload all nece
 ### 1. Creating a S3 Bucket
 
 Before uploading any data, you will need to create an S3 bucket. A bucket is simply a container in the cloud where your files and datasets will be stored, similar to a folder on your personal computer. To get started, log in to your AWS account and navigate to the S3 service, which can be found by searching "S3" in the AWS search bar at the top of the screen.
-
 ```{r 1-4-Cloud-3, echo=FALSE, out.width = "100%",fig.align='center'}
 knitr::include_graphics("Chapter_1/1_4_Cloud/s3_bucket.png")
 ```
@@ -117,7 +113,6 @@ Once on the S3 dashboard, click the Create bucket button to begin. You will be p
 + **Default Encryption**: Leave this set to the default "Server-side encryption with Amazon S3 managed keys (SSE-S3)". This ensures your data is automatically encrypted when stored, adding a layer of security without any additional configuration required.
 
 Once you have reviewed these settings, scroll to the bottom of the page and click **Create bucket**. Your bucket will now appear in your S3 dashboard and is ready to receive data.
-
 ```{r 1-4-Cloud-4, echo=FALSE, out.width = "100%",fig.align='center'}
 knitr::include_graphics("Chapter_1/1_4_Cloud/aws_create_bucket.png")
 ```
@@ -125,7 +120,6 @@ knitr::include_graphics("Chapter_1/1_4_Cloud/aws_create_bucket.png")
 <br>
 
 To find your bucket at any time, navigate back to the S3 service and select "Buckets" from the left-hand menu, where all of your buckets will be listed by name.
-
 ```{r 1-4-Cloud-5, echo=FALSE, out.width = "100%",fig.align='center'}
 knitr::include_graphics("Chapter_1/1_4_Cloud/aws_bucket.png")
 ```
@@ -388,9 +382,10 @@ Cloud computing offers researchers a powerful and flexible alternative to tradit
 + [Domain Specfic Tutorials through NIH](https://github.com/STRIDES/NIHCloudLabAWS/tree/main/?tab=readme-ov-file#bio)
 
 ### Dictionary of Terminology
-+ EC2:
++ EC2: allows you to rent virtual servers, referred to as instances, with configurable amounts of CPU, memory, storage, and networking capacity
 + S3: 
 + SSH:
+**Amazon Simple Storage Service (S3)**, keeps your data safe and accessible regardless of whether your instance is running or not, making it ideal for long-term storage of datasets, results, and backups. Temporary storage, such as **Amazon Elastic Block Store (EBS)** or local instance storage, is only available while your instance is active and is used during computation to hold intermediate files and data that require fast read and write access.
 
 <br>
 
