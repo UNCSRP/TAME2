@@ -51,7 +51,7 @@ We've covered the basics of cloud computing and various applications that provid
 
 ## Public Cloud Providers 
 
-Amazon Web Services (AWS) leads the cloud computing market, offers the widest range of services, and has strong interoperability with third-party organizations. Other popular public cloud providers include Microsoft Azure and Google Cloud. The National Institutes of Health (NIH) offers a training program to help researchers integrate cloud computing technologies into their work through the [NIH Cloud Lab](https://cloud.nih.gov/resources/cloudlab/), which provides guided resources for AWS, Microsoft Azure, and Google Cloud.
+**Amazon Web Services (AWS)** leads the cloud computing market, offers the widest range of services, and has strong interoperability with third-party organizations. Other popular public cloud providers include **Microsoft Azure** and **Google Cloud**. The National Institutes of Health (NIH) offers a training program to help researchers integrate cloud computing technologies into their work through the [NIH Cloud Lab](https://cloud.nih.gov/resources/cloudlab/), which provides guided resources for AWS, Microsoft Azure, and Google Cloud.
 
 
 Another public cloud option worth noting is [Binder](https://jupyter.org/binder), which creates a coding environment directly from a public GitHub repository. This allows users to interact with Jupyter notebooks and datasets housed in that repository without needing to install any software locally. Binder is particularly useful for teaching, as students and researchers can launch a fully configured environment — with data and packages already loaded — and avoid the operating system conflicts that often arise when setting up software on local computers.
@@ -382,10 +382,13 @@ Cloud computing offers researchers a powerful and flexible alternative to tradit
 + [Domain Specfic Tutorials through NIH](https://github.com/STRIDES/NIHCloudLabAWS/tree/main/?tab=readme-ov-file#bio)
 
 ### Dictionary of Terminology
-+ EC2: allows you to rent virtual servers, referred to as instances, with configurable amounts of CPU, memory, storage, and networking capacity
-+ S3: 
-+ SSH:
-**Amazon Simple Storage Service (S3)**, keeps your data safe and accessible regardless of whether your instance is running or not, making it ideal for long-term storage of datasets, results, and backups. Temporary storage, such as **Amazon Elastic Block Store (EBS)** or local instance storage, is only available while your instance is active and is used during computation to hold intermediate files and data that require fast read and write access.
++ **Elastic Compute Cloud (EC2)**: allows you to rent virtual servers, referred to as instances, with configurable amounts of central processing units (CPU), memory, storage, and networking capacity. These instances are the environments in which coding occurs. 
++ **Amazon Simple Storage Service (S3)**: long-term data storage through AWS that keeps data safe and accessible regardless of whether your instance is running or not
++ **Amazon Elastic Block Store (EBS)**: local instance storage where data is only available while your instance is active and is used during computation to hold intermediate files and data that require fast read and write access.
++ **Secure Shell (SSH)**: allows you to connect to your instance from your local terminal and control it as if you were typing directly on it
+
+
+I ALSO THINK IT WOULD BE HELP TO HAVE A FLOWCHART THAT EASILY SHOWS THE PATHS PEOPLE SHOULD TAKE DEPENDING ON THEIR ORGANIZATIONAL AND ANALYSIS NEEDS
 
 <br>
 
