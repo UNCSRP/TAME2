@@ -7,7 +7,7 @@ All input files (script, data, and figures) can be downloaded from the [UNC-SRP 
 
 Traditionally, computing operations (including data analyses and visualizations) have been performed using on-premises infrastructure on local computers. This approach requires organizations to continuously update software, manage data privacy and storage, and pay for hardware and platforms regardless of whether demand fluctuates. Gaining in popularity over recent years, cloud computing provides a flexible and scalable solution to many of these challenges.
 
-At the core of cloud computing are two fundamental components: **storage** and **compute**. Cloud storage allows organizations to save and retrieve data remotely, eliminating the need for on-premises hardware. Major cloud providers offer scalable object storage solutions (e.g. AWS S3, Google Cloud Storage, and Azure Blob Storage) which provide durable and secure storage for datasets, models, and results of any size. For compute, cloud platforms provide virtual machine services that allow users to run analyses on demand, provisioning servers with customizable CPU, memory, and storage configurations and paying only for the resources they use. The most widely used of these services include AWS EC2 (Elastic Compute Cloud), Google Compute Engine, and Azure Virtual Machines. For data science and machine learning workflows specifically, managed cloud environments such as AWS SageMaker, Google Vertex AI, and Azure Machine Learning build on these capabilities by offering fully integrated platforms for building, training, and deploying machine learning models, removing much of the overhead of configuring and managing underlying infrastructure.
+At the core of cloud computing are two fundamental components: **storage** and **compute**. Cloud storage allows organizations to save and retrieve data remotely, eliminating the need for on-premises hardware. Major cloud providers offer scalable object storage solutions (e.g. AWS S3, Google Cloud Storage, and Azure Blob Storage) which provide durable and secure storage for datasets, models, and results of any size. For compute, cloud platforms provide virtual machine services that allow users to run analyses on demand, provisioning servers with customizable CPU, memory, and storage configurations and paying only for the resources they use. The most widely used of these services include AWS Elastic Compute Cloud (EC2), Google Compute Engine, and Azure Virtual Machines. For data science and machine learning workflows specifically, managed cloud environments such as AWS SageMaker, Google Vertex AI, and Azure Machine Learning build on these capabilities by offering fully integrated platforms for building, training, and deploying machine learning models, removing much of the overhead of configuring and managing underlying infrastructure.
 
 In this module, we'll explore the following concepts:
 
@@ -15,6 +15,8 @@ In this module, we'll explore the following concepts:
 + Creating a Cloud Account
 + Storing Data in the Cloud
 + Computing in the Cloud 
+
+Additionally, we'll be making use of the ELISA dataset used in the previous module, **1.4 Data Wrangling in Excel**, to walk through some of these steps. Further description of the dataset can be found there. 
 
 <br>
 
@@ -34,7 +36,7 @@ Traditionally, these resources were stored **on premises**, meaning infrastructu
 <br>
 
 ## Deployment Models
-Deployment models are paradigms that dictate the accessiblity, management and ownership of the infrastructure. Three commonly used models are described below:
+Deployment models are paradigms that dictate the accessibility, management and ownership of the infrastructure. Three commonly used models are described below:
 
 1. A **Public Cloud** is when a cloud provider makes computing resources available over the public internet. The public cloud provider is responsible for owning, managing, and maintaining the infrastructure necessary to run these services. Some public clouds are completely free, while others operate on a pay-as-you-go model, offering flexibility and scalability based on the needs of the project. Well-known public cloud providers include Amazon Web Services (AWS), Microsoft Azure, and Google Cloud.
 
@@ -67,6 +69,8 @@ Choosing the right cloud provider depends largely on the needs of your project a
 
 For this tutorial, we will use AWS for our cloud provider. To get started with AWS, head to [aws.amazon.com](https://aws.amazon.com) and click "Create an AWS Account". You will be prompted to enter your email address, create a password, and provide billing information. AWS offers a [Free Tier](https://aws.amazon.com/free/) that gives new users access to a range of services at no cost for the first 12 months, which is a good way to explore the platform before committing to paid resources. Once your account is created and verified, you will have access to the AWS Management Console, where you can launch and manage cloud services. Alternatively, the NIH Strides initiative provides access to [NIH Cloud Lab](https://cloud.nih.gov/resources/cloudlab/) accounts that come with $500 in credits to explore clouding computing. 
 
+In this module, we'll be introducing some cloud-computing related terminology that will be described throughout. A section at the end of this module has also been created to provide definitions for some of these terms in one place. 
+
 <br>
 
 ## Identity and Access Management (IAM)
@@ -80,6 +84,10 @@ As a personal AWS account holder, you have full access to IAM. The two things yo
 
 For this tutorial, you will need to create an IAM role for your EC2 instance so that it can access S3. To do this, navigate to **IAM → Roles → Create Role**. Select **AWS Service** as the trusted entity  type and choose **EC2** as the use case. On the next screen, search for and attach the **AmazonS3FullAccess** policy, give your role a name (such as `ec2-s3-access`), and click **Create Role**. You can then attach this role to 
 any EC2 instance at launch, or after the fact via **EC2 → Actions → Security → Modify IAM Role**.
+
+```{r 1-4-Cloud-4, echo=FALSE, out.width = "100%",fig.align='center'}
+knitr::include_graphics("Chapter_1/1_4_Cloud/iam.png")
+```
 
 For more information see:
 
@@ -100,9 +108,9 @@ Before uploading any data, you will need to create an S3 bucket. A bucket is sim
 knitr::include_graphics("Chapter_1/1_4_Cloud/s3_bucket.png")
 ```
 
-Once on the S3 dashboard, click the Create bucket button to begin. You will be presented with several configuration options. For most users, the following settings are recommended:
+Once on the S3 dashboard, click the "Create bucket" button to begin. You will be presented with several configuration options. For most users, the following settings are recommended:
 
-+ **General Configuration**: Select the region closest to your location as the AWS Region. Under Bucket Type, select "General purpose", which is recommended for most use cases. For the **Bucket namespace**, select "Account Regional namespace (recommended)", which ensures your bucket name is unique to your account. Finally, enter a **Bucket name prefix**, keeping it short and descriptive such as "myproject-data".
++ **General Configuration**: Select the region closest to your location as the AWS Region. Under Bucket Type, select "General purpose", which is recommended for most use cases. For the **Bucket namespace**, select "Account Regional namespace (recommended)", which ensures your bucket name is unique to your account. Finally, enter a **Bucket name prefix**, keeping it short and descriptive. For this dataset, we'll name the bucket such as "allostatic-data".
 
 + **Object Ownership**: Leave this set to "ACLs disabled (recommended)". This means your account will own all objects stored in the bucket and access is managed through policies rather than individual file permissions.
 
@@ -389,13 +397,3 @@ Cloud computing offers researchers a powerful and flexible alternative to tradit
 
 
 I ALSO THINK IT WOULD BE HELP TO HAVE A FLOWCHART THAT EASILY SHOWS THE PATHS PEOPLE SHOULD TAKE DEPENDING ON THEIR ORGANIZATIONAL AND ANALYSIS NEEDS
-
-<br>
-
-<label class="tykfont">
-Test Your Knowledge 
-</label>
-
-:::tyk
-Try creating your own AWS profile, choose a server with the right CPU... JESSIE ARE WE STILL MOVING FORWARD WITH USING THAT DATASET THAT YOU'VE PUBLISHED ON?
-:::
