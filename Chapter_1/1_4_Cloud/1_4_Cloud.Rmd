@@ -85,7 +85,7 @@ As a personal AWS account holder, you have full access to IAM. The two things yo
 For this tutorial, you will need to create an IAM role for your EC2 instance so that it can access S3. To do this, navigate to **IAM → Roles → Create Role**. Select **AWS Service** as the trusted entity  type and choose **EC2** as the use case. On the next screen, search for and attach the **AmazonS3FullAccess** policy, give your role a name (such as `ec2-s3-access`), and click **Create Role**. You can then attach this role to 
 any EC2 instance at launch, or after the fact via **EC2 → Actions → Security → Modify IAM Role**.
 
-```{r 1-4-Cloud-4, echo=FALSE, out.width = "100%",fig.align='center'}
+```{r 1-4-Cloud-3, echo=FALSE, out.width = "80%",fig.align='center'}
 knitr::include_graphics("Chapter_1/1_4_Cloud/iam.png")
 ```
 
@@ -104,7 +104,7 @@ As the computing will be done on the cloud, the first step is to upload all nece
 ### 1. Creating a S3 Bucket
 
 Before uploading any data, you will need to create an S3 bucket. A bucket is simply a container in the cloud where your files and datasets will be stored, similar to a folder on your personal computer. To get started, log in to your AWS account and navigate to the S3 service, which can be found by searching "S3" in the AWS search bar at the top of the screen.
-```{r 1-4-Cloud-3, echo=FALSE, out.width = "100%",fig.align='center'}
+```{r 1-4-Cloud-4, echo=FALSE, out.width = "100%",fig.align='center'}
 knitr::include_graphics("Chapter_1/1_4_Cloud/s3_bucket.png")
 ```
 
@@ -121,14 +121,14 @@ Once on the S3 dashboard, click the "Create bucket" button to begin. You will be
 + **Default Encryption**: Leave this set to the default "Server-side encryption with Amazon S3 managed keys (SSE-S3)". This ensures your data is automatically encrypted when stored, adding a layer of security without any additional configuration required.
 
 Once you have reviewed these settings, scroll to the bottom of the page and click **Create bucket**. Your bucket will now appear in your S3 dashboard and is ready to receive data.
-```{r 1-4-Cloud-4, echo=FALSE, out.width = "100%",fig.align='center'}
+```{r 1-4-Cloud-5, echo=FALSE, out.width = "100%",fig.align='center'}
 knitr::include_graphics("Chapter_1/1_4_Cloud/aws_create_bucket.png")
 ```
 
 <br>
 
 To find your bucket at any time, navigate back to the S3 service and select "Buckets" from the left-hand menu, where all of your buckets will be listed by name.
-```{r 1-4-Cloud-5, echo=FALSE, out.width = "100%",fig.align='center'}
+```{r 1-4-Cloud-6, echo=FALSE, out.width = "100%",fig.align='center'}
 knitr::include_graphics("Chapter_1/1_4_Cloud/aws_bucket.png")
 ```
 
@@ -150,7 +150,9 @@ The AWS Management Console provides a straightforward point-and-click interface 
 5. Once your files have been added, a list of the selected items will appear on the screen. Review this list to confirm the correct files have been selected.
 6. Leave all other settings as their defaults unless you have specific access or encryption requirements.
 7. Click "Upload" at the bottom of the page. A progress bar will appear showing the status of your upload. Once complete, a confirmation message will be displayed and your files will be visible inside the bucket.
-
+```{r 1-4-Cloud-7, echo=FALSE, out.width = "100%", fig.align='center'}
+knitr::include_graphics("Chapter_1/1_4_Cloud/data_upload.png")
+```
 
 **Uploading via the Command Line Interface (CLI)**
 
@@ -236,18 +238,30 @@ Now that your data is stored in the cloud, the next step is to select and launch
 
 **Step 1: Navigate to EC2**
 Log in to the AWS Management Console and search for "EC2" in the search bar at the top of the screen. Click on "EC2" in the results to open the EC2 dashboard. From here, click the "Launch instance" button to begin the setup process.
+```{r 1-4-Cloud-8, echo=FALSE, out.width = "100%",fig.align='center'}
+knitr::include_graphics("Chapter_1/1_4_Cloud/ec2_dashboard.png")
+```
 
 **Step 2: Name Your Instance**
-Enter a descriptive name for your instance in the "Name" field at the top of the page, such as "my-analysis-instance". This helps you identify it later if you have multiple instances running.
+Enter a descriptive name for your instance in the "Name" field at the top of the page, such as "Allostatic Analysis". This helps you identify it later if you have multiple instances running.
 
 **Step 3: Choose an Amazon Machine Image (AMI)**
-An Amazon Machine Image (AMI) is the operating system and software that will be pre-installed on your instance. For general data analysis, select **Amazon Linux**, which is free tier eligible and comes with many common tools pre-installed. A range of other operating systems are also available including Windows, Ubuntu, and macOS, and can be browsed in the AMI selection list.
+An Amazon Machine Image (AMI) is the operating system and software that will be pre-installed on your instance. For general data analysis, select **Amazon Linux**, which is free tier eligible and comes with many common tools pre-installed. A range of other operating systems are also available including Windows, Ubuntu, and macOS, and can be browsed in the AMI selection list. For this walkthrough, select one of the free tier "Amazon Linux" as the AMI. It should already be the default option.
+```{r 1-4-Cloud-9, echo=FALSE, out.width = "100%",fig.align='center'}
+knitr::include_graphics("Chapter_1/1_4_Cloud/ami.png")
+```
 
 **Step 4: Choose an Instance Type**
 The instance type determines how much processing power and memory your virtual machine will have. For light data analysis tasks, **t2.micro** or **t3.micro** are free tier eligible and sufficient for getting started. For more demanding analyses involving larger datasets, consider a **t3.medium** or **t3.large**, which provide more memory and processing power at a modest hourly cost. A full list of instance types and their pricing can be found on the [AWS EC2 pricing page](https://aws.amazon.com/ec2/pricing/).
+```{r 1-4-Cloud-10, echo=FALSE, out.width = "100%",fig.align='center'}
+knitr::include_graphics("Chapter_1/1_4_Cloud/instance_type.png")
+```
 
 **Step 5: Configure a Key Pair**
 A key pair is used to securely connect to your instance from your terminal. Click "Create new key pair", enter a name for your key pair, leave the settings as their defaults, and click "Create key pair". A file with a **.pem** extension will automatically download to your computer. Store this file somewhere safe as it cannot be downloaded again and will be needed every time you connect to your instance.
+```{r 1-4-Cloud-11, echo=FALSE, out.width = "100%",fig.align='center'}
+knitr::include_graphics("Chapter_1/1_4_Cloud/key_pair.png")
+```
 
 **Step 6: Configure Storage**
 Under the "Configure storage" section, you will see that a default EBS volume has already been attached to your instance. The default size is 8 GB, which is sufficient for most small analyses. If you anticipate working with larger datasets directly on the instance, increase this value by typing a new number into the size field.
@@ -255,19 +269,21 @@ Under the "Configure storage" section, you will see that a default EBS volume ha
 **Step 7: Assign an IAM Role**
 Before launching, it is important to assign an IAM role to your instance. Without one, your instance will have no permissions to interact with any other AWS service — meaning you will not be able to read from or write to S3, or use any other AWS service from within the instance. Note that an IAM role has nothing to do with connecting to your instance via SSH; you can always SSH in with your .pem key regardless of whether a role is attached. The IAM role purely controls what AWS services the instance itself can access once it is running.
 
-To assign a role, expand the **Advanced details** section and find the **IAM instance profile** dropdown. Select the role you created earlier (such as `ec2-s3-access`). If you have not yet created a role, see the [IAM section](#identity-and-access-management-iam) of this guide before proceeding.
+To assign a role, expand the "Advanced details" section and find the "IAM instance profile" dropdown. Select the role you created earlier (such as `ec2-s3-access`). If you have not yet created a role, see the [IAM section](#identity-and-access-management-iam) of this guide before proceeding.
+```{r 1-4-Cloud-12, echo=FALSE, out.width = "100%",fig.align='center'}
+knitr::include_graphics("Chapter_1/1_4_Cloud/iam_assignment.png")
+```
 
 **Step 8: Launch the Instance**
 Leave all remaining settings as their defaults and click "Launch instance". AWS will take a moment to start your instance. You can monitor its status from the EC2 dashboard — once the **Instance state** shows **Running** and the **Status check** shows **2/2 checks passed**, your instance is ready to connect to.
-
-```{r 1-4-Cloud-6, echo=FALSE, out.width = "100%",fig.align='center'}
+```{r 1-4-Cloud-13, echo=FALSE, out.width = "100%",fig.align='center'}
 knitr::include_graphics("Chapter_1/1_4_Cloud/launch_ec2.png")
 ```
 
 
 ### 2. Connecting to an EC2 Instance
 
-You can monitor your instance's status by navigating back to the EC2 dashboard and selecting **Instances** from the left hand menu. Once the **Instance state** column shows **Running**, your instance is ready to use.
+You can monitor your instance's status by navigating back to the EC2 dashboard and selecting "Instances" from the left hand menu. Once the "Instance state" column shows "Running", your instance is ready to use.
 
 There are several ways to connect to an EC2 instance. The right method depends on your account type and setup:
 
@@ -286,8 +302,7 @@ Then connect using the following command, replacing the IP address with your ins
 ssh -i your-key-name.pem ec2-user@your-public-ip-address
 ```
 
-> **Note:** If you are using an Ubuntu AMI, replace `ec2-user` with `ubuntu`. For other 
-> AMIs, the default username may vary — check the AMI documentation if you are unsure.
+> **Note:** If you are using an Ubuntu AMI, replace `ec2-user` with `ubuntu`. For other AMIs, the default username may vary — check the AMI documentation if you are unsure.
 
 ---
 
@@ -295,9 +310,11 @@ ssh -i your-key-name.pem ec2-user@your-public-ip-address
 EC2 Instance Connect allows you to connect directly from your browser without needing a .pem key file. This is a convenient option for quick access or if you have misplaced your key file.
 
 To use it, select your instance in the EC2 dashboard, click the "Connect" button at the top of the page, select the "EC2 Instance Connect" tab, and click "Connect". A terminal will open in your browser.
+```{r 1-4-Cloud-14, echo=FALSE, out.width = "100%",fig.align='center'}
+knitr::include_graphics("Chapter_1/1_4_Cloud/ec2_connect.png")
+```
 
-> **Note:** EC2 Instance Connect requires your instance to have a public IP address and the 
-> correct security group rules allowing inbound SSH traffic on port 22.
+> **Note:** EC2 Instance Connect requires your instance to have a public IP address and the correct security group rules allowing inbound SSH traffic on port 22.
 
 ---
 
@@ -315,10 +332,7 @@ To connect via Session Manager:
 Alternatively, you can access Session Manager directly from the EC2 dashboard by selecting 
 your instance, clicking the **Connect** button, and choosing the **Session Manager** tab.
 
-> **Note:** Session Manager requires your EC2 instance to have an IAM role with the 
-> **AmazonSSMManagedInstanceCore** policy attached, and the SSM agent must be running on 
-> the instance. Amazon Linux 2 and Amazon Linux 2023 AMIs come with the SSM agent 
-> pre-installed.
+> **Note:** Session Manager requires your EC2 instance to have an IAM role with the **AmazonSSMManagedInstanceCore** policy attached, and the SSM agent must be running on the instance. Amazon Linux 2 and Amazon Linux 2023 AMIs come with the SSM agent pre-installed.
 
 ---
 
@@ -339,14 +353,14 @@ Log in to the AWS Management Console and search for "SageMaker" in the search ba
 **Step 2: Open SageMaker Studio**
 
 From the landing page, click **Open** to launch SageMaker Studio Classic in a new browser tab.
-```{r 1-4-Cloud-7, echo=FALSE, out.width = "100%",fig.align='center'}
+```{r 1-4-Cloud-15, echo=FALSE, out.width = "100%",fig.align='center'}
 knitr::include_graphics("Chapter_1/1_4_Cloud/sagemaker_studio.png")
 ```
 
 **Step 3: Create a New Notebook**
 
 Once inside SageMaker Studio, click "Notebooks" in the left hand menu which will open a new page. The select "Create notebook" and you will be redirected to a new Jupyter Notebook. 
-```{r 1-4-Cloud-8, echo=FALSE, out.width = "100%",fig.align='center'}
+```{r 1-4-Cloud-16, echo=FALSE, out.width = "100%",fig.align='center'}
 knitr::include_graphics("Chapter_1/1_4_Cloud/sagemaker_notebook.png")
 ```
 
@@ -377,6 +391,14 @@ When working in AWS, keeping costs under control requires deliberate habits. A f
 
 <br>
 
+### Dictionary of Terminology
++ **Elastic Compute Cloud (EC2)**: allows you to rent virtual servers, referred to as instances, with configurable amounts of central processing units (CPU), memory, storage, and networking capacity. These instances are the environments in which coding occurs. 
++ **Amazon Simple Storage Service (S3)**: long-term data storage through AWS that keeps data safe and accessible regardless of whether your instance is running or not
++ **Amazon Elastic Block Store (EBS)**: local instance storage where data is only available while your instance is active and is used during computation to hold intermediate files and data that require fast read and write access.
++ **Secure Shell (SSH)**: allows you to connect to your instance from your local terminal and control it as if you were typing directly on it
+
+<br>
+
 ## Concluding Remarks
 
 Cloud computing offers researchers a powerful and flexible alternative to traditional on-premises computing. By leveraging services like AWS S3 for storage and EC2 for computation, analyses that would be impractical on a local machine — due to data size, memory requirements, or processing time — become manageable and reproducible. As cloud platforms continue to evolve and become more accessible, familiarity with these tools is increasingly valuable for researchers across disciplines. We encourage you to explore the [NIH Cloud Lab](https://cloud.nih.gov/resources/cloudlab/) and the broader AWS documentation to continue building these skills beyond this module.
@@ -388,12 +410,6 @@ Cloud computing offers researchers a powerful and flexible alternative to tradit
 + [Cloud Computing](https://www.ibm.com/think/topics/cloud-computing)
 + [On Premises vs Cloud](https://www.cleo.com/blog/knowledge-base-on-premise-vs-cloud)
 + [Domain Specfic Tutorials through NIH](https://github.com/STRIDES/NIHCloudLabAWS/tree/main/?tab=readme-ov-file#bio)
-
-### Dictionary of Terminology
-+ **Elastic Compute Cloud (EC2)**: allows you to rent virtual servers, referred to as instances, with configurable amounts of central processing units (CPU), memory, storage, and networking capacity. These instances are the environments in which coding occurs. 
-+ **Amazon Simple Storage Service (S3)**: long-term data storage through AWS that keeps data safe and accessible regardless of whether your instance is running or not
-+ **Amazon Elastic Block Store (EBS)**: local instance storage where data is only available while your instance is active and is used during computation to hold intermediate files and data that require fast read and write access.
-+ **Secure Shell (SSH)**: allows you to connect to your instance from your local terminal and control it as if you were typing directly on it
 
 
 I ALSO THINK IT WOULD BE HELP TO HAVE A FLOWCHART THAT EASILY SHOWS THE PATHS PEOPLE SHOULD TAKE DEPENDING ON THEIR ORGANIZATIONAL AND ANALYSIS NEEDS
