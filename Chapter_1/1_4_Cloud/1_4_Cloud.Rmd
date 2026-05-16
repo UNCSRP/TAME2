@@ -258,7 +258,7 @@ knitr::include_graphics("Chapter_1/1_4_Cloud/instance_type.png")
 ```
 
 **Step 5: Configure a Key Pair**
-A key pair is used to securely connect to your instance from your terminal. Click "Create new key pair", enter a name for your key pair, leave the settings as their defaults, and click "Create key pair". A file with a **.pem** extension will automatically download to your computer. Store this file somewhere safe as it cannot be downloaded again and will be needed every time you connect to your instance.
+A key pair is used to securely connect to your instance from your terminal. Click "Create new key pair", enter a name for your key pair, leave the settings as their defaults, and click "Create key pair". A file with a ".pem" extension will automatically download to your computer. Store this file somewhere safe as it cannot be downloaded again and will be needed every time you connect to your instance.
 ```{r 1-4-Cloud-11, echo=FALSE, out.width = "100%",fig.align='center'}
 knitr::include_graphics("Chapter_1/1_4_Cloud/key_pair.png")
 ```
@@ -285,14 +285,31 @@ knitr::include_graphics("Chapter_1/1_4_Cloud/launch_ec2.png")
 
 You can monitor your instance's status by navigating back to the EC2 dashboard and selecting "Instances" from the left hand menu. Once the "Instance state" column shows "Running", your instance is ready to use.
 
-There are several ways to connect to an EC2 instance. The right method depends on your account type and setup:
+There are several ways to connect to an EC2 instance as described below. The right method depends on your account type and setup, but we'll focus on connecting to an EC2 instance using the AWS Systems Manager for this module's walkthrough. 
 
 ---
 
-**Option 1: Secure Shell (SSH)**
-SSH allows you to connect to your instance from your local terminal and control it as if you were typing directly on it. This is the most common method for personal AWS accounts and requires your **.pem** key file.
++ **Option 1: AWS Systems Session Manager**
+Session Manager allows you to connect to your instance through the AWS Management Console without needing SSH, a public IP address, or an open port. This is the recommended method for **federated or organizational accounts** (such as university or institutional AWS accounts) where SSH access may be restricted by VPN or firewall rules.
 
-Open your terminal and navigate to the folder where your **.pem** key file was saved. First, set the correct permissions on the key file:
+To connect via Session Manager:
+
+1. Navigate to "AWS Systems Manager" by searching for it in the AWS search bar.
+2. Select "Session Manager" from the left hand menu.
+3. Click "Start session".
+4. Select your instance from the list and click "Start session". A terminal will open 
+   in your browser.
+
+Alternatively, you can access Session Manager directly from the EC2 dashboard by selecting your instance, clicking the "Connect" button, and choosing the "Session Manager" tab.
+
+> **Note:** Session Manager requires your EC2 instance to have an IAM role with the **AmazonSSMManagedInstanceCore** policy attached, and the SSM agent must be running on the instance. Amazon Linux 2 and Amazon Linux 2023 AMIs come with the SSM agent pre-installed.
+
+---
+
+**Option 2: Secure Shell (SSH)**
+SSH allows you to connect to your instance from your local terminal and control it as if you were typing directly on it. This is the most common method for personal AWS accounts and requires your ".pem" key file.
+
+Open your terminal and navigate to the folder where your ".pem" key file was saved. First, set the correct permissions on the key file:
 ```bash
 chmod 400 your-key-name.pem
 ```
@@ -301,16 +318,18 @@ Then connect using the following command, replacing the IP address with your ins
 ```bash
 ssh -i your-key-name.pem ec2-user@your-public-ip-address
 ```
-
+```{r 1-4-Cloud-14, echo=FALSE, out.width = "100%",fig.align='center'}
+knitr::include_graphics("Chapter_1/1_4_Cloud/aws_terminal.png")
+```
 > **Note:** If you are using an Ubuntu AMI, replace `ec2-user` with `ubuntu`. For other AMIs, the default username may vary — check the AMI documentation if you are unsure.
 
 ---
 
-**Option 2: EC2 Instance Connect (Browser-Based)**
+**Option 3: EC2 Instance Connect (Browser-Based)**
 EC2 Instance Connect allows you to connect directly from your browser without needing a .pem key file. This is a convenient option for quick access or if you have misplaced your key file.
 
 To use it, select your instance in the EC2 dashboard, click the "Connect" button at the top of the page, select the "EC2 Instance Connect" tab, and click "Connect". A terminal will open in your browser.
-```{r 1-4-Cloud-14, echo=FALSE, out.width = "100%",fig.align='center'}
+```{r 1-4-Cloud-15, echo=FALSE, out.width = "100%",fig.align='center'}
 knitr::include_graphics("Chapter_1/1_4_Cloud/ec2_connect.png")
 ```
 
@@ -318,31 +337,9 @@ knitr::include_graphics("Chapter_1/1_4_Cloud/ec2_connect.png")
 
 ---
 
-**Option 3: AWS Systems Manager Session Manager**
-Session Manager allows you to connect to your instance through the AWS Management Console without needing SSH, a public IP address, or an open port. This is the recommended method for **federated or organizational accounts** (such as university or institutional AWS accounts) where SSH access may be restricted by VPN or firewall rules.
-
-To connect via Session Manager:
-
-1. Navigate to **AWS Systems Manager** by searching for it in the AWS search bar.
-2. Select **Session Manager** from the left hand menu.
-3. Click **Start session**.
-4. Select your instance from the list and click **Start session**. A terminal will open 
-   in your browser.
-
-Alternatively, you can access Session Manager directly from the EC2 dashboard by selecting 
-your instance, clicking the **Connect** button, and choosing the **Session Manager** tab.
-
-> **Note:** Session Manager requires your EC2 instance to have an IAM role with the **AmazonSSMManagedInstanceCore** policy attached, and the SSM agent must be running on the instance. Amazon Linux 2 and Amazon Linux 2023 AMIs come with the SSM agent pre-installed.
-
----
-
 Once connected by any of the above methods, you will see a command prompt indicating that you are now working inside your cloud instance and can begin running your analysis. 
 
-### 3. Running in an EC2 Instance - I'M NOT SURE WHAT THIS SECTION MEANS
-
-TODO:  Installing packages for both R and Python, Access Your S3 Data, Run Analysis, Save Your Results Back to S3
-
-### 4. Creating a SageMaker Notebook
+### 3. Creating a SageMaker Notebook
 
 **Amazon SageMaker** provides a fully managed environment for data analysis and machine learning, removing the need to manually configure and connect to a virtual machine. Rather than working in a terminal, SageMaker allows you to work in a **Jupyter Notebook**, a familiar browser-based interface where you can write and run code interactively alongside text, figures, and outputs. This makes SageMaker particularly well suited for exploratory data analysis and iterative workflows, however the environment is restricted to Python. 
 
@@ -352,15 +349,15 @@ Log in to the AWS Management Console and search for "SageMaker" in the search ba
 
 **Step 2: Open SageMaker Studio**
 
-From the landing page, click **Open** to launch SageMaker Studio Classic in a new browser tab.
-```{r 1-4-Cloud-15, echo=FALSE, out.width = "100%",fig.align='center'}
+From the landing page, click "Open" to launch SageMaker Studio Classic in a new browser tab.
+```{r 1-4-Cloud-16, echo=FALSE, out.width = "100%",fig.align='center'}
 knitr::include_graphics("Chapter_1/1_4_Cloud/sagemaker_studio.png")
 ```
 
 **Step 3: Create a New Notebook**
 
 Once inside SageMaker Studio, click "Notebooks" in the left hand menu which will open a new page. The select "Create notebook" and you will be redirected to a new Jupyter Notebook. 
-```{r 1-4-Cloud-16, echo=FALSE, out.width = "100%",fig.align='center'}
+```{r 1-4-Cloud-17, echo=FALSE, out.width = "100%",fig.align='center'}
 knitr::include_graphics("Chapter_1/1_4_Cloud/sagemaker_notebook.png")
 ```
 
@@ -373,10 +370,6 @@ The specific properties of the notebook can be managed via the left-hand menu, r
 - **Python Packages**: Browse the Python packages currently installed in your environment, and search for and install additional packages as needed.
 
 The currently selected instance type is also displayed at the top right of the notebook interface. Clicking on it allows you to switch instances based on the demands of your analysis. Choosing the right instance is important both for performance and cost management. A full list of SageMaker instance pricing can be found on the [AWS SageMaker pricing page](https://aws.amazon.com/sagemaker/pricing/).
-
-### 4. Running a SageMaker Notebook Analysis - SAME THING HERE WAS THIS A TODO LIST THAT TIM WROTE FOR HIMSELF?
-
-TODO:  Access Your S3 Data, Run Analysis, Save Your Results Back to S3
 
 <br>
 
@@ -410,6 +403,3 @@ Cloud computing offers researchers a powerful and flexible alternative to tradit
 + [Cloud Computing](https://www.ibm.com/think/topics/cloud-computing)
 + [On Premises vs Cloud](https://www.cleo.com/blog/knowledge-base-on-premise-vs-cloud)
 + [Domain Specfic Tutorials through NIH](https://github.com/STRIDES/NIHCloudLabAWS/tree/main/?tab=readme-ov-file#bio)
-
-
-I ALSO THINK IT WOULD BE HELP TO HAVE A FLOWCHART THAT EASILY SHOWS THE PATHS PEOPLE SHOULD TAKE DEPENDING ON THEIR ORGANIZATIONAL AND ANALYSIS NEEDS
