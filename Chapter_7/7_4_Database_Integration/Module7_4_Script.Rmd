@@ -26,7 +26,7 @@ This training module was specifically developed to answer the following environm
 1. What areas of the U.S. are most heavily monitored for air quality?
 2. Is there an association between long-term, ambient PM~2.5~ concentrations and mortality at the county level? Stated another way we are asking: Do counties with higher annual average PM~2.5~ concentrations also have higher all-cause mortality rates?
 3. What is the difference when running crude statistical models vs. statistical models that adjust for potential confounding, when evaluating the relationship between PM~2.5~ and mortality?
-4. Do observed associations differ when comparing counties with a higher vs. lower percentage of African-Americans?
+4. Do observed associations differ when comparing counties with different racial distributions?
 
 
 ### Script Preparations
@@ -339,7 +339,7 @@ rbind(c("Bottom 25% AA Counties",round(summary(m.low)$coefficients["PM25",c(1,2,
 
 ### Answer to Envrionmental Health Question 4
 :::question
-*With this, we can answer **Environmental Health Question #4***: Do observed associations differ when comparing counties with a higher vs. lower percentage of African-Americans?
+*With this, we can answer **Environmental Health Question #4***: Do observed associations differ when comparing counties with different racial distributions?
 :::
 
 :::answer
