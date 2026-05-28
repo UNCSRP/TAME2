@@ -38,14 +38,14 @@ jobs:
           # Pin factoextra
           Rscript -e 'remotes::install_version("factoextra", version = "1.0.7", repos = "https://cran.rstudio.com")'
           
-          # Install superheat explicitly
-          Rscript -e 'install.packages("superheat", repos = "https://cran.rstudio.com", verbose = TRUE)'
-          
           # Install ctxR from GitHub
           Rscript -e 'remotes::install_github("USEPA/ctxR", auth_token = Sys.getenv("GITHUB_TOKEN"))'
           
           # Now install remaining CRAN deps from DESCRIPTION
           Rscript -e 'remotes::install_deps(dependencies = TRUE, upgrade = "never")'
+
+          # Install superheat explicitly
+          Rscript -e 'remotes::install_github("rlbarter/superheat")'
 
       - name: Check package installation
         run: |
