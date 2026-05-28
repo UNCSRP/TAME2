@@ -4,12 +4,10 @@ on:
     branches:
       - main
   pull_request:
-
 permissions:
   contents: write
   pages: write
   id-token: write
-
 jobs:
   build:
     runs-on: macos-latest
@@ -32,21 +30,37 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")'
-
+         
           # Install BiocManager and Bioconductor packages FIRST
-          # so remotes::install_deps() doesn't warn about missing deps
           Rscript -e 'if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")'
-          
           Rscript -e 'BiocManager::install(c("EnhancedVolcano","DESeq2","edgeR","RUVSeq","piano","pcaMethods","impute","imputeLCMD","GEOquery"), ask = FALSE)'
-
+          
           # Pin factoextra
           Rscript -e 'remotes::install_version("factoextra", version = "1.0.7", repos = "https://cran.rstudio.com")'
-
+          
+          # Install superheat explicitly
+          Rscript -e 'install.packages("superheat", repos = "https://cran.rstudio.com", verbose = TRUE)'
+          
           # Install ctxR from GitHub
           Rscript -e 'remotes::install_github("USEPA/ctxR", auth_token = Sys.getenv("GITHUB_TOKEN"))'
-
+          
           # Now install remaining CRAN deps from DESCRIPTION
           Rscript -e 'remotes::install_deps(dependencies = TRUE, upgrade = "never")'
+
+      - name: Check package installation
+        run: |
+          Rscript -e '
+            desc <- read.dcf("DESCRIPTION")
+            fields <- c("Depends", "Imports", "Suggests")
+            fields <- fields[fields %in% colnames(desc)]
+            pkgs <- unlist(strsplit(gsub("\\s+", "", desc[, fields]), ","))
+            pkgs <- gsub("\\(.*\\)", "", pkgs)
+            pkgs <- pkgs[!pkgs %in% c("R", "")]  # exclude R itself
+            missing <- pkgs[!sapply(pkgs, requireNamespace, quietly = TRUE)]
+            if (length(missing)) stop("Missing packages: ", paste(missing, collapse = ", "))
+            cat("All packages verified OK\n")
+          '
+
 
       - name: Build bookdown
         run: |
