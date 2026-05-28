@@ -4,12 +4,10 @@ on:
     branches:
       - main
   pull_request:
-
 permissions:
   contents: write
   pages: write
   id-token: write
-
 jobs:
   build:
     runs-on: macos-latest
@@ -32,21 +30,26 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")'
-
+         
           # Install BiocManager and Bioconductor packages FIRST
-          # so remotes::install_deps() doesn't warn about missing deps
           Rscript -e 'if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")'
-          
           Rscript -e 'BiocManager::install(c("EnhancedVolcano","DESeq2","edgeR","RUVSeq","piano","pcaMethods","impute","imputeLCMD","GEOquery"), ask = FALSE)'
-
+          
           # Pin factoextra
           Rscript -e 'remotes::install_version("factoextra", version = "1.0.7", repos = "https://cran.rstudio.com")'
-
+          
           # Install ctxR from GitHub
           Rscript -e 'remotes::install_github("USEPA/ctxR", auth_token = Sys.getenv("GITHUB_TOKEN"))'
-
+          
           # Now install remaining CRAN deps from DESCRIPTION
           Rscript -e 'remotes::install_deps(dependencies = TRUE, upgrade = "never")'
+
+          # Install superheat explicitly
+          Rscript -e 'remotes::install_github("rlbarter/superheat")'
+
+      - name: Check package installation
+        run: |
+          Rscript scripts/check_packages.R
 
       - name: Build bookdown
         run: |
