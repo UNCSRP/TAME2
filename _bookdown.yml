@@ -43,6 +43,7 @@ rmd_files:
   - "Chapter_7/7_1_Comparative_Toxicogenomics_Database/7_1_Comparative_Toxicogenomics_Database.Rmd"
   - "Chapter_7/7_2_Gene_Expression_Omnibus/7_2_Gene_Expression_Omnibus.Rmd"
   - "Chapter_7/7_3_CompTox_Dashboard/7_3_CompTox_Dashboard.Rmd"
+  - "Chapter_7/7_4_Database_Integration/7_4_Database_Integration.Rmd"
 
 #prefix name for each chapter
 language:

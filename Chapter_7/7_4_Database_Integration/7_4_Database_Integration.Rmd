@@ -32,13 +32,13 @@ This training module was specifically developed to answer the following environm
 ### Script Preparations
 
 #### Cleaning the global environment
-```{r}
+```{r 7-4-Database-Integration-1}
 rm(list=ls())
 ```
 
 #### Installing required R packages
 If you already have these packages installed, you can skip this step, or you can run the below code which checks installation status for you
-```{r, results=FALSE, message=FALSE}
+```{r 7-4-Database-Integration-2, results=FALSE, message=FALSE}
 if (!requireNamespace("sf"))
   install.packages("sf");
 if (!requireNamespace("tidyverse"))
@@ -48,7 +48,7 @@ if (!requireNamespace("ggthemes"))
 ```
 
 #### Loading R packages required for this session
-```{r, results=FALSE, message=FALSE}
+```{r 7-4-Database-Integration-3, results=FALSE, message=FALSE}
 library(sf)
 library(tidyverse)
 library(ggthemes)
@@ -56,19 +56,19 @@ library(DT)
 ```
 
 #### Set your working directory
-```{r, eval=FALSE, echo=TRUE}
+```{r 7-4-Database-Integration-4, eval=FALSE, echo=TRUE}
 setwd("/filepath to where your input files are")
 ```
 
 Let's start by loading the datasets needed for this training module. As detailed in the introduction, these data were previously downloaded and organized, and specifically made available for this training exercise as a compiled RDataset, containing organized dataframes ready to analyze.
 
 We can now read in these organized data using the `load()` function.
-```{r}
-load("Module7_4_Input/Module7_4_InputData.RData")
+```{r 7-4-Database-Integration-5}
+load("Chapter_7/7_4_Database_integration/Module7_4_Input/Module7_4_InputData.RData")
 ```
 
 First let's take a look at the geographic data, starting with the county-level shapefile (`counties_shapefile`). This dataframe contains the location information for the counties which we will use for visualizations.
-```{r}
+```{r 7-4-Database-Integration-6}
 head(counties_shapefile)
 ```
 These geographic data are represented by the following columns. (Some columns are not described below, since we don't need them for these analyses.): 
@@ -80,7 +80,7 @@ These geographic data are represented by the following columns. (Some columns ar
 + `geometry`: Latitude and longitude coordinates
 
 Now let's view the EPA Air Quality Survey (AQS) data (`epa_ap_county`) collected from 2016. This dataframe represents county-level air quality measures, as detailed above. This dataframe is in melted (or long) format, meaning that different air quality measures are organized across rows, with variable measure indicators in the `Parameter.Name`, `Units.of.Measure`, and `County_Avg` columns.
-```{r}
+```{r 7-4-Database-Integration-7}
 head(epa_ap_county)
 ```
 These air quality data are represented by the following columns:
@@ -95,7 +95,7 @@ These air quality data are represented by the following columns:
 + `County_Avg`: County average
 
 These data can be restructured to view air quality measures as separate variables labeled across columns using:
-```{r}
+```{r 7-4-Database-Integration-8}
 # transform from the "long" to "wide" format for the pollutants
 epa_ap_county <- epa_ap_county %>% 
   select(-Units.of.Measure) %>% 
@@ -111,7 +111,7 @@ Note that we can now see the specific pollutant variables `NO2`, `PM25`, and `SO
 Here we pause briefly to speak on population-weighted vs unweighted exposures. The analysis we will be undertaking is known as an "ecological" analysis where we are looking at associations by area, e.g. county. When studying environmental exposures by area a common practice is to try to weight the exposures by the population so that exposures better represent the "burden" faced by the population. Ideally for this you would want a systematic model or assessment of the exposure that corresponded with a fine-scale population estimate so that for each county you could weight exposures within different areas of the county by the population exposed. This sparse monitor data (we will examine the population covered later in the tutorial) is not population weighted, but should you see similar analyses with population weighting of exposures you should simply be aware that this better captures the "burden" of exposure experienced by the population within the area estimated, typically zip code or county.
 
 Now let's view the CDC's mortality dataset collected from 2016 (`cdc_mortality`):
-```{r}
+```{r 7-4-Database-Integration-9}
 head(cdc_mortality)
 ```
 These mortality data are represented by the following columns. We'll just ignore the `Notes` column for our purposes:
@@ -143,7 +143,7 @@ plot(county_plot[,c("Age.Adjusted.Rate","PM25","NO2","SO2")])
 You can see that these result in the generation of four different nationwide plots, showing the distributions of age-adjusted mortality rates, PM~2.5~ concentrations, NO~2~ concentrations, and SO~2~ concentrations, averaged per county.
 
 Let's make a nicer looking plot with `ggplot()`, looking just at PM~2.5~ levels:
-```{R fig.align = "center"}
+```{R 7-4-Database-Integration-10, fig.align = "center"}
 ggplot(data = county_plot) + 
   geom_sf(aes(fill = PM25)) +
   
@@ -184,14 +184,14 @@ model_data <- merge(epa_ap_county, cdc_mortality, by.x = "State_County_Code", by
 ```
 
 As we saw in the above plot, only a portion of the USA is covered by PM~2.5~ monitors. Let's see what our population coverage is
-```{r}
+```{r 7-4-Database-Integration-11}
 sum(model_data$Population, na.rm = TRUE)
 sum(cdc_mortality$Population, na.rm = TRUE)
 sum(model_data$Population, na.rm = TRUE)/sum(cdc_mortality$Population, na.rm = TRUE)*100
 ```
 
 We can do a quick visual inspection of this using a scatter plot which will also let us check for unexpected distributions of the data (always a good idea)
-```{r fig.align = "center", warning=FALSE}
+```{r 7-4-Database-Integration-12, fig.align = "center", warning=FALSE}
 ggplot(model_data) + 
   geom_point(aes(x = Age.Adjusted.Rate, y = PM25)) +
   ggtitle(expression(PM[2.5]~by~Mortality~Rate)) + 
@@ -199,14 +199,14 @@ ggplot(model_data) +
 ```
 
 The univariate correlation is a simple way of quantifying this potential relationship, though it does not nearly tell the complete story. Just as a starting point, let's run this simple univariate correlation calculation using the `cor()` function.
-```{r}
+```{r 7-4-Database-Integration-13}
 cor(model_data$Age.Adjusted.Rate, model_data$PM25, use = "complete.obs")
 ```
 
 Now, let's obtain a more complete estimate of the data through regression modeling. As an initial starting point, let's run this model without any confounders (also known as a 'crude' model).
 
 A simple linear regression model in R can be carried out using the `lm()` function. Here, we are evaluating age-adjusted mortality rate (`age.adjusted.rate`) as the dependent variable, and PM~2.5~ as the independent variable. Values used in evaluating this model were weighted to adjust for the fact that some counties have higher precision in their age-adjusted mortality rate (represented by a smaller age-adjusted rate standard error).
-```{r}
+```{r 7-4-Database-Integration-14}
 # running the linear regression model
 m <- lm(Age.Adjusted.Rate ~ PM25,
         data = model_data, weights = 1/model_data$Age.Adjusted.Rate.Standard.Error)   
@@ -238,7 +238,7 @@ The residuals are the difference between the predicted outcome (age-adjusted mor
 ### Adjusting for Covariates
 
 To more thoroughly examine the potential relationship between PM~2.5~ concentrations and mortality it is absolutely essential to adjust for confounders. Let's start by viewing the human covariate data that contains some confounders of interest.
-```{r}
+```{r 7-4-Database-Integration-15}
 datatable(county_health)
 ```
 These covariate data are represented by the following columns:
@@ -251,7 +251,7 @@ These covariate data are represented by the following columns:
 + `Release.Year`: Year the data was publicly released 
 + Various confounders in columns 7-36
 
-```{r}
+```{r 7-4-Database-Integration-16}
 # Merging the covariate data in with the AQS data
 model_data <- merge(model_data, county_health, by.x = "State_County_Code", 
                     by.y = "County.5.digit.FIPS.Code", all.x = TRUE)
@@ -283,7 +283,7 @@ summary(m)
 Here we will consider use the `Non-Hispanic African-American` group to investigate if pollution levels differ by percent African-Americans in a county and if associations between PM~2.5~ and mortality also differ by this variable. We will specifically evaluate data distributions across counties with the highest percentage of African-Americans (top 25%) vs. lowest percentage of African-Americans (bottom 25%).  
 
 First let's visualize the distribution of African-American percentage in these data
-```{r fig.align = "center", warning=FALSE, message =FALSE}
+```{r 7-4-Database-Integration-17, fig.align = "center", warning=FALSE, message =FALSE}
 ggplot(model_data) + 
   geom_histogram(aes(x = Percent.Non.Hispanic.African.American*100)) + 
   ggtitle("Percent African-American by County") + 
@@ -291,19 +291,19 @@ ggplot(model_data) +
 ```
 
 Let's look at a summary of the data
-```{r}
+```{r 7-4-Database-Integration-18}
 summary(model_data$Percent.Non.Hispanic.African.American)
 ```
 
 We can compute quartiles of the data
-```{r}
+```{r 7-4-Database-Integration-19}
 model_data$AA_quartile <- with(model_data, cut(Percent.Non.Hispanic.African.American, 
                                 breaks = quantile(Percent.Non.Hispanic.African.American, probs = seq(0,1, by = 0.25), na.rm = TRUE), 
                                 include.lowest = TRUE, ordered_result = TRUE, labels = FALSE))
 ```
 
 Then we can use these quartiles to see that as the Percent African-American increases so does the PM~2.5~ exposure by county
-```{r}
+```{r 7-4-Database-Integration-20}
 AA_summary <- model_data %>% 
   filter(!is.na(Percent.Non.Hispanic.African.American)) %>% 
   group_by(AA_quartile) %>% 
@@ -314,7 +314,7 @@ AA_summary
 
 Now that we can see this trend, let's add some statistics.
 Let's specifically compare the relationships between PM~2.5~ and mortality within the bottom 25% AA counties (quartile 1); and also the highest 25% AA counties (quartile 4)
-```{r}
+```{r 7-4-Database-Integration-21}
 # first need to subset the data by these quartiles of interest
 low_AA <- subset(model_data, AA_quartile == 1)
 high_AA <- subset(model_data, AA_quartile == 4)
