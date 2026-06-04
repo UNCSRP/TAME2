@@ -16,7 +16,7 @@ In this module, we'll explore the following concepts:
 + Storing Data in the Cloud
 + Computing in the Cloud 
 
-Additionally, we'll be making use of the ELISA dataset used in the previous module, **1.4 Data Wrangling in Excel**, to walk through some of these steps. Further description of the dataset can be found there. 
+Additionally, we'll be making use of the dataset used in the module, **Data Wrangling in Excel**, to walk through some of these steps. Further description of the dataset can be found there. 
 
 <br>
 
@@ -110,7 +110,7 @@ knitr::include_graphics("Chapter_1/1_4_Cloud/s3_bucket.png")
 
 Once on the S3 dashboard, click the "Create bucket" button to begin. You will be presented with several configuration options. For most users, the following settings are recommended:
 
-+ **General Configuration**: Select the region closest to your location as the AWS Region. Under Bucket Type, select "General purpose", which is recommended for most use cases. For the **Bucket namespace**, select "Account Regional namespace (recommended)", which ensures your bucket name is unique to your account. Finally, enter a **Bucket name prefix**, keeping it short and descriptive. For this dataset, we'll name the bucket such as "allostatic-data".
++ **General Configuration**: Select the region closest to your location as the AWS Region. Under Bucket Type, select "General purpose", which is recommended for most use cases. For the **Bucket namespace**, select "Account Regional namespace (recommended)", which ensures your bucket name is unique to your account. Finally, enter a **Bucket name prefix**, keeping it short and descriptive. For this dataset, we'll name the bucket "allostatic-data".
 
 + **Object Ownership**: Leave this set to "ACLs disabled (recommended)". This means your account will own all objects stored in the bucket and access is managed through policies rather than individual file permissions.
 
@@ -341,7 +341,7 @@ Once connected by any of the above methods, you will see a command prompt indica
 
 ### 3. Creating a SageMaker Notebook
 
-**Amazon SageMaker** provides a fully managed environment for data analysis and machine learning, removing the need to manually configure and connect to a virtual machine. Rather than working in a terminal, SageMaker allows you to work in a **Jupyter Notebook**, a familiar browser-based interface where you can write and run code interactively alongside text, figures, and outputs. This makes SageMaker particularly well suited for exploratory data analysis and iterative workflows, however the environment is restricted to Python. 
+**Amazon SageMaker** provides a fully managed environment for data analysis and machine learning, removing the need to manually configure and connect to a virtual machine. Rather than working in a terminal, SageMaker allows you to work in a **Jupyter Notebook**, a familiar browser-based interface where you can write and run code interactively alongside text, figures, and outputs. This makes SageMaker particularly well suited for exploratory data analysis and iterative workflows. 
 
 **Step 1: Navigate to SageMaker**
 
@@ -394,7 +394,7 @@ When working in AWS, keeping costs under control requires deliberate habits. A f
 
 ## Concluding Remarks
 
-Cloud computing offers researchers a powerful and flexible alternative to traditional on-premises computing. By leveraging services like AWS S3 for storage and EC2 for computation, analyses that would be impractical on a local machine — due to data size, memory requirements, or processing time — become manageable and reproducible. As cloud platforms continue to evolve and become more accessible, familiarity with these tools is increasingly valuable for researchers across disciplines. We encourage you to explore the [NIH Cloud Lab](https://cloud.nih.gov/resources/cloudlab/) and the broader AWS documentation to continue building these skills beyond this module.
+Cloud computing offers researchers a powerful and flexible alternative to traditional on-premises computing. By leveraging services like AWS S3 for storage and EC2 for computation, analyses that would be impractical on a local machine — due to data size, memory requirements, or processing time become manageable and reproducible. As cloud platforms continue to evolve and become more accessible, familiarity with these tools is increasingly valuable for researchers across disciplines. We encourage you to explore the [NIH Cloud Lab](https://cloud.nih.gov/resources/cloudlab/) and the broader AWS documentation to continue building these skills beyond this module.
 
 <br>
 
