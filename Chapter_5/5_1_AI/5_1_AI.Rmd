@@ -1,4 +1,4 @@
-# 5.1 Introduction to Artificial Intelligence, Machine Learning, and Predictive Modeling for Environmental Health
+# 5.1 Introduction to Artificial Intelligence & Machine Learning for Environmental Health
 
 This training module was developed by David M. Reif, with contributions from Elise Hickman, Alexis Payton, and Julia E. Rager
 
@@ -12,7 +12,8 @@ In this training module, we will:
 
 + Provide general historical context and taxonomy of modern AI/ML
 + Provide an overview of the intersection between environmental health science ML through discussing...
-    + Why there is a need for ML in environmental health science
+    + Why there is a need for AI/ML in environmental health science
+    + Provide guidance for integrating generative AI into scientific research
     + The differences between ML and traditional statistical methods
     + Predictive modeling in the context of environmental health science 
     + Additional applications of ML in environmental health science
@@ -27,7 +28,7 @@ This training module was specifically developed to answer the following environm
 
 ## General Historical Context and Taxonomy of Modern AI/ML
 
-Before diving in to the applications of AI and ML in environmental health, let's first establish what these term mean and how they are related. Note that the definitions surrounding AI and ML can be subjective, however the purpose of this module is not to get caught up in semantics, but to broadly understand how AI and ML can be applied to environmental health research. 
+Before diving in to the applications of AI and ML in environmental health, let's first establish what these terms mean and how they are related. Note that the definitions surrounding AI and ML can be subjective, however the purpose of this module is not to get caught up in semantics, but to broadly understand how AI and ML can be applied to environmental health research. 
 
 **Artificial Intelligence (AI)** encompasses computer systems that perform tasks typically associated with human cognition and intelligence. AI is found in our everyday lives, for instance, within face recognition, internet search queries, email spam detection, smart home devices, auto-navigation, and digital assistants. 
 
@@ -53,15 +54,17 @@ It is important to understand the methodological "roots" of current methods. Oth
 knitr::include_graphics("Module5_1_Input/Module5_1_Image2.png")
 ```
 
-### A Brief Detour to Discuss Generative AI
+### Impact and Integration of Generative AI into Scientific Research
 
-By learning from massive amounts of data, Generative AI is able to create content, including but not limited to images, photos, videos, text, and code. One of the most popular generative AI platforms, **ChatGPT (Chat Generative Pre-trained Transformer)** is a publicly available chatbot developed by OpenAI. It was released in November of 2022 and quickly gained popularity due to its accessibility and ability to have human-like conversations with the user across almost any imaginable topic. Other generative AI platforms include Claude, Google's Gemini, and Microsoft's Copilot. 
+By learning from massive amounts of data, Generative AI is able to create content, including but not limited to images, photos, videos, text, and code. One of the most popular generative AI platforms, **ChatGPT (Chat Generative Pre-trained Transformer)** is a publicly available chatbot developed by OpenAI. It was released in November of 2022 and quickly gained popularity due to its accessibility and ability to have human-like conversations with the user across almost any imaginable topic. Other generative AI platforms include Claude, ChatGPT's Codex, Google's Gemini, and Microsoft's Copilot. 
 
 Language Models (LLMs), including large language models like GPT-3 (a predecessor to ChatGPT), generally fall under the "Connectionist AI" category, which use deep learning techniques and are considered a subset of artificial neural networks. They fall under the deep learning subset due to their use of deep neural networks with many layers, allowing them to learn from large amounts of data and find intricate patterns.
 
 LLMs are trained to predict the probability of a word given its context in a dataset (a form of next-word prediction), which is a machine learning methodology. It's notable that they use architectures like [Transformer Networks](https://en.wikipedia.org/wiki/Transformer_(machine_learning_model)), which are known for their efficiency in handling sequential data, making them a go-to choice for natural language processing (NLP) tasks. The use of attention mechanisms in these architectures allows the model to focus on different parts of the input sequence when producing an output sequence, offering a substantial improvement in performance for many natural language processing tasks.
 
-The role of ChatGPT and similar tools in the environmental health research space is still being explored. Although ChatGPT has the potential to streamline certain parts of the research process, such as text and language polishing, synthesizing existing information, and suggesting custom coding solutions, it is not an intellectual replacement for the expertise and diverse viewpoints of scientists and must be used transparently and with caution. UNC has issued a [Research Generative AI Guidance](https://ai.unc.edu/research-generative-ai-usage-guidance/), which offers a more comprehensive overview of incorporating generative AI into research practices. 
+The role of ChatGPT and similar tools in the environmental health research space is still being explored. Although ChatGPT has the potential to streamline certain parts of the research process, such as text and language polishing, synthesizing existing information, and suggesting custom coding solutions, it is not an intellectual replacement for the expertise and diverse viewpoints of scientists and must be used transparently and with caution. For example, using AI to transform the structure of your data is a great way to incorporate it into workflows. However, using AI to draw inferences from analyses on niche topics with few peer-reviewed articles or having AI write all your code as someone who is a beginner-level programmer is not advised. These platforms make mistakes often, so it advised to incorporate AI under circumstances that can be easily verified.
+
+UNC has issued a [Research Generative AI Guidance](https://ai.unc.edu/research-generative-ai-usage-guidance/), which offers a more comprehensive overview of incorporating generative AI into research practices. Also, check out this paper on the [Ten simple rules for optimal and careful use of generative AI in science](https://pmc.ncbi.nlm.nih.gov/articles/PMC12561928/). 
 
 <br>
 
@@ -149,7 +152,7 @@ In addition to the predictive toxicology questions above, ML can also be applied
 
 ## Concluding Remarks
 
-In conclusion, this training module provides an overview of the field of AI and ML and discusses applications of these tools in environmental health science through predictive modeling. These methods represent common tools that are used in high dimensional data analyses within the field of environmental health sciences.
+In conclusion, this training module provides an overview of the field of AI and ML and discusses applications of these tools in environmental health science. These methods represent common tools that are used in high dimensional data analyses within the field of environmental health sciences.
 
 In the following modules, we will provide specific examples detailing how to apply both supervised and unsupervised machine learning methods to environmental health questions and how to interpret the results of these analyses. 
 
