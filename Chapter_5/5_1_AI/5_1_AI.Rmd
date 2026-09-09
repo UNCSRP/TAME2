@@ -1,4 +1,6 @@
-# 5.1 Introduction to Artificial Intelligence & Machine Learning for Environmental Health
+# (PART\*) Chapter 5 Machine Learning <br>& Artificial Intelligence {-}
+
+# 5.1 Introduction to Artificial Intelligence, Machine Learning, and Predictive Modeling for Environmental Health
 
 This training module was developed by David M. Reif, with contributions from Elise Hickman, Alexis Payton, and Julia E. Rager
 
@@ -12,8 +14,7 @@ In this training module, we will:
 
 + Provide general historical context and taxonomy of modern AI/ML
 + Provide an overview of the intersection between environmental health science ML through discussing...
-    + Why there is a need for AI/ML in environmental health science
-    + Provide guidance for integrating generative AI into scientific research
+    + Why there is a need for ML in environmental health science
     + The differences between ML and traditional statistical methods
     + Predictive modeling in the context of environmental health science 
     + Additional applications of ML in environmental health science
@@ -28,18 +29,15 @@ This training module was specifically developed to answer the following environm
 
 ## General Historical Context and Taxonomy of Modern AI/ML
 
-Before diving in to the applications of AI and ML in environmental health, let's first establish what these terms mean and how they are related. Note that the definitions surrounding AI and ML can be subjective, however the purpose of this module is not to get caught up in semantics, but to broadly understand how AI and ML can be applied to environmental health research. 
+Before diving in to the applications of AI and ML in environmental health, let's first establish what these term mean and how they are related. Note that the definitions surrounding AI and ML can be subjective, however the purpose of this module is not to get caught up in semantics, but to broadly understand how AI and ML can be applied to environmental health research. 
 
 **Artificial Intelligence (AI)** encompasses computer systems that perform tasks typically associated with human cognition and intelligence. AI is found in our everyday lives, for instance, within face recognition, internet search queries, email spam detection, smart home devices, auto-navigation, and digital assistants. 
 
 **Machine Learning (ML)** can be thought of as a subset of AI and describes a computer system that iteratively learns and improves from that experience autonomously. 
 
-Below is a high level taxonomy of AI. It's not meant to be an exhaustive depiction of all AI techniques but a simple visualization of how some of these methodologies are nested within each other. 
-
-> **Note**: AI can be categorized in different ways and may deviate from what is illustrated below.
-
-```{r out.width = "800px", echo = FALSE, out.width = "75%", fig.align = 'center'}
-knitr::include_graphics("Module5_1_Input/Module5_1_Image1.png")
+Below is a high level taxonomy of AI. It's not meant to be an exhaustive depiction of all AI techniques but a simple visualization of how some of these methodologies are nested within each other. **Note**: AI can be categorized in different ways and may deviate from what is illustrated below.
+```{r 5-1-AI-1, out.width = "800px", echo = FALSE, out.width = "75%", fig.align = 'center'}
+knitr::include_graphics("Chapter_5/5_1_AI//Module5_1_Image1.png")
 ```
 
 Advantages of AI and ML include the automation of repetitive tasks, complex problem solving, and reducing human error. However, disadvantages include learning from biased datasets or patterns that are reflected in the decisions of AI/ML and the potential limited interpretability of algorithms created by AI/ML. Check out the following resources for... 
@@ -50,8 +48,8 @@ Advantages of AI and ML include the automation of repetitive tasks, complex prob
 
 It is important to understand the methodological "roots" of current methods. Otherwise, it seems like every approach is novel! AI and ML methods have been around since the mid- to late- 1900s and continue to evolve in the present day. The earliest conceptual roots for these approaches can be traced from antiquity; however, it is generally thought that the field was named "artificial intelligence" at the ["Dartmouth Workshop"](https://home.dartmouth.edu/about/artificial-intelligence-ai-coined-dartmouth) in 1956, led by John McCarthy and others. The following schematic demonstrates the general taxonomy (categories, sub-fields, and specific methods) of modern AI and ML:
 
-```{r out.width = "800px", echo = FALSE, fig.align = 'center'}
-knitr::include_graphics("Module5_1_Input/Module5_1_Image2.png")
+```{r 5-1-AI-2, out.width = "800px", echo = FALSE, fig.align = 'center'}
+knitr::include_graphics("Chapter_5/5_1_AI//Module5_1_Image2.png")
 ```
 
 ### Impact and Integration of Generative AI into Scientific Research
@@ -78,18 +76,18 @@ There are many avenues to incorporate ML into environmental health research, all
 
 One well-known problem that can be better addressed by incorporating ML is the 'too many chemicals, too little data' problem. To detail, there are thousands of chemicals in commerce today. Testing these chemicals one by one for toxicity using comprehensive animal screening experiments would take decades and is not feasible financially. Current efforts to address this problem include using cell-based high throughput screening to efficiently determine biological responses to a variety of chemical exposures and treatment conditions. 
 
-```{r out.width = "700px", echo = FALSE, fig.align = 'center'}
-knitr::include_graphics("Module5_1_Input/Module5_1_Image3.png")
+```{r 5-1-AI-3, out.width = "700px", echo = FALSE, fig.align = 'center'}
+knitr::include_graphics("Chapter_5/5_1_AI//Module5_1_Image3.png")
 ```
 
 These screening efforts result in increasing amounts of data, which can be gathered to start building big databases.
-```{r out.width = "700px", echo = FALSE, fig.align = 'center'}
-knitr::include_graphics("Module5_1_Input/Module5_1_Image4.png")
+```{r 5-1-AI-4, out.width = "700px", echo = FALSE, fig.align = 'center'}
+knitr::include_graphics("Chapter_5/5_1_AI//Module5_1_Image4.png")
 ```
 
 When many of these datasets and databases are combined, including diversity across different types of screening platforms, technologies, cell types, species, and other experimental variables, the associated dimensionality of the data gets "big." 
-```{r out.width = "500px", echo = FALSE, fig.align = 'center'}
-knitr::include_graphics("Module5_1_Input/Module5_1_Image5.png")
+```{r 5-1-AI-5, out.width = "500px", echo = FALSE, fig.align = 'center'}
+knitr::include_graphics("Chapter_5/5_1_AI//Module5_1_Image5.png")
 ```
 
 This presents a problem because these data are diverse and high dimensional (the number of features or endpoints exceeds the number of observations/chemicals). To appropriately analyze and model these data, new approaches beyond traditional statistical methods are needed. 
@@ -105,8 +103,8 @@ This image shows graphical abstractions of how a "problem" is solved using:
 + Traditional statistics ((A) logistic regression and (B) linear regression), OR
 + Machine learning ((C) support vector machines, (D) artificial neural networks, and (E) decision trees)
 
-```{r out.width = "700px", echo = FALSE, fig.align = 'center'}
-knitr::include_graphics("Module5_1_Input/Module5_1_Image6.png")
+```{r 5-1-AI-6, out.width = "700px", echo = FALSE, fig.align = 'center'}
+knitr::include_graphics("Chapter_5/5_1_AI//Module5_1_Image6.png")
 ```
 
 ### Predictive Modeling in the Context of Environmental Health Science
@@ -119,8 +117,8 @@ Our *working definition* is that **predictive toxicology** describes a multidisc
 + Can this suite of *in vitro* assays **predict** what would happen in an organism?
 + Can we use diverse, high dimensional data to cluster chemicals into **predicted** activity classes?
 
-```{r out.width = "600px", echo = FALSE, fig.align = 'center'}
-knitr::include_graphics("Module5_1_Input/Module5_1_Image7.png")
+```{r 5-1-AI-7, out.width = "600px", echo = FALSE, fig.align = 'center'}
+knitr::include_graphics("Chapter_5/5_1_AI//Module5_1_Image7.png")
 ```
 
 Similar logic applies to the field of exposure science. What about "prediction" applied to exposure science?
@@ -152,7 +150,7 @@ In addition to the predictive toxicology questions above, ML can also be applied
 
 ## Concluding Remarks
 
-In conclusion, this training module provides an overview of the field of AI and ML and discusses applications of these tools in environmental health science. These methods represent common tools that are used in high dimensional data analyses within the field of environmental health sciences.
+In conclusion, this training module provides an overview of the field of AI and ML and discusses applications of these tools in environmental health science through predictive modeling. These methods represent common tools that are used in high dimensional data analyses within the field of environmental health sciences.
 
 In the following modules, we will provide specific examples detailing how to apply both supervised and unsupervised machine learning methods to environmental health questions and how to interpret the results of these analyses. 
 
