@@ -49,6 +49,12 @@ jobs:
           # Now install remaining CRAN deps from DESCRIPTION
           Rscript -e 'remotes::install_deps(dependencies = TRUE, upgrade = "never")'
 
+          # Explicitly ensure flextable is installed
+          Rscript -e 'install.packages("flextable", repos = "https://cran.rstudio.com")'
+
+          # Verify flextable is available
+          Rscript -e 'if (!requireNamespace("flextable", quietly = TRUE)) stop("flextable is not installed")'
+
           # Install superheat explicitly
           Rscript -e 'remotes::install_github("rlbarter/superheat")'
 
