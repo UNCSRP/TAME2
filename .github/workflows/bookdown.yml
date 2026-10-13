@@ -84,11 +84,6 @@ jobs:
         run: |
           Rscript -e "bookdown::render_book('index.Rmd', output_format = 'bookdown::gitbook')"
 
-      - name: Debug flextable on failure
-        if: failure()
-        run: Rscript -e 'library(flextable); sessionInfo()'
-        continue-on-error: true
-
       - name: Upload book artifact
         if: always()
         uses: actions/upload-artifact@v4
