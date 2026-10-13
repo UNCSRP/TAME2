@@ -33,6 +33,8 @@ jobs:
         run: |
           brew update
           brew install pandoc freetype harfbuzz fribidi cairo pkg-config libpng libjpeg libtiff
+          # gdtools binaries from Posit link against XQuartz's libXrender in /opt/X11
+          brew install --cask xquartz
 
       - name: Install CRAN & Bioconductor packages
         run: |
