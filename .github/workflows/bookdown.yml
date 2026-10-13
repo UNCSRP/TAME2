@@ -1,67 +1,98 @@
 name: Build Bookdown
+
 on:
   push:
     branches:
       - main
   pull_request:
+
 permissions:
   contents: write
   pages: write
   id-token: write
+
 jobs:
   build:
     runs-on: macos-latest
+
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      CRAN_REPO: "https://packagemanager.posit.co/cran/latest"
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
         with:
           r-version: "4.5.0"
+          use-public-rspm: true
 
       - name: Install system dependencies
         run: |
           brew update
-          brew install pandoc
+          brew install pandoc freetype harfbuzz fribidi cairo pkg-config libpng libjpeg libtiff
+          # gdtools binaries from Posit link against XQuartz's libXrender in /opt/X11
+          brew install --cask xquartz
 
       - name: Install CRAN & Bioconductor packages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")'
-         
-          # Install BiocManager and Bioconductor packages FIRST
-          Rscript -e 'if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")'
-          Rscript -e 'BiocManager::install(c("EnhancedVolcano","DESeq2","edgeR","RUVSeq","piano","pcaMethods","impute","imputeLCMD","GEOquery"), ask = FALSE)'
-          
-          # Pin factoextra
-          Rscript -e 'remotes::install_version("factoextra", version = "1.0.7", repos = "https://cran.rstudio.com")'
-          
-          # Install ctxR from GitHub
-          Rscript -e 'remotes::install_github("USEPA/ctxR", auth_token = Sys.getenv("GITHUB_TOKEN"))'
-          
-          # Now install remaining CRAN deps from DESCRIPTION
-          Rscript -e 'remotes::install_deps(dependencies = TRUE, upgrade = "never")'
+          options(repos = c(CRAN = Sys.getenv("CRAN_REPO")))
+          options(Ncpus = 2)
 
-          # Install superheat explicitly
-          Rscript -e 'remotes::install_github("rlbarter/superheat")'
+          install_or_stop <- function(pkgs) {
+            install.packages(pkgs)
+            missing <- pkgs[!vapply(pkgs, requireNamespace, logical(1), quietly = TRUE)]
+            if (length(missing) > 0) {
+              stop("Failed to install: ", paste(missing, collapse = ", "))
+            }
+          }
+
+          install_or_stop(c("remotes", "BiocManager"))
+
+          # Bioconductor packages first
+          BiocManager::install(
+            c("EnhancedVolcano", "DESeq2", "edgeR", "RUVSeq", "piano",
+              "pcaMethods", "impute", "imputeLCMD", "GEOquery"),
+            ask = FALSE, update = FALSE
+          )
+
+          # Pinned version
+          remotes::install_version("factoextra", version = "1.0.7")
+
+          # GitHub packages
+          remotes::install_github("USEPA/ctxR", upgrade = "never")
+          remotes::install_github("rlbarter/superheat", upgrade = "never")
+
+          # flextable and its system-library-dependent deps, installed explicitly
+          install_or_stop(c("systemfonts", "textshaping", "gdtools", "officer", "flextable"))
+
+          # Remaining CRAN deps from DESCRIPTION
+          remotes::install_deps(dependencies = TRUE, upgrade = "never")
+
+          # library() (not requireNamespace) so the real load error is printed
+          library(flextable)
+          library(superheat)
+          library(ctxR)
+        shell: Rscript {0}
 
       - name: Check package installation
-        run: |
-          Rscript scripts/check_packages.R
+        run: Rscript scripts/check_packages.R
 
       - name: Build bookdown
         run: |
           Rscript -e "bookdown::render_book('index.Rmd', output_format = 'bookdown::gitbook')"
 
       - name: Upload book artifact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: bookdown-book
           path: |
             book/
             book/error.log
+          if-no-files-found: ignore
 
       - name: Deploy to GitHub Pages
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
